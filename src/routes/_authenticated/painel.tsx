@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { getStudyPlan, generateStudyPlan, refineStudyPlanFromFeedback } from "@/lib/study-plan.functions";
+import { getStudyPlan, generateStudyPlan, previewStudyPlanRefinement, applyStudyPlanRefinement } from "@/lib/study-plan.functions";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/speak2co-logo.asset.json";
 import { DailyExercisesSection } from "@/components/DailyExercisesSection";
