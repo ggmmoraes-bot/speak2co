@@ -80,8 +80,9 @@ function ChatWindow({
   });
 
   // Focus the textarea on mount.
+  const focusTextarea = () => promptRef.current?.querySelector("textarea")?.focus();
   useEffect(() => {
-    textareaRef.current?.focus();
+    focusTextarea();
   }, []);
 
   const isBusy = status === "submitted" || status === "streaming";
@@ -96,7 +97,7 @@ function ChatWindow({
     } catch {
       // onError already toasts
     } finally {
-      textareaRef.current?.focus();
+      focusTextarea();
     }
   }
 
@@ -146,10 +147,9 @@ function ChatWindow({
         <ConversationScrollButton />
       </Conversation>
 
-      <div className="border-t border-border bg-background/80 p-4 backdrop-blur">
+      <div ref={promptRef} className="border-t border-border bg-background/80 p-4 backdrop-blur">
         <PromptInput onSubmit={handleSubmit} className="mx-auto max-w-3xl">
           <PromptInputTextarea
-            ref={textareaRef as never}
             placeholder="Type in English…"
             disabled={isBusy}
           />
