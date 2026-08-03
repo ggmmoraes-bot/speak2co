@@ -27,6 +27,7 @@ export type DailyExercise = {
   answers: Record<string, string>;
   score: number | null;
   completed: boolean;
+  explanation_feedback?: Record<string, "helpful" | "not_helpful">;
 };
 
 function today() {
@@ -38,7 +39,7 @@ export const getExerciseHistory = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { data, error } = await context.supabase
       .from("daily_exercises")
-      .select("id, exercise_date, week_number, title, instructions, items, answers, score, completed")
+      .select("id, exercise_date, week_number, title, instructions, items, answers, score, completed, explanation_feedback")
       .eq("user_id", context.userId)
       .eq("completed", true)
       .order("exercise_date", { ascending: false })
@@ -54,7 +55,7 @@ export const getTodayExercise = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { data, error } = await context.supabase
       .from("daily_exercises")
-      .select("id, exercise_date, week_number, title, instructions, items, answers, score, completed")
+      .select("id, exercise_date, week_number, title, instructions, items, answers, score, completed, explanation_feedback")
       .eq("user_id", context.userId)
       .eq("exercise_date", today())
       .maybeSingle();
@@ -137,7 +138,7 @@ Crie o exercício de hoje com título curto, instruções de 1 frase e 5 questõ
         },
         { onConflict: "user_id,exercise_date" },
       )
-      .select("id, exercise_date, week_number, title, instructions, items, answers, score, completed")
+      .select("id, exercise_date, week_number, title, instructions, items, answers, score, completed, explanation_feedback")
       .single();
     if (error) throw new Error(error.message);
     return data as DailyExercise;
@@ -169,7 +170,45 @@ export const submitTodayExercise = createServerFn({ method: "POST" })
       .update({ answers: data.answers, score, completed: true })
       .eq("id", data.id)
       .eq("user_id", context.userId)
-      .select("id, exercise_date, week_number, title, instructions, items, answers, score, completed")
+      .select("id, exercise_date, week_number, title, instructions, items, answers, score, completed, explanation_feedback")
+      .single();
+    if (error) throw new Error(error.message);
+    return updated as DailyExercise;
+  });
+
+export const setExplanationFeedback = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z
+      .object({
+        id: z.string(),
+        itemIndex: z.number().int().min(0),
+        value: z.enum(["helpful", "not_helpful"]).nullable(),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const { data: existing, error: readError } = await context.supabase
+      .from("daily_exercises")
+      .select("explanation_feedback")
+      .eq("id", data.id)
+      .eq("user_id", context.userId)
+      .maybeSingle();
+    if (readError) throw new Error(readError.message);
+    if (!existing) throw new Error("Exercício não encontrado.");
+
+    const feedback = {
+      ...((existing.explanation_feedback ?? {}) as Record<string, string>),
+    };
+    if (data.value === null) delete feedback[String(data.itemIndex)];
+    else feedback[String(data.itemIndex)] = data.value;
+
+    const { data: updated, error } = await context.supabase
+      .from("daily_exercises")
+      .update({ explanation_feedback: feedback })
+      .eq("id", data.id)
+      .eq("user_id", context.userId)
+      .select("id, exercise_date, week_number, title, instructions, items, answers, score, completed, explanation_feedback")
       .single();
     if (error) throw new Error(error.message);
     return updated as DailyExercise;
