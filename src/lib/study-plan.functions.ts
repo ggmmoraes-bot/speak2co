@@ -26,109 +26,8 @@ export const getStudyPlan = createServerFn({ method: "GET" })
 export const generateStudyPlan = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const apiKey = process.env["LOVABLE_API_KEY"];
-    if (!apiKey) throw new Error("AI indisponível no momento.");
-
-    const { data: profile, error: profileError } = await context.supabase
-      .from("profiles")
-      .select("full_name, english_level, goal, target_level")
-      .eq("id", context.userId)
-      .maybeSingle();
-    if (profileError) throw new Error(profileError.message);
-    if (!profile?.full_name || !profile.goal || !profile.target_level) {
-      throw new Error("Complete seu perfil (nome, objetivo e nível desejado) antes de gerar o plano.");
-    }
-
-    const { data: past } = await context.supabase
-      .from("daily_exercises")
-      .select("week_number, items, explanation_feedback")
-      .eq("user_id", context.userId)
-      .eq("completed", true)
-      .order("exercise_date", { ascending: false })
-      .limit(30);
-
-    const helpfulTopics: string[] = [];
-    const unhelpfulTopics: string[] = [];
-    for (const row of past ?? []) {
-      const items = (row.items ?? []) as { question: string }[];
-      const feedback = (row.explanation_feedback ?? {}) as Record<string, string>;
-      for (const [index, value] of Object.entries(feedback)) {
-        const question = items[Number(index)]?.question;
-        if (!question) continue;
-        (value === "helpful" ? helpfulTopics : unhelpfulTopics).push(question);
-      }
-    }
-    const feedbackHint =
-      helpfulTopics.length + unhelpfulTopics.length === 0
-        ? "Sem feedback do aluno ainda."
-        : `Explicações que ajudaram (reforce esse estilo e temas): ${helpfulTopics.slice(0, 10).join(" | ") || "nenhuma"}\nExplicações que NÃO ajudaram (explique esses temas de outra forma, com mais exemplos e passo a passo): ${unhelpfulTopics.slice(0, 10).join(" | ") || "nenhuma"}`;
-
-    const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
-    const gateway = createLovableAiGatewayProvider(apiKey);
-
-    let output: StudyPlan;
-    try {
-      const result = await generateText({
-        model: gateway("google/gemini-2.5-flash"),
-        output: Output.object({ schema: planSchema }),
-        system:
-          "Você é o professor de inglês da Speak2Co. Crie planos de estudo de inglês objetivos, motivadores e práticos. Escreva tudo em português do Brasil, exceto exemplos em inglês. Gere exatamente 8 semanas e de 4 a 6 marcos.",
-        prompt: `Aluno: ${profile.full_name}
-Nível atual: ${profile.english_level ?? "não avaliado"}
-Nível desejado: ${profile.target_level}
-Objetivo: ${profile.goal}
-
-Feedback do aluno sobre explicações anteriores:
-${feedbackHint}
-
-Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases), foco semanal (8 semanas, cada uma com título e 3 atividades práticas) e marcos de evolução.`,
-      });
-      output = result.output;
-    } catch (e) {
-      const message = e instanceof Error ? e.message : "";
-      if (message.includes("429")) throw new Error("Muitas solicitações. Tente novamente em instantes.");
-      if (message.includes("402")) throw new Error("Créditos de IA esgotados. Adicione créditos para continuar.");
-      console.error("[study-plan] geração falhou", e);
-      throw new Error("Não foi possível gerar seu plano agora.");
-    }
-
-    const { data: existingPlan } = await context.supabase
-      .from("study_plans")
-      .select("weekly_focus, locked_weeks")
-      .eq("user_id", context.userId)
-      .maybeSingle();
-    const lockedWeeks = ((existingPlan?.locked_weeks ?? []) as number[]).map(Number);
-    const existingByWeek = new Map(
-      ((existingPlan?.weekly_focus ?? []) as StudyPlan["weekly_focus"]).map((w) => [w.week, w]),
-    );
-    const finalWeeks = output.weekly_focus.map((w) =>
-      lockedWeeks.includes(w.week) ? (existingByWeek.get(w.week) ?? w) : w,
-    );
-    output = { ...output, weekly_focus: finalWeeks };
-
-    const { error: upsertError } = await context.supabase.from("study_plans").upsert(
-      {
-        user_id: context.userId,
-        summary: output.summary,
-        weekly_focus: output.weekly_focus,
-        milestones: output.milestones,
-        locked_weeks: lockedWeeks,
-      },
-      { onConflict: "user_id" },
-    );
-    if (upsertError) throw new Error(upsertError.message);
-
-    await context.supabase.from("study_plan_versions").insert({
-      user_id: context.userId,
-      summary: output.summary,
-      weekly_focus: output.weekly_focus,
-      milestones: output.milestones,
-      locked_weeks: lockedWeeks,
-      reason: "generated",
-      refined_weeks: [],
-    });
-
-    return output;
+    const { buildAndSaveStudyPlan } = await import("./study-plan.server");
+    return buildAndSaveStudyPlan(context.supabase, context.userId, "generated");
   });
 
 export const previewStudyPlanRefinement = createServerFn({ method: "POST" })
@@ -192,6 +91,9 @@ export const previewStudyPlanRefinement = createServerFn({ method: "POST" })
       );
     }
 
+    const { describePlacement, getPlacementSnapshot } = await import("./placement-context.server");
+    const placement = await getPlacementSnapshot(context.supabase, context.userId);
+
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
     const gateway = createLovableAiGatewayProvider(apiKey);
 
@@ -209,9 +111,13 @@ export const previewStudyPlanRefinement = createServerFn({ method: "POST" })
         system:
           "Você é o professor de inglês da Speak2Co. Reescreva APENAS as semanas indicadas do plano de estudos, mantendo os mesmos números de semana. Use abordagens diferentes das atuais, mais passo a passo e com mais exemplos, focando nos pontos em que o aluno disse que a explicação não ajudou. Escreva em português do Brasil, com 3 atividades práticas por semana.",
         prompt: `Aluno: ${profile?.full_name ?? "aluno"}
-Nível atual: ${profile?.english_level ?? "não avaliado"}
+Nível atual: ${placement?.level ?? profile?.english_level ?? "não avaliado"}
 Nível desejado: ${profile?.target_level ?? "B2"}
 Objetivo: ${profile?.goal ?? "melhorar o inglês geral"}
+
+Resultado do teste de nivelamento (mantenha a dificuldade coerente com ele):
+${describePlacement(placement)}
+
 Resumo do plano (não altere): ${plan.summary ?? ""}
 
 Semanas a reescrever:

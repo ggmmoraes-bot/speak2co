@@ -197,5 +197,15 @@ Devolva: level (confirme ou ajuste em no máximo um degrau em relação ao níve
       .update({ english_level: feedback.level })
       .eq("id", context.userId);
 
-    return row as unknown as PlacementTest;
+    // Reajusta automaticamente o plano personalizado com o novo nível.
+    let planUpdated = false;
+    try {
+      const { buildAndSaveStudyPlan } = await import("./study-plan.server");
+      await buildAndSaveStudyPlan(context.supabase, context.userId, "placement");
+      planUpdated = true;
+    } catch (e) {
+      console.error("[nivelamento] plano não pôde ser regenerado", e);
+    }
+
+    return { ...(row as unknown as PlacementTest), planUpdated };
   });
