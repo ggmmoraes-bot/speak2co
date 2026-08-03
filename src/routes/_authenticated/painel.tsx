@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { getStudyPlan, generateStudyPlan } from "@/lib/study-plan.functions";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/speak2co-logo.asset.json";
+import { DailyExercisesSection } from "@/components/DailyExercisesSection";
 
 type WeeklyFocus = { week: number; title: string; activities: string[] };
 
