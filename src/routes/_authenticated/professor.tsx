@@ -49,7 +49,7 @@ function ProfessorLayout() {
   // Active thread id is derived from the current URL.
   const pathname = router.state.location.pathname;
   const activeThreadId = pathname.startsWith("/professor/")
-    ? decodeURIComponent(pathpath === undefined ? "" : pathname.replace("/professor/", ""))
+    ? decodeURIComponent(pathname.replace("/professor/", ""))
     : undefined;
 
   async function handleNewThread() {

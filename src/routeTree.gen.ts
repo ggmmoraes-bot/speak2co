@@ -16,6 +16,7 @@ import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authentic
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
 import { Route as AuthenticatedPremiumRouteImport } from './routes/_authenticated/premium'
+import { Route as AuthenticatedProfessorRouteImport } from './routes/_authenticated/professor'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/public/webhooks/mercadopago'
 
@@ -53,6 +54,11 @@ const AuthenticatedPremiumRoute = AuthenticatedPremiumRouteImport.update({
   path: '/premium',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedProfessorRoute = AuthenticatedProfessorRouteImport.update({
+  id: '/professor',
+  path: '/professor',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
+  '/professor': typeof AuthenticatedProfessorRoute
   '/api/chat': typeof ApiChatRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
+  '/professor': typeof AuthenticatedProfessorRoute
   '/api/chat': typeof ApiChatRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
+  '/_authenticated/professor': typeof AuthenticatedProfessorRoute
   '/api/chat': typeof ApiChatRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/painel'
     | '/perfil'
     | '/premium'
+    | '/professor'
     | '/api/chat'
     | '/api/public/webhooks/mercadopago'
   fileRoutesByTo: FileRoutesByTo
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/painel'
     | '/perfil'
     | '/premium'
+    | '/professor'
     | '/api/chat'
     | '/api/public/webhooks/mercadopago'
   id:
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/_authenticated/painel'
     | '/_authenticated/perfil'
     | '/_authenticated/premium'
+    | '/_authenticated/professor'
     | '/api/chat'
     | '/api/public/webhooks/mercadopago'
   fileRoutesById: FileRoutesById
@@ -190,6 +202,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPremiumRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/professor': {
+      id: '/_authenticated/professor'
+      path: '/professor'
+      fullPath: '/professor'
+      preLoaderRoute: typeof AuthenticatedProfessorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -212,6 +231,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
+  AuthenticatedProfessorRoute: typeof AuthenticatedProfessorRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -219,6 +239,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
+  AuthenticatedProfessorRoute: AuthenticatedProfessorRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
