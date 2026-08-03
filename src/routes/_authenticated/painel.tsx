@@ -125,8 +125,12 @@ function Painel() {
             </Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
+            <Link to="/teste-de-nivel">Teste de nivelamento</Link>
+          </Button>
+          <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/professor">Professor IA</Link>
           </Button>
+
           <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/speak2hire">Speak2Hire — Entrevistas</Link>
 

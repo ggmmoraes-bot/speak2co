@@ -172,6 +172,60 @@ export type Database = {
         }
         Relationships: []
       }
+      placement_tests: {
+        Row: {
+          answers: Json
+          completed: boolean
+          completed_at: string | null
+          correct_count: number
+          created_at: string
+          feedback: Json | null
+          id: string
+          level: string | null
+          questions: Json
+          score: number | null
+          total_questions: number
+          updated_at: string
+          user_id: string
+          writing_answer: string | null
+          writing_prompt: string | null
+        }
+        Insert: {
+          answers?: Json
+          completed?: boolean
+          completed_at?: string | null
+          correct_count?: number
+          created_at?: string
+          feedback?: Json | null
+          id?: string
+          level?: string | null
+          questions?: Json
+          score?: number | null
+          total_questions?: number
+          updated_at?: string
+          user_id: string
+          writing_answer?: string | null
+          writing_prompt?: string | null
+        }
+        Update: {
+          answers?: Json
+          completed?: boolean
+          completed_at?: string | null
+          correct_count?: number
+          created_at?: string
+          feedback?: Json | null
+          id?: string
+          level?: string | null
+          questions?: Json
+          score?: number | null
+          total_questions?: number
+          updated_at?: string
+          user_id?: string
+          writing_answer?: string | null
+          writing_prompt?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null

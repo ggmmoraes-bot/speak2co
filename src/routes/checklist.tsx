@@ -106,9 +106,11 @@ const ROUTES: RouteItem[] = [
   {
     path: "/teste-de-nivel",
     title: "Teste de nivelamento",
-    description: "Telas 2 e 3 do roteiro: o aluno faz o teste e descobre o nível (ex.: B1).",
-    status: "pending",
+    description:
+      "Telas 2 e 3 do roteiro: 20 questões (A1 a C1) mais redação avaliada pela IA, resultado CEFR salvo no perfil e histórico de testes.",
+    status: "protected",
   },
+
   {
     path: "/speak2hire",
     title: "Speak2Hire",
