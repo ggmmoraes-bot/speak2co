@@ -229,6 +229,7 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
       )}
 
       <DailyExercisesSection hasPlan={Boolean(plan)} />
+      <ExerciseHistorySection />
     </section>
   );
 }
