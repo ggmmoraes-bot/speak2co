@@ -115,14 +115,19 @@ function Painel() {
           </div>
         </div>
 
-        <Button
-          asChild
-          className="bg-gold text-primary-foreground glow-gold mt-8 rounded-full font-semibold hover:opacity-90"
-        >
-          <Link to="/perfil">
-            {profile?.goal && profile?.target_level ? "Editar meu perfil" : "Completar meu perfil"}
-          </Link>
-        </Button>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Button
+            asChild
+            className="bg-gold text-primary-foreground glow-gold rounded-full font-semibold hover:opacity-90"
+          >
+            <Link to="/perfil">
+              {profile?.goal && profile?.target_level ? "Editar meu perfil" : "Completar meu perfil"}
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="rounded-full font-semibold">
+            <Link to="/premium">Assinar Premium</Link>
+          </Button>
+        </div>
 
         <StudyPlanSection profileReady={Boolean(profile?.goal && profile?.target_level)} />
         <PlanVersionsSection />
