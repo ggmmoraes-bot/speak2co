@@ -65,6 +65,9 @@ export async function speakText(text: string, options: SpeakOptions | string = {
   }
   stopSpeaking();
   const audio = new Audio(url);
+  audio.volume = volume;
+  audio.playbackRate = rate;
+  audio.preservesPitch = true;
   currentAudio = audio;
   await audio.play();
   await new Promise<void>((resolve) => {
