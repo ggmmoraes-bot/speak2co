@@ -54,7 +54,7 @@ function ChatWindow({
   initialMessages: UIMessage[];
 }) {
   const queryClient = useQueryClient();
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const promptRef = useRef<HTMLDivElement | null>(null);
 
   const transport = useMemo(
     () =>
