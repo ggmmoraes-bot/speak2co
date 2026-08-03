@@ -21,6 +21,7 @@ import { Route as AuthenticatedProfessorRouteImport } from './routes/_authentica
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
+import { Route as AuthenticatedSpeak2hireIndexRouteImport } from './routes/_authenticated/speak2hire.index'
 import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/public/webhooks/mercadopago'
 
 const IndexRoute = IndexRouteImport.update({
@@ -84,6 +85,12 @@ const AuthenticatedProfessorThreadIdRoute =
     path: '/$threadId',
     getParentRoute: () => AuthenticatedProfessorRoute,
   } as any)
+const AuthenticatedSpeak2hireIndexRoute =
+  AuthenticatedSpeak2hireIndexRouteImport.update({
+    id: '/speak2hire/',
+    path: '/speak2hire/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiPublicWebhooksMercadopagoRoute =
   ApiPublicWebhooksMercadopagoRouteImport.update({
     id: '/api/public/webhooks/mercadopago',
@@ -103,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/professor/': typeof AuthenticatedProfessorIndexRoute
+  '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRoutesByTo {
@@ -116,6 +124,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/professor': typeof AuthenticatedProfessorIndexRoute
+  '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRoutesById {
@@ -132,6 +141,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
+  '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRouteTypes {
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/professor/$threadId'
     | '/professor/'
+    | '/speak2hire/'
     | '/api/public/webhooks/mercadopago'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/professor/$threadId'
     | '/professor'
+    | '/speak2hire'
     | '/api/public/webhooks/mercadopago'
   id:
     | '__root__'
@@ -176,6 +188,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/professor/'
+    | '/_authenticated/speak2hire/'
     | '/api/public/webhooks/mercadopago'
   fileRoutesById: FileRoutesById
 }
@@ -274,6 +287,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfessorThreadIdRouteImport
       parentRoute: typeof AuthenticatedProfessorRoute
     }
+    '/_authenticated/speak2hire/': {
+      id: '/_authenticated/speak2hire/'
+      path: '/speak2hire'
+      fullPath: '/speak2hire/'
+      preLoaderRoute: typeof AuthenticatedSpeak2hireIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/webhooks/mercadopago': {
       id: '/api/public/webhooks/mercadopago'
       path: '/api/public/webhooks/mercadopago'
@@ -306,6 +326,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
   AuthenticatedProfessorRoute: typeof AuthenticatedProfessorRouteWithChildren
+  AuthenticatedSpeak2hireIndexRoute: typeof AuthenticatedSpeak2hireIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -314,6 +335,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
   AuthenticatedProfessorRoute: AuthenticatedProfessorRouteWithChildren,
+  AuthenticatedSpeak2hireIndexRoute: AuthenticatedSpeak2hireIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
