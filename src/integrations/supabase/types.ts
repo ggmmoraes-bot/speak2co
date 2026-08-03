@@ -167,6 +167,54 @@ export type Database = {
         }
         Relationships: []
       }
+      subscriptions: {
+        Row: {
+          amount: number | null
+          created_at: string
+          currency: string
+          external_reference: string | null
+          id: string
+          init_point: string | null
+          plan_label: string | null
+          preapproval_id: string | null
+          provider: string
+          raw: Json
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount?: number | null
+          created_at?: string
+          currency?: string
+          external_reference?: string | null
+          id?: string
+          init_point?: string | null
+          plan_label?: string | null
+          preapproval_id?: string | null
+          provider?: string
+          raw?: Json
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number | null
+          created_at?: string
+          currency?: string
+          external_reference?: string | null
+          id?: string
+          init_point?: string | null
+          plan_label?: string | null
+          preapproval_id?: string | null
+          provider?: string
+          raw?: Json
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
