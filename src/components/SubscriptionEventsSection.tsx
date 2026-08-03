@@ -27,14 +27,21 @@ function formatDateTime(value: string) {
   });
 }
 
-export function SubscriptionEventsSection() {
+export function SubscriptionEventsSection({
+  simulatedEvents,
+}: {
+  simulatedEvents?: SubscriptionEventView[];
+}) {
   const fetchEvents = useServerFn(getMySubscriptionEvents);
-  const { data, isPending } = useQuery({
+  const { data, isPending: isLoading } = useQuery({
     queryKey: ["subscription-events"],
     queryFn: () => fetchEvents(),
+    enabled: !simulatedEvents,
   });
 
-  const events = data?.events ?? [];
+  const events: SubscriptionEventView[] = simulatedEvents ?? data?.events ?? [];
+  const isPending = !simulatedEvents && isLoading;
+
 
   return (
     <section className="mt-12">
