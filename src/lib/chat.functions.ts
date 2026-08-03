@@ -1,7 +1,12 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import type { UIMessage } from "ai";
 import { z } from "zod";
+
+export type ChatMessageDTO = {
+  id: string;
+  role: "user" | "assistant" | "system";
+  parts: Array<Record<string, unknown>>;
+};
 
 export type ChatThread = {
   id: string;
