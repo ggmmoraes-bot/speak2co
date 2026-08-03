@@ -90,7 +90,7 @@ export const Route = createFileRoute("/api/chat")({
         const result = streamText({
           model: gateway("google/gemini-3.6-flash"),
           system: buildSystemPrompt(profile ?? { full_name: null, english_level: null, goal: null, target_level: null }),
-          messages: convertToModelMessages(messages),
+          messages: await convertToModelMessages(messages),
         });
 
         const threadTitleWasDefault = thread.title === DEFAULT_TITLE;
