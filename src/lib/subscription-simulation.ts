@@ -187,3 +187,29 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
     ],
   };
 }
+
+/**
+ * Trava de ambiente: a simulação só roda em desenvolvimento e nos previews
+ * (localhost, *.lovable.dev e URLs de preview id-preview--* / --dev.lovable.app).
+ * Em produção (domínio publicado ou domínio próprio) ela fica sempre desligada.
+ */
+export function isSimulationAllowedForHost(hostname: string | null | undefined): boolean {
+  if (!hostname) return false;
+  const host = hostname.toLowerCase();
+
+  if (host === "localhost" || host === "127.0.0.1" || host.endsWith(".localhost")) return true;
+  if (host.endsWith(".lovable.dev") || host.endsWith(".lovableproject.com")) return true;
+
+  if (host.endsWith(".lovable.app")) {
+    const sub = host.slice(0, -".lovable.app".length);
+    return sub.includes("-preview--") || sub.endsWith("-dev") || sub.startsWith("preview--");
+  }
+
+  return false;
+}
+
+export function isSimulationAllowedHere(): boolean {
+  if (import.meta.env.DEV) return true;
+  if (typeof window === "undefined") return false;
+  return isSimulationAllowedForHost(window.location.hostname);
+}

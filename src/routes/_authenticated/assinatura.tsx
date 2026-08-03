@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,7 @@ import { SubscriptionEventsSection } from "@/components/SubscriptionEventsSectio
 import {
   SIMULATION_MODES,
   buildSimulation,
+  isSimulationAllowedHere,
   isSimulationMode,
 } from "@/lib/subscription-simulation";
 
@@ -61,7 +63,14 @@ function formatDate(value: string | null | undefined) {
 
 function AssinaturaPage() {
   const { simulacao } = Route.useSearch();
-  const simulation = simulacao ? buildSimulation(simulacao) : null;
+  // A trava só pode ser avaliada no cliente (depende do domínio), então começa desligada.
+  const [simulationAllowed, setSimulationAllowed] = useState(false);
+  useEffect(() => {
+    setSimulationAllowed(isSimulationAllowedHere());
+  }, []);
+
+  const blockedInProduction = Boolean(simulacao) && !simulationAllowed;
+  const simulation = simulacao && simulationAllowed ? buildSimulation(simulacao) : null;
 
   const fetchSubscription = useServerFn(getMySubscription);
   const { data, isPending: isLoading } = useQuery({
@@ -89,15 +98,36 @@ function AssinaturaPage() {
         </p>
       </header>
 
+      {simulation && (
+        <div
+          role="status"
+          className="mt-8 rounded-2xl border-2 border-dashed border-destructive/60 bg-destructive/10 p-4 text-sm font-semibold text-destructive"
+        >
+          ⚠️ Você está vendo DADOS FICTÍCIOS de simulação — nada aqui reflete uma compra real. Em
+          produção esta tela sempre mostra a assinatura verdadeira.
+        </div>
+      )}
+
+      {blockedInProduction && (
+        <div
+          role="status"
+          className="mt-8 rounded-2xl border border-border bg-muted/40 p-4 text-sm text-muted-foreground"
+        >
+          🔒 O modo de simulação está desativado neste ambiente (produção). Os dados abaixo são reais.
+        </div>
+      )}
+
       <section className="mt-8 rounded-2xl border border-dashed border-accent/50 bg-accent/5 p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="font-semibold text-foreground">
-              Modo de simulação {simulation ? "ativo" : "desligado"}
+              Modo de simulação{" "}
+              {!simulationAllowed ? "indisponível em produção" : simulation ? "ativo" : "desligado"}
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
               Visualize esta tela com datas de renovação e recursos Premium liberados. Nada é gravado
-              no banco e nenhuma cobrança é feita.
+              no banco e nenhuma cobrança é feita. Disponível apenas em desenvolvimento e nos
+              previews — no app publicado a simulação é ignorada automaticamente.
             </p>
           </div>
           {simulation && (
@@ -107,7 +137,13 @@ function AssinaturaPage() {
           )}
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
-          {SIMULATION_MODES.map((mode) => (
+          {!simulationAllowed && (
+            <p className="text-sm text-muted-foreground">
+              Abra o preview do projeto para usar a simulação.
+            </p>
+          )}
+          {simulationAllowed &&
+            SIMULATION_MODES.map((mode) => (
             <Button
               key={mode.value}
               asChild
@@ -118,8 +154,8 @@ function AssinaturaPage() {
               <Link to="/assinatura" search={{ simulacao: mode.value }}>
                 {mode.label}
               </Link>
-            </Button>
-          ))}
+              </Button>
+            ))}
           {simulation && (
             <Button asChild size="sm" variant="ghost" className="rounded-full text-xs font-semibold">
               <Link to="/assinatura" search={{ simulacao: undefined }}>
