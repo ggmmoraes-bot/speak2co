@@ -36,7 +36,9 @@ export type Preapproval = {
   status: string;
   external_reference?: string;
   init_point?: string;
-  auto_recurring?: { transaction_amount?: number; currency_id?: string };
+  next_payment_date?: string;
+  date_created?: string;
+  auto_recurring?: { transaction_amount?: number; currency_id?: string; frequency?: number; frequency_type?: string };
 };
 
 export async function createPreapproval(params: {

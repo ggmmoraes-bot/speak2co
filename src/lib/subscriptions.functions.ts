@@ -9,7 +9,9 @@ export const getMySubscription = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { data, error } = await context.supabase
       .from("subscriptions")
-      .select("id, status, plan_label, amount, currency, init_point, created_at")
+      .select(
+        "id, status, plan_label, amount, currency, init_point, next_payment_date, created_at, updated_at",
+      )
       .eq("user_id", context.userId)
       .order("created_at", { ascending: false })
       .limit(1)

@@ -175,6 +175,7 @@ export type Database = {
           external_reference: string | null
           id: string
           init_point: string | null
+          next_payment_date: string | null
           plan_label: string | null
           preapproval_id: string | null
           provider: string
@@ -190,6 +191,7 @@ export type Database = {
           external_reference?: string | null
           id?: string
           init_point?: string | null
+          next_payment_date?: string | null
           plan_label?: string | null
           preapproval_id?: string | null
           provider?: string
@@ -205,6 +207,7 @@ export type Database = {
           external_reference?: string | null
           id?: string
           init_point?: string | null
+          next_payment_date?: string | null
           plan_label?: string | null
           preapproval_id?: string | null
           provider?: string

@@ -61,6 +61,7 @@ export const Route = createFileRoute("/api/public/webhooks/mercadopago")({
           .from("subscriptions")
           .update({
             status: preapproval.status,
+            next_payment_date: preapproval.next_payment_date ?? null,
             raw: JSON.parse(JSON.stringify(preapproval)),
           })
           .eq("preapproval_id", preapproval.id);
