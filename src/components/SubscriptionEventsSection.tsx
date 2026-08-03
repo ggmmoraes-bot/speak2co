@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { getMySubscriptionEvents } from "@/lib/subscriptions.functions";
+import type { SubscriptionEventView } from "@/lib/subscription-simulation";
+
 
 const EVENT_LABEL: Record<string, { label: string; icon: string; tone: string }> = {
   checkout_created: { label: "Checkout criado", icon: "🧾", tone: "text-muted-foreground" },
@@ -25,14 +27,21 @@ function formatDateTime(value: string) {
   });
 }
 
-export function SubscriptionEventsSection() {
+export function SubscriptionEventsSection({
+  simulatedEvents,
+}: {
+  simulatedEvents?: SubscriptionEventView[] | undefined;
+}) {
   const fetchEvents = useServerFn(getMySubscriptionEvents);
-  const { data, isPending } = useQuery({
+  const { data, isPending: isLoading } = useQuery({
     queryKey: ["subscription-events"],
     queryFn: () => fetchEvents(),
+    enabled: !simulatedEvents,
   });
 
-  const events = data?.events ?? [];
+  const events: SubscriptionEventView[] = simulatedEvents ?? data?.events ?? [];
+  const isPending = !simulatedEvents && isLoading;
+
 
   return (
     <section className="mt-12">
