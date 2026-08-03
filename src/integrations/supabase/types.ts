@@ -98,6 +98,42 @@ export type Database = {
         }
         Relationships: []
       }
+      study_plan_versions: {
+        Row: {
+          created_at: string
+          id: string
+          locked_weeks: number[]
+          milestones: Json
+          reason: string
+          refined_weeks: number[]
+          summary: string
+          user_id: string
+          weekly_focus: Json
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          locked_weeks?: number[]
+          milestones?: Json
+          reason?: string
+          refined_weeks?: number[]
+          summary: string
+          user_id: string
+          weekly_focus?: Json
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          locked_weeks?: number[]
+          milestones?: Json
+          reason?: string
+          refined_weeks?: number[]
+          summary?: string
+          user_id?: string
+          weekly_focus?: Json
+        }
+        Relationships: []
+      }
       study_plans: {
         Row: {
           created_at: string
