@@ -125,7 +125,7 @@ function Painel() {
             </Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/premium">Assinar Premium</Link>
+            <Link to="/assinatura">Minha assinatura</Link>
           </Button>
         </div>
 
