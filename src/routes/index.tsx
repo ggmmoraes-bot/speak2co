@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Briefcase, Plane, Sparkles, GraduationCap, Globe } from "lucide-react";
 import logo from "@/assets/speak2co-logo.asset.json";
 import hire from "@/assets/speak2hire.asset.json";
