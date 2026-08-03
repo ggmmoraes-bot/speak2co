@@ -5,7 +5,7 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
-import { Mic, Square, Volume2, Loader2, AudioLines } from "lucide-react";
+import { Mic, Square, Volume2, Volume1, VolumeX, Loader2, AudioLines, Gauge, Settings2 } from "lucide-react";
 import {
   Conversation,
   ConversationContent,
@@ -24,6 +24,9 @@ import { Button } from "@/components/ui/button";
 import { PronunciationDialog } from "@/components/PronunciationDialog";
 import { MicRecorder } from "@/lib/audio-recorder";
 import { transcribeAudio, speakText, stopSpeaking } from "@/lib/voice-client";
+import { useVoiceSettings } from "@/lib/use-voice-settings";
+import { Slider } from "@/components/ui/slider";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { getThreadMessages } from "@/lib/chat.functions";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -97,7 +100,8 @@ function ChatWindow({
   const [recording, setRecording] = useState(false);
   const [transcribing, setTranscribing] = useState(false);
   const [speakingId, setSpeakingId] = useState<string | null>(null);
-  const [autoSpeak, setAutoSpeak] = useState(false);
+  const { settings: voice, update: updateVoice } = useVoiceSettings();
+  const autoSpeak = voice.autoSpeak;
   const [pronOpen, setPronOpen] = useState(false);
   const recorderRef = useRef<MicRecorder | null>(null);
   const lastSpokenRef = useRef<string | null>(null);
@@ -115,7 +119,7 @@ function ChatWindow({
     }
     try {
       setSpeakingId(m.id);
-      await speakText(text);
+      await speakText(text, { volume: voice.volume, rate: voice.rate });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível gerar o áudio.");
     } finally {
@@ -259,12 +263,82 @@ function ChatWindow({
             variant={autoSpeak ? "secondary" : "ghost"}
             onClick={() => {
               if (autoSpeak) stopSpeaking();
-              setAutoSpeak((v) => !v);
+              updateVoice({ autoSpeak: !autoSpeak });
             }}
             className="gap-1 text-xs"
           >
             <Volume2 className="h-4 w-4" /> Voz automática {autoSpeak ? "ligada" : "desligada"}
           </Button>
+
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button type="button" size="sm" variant="ghost" className="gap-1 text-xs">
+                <Settings2 className="h-4 w-4" /> Volume {Math.round(voice.volume * 100)}% ·{" "}
+                {voice.rate.toFixed(1)}x
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent align="start" className="w-72 space-y-5">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs font-medium">
+                  <span className="flex items-center gap-1">
+                    {voice.volume === 0 ? (
+                      <VolumeX className="h-4 w-4" />
+                    ) : voice.volume < 0.5 ? (
+                      <Volume1 className="h-4 w-4" />
+                    ) : (
+                      <Volume2 className="h-4 w-4" />
+                    )}
+                    Volume
+                  </span>
+                  <span className="text-muted-foreground">{Math.round(voice.volume * 100)}%</span>
+                </div>
+                <Slider
+                  aria-label="Volume da voz"
+                  value={[voice.volume]}
+                  min={0}
+                  max={1}
+                  step={0.05}
+                  onValueChange={([v]) => updateVoice({ volume: v })}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs font-medium">
+                  <span className="flex items-center gap-1">
+                    <Gauge className="h-4 w-4" /> Velocidade
+                  </span>
+                  <span className="text-muted-foreground">{voice.rate.toFixed(1)}x</span>
+                </div>
+                <Slider
+                  aria-label="Velocidade da voz"
+                  value={[voice.rate]}
+                  min={0.5}
+                  max={2}
+                  step={0.1}
+                  onValueChange={([v]) => updateVoice({ rate: v })}
+                />
+                <div className="flex gap-1">
+                  {[0.75, 1, 1.25, 1.5].map((r) => (
+                    <Button
+                      key={r}
+                      type="button"
+                      size="sm"
+                      variant={Math.abs(voice.rate - r) < 0.01 ? "secondary" : "ghost"}
+                      className="h-7 flex-1 px-0 text-xs"
+                      onClick={() => updateVoice({ rate: r })}
+                    >
+                      {r}x
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-xs text-muted-foreground">
+                As preferências ficam salvas neste dispositivo e valem para o modo de voz
+                automática.
+              </p>
+            </PopoverContent>
+          </Popover>
         </div>
 
         <PromptInput onSubmit={handleSubmit} className="mx-auto max-w-3xl">
