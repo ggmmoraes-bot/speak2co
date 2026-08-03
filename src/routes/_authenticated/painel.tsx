@@ -22,7 +22,13 @@ export const Route = createFileRoute("/_authenticated/painel")({
   component: Painel,
 });
 
-type Profile = { full_name: string | null; plan: string; english_level: string | null };
+type Profile = {
+  full_name: string | null;
+  plan: string;
+  english_level: string | null;
+  goal: string | null;
+  target_level: string | null;
+};
 
 function Painel() {
   const navigate = useNavigate();
@@ -38,7 +44,7 @@ function Painel() {
       setEmail(userData.user.email ?? "");
       const { data } = await supabase
         .from("profiles")
-        .select("full_name, plan, english_level")
+        .select("full_name, plan, english_level, goal, target_level")
         .eq("id", userData.user.id)
         .maybeSingle();
       if (active && data) setProfile(data as Profile);
@@ -87,7 +93,28 @@ function Painel() {
               {profile?.english_level ?? "A definir"}
             </p>
           </div>
+          <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
+            <p className="text-xs tracking-widest text-muted-foreground uppercase">Nível desejado</p>
+            <p className="mt-2 text-xl font-semibold text-gold">
+              {profile?.target_level ?? "A definir"}
+            </p>
+          </div>
+          <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
+            <p className="text-xs tracking-widest text-muted-foreground uppercase">Seu objetivo</p>
+            <p className="mt-2 text-sm text-foreground">
+              {profile?.goal ?? "Conte pra gente o que você quer conquistar com o inglês."}
+            </p>
+          </div>
         </div>
+
+        <Button
+          asChild
+          className="bg-gold text-primary-foreground glow-gold mt-8 rounded-full font-semibold hover:opacity-90"
+        >
+          <Link to="/perfil">
+            {profile?.goal && profile?.target_level ? "Editar meu perfil" : "Completar meu perfil"}
+          </Link>
+        </Button>
       </div>
     </main>
   );
