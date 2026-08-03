@@ -16,7 +16,7 @@ export const getStudyPlan = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { data, error } = await context.supabase
       .from("study_plans")
-      .select("summary, weekly_focus, milestones, updated_at")
+      .select("summary, weekly_focus, milestones, locked_weeks, updated_at")
       .eq("user_id", context.userId)
       .maybeSingle();
     if (error) throw new Error(error.message);
@@ -92,12 +92,27 @@ Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases), foco 
       throw new Error("Não foi possível gerar seu plano agora.");
     }
 
+    const { data: existingPlan } = await context.supabase
+      .from("study_plans")
+      .select("weekly_focus, locked_weeks")
+      .eq("user_id", context.userId)
+      .maybeSingle();
+    const lockedWeeks = ((existingPlan?.locked_weeks ?? []) as number[]).map(Number);
+    const existingByWeek = new Map(
+      (((existingPlan?.weekly_focus ?? []) as StudyPlan["weekly_focus"]) ?? []).map((w) => [w.week, w]),
+    );
+    const finalWeeks = output.weekly_focus.map((w) =>
+      lockedWeeks.includes(w.week) ? (existingByWeek.get(w.week) ?? w) : w,
+    );
+    output = { ...output, weekly_focus: finalWeeks };
+
     const { error: upsertError } = await context.supabase.from("study_plans").upsert(
       {
         user_id: context.userId,
         summary: output.summary,
         weekly_focus: output.weekly_focus,
         milestones: output.milestones,
+        locked_weeks: lockedWeeks,
       },
       { onConflict: "user_id" },
     );
@@ -120,7 +135,7 @@ export const previewStudyPlanRefinement = createServerFn({ method: "POST" })
         .maybeSingle(),
       context.supabase
         .from("study_plans")
-        .select("summary, weekly_focus, milestones")
+        .select("summary, weekly_focus, milestones, locked_weeks")
         .eq("user_id", context.userId)
         .maybeSingle(),
     ]);
@@ -153,10 +168,17 @@ export const previewStudyPlanRefinement = createServerFn({ method: "POST" })
       }
     }
 
-    const targetWeeks = weeks.filter((w) => problemsByWeek.has(w.week));
-    if (targetWeeks.length === 0) {
+    const lockedWeeks = new Set(((plan.locked_weeks ?? []) as number[]).map(Number));
+    const affectedWeeks = weeks.filter((w) => problemsByWeek.has(w.week));
+    const targetWeeks = affectedWeeks.filter((w) => !lockedWeeks.has(w.week));
+    if (affectedWeeks.length === 0) {
       throw new Error(
         "Nenhuma explicação foi marcada como \"não ajudou\" ainda. Marque no histórico para eu ajustar essa parte do plano.",
+      );
+    }
+    if (targetWeeks.length === 0) {
+      throw new Error(
+        "Todas as semanas afetadas pelo seu feedback estão travadas. Destrave alguma semana para ajustar o plano.",
       );
     }
 
@@ -231,13 +253,16 @@ export const applyStudyPlanRefinement = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { data: plan, error: planError } = await context.supabase
       .from("study_plans")
-      .select("summary, weekly_focus, milestones")
+      .select("summary, weekly_focus, milestones, locked_weeks")
       .eq("user_id", context.userId)
       .maybeSingle();
     if (planError) throw new Error(planError.message);
     if (!plan) throw new Error("Gere seu plano de estudos antes de ajustá-lo.");
 
-    const refinedByWeek = new Map(data.weeks.map((w) => [w.week, w]));
+    const lockedWeeks = new Set(((plan.locked_weeks ?? []) as number[]).map(Number));
+    const refinedByWeek = new Map(
+      data.weeks.filter((w) => !lockedWeeks.has(w.week)).map((w) => [w.week, w]),
+    );
     const weeks = (plan.weekly_focus ?? []) as StudyPlan["weekly_focus"];
     const mergedWeeks = weeks.map((w) => refinedByWeek.get(w.week) ?? w);
 
@@ -251,6 +276,35 @@ export const applyStudyPlanRefinement = createServerFn({ method: "POST" })
       summary: plan.summary,
       weekly_focus: mergedWeeks,
       milestones: (plan.milestones ?? []) as string[],
-      refined_weeks: data.weeks.map((w) => w.week),
+      locked_weeks: [...lockedWeeks],
+      refined_weeks: [...refinedByWeek.keys()],
     };
+  });
+
+export const setWeekLock = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z.object({ week: z.number(), locked: z.boolean() }).parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const { data: plan, error: planError } = await context.supabase
+      .from("study_plans")
+      .select("locked_weeks")
+      .eq("user_id", context.userId)
+      .maybeSingle();
+    if (planError) throw new Error(planError.message);
+    if (!plan) throw new Error("Gere seu plano de estudos antes de travar semanas.");
+
+    const current = new Set(((plan.locked_weeks ?? []) as number[]).map(Number));
+    if (data.locked) current.add(data.week);
+    else current.delete(data.week);
+    const lockedWeeks = [...current].sort((a, b) => a - b);
+
+    const { error: updateError } = await context.supabase
+      .from("study_plans")
+      .update({ locked_weeks: lockedWeeks })
+      .eq("user_id", context.userId);
+    if (updateError) throw new Error(updateError.message);
+
+    return { locked_weeks: lockedWeeks };
   });
