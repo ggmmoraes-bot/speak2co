@@ -15,12 +15,16 @@ type ChatRequestBody = {
 
 const DEFAULT_TITLE = "Nova conversa";
 
-function buildSystemPrompt(profile: {
-  full_name: string | null;
-  english_level: string | null;
-  goal: string | null;
-  target_level: string | null;
-}) {
+function buildSystemPrompt(
+  profile: {
+    full_name: string | null;
+    english_level: string | null;
+    goal: string | null;
+    target_level: string | null;
+  },
+  placementBlock: string,
+  feedbackStyle: string,
+) {
   const name = profile.full_name || "aluno";
   const level = profile.english_level || "indefinido";
   const goal = profile.goal || "melhorar o inglês geral";
@@ -33,8 +37,15 @@ Contexto do aluno:
 - Objetivo: ${goal}
 - Nível desejado: ${target}
 
+Resultado do teste de nivelamento:
+${placementBlock}
+
+Calibragem do feedback (siga à risca):
+${feedbackStyle}
+
 Diretrizes:
 - Converse PRINCIPALMENTE em inglês, adaptando a complexidade ao nível do aluno (${level}). Use português brevemente só quando o aluno não entender.
+- Priorize nas correções os pontos fracos apontados no teste de nivelamento.
 - Seja encorajador, paciente e amigável — tom de professor particular premium.
 - Corrija erros de gramática e vocabulário de forma natural: primeiro responda à mensagem, depois, quando útil, mostre a correção em uma linha curta com "💡 Correction:".
 - Ajude com pronúncia descrevendo sons quando o aluno perguntar.
