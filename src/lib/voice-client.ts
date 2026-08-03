@@ -32,8 +32,23 @@ export function stopSpeaking() {
   currentAudio = null;
 }
 
+export type SpeakOptions = {
+  voice?: string;
+  /** 0 a 1 */
+  volume?: number;
+  /** 0.5 a 2 */
+  rate?: number;
+};
+
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(max, Math.max(min, Number.isFinite(value) ? value : min));
+
 /** Gera (ou reaproveita) o áudio da frase e reproduz com voz nativa. */
-export async function speakText(text: string, voice = "alloy"): Promise<void> {
+export async function speakText(text: string, options: SpeakOptions | string = {}): Promise<void> {
+  const opts: SpeakOptions = typeof options === "string" ? { voice: options } : options;
+  const voice = opts.voice ?? "alloy";
+  const volume = clamp(opts.volume ?? 1, 0, 1);
+  const rate = clamp(opts.rate ?? 1, 0.5, 2);
   const key = `${voice}:${text}`;
   let url = audioCache.get(key);
   if (!url) {
