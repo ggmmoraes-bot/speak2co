@@ -4,8 +4,16 @@ import { useServerFn } from "@tanstack/react-start";
 import { Button } from "@/components/ui/button";
 import { getMySubscription } from "@/lib/subscriptions.functions";
 import { SubscriptionEventsSection } from "@/components/SubscriptionEventsSection";
+import {
+  SIMULATION_MODES,
+  buildSimulation,
+  isSimulationMode,
+} from "@/lib/subscription-simulation";
 
 export const Route = createFileRoute("/_authenticated/assinatura")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    simulacao: isSimulationMode(search["simulacao"]) ? search["simulacao"] : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Minha assinatura — Speak2Co" },
@@ -52,14 +60,19 @@ function formatDate(value: string | null | undefined) {
 }
 
 function AssinaturaPage() {
+  const { simulacao } = Route.useSearch();
+  const simulation = simulacao ? buildSimulation(simulacao) : null;
+
   const fetchSubscription = useServerFn(getMySubscription);
-  const { data, isPending } = useQuery({
+  const { data, isPending: isLoading } = useQuery({
     queryKey: ["subscription"],
     queryFn: () => fetchSubscription(),
+    enabled: !simulation,
   });
 
-  const isPremium = data?.plan === "premium";
-  const subscription = data?.subscription ?? null;
+  const isPending = !simulation && isLoading;
+  const isPremium = simulation ? simulation.isPremium : data?.plan === "premium";
+  const subscription = simulation ? simulation.subscription : (data?.subscription ?? null);
   const renewal = formatDate(subscription?.next_payment_date);
 
   return (
@@ -76,7 +89,48 @@ function AssinaturaPage() {
         </p>
       </header>
 
-      <section className="mt-8 grid gap-4 rounded-2xl border border-border bg-card p-6 md:grid-cols-3">
+      <section className="mt-8 rounded-2xl border border-dashed border-accent/50 bg-accent/5 p-5">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <p className="font-semibold text-foreground">
+              Modo de simulação {simulation ? "ativo" : "desligado"}
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Visualize esta tela com datas de renovação e recursos Premium liberados. Nada é gravado
+              no banco e nenhuma cobrança é feita.
+            </p>
+          </div>
+          {simulation && (
+            <span className="rounded-full border border-accent/50 bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
+              Dados fictícios
+            </span>
+          )}
+        </div>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {SIMULATION_MODES.map((mode) => (
+            <Button
+              key={mode.value}
+              asChild
+              size="sm"
+              variant={simulacao === mode.value ? "default" : "outline"}
+              className="rounded-full text-xs font-semibold"
+            >
+              <Link to="/assinatura" search={{ simulacao: mode.value }}>
+                {mode.label}
+              </Link>
+            </Button>
+          ))}
+          {simulation && (
+            <Button asChild size="sm" variant="ghost" className="rounded-full text-xs font-semibold">
+              <Link to="/assinatura" search={{ simulacao: undefined }}>
+                Sair da simulação
+              </Link>
+            </Button>
+          )}
+        </div>
+      </section>
+
+      <section className="mt-6 grid gap-4 rounded-2xl border border-border bg-card p-6 md:grid-cols-3">
         <div>
           <p className="text-xs uppercase tracking-wider text-muted-foreground">Plano</p>
           <p className="mt-1 font-semibold text-foreground">
@@ -132,7 +186,7 @@ function AssinaturaPage() {
         </ul>
       </section>
 
-      <SubscriptionEventsSection />
+      <SubscriptionEventsSection simulatedEvents={simulation?.events} />
 
 
       <div className="mt-10 flex flex-wrap gap-3">
