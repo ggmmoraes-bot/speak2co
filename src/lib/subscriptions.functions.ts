@@ -46,20 +46,52 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
     });
 
     const plan = MP_PLANS[data.planKey];
-    const { error } = await supabaseAdmin.from("subscriptions").insert({
+    const { data: created, error } = await supabaseAdmin
+      .from("subscriptions")
+      .insert({
+        user_id: context.userId,
+        provider: "mercadopago",
+        preapproval_id: preapproval.id,
+        external_reference: externalReference,
+        status: preapproval.status ?? "pending",
+        plan_label: plan.label,
+        amount: plan.amount,
+        currency: "BRL",
+        init_point: preapproval.init_point ?? null,
+        raw: JSON.parse(JSON.stringify(preapproval)),
+      })
+      .select("id")
+      .maybeSingle();
+    if (error) throw new Error(error.message);
+
+    const { logSubscriptionEvent } = await import("@/lib/subscription-events.server");
+    await logSubscriptionEvent({
       user_id: context.userId,
-      provider: "mercadopago",
+      subscription_id: created?.id ?? null,
       preapproval_id: preapproval.id,
-      external_reference: externalReference,
+      event_type: "checkout_created",
       status: preapproval.status ?? "pending",
-      plan_label: plan.label,
       amount: plan.amount,
       currency: "BRL",
-      init_point: preapproval.init_point ?? null,
+      message: `Checkout criado para o plano ${plan.label}.`,
       raw: JSON.parse(JSON.stringify(preapproval)),
     });
-    if (error) throw new Error(error.message);
 
     if (!preapproval.init_point) throw new Error("O Mercado Pago não retornou o link de pagamento.");
     return { checkoutUrl: preapproval.init_point };
+  });
+
+export const getMySubscriptionEvents = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { data, error } = await context.supabase
+      .from("subscription_events")
+      .select(
+        "id, event_type, status, amount, currency, next_payment_date, message, preapproval_id, created_at",
+      )
+      .eq("user_id", context.userId)
+      .order("created_at", { ascending: false })
+      .limit(50);
+    if (error) throw new Error(error.message);
+    return { events: data ?? [] };
   });
