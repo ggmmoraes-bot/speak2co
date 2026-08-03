@@ -54,7 +54,7 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
       amount: plan.amount,
       currency: "BRL",
       init_point: preapproval.init_point ?? null,
-      raw: preapproval as unknown as Record<string, unknown>,
+      raw: JSON.parse(JSON.stringify(preapproval)),
     });
     if (error) throw new Error(error.message);
 
