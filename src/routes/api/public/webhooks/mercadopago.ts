@@ -40,35 +40,95 @@ export const Route = createFileRoute("/api/public/webhooks/mercadopago")({
         }
 
         const dataId = payload.data?.id ?? url.searchParams.get("data.id") ?? url.searchParams.get("id");
+        const { logSubscriptionEvent, eventTypeFromStatus } = await import(
+          "@/lib/subscription-events.server"
+        );
+
         const valid = verifySignature({
           secret,
           signatureHeader: request.headers.get("x-signature"),
           requestId: request.headers.get("x-request-id"),
           dataId,
         });
-        if (!valid) return new Response("Invalid signature", { status: 401 });
+        if (!valid) {
+          await logSubscriptionEvent({
+            event_type: "webhook_rejected",
+            preapproval_id: dataId ?? null,
+            message: "Assinatura HMAC inválida — notificação descartada.",
+            raw: JSON.parse(JSON.stringify(payload)),
+          });
+          return new Response("Invalid signature", { status: 401 });
+        }
 
         const topic = payload.type ?? payload.action ?? url.searchParams.get("type") ?? "";
-        if (!dataId || !topic.includes("preapproval")) return new Response("ignored");
+        if (!dataId || !topic.includes("preapproval")) {
+          await logSubscriptionEvent({
+            event_type: "webhook_ignored",
+            preapproval_id: dataId ?? null,
+            message: `Notificação ignorada (tópico: ${topic || "desconhecido"}).`,
+            raw: JSON.parse(JSON.stringify(payload)),
+          });
+          return new Response("ignored");
+        }
 
         const { getPreapproval } = await import("@/lib/mercadopago.server");
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
         const preapproval = await getPreapproval(dataId);
-        const userId = (preapproval.external_reference ?? "").split(":")[0];
+        const userId = (preapproval.external_reference ?? "").split(":")[0] || null;
+        const rawPreapproval = JSON.parse(JSON.stringify(preapproval));
+
+        const { data: existing } = await supabaseAdmin
+          .from("subscriptions")
+          .select("id, status, next_payment_date, amount, currency")
+          .eq("preapproval_id", preapproval.id)
+          .maybeSingle();
 
         await supabaseAdmin
           .from("subscriptions")
           .update({
             status: preapproval.status,
             next_payment_date: preapproval.next_payment_date ?? null,
-            raw: JSON.parse(JSON.stringify(preapproval)),
+            raw: rawPreapproval,
           })
           .eq("preapproval_id", preapproval.id);
+
+        const renewed =
+          existing?.status === "authorized" &&
+          preapproval.status === "authorized" &&
+          !!preapproval.next_payment_date &&
+          preapproval.next_payment_date !== existing.next_payment_date;
+
+        await logSubscriptionEvent({
+          user_id: userId,
+          subscription_id: existing?.id ?? null,
+          preapproval_id: preapproval.id,
+          event_type: renewed ? "subscription_renewed" : eventTypeFromStatus(preapproval.status),
+          status: preapproval.status ?? null,
+          amount: existing?.amount ?? null,
+          currency: existing?.currency ?? "BRL",
+          next_payment_date: preapproval.next_payment_date ?? null,
+          message: renewed
+            ? "Renovação confirmada pelo Mercado Pago."
+            : `Notificação recebida (${topic}): situação ${preapproval.status}.`,
+          raw: rawPreapproval,
+        });
 
         if (userId) {
           const plan = preapproval.status === "authorized" ? "premium" : "free";
           await supabaseAdmin.from("profiles").update({ plan }).eq("id", userId);
+          await logSubscriptionEvent({
+            user_id: userId,
+            subscription_id: existing?.id ?? null,
+            preapproval_id: preapproval.id,
+            event_type: "plan_updated",
+            status: preapproval.status ?? null,
+            message:
+              plan === "premium"
+                ? "Plano Premium liberado para o aluno."
+                : "Plano do aluno voltou para Gratuito.",
+            raw: { plan },
+          });
         }
 
         return new Response("ok");

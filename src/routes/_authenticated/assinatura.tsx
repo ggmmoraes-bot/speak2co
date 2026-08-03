@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Button } from "@/components/ui/button";
 import { getMySubscription } from "@/lib/subscriptions.functions";
+import { SubscriptionEventsSection } from "@/components/SubscriptionEventsSection";
 
 export const Route = createFileRoute("/_authenticated/assinatura")({
   head: () => ({
@@ -130,6 +131,9 @@ function AssinaturaPage() {
           ))}
         </ul>
       </section>
+
+      <SubscriptionEventsSection />
+
 
       <div className="mt-10 flex flex-wrap gap-3">
         {!isPremium && (
