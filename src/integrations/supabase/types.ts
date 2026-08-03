@@ -20,8 +20,10 @@ export type Database = {
           created_at: string
           english_level: string | null
           full_name: string | null
+          goal: string | null
           id: string
           plan: Database["public"]["Enums"]["plan_tier"]
+          target_level: string | null
           updated_at: string
         }
         Insert: {
@@ -29,8 +31,10 @@ export type Database = {
           created_at?: string
           english_level?: string | null
           full_name?: string | null
+          goal?: string | null
           id: string
           plan?: Database["public"]["Enums"]["plan_tier"]
+          target_level?: string | null
           updated_at?: string
         }
         Update: {
@@ -38,8 +42,10 @@ export type Database = {
           created_at?: string
           english_level?: string | null
           full_name?: string | null
+          goal?: string | null
           id?: string
           plan?: Database["public"]["Enums"]["plan_tier"]
+          target_level?: string | null
           updated_at?: string
         }
         Relationships: []
