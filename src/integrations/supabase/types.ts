@@ -440,7 +440,20 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      fluency_leaderboard: {
+        Args: { _limit?: number }
+        Returns: {
+          avatar_url: string
+          chat_points: number
+          display_name: string
+          english_level: string
+          exercise_points: number
+          interview_points: number
+          placement_points: number
+          total_points: number
+          user_id: string
+        }[]
+      }
     }
     Enums: {
       plan_tier: "free" | "premium"
