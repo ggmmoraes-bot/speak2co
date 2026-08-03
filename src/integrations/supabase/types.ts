@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      daily_exercises: {
+        Row: {
+          answers: Json
+          completed: boolean
+          created_at: string
+          exercise_date: string
+          id: string
+          instructions: string | null
+          items: Json
+          score: number | null
+          title: string
+          updated_at: string
+          user_id: string
+          week_number: number | null
+        }
+        Insert: {
+          answers?: Json
+          completed?: boolean
+          created_at?: string
+          exercise_date?: string
+          id?: string
+          instructions?: string | null
+          items?: Json
+          score?: number | null
+          title: string
+          updated_at?: string
+          user_id: string
+          week_number?: number | null
+        }
+        Update: {
+          answers?: Json
+          completed?: boolean
+          created_at?: string
+          exercise_date?: string
+          id?: string
+          instructions?: string | null
+          items?: Json
+          score?: number | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+          week_number?: number | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
