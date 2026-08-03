@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { getPlanVersions, restorePlanVersion } from "@/lib/study-plan.functions";
+import { exportPlanVersionToPdf } from "@/lib/plan-pdf";
 
 type WeeklyFocus = { week: number; title: string; activities: string[] };
 
