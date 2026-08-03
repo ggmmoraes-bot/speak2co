@@ -33,6 +33,22 @@ function today() {
   return new Date().toISOString().slice(0, 10);
 }
 
+export const getExerciseHistory = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { data, error } = await context.supabase
+      .from("daily_exercises")
+      .select("id, exercise_date, week_number, title, instructions, items, answers, score, completed")
+      .eq("user_id", context.userId)
+      .eq("completed", true)
+      .order("exercise_date", { ascending: false })
+      .limit(60);
+    if (error) throw new Error(error.message);
+    return (data ?? []) as DailyExercise[];
+  });
+
+
+
 export const getTodayExercise = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
