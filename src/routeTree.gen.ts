@@ -22,6 +22,7 @@ import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2hireIndexRouteImport } from './routes/_authenticated/speak2hire.index'
+import { Route as AuthenticatedSpeak2hireMaterialMaterialIdRouteImport } from './routes/_authenticated/speak2hire.material.$materialId'
 import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/public/webhooks/mercadopago'
 
 const IndexRoute = IndexRouteImport.update({
@@ -91,6 +92,12 @@ const AuthenticatedSpeak2hireIndexRoute =
     path: '/speak2hire/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSpeak2hireMaterialMaterialIdRoute =
+  AuthenticatedSpeak2hireMaterialMaterialIdRouteImport.update({
+    id: '/speak2hire/material/$materialId',
+    path: '/speak2hire/material/$materialId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiPublicWebhooksMercadopagoRoute =
   ApiPublicWebhooksMercadopagoRouteImport.update({
     id: '/api/public/webhooks/mercadopago',
@@ -111,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/professor/': typeof AuthenticatedProfessorIndexRoute
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
+  '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRoutesByTo {
@@ -125,6 +133,7 @@ export interface FileRoutesByTo {
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/professor': typeof AuthenticatedProfessorIndexRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
+  '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRoutesById {
@@ -142,6 +151,7 @@ export interface FileRoutesById {
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
+  '/_authenticated/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRouteTypes {
@@ -159,6 +169,7 @@ export interface FileRouteTypes {
     | '/professor/$threadId'
     | '/professor/'
     | '/speak2hire/'
+    | '/speak2hire/material/$materialId'
     | '/api/public/webhooks/mercadopago'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -173,6 +184,7 @@ export interface FileRouteTypes {
     | '/professor/$threadId'
     | '/professor'
     | '/speak2hire'
+    | '/speak2hire/material/$materialId'
     | '/api/public/webhooks/mercadopago'
   id:
     | '__root__'
@@ -189,6 +201,7 @@ export interface FileRouteTypes {
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/professor/'
     | '/_authenticated/speak2hire/'
+    | '/_authenticated/speak2hire/material/$materialId'
     | '/api/public/webhooks/mercadopago'
   fileRoutesById: FileRoutesById
 }
@@ -294,6 +307,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSpeak2hireIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/speak2hire/material/$materialId': {
+      id: '/_authenticated/speak2hire/material/$materialId'
+      path: '/speak2hire/material/$materialId'
+      fullPath: '/speak2hire/material/$materialId'
+      preLoaderRoute: typeof AuthenticatedSpeak2hireMaterialMaterialIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/webhooks/mercadopago': {
       id: '/api/public/webhooks/mercadopago'
       path: '/api/public/webhooks/mercadopago'
@@ -327,6 +347,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
   AuthenticatedProfessorRoute: typeof AuthenticatedProfessorRouteWithChildren
   AuthenticatedSpeak2hireIndexRoute: typeof AuthenticatedSpeak2hireIndexRoute
+  AuthenticatedSpeak2hireMaterialMaterialIdRoute: typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -336,6 +357,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
   AuthenticatedProfessorRoute: AuthenticatedProfessorRouteWithChildren,
   AuthenticatedSpeak2hireIndexRoute: AuthenticatedSpeak2hireIndexRoute,
+  AuthenticatedSpeak2hireMaterialMaterialIdRoute:
+    AuthenticatedSpeak2hireMaterialMaterialIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
