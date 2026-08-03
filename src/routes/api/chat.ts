@@ -96,11 +96,20 @@ export const Route = createFileRoute("/api/chat")({
           return new Response("IA indisponível no momento", { status: 503 });
         }
 
+        const { describePlacement, getPlacementSnapshot, feedbackStyleForLevel } = await import(
+          "@/lib/placement-context.server"
+        );
+        const placement = await getPlacementSnapshot(supabase, userId);
+
         const initialRunId = getLovableAiGatewayRunId(request);
         const gateway = createLovableAiGatewayProvider(apiKey, initialRunId);
         const result = streamText({
           model: gateway("google/gemini-3.6-flash"),
-          system: buildSystemPrompt(profile ?? { full_name: null, english_level: null, goal: null, target_level: null }),
+          system: buildSystemPrompt(
+            profile ?? { full_name: null, english_level: null, goal: null, target_level: null },
+            describePlacement(placement),
+            feedbackStyleForLevel(placement?.level ?? profile?.english_level ?? null),
+          ),
           messages: await convertToModelMessages(messages),
         });
 
