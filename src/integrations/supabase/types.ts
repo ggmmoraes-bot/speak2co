@@ -121,6 +121,57 @@ export type Database = {
         }
         Relationships: []
       }
+      interview_sessions: {
+        Row: {
+          answers: Json
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          durations: Json
+          feedback: Json | null
+          id: string
+          questions: Json
+          score: number | null
+          title: string
+          total_seconds: number
+          track: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          answers?: Json
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          durations?: Json
+          feedback?: Json | null
+          id?: string
+          questions?: Json
+          score?: number | null
+          title?: string
+          total_seconds?: number
+          track?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          answers?: Json
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          durations?: Json
+          feedback?: Json | null
+          id?: string
+          questions?: Json
+          score?: number | null
+          title?: string
+          total_seconds?: number
+          track?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
