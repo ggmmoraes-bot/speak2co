@@ -108,9 +108,13 @@ export const previewStudyPlanRefinement = createServerFn({ method: "POST" })
         system:
           "Você é o professor de inglês da Speak2Co. Reescreva APENAS as semanas indicadas do plano de estudos, mantendo os mesmos números de semana. Use abordagens diferentes das atuais, mais passo a passo e com mais exemplos, focando nos pontos em que o aluno disse que a explicação não ajudou. Escreva em português do Brasil, com 3 atividades práticas por semana.",
         prompt: `Aluno: ${profile?.full_name ?? "aluno"}
-Nível atual: ${profile?.english_level ?? "não avaliado"}
+Nível atual: ${placement?.level ?? profile?.english_level ?? "não avaliado"}
 Nível desejado: ${profile?.target_level ?? "B2"}
 Objetivo: ${profile?.goal ?? "melhorar o inglês geral"}
+
+Resultado do teste de nivelamento (mantenha a dificuldade coerente com ele):
+${describePlacement(placement)}
+
 Resumo do plano (não altere): ${plan.summary ?? ""}
 
 Semanas a reescrever:

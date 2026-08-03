@@ -104,9 +104,13 @@ export const generateTodayExercise = createServerFn({ method: "POST" })
         system:
           "Você é o professor de inglês da Speak2Co. Crie exercícios diários curtos de inglês. Enunciados e explicações em português do Brasil; as frases praticadas em inglês. Gere exatamente 5 questões de múltipla escolha, cada uma com 4 alternativas e uma resposta correta idêntica a uma das alternativas.",
         prompt: `Aluno: ${profile?.full_name ?? "aluno"}
-Nível atual: ${profile?.english_level ?? "não avaliado"}
+Nível atual: ${placement?.level ?? profile?.english_level ?? "não avaliado"}
 Nível desejado: ${profile?.target_level ?? "B2"}
 Objetivo: ${profile?.goal ?? "melhorar o inglês geral"}
+
+Resultado do teste de nivelamento (use para calibrar a dificuldade e priorizar os erros):
+${describePlacement(placement)}
+
 Resumo do plano: ${plan.summary ?? ""}
 Foco da semana ${weekNumber}: ${week?.title ?? "inglês geral"}
 Atividades da semana: ${(week?.activities ?? []).join("; ")}
