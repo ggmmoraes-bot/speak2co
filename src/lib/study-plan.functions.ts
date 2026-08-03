@@ -99,7 +99,7 @@ Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases), foco 
       .maybeSingle();
     const lockedWeeks = ((existingPlan?.locked_weeks ?? []) as number[]).map(Number);
     const existingByWeek = new Map(
-      (((existingPlan?.weekly_focus ?? []) as StudyPlan["weekly_focus"]) ?? []).map((w) => [w.week, w]),
+      ((existingPlan?.weekly_focus ?? []) as StudyPlan["weekly_focus"]).map((w) => [w.week, w]),
     );
     const finalWeeks = output.weekly_focus.map((w) =>
       lockedWeeks.includes(w.week) ? (existingByWeek.get(w.week) ?? w) : w,
