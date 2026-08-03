@@ -50,6 +50,36 @@ export type Database = {
         }
         Relationships: []
       }
+      study_plans: {
+        Row: {
+          created_at: string
+          id: string
+          milestones: Json
+          summary: string
+          updated_at: string
+          user_id: string
+          weekly_focus: Json
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          milestones?: Json
+          summary: string
+          updated_at?: string
+          user_id: string
+          weekly_focus?: Json
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          milestones?: Json
+          summary?: string
+          updated_at?: string
+          user_id?: string
+          weekly_focus?: Json
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
