@@ -1,24 +1,124 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Briefcase, Plane, Sparkles, GraduationCap, Globe } from "lucide-react";
+import logo from "@/assets/speak2co-logo.asset.json";
+import hire from "@/assets/speak2hire.asset.json";
+import travel from "@/assets/speak2travel.asset.json";
+import { Button } from "@/components/ui/button";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Speak2Co — English for Every Opportunity" },
+      {
+        name: "description",
+        content:
+          "Speak2Co: inglês premium com professor de IA, simulador de entrevistas e treino para viagens. English for Every Opportunity.",
+      },
+      { property: "og:title", content: "Speak2Co — English for Every Opportunity" },
+      {
+        property: "og:description",
+        content:
+          "Aprenda inglês com IA: prática de conversação, entrevistas e viagens. Plano personalizado e painel de evolução.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const products = [
+  {
+    name: "Speak2Hire",
+    tagline: "Ace your interview. Anywhere in the world.",
+    image: hire.url,
+    icon: Briefcase,
+  },
+  {
+    name: "Speak2Travel",
+    tagline: "Your passport to confidence. Anywhere in the world.",
+    image: travel.url,
+    icon: Plane,
+  },
+];
+
+const features = [
+  { icon: Sparkles, title: "Professor de IA", text: "Converse em inglês 24h e receba correções de gramática e pronúncia." },
+  { icon: GraduationCap, title: "Plano personalizado", text: "Teste de nivelamento e trilha de estudos feita para o seu objetivo." },
+  { icon: Globe, title: "Situações reais", text: "Aeroporto, hotel, reuniões e entrevistas — treine antes de viver." },
+];
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="surface-navy min-h-screen">
+      <section className="mx-auto flex max-w-5xl flex-col items-center px-6 pt-16 pb-20 text-center sm:pt-24">
+        <img
+          src={logo.url}
+          alt="Logo Speak2Co"
+          className="w-64 rounded-full sm:w-80 glow-gold"
+        />
+
+        <h1 className="mt-10 text-4xl font-semibold tracking-tight sm:text-6xl">
+          <span className="text-gold">Speak2Co</span>
+        </h1>
+        <p className="mt-4 text-lg tracking-[0.2em] text-muted-foreground uppercase sm:text-xl">
+          English for Every Opportunity
+        </p>
+
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <Button
+            size="lg"
+            className="bg-gold text-primary-foreground glow-gold rounded-full px-10 text-base font-semibold hover:opacity-90"
+          >
+            Começar
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="rounded-full border-primary/40 bg-transparent px-8 text-base text-foreground hover:bg-secondary"
+          >
+            Fazer teste de inglês
+          </Button>
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-5xl gap-6 px-6 pb-20 sm:grid-cols-3">
+        {features.map((f) => (
+          <div
+            key={f.title}
+            className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur"
+          >
+            <f.icon className="h-7 w-7 text-primary" />
+            <h2 className="mt-4 text-lg font-semibold">{f.title}</h2>
+            <p className="mt-2 text-sm text-muted-foreground">{f.text}</p>
+          </div>
+        ))}
+      </section>
+
+      <section className="mx-auto max-w-5xl px-6 pb-24">
+        <h2 className="text-center text-2xl font-semibold sm:text-3xl">
+          Nossos <span className="text-gold">subprodutos</span>
+        </h2>
+        <div className="mt-10 grid gap-8 sm:grid-cols-2">
+          {products.map((p) => (
+            <article
+              key={p.name}
+              className="overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-deep)]"
+            >
+              <img src={p.image} alt={`Arte ${p.name}`} className="aspect-square w-full object-cover" />
+              <div className="p-6">
+                <div className="flex items-center gap-2">
+                  <p.icon className="h-5 w-5 text-primary" />
+                  <h3 className="text-xl font-semibold text-gold">{p.name}</h3>
+                </div>
+                <p className="mt-2 text-sm text-muted-foreground">{p.tagline}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <footer className="border-t border-border py-8 text-center text-xs tracking-[0.2em] text-muted-foreground uppercase">
+        Speak2Co · English for Every Opportunity
+      </footer>
+    </main>
   );
 }
