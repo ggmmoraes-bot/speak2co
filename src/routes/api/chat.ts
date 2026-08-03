@@ -108,14 +108,16 @@ export const Route = createFileRoute("/api/chat")({
                   thread_id: threadId,
                   user_id: userId,
                   role: "user",
-                  parts: lastUser.parts,
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  parts: lastUser.parts as any,
                 });
               }
               await supabase.from("chat_messages").insert({
                 thread_id: threadId,
                 user_id: userId,
                 role: "assistant",
-                parts: responseMessage.parts,
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                parts: responseMessage.parts as any,
               });
 
               if (threadTitleWasDefault && lastUser) {
