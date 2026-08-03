@@ -12,13 +12,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Speak2Co: inglês premium com professor de IA, simulador de entrevistas e treino para viagens. English for Every Opportunity.",
+          "A Speak2Co é uma plataforma criada para transformar o aprendizado do inglês em uma experiência prática, acessível e personalizada.",
       },
       { property: "og:title", content: "Speak2Co — English for Every Opportunity" },
       {
         property: "og:description",
         content:
-          "Aprenda inglês com IA: prática de conversação, entrevistas e viagens. Plano personalizado e painel de evolução.",
+          "A Speak2Co é uma plataforma criada para transformar o aprendizado do inglês em uma experiência prática, acessível e personalizada.",
       },
     ],
   }),
