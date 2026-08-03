@@ -93,7 +93,25 @@ export function PlanVersionsSection() {
                     >
                       {isOpen ? "Ocultar" : "Ver detalhes"}
                     </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        exportPlanVersionToPdf({
+                          createdAt: version.created_at,
+                          reasonLabel: REASON_LABEL[version.reason] ?? version.reason,
+                          summary: version.summary,
+                          weeklyFocus: version.weekly_focus ?? [],
+                          milestones: version.milestones ?? [],
+                          lockedWeeks: version.locked_weeks ?? [],
+                        })
+                      }
+                      className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
+                    >
+                      Exportar PDF
+                    </Button>
                     {index !== 0 && (
+
                       <Button
                         size="sm"
                         disabled={restoreMutation.isPending}
