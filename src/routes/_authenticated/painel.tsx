@@ -226,6 +226,9 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
           Ainda não há um plano gerado. Clique em “Gerar plano”.
         </p>
       )}
+
+      <DailyExercisesSection hasPlan={Boolean(plan)} />
     </section>
   );
 }
+
