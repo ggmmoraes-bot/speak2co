@@ -3,8 +3,9 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
+import { Mic, Square, Volume2, Loader2, AudioLines } from "lucide-react";
 import {
   Conversation,
   ConversationContent,
@@ -19,8 +20,13 @@ import {
   PromptInputSubmit,
 } from "@/components/ai-elements/prompt-input";
 import { Shimmer } from "@/components/ai-elements/shimmer";
+import { Button } from "@/components/ui/button";
+import { PronunciationDialog } from "@/components/PronunciationDialog";
+import { MicRecorder } from "@/lib/audio-recorder";
+import { transcribeAudio, speakText, stopSpeaking } from "@/lib/voice-client";
 import { getThreadMessages } from "@/lib/chat.functions";
 import { supabase } from "@/integrations/supabase/client";
+
 
 export const Route = createFileRoute("/_authenticated/professor/$threadId")({
   component: ProfessorThread,
