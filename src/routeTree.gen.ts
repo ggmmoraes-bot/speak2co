@@ -18,6 +18,7 @@ import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
 import { Route as AuthenticatedPremiumRouteImport } from './routes/_authenticated/premium'
 import { Route as AuthenticatedProfessorRouteImport } from './routes/_authenticated/professor'
+import { Route as AuthenticatedTesteDeNivelRouteImport } from './routes/_authenticated/teste-de-nivel'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
@@ -70,6 +71,12 @@ const AuthenticatedProfessorRoute = AuthenticatedProfessorRouteImport.update({
   path: '/professor',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedTesteDeNivelRoute =
+  AuthenticatedTesteDeNivelRouteImport.update({
+    id: '/teste-de-nivel',
+    path: '/teste-de-nivel',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
@@ -121,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
   '/professor': typeof AuthenticatedProfessorRouteWithChildren
+  '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/professor/': typeof AuthenticatedProfessorIndexRoute
@@ -137,6 +145,7 @@ export interface FileRoutesByTo {
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
+  '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/professor': typeof AuthenticatedProfessorIndexRoute
@@ -156,6 +165,7 @@ export interface FileRoutesById {
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
   '/_authenticated/professor': typeof AuthenticatedProfessorRouteWithChildren
+  '/_authenticated/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/premium'
     | '/professor'
+    | '/teste-de-nivel'
     | '/api/chat'
     | '/professor/$threadId'
     | '/professor/'
@@ -191,6 +202,7 @@ export interface FileRouteTypes {
     | '/painel'
     | '/perfil'
     | '/premium'
+    | '/teste-de-nivel'
     | '/api/chat'
     | '/professor/$threadId'
     | '/professor'
@@ -209,6 +221,7 @@ export interface FileRouteTypes {
     | '/_authenticated/perfil'
     | '/_authenticated/premium'
     | '/_authenticated/professor'
+    | '/_authenticated/teste-de-nivel'
     | '/api/chat'
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/professor/'
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfessorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/teste-de-nivel': {
+      id: '/_authenticated/teste-de-nivel'
+      path: '/teste-de-nivel'
+      fullPath: '/teste-de-nivel'
+      preLoaderRoute: typeof AuthenticatedTesteDeNivelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -366,6 +386,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
   AuthenticatedProfessorRoute: typeof AuthenticatedProfessorRouteWithChildren
+  AuthenticatedTesteDeNivelRoute: typeof AuthenticatedTesteDeNivelRoute
   AuthenticatedSpeak2hireIndexRoute: typeof AuthenticatedSpeak2hireIndexRoute
   AuthenticatedSpeak2hireMaterialMaterialIdRoute: typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   AuthenticatedSpeak2hireSessaoSessionIdRoute: typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
@@ -377,6 +398,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
   AuthenticatedProfessorRoute: AuthenticatedProfessorRouteWithChildren,
+  AuthenticatedTesteDeNivelRoute: AuthenticatedTesteDeNivelRoute,
   AuthenticatedSpeak2hireIndexRoute: AuthenticatedSpeak2hireIndexRoute,
   AuthenticatedSpeak2hireMaterialMaterialIdRoute:
     AuthenticatedSpeak2hireMaterialMaterialIdRoute,
