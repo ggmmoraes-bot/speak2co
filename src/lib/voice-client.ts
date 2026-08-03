@@ -27,6 +27,13 @@ export async function transcribeAudio(blob: Blob): Promise<string> {
 const audioCache = new Map<string, string>();
 let currentAudio: HTMLAudioElement | null = null;
 
+/** Ajusta volume/velocidade do áudio que já está tocando. */
+export function applyPlaybackSettings({ volume, rate }: { volume?: number; rate?: number }) {
+  if (!currentAudio) return;
+  if (volume !== undefined) currentAudio.volume = Math.min(1, Math.max(0, volume));
+  if (rate !== undefined) currentAudio.playbackRate = Math.min(2, Math.max(0.5, rate));
+}
+
 export function stopSpeaking() {
   currentAudio?.pause();
   currentAudio = null;
@@ -67,7 +74,7 @@ export async function speakText(text: string, options: SpeakOptions | string = {
   const audio = new Audio(url);
   audio.volume = volume;
   audio.playbackRate = rate;
-  audio.preservesPitch = true;
+  (audio as HTMLAudioElement & { preservesPitch?: boolean }).preservesPitch = true;
   currentAudio = audio;
   await audio.play();
   await new Promise<void>((resolve) => {
