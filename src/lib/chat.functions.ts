@@ -56,7 +56,7 @@ export const getThreadMessages = createServerFn({ method: "GET" })
       .eq("id", data.threadId)
       .eq("user_id", context.userId)
       .maybeSingle();
-    if (!thread) return [] as UIMessage[];
+    if (!thread) return [] as ChatMessageDTO[];
 
     const { data: rows, error } = await context.supabase
       .from("chat_messages")
@@ -67,9 +67,9 @@ export const getThreadMessages = createServerFn({ method: "GET" })
 
     return (rows ?? []).map((row) => ({
       id: String(row.id),
-      role: row.role,
-      parts: Array.isArray(row.parts) ? row.parts : [{ type: "text" as const, text: "" }],
-    })) as UIMessage[];
+      role: row.role as ChatMessageDTO["role"],
+      parts: Array.isArray(row.parts) ? (row.parts as Array<Record<string, unknown>>) : [{ type: "text", text: "" }],
+    })) as ChatMessageDTO[];
   });
 
 export const createThread = createServerFn({ method: "POST" })
