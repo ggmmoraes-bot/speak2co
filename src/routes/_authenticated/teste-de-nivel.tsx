@@ -115,8 +115,13 @@ function PlacementPage() {
       });
       setResult(test);
       setActiveTestId(null);
+      if (test.planUpdated) {
+        toast.success("Seu plano de estudos foi reajustado para o novo nível.");
+      }
       await queryClient.invalidateQueries({ queryKey: ["placement-tests"] });
       await queryClient.invalidateQueries({ queryKey: ["profile"] });
+      await queryClient.invalidateQueries({ queryKey: ["study-plan"] });
+      await queryClient.invalidateQueries({ queryKey: ["plan-versions"] });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível avaliar seu teste.");
     } finally {
