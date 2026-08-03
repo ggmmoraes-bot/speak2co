@@ -91,6 +91,9 @@ export const previewStudyPlanRefinement = createServerFn({ method: "POST" })
       );
     }
 
+    const { describePlacement, getPlacementSnapshot } = await import("./placement-context.server");
+    const placement = await getPlacementSnapshot(context.supabase, context.userId);
+
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
     const gateway = createLovableAiGatewayProvider(apiKey);
 

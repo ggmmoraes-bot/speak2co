@@ -93,6 +93,9 @@ export const generateTodayExercise = createServerFn({ method: "POST" })
     const weekNumber = weeks.length > 0 ? (Math.floor((count ?? 0) / 5) % weeks.length) + 1 : 1;
     const week = weeks.find((w) => w.week === weekNumber) ?? weeks[0];
 
+    const { describePlacement, getPlacementSnapshot } = await import("./placement-context.server");
+    const placement = await getPlacementSnapshot(context.supabase, context.userId);
+
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
     const gateway = createLovableAiGatewayProvider(apiKey);
 
