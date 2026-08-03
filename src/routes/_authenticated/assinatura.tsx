@@ -132,6 +132,9 @@ function AssinaturaPage() {
         </ul>
       </section>
 
+      <SubscriptionEventsSection />
+
+
       <div className="mt-10 flex flex-wrap gap-3">
         {!isPremium && (
           <Button asChild className="rounded-full font-semibold">
