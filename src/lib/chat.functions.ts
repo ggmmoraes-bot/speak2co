@@ -2,10 +2,12 @@ import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
+export type ChatPart = { type: string; text?: string };
+
 export type ChatMessageDTO = {
   id: string;
   role: "user" | "assistant" | "system";
-  parts: Array<Record<string, unknown>>;
+  parts: ChatPart[];
 };
 
 export type ChatThread = {
@@ -68,7 +70,7 @@ export const getThreadMessages = createServerFn({ method: "GET" })
     return (rows ?? []).map((row) => ({
       id: String(row.id),
       role: row.role as ChatMessageDTO["role"],
-      parts: Array.isArray(row.parts) ? (row.parts as Array<Record<string, unknown>>) : [{ type: "text", text: "" }],
+      parts: Array.isArray(row.parts) ? (row.parts as ChatPart[]) : [{ type: "text", text: "" }],
     })) as ChatMessageDTO[];
   });
 
