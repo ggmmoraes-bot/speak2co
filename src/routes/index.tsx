@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Briefcase, Plane, Sparkles, GraduationCap, Globe } from "lucide-react";
 import logo from "@/assets/speak2co-logo.asset.json";
 import hire from "@/assets/speak2hire.asset.json";
@@ -65,17 +65,19 @@ function Index() {
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Button
+            asChild
             size="lg"
             className="bg-gold text-primary-foreground glow-gold rounded-full px-10 text-base font-semibold hover:opacity-90"
           >
-            Começar
+            <Link to="/auth">Começar</Link>
           </Button>
           <Button
+            asChild
             size="lg"
             variant="outline"
             className="rounded-full border-primary/40 bg-transparent px-8 text-base text-foreground hover:bg-secondary"
           >
-            Fazer teste de inglês
+            <Link to="/auth">Entrar</Link>
           </Button>
         </div>
       </section>
