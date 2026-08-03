@@ -112,9 +112,11 @@ const ROUTES: RouteItem[] = [
   {
     path: "/speak2hire",
     title: "Speak2Hire",
-    description: "Simulador de entrevistas de emprego em inglês.",
-    status: "pending",
+    description:
+      "Materiais de entrada (Blueprint, STAR, Mock Interview, S.O.S.), simulador de entrevistas com temporizador, feedback da IA e histórico das sessões.",
+    status: "protected",
   },
+
   {
     path: "/speak2travel",
     title: "Speak2Travel",
