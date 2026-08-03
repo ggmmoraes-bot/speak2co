@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { getStudyPlan, generateStudyPlan } from "@/lib/study-plan.functions";
+import { getStudyPlan, generateStudyPlan, refineStudyPlanFromFeedback } from "@/lib/study-plan.functions";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/speak2co-logo.asset.json";
 import { DailyExercisesSection } from "@/components/DailyExercisesSection";
@@ -132,6 +132,7 @@ function Painel() {
 function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
   const fetchPlan = useServerFn(getStudyPlan);
   const generate = useServerFn(generateStudyPlan);
+  const refine = useServerFn(refineStudyPlanFromFeedback);
   const queryClient = useQueryClient();
 
   const { data: plan, isLoading } = useQuery({
@@ -144,6 +145,19 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
     onSuccess: (data) => {
       queryClient.setQueryData(["study-plan"], data);
       toast.success("Seu plano de estudos foi gerado!");
+    },
+    onError: (error: Error) => toast.error(error.message),
+  });
+
+  const refineMutation = useMutation({
+    mutationFn: () => refine(),
+    onSuccess: (data) => {
+      queryClient.setQueryData(["study-plan"], data);
+      toast.success(
+        `Semana${data.refined_weeks.length > 1 ? "s" : ""} ${data.refined_weeks.join(", ")} atualizada${
+          data.refined_weeks.length > 1 ? "s" : ""
+        } com base no seu feedback.`,
+      );
     },
     onError: (error: Error) => toast.error(error.message),
   });
@@ -173,6 +187,16 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
             className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
           >
             {mutation.isPending ? "Gerando…" : plan ? "Gerar novamente" : "Gerar plano"}
+          </Button>
+        )}
+        {profileReady && plan && (
+          <Button
+            variant="outline"
+            disabled={refineMutation.isPending || mutation.isPending}
+            onClick={() => refineMutation.mutate()}
+            className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
+          >
+            {refineMutation.isPending ? "Ajustando…" : "Ajustar com meu feedback"}
           </Button>
         )}
       </div>
