@@ -113,7 +113,7 @@ function AuthPage() {
   return (
     <main className="surface-navy flex min-h-screen flex-col items-center justify-center px-6 py-16">
       <Link to="/" className="mb-8">
-        <img src={logo.url} alt="Logo Speak2Co" className="glow-gold w-28 rounded-full" />
+        <img src={logo.url} alt="Logo Speak2Co" className="glow-gold h-28 w-28 rounded-full object-cover" />
       </Link>
 
       <div className="w-full max-w-md rounded-3xl border border-border bg-card/70 p-8 backdrop-blur">
