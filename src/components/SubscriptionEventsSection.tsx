@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { getMySubscriptionEvents } from "@/lib/subscriptions.functions";
+import type { SubscriptionEventView } from "@/lib/subscription-simulation";
+
 
 const EVENT_LABEL: Record<string, { label: string; icon: string; tone: string }> = {
   checkout_created: { label: "Checkout criado", icon: "🧾", tone: "text-muted-foreground" },
