@@ -106,7 +106,7 @@ Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases), foco 
     return output;
   });
 
-export const refineStudyPlanFromFeedback = createServerFn({ method: "POST" })
+export const previewStudyPlanRefinement = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const apiKey = process.env["LOVABLE_API_KEY"];
@@ -202,6 +202,43 @@ Devolva somente essas semanas reescritas.`,
     }
 
     const refinedByWeek = new Map(refined.weekly_focus.map((w) => [w.week, w]));
+
+    return {
+      weeks: targetWeeks.map((w) => ({
+        week: w.week,
+        before: { title: w.title, activities: w.activities },
+        after: {
+          week: w.week,
+          title: refinedByWeek.get(w.week)?.title ?? w.title,
+          activities: refinedByWeek.get(w.week)?.activities ?? w.activities,
+        },
+        unclear: (problemsByWeek.get(w.week) ?? []).slice(0, 6),
+      })),
+    };
+  });
+
+export const applyStudyPlanRefinement = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z
+      .object({
+        weeks: z.array(
+          z.object({ week: z.number(), title: z.string(), activities: z.array(z.string()) }),
+        ),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const { data: plan, error: planError } = await context.supabase
+      .from("study_plans")
+      .select("summary, weekly_focus, milestones")
+      .eq("user_id", context.userId)
+      .maybeSingle();
+    if (planError) throw new Error(planError.message);
+    if (!plan) throw new Error("Gere seu plano de estudos antes de ajustá-lo.");
+
+    const refinedByWeek = new Map(data.weeks.map((w) => [w.week, w]));
+    const weeks = (plan.weekly_focus ?? []) as StudyPlan["weekly_focus"];
     const mergedWeeks = weeks.map((w) => refinedByWeek.get(w.week) ?? w);
 
     const { error: updateError } = await context.supabase
@@ -214,6 +251,6 @@ Devolva somente essas semanas reescritas.`,
       summary: plan.summary,
       weekly_focus: mergedWeeks,
       milestones: (plan.milestones ?? []) as string[],
-      refined_weeks: targetWeeks.map((w) => w.week),
+      refined_weeks: data.weeks.map((w) => w.week),
     };
   });
