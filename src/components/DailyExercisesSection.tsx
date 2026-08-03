@@ -37,6 +37,7 @@ export function DailyExercisesSection({ hasPlan }: { hasPlan: boolean }) {
     mutationFn: (payload: { id: string; answers: Record<string, string> }) => submit({ data: payload }),
     onSuccess: (data) => {
       queryClient.setQueryData(["daily-exercise"], data);
+      queryClient.invalidateQueries({ queryKey: ["exercise-history"] });
       toast.success(`Você acertou ${data.score} de ${(data.items ?? []).length}!`);
     },
     onError: (error: Error) => toast.error(error.message),
