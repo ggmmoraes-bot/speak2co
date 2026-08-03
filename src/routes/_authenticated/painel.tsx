@@ -138,6 +138,9 @@ function Painel() {
             <Link to="/ranking">Ranking de fluência</Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
+            <Link to="/certificados">Meus certificados</Link>
+          </Button>
+          <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/assinatura">Minha assinatura</Link>
           </Button>
         </div>
