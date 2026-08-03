@@ -135,8 +135,9 @@ const ROUTES: RouteItem[] = [
   {
     path: "/certificados",
     title: "Certificados",
-    description: "Emissão de certificados por nível ou marco concluído.",
-    status: "pending",
+    description:
+      "Certificados de nível CEFR, Speak2Hire, prática diária e conversação — com progresso, código de verificação e download em PDF.",
+    status: "protected",
   },
 ];
 
