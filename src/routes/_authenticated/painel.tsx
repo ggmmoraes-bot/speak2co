@@ -129,11 +129,22 @@ function Painel() {
   );
 }
 
+type RefinementPreview = {
+  weeks: {
+    week: number;
+    before: { title: string; activities: string[] };
+    after: { week: number; title: string; activities: string[] };
+    unclear: string[];
+  }[];
+};
+
 function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
   const fetchPlan = useServerFn(getStudyPlan);
   const generate = useServerFn(generateStudyPlan);
-  const refine = useServerFn(refineStudyPlanFromFeedback);
+  const previewRefinement = useServerFn(previewStudyPlanRefinement);
+  const applyRefinement = useServerFn(applyStudyPlanRefinement);
   const queryClient = useQueryClient();
+  const [preview, setPreview] = useState<RefinementPreview | null>(null);
 
   const { data: plan, isLoading } = useQuery({
     queryKey: ["study-plan"],
@@ -149,13 +160,22 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
     onError: (error: Error) => toast.error(error.message),
   });
 
-  const refineMutation = useMutation({
-    mutationFn: () => refine(),
+  const previewMutation = useMutation({
+    mutationFn: () => previewRefinement(),
+    onSuccess: (data) => setPreview(data as RefinementPreview),
+    onError: (error: Error) => toast.error(error.message),
+  });
+
+  const applyMutation = useMutation({
+    mutationFn: (weeks: RefinementPreview["weeks"]) =>
+      applyRefinement({ data: { weeks: weeks.map((w) => w.after) } }),
     onSuccess: (data) => {
       queryClient.setQueryData(["study-plan"], data);
+      setPreview(null);
+      const list = (data as { refined_weeks: number[] }).refined_weeks;
       toast.success(
-        `Semana${data.refined_weeks.length > 1 ? "s" : ""} ${data.refined_weeks.join(", ")} atualizada${
-          data.refined_weeks.length > 1 ? "s" : ""
+        `Semana${list.length > 1 ? "s" : ""} ${list.join(", ")} atualizada${
+          list.length > 1 ? "s" : ""
         } com base no seu feedback.`,
       );
     },
@@ -192,14 +212,84 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
         {profileReady && plan && (
           <Button
             variant="outline"
-            disabled={refineMutation.isPending || mutation.isPending}
-            onClick={() => refineMutation.mutate()}
+            disabled={previewMutation.isPending || mutation.isPending}
+            onClick={() => previewMutation.mutate()}
             className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
           >
-            {refineMutation.isPending ? "Ajustando…" : "Ajustar com meu feedback"}
+            {previewMutation.isPending ? "Preparando prévia…" : "Ver prévia do ajuste"}
           </Button>
         )}
       </div>
+
+      {preview && (
+        <div className="mt-6 rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur">
+          <p className="text-xs tracking-widest text-muted-foreground uppercase">
+            Prévia do ajuste — nada foi salvo ainda
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Compare o que muda nas semanas afetadas pelo seu feedback antes de aplicar.
+          </p>
+
+          <div className="mt-5 grid gap-5">
+            {preview.weeks.map((item) => (
+              <div key={item.week} className="rounded-xl border border-border p-4">
+                <p className="font-semibold text-gold">Semana {item.week}</p>
+                {item.unclear.length > 0 && (
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Exercícios marcados como “não ajudou”: {item.unclear.join(" | ")}
+                  </p>
+                )}
+                <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <p className="text-xs tracking-widest text-muted-foreground uppercase">Antes</p>
+                    <p className="mt-1 text-sm font-medium text-foreground">{item.before.title}</p>
+                    <ul className="mt-2 grid gap-1.5 text-sm text-muted-foreground">
+                      {item.before.activities.map((activity, i) => (
+                        <li key={i}>• {activity}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-xs tracking-widest text-gold uppercase">Depois</p>
+                    <p className="mt-1 text-sm font-medium text-foreground">{item.after.title}</p>
+                    <ul className="mt-2 grid gap-1.5 text-sm text-muted-foreground">
+                      {item.after.activities.map((activity, i) => (
+                        <li key={i}>• {activity}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Button
+              disabled={applyMutation.isPending}
+              onClick={() => applyMutation.mutate(preview.weeks)}
+              className="rounded-full"
+            >
+              {applyMutation.isPending ? "Aplicando…" : "Aplicar ajuste"}
+            </Button>
+            <Button
+              variant="outline"
+              disabled={applyMutation.isPending}
+              onClick={() => setPreview(null)}
+              className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
+            >
+              Manter como está
+            </Button>
+            <Button
+              variant="outline"
+              disabled={previewMutation.isPending || applyMutation.isPending}
+              onClick={() => previewMutation.mutate()}
+              className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
+            >
+              {previewMutation.isPending ? "Gerando…" : "Gerar outra prévia"}
+            </Button>
+          </div>
+        </div>
+      )}
 
       {!profileReady ? (
         <p className="mt-4 text-sm text-muted-foreground">
