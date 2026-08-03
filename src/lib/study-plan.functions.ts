@@ -118,6 +118,16 @@ Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases), foco 
     );
     if (upsertError) throw new Error(upsertError.message);
 
+    await context.supabase.from("study_plan_versions").insert({
+      user_id: context.userId,
+      summary: output.summary,
+      weekly_focus: output.weekly_focus,
+      milestones: output.milestones,
+      locked_weeks: lockedWeeks,
+      reason: "generated",
+      refined_weeks: [],
+    });
+
     return output;
   });
 
@@ -272,6 +282,16 @@ export const applyStudyPlanRefinement = createServerFn({ method: "POST" })
       .eq("user_id", context.userId);
     if (updateError) throw new Error(updateError.message);
 
+    await context.supabase.from("study_plan_versions").insert({
+      user_id: context.userId,
+      summary: plan.summary ?? "",
+      weekly_focus: mergedWeeks,
+      milestones: (plan.milestones ?? []) as string[],
+      locked_weeks: [...lockedWeeks],
+      reason: "refined",
+      refined_weeks: [...refinedByWeek.keys()],
+    });
+
     return {
       summary: plan.summary,
       weekly_focus: mergedWeeks,
@@ -307,4 +327,59 @@ export const setWeekLock = createServerFn({ method: "POST" })
     if (updateError) throw new Error(updateError.message);
 
     return { locked_weeks: lockedWeeks };
+  });
+
+export const getPlanVersions = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { data, error } = await context.supabase
+      .from("study_plan_versions")
+      .select("id, summary, weekly_focus, milestones, locked_weeks, reason, refined_weeks, created_at")
+      .eq("user_id", context.userId)
+      .order("created_at", { ascending: false })
+      .limit(30);
+    if (error) throw new Error(error.message);
+    return data ?? [];
+  });
+
+export const restorePlanVersion = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) => z.object({ id: z.string().uuid() }).parse(input))
+  .handler(async ({ data, context }) => {
+    const { data: version, error } = await context.supabase
+      .from("study_plan_versions")
+      .select("summary, weekly_focus, milestones, locked_weeks")
+      .eq("id", data.id)
+      .eq("user_id", context.userId)
+      .maybeSingle();
+    if (error) throw new Error(error.message);
+    if (!version) throw new Error("Versão não encontrada.");
+
+    const { error: updateError } = await context.supabase
+      .from("study_plans")
+      .update({
+        summary: version.summary,
+        weekly_focus: version.weekly_focus,
+        milestones: version.milestones,
+        locked_weeks: version.locked_weeks,
+      })
+      .eq("user_id", context.userId);
+    if (updateError) throw new Error(updateError.message);
+
+    await context.supabase.from("study_plan_versions").insert({
+      user_id: context.userId,
+      summary: version.summary,
+      weekly_focus: version.weekly_focus,
+      milestones: version.milestones,
+      locked_weeks: version.locked_weeks,
+      reason: "restored",
+      refined_weeks: [],
+    });
+
+    return {
+      summary: version.summary,
+      weekly_focus: version.weekly_focus,
+      milestones: version.milestones,
+      locked_weeks: version.locked_weeks,
+    };
   });
