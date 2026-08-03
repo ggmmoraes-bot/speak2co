@@ -1,0 +1,1 @@
+ALTER TABLE public.daily_exercises ADD COLUMN IF NOT EXISTS explanation_feedback jsonb NOT NULL DEFAULT '{}'::jsonb;

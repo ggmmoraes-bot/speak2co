@@ -20,6 +20,7 @@ export type Database = {
           completed: boolean
           created_at: string
           exercise_date: string
+          explanation_feedback: Json
           id: string
           instructions: string | null
           items: Json
@@ -34,6 +35,7 @@ export type Database = {
           completed?: boolean
           created_at?: string
           exercise_date?: string
+          explanation_feedback?: Json
           id?: string
           instructions?: string | null
           items?: Json
@@ -48,6 +50,7 @@ export type Database = {
           completed?: boolean
           created_at?: string
           exercise_date?: string
+          explanation_feedback?: Json
           id?: string
           instructions?: string | null
           items?: Json

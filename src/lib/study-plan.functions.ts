@@ -39,6 +39,30 @@ export const generateStudyPlan = createServerFn({ method: "POST" })
       throw new Error("Complete seu perfil (nome, objetivo e nível desejado) antes de gerar o plano.");
     }
 
+    const { data: past } = await context.supabase
+      .from("daily_exercises")
+      .select("week_number, items, explanation_feedback")
+      .eq("user_id", context.userId)
+      .eq("completed", true)
+      .order("exercise_date", { ascending: false })
+      .limit(30);
+
+    const helpfulTopics: string[] = [];
+    const unhelpfulTopics: string[] = [];
+    for (const row of past ?? []) {
+      const items = (row.items ?? []) as { question: string }[];
+      const feedback = (row.explanation_feedback ?? {}) as Record<string, string>;
+      for (const [index, value] of Object.entries(feedback)) {
+        const question = items[Number(index)]?.question;
+        if (!question) continue;
+        (value === "helpful" ? helpfulTopics : unhelpfulTopics).push(question);
+      }
+    }
+    const feedbackHint =
+      helpfulTopics.length + unhelpfulTopics.length === 0
+        ? "Sem feedback do aluno ainda."
+        : `Explicações que ajudaram (reforce esse estilo e temas): ${helpfulTopics.slice(0, 10).join(" | ") || "nenhuma"}\nExplicações que NÃO ajudaram (explique esses temas de outra forma, com mais exemplos e passo a passo): ${unhelpfulTopics.slice(0, 10).join(" | ") || "nenhuma"}`;
+
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
     const gateway = createLovableAiGatewayProvider(apiKey);
 
@@ -53,6 +77,9 @@ export const generateStudyPlan = createServerFn({ method: "POST" })
 Nível atual: ${profile.english_level ?? "não avaliado"}
 Nível desejado: ${profile.target_level}
 Objetivo: ${profile.goal}
+
+Feedback do aluno sobre explicações anteriores:
+${feedbackHint}
 
 Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases), foco semanal (8 semanas, cada uma com título e 3 atividades práticas) e marcos de evolução.`,
       });

@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
+import { toast } from "sonner";
 import {
   getExerciseHistory,
+  setExplanationFeedback,
   type DailyExercise,
   type ExerciseItem,
 } from "@/lib/daily-exercises.functions";
+
+type FeedbackValue = "helpful" | "not_helpful";
 
 function formatDate(value: string) {
   const [year, month, day] = value.split("-");
@@ -14,7 +18,20 @@ function formatDate(value: string) {
 
 export function ExerciseHistorySection() {
   const fetchHistory = useServerFn(getExerciseHistory);
+  const saveFeedback = useServerFn(setExplanationFeedback);
+  const queryClient = useQueryClient();
   const [openId, setOpenId] = useState<string | null>(null);
+
+  const feedbackMutation = useMutation({
+    mutationFn: (vars: { id: string; itemIndex: number; value: FeedbackValue | null }) =>
+      saveFeedback({ data: vars }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["exercise-history"] });
+      toast.success("Obrigado! Vamos ajustar suas recomendações.");
+    },
+    onError: (error) =>
+      toast.error(error instanceof Error ? error.message : "Não foi possível salvar seu feedback."),
+  });
 
   const { data, isLoading } = useQuery({
     queryKey: ["exercise-history"],
@@ -61,6 +78,7 @@ export function ExerciseHistorySection() {
           {history.map((entry) => {
             const items = (entry.items ?? []) as ExerciseItem[];
             const answers = (entry.answers ?? {}) as Record<string, string>;
+            const feedback = (entry.explanation_feedback ?? {}) as Record<string, FeedbackValue>;
             const isOpen = openId === entry.id;
             return (
               <div
@@ -103,6 +121,40 @@ export function ExerciseHistorySection() {
                             </p>
                           )}
                           <p className="mt-1 text-sm text-muted-foreground">{item.explanation}</p>
+                          <div className="mt-2 flex flex-wrap items-center gap-2">
+                            <span className="text-xs text-muted-foreground">
+                              A explicação ajudou?
+                            </span>
+                            {(
+                              [
+                                { value: "helpful" as const, label: "👍 Sim" },
+                                { value: "not_helpful" as const, label: "👎 Não" },
+                              ]
+                            ).map((option) => {
+                              const active = feedback[String(index)] === option.value;
+                              return (
+                                <button
+                                  key={option.value}
+                                  type="button"
+                                  disabled={feedbackMutation.isPending}
+                                  onClick={() =>
+                                    feedbackMutation.mutate({
+                                      id: entry.id,
+                                      itemIndex: index,
+                                      value: active ? null : option.value,
+                                    })
+                                  }
+                                  className={`rounded-full border px-3 py-1 text-xs transition disabled:opacity-60 ${
+                                    active
+                                      ? "border-gold bg-gold/15 text-gold"
+                                      : "border-border text-muted-foreground hover:text-foreground"
+                                  }`}
+                                >
+                                  {option.label}
+                                </button>
+                              );
+                            })}
+                          </div>
                         </div>
                       );
                     })}
