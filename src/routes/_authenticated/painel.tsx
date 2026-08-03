@@ -128,6 +128,10 @@ function Painel() {
             <Link to="/professor">Professor IA</Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
+            <Link to="/speak2hire">Speak2Hire — Entrevistas</Link>
+
+          </Button>
+          <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/assinatura">Minha assinatura</Link>
           </Button>
         </div>

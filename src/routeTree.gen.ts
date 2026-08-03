@@ -21,6 +21,9 @@ import { Route as AuthenticatedProfessorRouteImport } from './routes/_authentica
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
+import { Route as AuthenticatedSpeak2hireIndexRouteImport } from './routes/_authenticated/speak2hire.index'
+import { Route as AuthenticatedSpeak2hireMaterialMaterialIdRouteImport } from './routes/_authenticated/speak2hire.material.$materialId'
+import { Route as AuthenticatedSpeak2hireSessaoSessionIdRouteImport } from './routes/_authenticated/speak2hire.sessao.$sessionId'
 import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/public/webhooks/mercadopago'
 
 const IndexRoute = IndexRouteImport.update({
@@ -84,6 +87,24 @@ const AuthenticatedProfessorThreadIdRoute =
     path: '/$threadId',
     getParentRoute: () => AuthenticatedProfessorRoute,
   } as any)
+const AuthenticatedSpeak2hireIndexRoute =
+  AuthenticatedSpeak2hireIndexRouteImport.update({
+    id: '/speak2hire/',
+    path: '/speak2hire/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSpeak2hireMaterialMaterialIdRoute =
+  AuthenticatedSpeak2hireMaterialMaterialIdRouteImport.update({
+    id: '/speak2hire/material/$materialId',
+    path: '/speak2hire/material/$materialId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSpeak2hireSessaoSessionIdRoute =
+  AuthenticatedSpeak2hireSessaoSessionIdRouteImport.update({
+    id: '/speak2hire/sessao/$sessionId',
+    path: '/speak2hire/sessao/$sessionId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiPublicWebhooksMercadopagoRoute =
   ApiPublicWebhooksMercadopagoRouteImport.update({
     id: '/api/public/webhooks/mercadopago',
@@ -103,6 +124,9 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/professor/': typeof AuthenticatedProfessorIndexRoute
+  '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
+  '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
+  '/speak2hire/sessao/$sessionId': typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRoutesByTo {
@@ -116,6 +140,9 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/professor': typeof AuthenticatedProfessorIndexRoute
+  '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
+  '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
+  '/speak2hire/sessao/$sessionId': typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRoutesById {
@@ -132,6 +159,9 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
+  '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
+  '/_authenticated/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
+  '/_authenticated/speak2hire/sessao/$sessionId': typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRouteTypes {
@@ -148,6 +178,9 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/professor/$threadId'
     | '/professor/'
+    | '/speak2hire/'
+    | '/speak2hire/material/$materialId'
+    | '/speak2hire/sessao/$sessionId'
     | '/api/public/webhooks/mercadopago'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -161,6 +194,9 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/professor/$threadId'
     | '/professor'
+    | '/speak2hire'
+    | '/speak2hire/material/$materialId'
+    | '/speak2hire/sessao/$sessionId'
     | '/api/public/webhooks/mercadopago'
   id:
     | '__root__'
@@ -176,6 +212,9 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/professor/'
+    | '/_authenticated/speak2hire/'
+    | '/_authenticated/speak2hire/material/$materialId'
+    | '/_authenticated/speak2hire/sessao/$sessionId'
     | '/api/public/webhooks/mercadopago'
   fileRoutesById: FileRoutesById
 }
@@ -274,6 +313,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfessorThreadIdRouteImport
       parentRoute: typeof AuthenticatedProfessorRoute
     }
+    '/_authenticated/speak2hire/': {
+      id: '/_authenticated/speak2hire/'
+      path: '/speak2hire'
+      fullPath: '/speak2hire/'
+      preLoaderRoute: typeof AuthenticatedSpeak2hireIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/speak2hire/material/$materialId': {
+      id: '/_authenticated/speak2hire/material/$materialId'
+      path: '/speak2hire/material/$materialId'
+      fullPath: '/speak2hire/material/$materialId'
+      preLoaderRoute: typeof AuthenticatedSpeak2hireMaterialMaterialIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/speak2hire/sessao/$sessionId': {
+      id: '/_authenticated/speak2hire/sessao/$sessionId'
+      path: '/speak2hire/sessao/$sessionId'
+      fullPath: '/speak2hire/sessao/$sessionId'
+      preLoaderRoute: typeof AuthenticatedSpeak2hireSessaoSessionIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/webhooks/mercadopago': {
       id: '/api/public/webhooks/mercadopago'
       path: '/api/public/webhooks/mercadopago'
@@ -306,6 +366,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
   AuthenticatedProfessorRoute: typeof AuthenticatedProfessorRouteWithChildren
+  AuthenticatedSpeak2hireIndexRoute: typeof AuthenticatedSpeak2hireIndexRoute
+  AuthenticatedSpeak2hireMaterialMaterialIdRoute: typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
+  AuthenticatedSpeak2hireSessaoSessionIdRoute: typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -314,6 +377,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
   AuthenticatedProfessorRoute: AuthenticatedProfessorRouteWithChildren,
+  AuthenticatedSpeak2hireIndexRoute: AuthenticatedSpeak2hireIndexRoute,
+  AuthenticatedSpeak2hireMaterialMaterialIdRoute:
+    AuthenticatedSpeak2hireMaterialMaterialIdRoute,
+  AuthenticatedSpeak2hireSessaoSessionIdRoute:
+    AuthenticatedSpeak2hireSessaoSessionIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
