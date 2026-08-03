@@ -24,6 +24,9 @@ import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2hireIndexRouteImport } from './routes/_authenticated/speak2hire.index'
+import { Route as ApiVoicePronunciationRouteImport } from './routes/api/voice/pronunciation'
+import { Route as ApiVoiceSpeakRouteImport } from './routes/api/voice/speak'
+import { Route as ApiVoiceTranscribeRouteImport } from './routes/api/voice/transcribe'
 import { Route as AuthenticatedSpeak2hireMaterialMaterialIdRouteImport } from './routes/_authenticated/speak2hire.material.$materialId'
 import { Route as AuthenticatedSpeak2hireSessaoSessionIdRouteImport } from './routes/_authenticated/speak2hire.sessao.$sessionId'
 import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/public/webhooks/mercadopago'
@@ -106,6 +109,21 @@ const AuthenticatedSpeak2hireIndexRoute =
     path: '/speak2hire/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ApiVoicePronunciationRoute = ApiVoicePronunciationRouteImport.update({
+  id: '/api/voice/pronunciation',
+  path: '/api/voice/pronunciation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVoiceSpeakRoute = ApiVoiceSpeakRouteImport.update({
+  id: '/api/voice/speak',
+  path: '/api/voice/speak',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVoiceTranscribeRoute = ApiVoiceTranscribeRouteImport.update({
+  id: '/api/voice/transcribe',
+  path: '/api/voice/transcribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedSpeak2hireMaterialMaterialIdRoute =
   AuthenticatedSpeak2hireMaterialMaterialIdRouteImport.update({
     id: '/speak2hire/material/$materialId',
@@ -138,6 +156,9 @@ export interface FileRoutesByFullPath {
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
+  '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
+  '/api/voice/speak': typeof ApiVoiceSpeakRoute
+  '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
   '/professor/': typeof AuthenticatedProfessorIndexRoute
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -156,6 +177,9 @@ export interface FileRoutesByTo {
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
+  '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
+  '/api/voice/speak': typeof ApiVoiceSpeakRoute
+  '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
   '/professor': typeof AuthenticatedProfessorIndexRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -177,6 +201,9 @@ export interface FileRoutesById {
   '/_authenticated/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
+  '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
+  '/api/voice/speak': typeof ApiVoiceSpeakRoute
+  '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/_authenticated/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -198,6 +225,9 @@ export interface FileRouteTypes {
     | '/teste-de-nivel'
     | '/api/chat'
     | '/professor/$threadId'
+    | '/api/voice/pronunciation'
+    | '/api/voice/speak'
+    | '/api/voice/transcribe'
     | '/professor/'
     | '/speak2hire/'
     | '/speak2hire/material/$materialId'
@@ -216,6 +246,9 @@ export interface FileRouteTypes {
     | '/teste-de-nivel'
     | '/api/chat'
     | '/professor/$threadId'
+    | '/api/voice/pronunciation'
+    | '/api/voice/speak'
+    | '/api/voice/transcribe'
     | '/professor'
     | '/speak2hire'
     | '/speak2hire/material/$materialId'
@@ -236,6 +269,9 @@ export interface FileRouteTypes {
     | '/_authenticated/teste-de-nivel'
     | '/api/chat'
     | '/_authenticated/professor/$threadId'
+    | '/api/voice/pronunciation'
+    | '/api/voice/speak'
+    | '/api/voice/transcribe'
     | '/_authenticated/professor/'
     | '/_authenticated/speak2hire/'
     | '/_authenticated/speak2hire/material/$materialId'
@@ -249,6 +285,9 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ChecklistRoute: typeof ChecklistRoute
   ApiChatRoute: typeof ApiChatRoute
+  ApiVoicePronunciationRoute: typeof ApiVoicePronunciationRoute
+  ApiVoiceSpeakRoute: typeof ApiVoiceSpeakRoute
+  ApiVoiceTranscribeRoute: typeof ApiVoiceTranscribeRoute
   ApiPublicWebhooksMercadopagoRoute: typeof ApiPublicWebhooksMercadopagoRoute
 }
 
@@ -359,6 +398,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSpeak2hireIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/voice/pronunciation': {
+      id: '/api/voice/pronunciation'
+      path: '/api/voice/pronunciation'
+      fullPath: '/api/voice/pronunciation'
+      preLoaderRoute: typeof ApiVoicePronunciationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/voice/speak': {
+      id: '/api/voice/speak'
+      path: '/api/voice/speak'
+      fullPath: '/api/voice/speak'
+      preLoaderRoute: typeof ApiVoiceSpeakRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/voice/transcribe': {
+      id: '/api/voice/transcribe'
+      path: '/api/voice/transcribe'
+      fullPath: '/api/voice/transcribe'
+      preLoaderRoute: typeof ApiVoiceTranscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/speak2hire/material/$materialId': {
       id: '/_authenticated/speak2hire/material/$materialId'
       path: '/speak2hire/material/$materialId'
@@ -436,6 +496,9 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ChecklistRoute: ChecklistRoute,
   ApiChatRoute: ApiChatRoute,
+  ApiVoicePronunciationRoute: ApiVoicePronunciationRoute,
+  ApiVoiceSpeakRoute: ApiVoiceSpeakRoute,
+  ApiVoiceTranscribeRoute: ApiVoiceTranscribeRoute,
   ApiPublicWebhooksMercadopagoRoute: ApiPublicWebhooksMercadopagoRoute,
 }
 export const routeTree = rootRouteImport

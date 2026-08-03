@@ -3,8 +3,9 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
+import { Mic, Square, Volume2, Loader2, AudioLines } from "lucide-react";
 import {
   Conversation,
   ConversationContent,
@@ -19,8 +20,13 @@ import {
   PromptInputSubmit,
 } from "@/components/ai-elements/prompt-input";
 import { Shimmer } from "@/components/ai-elements/shimmer";
+import { Button } from "@/components/ui/button";
+import { PronunciationDialog } from "@/components/PronunciationDialog";
+import { MicRecorder } from "@/lib/audio-recorder";
+import { transcribeAudio, speakText, stopSpeaking } from "@/lib/voice-client";
 import { getThreadMessages } from "@/lib/chat.functions";
 import { supabase } from "@/integrations/supabase/client";
+
 
 export const Route = createFileRoute("/_authenticated/professor/$threadId")({
   component: ProfessorThread,
@@ -87,6 +93,64 @@ function ChatWindow({
 
   const isBusy = status === "submitted" || status === "streaming";
 
+  // ---- Voz -----------------------------------------------------------------
+  const [recording, setRecording] = useState(false);
+  const [transcribing, setTranscribing] = useState(false);
+  const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [autoSpeak, setAutoSpeak] = useState(false);
+  const [pronOpen, setPronOpen] = useState(false);
+  const recorderRef = useRef<MicRecorder | null>(null);
+  const lastSpokenRef = useRef<string | null>(null);
+
+  const messageText = (m: UIMessage) =>
+    m.parts.map((p) => (p.type === "text" ? p.text : "")).join(" ").trim();
+
+  async function playMessage(m: UIMessage) {
+    const text = messageText(m);
+    if (!text) return;
+    if (speakingId === m.id) {
+      stopSpeaking();
+      setSpeakingId(null);
+      return;
+    }
+    try {
+      setSpeakingId(m.id);
+      await speakText(text);
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Não foi possível gerar o áudio.");
+    } finally {
+      setSpeakingId((current) => (current === m.id ? null : current));
+    }
+  }
+
+  async function toggleRecording() {
+    if (recording) {
+      setRecording(false);
+      const rec = recorderRef.current;
+      recorderRef.current = null;
+      if (!rec) return;
+      try {
+        setTranscribing(true);
+        const { blob } = await rec.stop();
+        const text = await transcribeAudio(blob);
+        await handleSubmit({ text });
+      } catch (e) {
+        toast.error(e instanceof Error ? e.message : "Não foi possível transcrever o áudio.");
+      } finally {
+        setTranscribing(false);
+      }
+      return;
+    }
+    try {
+      const rec = new MicRecorder();
+      await rec.start();
+      recorderRef.current = rec;
+      setRecording(true);
+    } catch {
+      toast.error("Preciso de acesso ao microfone para ouvir você.");
+    }
+  }
+
   async function handleSubmit({ text }: { text: string }) {
     const value = text.trim();
     if (!value || isBusy) return;
@@ -101,6 +165,22 @@ function ChatWindow({
     }
   }
 
+  // Leitura automática da última resposta do professor.
+  useEffect(() => {
+    if (!autoSpeak || status !== "ready") return;
+    const last = messages.at(-1);
+    if (!last || last.role !== "assistant") return;
+    if (lastSpokenRef.current === last.id) return;
+    lastSpokenRef.current = last.id;
+    void playMessage(last);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoSpeak, status, messages]);
+
+  useEffect(() => () => {
+    recorderRef.current?.cancel();
+    stopSpeaking();
+  }, []);
+
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col">
       <Conversation className="flex-1">
@@ -108,7 +188,7 @@ function ChatWindow({
           {messages.length === 0 && (
             <ConversationEmptyState
               title="Converse com seu Professor IA"
-              description="Digite em inglês para começar. Peça correções, simule uma entrevista ou uma viagem."
+              description="Fale ou digite em inglês. Peça correções, ouça a resposta em voz nativa ou treine sua pronúncia."
             />
           )}
 
@@ -125,6 +205,21 @@ function ChatWindow({
                       </p>
                     )
                   ) : null,
+                )}
+                {m.role === "assistant" && messageText(m) && (
+                  <button
+                    type="button"
+                    onClick={() => playMessage(m)}
+                    aria-label="Ouvir a resposta"
+                    className="flex w-fit items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-gold"
+                  >
+                    {speakingId === m.id ? (
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    ) : (
+                      <Volume2 className="h-3.5 w-3.5" />
+                    )}
+                    {speakingId === m.id ? "Tocando…" : "Ouvir"}
+                  </button>
                 )}
               </MessageContent>
             </Message>
@@ -148,16 +243,60 @@ function ChatWindow({
       </Conversation>
 
       <div ref={promptRef} className="border-t border-border bg-background/80 p-4 backdrop-blur">
+        <div className="mx-auto mb-2 flex max-w-3xl flex-wrap items-center gap-2">
+          <Button
+            type="button"
+            size="sm"
+            variant="ghost"
+            onClick={() => setPronOpen(true)}
+            className="gap-1 text-xs"
+          >
+            <AudioLines className="h-4 w-4" /> Checar pronúncia
+          </Button>
+          <Button
+            type="button"
+            size="sm"
+            variant={autoSpeak ? "secondary" : "ghost"}
+            onClick={() => {
+              if (autoSpeak) stopSpeaking();
+              setAutoSpeak((v) => !v);
+            }}
+            className="gap-1 text-xs"
+          >
+            <Volume2 className="h-4 w-4" /> Voz automática {autoSpeak ? "ligada" : "desligada"}
+          </Button>
+        </div>
+
         <PromptInput onSubmit={handleSubmit} className="mx-auto max-w-3xl">
           <PromptInputTextarea
-            placeholder="Type in English…"
-            disabled={isBusy}
+            placeholder={recording ? "Gravando… fale em inglês" : "Type or speak in English…"}
+            disabled={isBusy || transcribing}
           />
-          <PromptInputFooter className="justify-end">
+          <PromptInputFooter className="justify-between">
+            <Button
+              type="button"
+              size="sm"
+              onClick={toggleRecording}
+              disabled={isBusy || transcribing}
+              variant={recording ? "destructive" : "secondary"}
+              className="gap-1 rounded-full text-xs"
+            >
+              {transcribing ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : recording ? (
+                <Square className="h-4 w-4" />
+              ) : (
+                <Mic className="h-4 w-4" />
+              )}
+              {transcribing ? "Transcrevendo…" : recording ? "Parar e enviar" : "Falar"}
+            </Button>
             <PromptInputSubmit status={status} onStop={stop} disabled={isBusy} />
           </PromptInputFooter>
         </PromptInput>
       </div>
+
+      <PronunciationDialog open={pronOpen} onOpenChange={setPronOpen} />
     </div>
   );
+
 }
