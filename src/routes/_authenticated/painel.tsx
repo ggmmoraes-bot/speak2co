@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { PlanVersionsSection } from "@/components/PlanVersionsSection";
 import { getStudyPlan, generateStudyPlan, previewStudyPlanRefinement, applyStudyPlanRefinement, setWeekLock } from "@/lib/study-plan.functions";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/speak2co-logo.asset.json";
@@ -124,6 +125,7 @@ function Painel() {
         </Button>
 
         <StudyPlanSection profileReady={Boolean(profile?.goal && profile?.target_level)} />
+        <PlanVersionsSection />
       </div>
     </main>
   );
@@ -156,6 +158,7 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
     mutationFn: () => generate(),
     onSuccess: (data) => {
       queryClient.setQueryData(["study-plan"], data);
+      queryClient.invalidateQueries({ queryKey: ["plan-versions"] });
       toast.success("Seu plano de estudos foi gerado!");
     },
     onError: (error: Error) => toast.error(error.message),
@@ -172,6 +175,7 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
       applyRefinement({ data: { weeks: weeks.map((w) => w.after) } }),
     onSuccess: (data) => {
       queryClient.setQueryData(["study-plan"], data);
+      queryClient.invalidateQueries({ queryKey: ["plan-versions"] });
       setPreview(null);
       const list = (data as { refined_weeks: number[] }).refined_weeks;
       toast.success(
