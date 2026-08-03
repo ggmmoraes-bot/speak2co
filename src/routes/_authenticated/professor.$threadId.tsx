@@ -298,7 +298,7 @@ function ChatWindow({
                   min={0}
                   max={1}
                   step={0.05}
-                  onValueChange={([v]) => updateVoice({ volume: v })}
+                  onValueChange={([v]) => updateVoice({ volume: v ?? voice.volume })}
                 />
               </div>
 
@@ -315,7 +315,7 @@ function ChatWindow({
                   min={0.5}
                   max={2}
                   step={0.1}
-                  onValueChange={([v]) => updateVoice({ rate: v })}
+                  onValueChange={([v]) => updateVoice({ rate: v ?? voice.rate })}
                 />
                 <div className="flex gap-1">
                   {[0.75, 1, 1.25, 1.5].map((r) => (
