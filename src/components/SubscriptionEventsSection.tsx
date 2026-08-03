@@ -30,7 +30,7 @@ function formatDateTime(value: string) {
 export function SubscriptionEventsSection({
   simulatedEvents,
 }: {
-  simulatedEvents?: SubscriptionEventView[];
+  simulatedEvents?: SubscriptionEventView[] | undefined;
 }) {
   const fetchEvents = useServerFn(getMySubscriptionEvents);
   const { data, isPending: isLoading } = useQuery({
