@@ -148,3 +148,24 @@
     color: var(--color-foreground);
   }
 }
+
+@layer components {
+  .text-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-gold {
+    background: var(--gradient-gold);
+  }
+
+  .surface-navy {
+    background: var(--gradient-navy);
+  }
+
+  .glow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+}
