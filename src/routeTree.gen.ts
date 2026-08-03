@@ -16,6 +16,10 @@ import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authentic
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
 import { Route as AuthenticatedPremiumRouteImport } from './routes/_authenticated/premium'
+import { Route as AuthenticatedProfessorRouteImport } from './routes/_authenticated/professor'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
+import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/public/webhooks/mercadopago'
 
 const IndexRoute = IndexRouteImport.update({
@@ -52,6 +56,28 @@ const AuthenticatedPremiumRoute = AuthenticatedPremiumRouteImport.update({
   path: '/premium',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedProfessorRoute = AuthenticatedProfessorRouteImport.update({
+  id: '/professor',
+  path: '/professor',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedProfessorIndexRoute =
+  AuthenticatedProfessorIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedProfessorRoute,
+  } as any)
+const AuthenticatedProfessorThreadIdRoute =
+  AuthenticatedProfessorThreadIdRouteImport.update({
+    id: '/$threadId',
+    path: '/$threadId',
+    getParentRoute: () => AuthenticatedProfessorRoute,
+  } as any)
 const ApiPublicWebhooksMercadopagoRoute =
   ApiPublicWebhooksMercadopagoRouteImport.update({
     id: '/api/public/webhooks/mercadopago',
@@ -66,6 +92,10 @@ export interface FileRoutesByFullPath {
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
+  '/professor': typeof AuthenticatedProfessorRouteWithChildren
+  '/api/chat': typeof ApiChatRoute
+  '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
+  '/professor/': typeof AuthenticatedProfessorIndexRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRoutesByTo {
@@ -75,6 +105,9 @@ export interface FileRoutesByTo {
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
+  '/api/chat': typeof ApiChatRoute
+  '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
+  '/professor': typeof AuthenticatedProfessorIndexRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRoutesById {
@@ -86,6 +119,10 @@ export interface FileRoutesById {
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
+  '/_authenticated/professor': typeof AuthenticatedProfessorRouteWithChildren
+  '/api/chat': typeof ApiChatRoute
+  '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
+  '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRouteTypes {
@@ -97,6 +134,10 @@ export interface FileRouteTypes {
     | '/painel'
     | '/perfil'
     | '/premium'
+    | '/professor'
+    | '/api/chat'
+    | '/professor/$threadId'
+    | '/professor/'
     | '/api/public/webhooks/mercadopago'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -106,6 +147,9 @@ export interface FileRouteTypes {
     | '/painel'
     | '/perfil'
     | '/premium'
+    | '/api/chat'
+    | '/professor/$threadId'
+    | '/professor'
     | '/api/public/webhooks/mercadopago'
   id:
     | '__root__'
@@ -116,6 +160,10 @@ export interface FileRouteTypes {
     | '/_authenticated/painel'
     | '/_authenticated/perfil'
     | '/_authenticated/premium'
+    | '/_authenticated/professor'
+    | '/api/chat'
+    | '/_authenticated/professor/$threadId'
+    | '/_authenticated/professor/'
     | '/api/public/webhooks/mercadopago'
   fileRoutesById: FileRoutesById
 }
@@ -123,6 +171,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ApiChatRoute: typeof ApiChatRoute
   ApiPublicWebhooksMercadopagoRoute: typeof ApiPublicWebhooksMercadopagoRoute
 }
 
@@ -177,6 +226,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPremiumRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/professor': {
+      id: '/_authenticated/professor'
+      path: '/professor'
+      fullPath: '/professor'
+      preLoaderRoute: typeof AuthenticatedProfessorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/professor/': {
+      id: '/_authenticated/professor/'
+      path: '/'
+      fullPath: '/professor/'
+      preLoaderRoute: typeof AuthenticatedProfessorIndexRouteImport
+      parentRoute: typeof AuthenticatedProfessorRoute
+    }
+    '/_authenticated/professor/$threadId': {
+      id: '/_authenticated/professor/$threadId'
+      path: '/$threadId'
+      fullPath: '/professor/$threadId'
+      preLoaderRoute: typeof AuthenticatedProfessorThreadIdRouteImport
+      parentRoute: typeof AuthenticatedProfessorRoute
+    }
     '/api/public/webhooks/mercadopago': {
       id: '/api/public/webhooks/mercadopago'
       path: '/api/public/webhooks/mercadopago'
@@ -187,11 +264,28 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedProfessorRouteChildren {
+  AuthenticatedProfessorThreadIdRoute: typeof AuthenticatedProfessorThreadIdRoute
+  AuthenticatedProfessorIndexRoute: typeof AuthenticatedProfessorIndexRoute
+}
+
+const AuthenticatedProfessorRouteChildren: AuthenticatedProfessorRouteChildren =
+  {
+    AuthenticatedProfessorThreadIdRoute: AuthenticatedProfessorThreadIdRoute,
+    AuthenticatedProfessorIndexRoute: AuthenticatedProfessorIndexRoute,
+  }
+
+const AuthenticatedProfessorRouteWithChildren =
+  AuthenticatedProfessorRoute._addFileChildren(
+    AuthenticatedProfessorRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
+  AuthenticatedProfessorRoute: typeof AuthenticatedProfessorRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -199,6 +293,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
+  AuthenticatedProfessorRoute: AuthenticatedProfessorRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -208,6 +303,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  ApiChatRoute: ApiChatRoute,
   ApiPublicWebhooksMercadopagoRoute: ApiPublicWebhooksMercadopagoRoute,
 }
 export const routeTree = rootRouteImport
