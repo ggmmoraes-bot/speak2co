@@ -106,7 +106,7 @@ Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases), foco 
     return output;
   });
 
-export const refineStudyPlanFromFeedback = createServerFn({ method: "POST" })
+export const previewStudyPlanRefinement = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const apiKey = process.env["LOVABLE_API_KEY"];
