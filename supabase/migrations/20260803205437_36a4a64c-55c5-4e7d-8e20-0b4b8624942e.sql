@@ -1,0 +1,1 @@
+ALTER TABLE public.study_plans ADD COLUMN IF NOT EXISTS locked_weeks integer[] NOT NULL DEFAULT '{}'::integer[];

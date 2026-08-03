@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { getStudyPlan, generateStudyPlan, previewStudyPlanRefinement, applyStudyPlanRefinement } from "@/lib/study-plan.functions";
+import { getStudyPlan, generateStudyPlan, previewStudyPlanRefinement, applyStudyPlanRefinement, setWeekLock } from "@/lib/study-plan.functions";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/speak2co-logo.asset.json";
 import { DailyExercisesSection } from "@/components/DailyExercisesSection";
@@ -143,6 +143,7 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
   const generate = useServerFn(generateStudyPlan);
   const previewRefinement = useServerFn(previewStudyPlanRefinement);
   const applyRefinement = useServerFn(applyStudyPlanRefinement);
+  const toggleLock = useServerFn(setWeekLock);
   const queryClient = useQueryClient();
   const [preview, setPreview] = useState<RefinementPreview | null>(null);
 
@@ -182,6 +183,25 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
     onError: (error: Error) => toast.error(error.message),
   });
 
+  const lockMutation = useMutation({
+    mutationFn: (vars: { week: number; locked: boolean }) => toggleLock({ data: vars }),
+    onSuccess: (data, vars) => {
+      const list = (data as { locked_weeks: number[] }).locked_weeks;
+      queryClient.setQueryData(["study-plan"], (old: unknown) =>
+        old ? { ...(old as object), locked_weeks: list } : old,
+      );
+      setPreview((current) =>
+        current && vars.locked
+          ? { weeks: current.weeks.filter((w) => w.week !== vars.week) }
+          : current,
+      );
+      toast.success(
+        vars.locked ? `Semana ${vars.week} travada.` : `Semana ${vars.week} destravada.`,
+      );
+    },
+    onError: (error: Error) => toast.error(error.message),
+  });
+
   const autoRan = useRef(false);
   useEffect(() => {
     if (autoRan.current) return;
@@ -192,6 +212,7 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
 
   const weeks = (plan?.weekly_focus ?? []) as WeeklyFocus[];
   const milestones = (plan?.milestones ?? []) as string[];
+  const lockedWeeks = new Set((((plan as { locked_weeks?: number[] } | null)?.locked_weeks ?? []) as number[]).map(Number));
 
   return (
     <section className="mt-14">
@@ -311,9 +332,23 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
                 key={week.week}
                 className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur"
               >
-                <p className="text-xs tracking-widest text-muted-foreground uppercase">
-                  Semana {week.week}
-                </p>
+                <div className="flex items-start justify-between gap-3">
+                  <p className="text-xs tracking-widest text-muted-foreground uppercase">
+                    Semana {week.week}
+                    {lockedWeeks.has(week.week) && <span className="ml-2 text-gold">🔒 travada</span>}
+                  </p>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={lockMutation.isPending}
+                    onClick={() =>
+                      lockMutation.mutate({ week: week.week, locked: !lockedWeeks.has(week.week) })
+                    }
+                    className="h-7 rounded-full border-primary/40 bg-transparent px-3 text-xs text-foreground hover:bg-secondary"
+                  >
+                    {lockedWeeks.has(week.week) ? "Destravar" : "Travar"}
+                  </Button>
+                </div>
                 <p className="mt-1 font-semibold text-gold">{week.title}</p>
                 <ul className="mt-3 grid gap-1.5 text-sm text-muted-foreground">
                   {week.activities.map((activity, i) => (
