@@ -128,8 +128,9 @@ const ROUTES: RouteItem[] = [
   {
     path: "/ranking",
     title: "Ranking de fluência",
-    description: "Classificação comparativa entre alunos.",
-    status: "pending",
+    description:
+      "Classificação entre alunos com pontos do teste de nivelamento, do Professor de IA, das entrevistas do Speak2Hire e dos exercícios diários.",
+    status: "protected",
   },
   {
     path: "/certificados",
