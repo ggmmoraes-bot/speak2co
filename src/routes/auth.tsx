@@ -52,11 +52,17 @@ function AuthPage() {
   async function handleSignIn(e: React.FormEvent) {
     e.preventDefault();
     const parsed = z.object({ email: emailSchema, password: passwordSchema }).safeParse({ email, password });
-    if (!parsed.success) return toast.error(parsed.error.issues[0]!.message);
+    if (!parsed.success) {
+      toast.error(parsed.error.issues[0]!.message);
+      return;
+    }
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword(parsed.data);
     setLoading(false);
-    if (error) return toast.error("Não foi possível entrar. Verifique e-mail e senha.");
+    if (error) {
+      toast.error("Não foi possível entrar. Verifique e-mail e senha.");
+      return;
+    }
     navigate({ to: "/painel", replace: true });
   }
 
@@ -65,7 +71,10 @@ function AuthPage() {
     const parsed = z
       .object({ full_name: nameSchema, email: emailSchema, password: passwordSchema })
       .safeParse({ full_name: name, email, password });
-    if (!parsed.success) return toast.error(parsed.error.issues[0]!.message);
+    if (!parsed.success) {
+      toast.error(parsed.error.issues[0]!.message);
+      return;
+    }
     setLoading(true);
     const { data, error } = await supabase.auth.signUp({
       email: parsed.data.email,
@@ -76,8 +85,14 @@ function AuthPage() {
       },
     });
     setLoading(false);
-    if (error) return toast.error(error.message);
-    if (data.session) return navigate({ to: "/painel", replace: true });
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    if (data.session) {
+      navigate({ to: "/painel", replace: true });
+      return;
+    }
     setSent(true);
   }
 
@@ -88,7 +103,8 @@ function AuthPage() {
     });
     if (result.error) {
       setLoading(false);
-      return toast.error("Não foi possível conectar com esse provedor.");
+      toast.error("Não foi possível conectar com esse provedor.");
+      return;
     }
     if (result.redirected) return;
     navigate({ to: "/painel", replace: true });
