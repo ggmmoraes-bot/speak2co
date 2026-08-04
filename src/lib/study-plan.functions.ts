@@ -147,6 +147,7 @@ Devolva somente essas semanas reescritas.`,
     const refinedByWeek = new Map(refined.weekly_focus.map((w) => [w.week, w]));
 
     return {
+      notice: null as string | null,
       weeks: targetWeeks.map((w) => ({
         week: w.week,
         before: { title: w.title, activities: w.activities },
