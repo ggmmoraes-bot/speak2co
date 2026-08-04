@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { PlanVersionsSection } from "@/components/PlanVersionsSection";
 import { getStudyPlan, generateStudyPlan, previewStudyPlanRefinement, applyStudyPlanRefinement, setWeekLock } from "@/lib/study-plan.functions";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import logo from "@/assets/speak2co-logo.asset.json";
 import { DailyExercisesSection } from "@/components/DailyExercisesSection";
 import { ExerciseHistorySection } from "@/components/ExerciseHistorySection";
@@ -132,18 +133,38 @@ function Painel() {
             <Link to="/professor">Professor IA</Link>
           </Button>
 
-          <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/speak2hire">
-              <Briefcase className="mr-2 h-4 w-4 text-gold" />
-              Começar Speak2Hire
-            </Link>
-          </Button>
-          <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/speak2travel">
-              <Plane className="mr-2 h-4 w-4 text-gold" />
-              Começar Speak2Travel
-            </Link>
-          </Button>
+          <TooltipProvider delayDuration={200}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="inline-flex">
+                  <Button asChild variant="outline" className="rounded-full font-semibold">
+                    <Link to="/speak2hire">
+                      <Briefcase className="mr-2 h-4 w-4 text-gold" />
+                      Começar Speak2Hire
+                    </Link>
+                  </Button>
+                </span>
+              </TooltipTrigger>
+              <TooltipContent side="bottom" className="max-w-xs text-center">
+                Simulador de entrevistas com IA: treine perguntas e respostas em inglês e receba correções de gramática e pronúncia.
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="inline-flex">
+                  <Button asChild variant="outline" className="rounded-full font-semibold">
+                    <Link to="/speak2travel">
+                      <Plane className="mr-2 h-4 w-4 text-gold" />
+                      Começar Speak2Travel
+                    </Link>
+                  </Button>
+                </span>
+              </TooltipTrigger>
+              <TooltipContent side="bottom" className="max-w-xs text-center">
+                Curso de inglês para viagens: role play de aeroporto, hotel, restaurante e mais, com vocabulário e exercícios por módulo.
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
 
           <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/ranking">Ranking de fluência</Link>
