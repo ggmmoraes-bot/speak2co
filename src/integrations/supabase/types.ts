@@ -103,6 +103,57 @@ export type Database = {
         }
         Relationships: []
       }
+      course_progress: {
+        Row: {
+          answers: Json
+          completed: boolean
+          completed_at: string | null
+          course_id: string
+          created_at: string
+          grammar_mastered: boolean
+          id: string
+          lesson_id: string
+          pronunciation_score: number | null
+          quiz_score: number | null
+          sections_done: Json
+          updated_at: string
+          user_id: string
+          vocabulary_mastered: number
+        }
+        Insert: {
+          answers?: Json
+          completed?: boolean
+          completed_at?: string | null
+          course_id: string
+          created_at?: string
+          grammar_mastered?: boolean
+          id?: string
+          lesson_id: string
+          pronunciation_score?: number | null
+          quiz_score?: number | null
+          sections_done?: Json
+          updated_at?: string
+          user_id: string
+          vocabulary_mastered?: number
+        }
+        Update: {
+          answers?: Json
+          completed?: boolean
+          completed_at?: string | null
+          course_id?: string
+          created_at?: string
+          grammar_mastered?: boolean
+          id?: string
+          lesson_id?: string
+          pronunciation_score?: number | null
+          quiz_score?: number | null
+          sections_done?: Json
+          updated_at?: string
+          user_id?: string
+          vocabulary_mastered?: number
+        }
+        Relationships: []
+      }
       daily_exercises: {
         Row: {
           answers: Json
