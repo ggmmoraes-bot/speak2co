@@ -29,7 +29,8 @@ async function buildLogoDataUrl(): Promise<string | null> {
     const data = ctx.getImageData(0, 0, size, size);
     const pixels = data.data;
     for (let i = 0; i < pixels.length; i += 4) {
-      const luminance = 0.299 * pixels[i] + 0.587 * pixels[i + 1] + 0.114 * pixels[i + 2];
+      const luminance =
+        0.299 * (pixels[i] ?? 0) + 0.587 * (pixels[i + 1] ?? 0) + 0.114 * (pixels[i + 2] ?? 0);
       if (luminance < 42) {
         pixels[i + 3] = 0;
       }
