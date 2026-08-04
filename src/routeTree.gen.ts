@@ -30,6 +30,7 @@ import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_au
 import { Route as AuthenticatedSpeak2hireIndexRouteImport } from './routes/_authenticated/speak2hire.index'
 import { Route as AuthenticatedSpeak2travelIndexRouteImport } from './routes/_authenticated/speak2travel.index'
 import { Route as AuthenticatedSpeak2travelTripPlannerRouteImport } from './routes/_authenticated/speak2travel.trip-planner'
+import { Route as AuthenticatedUpgradeEssentialRouteImport } from './routes/_authenticated/upgrade.essential'
 import { Route as ApiVoicePronunciationRouteImport } from './routes/api/voice/pronunciation'
 import { Route as ApiVoiceSpeakRouteImport } from './routes/api/voice/speak'
 import { Route as ApiVoiceTranscribeRouteImport } from './routes/api/voice/transcribe'
@@ -152,6 +153,12 @@ const AuthenticatedSpeak2travelTripPlannerRoute =
     path: '/trip-planner',
     getParentRoute: () => AuthenticatedSpeak2travelRoute,
   } as any)
+const AuthenticatedUpgradeEssentialRoute =
+  AuthenticatedUpgradeEssentialRouteImport.update({
+    id: '/upgrade/essential',
+    path: '/upgrade/essential',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiVoicePronunciationRoute = ApiVoicePronunciationRouteImport.update({
   id: '/api/voice/pronunciation',
   path: '/api/voice/pronunciation',
@@ -222,6 +229,7 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
+  '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
@@ -250,6 +258,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
+  '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
@@ -283,6 +292,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
+  '/_authenticated/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
@@ -316,6 +326,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
+    | '/upgrade/essential'
     | '/api/voice/pronunciation'
     | '/api/voice/speak'
     | '/api/voice/transcribe'
@@ -344,6 +355,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
+    | '/upgrade/essential'
     | '/api/voice/pronunciation'
     | '/api/voice/speak'
     | '/api/voice/transcribe'
@@ -376,6 +388,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/speak2travel/trip-planner'
+    | '/_authenticated/upgrade/essential'
     | '/api/voice/pronunciation'
     | '/api/voice/speak'
     | '/api/voice/transcribe'
@@ -551,6 +564,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSpeak2travelTripPlannerRouteImport
       parentRoute: typeof AuthenticatedSpeak2travelRoute
     }
+    '/_authenticated/upgrade/essential': {
+      id: '/_authenticated/upgrade/essential'
+      path: '/upgrade/essential'
+      fullPath: '/upgrade/essential'
+      preLoaderRoute: typeof AuthenticatedUpgradeEssentialRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/voice/pronunciation': {
       id: '/api/voice/pronunciation'
       path: '/api/voice/pronunciation'
@@ -691,6 +711,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSpeak2hireRoute: typeof AuthenticatedSpeak2hireRouteWithChildren
   AuthenticatedSpeak2travelRoute: typeof AuthenticatedSpeak2travelRouteWithChildren
   AuthenticatedTesteDeNivelRoute: typeof AuthenticatedTesteDeNivelRoute
+  AuthenticatedUpgradeEssentialRoute: typeof AuthenticatedUpgradeEssentialRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -705,6 +726,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSpeak2hireRoute: AuthenticatedSpeak2hireRouteWithChildren,
   AuthenticatedSpeak2travelRoute: AuthenticatedSpeak2travelRouteWithChildren,
   AuthenticatedTesteDeNivelRoute: AuthenticatedTesteDeNivelRoute,
+  AuthenticatedUpgradeEssentialRoute: AuthenticatedUpgradeEssentialRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

@@ -203,7 +203,28 @@ function Painel() {
         </div>
 
         <StudyPlanSection fullPlan={hasFeature(access, FEATURE_KEYS.studyPlanFull)} profileReady={Boolean(profile?.goal && profile?.target_level)} />
-        {hasFeature(access, FEATURE_KEYS.studyPlanFull) && <PlanVersionsSection />}
+        {hasFeature(access, FEATURE_KEYS.studyPlanFull) ? (
+          <PlanVersionsSection />
+        ) : (
+          <div className="mt-8 rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur">
+            <div className="flex items-center gap-2 text-gold">
+              <Lock className="h-4 w-4" />
+              <p className="text-xs tracking-widest uppercase">Histórico de versões bloqueado</p>
+            </div>
+            <p className="mt-3 text-sm text-muted-foreground">
+              No plano Essential você consulta todas as versões anteriores do seu plano e volta para
+              qualquer uma delas.
+            </p>
+            <Button
+              asChild
+              className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+            >
+              <Link to="/upgrade/essential" search={{ feature: "historico" as const }}>
+                Fazer upgrade para o Essential
+              </Link>
+            </Button>
+          </div>
+        )}
       </div>
     </main>
   );
@@ -362,6 +383,17 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
             className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
           >
             {previewMutation.isPending ? "Preparando prévia…" : "Ver prévia do ajuste"}
+          </Button>
+        )}
+        {profileReady && plan && !fullPlan && (
+          <Button
+            asChild
+            className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+          >
+            <Link to="/upgrade/essential" search={{ feature: "ajustes" as const }}>
+              <Lock className="mr-2 h-4 w-4" />
+              Ajustar com IA · Essential
+            </Link>
           </Button>
         )}
       </div>
@@ -552,13 +584,13 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                   asChild
                   className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                 >
-                  <Link to="/premium">Liberar com o Essential</Link>
+                  <Link to="/upgrade/essential" search={{}}>Liberar com o Essential</Link>
                 </Button>
               </div>
             )}
           </div>
 
-          {milestones.length > 0 && (
+          {fullPlan && milestones.length > 0 && (
             <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
               <p className="text-xs tracking-widest text-muted-foreground uppercase">
                 Marcos de evolução
@@ -568,6 +600,27 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                   <li key={i}>✓ {milestone}</li>
                 ))}
               </ul>
+            </div>
+          )}
+
+          {!fullPlan && (
+            <div className="rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur">
+              <div className="flex items-center gap-2 text-gold">
+                <Lock className="h-4 w-4" />
+                <p className="text-xs tracking-widest uppercase">Marcos de evolução bloqueados</p>
+              </div>
+              <p className="mt-3 text-sm text-muted-foreground">
+                Os marcos mostram cada conquista prevista no seu plano. Eles fazem parte do plano
+                Essential.
+              </p>
+              <Button
+                asChild
+                className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+              >
+                <Link to="/upgrade/essential" search={{ feature: "marcos" as const }}>
+                  Fazer upgrade para o Essential
+                </Link>
+              </Button>
             </div>
           )}
         </div>
