@@ -14,6 +14,7 @@ import {
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { RolePlayCoach } from "@/components/RolePlayCoach";
 import {
   TRAVEL_BRIEFING,
   getTravelTrack,
@@ -330,6 +331,19 @@ function TravelModule({ track }: { track: TravelTrack }) {
               placeholder="Write your answer in English..."
               className="min-h-36"
             />
+
+            <RolePlayCoach
+              trackId={track.id}
+              prompt={prompt}
+              onUseAnswer={(text) =>
+                setAnswers((prev) => ({
+                  ...prev,
+                  [prompt.id]: `${(prev[prompt.id] ?? "").trim()}\n${text}`.trim(),
+                }))
+              }
+            />
+
+
 
             <div className="flex flex-wrap gap-3">
               {index > 0 && (

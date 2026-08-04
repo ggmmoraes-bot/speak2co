@@ -88,3 +88,89 @@ Devolva: score (0-100), summary (2-3 frases), highlights (2 a 4 acertos), focus 
       throw new Error("Não foi possível avaliar sua prática agora.");
     }
   });
+
+const coachTurnSchema = z.object({
+  reply: z.string(),
+  correction: z.string(),
+  pronunciation: z.string(),
+  nextTip: z.string(),
+});
+
+export type TravelCoachTurn = z.infer<typeof coachTurnSchema>;
+
+/** Conversa em tempo real com a IA dentro do role play do módulo. */
+export const chatTravelRolePlay = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z
+      .object({
+        trackId: z.string(),
+        promptId: z.string(),
+        message: z.string().min(1).max(1200),
+        history: z
+          .array(
+            z.object({
+              role: z.enum(["student", "coach"]),
+              text: z.string().max(1200),
+            }),
+          )
+          .max(20)
+          .default([]),
+      })
+      .parse(input),
+  )
+  .handler(async ({ context, data }) => {
+    const apiKey = process.env["LOVABLE_API_KEY"];
+    if (!apiKey) throw new Error("AI indisponível no momento.");
+
+    const track = getTravelTrack(data.trackId);
+    if (!track) throw new Error("Trilha não encontrada.");
+    const prompt = track.prompts.find((p) => p.id === data.promptId) ?? track.prompts[0];
+    if (!prompt) throw new Error("Situação não encontrada.");
+
+    const { getModuleContent } = await import("./speak2travel-modules");
+    const moduleContent = getModuleContent(track.id);
+
+    const { data: profile } = await context.supabase
+      .from("profiles")
+      .select("full_name, english_level, target_level")
+      .eq("id", context.userId)
+      .maybeSingle();
+
+    const conversation = data.history
+      .map((m) => `${m.role === "student" ? "Student" : "Coach"}: ${m.text}`)
+      .join("\n");
+
+    const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
+    const gateway = createLovableAiGatewayProvider(apiKey);
+
+    try {
+      const result = await generateText({
+        model: gateway("google/gemini-3.6-flash"),
+        output: Output.object({ schema: coachTurnSchema }),
+        system:
+          "Você é o coach de conversação do Speak2Travel (Speak2Co). Faça um role play de viagem: interprete o interlocutor da cena (agente, atendente, oficial, garçom...) em inglês natural, curto (1 a 3 frases) e realista, mantendo a conversa avançando com uma pergunta. Além disso, corrija o inglês do aluno. 'reply' = sua fala em inglês no personagem. 'correction' = em português do Brasil, correção de gramática/vocabulário com a versão correta em inglês entre aspas (se estiver perfeito, elogie de forma curta). 'pronunciation' = em português, uma dica de pronúncia sobre uma palavra específica que o aluno usou, com a sílaba tônica indicada em MAIÚSCULAS. 'nextTip' = em português, uma frase curta sugerindo o que dizer em seguida em inglês.",
+        prompt: `Aluno: ${profile?.full_name ?? "aluno"} (nível ${profile?.english_level ?? "não avaliado"}, meta ${profile?.target_level ?? "B1"})
+Módulo: ${track.title}${moduleContent ? ` — ${moduleContent.label}` : ""}
+Cena: ${prompt.situation}
+Fala inicial do interlocutor: ${prompt.cue}
+Tarefa do aluno: ${prompt.task}
+Expressões-alvo: ${prompt.keyPhrases.join(" | ")}
+${moduleContent ? `Vocabulário do módulo: ${moduleContent.vocabulary.map((v) => v.en).join(", ")}` : ""}
+
+Conversa até agora:
+${conversation || "(início da conversa)"}
+
+Nova fala do aluno: ${data.message}`,
+      });
+      return result.output;
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "";
+      if (message.includes("429"))
+        throw new Error("Muitas solicitações. Tente novamente em instantes.");
+      if (message.includes("402"))
+        throw new Error("Créditos de IA esgotados. Adicione créditos para continuar.");
+      console.error("[speak2travel] role play chat falhou", e);
+      throw new Error("Não foi possível falar com a IA agora.");
+    }
+  });
