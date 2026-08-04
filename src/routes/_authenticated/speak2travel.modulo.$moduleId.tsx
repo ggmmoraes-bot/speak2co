@@ -189,7 +189,10 @@ function TravelModule({ track }: { track: TravelTrack }) {
                 <BookOpen className="h-5 w-5" /> Vocabulário essencial
               </h2>
               <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-                {track.vocabulary.map((word) => (
+                {(moduleContent
+                  ? moduleContent.vocabulary.map((v) => ({ term: v.en, meaning: v.pt }))
+                  : track.vocabulary
+                ).map((word) => (
                   <li key={word.term} className="text-sm text-foreground/80">
                     <span className="font-semibold text-foreground">{word.term}</span> —{" "}
                     {word.meaning}
@@ -200,16 +203,54 @@ function TravelModule({ track }: { track: TravelTrack }) {
 
             <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
               <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
-                <Compass className="h-5 w-5" /> Frases-modelo
+                <Compass className="h-5 w-5" /> Expressões-chave
               </h2>
               <ul className="mt-4 space-y-2">
-                {track.phrases.map((phrase) => (
-                  <li key={phrase} className="flex gap-2 text-sm text-foreground/80">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />“{phrase}”
-                  </li>
-                ))}
+                {moduleContent
+                  ? moduleContent.expressions.map((e) => (
+                      <li key={e.en} className="flex gap-2 text-sm text-foreground/80">
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                        <span>
+                          “{e.en}”
+                          <span className="block text-muted-foreground">{e.pt}</span>
+                        </span>
+                      </li>
+                    ))
+                  : track.phrases.map((phrase) => (
+                      <li key={phrase} className="flex gap-2 text-sm text-foreground/80">
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />“
+                        {phrase}”
+                      </li>
+                    ))}
               </ul>
             </div>
+
+            {moduleContent && (
+              <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
+                <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
+                  <MessageSquare className="h-5 w-5" /> Diálogo-modelo
+                </h2>
+                <ul className="mt-4 space-y-2">
+                  {moduleContent.dialogue.map((line, i) => (
+                    <li key={`${line.who}-${i}`} className="text-sm">
+                      <span className="font-semibold text-gold">{line.who}: </span>
+                      <span className="text-foreground/80">{line.line}</span>
+                    </li>
+                  ))}
+                </ul>
+                <h3 className="mt-6 flex items-center gap-2 text-xs tracking-widest text-muted-foreground uppercase">
+                  <Lightbulb className="h-4 w-4" /> Dicas de pronúncia
+                </h3>
+                <ul className="mt-3 space-y-2">
+                  {moduleContent.pronunciation.map((tip) => (
+                    <li key={tip} className="text-sm text-foreground/80">
+                      {tip}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
 
             <div className="grid gap-4 sm:grid-cols-2">
               {TRAVEL_BRIEFING.steps.map((step) => (
