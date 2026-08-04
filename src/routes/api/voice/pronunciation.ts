@@ -44,6 +44,15 @@ export const Route = createFileRoute("/api/voice/pronunciation")({
         const auth = await verifyChatRequest(request);
         if (!auth.ok) return new Response(auth.message, { status: auth.status });
 
+        const { checkFeatureAccess } = await import("@/lib/entitlements-access.server");
+        const access = await checkFeatureAccess(auth.supabase, auth.userId, "pronunciation_checker");
+        if (!access.allowed) {
+          return new Response("A checagem de pronúncia não está incluída no seu plano.", {
+            status: 403,
+          });
+        }
+
+
         const body = (await request.json()) as { target?: string; transcript?: string };
         const target = (body.target ?? "").trim();
         const transcript = (body.transcript ?? "").trim();

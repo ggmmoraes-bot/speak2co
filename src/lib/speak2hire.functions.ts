@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireFeature } from "@/lib/entitlement-middleware";
 import { generateText, Output } from "ai";
 import { z } from "zod";
 import { getTrack, type InterviewQuestion } from "./speak2hire-content";
@@ -40,7 +40,7 @@ export type InterviewSession = {
 };
 
 export const listInterviewSessions = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_hire")])
   .handler(async ({ context }) => {
     const { data, error } = await context.supabase
       .from("interview_sessions")
@@ -53,7 +53,7 @@ export const listInterviewSessions = createServerFn({ method: "GET" })
   });
 
 export const getInterviewSession = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_hire")])
   .inputValidator((input: unknown) => z.object({ sessionId: z.string() }).parse(input))
   .handler(async ({ context, data }) => {
     const { data: row, error } = await context.supabase
@@ -67,7 +67,7 @@ export const getInterviewSession = createServerFn({ method: "GET" })
   });
 
 export const startInterviewSession = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_hire")])
   .inputValidator((input: unknown) => z.object({ trackId: z.string() }).parse(input))
   .handler(async ({ context, data }) => {
     const track = getTrack(data.trackId);
@@ -90,7 +90,7 @@ export const startInterviewSession = createServerFn({ method: "POST" })
   });
 
 export const saveInterviewAnswer = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_hire")])
   .inputValidator((input: unknown) =>
     z
       .object({
@@ -130,7 +130,7 @@ export const saveInterviewAnswer = createServerFn({ method: "POST" })
   });
 
 export const finishInterviewSession = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_hire")])
   .inputValidator((input: unknown) => z.object({ sessionId: z.string() }).parse(input))
   .handler(async ({ context, data }) => {
     const apiKey = process.env["LOVABLE_API_KEY"];
@@ -214,7 +214,7 @@ Devolva: score (0-100), summary (2-3 frases), highlights (2 a 4 pontos fortes), 
   });
 
 export const deleteInterviewSession = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_hire")])
   .inputValidator((input: unknown) => z.object({ sessionId: z.string() }).parse(input))
   .handler(async ({ context, data }) => {
     const { error } = await context.supabase

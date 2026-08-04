@@ -73,6 +73,19 @@ export const Route = createFileRoute("/api/chat")({
         }
         const { supabase, userId } = auth;
 
+        // Plano e limite diário de IA validados no servidor (o guard visual é só UX).
+        const { checkFeatureAccess } = await import("@/lib/entitlements-access.server");
+        const access = await checkFeatureAccess(supabase, userId, "ai_teacher");
+        if (!access.allowed) {
+          return new Response("O Professor IA não está incluído no seu plano.", { status: 403 });
+        }
+        if (access.aiDailyMinutes != null && access.aiUsedSeconds >= access.aiDailyMinutes * 60) {
+          return new Response(
+            `Você já usou os ${access.aiDailyMinutes} minutos diários de IA do seu plano.`,
+            { status: 429 },
+          );
+        }
+
         // Verify the thread belongs to this user.
         const { data: thread } = await supabase
           .from("chat_threads")

@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireFeature } from "@/lib/entitlement-middleware";
 import { z } from "zod";
 import type { TravelFeedback } from "./speak2travel.functions";
 
@@ -23,7 +23,7 @@ const saveSchema = z.object({
 });
 
 export const getTravelProgress = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_travel")])
   .inputValidator((input: unknown) => z.object({ trackId: z.string() }).parse(input))
   .handler(async ({ context, data }): Promise<TravelProgress | null> => {
     const { data: row, error } = await context.supabase
@@ -46,7 +46,7 @@ export const getTravelProgress = createServerFn({ method: "POST" })
   });
 
 export const saveTravelProgress = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_travel")])
   .inputValidator((input: unknown) => saveSchema.parse(input))
   .handler(async ({ context, data }) => {
     const completed = data.completed ?? false;
@@ -68,7 +68,7 @@ export const saveTravelProgress = createServerFn({ method: "POST" })
   });
 
 export const resetTravelProgress = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_travel")])
   .inputValidator((input: unknown) => z.object({ trackId: z.string() }).parse(input))
   .handler(async ({ context, data }) => {
     const { error } = await context.supabase
@@ -81,7 +81,7 @@ export const resetTravelProgress = createServerFn({ method: "POST" })
   });
 
 export const listTravelProgress = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_travel")])
   .handler(async ({ context }): Promise<TravelProgress[]> => {
     const { data: rows, error } = await context.supabase
       .from("travel_progress")
