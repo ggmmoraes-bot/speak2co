@@ -135,7 +135,7 @@ function Painel() {
           <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/speak2hire">
               <Briefcase className="mr-2 h-4 w-4 text-gold" />
-              Começar Speak2hire
+              Começar Speak2Hire
             </Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
