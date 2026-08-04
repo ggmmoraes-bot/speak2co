@@ -1,13 +1,14 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
+import type { TravelFeedback } from "./speak2travel.functions";
 
 export type TravelProgress = {
   trackId: string;
   briefingCompleted: boolean;
   currentIndex: number;
   answers: Record<string, string>;
-  feedback: unknown | null;
+  feedback: TravelFeedback | null;
   completed: boolean;
   updatedAt: string | null;
 };
@@ -17,7 +18,7 @@ const saveSchema = z.object({
   briefingCompleted: z.boolean(),
   currentIndex: z.number().int().min(0),
   answers: z.record(z.string(), z.string()),
-  feedback: z.unknown().nullable().optional(),
+  feedback: z.any().nullable().optional(),
   completed: z.boolean().optional(),
 });
 
@@ -38,7 +39,7 @@ export const getTravelProgress = createServerFn({ method: "POST" })
       briefingCompleted: row.briefing_completed,
       currentIndex: row.current_index,
       answers: (row.answers ?? {}) as Record<string, string>,
-      feedback: row.feedback ?? null,
+      feedback: (row.feedback ?? null) as TravelFeedback | null,
       completed: row.completed,
       updatedAt: row.updated_at,
     };
