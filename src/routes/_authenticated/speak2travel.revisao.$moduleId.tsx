@@ -58,7 +58,7 @@ function ReviewPage() {
 
 type Mode = "cards" | "dialogo" | "quiz";
 
-function buildDeck(track: TravelTrack, content?: TravelModuleContent): ModuleFlashcard[] {
+function buildDeck(track: TravelTrack, content: TravelModuleContent | undefined): ModuleFlashcard[] {
   const fromDoc = content?.flashcards ?? [];
   const fromVocab = (content?.vocabulary ?? []).map((v) => ({ front: v.en, back: v.pt }));
   const fallback = track.vocabulary.map((v) => ({ front: v.term, back: v.meaning }));
@@ -136,7 +136,7 @@ function Flashcards({
 }: {
   deck: ModuleFlashcard[];
   track: TravelTrack;
-  content?: TravelModuleContent;
+  content: TravelModuleContent | undefined;
 }) {
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
@@ -237,7 +237,7 @@ function DialogueSection({
   content,
 }: {
   track: TravelTrack;
-  content?: TravelModuleContent;
+  content: TravelModuleContent | undefined;
 }) {
   if (!content) {
     return (
@@ -302,7 +302,7 @@ type QuizItem = {
   options: string[];
 };
 
-function buildQuiz(track: TravelTrack, content?: TravelModuleContent): QuizItem[] {
+function buildQuiz(track: TravelTrack, content: TravelModuleContent | undefined): QuizItem[] {
   const docQuiz: QuizItem[] = (content?.quiz ?? []).map((q: ModuleQuizQuestion, i) => ({
     key: `doc-${i}`,
     question: q.question,
@@ -339,7 +339,7 @@ function VocabularyQuiz({
   content,
 }: {
   track: TravelTrack;
-  content?: TravelModuleContent;
+  content: TravelModuleContent | undefined;
 }) {
   const [round, setRound] = useState(0);
   const questions = useMemo(() => buildQuiz(track, content), [track, content, round]);
