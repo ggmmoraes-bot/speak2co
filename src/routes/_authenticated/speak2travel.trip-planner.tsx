@@ -151,16 +151,22 @@ function TripPlannerPage() {
               </p>
               <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                 {plan.vocabulary.map((word) => (
-                  <li key={word.term} className="text-sm text-foreground/80">
-                    <span className="font-semibold text-foreground">{word.term}</span> —{" "}
-                    {word.meaning}
+                  <li
+                    key={word.term}
+                    className="flex items-start justify-between gap-2 text-sm text-foreground/80"
+                  >
+                    <span>
+                      <span className="font-semibold text-foreground">{word.term}</span> —{" "}
+                      {word.meaning}
+                    </span>
+                    <SpeakButton text={word.term} label="Ouvir" />
                   </li>
                 ))}
               </ul>
             </div>
 
-            <ListCard title="Expressões" items={plan.expressions} />
-            <ListCard title="Situações prováveis" items={plan.likelySituations} />
+            <ListCard title="Expressões" items={plan.expressions} speak />
+            <ListCard title="Situações prováveis" items={plan.likelySituations} speak />
 
             <div className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur">
               <p className="text-xs tracking-widest text-muted-foreground uppercase">
