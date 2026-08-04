@@ -1,3 +1,4 @@
+import travelLogoAsset from "@/assets/speak2travel.asset.json";
 import logoAsset from "@/assets/speak2co-logo.asset.json";
 
 let cached: string | null = null;
@@ -147,3 +148,49 @@ export function drawPdfLogo(
   doc.addImage(logo, "PNG", x, y, size, size, PDF_LOGO_ALIAS, "NONE");
   return { x, y, size };
 }
+
+/* ---------------------------------------------------------------------------
+ * Logomarca do Speak2Travel (subproduto) para uso secundário nos PDFs.
+ * ------------------------------------------------------------------------- */
+
+let travelCached: string | null = null;
+let travelPending: Promise<string | null> | null = null;
+
+async function buildTravelLogoDataUrl(): Promise<string | null> {
+  if (typeof window === "undefined") return null;
+  try {
+    const image = new Image();
+    image.crossOrigin = "anonymous";
+    image.src = travelLogoAsset.url;
+    await new Promise<void>((resolve, reject) => {
+      image.onload = () => resolve();
+      image.onerror = () => reject(new Error("travel logo load failed"));
+    });
+    const natural = Math.max(image.naturalWidth || 0, image.naturalHeight || 0);
+    const size = Math.min(1536, Math.max(768, natural));
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return null;
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(image, 0, 0, size, size);
+    return canvas.toDataURL("image/png");
+  } catch {
+    return null;
+  }
+}
+
+export async function getTravelLogoDataUrl(): Promise<string | null> {
+  if (travelCached) return travelCached;
+  if (!travelPending) {
+    travelPending = buildTravelLogoDataUrl().then((result) => {
+      travelCached = result;
+      return result;
+    });
+  }
+  return travelPending;
+}
+
+export const PDF_TRAVEL_LOGO_ALIAS = "speak2travel-logo";
