@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { RolePlayCoach } from "@/components/RolePlayCoach";
+import { TravelDrills } from "@/components/TravelDrills";
 import {
   TRAVEL_BRIEFING,
   getTravelTrack,
@@ -75,6 +76,9 @@ function TravelModule({ track }: { track: TravelTrack }) {
   const [started, setStarted] = useState(false);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [coachTranscript, setCoachTranscript] = useState<
+    { role: "student" | "coach"; text: string }[]
+  >([]);
   const [feedback, setFeedback] = useState<TravelFeedback | null>(null);
   const [loading, setLoading] = useState(false);
   const [restoring, setRestoring] = useState(true);
@@ -341,6 +345,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
                   [prompt.id]: `${(prev[prompt.id] ?? "").trim()}\n${text}`.trim(),
                 }))
               }
+              onTranscript={setCoachTranscript}
             />
 
 
@@ -415,6 +420,12 @@ function TravelModule({ track }: { track: TravelTrack }) {
                 </div>
               );
             })}
+
+            <TravelDrills
+              trackId={track.id}
+              answers={answers}
+              conversation={coachTranscript}
+            />
 
             <div className="flex flex-wrap gap-3">
               <Button

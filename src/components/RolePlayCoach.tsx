@@ -25,10 +25,12 @@ export function RolePlayCoach({
   trackId,
   prompt,
   onUseAnswer,
+  onTranscript,
 }: {
   trackId: string;
   prompt: TravelPrompt;
   onUseAnswer?: (text: string) => void;
+  onTranscript?: (turns: { role: "student" | "coach"; text: string }[]) => void;
 }) {
   const [turns, setTurns] = useState<Turn[]>([]);
   const [input, setInput] = useState("");
@@ -63,10 +65,14 @@ export function RolePlayCoach({
       const result = await sendTurn({
         data: { trackId, promptId: prompt.id, message: text, history },
       });
-      setTurns((prev) => [
-        ...prev,
-        { id: crypto.randomUUID(), role: "coach", text: result.reply, feedback: result },
-      ]);
+      setTurns((prev) => {
+        const next: Turn[] = [
+          ...prev,
+          { id: crypto.randomUUID(), role: "coach" as const, text: result.reply, feedback: result },
+        ];
+        onTranscript?.(next.map((turn) => ({ role: turn.role, text: turn.text })));
+        return next;
+      });
       if (settings.autoSpeak) void play(result.reply);
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível falar com a IA.");
