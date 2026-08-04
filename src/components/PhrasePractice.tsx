@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { Progress } from "@/components/ui/progress";
 import { MicRecorder } from "@/lib/audio-recorder";
 import { checkPronunciation, speakText, type PronunciationResult } from "@/lib/voice-client";
+import { SpeechComparison } from "@/components/SpeechComparison";
 import {
   GRADE_TONE_CLASS,
   gradePronunciation,
@@ -152,9 +153,11 @@ export function PhrasePractice({
             {gradePronunciation(result.score).label}
             {history.length > 1 ? ` · tentativas: ${history.join("% · ")}%` : ""}
           </p>
-          <p className="text-xs text-muted-foreground">
-            Entendi: <span className="text-foreground italic">“{result.transcript}”</span>
-          </p>
+          <SpeechComparison
+            target={en}
+            transcript={result.transcript}
+            onPlayModel={playModel}
+          />
           <p className="text-xs">{result.verdict}</p>
           {result.issues.length > 0 && (
             <p className="text-xs font-semibold text-foreground">
