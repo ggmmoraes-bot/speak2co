@@ -174,3 +174,95 @@ Nova fala do aluno: ${data.message}`,
       throw new Error("Não foi possível falar com a IA agora.");
     }
   });
+
+const drillSchema = z.object({
+  type: z.enum(["vocabulary", "grammar"]),
+  question: z.string(),
+  options: z.array(z.string()).min(3).max(4),
+  answer: z.string(),
+  explanation: z.string(),
+  sourceHint: z.string(),
+});
+
+const drillsSchema = z.object({
+  focus: z.string(),
+  drills: z.array(drillSchema).min(4).max(10),
+});
+
+export type TravelDrill = z.infer<typeof drillSchema>;
+export type TravelDrills = z.infer<typeof drillsSchema>;
+
+/** Gera exercícios de vocabulário e gramática a partir das respostas do aluno no role play. */
+export const generateTravelDrills = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z
+      .object({
+        trackId: z.string(),
+        answers: z.record(z.string(), z.string()),
+        conversation: z
+          .array(z.object({ role: z.enum(["student", "coach"]), text: z.string().max(1200) }))
+          .max(40)
+          .default([]),
+      })
+      .parse(input),
+  )
+  .handler(async ({ context, data }) => {
+    const apiKey = process.env["LOVABLE_API_KEY"];
+    if (!apiKey) throw new Error("AI indisponível no momento.");
+
+    const track = getTravelTrack(data.trackId);
+    if (!track) throw new Error("Trilha não encontrada.");
+
+    const answered = track.prompts.filter(
+      (p) => (data.answers[p.id] ?? "").trim().length > 0,
+    );
+    const studentTurns = data.conversation.filter((m) => m.role === "student");
+    if (answered.length === 0 && studentTurns.length === 0)
+      throw new Error("Pratique pelo menos uma situação para gerar exercícios.");
+
+    const { getModuleContent } = await import("./speak2travel-modules");
+    const moduleContent = getModuleContent(track.id);
+
+    const { data: profile } = await context.supabase
+      .from("profiles")
+      .select("english_level, target_level")
+      .eq("id", context.userId)
+      .maybeSingle();
+
+    const material = [
+      ...answered.map(
+        (p) => `Situação: ${p.situation}\nResposta do aluno: ${data.answers[p.id]}`,
+      ),
+      ...studentTurns.map((m) => `Fala do aluno no chat: ${m.text}`),
+    ].join("\n\n");
+
+    const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
+    const gateway = createLovableAiGatewayProvider(apiKey);
+
+    try {
+      const result = await generateText({
+        model: gateway("google/gemini-3.6-flash"),
+        output: Output.object({ schema: drillsSchema }),
+        system:
+          "Você cria exercícios personalizados do Speak2Travel (Speak2Co) a partir dos erros e do vocabulário reais do aluno. Gere de 6 a 8 exercícios de múltipla escolha, misturando 'vocabulary' (palavra/expressão certa para a situação de viagem) e 'grammar' (corrigir estrutura que o aluno errou). Enunciados e alternativas em inglês; 'explanation' e 'sourceHint' em português do Brasil. 'answer' deve ser exatamente igual a uma das 'options'. 'sourceHint' explica de qual fala do aluno o exercício veio. Priorize os erros cometidos; se o aluno acertou tudo, avance o nível com vocabulário novo do módulo.",
+        prompt: `Nível do aluno: ${profile?.english_level ?? "não avaliado"} (meta ${profile?.target_level ?? "B1"})
+Módulo: ${track.title}${moduleContent ? ` — ${moduleContent.label}` : ""}
+${moduleContent ? `Vocabulário do módulo: ${moduleContent.vocabulary.map((v) => v.en).join(", ")}` : ""}
+
+Produção real do aluno:
+${material}
+
+Devolva 'focus' (1 frase em português dizendo o que estes exercícios treinam) e a lista 'drills'.`,
+      });
+      return result.output;
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "";
+      if (message.includes("429"))
+        throw new Error("Muitas solicitações. Tente novamente em instantes.");
+      if (message.includes("402"))
+        throw new Error("Créditos de IA esgotados. Adicione créditos para continuar.");
+      console.error("[speak2travel] geração de exercícios falhou", e);
+      throw new Error("Não foi possível gerar os exercícios agora.");
+    }
+  });
