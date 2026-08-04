@@ -435,6 +435,48 @@ export type Database = {
         }
         Relationships: []
       }
+      travel_progress: {
+        Row: {
+          answers: Json
+          briefing_completed: boolean
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          current_index: number
+          feedback: Json | null
+          id: string
+          track_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          answers?: Json
+          briefing_completed?: boolean
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          current_index?: number
+          feedback?: Json | null
+          id?: string
+          track_id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          answers?: Json
+          briefing_completed?: boolean
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          current_index?: number
+          feedback?: Json | null
+          id?: string
+          track_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
