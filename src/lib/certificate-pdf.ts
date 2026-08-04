@@ -8,7 +8,12 @@ export type CertificatePdfInput = {
   detail: string | null;
   issuedAt: string | null;
   code: string;
+  signatureText?: string;
+  signatureCaption?: string;
 };
+
+export const DEFAULT_SIGNATURE_TEXT = "S2co";
+export const DEFAULT_SIGNATURE_CAPTION = "Speak2Co - Academic Team";
 
 const NAVY: [number, number, number] = [15, 26, 51];
 const GOLD: [number, number, number] = [193, 154, 60];
