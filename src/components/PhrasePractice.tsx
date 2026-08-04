@@ -16,7 +16,7 @@ export function PhrasePractice({
 }: {
   en: string;
   pt: string;
-  note?: string;
+  note?: string | undefined;
 }) {
   const [playing, setPlaying] = useState(false);
   const [recording, setRecording] = useState(false);
