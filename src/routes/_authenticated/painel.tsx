@@ -145,7 +145,7 @@ function Painel() {
             <Link to="/certificados">Meus certificados</Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/assinatura">Minha assinatura</Link>
+            <Link to="/assinatura" search={{}}>Minha assinatura</Link>
           </Button>
         </div>
 

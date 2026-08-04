@@ -74,7 +74,7 @@ export async function buildAndSaveStudyPlan(
       model: gateway("google/gemini-2.5-flash"),
       output: Output.object({ schema: planSchema }),
       system:
-        "Você é o professor de inglês da Speak2Co. Crie planos de estudo de inglês objetivos, motivadores e práticos. Escreva tudo em português do Brasil, exceto exemplos em inglês. Gere exatamente 8 semanas e de 4 a 6 marcos. Calibre a dificuldade pelo resultado do teste de nivelamento: as primeiras semanas devem atacar as prioridades apontadas no teste e as últimas devem aproximar o aluno do nível desejado.",
+        'Você é o professor de inglês da Speak2Co. Crie planos de estudo de inglês objetivos, motivadores e práticos. Escreva o conteúdo em português do Brasil, exceto exemplos em inglês. Gere exatamente 8 semanas e de 4 a 6 marcos. Calibre a dificuldade pelo resultado do teste de nivelamento: as primeiras semanas devem atacar as prioridades apontadas no teste e as últimas devem aproximar o aluno do nível desejado. Responda SOMENTE com um JSON com estas chaves exatas em inglês: {"summary": string, "weekly_focus": [{"week": number, "title": string, "activities": string[]}], "milestones": string[]}. Nunca traduza os nomes das chaves e nunca adicione outras chaves.',
       prompt: `Aluno: ${profile.full_name}
 Nível atual (perfil): ${placement?.level ?? profile.english_level ?? "não avaliado"}
 Nível desejado: ${profile.target_level}
@@ -86,16 +86,21 @@ ${describePlacement(placement)}
 Feedback do aluno sobre explicações anteriores:
 ${feedbackHint}
 
-Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases, citando o nível do teste), foco semanal (8 semanas, cada uma com título e 3 atividades práticas) e marcos de evolução.`,
+Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases, citando o nível do teste), foco semanal (8 semanas, cada uma com título e 3 atividades práticas) e marcos de evolução. Use exatamente as chaves summary, weekly_focus (week, title, activities) e milestones.`,
     });
     output = result.output;
   } catch (e) {
     const message = e instanceof Error ? e.message : "";
     if (message.includes("429")) throw new Error("Muitas solicitações. Tente novamente em instantes.");
     if (message.includes("402")) throw new Error("Créditos de IA esgotados. Adicione créditos para continuar.");
-    console.error("[study-plan] geração falhou", e);
-    throw new Error("Não foi possível gerar seu plano agora.");
+    const rescued = rescuePlan(e);
+    if (!rescued) {
+      console.error("[study-plan] geração falhou", e);
+      throw new Error("Não foi possível gerar seu plano agora.");
+    }
+    output = rescued;
   }
+
 
   const { data: existingPlan } = await supabase
     .from("study_plans")
@@ -134,4 +139,51 @@ Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases, citand
   });
 
   return output;
+}
+
+/** Aceita respostas do modelo com chaves traduzidas/variantes e devolve o plano no formato esperado. */
+function rescuePlan(error: unknown): StudyPlan | null {
+  const raw = (error as { text?: unknown } | null)?.text;
+  if (typeof raw !== "string") return null;
+  const match = raw.match(/\{[\s\S]*\}/);
+  if (!match) return null;
+
+  let parsed: Record<string, unknown>;
+  try {
+    parsed = JSON.parse(match[0]) as Record<string, unknown>;
+  } catch {
+    return null;
+  }
+
+  const pick = (...keys: string[]) => keys.map((k) => parsed[k]).find((v) => v !== undefined);
+  const toText = (value: unknown): string =>
+    typeof value === "string"
+      ? value
+      : value && typeof value === "object"
+        ? String(
+            (value as Record<string, unknown>)["descricao"] ??
+              (value as Record<string, unknown>)["description"] ??
+              (value as Record<string, unknown>)["marco"] ??
+              JSON.stringify(value),
+          )
+        : String(value ?? "");
+
+  const summary = toText(pick("summary", "resumo", "resumo_plano"));
+  const weeksRaw = pick("weekly_focus", "plano_de_estudos", "semanas", "foco_semanal");
+  const milestonesRaw = pick("milestones", "marcos", "marcos_de_evolucao");
+  if (!summary || !Array.isArray(weeksRaw) || !Array.isArray(milestonesRaw)) return null;
+
+  const weekly_focus = weeksRaw.map((item, index) => {
+    const w = (item ?? {}) as Record<string, unknown>;
+    const activities = (w["activities"] ?? w["atividades"] ?? []) as unknown;
+    return {
+      week: Number(w["week"] ?? w["semana"] ?? index + 1) || index + 1,
+      title: toText(w["title"] ?? w["titulo"] ?? `Semana ${index + 1}`),
+      activities: Array.isArray(activities) ? activities.map(toText) : [],
+    };
+  });
+
+  const candidate = { summary, weekly_focus, milestones: milestonesRaw.map(toText) };
+  const result = planSchema.safeParse(candidate);
+  return result.success ? result.data : null;
 }
