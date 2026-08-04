@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ChecklistRouteImport } from './routes/checklist'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authenticated/assinatura'
 import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
@@ -57,6 +58,11 @@ const ChecklistRoute = ChecklistRouteImport.update({
   id: '/checklist',
   path: '/checklist',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAssinaturaRoute = AuthenticatedAssinaturaRouteImport.update({
   id: '/assinatura',
@@ -202,6 +208,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/painel': typeof AuthenticatedPainelRoute
@@ -232,6 +239,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/painel': typeof AuthenticatedPainelRoute
@@ -261,6 +269,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
@@ -293,6 +302,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/checklist'
+    | '/admin'
     | '/assinatura'
     | '/certificados'
     | '/painel'
@@ -323,6 +333,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/checklist'
+    | '/admin'
     | '/assinatura'
     | '/certificados'
     | '/painel'
@@ -351,6 +362,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/checklist'
+    | '/_authenticated/admin'
     | '/_authenticated/assinatura'
     | '/_authenticated/certificados'
     | '/_authenticated/painel'
@@ -419,6 +431,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/checklist'
       preLoaderRoute: typeof ChecklistRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/assinatura': {
       id: '/_authenticated/assinatura'
@@ -661,6 +680,7 @@ const AuthenticatedSpeak2travelRouteWithChildren =
   )
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
@@ -674,6 +694,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
