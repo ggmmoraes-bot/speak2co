@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireFeature } from "@/lib/entitlement-middleware";
 import { generateText, Output } from "ai";
 import { z } from "zod";
 import { getTravelTrack } from "./speak2travel-content";
@@ -22,7 +22,7 @@ const travelFeedbackSchema = z.object({
 export type TravelFeedback = z.infer<typeof travelFeedbackSchema>;
 
 export const evaluateTravelPractice = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_travel")])
   .inputValidator((input: unknown) =>
     z
       .object({
@@ -100,7 +100,7 @@ export type TravelCoachTurn = z.infer<typeof coachTurnSchema>;
 
 /** Conversa em tempo real com a IA dentro do role play do módulo. */
 export const chatTravelRolePlay = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_travel")])
   .inputValidator((input: unknown) =>
     z
       .object({
@@ -194,7 +194,7 @@ export type TravelDrills = z.infer<typeof drillsSchema>;
 
 /** Gera exercícios de vocabulário e gramática a partir das respostas do aluno no role play. */
 export const generateTravelDrills = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_travel")])
   .inputValidator((input: unknown) =>
     z
       .object({

@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireFeature } from "@/lib/entitlement-middleware";
 import { generateText, Output } from "ai";
 import { z } from "zod";
 
@@ -21,7 +21,7 @@ export type PronunciationDrills = z.infer<typeof drillsSchema>;
 
 /** Gera frases de treino de pronúncia focadas nos sons que o aluno mais erra no Pronunciation Lab. */
 export const generatePronunciationDrills = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("pronunciation_checker")])
   .inputValidator((input: unknown) =>
     z
       .object({

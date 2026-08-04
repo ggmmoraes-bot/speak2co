@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireFeature } from "@/lib/entitlement-middleware";
 import {
   normalizeTripPlan,
   rawTripPlanSchema,
@@ -10,7 +10,7 @@ import {
 export type { TripPlan };
 
 export const generateTripPlan = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("product_line_travel")])
   .inputValidator((input: unknown) => tripPlanInputSchema.parse(input))
   .handler(async ({ context, data }): Promise<TripPlan> => {
     const apiKey = process.env["LOVABLE_API_KEY"];
