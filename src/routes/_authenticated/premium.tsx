@@ -204,6 +204,64 @@ function PremiumPage() {
           );
         })}
       </section>
+
+      <section className="mt-14">
+        <h2 className="text-center text-2xl font-bold text-foreground">
+          Compare os planos
+        </h2>
+        <p className="mt-2 text-center text-sm text-muted-foreground">
+          Veja exatamente o que cada nível libera e por quanto tempo.
+        </p>
+        <div className="mt-8 overflow-x-auto rounded-2xl border border-border bg-card shadow-lg">
+          <table className="w-full min-w-[680px] text-left text-sm">
+            <thead>
+              <tr className="border-b border-border bg-accent/5">
+                <th className="px-6 py-4 font-semibold text-foreground">Recurso</th>
+                <th className="px-6 py-4 text-center font-semibold text-foreground">
+                  Essential
+                </th>
+                <th className="px-6 py-4 text-center font-semibold text-foreground">
+                  Premium
+                </th>
+                <th className="px-6 py-4 text-center font-semibold text-accent">
+                  Signature ⭐
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border">
+              {COMPARISON_ROWS.map((row) => (
+                <tr key={row.feature} className="hover:bg-accent/5">
+                  <td className="px-6 py-3 text-muted-foreground">{row.feature}</td>
+                  <td className="px-6 py-3 text-center">{cell(row.essential)}</td>
+                  <td className="px-6 py-3 text-center">{cell(row.premium)}</td>
+                  <td className="px-6 py-3 text-center">{cell(row.signature)}</td>
+                </tr>
+              ))}
+              <tr className="border-t-2 border-border bg-accent/5 font-semibold">
+                <td className="px-6 py-4 text-foreground">Duração do acesso</td>
+                <td className="px-6 py-4 text-center text-foreground">30 dias (mensal) / 12 meses (anual)</td>
+                <td className="px-6 py-4 text-center text-foreground">30 dias (mensal) / 12 meses (anual)</td>
+                <td className="px-6 py-4 text-center text-accent">30 dias (mensal) / 12 meses (anual)</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-4 text-muted-foreground">Preço mensal</td>
+                <td className="px-6 py-4 text-center text-foreground">R$ 19,90</td>
+                <td className="px-6 py-4 text-center text-foreground">R$ 49,90</td>
+                <td className="px-6 py-4 text-center text-accent">R$ 59,90</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-4 text-muted-foreground">Preço anual (2 meses grátis)</td>
+                <td className="px-6 py-4 text-center text-foreground">R$ 199,00</td>
+                <td className="px-6 py-4 text-center text-foreground">R$ 499,00</td>
+                <td className="px-6 py-4 text-center text-accent">R$ 599,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-4 text-center text-xs text-muted-foreground">
+          Os valores anuais equivalem a 10 meses de pagamento — 2 meses são cortesia.
+        </p>
+      </section>
     </main>
   );
 }
