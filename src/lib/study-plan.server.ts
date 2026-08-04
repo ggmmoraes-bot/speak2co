@@ -140,3 +140,50 @@ Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases, citand
 
   return output;
 }
+
+/** Aceita respostas do modelo com chaves traduzidas/variantes e devolve o plano no formato esperado. */
+function rescuePlan(error: unknown): StudyPlan | null {
+  const raw = (error as { text?: unknown } | null)?.text;
+  if (typeof raw !== "string") return null;
+  const match = raw.match(/\{[\s\S]*\}/);
+  if (!match) return null;
+
+  let parsed: Record<string, unknown>;
+  try {
+    parsed = JSON.parse(match[0]) as Record<string, unknown>;
+  } catch {
+    return null;
+  }
+
+  const pick = (...keys: string[]) => keys.map((k) => parsed[k]).find((v) => v !== undefined);
+  const toText = (value: unknown): string =>
+    typeof value === "string"
+      ? value
+      : value && typeof value === "object"
+        ? String(
+            (value as Record<string, unknown>)["descricao"] ??
+              (value as Record<string, unknown>)["description"] ??
+              (value as Record<string, unknown>)["marco"] ??
+              JSON.stringify(value),
+          )
+        : String(value ?? "");
+
+  const summary = toText(pick("summary", "resumo", "resumo_plano"));
+  const weeksRaw = pick("weekly_focus", "plano_de_estudos", "semanas", "foco_semanal");
+  const milestonesRaw = pick("milestones", "marcos", "marcos_de_evolucao");
+  if (!summary || !Array.isArray(weeksRaw) || !Array.isArray(milestonesRaw)) return null;
+
+  const weekly_focus = weeksRaw.map((item, index) => {
+    const w = (item ?? {}) as Record<string, unknown>;
+    const activities = (w["activities"] ?? w["atividades"] ?? []) as unknown;
+    return {
+      week: Number(w["week"] ?? w["semana"] ?? index + 1) || index + 1,
+      title: toText(w["title"] ?? w["titulo"] ?? `Semana ${index + 1}`),
+      activities: Array.isArray(activities) ? activities.map(toText) : [],
+    };
+  });
+
+  const candidate = { summary, weekly_focus, milestones: milestonesRaw.map(toText) };
+  const result = planSchema.safeParse(candidate);
+  return result.success ? result.data : null;
+}
