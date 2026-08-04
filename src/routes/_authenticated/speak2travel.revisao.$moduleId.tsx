@@ -1,8 +1,23 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { ArrowLeft, Check, RefreshCw, RotateCcw, Sparkles, X } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  MessageSquare,
+  Mic,
+  RefreshCw,
+  RotateCcw,
+  Sparkles,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getTravelTrack, type TravelTrack } from "@/lib/speak2travel-content";
+import {
+  getModuleContent,
+  type ModuleFlashcard,
+  type ModuleQuizQuestion,
+  type TravelModuleContent,
+} from "@/lib/speak2travel-modules";
 
 export const Route = createFileRoute("/_authenticated/speak2travel/revisao/$moduleId")({
   loader: ({ params }) => {
@@ -21,7 +36,7 @@ export const Route = createFileRoute("/_authenticated/speak2travel/revisao/$modu
     }
     const { track } = loaderData;
     const title = `Revisão: ${track.title} — Speak2Travel`;
-    const description = `Cartões de vocabulário e exercícios de revisão do módulo ${track.module} (${track.title}) do Speak2Travel.`;
+    const description = `Flashcards, diálogo-modelo, dicas de pronúncia e quiz de vocabulário do módulo ${track.module} (${track.title}) do Speak2Travel.`;
     return {
       meta: [
         { title },
@@ -41,10 +56,32 @@ function ReviewPage() {
   return <Review key={track.id} track={track} />;
 }
 
-type Mode = "cards" | "quiz";
+type Mode = "cards" | "dialogo" | "quiz";
+
+function buildDeck(track: TravelTrack, content?: TravelModuleContent): ModuleFlashcard[] {
+  const fromDoc = content?.flashcards ?? [];
+  const fromVocab = (content?.vocabulary ?? []).map((v) => ({ front: v.en, back: v.pt }));
+  const fallback = track.vocabulary.map((v) => ({ front: v.term, back: v.meaning }));
+  const all = [...fromDoc, ...fromVocab, ...fallback];
+  const seen = new Set<string>();
+  return all.filter((c) => {
+    const key = c.front.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
 
 function Review({ track }: { track: TravelTrack }) {
   const [mode, setMode] = useState<Mode>("cards");
+  const content = getModuleContent(track.id);
+  const deck = useMemo(() => buildDeck(track, content), [track, content]);
+
+  const tabs: { id: Mode; label: string }[] = [
+    { id: "cards", label: "Cartões" },
+    { id: "dialogo", label: "Diálogo & pronúncia" },
+    { id: "quiz", label: "Exercícios" },
+  ];
 
   return (
     <main className="min-h-screen bg-background">
@@ -58,55 +95,59 @@ function Review({ track }: { track: TravelTrack }) {
         <header>
           <p className="text-xs tracking-widest text-muted-foreground uppercase">
             Revisão · Módulo {track.module}
+            {content ? ` · ${content.label}` : ""}
           </p>
           <h1 className="mt-1 text-3xl font-semibold text-gold">{track.title}</h1>
           <p className="text-sm text-muted-foreground">
-            {track.vocabulary.length} palavras · {track.phrases.length} frases-modelo
+            {deck.length} cartões · {content?.quiz.length ?? 0} questões ·{" "}
+            {content?.dialogue.length ?? 0} falas do diálogo-modelo
           </p>
         </header>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Button
-            variant={mode === "cards" ? "default" : "outline"}
-            className={
-              mode === "cards"
-                ? "rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
-                : "rounded-full"
-            }
-            onClick={() => setMode("cards")}
-          >
-            Cartões
-          </Button>
-          <Button
-            variant={mode === "quiz" ? "default" : "outline"}
-            className={
-              mode === "quiz"
-                ? "rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
-                : "rounded-full"
-            }
-            onClick={() => setMode("quiz")}
-          >
-            Exercícios
-          </Button>
+          {tabs.map((tab) => (
+            <Button
+              key={tab.id}
+              variant={mode === tab.id ? "default" : "outline"}
+              className={
+                mode === tab.id
+                  ? "rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+                  : "rounded-full"
+              }
+              onClick={() => setMode(tab.id)}
+            >
+              {tab.label}
+            </Button>
+          ))}
         </div>
 
-        {mode === "cards" ? <Flashcards track={track} /> : <VocabularyQuiz track={track} />}
+        {mode === "cards" && <Flashcards deck={deck} track={track} content={content} />}
+        {mode === "dialogo" && <DialogueSection track={track} content={content} />}
+        {mode === "quiz" && <VocabularyQuiz track={track} content={content} />}
       </div>
     </main>
   );
 }
 
-function Flashcards({ track }: { track: TravelTrack }) {
+function Flashcards({
+  deck,
+  track,
+  content,
+}: {
+  deck: ModuleFlashcard[];
+  track: TravelTrack;
+  content?: TravelModuleContent;
+}) {
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [known, setKnown] = useState<string[]>([]);
 
-  const card = track.vocabulary[index]!;
-  const isLast = index === track.vocabulary.length - 1;
+  const card = deck[index]!;
+  const isLast = index === deck.length - 1;
 
   function next(markKnown: boolean) {
     setKnown((prev) =>
-      markKnown && !prev.includes(card.term) ? [...prev, card.term] : prev,
+      markKnown && !prev.includes(card.front) ? [...prev, card.front] : prev,
     );
     setRevealed(false);
     setIndex((i) => (isLast ? i : i + 1));
@@ -115,7 +156,7 @@ function Flashcards({ track }: { track: TravelTrack }) {
   return (
     <section className="mt-8 space-y-6">
       <p className="text-xs tracking-widest text-muted-foreground uppercase">
-        Cartão {index + 1} de {track.vocabulary.length} · {known.length} marcados como sabidos
+        Cartão {index + 1} de {deck.length} · {known.length} marcados como sabidos
       </p>
 
       <button
@@ -123,12 +164,12 @@ function Flashcards({ track }: { track: TravelTrack }) {
         onClick={() => setRevealed((r) => !r)}
         className="flex min-h-48 w-full flex-col items-center justify-center rounded-2xl border border-gold/40 bg-card/60 p-8 text-center backdrop-blur transition hover:border-gold"
       >
-        <p className="text-2xl font-semibold text-gold">{card.term}</p>
+        <p className="text-2xl font-semibold text-gold">{card.front}</p>
         {revealed ? (
-          <p className="mt-4 text-base text-foreground/80">{card.meaning}</p>
+          <p className="mt-4 text-base text-foreground/80">{card.back}</p>
         ) : (
           <p className="mt-4 text-xs tracking-widest text-muted-foreground uppercase">
-            Toque para ver a tradução
+            Toque para ver o significado
           </p>
         )}
       </button>
@@ -170,47 +211,142 @@ function Flashcards({ track }: { track: TravelTrack }) {
 
       <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
         <h2 className="text-xs tracking-widest text-muted-foreground uppercase">
-          Frases-modelo para repetir em voz alta
+          Expressões-chave para repetir em voz alta
         </h2>
-        <ul className="mt-3 space-y-2">
-          {track.phrases.map((phrase) => (
-            <li key={phrase} className="text-sm text-foreground/80">
-              “{phrase}”
+        <ul className="mt-3 space-y-3">
+          {(content?.expressions ?? []).map((e) => (
+            <li key={e.en} className="text-sm text-foreground/80">
+              <span className="text-foreground">“{e.en}”</span>
+              <span className="block text-muted-foreground">{e.pt}</span>
             </li>
           ))}
+          {!content &&
+            track.phrases.map((phrase) => (
+              <li key={phrase} className="text-sm text-foreground/80">
+                “{phrase}”
+              </li>
+            ))}
         </ul>
       </div>
     </section>
   );
 }
 
-type QuizQuestion = {
-  term: string;
+function DialogueSection({
+  track,
+  content,
+}: {
+  track: TravelTrack;
+  content?: TravelModuleContent;
+}) {
+  if (!content) {
+    return (
+      <section className="mt-8 rounded-2xl border border-border bg-card/60 p-6 text-sm text-foreground/80 backdrop-blur">
+        Este módulo ainda não tem diálogo-modelo. Use as frases-modelo do módulo{" "}
+        {track.title} para praticar em voz alta.
+      </section>
+    );
+  }
+
+  return (
+    <section className="mt-8 space-y-6">
+      <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
+        <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
+          <MessageSquare className="h-5 w-5" /> Diálogo-modelo
+        </h2>
+        <ul className="mt-4 space-y-3">
+          {content.dialogue.map((line, i) => (
+            <li key={`${line.who}-${i}`} className="text-sm">
+              <span className="font-semibold text-gold">{line.who}: </span>
+              <span className="text-foreground/80">{line.line}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
+        <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
+          <Mic className="h-5 w-5" /> Dicas de pronúncia
+        </h2>
+        <ul className="mt-4 space-y-2">
+          {content.pronunciation.map((tip) => (
+            <li key={tip} className="text-sm text-foreground/80">
+              {tip}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur">
+        <h2 className="text-xs tracking-widest text-muted-foreground uppercase">
+          Role play com IA
+        </h2>
+        <p className="mt-3 text-sm text-foreground/80">{content.rolePlay}</p>
+        <Button
+          asChild
+          className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+        >
+          <Link to="/speak2travel/modulo/$moduleId" params={{ moduleId: track.id }}>
+            <Sparkles className="mr-1 h-4 w-4" /> Começar o role play
+          </Link>
+        </Button>
+      </div>
+    </section>
+  );
+}
+
+type QuizItem = {
+  key: string;
+  question: string;
   answer: string;
   options: string[];
 };
 
-function buildQuiz(track: TravelTrack): QuizQuestion[] {
-  const vocab = track.vocabulary;
-  const shuffled = [...vocab].sort(() => Math.random() - 0.5);
-  return shuffled.map((item) => {
-    const distractors = vocab
-      .filter((v) => v.term !== item.term)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3)
-      .map((v) => v.meaning);
-    const options = [item.meaning, ...distractors].sort(() => Math.random() - 0.5);
-    return { term: item.term, answer: item.meaning, options };
-  });
+function buildQuiz(track: TravelTrack, content?: TravelModuleContent): QuizItem[] {
+  const docQuiz: QuizItem[] = (content?.quiz ?? []).map((q: ModuleQuizQuestion, i) => ({
+    key: `doc-${i}`,
+    question: q.question,
+    answer: q.answer,
+    options: [...q.options].sort(() => Math.random() - 0.5),
+  }));
+
+  const vocab = content
+    ? content.vocabulary.map((v) => ({ term: v.en, meaning: v.pt }))
+    : track.vocabulary.map((v) => ({ term: v.term, meaning: v.meaning }));
+
+  const vocabQuiz: QuizItem[] = [...vocab]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 5)
+    .map((item) => {
+      const distractors = vocab
+        .filter((v) => v.term !== item.term)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 3)
+        .map((v) => v.meaning);
+      return {
+        key: `vocab-${item.term}`,
+        question: `O que significa “${item.term}”?`,
+        answer: item.meaning,
+        options: [item.meaning, ...distractors].sort(() => Math.random() - 0.5),
+      };
+    });
+
+  return [...docQuiz, ...vocabQuiz];
 }
 
-function VocabularyQuiz({ track }: { track: TravelTrack }) {
+function VocabularyQuiz({
+  track,
+  content,
+}: {
+  track: TravelTrack;
+  content?: TravelModuleContent;
+}) {
   const [round, setRound] = useState(0);
-  const questions = useMemo(() => buildQuiz(track), [track, round]);
+  const questions = useMemo(() => buildQuiz(track, content), [track, content, round]);
   const [answers, setAnswers] = useState<Record<string, string>>({});
 
   const answeredCount = Object.keys(answers).length;
-  const correct = questions.filter((q) => answers[q.term] === q.answer).length;
+  const correct = questions.filter((q) => answers[q.key] === q.answer).length;
   const done = answeredCount === questions.length;
 
   return (
@@ -220,16 +356,16 @@ function VocabularyQuiz({ track }: { track: TravelTrack }) {
       </p>
 
       {questions.map((q, i) => {
-        const chosen = answers[q.term];
+        const chosen = answers[q.key];
         return (
           <div
-            key={q.term}
+            key={q.key}
             className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur"
           >
             <p className="text-xs tracking-widest text-muted-foreground uppercase">
               Questão {i + 1}
             </p>
-            <p className="mt-2 text-lg font-semibold text-gold">{q.term}</p>
+            <p className="mt-2 text-lg font-semibold text-gold">{q.question}</p>
             <div className="mt-4 grid gap-2">
               {q.options.map((option) => {
                 const isChosen = chosen === option;
@@ -246,7 +382,7 @@ function VocabularyQuiz({ track }: { track: TravelTrack }) {
                     key={option}
                     type="button"
                     disabled={Boolean(chosen)}
-                    onClick={() => setAnswers((prev) => ({ ...prev, [q.term]: option }))}
+                    onClick={() => setAnswers((prev) => ({ ...prev, [q.key]: option }))}
                     className={`flex items-center justify-between gap-3 rounded-xl border ${state} px-4 py-3 text-left text-sm transition hover:border-gold/60 disabled:cursor-default`}
                   >
                     <span>{option}</span>
