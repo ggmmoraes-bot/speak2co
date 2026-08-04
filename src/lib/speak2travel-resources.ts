@@ -268,7 +268,7 @@ export const TRAVEL_RESOURCE_CONTENT: TravelResourceContent[] = [
         intro: "Grave cada par: a IA mostra se o ouvinte entendeu a palavra certa.",
         items: [
           { en: "I want to leave now, not live here.", pt: "Quero ir embora agora, não morar aqui.", note: "leave (longo) × live (curto)." },
-          { en: "The beach is near the bitch of a hill — say beach clearly.", pt: "Cuidado: beach × outro som. Pronuncie o 'ee' longo.", note: "Alongue o 'ee' de beach." },
+          { en: "The beach is only ten minutes from here.", pt: "A praia fica a só dez minutos daqui.", note: "Alongue o 'ee' de beach — o 'i' curto muda a palavra." },
           { en: "Please sit on this seat.", pt: "Por favor, sente neste assento.", note: "sit (curto) × seat (longo)." },
           { en: "Can I have a full refund?", pt: "Posso ter o reembolso total?", note: "full (curto) × fool." },
           { en: "The ship left the port at six.", pt: "O navio saiu do porto às seis.", note: "ship × sheep." },
