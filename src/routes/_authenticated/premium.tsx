@@ -67,6 +67,32 @@ const TIERS = [
   },
 ];
 
+type CellValue = boolean | string;
+
+const COMPARISON_ROWS: { feature: string; essential: CellValue; premium: CellValue; signature: CellValue }[] = [
+  { feature: "Aulas guiadas", essential: true, premium: true, signature: true },
+  { feature: "Exercícios diários", essential: true, premium: true, signature: true },
+  { feature: "Quizzes de vocabulário e gramática", essential: true, premium: true, signature: true },
+  { feature: "Plano de estudos personalizado", essential: true, premium: true, signature: true },
+  { feature: "Teste de nivelamento (CEFR)", essential: true, premium: true, signature: true },
+  { feature: "Trilhas completas — Speak2Hire", essential: false, premium: true, signature: true },
+  { feature: "Trilhas completas — Speak2Travel (10 módulos)", essential: false, premium: true, signature: true },
+  { feature: "Simulador de entrevista com IA", essential: false, premium: true, signature: true },
+  { feature: "Role play de viagem com IA", essential: false, premium: true, signature: true },
+  { feature: "Certificados de evolução", essential: false, premium: true, signature: true },
+  { feature: "Ranking de fluência", essential: false, premium: true, signature: true },
+  { feature: "Professor IA (chat)", essential: "Limitado", premium: true, signature: true },
+  { feature: "GiseleAI ilimitada", essential: false, premium: false, signature: true },
+  { feature: "Feedback personalizado", essential: false, premium: false, signature: true },
+  { feature: "Conversação 24/7", essential: false, premium: false, signature: true },
+];
+
+function cell(value: CellValue) {
+  if (value === true) return <span className="font-bold text-accent">✓</span>;
+  if (value === false) return <span className="text-muted-foreground/40">—</span>;
+  return <span className="text-foreground">{value}</span>;
+}
+
 function PremiumPage() {
   const queryClient = useQueryClient();
   const fetchSubscription = useServerFn(getMySubscription);
