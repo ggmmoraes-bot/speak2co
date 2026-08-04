@@ -20,6 +20,7 @@ import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedPremiumRouteImport } from './routes/_authenticated/premium'
 import { Route as AuthenticatedProfessorRouteImport } from './routes/_authenticated/professor'
 import { Route as AuthenticatedRankingRouteImport } from './routes/_authenticated/ranking'
+import { Route as AuthenticatedSpeak2travelRouteImport } from './routes/_authenticated/speak2travel'
 import { Route as AuthenticatedTesteDeNivelRouteImport } from './routes/_authenticated/teste-de-nivel'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
@@ -92,6 +93,12 @@ const AuthenticatedRankingRoute = AuthenticatedRankingRouteImport.update({
   path: '/ranking',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSpeak2travelRoute =
+  AuthenticatedSpeak2travelRouteImport.update({
+    id: '/speak2travel',
+    path: '/speak2travel',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedTesteDeNivelRoute =
   AuthenticatedTesteDeNivelRouteImport.update({
     id: '/teste-de-nivel',
@@ -123,15 +130,15 @@ const AuthenticatedSpeak2hireIndexRoute =
   } as any)
 const AuthenticatedSpeak2travelIndexRoute =
   AuthenticatedSpeak2travelIndexRouteImport.update({
-    id: '/speak2travel/',
-    path: '/speak2travel/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedSpeak2travelRoute,
   } as any)
 const AuthenticatedSpeak2travelTripPlannerRoute =
   AuthenticatedSpeak2travelTripPlannerRouteImport.update({
-    id: '/speak2travel/trip-planner',
-    path: '/speak2travel/trip-planner',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/trip-planner',
+    path: '/trip-planner',
+    getParentRoute: () => AuthenticatedSpeak2travelRoute,
   } as any)
 const ApiVoicePronunciationRoute = ApiVoicePronunciationRouteImport.update({
   id: '/api/voice/pronunciation',
@@ -162,21 +169,21 @@ const AuthenticatedSpeak2hireSessaoSessionIdRoute =
   } as any)
 const AuthenticatedSpeak2travelMaterialResourceIdRoute =
   AuthenticatedSpeak2travelMaterialResourceIdRouteImport.update({
-    id: '/speak2travel/material/$resourceId',
-    path: '/speak2travel/material/$resourceId',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/material/$resourceId',
+    path: '/material/$resourceId',
+    getParentRoute: () => AuthenticatedSpeak2travelRoute,
   } as any)
 const AuthenticatedSpeak2travelModuloModuleIdRoute =
   AuthenticatedSpeak2travelModuloModuleIdRouteImport.update({
-    id: '/speak2travel/modulo/$moduleId',
-    path: '/speak2travel/modulo/$moduleId',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/modulo/$moduleId',
+    path: '/modulo/$moduleId',
+    getParentRoute: () => AuthenticatedSpeak2travelRoute,
   } as any)
 const AuthenticatedSpeak2travelRevisaoModuleIdRoute =
   AuthenticatedSpeak2travelRevisaoModuleIdRouteImport.update({
-    id: '/speak2travel/revisao/$moduleId',
-    path: '/speak2travel/revisao/$moduleId',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/revisao/$moduleId',
+    path: '/revisao/$moduleId',
+    getParentRoute: () => AuthenticatedSpeak2travelRoute,
   } as any)
 const ApiPublicWebhooksMercadopagoRoute =
   ApiPublicWebhooksMercadopagoRouteImport.update({
@@ -196,6 +203,7 @@ export interface FileRoutesByFullPath {
   '/premium': typeof AuthenticatedPremiumRoute
   '/professor': typeof AuthenticatedProfessorRouteWithChildren
   '/ranking': typeof AuthenticatedRankingRoute
+  '/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
@@ -253,6 +261,7 @@ export interface FileRoutesById {
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
   '/_authenticated/professor': typeof AuthenticatedProfessorRouteWithChildren
   '/_authenticated/ranking': typeof AuthenticatedRankingRoute
+  '/_authenticated/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/_authenticated/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
@@ -283,6 +292,7 @@ export interface FileRouteTypes {
     | '/premium'
     | '/professor'
     | '/ranking'
+    | '/speak2travel'
     | '/teste-de-nivel'
     | '/api/chat'
     | '/professor/$threadId'
@@ -339,6 +349,7 @@ export interface FileRouteTypes {
     | '/_authenticated/premium'
     | '/_authenticated/professor'
     | '/_authenticated/ranking'
+    | '/_authenticated/speak2travel'
     | '/_authenticated/teste-de-nivel'
     | '/api/chat'
     | '/_authenticated/professor/$threadId'
@@ -448,6 +459,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRankingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/speak2travel': {
+      id: '/_authenticated/speak2travel'
+      path: '/speak2travel'
+      fullPath: '/speak2travel'
+      preLoaderRoute: typeof AuthenticatedSpeak2travelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/teste-de-nivel': {
       id: '/_authenticated/teste-de-nivel'
       path: '/teste-de-nivel'
@@ -485,17 +503,17 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/speak2travel/': {
       id: '/_authenticated/speak2travel/'
-      path: '/speak2travel'
+      path: '/'
       fullPath: '/speak2travel/'
       preLoaderRoute: typeof AuthenticatedSpeak2travelIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2travelRoute
     }
     '/_authenticated/speak2travel/trip-planner': {
       id: '/_authenticated/speak2travel/trip-planner'
-      path: '/speak2travel/trip-planner'
+      path: '/trip-planner'
       fullPath: '/speak2travel/trip-planner'
       preLoaderRoute: typeof AuthenticatedSpeak2travelTripPlannerRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2travelRoute
     }
     '/api/voice/pronunciation': {
       id: '/api/voice/pronunciation'
@@ -534,24 +552,24 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/speak2travel/material/$resourceId': {
       id: '/_authenticated/speak2travel/material/$resourceId'
-      path: '/speak2travel/material/$resourceId'
+      path: '/material/$resourceId'
       fullPath: '/speak2travel/material/$resourceId'
       preLoaderRoute: typeof AuthenticatedSpeak2travelMaterialResourceIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2travelRoute
     }
     '/_authenticated/speak2travel/modulo/$moduleId': {
       id: '/_authenticated/speak2travel/modulo/$moduleId'
-      path: '/speak2travel/modulo/$moduleId'
+      path: '/modulo/$moduleId'
       fullPath: '/speak2travel/modulo/$moduleId'
       preLoaderRoute: typeof AuthenticatedSpeak2travelModuloModuleIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2travelRoute
     }
     '/_authenticated/speak2travel/revisao/$moduleId': {
       id: '/_authenticated/speak2travel/revisao/$moduleId'
-      path: '/speak2travel/revisao/$moduleId'
+      path: '/revisao/$moduleId'
       fullPath: '/speak2travel/revisao/$moduleId'
       preLoaderRoute: typeof AuthenticatedSpeak2travelRevisaoModuleIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2travelRoute
     }
     '/api/public/webhooks/mercadopago': {
       id: '/api/public/webhooks/mercadopago'
@@ -579,6 +597,32 @@ const AuthenticatedProfessorRouteWithChildren =
     AuthenticatedProfessorRouteChildren,
   )
 
+interface AuthenticatedSpeak2travelRouteChildren {
+  AuthenticatedSpeak2travelTripPlannerRoute: typeof AuthenticatedSpeak2travelTripPlannerRoute
+  AuthenticatedSpeak2travelIndexRoute: typeof AuthenticatedSpeak2travelIndexRoute
+  AuthenticatedSpeak2travelMaterialResourceIdRoute: typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
+  AuthenticatedSpeak2travelModuloModuleIdRoute: typeof AuthenticatedSpeak2travelModuloModuleIdRoute
+  AuthenticatedSpeak2travelRevisaoModuleIdRoute: typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
+}
+
+const AuthenticatedSpeak2travelRouteChildren: AuthenticatedSpeak2travelRouteChildren =
+  {
+    AuthenticatedSpeak2travelTripPlannerRoute:
+      AuthenticatedSpeak2travelTripPlannerRoute,
+    AuthenticatedSpeak2travelIndexRoute: AuthenticatedSpeak2travelIndexRoute,
+    AuthenticatedSpeak2travelMaterialResourceIdRoute:
+      AuthenticatedSpeak2travelMaterialResourceIdRoute,
+    AuthenticatedSpeak2travelModuloModuleIdRoute:
+      AuthenticatedSpeak2travelModuloModuleIdRoute,
+    AuthenticatedSpeak2travelRevisaoModuleIdRoute:
+      AuthenticatedSpeak2travelRevisaoModuleIdRoute,
+  }
+
+const AuthenticatedSpeak2travelRouteWithChildren =
+  AuthenticatedSpeak2travelRoute._addFileChildren(
+    AuthenticatedSpeak2travelRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
@@ -587,15 +631,11 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
   AuthenticatedProfessorRoute: typeof AuthenticatedProfessorRouteWithChildren
   AuthenticatedRankingRoute: typeof AuthenticatedRankingRoute
+  AuthenticatedSpeak2travelRoute: typeof AuthenticatedSpeak2travelRouteWithChildren
   AuthenticatedTesteDeNivelRoute: typeof AuthenticatedTesteDeNivelRoute
-  AuthenticatedSpeak2travelTripPlannerRoute: typeof AuthenticatedSpeak2travelTripPlannerRoute
   AuthenticatedSpeak2hireIndexRoute: typeof AuthenticatedSpeak2hireIndexRoute
-  AuthenticatedSpeak2travelIndexRoute: typeof AuthenticatedSpeak2travelIndexRoute
   AuthenticatedSpeak2hireMaterialMaterialIdRoute: typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   AuthenticatedSpeak2hireSessaoSessionIdRoute: typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
-  AuthenticatedSpeak2travelMaterialResourceIdRoute: typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
-  AuthenticatedSpeak2travelModuloModuleIdRoute: typeof AuthenticatedSpeak2travelModuloModuleIdRoute
-  AuthenticatedSpeak2travelRevisaoModuleIdRoute: typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -606,21 +646,13 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
   AuthenticatedProfessorRoute: AuthenticatedProfessorRouteWithChildren,
   AuthenticatedRankingRoute: AuthenticatedRankingRoute,
+  AuthenticatedSpeak2travelRoute: AuthenticatedSpeak2travelRouteWithChildren,
   AuthenticatedTesteDeNivelRoute: AuthenticatedTesteDeNivelRoute,
-  AuthenticatedSpeak2travelTripPlannerRoute:
-    AuthenticatedSpeak2travelTripPlannerRoute,
   AuthenticatedSpeak2hireIndexRoute: AuthenticatedSpeak2hireIndexRoute,
-  AuthenticatedSpeak2travelIndexRoute: AuthenticatedSpeak2travelIndexRoute,
   AuthenticatedSpeak2hireMaterialMaterialIdRoute:
     AuthenticatedSpeak2hireMaterialMaterialIdRoute,
   AuthenticatedSpeak2hireSessaoSessionIdRoute:
     AuthenticatedSpeak2hireSessaoSessionIdRoute,
-  AuthenticatedSpeak2travelMaterialResourceIdRoute:
-    AuthenticatedSpeak2travelMaterialResourceIdRoute,
-  AuthenticatedSpeak2travelModuloModuleIdRoute:
-    AuthenticatedSpeak2travelModuloModuleIdRoute,
-  AuthenticatedSpeak2travelRevisaoModuleIdRoute:
-    AuthenticatedSpeak2travelRevisaoModuleIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
