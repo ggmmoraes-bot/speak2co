@@ -183,6 +183,17 @@ function ChatWindow({
     }
   }
 
+  // Envia automaticamente a prática da semana vinda do plano de estudos (?prompt=).
+  const autoSentRef = useRef(false);
+  useEffect(() => {
+    if (autoSentRef.current) return;
+    if (!autoPrompt || initialMessages.length > 0 || isBusy) return;
+    autoSentRef.current = true;
+    void handleSubmit({ text: autoPrompt });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoPrompt]);
+
+
   // Leitura automática da última resposta do professor.
   useEffect(() => {
     if (!autoSpeak || status !== "ready") return;
