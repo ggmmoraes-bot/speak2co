@@ -781,7 +781,7 @@ export const TRAVEL_RESOURCES: TravelResource[] = [
   },
   {
     id: "mini-dictionary",
-    title: "Mini Dicionário",
+    title: "Pocket Dictionary",
     subtitle: "Organizado por tema",
     description: "Consulta rápida durante a viagem, agrupada pelos temas dos 10 módulos.",
     items: ["Hotel", "Aeroporto", "Compras", "Saúde", "Emergências", "Restaurantes"],
