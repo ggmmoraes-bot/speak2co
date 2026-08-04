@@ -4,6 +4,7 @@ import { ArrowLeft, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PhrasePractice } from "@/components/PhrasePractice";
 import { PronunciationLabSummary } from "@/components/PronunciationLabSummary";
+import { PronunciationTraining } from "@/components/PronunciationTraining";
 import type { PronunciationAttempt } from "@/lib/pronunciation-grade";
 import {
   getTravelResource,
@@ -67,7 +68,12 @@ function MaterialPage() {
           <p className="mt-4 max-w-2xl text-sm text-foreground/80">{resource.description}</p>
         </header>
 
-        {isLab && <PronunciationLabSummary attempts={attempts} />}
+        {isLab && (
+          <>
+            <PronunciationLabSummary attempts={attempts} />
+            <PronunciationTraining attempts={attempts} />
+          </>
+        )}
 
         <section className="mt-6 rounded-2xl border border-border bg-card/60 p-5 backdrop-blur">
           <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
