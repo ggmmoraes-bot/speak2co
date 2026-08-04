@@ -64,6 +64,25 @@ const features = [
 function Index() {
   return (
     <main className="surface-navy min-h-screen">
+      <header className="sticky top-0 z-30 border-b border-border/60 bg-background/70 backdrop-blur">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+          <Link to="/" className="flex items-center gap-2 text-lg font-semibold tracking-tight">
+            <span className="text-foreground">Speak</span><span className="text-gold">2Co</span>
+          </Link>
+          <nav className="flex items-center gap-6 text-sm">
+            <a
+              href="#product-lines"
+              className="text-muted-foreground transition-colors hover:text-gold"
+            >
+              Product Lines
+            </a>
+            <Button asChild size="sm" className="bg-gold text-primary-foreground rounded-full font-semibold hover:opacity-90">
+              <Link to="/auth">Começar</Link>
+            </Button>
+          </nav>
+        </div>
+      </header>
+
       <section className="mx-auto flex max-w-5xl flex-col items-center px-6 pt-16 pb-20 text-center sm:pt-24">
         <img
           src={logo.url}
@@ -112,7 +131,7 @@ function Index() {
         ))}
       </section>
 
-      <section className="mx-auto max-w-5xl px-6 pb-24">
+      <section id="product-lines" className="mx-auto max-w-5xl px-6 pb-24 scroll-mt-24">
         <h2 className="text-center text-2xl font-semibold sm:text-3xl">
           Product <span className="text-gold">Lines</span>
         </h2>
