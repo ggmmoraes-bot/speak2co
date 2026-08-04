@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { Briefcase, Plane } from "lucide-react";
+import { Briefcase, Plane, Lock, ShieldCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { PlanVersionsSection } from "@/components/PlanVersionsSection";
 import { getStudyPlan, generateStudyPlan, previewStudyPlanRefinement, applyStudyPlanRefinement, setWeekLock } from "@/lib/study-plan.functions";
@@ -12,6 +12,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import logo from "@/assets/speak2co-logo.asset.json";
 import { DailyExercisesSection } from "@/components/DailyExercisesSection";
 import { ExerciseHistorySection } from "@/components/ExerciseHistorySection";
+import { useAccess, hasFeature, aiMinutesLeft } from "@/lib/entitlements";
 
 type WeeklyFocus = { week: number; title: string; activities: string[] };
 
@@ -45,6 +46,7 @@ function Painel() {
   const queryClient = useQueryClient();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [email, setEmail] = useState<string>("");
+  const { data: access } = useAccess();
 
   useEffect(() => {
     let active = true;
@@ -94,8 +96,13 @@ function Painel() {
           <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
             <p className="text-xs tracking-widest text-muted-foreground uppercase">Seu plano</p>
             <p className="mt-2 text-xl font-semibold text-gold">
-              {profile?.plan === "premium" ? "Premium" : "Gratuito"}
+              {access?.plan?.name ?? "Gratuito"}
             </p>
+            {access?.aiDailyMinutes != null && (
+              <p className="mt-1 text-xs text-muted-foreground">
+                Professor IA: {aiMinutesLeft(access)} de {access.aiDailyMinutes} min hoje
+              </p>
+            )}
           </div>
           <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
             <p className="text-xs tracking-widest text-muted-foreground uppercase">Nível de inglês</p>
@@ -139,7 +146,11 @@ function Painel() {
                 <span className="inline-flex">
                   <Button asChild variant="outline" className="rounded-full font-semibold">
                     <Link to="/speak2hire">
-                      <Briefcase className="mr-2 h-4 w-4 text-gold" />
+                      {hasFeature(access, "product_line_hire") ? (
+                        <Briefcase className="mr-2 h-4 w-4 text-gold" />
+                      ) : (
+                        <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
+                      )}
                       Começar Speak2Hire
                     </Link>
                   </Button>
@@ -154,7 +165,11 @@ function Painel() {
                 <span className="inline-flex">
                   <Button asChild variant="outline" className="rounded-full font-semibold">
                     <Link to="/speak2travel">
-                      <Plane className="mr-2 h-4 w-4 text-gold" />
+                      {hasFeature(access, "product_line_travel") ? (
+                        <Plane className="mr-2 h-4 w-4 text-gold" />
+                      ) : (
+                        <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
+                      )}
                       Começar Speak2Travel
                     </Link>
                   </Button>
@@ -175,6 +190,14 @@ function Painel() {
           <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/assinatura" search={{}}>Minha assinatura</Link>
           </Button>
+          {access?.isAdmin && (
+            <Button asChild variant="outline" className="rounded-full font-semibold">
+              <Link to="/admin">
+                <ShieldCheck className="mr-2 h-4 w-4 text-gold" />
+                Administração
+              </Link>
+            </Button>
+          )}
         </div>
 
         <StudyPlanSection profileReady={Boolean(profile?.goal && profile?.target_level)} />

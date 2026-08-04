@@ -115,8 +115,31 @@ export const Route = createFileRoute("/api/public/webhooks/mercadopago")({
         });
 
         if (userId) {
-          const plan = preapproval.status === "authorized" ? "premium" : "free";
-          await supabaseAdmin.from("profiles").update({ plan }).eq("id", userId);
+          // Descobre o tier a partir do plano escolhido no checkout (tabela `plans`).
+          const { data: subRow } = await supabaseAdmin
+            .from("subscriptions")
+            .select("plan_key")
+            .eq("preapproval_id", preapproval.id)
+            .maybeSingle();
+          const checkoutKey = subRow?.plan_key ?? null;
+          let tier = "premium";
+          if (checkoutKey) {
+            const { data: planRow } = await supabaseAdmin
+              .from("plans")
+              .select("key")
+              .or(
+                `monthly_checkout_key.eq.${checkoutKey},yearly_checkout_key.eq.${checkoutKey}`,
+              )
+              .maybeSingle();
+            if (planRow?.key) tier = planRow.key;
+          }
+          const plan = preapproval.status === "authorized" ? tier : "free";
+          const { error: planError } = await supabaseAdmin
+            .from("profiles")
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            .update({ plan: plan as any })
+            .eq("id", userId);
+          if (planError) console.error(`Falha ao atualizar plano do aluno: ${planError.message}`);
           await logSubscriptionEvent({
             user_id: userId,
             subscription_id: existing?.id ?? null,
@@ -124,9 +147,9 @@ export const Route = createFileRoute("/api/public/webhooks/mercadopago")({
             event_type: "plan_updated",
             status: preapproval.status ?? null,
             message:
-              plan === "premium"
-                ? "Plano Premium liberado para o aluno."
-                : "Plano do aluno voltou para Gratuito.",
+              plan === "free"
+                ? "Plano do aluno voltou para Gratuito."
+                : `Plano ${plan} liberado para o aluno.`,
             raw: { plan },
           });
         }

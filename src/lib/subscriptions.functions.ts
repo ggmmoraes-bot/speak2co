@@ -62,6 +62,7 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
         user_id: context.userId,
         provider: "mercadopago",
         preapproval_id: preapproval.id,
+        plan_key: data.planKey,
         external_reference: externalReference,
         status: preapproval.status ?? "pending",
         plan_label: plan.label,

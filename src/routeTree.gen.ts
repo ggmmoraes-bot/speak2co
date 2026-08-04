@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ChecklistRouteImport } from './routes/checklist'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authenticated/assinatura'
 import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
@@ -20,6 +21,8 @@ import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedPremiumRouteImport } from './routes/_authenticated/premium'
 import { Route as AuthenticatedProfessorRouteImport } from './routes/_authenticated/professor'
 import { Route as AuthenticatedRankingRouteImport } from './routes/_authenticated/ranking'
+import { Route as AuthenticatedSpeak2hireRouteImport } from './routes/_authenticated/speak2hire'
+import { Route as AuthenticatedSpeak2travelRouteImport } from './routes/_authenticated/speak2travel'
 import { Route as AuthenticatedTesteDeNivelRouteImport } from './routes/_authenticated/teste-de-nivel'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
@@ -55,6 +58,11 @@ const ChecklistRoute = ChecklistRouteImport.update({
   id: '/checklist',
   path: '/checklist',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAssinaturaRoute = AuthenticatedAssinaturaRouteImport.update({
   id: '/assinatura',
@@ -92,6 +100,17 @@ const AuthenticatedRankingRoute = AuthenticatedRankingRouteImport.update({
   path: '/ranking',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSpeak2hireRoute = AuthenticatedSpeak2hireRouteImport.update({
+  id: '/speak2hire',
+  path: '/speak2hire',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSpeak2travelRoute =
+  AuthenticatedSpeak2travelRouteImport.update({
+    id: '/speak2travel',
+    path: '/speak2travel',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedTesteDeNivelRoute =
   AuthenticatedTesteDeNivelRouteImport.update({
     id: '/teste-de-nivel',
@@ -117,21 +136,21 @@ const AuthenticatedProfessorThreadIdRoute =
   } as any)
 const AuthenticatedSpeak2hireIndexRoute =
   AuthenticatedSpeak2hireIndexRouteImport.update({
-    id: '/speak2hire/',
-    path: '/speak2hire/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedSpeak2hireRoute,
   } as any)
 const AuthenticatedSpeak2travelIndexRoute =
   AuthenticatedSpeak2travelIndexRouteImport.update({
-    id: '/speak2travel/',
-    path: '/speak2travel/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedSpeak2travelRoute,
   } as any)
 const AuthenticatedSpeak2travelTripPlannerRoute =
   AuthenticatedSpeak2travelTripPlannerRouteImport.update({
-    id: '/speak2travel/trip-planner',
-    path: '/speak2travel/trip-planner',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/trip-planner',
+    path: '/trip-planner',
+    getParentRoute: () => AuthenticatedSpeak2travelRoute,
   } as any)
 const ApiVoicePronunciationRoute = ApiVoicePronunciationRouteImport.update({
   id: '/api/voice/pronunciation',
@@ -150,33 +169,33 @@ const ApiVoiceTranscribeRoute = ApiVoiceTranscribeRouteImport.update({
 } as any)
 const AuthenticatedSpeak2hireMaterialMaterialIdRoute =
   AuthenticatedSpeak2hireMaterialMaterialIdRouteImport.update({
-    id: '/speak2hire/material/$materialId',
-    path: '/speak2hire/material/$materialId',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/material/$materialId',
+    path: '/material/$materialId',
+    getParentRoute: () => AuthenticatedSpeak2hireRoute,
   } as any)
 const AuthenticatedSpeak2hireSessaoSessionIdRoute =
   AuthenticatedSpeak2hireSessaoSessionIdRouteImport.update({
-    id: '/speak2hire/sessao/$sessionId',
-    path: '/speak2hire/sessao/$sessionId',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/sessao/$sessionId',
+    path: '/sessao/$sessionId',
+    getParentRoute: () => AuthenticatedSpeak2hireRoute,
   } as any)
 const AuthenticatedSpeak2travelMaterialResourceIdRoute =
   AuthenticatedSpeak2travelMaterialResourceIdRouteImport.update({
-    id: '/speak2travel/material/$resourceId',
-    path: '/speak2travel/material/$resourceId',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/material/$resourceId',
+    path: '/material/$resourceId',
+    getParentRoute: () => AuthenticatedSpeak2travelRoute,
   } as any)
 const AuthenticatedSpeak2travelModuloModuleIdRoute =
   AuthenticatedSpeak2travelModuloModuleIdRouteImport.update({
-    id: '/speak2travel/modulo/$moduleId',
-    path: '/speak2travel/modulo/$moduleId',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/modulo/$moduleId',
+    path: '/modulo/$moduleId',
+    getParentRoute: () => AuthenticatedSpeak2travelRoute,
   } as any)
 const AuthenticatedSpeak2travelRevisaoModuleIdRoute =
   AuthenticatedSpeak2travelRevisaoModuleIdRouteImport.update({
-    id: '/speak2travel/revisao/$moduleId',
-    path: '/speak2travel/revisao/$moduleId',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/revisao/$moduleId',
+    path: '/revisao/$moduleId',
+    getParentRoute: () => AuthenticatedSpeak2travelRoute,
   } as any)
 const ApiPublicWebhooksMercadopagoRoute =
   ApiPublicWebhooksMercadopagoRouteImport.update({
@@ -189,6 +208,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/painel': typeof AuthenticatedPainelRoute
@@ -196,6 +216,8 @@ export interface FileRoutesByFullPath {
   '/premium': typeof AuthenticatedPremiumRoute
   '/professor': typeof AuthenticatedProfessorRouteWithChildren
   '/ranking': typeof AuthenticatedRankingRoute
+  '/speak2hire': typeof AuthenticatedSpeak2hireRouteWithChildren
+  '/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
@@ -217,6 +239,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/painel': typeof AuthenticatedPainelRoute
@@ -246,6 +269,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
@@ -253,6 +277,8 @@ export interface FileRoutesById {
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
   '/_authenticated/professor': typeof AuthenticatedProfessorRouteWithChildren
   '/_authenticated/ranking': typeof AuthenticatedRankingRoute
+  '/_authenticated/speak2hire': typeof AuthenticatedSpeak2hireRouteWithChildren
+  '/_authenticated/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/_authenticated/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
@@ -276,6 +302,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/checklist'
+    | '/admin'
     | '/assinatura'
     | '/certificados'
     | '/painel'
@@ -283,6 +310,8 @@ export interface FileRouteTypes {
     | '/premium'
     | '/professor'
     | '/ranking'
+    | '/speak2hire'
+    | '/speak2travel'
     | '/teste-de-nivel'
     | '/api/chat'
     | '/professor/$threadId'
@@ -304,6 +333,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/checklist'
+    | '/admin'
     | '/assinatura'
     | '/certificados'
     | '/painel'
@@ -332,6 +362,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/checklist'
+    | '/_authenticated/admin'
     | '/_authenticated/assinatura'
     | '/_authenticated/certificados'
     | '/_authenticated/painel'
@@ -339,6 +370,8 @@ export interface FileRouteTypes {
     | '/_authenticated/premium'
     | '/_authenticated/professor'
     | '/_authenticated/ranking'
+    | '/_authenticated/speak2hire'
+    | '/_authenticated/speak2travel'
     | '/_authenticated/teste-de-nivel'
     | '/api/chat'
     | '/_authenticated/professor/$threadId'
@@ -399,6 +432,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChecklistRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/assinatura': {
       id: '/_authenticated/assinatura'
       path: '/assinatura'
@@ -448,6 +488,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRankingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/speak2hire': {
+      id: '/_authenticated/speak2hire'
+      path: '/speak2hire'
+      fullPath: '/speak2hire'
+      preLoaderRoute: typeof AuthenticatedSpeak2hireRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/speak2travel': {
+      id: '/_authenticated/speak2travel'
+      path: '/speak2travel'
+      fullPath: '/speak2travel'
+      preLoaderRoute: typeof AuthenticatedSpeak2travelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/teste-de-nivel': {
       id: '/_authenticated/teste-de-nivel'
       path: '/teste-de-nivel'
@@ -478,24 +532,24 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/speak2hire/': {
       id: '/_authenticated/speak2hire/'
-      path: '/speak2hire'
+      path: '/'
       fullPath: '/speak2hire/'
       preLoaderRoute: typeof AuthenticatedSpeak2hireIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2hireRoute
     }
     '/_authenticated/speak2travel/': {
       id: '/_authenticated/speak2travel/'
-      path: '/speak2travel'
+      path: '/'
       fullPath: '/speak2travel/'
       preLoaderRoute: typeof AuthenticatedSpeak2travelIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2travelRoute
     }
     '/_authenticated/speak2travel/trip-planner': {
       id: '/_authenticated/speak2travel/trip-planner'
-      path: '/speak2travel/trip-planner'
+      path: '/trip-planner'
       fullPath: '/speak2travel/trip-planner'
       preLoaderRoute: typeof AuthenticatedSpeak2travelTripPlannerRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2travelRoute
     }
     '/api/voice/pronunciation': {
       id: '/api/voice/pronunciation'
@@ -520,38 +574,38 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/speak2hire/material/$materialId': {
       id: '/_authenticated/speak2hire/material/$materialId'
-      path: '/speak2hire/material/$materialId'
+      path: '/material/$materialId'
       fullPath: '/speak2hire/material/$materialId'
       preLoaderRoute: typeof AuthenticatedSpeak2hireMaterialMaterialIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2hireRoute
     }
     '/_authenticated/speak2hire/sessao/$sessionId': {
       id: '/_authenticated/speak2hire/sessao/$sessionId'
-      path: '/speak2hire/sessao/$sessionId'
+      path: '/sessao/$sessionId'
       fullPath: '/speak2hire/sessao/$sessionId'
       preLoaderRoute: typeof AuthenticatedSpeak2hireSessaoSessionIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2hireRoute
     }
     '/_authenticated/speak2travel/material/$resourceId': {
       id: '/_authenticated/speak2travel/material/$resourceId'
-      path: '/speak2travel/material/$resourceId'
+      path: '/material/$resourceId'
       fullPath: '/speak2travel/material/$resourceId'
       preLoaderRoute: typeof AuthenticatedSpeak2travelMaterialResourceIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2travelRoute
     }
     '/_authenticated/speak2travel/modulo/$moduleId': {
       id: '/_authenticated/speak2travel/modulo/$moduleId'
-      path: '/speak2travel/modulo/$moduleId'
+      path: '/modulo/$moduleId'
       fullPath: '/speak2travel/modulo/$moduleId'
       preLoaderRoute: typeof AuthenticatedSpeak2travelModuloModuleIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2travelRoute
     }
     '/_authenticated/speak2travel/revisao/$moduleId': {
       id: '/_authenticated/speak2travel/revisao/$moduleId'
-      path: '/speak2travel/revisao/$moduleId'
+      path: '/revisao/$moduleId'
       fullPath: '/speak2travel/revisao/$moduleId'
       preLoaderRoute: typeof AuthenticatedSpeak2travelRevisaoModuleIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedSpeak2travelRoute
     }
     '/api/public/webhooks/mercadopago': {
       id: '/api/public/webhooks/mercadopago'
@@ -579,7 +633,54 @@ const AuthenticatedProfessorRouteWithChildren =
     AuthenticatedProfessorRouteChildren,
   )
 
+interface AuthenticatedSpeak2hireRouteChildren {
+  AuthenticatedSpeak2hireIndexRoute: typeof AuthenticatedSpeak2hireIndexRoute
+  AuthenticatedSpeak2hireMaterialMaterialIdRoute: typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
+  AuthenticatedSpeak2hireSessaoSessionIdRoute: typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
+}
+
+const AuthenticatedSpeak2hireRouteChildren: AuthenticatedSpeak2hireRouteChildren =
+  {
+    AuthenticatedSpeak2hireIndexRoute: AuthenticatedSpeak2hireIndexRoute,
+    AuthenticatedSpeak2hireMaterialMaterialIdRoute:
+      AuthenticatedSpeak2hireMaterialMaterialIdRoute,
+    AuthenticatedSpeak2hireSessaoSessionIdRoute:
+      AuthenticatedSpeak2hireSessaoSessionIdRoute,
+  }
+
+const AuthenticatedSpeak2hireRouteWithChildren =
+  AuthenticatedSpeak2hireRoute._addFileChildren(
+    AuthenticatedSpeak2hireRouteChildren,
+  )
+
+interface AuthenticatedSpeak2travelRouteChildren {
+  AuthenticatedSpeak2travelTripPlannerRoute: typeof AuthenticatedSpeak2travelTripPlannerRoute
+  AuthenticatedSpeak2travelIndexRoute: typeof AuthenticatedSpeak2travelIndexRoute
+  AuthenticatedSpeak2travelMaterialResourceIdRoute: typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
+  AuthenticatedSpeak2travelModuloModuleIdRoute: typeof AuthenticatedSpeak2travelModuloModuleIdRoute
+  AuthenticatedSpeak2travelRevisaoModuleIdRoute: typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
+}
+
+const AuthenticatedSpeak2travelRouteChildren: AuthenticatedSpeak2travelRouteChildren =
+  {
+    AuthenticatedSpeak2travelTripPlannerRoute:
+      AuthenticatedSpeak2travelTripPlannerRoute,
+    AuthenticatedSpeak2travelIndexRoute: AuthenticatedSpeak2travelIndexRoute,
+    AuthenticatedSpeak2travelMaterialResourceIdRoute:
+      AuthenticatedSpeak2travelMaterialResourceIdRoute,
+    AuthenticatedSpeak2travelModuloModuleIdRoute:
+      AuthenticatedSpeak2travelModuloModuleIdRoute,
+    AuthenticatedSpeak2travelRevisaoModuleIdRoute:
+      AuthenticatedSpeak2travelRevisaoModuleIdRoute,
+  }
+
+const AuthenticatedSpeak2travelRouteWithChildren =
+  AuthenticatedSpeak2travelRoute._addFileChildren(
+    AuthenticatedSpeak2travelRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
@@ -587,18 +688,13 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
   AuthenticatedProfessorRoute: typeof AuthenticatedProfessorRouteWithChildren
   AuthenticatedRankingRoute: typeof AuthenticatedRankingRoute
+  AuthenticatedSpeak2hireRoute: typeof AuthenticatedSpeak2hireRouteWithChildren
+  AuthenticatedSpeak2travelRoute: typeof AuthenticatedSpeak2travelRouteWithChildren
   AuthenticatedTesteDeNivelRoute: typeof AuthenticatedTesteDeNivelRoute
-  AuthenticatedSpeak2travelTripPlannerRoute: typeof AuthenticatedSpeak2travelTripPlannerRoute
-  AuthenticatedSpeak2hireIndexRoute: typeof AuthenticatedSpeak2hireIndexRoute
-  AuthenticatedSpeak2travelIndexRoute: typeof AuthenticatedSpeak2travelIndexRoute
-  AuthenticatedSpeak2hireMaterialMaterialIdRoute: typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
-  AuthenticatedSpeak2hireSessaoSessionIdRoute: typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
-  AuthenticatedSpeak2travelMaterialResourceIdRoute: typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
-  AuthenticatedSpeak2travelModuloModuleIdRoute: typeof AuthenticatedSpeak2travelModuloModuleIdRoute
-  AuthenticatedSpeak2travelRevisaoModuleIdRoute: typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
@@ -606,21 +702,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
   AuthenticatedProfessorRoute: AuthenticatedProfessorRouteWithChildren,
   AuthenticatedRankingRoute: AuthenticatedRankingRoute,
+  AuthenticatedSpeak2hireRoute: AuthenticatedSpeak2hireRouteWithChildren,
+  AuthenticatedSpeak2travelRoute: AuthenticatedSpeak2travelRouteWithChildren,
   AuthenticatedTesteDeNivelRoute: AuthenticatedTesteDeNivelRoute,
-  AuthenticatedSpeak2travelTripPlannerRoute:
-    AuthenticatedSpeak2travelTripPlannerRoute,
-  AuthenticatedSpeak2hireIndexRoute: AuthenticatedSpeak2hireIndexRoute,
-  AuthenticatedSpeak2travelIndexRoute: AuthenticatedSpeak2travelIndexRoute,
-  AuthenticatedSpeak2hireMaterialMaterialIdRoute:
-    AuthenticatedSpeak2hireMaterialMaterialIdRoute,
-  AuthenticatedSpeak2hireSessaoSessionIdRoute:
-    AuthenticatedSpeak2hireSessaoSessionIdRoute,
-  AuthenticatedSpeak2travelMaterialResourceIdRoute:
-    AuthenticatedSpeak2travelMaterialResourceIdRoute,
-  AuthenticatedSpeak2travelModuloModuleIdRoute:
-    AuthenticatedSpeak2travelModuloModuleIdRoute,
-  AuthenticatedSpeak2travelRevisaoModuleIdRoute:
-    AuthenticatedSpeak2travelRevisaoModuleIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -640,13 +724,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
