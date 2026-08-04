@@ -79,3 +79,22 @@ export const resetTravelProgress = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
+export const listTravelProgress = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }): Promise<TravelProgress[]> => {
+    const { data: rows, error } = await context.supabase
+      .from("travel_progress")
+      .select("*")
+      .eq("user_id", context.userId);
+    if (error) throw new Error(error.message);
+    return (rows ?? []).map((row) => ({
+      trackId: row.track_id,
+      briefingCompleted: row.briefing_completed,
+      currentIndex: row.current_index,
+      answers: (row.answers ?? {}) as Record<string, string>,
+      feedback: (row.feedback ?? null) as TravelFeedback | null,
+      completed: row.completed,
+      updatedAt: row.updated_at,
+    }));
+  });
