@@ -14,7 +14,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import logo from "@/assets/speak2co-logo.asset.json";
 import { DailyExercisesSection } from "@/components/DailyExercisesSection";
 import { ExerciseHistorySection } from "@/components/ExerciseHistorySection";
-import { useAccess, hasFeature, aiMinutesLeft } from "@/lib/entitlements";
+import { useAccess, hasFeature, aiMinutesLeft, FEATURE_KEYS } from "@/lib/entitlements";
 
 type WeeklyFocus = { week: number; title: string; activities: string[] };
 
@@ -202,8 +202,8 @@ function Painel() {
           )}
         </div>
 
-        <StudyPlanSection profileReady={Boolean(profile?.goal && profile?.target_level)} />
-        <PlanVersionsSection />
+        <StudyPlanSection fullPlan={hasFeature(access, FEATURE_KEYS.studyPlanFull)} profileReady={Boolean(profile?.goal && profile?.target_level)} />
+        {hasFeature(access, FEATURE_KEYS.studyPlanFull) && <PlanVersionsSection />}
       </div>
     </main>
   );
@@ -218,7 +218,7 @@ type RefinementPreview = {
   }[];
 };
 
-function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
+function StudyPlanSection({ profileReady, fullPlan }: { profileReady: boolean; fullPlan: boolean }) {
   const fetchPlan = useServerFn(getStudyPlan);
   const generate = useServerFn(generateStudyPlan);
   const previewRefinement = useServerFn(previewStudyPlanRefinement);
@@ -333,6 +333,9 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
 
   const weeks = (plan?.weekly_focus ?? []) as WeeklyFocus[];
   const milestones = (plan?.milestones ?? []) as string[];
+  const limited = Boolean((plan as { limited?: boolean } | null)?.limited);
+  const totalWeeks = ((plan as { total_weeks?: number } | null)?.total_weeks ?? weeks.length);
+  const previewWeeks = ((plan as { preview_weeks?: number } | null)?.preview_weeks ?? weeks.length);
   const lockedWeeks = new Set((((plan as { locked_weeks?: number[] } | null)?.locked_weeks ?? []) as number[]).map(Number));
 
   return (
@@ -351,7 +354,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
             {mutation.isPending ? "Gerando…" : plan ? "Gerar novamente" : "Gerar plano"}
           </Button>
         )}
-        {profileReady && plan && (
+        {profileReady && plan && fullPlan && (
           <Button
             variant="outline"
             disabled={previewMutation.isPending || mutation.isPending}
@@ -458,6 +461,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                     Semana {week.week}
                     {lockedWeeks.has(week.week) && <span className="ml-2 text-gold">🔒 travada</span>}
                   </p>
+                  {fullPlan && (
                   <Button
                     variant="outline"
                     size="sm"
@@ -469,6 +473,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                   >
                     {lockedWeeks.has(week.week) ? "Destravar" : "Travar"}
                   </Button>
+                  )}
                 </div>
                 <p className="mt-1 font-semibold text-gold">{week.title}</p>
                 <ul className="mt-3 grid gap-1.5 text-sm text-muted-foreground">
@@ -492,6 +497,32 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
 
               </div>
             ))}
+
+            {limited && (
+              <div className="relative overflow-hidden rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur sm:col-span-2">
+                <div className="flex items-center gap-2 text-gold">
+                  <Lock className="h-4 w-4" />
+                  <p className="text-xs tracking-widest uppercase">
+                    Semanas {previewWeeks + 1}–{totalWeeks} bloqueadas
+                  </p>
+                </div>
+                <p className="mt-3 text-sm font-semibold text-foreground">
+                  Você está vendo uma degustação do seu plano de estudos.
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  O plano Gratuito libera as {previewWeeks} primeiras semanas. Com o plano
+                  Essential você desbloqueia as {Math.max(totalWeeks - previewWeeks, 0)} semanas
+                  restantes, os marcos de evolução, os ajustes do plano com IA, o travamento de
+                  semanas e o histórico de versões.
+                </p>
+                <Button
+                  asChild
+                  className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+                >
+                  <Link to="/premium">Liberar com o Essential</Link>
+                </Button>
+              </div>
+            )}
           </div>
 
           {milestones.length > 0 && (

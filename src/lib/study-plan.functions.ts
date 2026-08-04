@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireFeature } from "@/lib/entitlement-middleware";
 import { generateText, Output } from "ai";
 import { z } from "zod";
 
@@ -11,6 +12,9 @@ const planSchema = z.object({
 
 export type StudyPlan = z.infer<typeof planSchema>;
 
+/** Semanas visíveis como degustação para quem está no plano Gratuito. */
+export const FREE_PREVIEW_WEEKS = 2;
+
 export const getStudyPlan = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
@@ -20,7 +24,23 @@ export const getStudyPlan = createServerFn({ method: "GET" })
       .eq("user_id", context.userId)
       .maybeSingle();
     if (error) throw new Error(error.message);
-    return data;
+    if (!data) return null;
+
+    const { checkFeatureAccess } = await import("@/lib/entitlements-access.server");
+    const access = await checkFeatureAccess(context.supabase, context.userId, "study_plan_full");
+    const allWeeks = (data.weekly_focus ?? []) as StudyPlan["weekly_focus"];
+    if (access.allowed) {
+      return { ...data, limited: false, total_weeks: allWeeks.length, preview_weeks: allWeeks.length };
+    }
+
+    return {
+      ...data,
+      weekly_focus: allWeeks.slice(0, FREE_PREVIEW_WEEKS),
+      milestones: [] as string[],
+      limited: true,
+      total_weeks: allWeeks.length,
+      preview_weeks: Math.min(FREE_PREVIEW_WEEKS, allWeeks.length),
+    };
   });
 
 export const generateStudyPlan = createServerFn({ method: "POST" })
@@ -31,7 +51,7 @@ export const generateStudyPlan = createServerFn({ method: "POST" })
   });
 
 export const previewStudyPlanRefinement = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("study_plan_full")])
   .handler(async ({ context }) => {
     const apiKey = process.env["LOVABLE_API_KEY"];
     if (!apiKey) throw new Error("AI indisponível no momento.");
@@ -162,7 +182,7 @@ Devolva somente essas semanas reescritas.`,
   });
 
 export const applyStudyPlanRefinement = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("study_plan_full")])
   .inputValidator((input: unknown) =>
     z
       .object({
@@ -214,7 +234,7 @@ export const applyStudyPlanRefinement = createServerFn({ method: "POST" })
   });
 
 export const setWeekLock = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("study_plan_full")])
   .inputValidator((input: unknown) =>
     z.object({ week: z.number(), locked: z.boolean() }).parse(input),
   )
@@ -242,7 +262,7 @@ export const setWeekLock = createServerFn({ method: "POST" })
   });
 
 export const getPlanVersions = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("study_plan_full")])
   .handler(async ({ context }) => {
     const { data, error } = await context.supabase
       .from("study_plan_versions")
@@ -255,7 +275,7 @@ export const getPlanVersions = createServerFn({ method: "GET" })
   });
 
 export const restorePlanVersion = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireFeature("study_plan_full")])
   .inputValidator((input: unknown) => z.object({ id: z.string().uuid() }).parse(input))
   .handler(async ({ data, context }) => {
     const { data: version, error } = await context.supabase

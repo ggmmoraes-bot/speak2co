@@ -6,6 +6,7 @@ export const FEATURE_KEYS = {
   placementTest: "placement_test",
   cefrCertificate: "cefr_certificate",
   studyPlan: "study_plan",
+  studyPlanFull: "study_plan_full",
   pronunciationChecker: "pronunciation_checker",
   progressDashboard: "progress_dashboard",
   aiTeacher: "ai_teacher",
