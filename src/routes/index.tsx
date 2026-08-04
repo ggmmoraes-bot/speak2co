@@ -104,7 +104,8 @@ function Index() {
             className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur"
           >
             <f.icon className="h-7 w-7 text-primary" />
-            <h2 className="mt-4 text-lg font-semibold">{f.title}</h2>
+            <h2 className="mt-4 text-lg font-semibold text-gold">{f.title}</h2>
+            <p className="mt-1 text-sm font-medium text-muted-foreground">{f.subtitle}</p>
             <p className="mt-2 text-sm text-muted-foreground">{f.text}</p>
           </div>
         ))}
@@ -112,7 +113,7 @@ function Index() {
 
       <section className="mx-auto max-w-5xl px-6 pb-24">
         <h2 className="text-center text-2xl font-semibold sm:text-3xl">
-          Nossos <span className="text-gold">subprodutos</span>
+          Product <span className="text-gold">Lines</span>
         </h2>
         <div className="mt-10 grid gap-8 sm:grid-cols-2">
           {products.map((p) => (
