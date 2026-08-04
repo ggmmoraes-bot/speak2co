@@ -1,5 +1,5 @@
 import { jsPDF } from "jspdf";
-import { getLogoDataUrl } from "@/lib/pdf-logo";
+import { drawPdfLogo, getLogoDataUrl } from "@/lib/pdf-logo";
 
 export type CertificatePdfInput = {
   studentName: string;
@@ -55,7 +55,7 @@ export async function exportCertificateToPdf(input: CertificatePdfInput) {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(30);
   doc.setTextColor(255, 255, 255);
-  doc.text(input.studentName, width / 2, 218, { align: "center" });
+  doc.text(input.studentName, width / 2, introY + 32, { align: "center" });
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(13);
@@ -64,7 +64,7 @@ export async function exportCertificateToPdf(input: CertificatePdfInput) {
     `concluiu com êxito o requisito do ${input.title} — ${input.subtitle}.`,
     width - 220,
   ) as string[];
-  let y = 258;
+  let y = introY + 72;
   for (const line of lines) {
     doc.text(line, width / 2, y, { align: "center" });
     y += 20;
