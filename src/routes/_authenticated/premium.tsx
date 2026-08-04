@@ -93,6 +93,36 @@ function cell(value: CellValue) {
   return <span className="text-foreground">{value}</span>;
 }
 
+const MOBILE_TIERS: {
+  id: string;
+  label: string;
+  price: string;
+  highlight: boolean;
+  rows: { feature: string; value: CellValue }[];
+}[] = [
+  {
+    id: "essential",
+    label: "Essential",
+    price: "R$ 19,90/mês",
+    highlight: false,
+    rows: COMPARISON_ROWS.map((r) => ({ feature: r.feature, value: r.essential })),
+  },
+  {
+    id: "premium",
+    label: "Premium",
+    price: "R$ 49,90/mês",
+    highlight: false,
+    rows: COMPARISON_ROWS.map((r) => ({ feature: r.feature, value: r.premium })),
+  },
+  {
+    id: "signature",
+    label: "Signature ⭐",
+    price: "R$ 59,90/mês",
+    highlight: true,
+    rows: COMPARISON_ROWS.map((r) => ({ feature: r.feature, value: r.signature })),
+  },
+];
+
 function PremiumPage() {
   const queryClient = useQueryClient();
   const fetchSubscription = useServerFn(getMySubscription);
