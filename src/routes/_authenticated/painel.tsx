@@ -203,7 +203,28 @@ function Painel() {
         </div>
 
         <StudyPlanSection fullPlan={hasFeature(access, FEATURE_KEYS.studyPlanFull)} profileReady={Boolean(profile?.goal && profile?.target_level)} />
-        {hasFeature(access, FEATURE_KEYS.studyPlanFull) && <PlanVersionsSection />}
+        {hasFeature(access, FEATURE_KEYS.studyPlanFull) ? (
+          <PlanVersionsSection />
+        ) : (
+          <div className="mt-8 rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur">
+            <div className="flex items-center gap-2 text-gold">
+              <Lock className="h-4 w-4" />
+              <p className="text-xs tracking-widest uppercase">Histórico de versões bloqueado</p>
+            </div>
+            <p className="mt-3 text-sm text-muted-foreground">
+              No plano Essential você consulta todas as versões anteriores do seu plano e volta para
+              qualquer uma delas.
+            </p>
+            <Button
+              asChild
+              className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+            >
+              <Link to="/upgrade/essential" search={{ feature: "historico" as const }}>
+                Fazer upgrade para o Essential
+              </Link>
+            </Button>
+          </div>
+        )}
       </div>
     </main>
   );
