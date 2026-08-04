@@ -63,14 +63,15 @@ export const TRAVEL_BRIEFING = {
 };
 
 export const TRAVEL_TOOLS = [
-  "Vocabulário",
-  "Expressões",
-  "Diálogo",
-  "Pronúncia",
+  "Vocabulary",
+  "Expressions",
+  "Dialogue",
+  "Pronunciation",
   "Quiz",
   "Flashcards",
-  "Role play com IA",
+  "AI Role Play",
   "PDF",
+
 ];
 
 export const TRAVEL_TRACKS: TravelTrack[] = [
