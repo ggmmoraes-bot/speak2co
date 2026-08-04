@@ -366,6 +366,39 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
         )}
       </div>
 
+      {limited && (
+        <div className="mt-5 rounded-2xl border border-gold/40 bg-card/60 p-5 backdrop-blur">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2 text-gold">
+              <Sparkles className="h-4 w-4" />
+              <p className="text-xs tracking-widest uppercase">Modo degustação · plano Gratuito</p>
+            </div>
+            <p className="text-sm font-semibold text-foreground">
+              {previewWeeks} de {totalWeeks} semanas liberadas ·{" "}
+              <span className="text-gold">
+                {Math.max(totalWeeks - previewWeeks, 0)} semana
+                {totalWeeks - previewWeeks === 1 ? "" : "s"} bloqueada
+                {totalWeeks - previewWeeks === 1 ? "" : "s"}
+              </span>
+            </p>
+          </div>
+          <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-secondary">
+            <div
+              className="h-full rounded-full bg-gold transition-all"
+              style={{
+                width: `${totalWeeks > 0 ? Math.round((previewWeeks / totalWeeks) * 100) : 0}%`,
+              }}
+            />
+          </div>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Você já pode praticar as semanas 1–{previewWeeks}. As semanas {previewWeeks + 1}–
+            {totalWeeks} são liberadas no plano Essential.
+          </p>
+        </div>
+      )}
+
+
+
       {preview && (
         <div className="mt-6 rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur">
           <p className="text-xs tracking-widest text-muted-foreground uppercase">
