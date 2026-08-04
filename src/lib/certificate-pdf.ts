@@ -83,19 +83,26 @@ export async function exportCertificateToPdf(input: CertificatePdfInput) {
 
   const dateLabel = new Date(input.issuedAt ?? Date.now()).toLocaleDateString("pt-BR");
 
+  const signatureText = (input.signatureText ?? DEFAULT_SIGNATURE_TEXT).trim();
+  const signatureCaption = (input.signatureCaption ?? DEFAULT_SIGNATURE_CAPTION).trim();
+
   // Assinatura manuscrita em itálico
-  doc.setFont("times", "italic");
-  doc.setFontSize(34);
-  doc.setTextColor(...GOLD);
-  doc.text("S2co", width / 2, height - 128, { align: "center" });
+  if (signatureText) {
+    doc.setFont("times", "italic");
+    doc.setFontSize(34);
+    doc.setTextColor(...GOLD);
+    doc.text(signatureText, width / 2, height - 128, { align: "center" });
+  }
 
   doc.setDrawColor(...GOLD);
   doc.setLineWidth(1);
   doc.line(width / 2 - 110, height - 118, width / 2 + 110, height - 118);
-  doc.setFont("helvetica", "normal");
-  doc.setTextColor(220, 220, 220);
-  doc.setFontSize(11);
-  doc.text("Speak2Co - Academic Team", width / 2, height - 100, { align: "center" });
+  if (signatureCaption) {
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(220, 220, 220);
+    doc.setFontSize(11);
+    doc.text(signatureCaption, width / 2, height - 100, { align: "center" });
+  }
 
   doc.setFontSize(9);
   doc.setTextColor(...GRAY);
