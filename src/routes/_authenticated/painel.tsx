@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
+import { Briefcase, Plane } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { PlanVersionsSection } from "@/components/PlanVersionsSection";
 import { getStudyPlan, generateStudyPlan, previewStudyPlanRefinement, applyStudyPlanRefinement, setWeekLock } from "@/lib/study-plan.functions";
@@ -132,10 +133,16 @@ function Painel() {
           </Button>
 
           <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/speak2hire">Speak2Hire — Entrevistas</Link>
+            <Link to="/speak2hire">
+              <Briefcase className="mr-2 h-4 w-4 text-gold" />
+              Começar Speak2hire
+            </Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/speak2travel">Começar Speak2Travel</Link>
+            <Link to="/speak2travel">
+              <Plane className="mr-2 h-4 w-4 text-gold" />
+              Começar Speak2Travel
+            </Link>
           </Button>
 
           <Button asChild variant="outline" className="rounded-full font-semibold">
