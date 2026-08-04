@@ -32,11 +32,15 @@ import { supabase } from "@/integrations/supabase/client";
 
 
 export const Route = createFileRoute("/_authenticated/professor/$threadId")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    prompt: typeof search["prompt"] === "string" ? (search["prompt"] as string) : undefined,
+  }),
   component: ProfessorThread,
 });
 
 function ProfessorThread() {
   const { threadId } = Route.useParams();
+  const { prompt } = Route.useSearch();
   const fetchMessages = useServerFn(getThreadMessages);
 
   const { data: initialMessages, isLoading } = useQuery({
@@ -52,16 +56,26 @@ function ProfessorThread() {
     );
   }
 
-  return <ChatWindow key={threadId} threadId={threadId} initialMessages={initialMessages as UIMessage[]} />;
+  return (
+    <ChatWindow
+      key={threadId}
+      threadId={threadId}
+      initialMessages={initialMessages as UIMessage[]}
+      autoPrompt={prompt}
+    />
+  );
 }
 
 function ChatWindow({
   threadId,
   initialMessages,
+  autoPrompt,
 }: {
   threadId: string;
   initialMessages: UIMessage[];
+  autoPrompt?: string | undefined;
 }) {
+
   const queryClient = useQueryClient();
   const promptRef = useRef<HTMLDivElement | null>(null);
 
@@ -168,6 +182,17 @@ function ChatWindow({
       focusTextarea();
     }
   }
+
+  // Envia automaticamente a prática da semana vinda do plano de estudos (?prompt=).
+  const autoSentRef = useRef(false);
+  useEffect(() => {
+    if (autoSentRef.current) return;
+    if (!autoPrompt || initialMessages.length > 0 || isBusy) return;
+    autoSentRef.current = true;
+    void handleSubmit({ text: autoPrompt });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoPrompt]);
+
 
   // Leitura automática da última resposta do professor.
   useEffect(() => {

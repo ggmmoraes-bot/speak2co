@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { Briefcase, Plane, Lock, ShieldCheck } from "lucide-react";
+import { Briefcase, Plane, Lock, ShieldCheck, Sparkles, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { PlanVersionsSection } from "@/components/PlanVersionsSection";
+import { createThread } from "@/lib/chat.functions";
 import { getStudyPlan, generateStudyPlan, previewStudyPlanRefinement, applyStudyPlanRefinement, setWeekLock } from "@/lib/study-plan.functions";
+
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import logo from "@/assets/speak2co-logo.asset.json";
@@ -223,7 +225,38 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
   const applyRefinement = useServerFn(applyStudyPlanRefinement);
   const toggleLock = useServerFn(setWeekLock);
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const newThread = useServerFn(createThread);
   const [preview, setPreview] = useState<RefinementPreview | null>(null);
+  const [practiceWeek, setPracticeWeek] = useState<number | null>(null);
+
+  /** Abre o Professor IA já com a prática da semana indicada pelo plano. */
+  async function practiceWithAi(week: WeeklyFocus) {
+    if (practiceWeek !== null) return;
+    try {
+      setPracticeWeek(week.week);
+      const thread = await newThread({
+        data: { title: `Semana ${week.week} — ${week.title}` },
+      });
+      await queryClient.invalidateQueries({ queryKey: ["chat-threads"] });
+      const prompt = `Vamos fazer a prática da Semana ${week.week} do meu plano de estudos: "${week.title}".
+
+Atividades planejadas:
+${week.activities.map((a) => `- ${a}`).join("\n")}
+
+Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, com correções em português quando eu errar. Comece pela primeira atividade.`;
+      await navigate({
+        to: "/professor/$threadId",
+        params: { threadId: thread.id },
+        search: { prompt },
+      });
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Não foi possível abrir a prática com a IA.");
+    } finally {
+      setPracticeWeek(null);
+    }
+  }
+
 
   const { data: plan, isLoading } = useQuery({
     queryKey: ["study-plan"],
@@ -443,6 +476,20 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
                     <li key={i}>• {activity}</li>
                   ))}
                 </ul>
+                <Button
+                  size="sm"
+                  disabled={practiceWeek !== null}
+                  onClick={() => void practiceWithAi(week)}
+                  className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+                >
+                  {practiceWeek === week.week ? (
+                    <Loader2 className="mr-1 h-4 w-4 animate-spin" />
+                  ) : (
+                    <Sparkles className="mr-1 h-4 w-4" />
+                  )}
+                  Praticar com a IA
+                </Button>
+
               </div>
             ))}
           </div>
