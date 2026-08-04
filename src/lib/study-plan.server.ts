@@ -74,7 +74,7 @@ export async function buildAndSaveStudyPlan(
       model: gateway("google/gemini-2.5-flash"),
       output: Output.object({ schema: planSchema }),
       system:
-        "Você é o professor de inglês da Speak2Co. Crie planos de estudo de inglês objetivos, motivadores e práticos. Escreva tudo em português do Brasil, exceto exemplos em inglês. Gere exatamente 8 semanas e de 4 a 6 marcos. Calibre a dificuldade pelo resultado do teste de nivelamento: as primeiras semanas devem atacar as prioridades apontadas no teste e as últimas devem aproximar o aluno do nível desejado.",
+        'Você é o professor de inglês da Speak2Co. Crie planos de estudo de inglês objetivos, motivadores e práticos. Escreva o conteúdo em português do Brasil, exceto exemplos em inglês. Gere exatamente 8 semanas e de 4 a 6 marcos. Calibre a dificuldade pelo resultado do teste de nivelamento: as primeiras semanas devem atacar as prioridades apontadas no teste e as últimas devem aproximar o aluno do nível desejado. Responda SOMENTE com um JSON com estas chaves exatas em inglês: {"summary": string, "weekly_focus": [{"week": number, "title": string, "activities": string[]}], "milestones": string[]}. Nunca traduza os nomes das chaves e nunca adicione outras chaves.',
       prompt: `Aluno: ${profile.full_name}
 Nível atual (perfil): ${placement?.level ?? profile.english_level ?? "não avaliado"}
 Nível desejado: ${profile.target_level}
@@ -86,16 +86,21 @@ ${describePlacement(placement)}
 Feedback do aluno sobre explicações anteriores:
 ${feedbackHint}
 
-Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases, citando o nível do teste), foco semanal (8 semanas, cada uma com título e 3 atividades práticas) e marcos de evolução.`,
+Crie um plano de estudos personalizado com um resumo curto (2 a 3 frases, citando o nível do teste), foco semanal (8 semanas, cada uma com título e 3 atividades práticas) e marcos de evolução. Use exatamente as chaves summary, weekly_focus (week, title, activities) e milestones.`,
     });
     output = result.output;
   } catch (e) {
     const message = e instanceof Error ? e.message : "";
     if (message.includes("429")) throw new Error("Muitas solicitações. Tente novamente em instantes.");
     if (message.includes("402")) throw new Error("Créditos de IA esgotados. Adicione créditos para continuar.");
-    console.error("[study-plan] geração falhou", e);
-    throw new Error("Não foi possível gerar seu plano agora.");
+    const rescued = rescuePlan(e);
+    if (!rescued) {
+      console.error("[study-plan] geração falhou", e);
+      throw new Error("Não foi possível gerar seu plano agora.");
+    }
+    output = rescued;
   }
+
 
   const { data: existingPlan } = await supabase
     .from("study_plans")
