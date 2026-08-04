@@ -1,5 +1,11 @@
 import { jsPDF } from "jspdf";
-import { getLogoDataUrl } from "@/lib/pdf-logo";
+import {
+  PDF_BRAND_MARGIN,
+  drawPdfLogo,
+  getLogoDataUrl,
+  pdfLogoSize,
+} from "@/lib/pdf-logo";
+
 
 type WeeklyFocus = { week: number; title: string; activities: string[] };
 
