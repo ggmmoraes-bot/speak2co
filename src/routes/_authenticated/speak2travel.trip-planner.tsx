@@ -1,11 +1,48 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { ArrowLeft, Loader2, Sparkles } from "lucide-react";
+import { ArrowLeft, Loader2, Sparkles, Volume2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { speakText } from "@/lib/voice-client";
 import { generateTripPlan, type TripPlan } from "@/lib/trip-planner.functions";
+
+/** Extrai o trecho em inglês (entre aspas) quando o texto vem em português. */
+function englishPart(text: string) {
+  const quoted = text.match(/["“'']([^"”'']{3,})["”'']/);
+  return (quoted?.[1] ?? text).trim();
+}
+
+/** Botão de pronúncia da IA para um trecho em inglês. */
+function SpeakButton({ text, label = "Ouvir a IA" }: { text: string; label?: string }) {
+  const [playing, setPlaying] = useState(false);
+  return (
+    <button
+      type="button"
+      aria-label={`Ouvir pronúncia: ${text}`}
+      onClick={async () => {
+        try {
+          setPlaying(true);
+          await speakText(text);
+        } catch (e) {
+          toast.error(e instanceof Error ? e.message : "Não foi possível tocar o áudio.");
+        } finally {
+          setPlaying(false);
+        }
+      }}
+      disabled={playing}
+      className="inline-flex shrink-0 items-center gap-1 rounded-full border border-primary/40 px-2 py-0.5 text-[11px] text-foreground/80 transition hover:border-gold/60 disabled:opacity-60"
+    >
+      {playing ? (
+        <Loader2 className="h-3 w-3 animate-spin" />
+      ) : (
+        <Volume2 className="h-3 w-3" />
+      )}
+      {label}
+    </button>
+  );
+}
 
 export const Route = createFileRoute("/_authenticated/speak2travel/trip-planner")({
   head: () => ({
