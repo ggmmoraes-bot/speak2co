@@ -476,6 +476,20 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                     <li key={i}>• {activity}</li>
                   ))}
                 </ul>
+                <Button
+                  size="sm"
+                  disabled={practiceWeek !== null}
+                  onClick={() => void practiceWithAi(week)}
+                  className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+                >
+                  {practiceWeek === week.week ? (
+                    <Loader2 className="mr-1 h-4 w-4 animate-spin" />
+                  ) : (
+                    <Sparkles className="mr-1 h-4 w-4" />
+                  )}
+                  Praticar com a IA
+                </Button>
+
               </div>
             ))}
           </div>
