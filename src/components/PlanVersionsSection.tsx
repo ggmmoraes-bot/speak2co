@@ -97,7 +97,7 @@ export function PlanVersionsSection() {
                       variant="outline"
                       size="sm"
                       onClick={() =>
-                        exportPlanVersionToPdf({
+                        void exportPlanVersionToPdf({
                           createdAt: version.created_at,
                           reasonLabel: REASON_LABEL[version.reason] ?? version.reason,
                           summary: version.summary,
