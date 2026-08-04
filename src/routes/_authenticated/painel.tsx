@@ -94,8 +94,13 @@ function Painel() {
           <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
             <p className="text-xs tracking-widest text-muted-foreground uppercase">Seu plano</p>
             <p className="mt-2 text-xl font-semibold text-gold">
-              {profile?.plan === "premium" ? "Premium" : "Gratuito"}
+              {access?.plan?.name ?? "Gratuito"}
             </p>
+            {access?.aiDailyMinutes != null && (
+              <p className="mt-1 text-xs text-muted-foreground">
+                Professor IA: {aiMinutesLeft(access)} de {access.aiDailyMinutes} min hoje
+              </p>
+            )}
           </div>
           <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
             <p className="text-xs tracking-widest text-muted-foreground uppercase">Nível de inglês</p>
