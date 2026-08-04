@@ -28,12 +28,12 @@ const FEATURE_COPY: Record<UpgradeFeature, { title: string; description: string 
 };
 
 export const Route = createFileRoute("/_authenticated/upgrade/essential")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    feature:
-      search.feature === "marcos" || search.feature === "ajustes" || search.feature === "historico"
-        ? (search.feature as UpgradeFeature)
-        : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { feature?: UpgradeFeature } => {
+    const value = search["feature"];
+    return value === "marcos" || value === "ajustes" || value === "historico"
+      ? { feature: value }
+      : {};
+  },
   head: () => ({
     meta: [
       { title: "Upgrade para o Essential — Speak2Co" },
