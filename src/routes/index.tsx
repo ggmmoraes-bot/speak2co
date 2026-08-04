@@ -131,7 +131,7 @@ function Index() {
         ))}
       </section>
 
-      <section className="mx-auto max-w-5xl px-6 pb-24">
+      <section id="product-lines" className="mx-auto max-w-5xl px-6 pb-24 scroll-mt-24">
         <h2 className="text-center text-2xl font-semibold sm:text-3xl">
           Product <span className="text-gold">Lines</span>
         </h2>
