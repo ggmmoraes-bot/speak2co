@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FeatureGate } from "@/components/FeatureGate";
 import { PhrasePractice } from "@/components/PhrasePractice";
 import { PronunciationLabSummary } from "@/components/PronunciationLabSummary";
 import { PronunciationTraining } from "@/components/PronunciationTraining";
@@ -38,8 +39,21 @@ export const Route = createFileRoute("/_authenticated/speak2travel/material/$res
       ],
     };
   },
-  component: MaterialPage,
+  component: GatedMaterialPage,
 });
+
+function GatedMaterialPage() {
+  return (
+    <FeatureGate
+      feature="premium_materials"
+      title="Materiais complementares do Speak2Travel"
+      benefit="Desbloqueie o Travel Vocabulary, Grammar, Pronunciation Lab, Survival English, Culture Tips e Pocket Dictionary com pronúncia da IA."
+      requiredPlan="Essential"
+    >
+      <MaterialPage />
+    </FeatureGate>
+  );
+}
 
 function MaterialPage() {
   const { resource } = Route.useLoaderData() as { resource: TravelResourceContent };

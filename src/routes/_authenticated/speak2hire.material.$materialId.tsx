@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FeatureGate } from "@/components/FeatureGate";
 import { getMaterial, MATERIALS } from "@/lib/speak2hire-content";
 
 export const Route = createFileRoute("/_authenticated/speak2hire/material/$materialId")({
@@ -21,7 +22,7 @@ export const Route = createFileRoute("/_authenticated/speak2hire/material/$mater
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: MaterialPage,
+  component: GatedMaterialPage,
   errorComponent: ({ error }) => (
     <div role="alert" className="p-8 text-sm text-destructive">
       {error.message}
@@ -31,6 +32,19 @@ export const Route = createFileRoute("/_authenticated/speak2hire/material/$mater
     <div className="p-8 text-sm text-muted-foreground">Material não encontrado.</div>
   ),
 });
+
+function GatedMaterialPage() {
+  return (
+    <FeatureGate
+      feature="premium_materials"
+      title="Materiais de preparação do Speak2Hire"
+      benefit="Desbloqueie os frameworks de entrevista: elevator pitch, método STAR, power words e o guia S.O.S."
+      requiredPlan="Essential"
+    >
+      <MaterialPage />
+    </FeatureGate>
+  );
+}
 
 function MaterialPage() {
   const { materialId } = Route.useParams();
