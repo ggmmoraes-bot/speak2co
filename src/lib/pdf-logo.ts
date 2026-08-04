@@ -52,3 +52,81 @@ export async function getLogoDataUrl(): Promise<string | null> {
   }
   return pending;
 }
+
+/* ---------------------------------------------------------------------------
+ * Padrão da marca em PDFs
+ * Mesma margem, proporção e alinhamento em qualquer formato/orientação.
+ * ------------------------------------------------------------------------- */
+
+export const PDF_BRAND_MARGIN = 48;
+
+type LogoVariant = "hero" | "header" | "footer";
+
+const VARIANT_RATIO: Record<LogoVariant, number> = {
+  hero: 0.115,
+  header: 0.085,
+  footer: 0.035,
+};
+
+const VARIANT_RANGE: Record<LogoVariant, [number, number]> = {
+  hero: [72, 104],
+  header: [52, 72],
+  footer: [22, 32],
+};
+
+type MinimalDoc = {
+  internal: { pageSize: { getWidth(): number; getHeight(): number } };
+  addImage(
+    data: string,
+    format: string,
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+  ): unknown;
+};
+
+/** Tamanho padronizado da logo, proporcional ao lado maior da página. */
+export function pdfLogoSize(doc: MinimalDoc, variant: LogoVariant): number {
+  const width = doc.internal.pageSize.getWidth();
+  const height = doc.internal.pageSize.getHeight();
+  const reference = Math.max(width, height);
+  const [min, max] = VARIANT_RANGE[variant];
+  return Math.min(max, Math.max(min, reference * VARIANT_RATIO[variant]));
+}
+
+/**
+ * Desenha a logomarca oficial com margens e alinhamento padronizados.
+ * Retorna a caixa ocupada para posicionar o conteúdo ao lado/abaixo.
+ */
+export function drawPdfLogo(
+  doc: MinimalDoc,
+  logo: string | null,
+  options: {
+    variant: LogoVariant;
+    align?: "left" | "center" | "right";
+    top?: number;
+    bottom?: number;
+  },
+): { x: number; y: number; size: number } | null {
+  if (!logo) return null;
+  const { variant, align = "left" } = options;
+  const size = pdfLogoSize(doc, variant);
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+
+  const x =
+    align === "center"
+      ? (pageWidth - size) / 2
+      : align === "right"
+        ? pageWidth - PDF_BRAND_MARGIN - size
+        : PDF_BRAND_MARGIN;
+
+  const y =
+    options.bottom !== undefined
+      ? pageHeight - options.bottom - size
+      : (options.top ?? PDF_BRAND_MARGIN);
+
+  doc.addImage(logo, "PNG", x, y, size, size);
+  return { x, y, size };
+}

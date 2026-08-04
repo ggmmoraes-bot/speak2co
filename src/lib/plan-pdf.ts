@@ -1,5 +1,11 @@
 import { jsPDF } from "jspdf";
-import { getLogoDataUrl } from "@/lib/pdf-logo";
+import {
+  PDF_BRAND_MARGIN,
+  drawPdfLogo,
+  getLogoDataUrl,
+  pdfLogoSize,
+} from "@/lib/pdf-logo";
+
 
 type WeeklyFocus = { week: number; title: string; activities: string[] };
 
@@ -21,32 +27,39 @@ export async function exportPlanVersionToPdf(input: PlanPdfInput) {
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
-  const margin = 48;
+  const margin = PDF_BRAND_MARGIN;
   const maxWidth = pageWidth - margin * 2;
   let y = 0;
 
   const dateLabel = new Date(input.createdAt).toLocaleString("pt-BR");
 
   // Header band
+  const logoSize = pdfLogoSize(doc, "header");
+  const logoTop = 14;
+  const bandHeight = logoTop * 2 + logoSize;
   doc.setFillColor(...NAVY);
-  doc.rect(0, 0, pageWidth, 96, "F");
-  const textLeft = logo ? margin + 76 : margin;
-  if (logo) {
-    doc.addImage(logo, "PNG", margin, 12, 68, 68);
-  }
+  doc.rect(0, 0, pageWidth, bandHeight, "F");
+  const logoBox = drawPdfLogo(doc, logo, {
+    variant: "header",
+    align: "left",
+    top: logoTop,
+  });
+  const textLeft = logoBox ? logoBox.x + logoBox.size + 20 : margin;
+  const titleBaseline = logoTop + logoSize * 0.42;
   doc.setTextColor(255, 255, 255);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(22);
-  doc.text("Speak2Co", textLeft, 44);
+  doc.text("Speak2Co", textLeft, titleBaseline);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
   doc.setTextColor(...GOLD);
-  doc.text("English for Every Opportunity", textLeft, 64);
+  doc.text("English for Every Opportunity", textLeft, titleBaseline + 20);
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(10);
-  doc.text(`${input.reasonLabel} — ${dateLabel}`, textLeft, 82);
+  doc.text(`${input.reasonLabel} — ${dateLabel}`, textLeft, titleBaseline + 38);
 
-  y = 130;
+  y = bandHeight + 34;
+
 
   const ensureSpace = (needed: number) => {
     if (y + needed > pageHeight - margin) {
@@ -122,9 +135,8 @@ export async function exportPlanVersionToPdf(input: PlanPdfInput) {
     doc.setFontSize(9);
     doc.setTextColor(150, 150, 150);
     doc.text(`Speak2Co · ${dateLabel} · página ${i} de ${pageCount}`, margin, pageHeight - 24);
-    if (logo) {
-      doc.addImage(logo, "PNG", pageWidth - margin - 26, pageHeight - 44, 26, 26);
-    }
+    drawPdfLogo(doc, logo, { variant: "footer", align: "right", bottom: 18 });
+
   }
 
   const stamp = new Date(input.createdAt).toISOString().slice(0, 10);
