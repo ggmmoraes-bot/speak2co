@@ -219,7 +219,15 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
 
   const previewMutation = useMutation({
     mutationFn: () => previewRefinement(),
-    onSuccess: (data) => setPreview(data as RefinementPreview),
+    onSuccess: (data) => {
+      const result = data as RefinementPreview & { notice?: string | null };
+      if (result.notice || result.weeks.length === 0) {
+        setPreview(null);
+        toast.info(result.notice ?? "Nada para ajustar no seu plano por enquanto.");
+        return;
+      }
+      setPreview({ weeks: result.weeks });
+    },
     onError: (error: Error) => toast.error(error.message),
   });
 
