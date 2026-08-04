@@ -118,7 +118,9 @@ function AuthPage() {
 
       <div className="w-full max-w-md rounded-3xl border border-border bg-card/70 p-8 backdrop-blur">
         <h1 className="text-center text-2xl font-semibold">
-          Welcome to <span className="text-gold">Speak2Co</span>
+          Welcome to <span className="text-foreground">Speak2</span>
+          <span className="text-gold">Co</span>
+
         </h1>
 
         <p className="mt-2 text-center text-sm text-muted-foreground">
