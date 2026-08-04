@@ -225,7 +225,38 @@ function StudyPlanSection({ profileReady }: { profileReady: boolean }) {
   const applyRefinement = useServerFn(applyStudyPlanRefinement);
   const toggleLock = useServerFn(setWeekLock);
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const newThread = useServerFn(createThread);
   const [preview, setPreview] = useState<RefinementPreview | null>(null);
+  const [practiceWeek, setPracticeWeek] = useState<number | null>(null);
+
+  /** Abre o Professor IA já com a prática da semana indicada pelo plano. */
+  async function practiceWithAi(week: WeeklyFocus) {
+    if (practiceWeek !== null) return;
+    try {
+      setPracticeWeek(week.week);
+      const thread = await newThread({
+        data: { title: `Semana ${week.week} — ${week.title}` },
+      });
+      await queryClient.invalidateQueries({ queryKey: ["chat-threads"] });
+      const prompt = `Vamos fazer a prática da Semana ${week.week} do meu plano de estudos: "${week.title}".
+
+Atividades planejadas:
+${week.activities.map((a) => `- ${a}`).join("\n")}
+
+Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, com correções em português quando eu errar. Comece pela primeira atividade.`;
+      await navigate({
+        to: "/professor/$threadId",
+        params: { threadId: thread.id },
+        search: { prompt },
+      });
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Não foi possível abrir a prática com a IA.");
+    } finally {
+      setPracticeWeek(null);
+    }
+  }
+
 
   const { data: plan, isLoading } = useQuery({
     queryKey: ["study-plan"],
