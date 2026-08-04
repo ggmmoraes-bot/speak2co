@@ -7,6 +7,7 @@ import {
   CheckCircle2,
   Compass,
   Lightbulb,
+  MessageSquare,
   Play,
   Sparkles,
 } from "lucide-react";
@@ -18,6 +19,7 @@ import {
   getTravelTrack,
   type TravelTrack,
 } from "@/lib/speak2travel-content";
+import { getModuleContent } from "@/lib/speak2travel-modules";
 import {
   evaluateTravelPractice,
   type TravelFeedback,
@@ -63,6 +65,7 @@ function TravelModulePage() {
 }
 
 function TravelModule({ track }: { track: TravelTrack }) {
+  const moduleContent = getModuleContent(track.id);
   const evaluate = useServerFn(evaluateTravelPractice);
   const loadProgress = useServerFn(getTravelProgress);
   const persistProgress = useServerFn(saveTravelProgress);
