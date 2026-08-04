@@ -238,7 +238,51 @@ function PremiumPage() {
         <p className="mt-2 text-center text-sm text-muted-foreground">
           Veja exatamente o que cada nível libera e por quanto tempo.
         </p>
-        <div className="mt-8 overflow-x-auto rounded-2xl border border-border bg-card shadow-lg">
+
+        {/* Mobile: collapsible cards per tier */}
+        <div className="mt-8 space-y-4 md:hidden">
+          {MOBILE_TIERS.map((tier) => (
+            <details
+              key={tier.id}
+              className="group rounded-2xl border border-border bg-card shadow-lg"
+            >
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-5 py-4">
+                <span
+                  className={`text-lg font-semibold ${
+                    tier.highlight ? "text-accent" : "text-foreground"
+                  }`}
+                >
+                  {tier.label}
+                </span>
+                <span className="text-sm font-medium text-muted-foreground">
+                  {tier.price}
+                </span>
+                <span className="ml-auto text-muted-foreground transition group-open:rotate-180">
+                  ▾
+                </span>
+              </summary>
+              <div className="divide-y divide-border border-t border-border px-5 pb-4">
+                {tier.rows.map((row) => (
+                  <div
+                    key={row.feature}
+                    className="flex items-center justify-between gap-3 py-2.5"
+                  >
+                    <span className="min-w-0 text-sm text-muted-foreground">
+                      {row.feature}
+                    </span>
+                    <span className="shrink-0 text-sm">{cell(row.value)}</span>
+                  </div>
+                ))}
+              </div>
+            </details>
+          ))}
+          <p className="text-center text-xs text-muted-foreground">
+            Os valores anuais equivalem a 10 meses de pagamento — 2 meses são cortesia.
+          </p>
+        </div>
+
+        {/* Desktop: comparison table */}
+        <div className="mt-8 hidden overflow-x-auto rounded-2xl border border-border bg-card shadow-lg md:block">
           <table className="w-full min-w-[680px] text-left text-sm">
             <thead>
               <tr className="border-b border-border bg-accent/5">
@@ -284,7 +328,7 @@ function PremiumPage() {
             </tbody>
           </table>
         </div>
-        <p className="mt-4 text-center text-xs text-muted-foreground">
+        <p className="mt-4 hidden text-center text-xs text-muted-foreground md:block">
           Os valores anuais equivalem a 10 meses de pagamento — 2 meses são cortesia.
         </p>
       </section>
