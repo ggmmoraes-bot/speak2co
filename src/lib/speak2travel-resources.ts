@@ -1,7 +1,7 @@
 /**
  * Speak2Travel — Material Complementar.
  * Conteúdo desenvolvido de cada seção: vocabulário, gramática, laboratório de
- * pronúncia, inglês de sobrevivência, dicas culturais e mini dicionário.
+ * pronúncia, inglês de sobrevivência, dicas culturais e pocket dictionary.
  * Todo item é praticável: áudio da IA (modelo nativo) + fala do aluno para checagem.
  */
 
@@ -465,7 +465,7 @@ export const TRAVEL_RESOURCE_CONTENT: TravelResourceContent[] = [
   },
   {
     id: "mini-dictionary",
-    title: "Mini Dicionário",
+    title: "Pocket Dictionary",
     subtitle: "Consulta rápida por tema",
     description:
       "Palavra por palavra, agrupada pelos temas dos 10 módulos. Ideal para consultar no meio da viagem — e cada verbete tem áudio para você conferir a pronúncia na hora.",
