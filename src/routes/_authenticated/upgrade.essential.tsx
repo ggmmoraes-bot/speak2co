@@ -56,7 +56,7 @@ export const Route = createFileRoute("/_authenticated/upgrade/essential")({
 });
 
 function UpgradeEssentialPage() {
-  const { feature } = Route.useSearch();
+  const feature = Route.useSearch().feature as UpgradeFeature | undefined;
   const checkout = useServerFn(startMercadoPagoCheckout);
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
 
