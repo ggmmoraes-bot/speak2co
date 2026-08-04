@@ -32,11 +32,15 @@ import { supabase } from "@/integrations/supabase/client";
 
 
 export const Route = createFileRoute("/_authenticated/professor/$threadId")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    prompt: typeof search["prompt"] === "string" ? (search["prompt"] as string) : undefined,
+  }),
   component: ProfessorThread,
 });
 
 function ProfessorThread() {
   const { threadId } = Route.useParams();
+  const { prompt } = Route.useSearch();
   const fetchMessages = useServerFn(getThreadMessages);
 
   const { data: initialMessages, isLoading } = useQuery({
@@ -52,16 +56,26 @@ function ProfessorThread() {
     );
   }
 
-  return <ChatWindow key={threadId} threadId={threadId} initialMessages={initialMessages as UIMessage[]} />;
+  return (
+    <ChatWindow
+      key={threadId}
+      threadId={threadId}
+      initialMessages={initialMessages as UIMessage[]}
+      autoPrompt={prompt}
+    />
+  );
 }
 
 function ChatWindow({
   threadId,
   initialMessages,
+  autoPrompt,
 }: {
   threadId: string;
   initialMessages: UIMessage[];
+  autoPrompt?: string | undefined;
 }) {
+
   const queryClient = useQueryClient();
   const promptRef = useRef<HTMLDivElement | null>(null);
 
