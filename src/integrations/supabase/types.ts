@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_usage_daily: {
+        Row: {
+          created_at: string
+          feature_key: string
+          id: string
+          seconds_used: number
+          updated_at: string
+          usage_date: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          feature_key?: string
+          id?: string
+          seconds_used?: number
+          updated_at?: string
+          usage_date?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          feature_key?: string
+          id?: string
+          seconds_used?: number
+          updated_at?: string
+          usage_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       chat_messages: {
         Row: {
           created_at: string
@@ -121,6 +151,45 @@ export type Database = {
         }
         Relationships: []
       }
+      features: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          key: string
+          name: string
+          route: string | null
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          key: string
+          name: string
+          route?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          key?: string
+          name?: string
+          route?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       interview_sessions: {
         Row: {
           answers: Json
@@ -223,6 +292,108 @@ export type Database = {
           user_id?: string
           writing_answer?: string | null
           writing_prompt?: string | null
+        }
+        Relationships: []
+      }
+      plan_features: {
+        Row: {
+          created_at: string
+          enabled: boolean
+          feature_key: string
+          id: string
+          note: string | null
+          plan_key: string
+        }
+        Insert: {
+          created_at?: string
+          enabled?: boolean
+          feature_key: string
+          id?: string
+          note?: string | null
+          plan_key: string
+        }
+        Update: {
+          created_at?: string
+          enabled?: boolean
+          feature_key?: string
+          id?: string
+          note?: string | null
+          plan_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plan_features_feature_key_fkey"
+            columns: ["feature_key"]
+            isOneToOne: false
+            referencedRelation: "features"
+            referencedColumns: ["key"]
+          },
+          {
+            foreignKeyName: "plan_features_plan_key_fkey"
+            columns: ["plan_key"]
+            isOneToOne: false
+            referencedRelation: "plans"
+            referencedColumns: ["key"]
+          },
+        ]
+      }
+      plans: {
+        Row: {
+          access_level: number
+          ai_daily_minutes: number | null
+          created_at: string
+          currency: string
+          description: string | null
+          highlight: boolean
+          id: string
+          is_active: boolean
+          key: string
+          monthly_checkout_key: string | null
+          monthly_price: number | null
+          name: string
+          sort_order: number
+          tagline: string | null
+          updated_at: string
+          yearly_checkout_key: string | null
+          yearly_price: number | null
+        }
+        Insert: {
+          access_level?: number
+          ai_daily_minutes?: number | null
+          created_at?: string
+          currency?: string
+          description?: string | null
+          highlight?: boolean
+          id?: string
+          is_active?: boolean
+          key: string
+          monthly_checkout_key?: string | null
+          monthly_price?: number | null
+          name: string
+          sort_order?: number
+          tagline?: string | null
+          updated_at?: string
+          yearly_checkout_key?: string | null
+          yearly_price?: number | null
+        }
+        Update: {
+          access_level?: number
+          ai_daily_minutes?: number | null
+          created_at?: string
+          currency?: string
+          description?: string | null
+          highlight?: boolean
+          id?: string
+          is_active?: boolean
+          key?: string
+          monthly_checkout_key?: string | null
+          monthly_price?: number | null
+          name?: string
+          sort_order?: number
+          tagline?: string | null
+          updated_at?: string
+          yearly_checkout_key?: string | null
+          yearly_price?: number | null
         }
         Relationships: []
       }
@@ -393,6 +564,7 @@ export type Database = {
           id: string
           init_point: string | null
           next_payment_date: string | null
+          plan_key: string | null
           plan_label: string | null
           preapproval_id: string | null
           provider: string
@@ -409,6 +581,7 @@ export type Database = {
           id?: string
           init_point?: string | null
           next_payment_date?: string | null
+          plan_key?: string | null
           plan_label?: string | null
           preapproval_id?: string | null
           provider?: string
@@ -425,6 +598,7 @@ export type Database = {
           id?: string
           init_point?: string | null
           next_payment_date?: string | null
+          plan_key?: string | null
           plan_label?: string | null
           preapproval_id?: string | null
           provider?: string
@@ -477,6 +651,27 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -496,9 +691,17 @@ export type Database = {
           user_id: string
         }[]
       }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      plan_tier: "free" | "premium"
+      app_role: "admin" | "moderator" | "user"
+      plan_tier: "free" | "premium" | "essential" | "signature"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -626,7 +829,8 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      plan_tier: ["free", "premium"],
+      app_role: ["admin", "moderator", "user"],
+      plan_tier: ["free", "premium", "essential", "signature"],
     },
   },
 } as const
