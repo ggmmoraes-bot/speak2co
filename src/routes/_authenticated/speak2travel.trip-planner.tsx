@@ -1,11 +1,48 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { ArrowLeft, Loader2, Sparkles } from "lucide-react";
+import { ArrowLeft, Loader2, Sparkles, Volume2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { speakText } from "@/lib/voice-client";
 import { generateTripPlan, type TripPlan } from "@/lib/trip-planner.functions";
+
+/** Extrai o trecho em inglês (entre aspas) quando o texto vem em português. */
+function englishPart(text: string) {
+  const quoted = text.match(/["“'']([^"”'']{3,})["”'']/);
+  return (quoted?.[1] ?? text).trim();
+}
+
+/** Botão de pronúncia da IA para um trecho em inglês. */
+function SpeakButton({ text, label = "Ouvir a IA" }: { text: string; label?: string }) {
+  const [playing, setPlaying] = useState(false);
+  return (
+    <button
+      type="button"
+      aria-label={`Ouvir pronúncia: ${text}`}
+      onClick={async () => {
+        try {
+          setPlaying(true);
+          await speakText(text);
+        } catch (e) {
+          toast.error(e instanceof Error ? e.message : "Não foi possível tocar o áudio.");
+        } finally {
+          setPlaying(false);
+        }
+      }}
+      disabled={playing}
+      className="inline-flex shrink-0 items-center gap-1 rounded-full border border-primary/40 px-2 py-0.5 text-[11px] text-foreground/80 transition hover:border-gold/60 disabled:opacity-60"
+    >
+      {playing ? (
+        <Loader2 className="h-3 w-3 animate-spin" />
+      ) : (
+        <Volume2 className="h-3 w-3" />
+      )}
+      {label}
+    </button>
+  );
+}
 
 export const Route = createFileRoute("/_authenticated/speak2travel/trip-planner")({
   head: () => ({
@@ -114,16 +151,22 @@ function TripPlannerPage() {
               </p>
               <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                 {plan.vocabulary.map((word) => (
-                  <li key={word.term} className="text-sm text-foreground/80">
-                    <span className="font-semibold text-foreground">{word.term}</span> —{" "}
-                    {word.meaning}
+                  <li
+                    key={word.term}
+                    className="flex items-start justify-between gap-2 text-sm text-foreground/80"
+                  >
+                    <span>
+                      <span className="font-semibold text-foreground">{word.term}</span> —{" "}
+                      {word.meaning}
+                    </span>
+                    <SpeakButton text={word.term} label="Ouvir" />
                   </li>
                 ))}
               </ul>
             </div>
 
-            <ListCard title="Expressões" items={plan.expressions} />
-            <ListCard title="Situações prováveis" items={plan.likelySituations} />
+            <ListCard title="Expressões" items={plan.expressions} speak />
+            <ListCard title="Situações prováveis" items={plan.likelySituations} speak />
 
             <div className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur">
               <p className="text-xs tracking-widest text-muted-foreground uppercase">
@@ -146,14 +189,26 @@ function TripPlannerPage() {
   );
 }
 
-function ListCard({ title, items }: { title: string; items: string[] }) {
+function ListCard({
+  title,
+  items,
+  speak = false,
+}: {
+  title: string;
+  items: string[];
+  speak?: boolean;
+}) {
   return (
     <div className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur">
       <p className="text-xs tracking-widest text-muted-foreground uppercase">{title}</p>
       <ul className="mt-3 space-y-2">
         {items.map((item) => (
-          <li key={item} className="text-sm text-foreground/80">
-            {item}
+          <li
+            key={item}
+            className="flex items-start justify-between gap-2 text-sm text-foreground/80"
+          >
+            <span>{item}</span>
+            {speak && <SpeakButton text={englishPart(item)} label="Ouvir" />}
           </li>
         ))}
       </ul>
