@@ -6,6 +6,7 @@ import { Plus, MessageSquare, Trash2, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/speak2co-logo.asset.json";
+import { AiUsageGuard } from "@/components/AiUsageGuard";
 import {
   getThreads,
   createThread,
