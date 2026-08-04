@@ -77,12 +77,20 @@ export async function exportCertificateToPdf(input: CertificatePdfInput) {
   }
 
   const dateLabel = new Date(input.issuedAt ?? Date.now()).toLocaleDateString("pt-BR");
+
+  // Assinatura manuscrita em itálico
+  doc.setFont("times", "italic");
+  doc.setFontSize(34);
+  doc.setTextColor(...GOLD);
+  doc.text("S2co", width / 2, height - 128, { align: "center" });
+
   doc.setDrawColor(...GOLD);
   doc.setLineWidth(1);
   doc.line(width / 2 - 110, height - 118, width / 2 + 110, height - 118);
+  doc.setFont("helvetica", "normal");
   doc.setTextColor(220, 220, 220);
   doc.setFontSize(11);
-  doc.text("Speak2Co · Equipe pedagógica", width / 2, height - 100, { align: "center" });
+  doc.text("Speak2Co - Academic Team", width / 2, height - 100, { align: "center" });
 
   doc.setFontSize(9);
   doc.setTextColor(...GRAY);
