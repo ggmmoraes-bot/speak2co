@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -19,6 +19,11 @@ import {
   evaluateTravelPractice,
   type TravelFeedback,
 } from "@/lib/speak2travel.functions";
+import {
+  getTravelProgress,
+  resetTravelProgress,
+  saveTravelProgress,
+} from "@/lib/speak2travel-progress.functions";
 
 export const Route = createFileRoute("/_authenticated/speak2travel/")({
   head: () => ({
@@ -46,20 +51,82 @@ const track = TRAVEL_TRACKS[0]!;
 
 function Speak2TravelBriefing() {
   const evaluate = useServerFn(evaluateTravelPractice);
+  const loadProgress = useServerFn(getTravelProgress);
+  const persistProgress = useServerFn(saveTravelProgress);
+  const clearProgress = useServerFn(resetTravelProgress);
+
   const [started, setStarted] = useState(false);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [feedback, setFeedback] = useState<TravelFeedback | null>(null);
   const [loading, setLoading] = useState(false);
+  const [restoring, setRestoring] = useState(true);
+  const [resumed, setResumed] = useState(false);
+  const [savedAt, setSavedAt] = useState<string | null>(null);
+  const hydrated = useRef(false);
 
   const prompt = track.prompts[index]!;
   const isLast = index === track.prompts.length - 1;
+
+  useEffect(() => {
+    let active = true;
+    loadProgress({ data: { trackId: track.id } })
+      .then((saved) => {
+        if (!active || !saved) return;
+        setStarted(saved.briefingCompleted);
+        setIndex(Math.min(saved.currentIndex, track.prompts.length - 1));
+        setAnswers(saved.answers ?? {});
+        setFeedback(saved.feedback ?? null);
+        setSavedAt(saved.updatedAt);
+        if (saved.briefingCompleted) setResumed(true);
+      })
+      .catch(() => undefined)
+      .finally(() => {
+        if (!active) return;
+        hydrated.current = true;
+        setRestoring(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [loadProgress]);
+
+  const save = useCallback(
+    (patch: {
+      briefingCompleted: boolean;
+      currentIndex: number;
+      answers: Record<string, string>;
+      feedback?: TravelFeedback | null;
+      completed?: boolean;
+    }) => {
+      persistProgress({ data: { trackId: track.id, ...patch } })
+        .then(() => setSavedAt(new Date().toISOString()))
+        .catch(() => undefined);
+    },
+    [persistProgress],
+  );
+
+  // Autosalva respostas e posição atual (debounce curto).
+  useEffect(() => {
+    if (!hydrated.current || !started || feedback) return;
+    const timer = setTimeout(() => {
+      save({ briefingCompleted: true, currentIndex: index, answers });
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [answers, index, started, feedback, save]);
 
   async function handleFinish() {
     try {
       setLoading(true);
       const result = await evaluate({ data: { trackId: track.id, answers } });
       setFeedback(result);
+      save({
+        briefingCompleted: true,
+        currentIndex: index,
+        answers,
+        feedback: result,
+        completed: true,
+      });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível avaliar sua prática.");
     } finally {
@@ -90,7 +157,17 @@ function Speak2TravelBriefing() {
           </div>
         </header>
 
-        {!started && (
+        {restoring && (
+          <p className="mt-10 text-sm text-muted-foreground">Carregando seu progresso...</p>
+        )}
+
+        {!restoring && resumed && (
+          <div className="mt-8 rounded-2xl border border-gold/40 bg-card/60 p-4 text-sm text-foreground/80 backdrop-blur">
+            Retomamos de onde você parou{savedAt ? ` (salvo em ${formatSaved(savedAt)})` : ""}.
+          </div>
+        )}
+
+        {!restoring && !started && (
           <section className="mt-10 space-y-8">
             <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
               <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
@@ -134,16 +211,22 @@ function Speak2TravelBriefing() {
               </p>
               <p className="mt-3 text-sm text-foreground/80">{track.description}</p>
               <Button
-                onClick={() => setStarted(true)}
+                onClick={() => {
+                  setStarted(true);
+                  save({ briefingCompleted: true, currentIndex: index, answers });
+                }}
                 className="mt-5 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
               >
-                <Play className="mr-1 h-4 w-4" /> Iniciar primeira prática
+                <Play className="mr-1 h-4 w-4" />
+                {Object.keys(answers).length > 0
+                  ? "Continuar de onde parei"
+                  : "Iniciar primeira prática"}
               </Button>
             </div>
           </section>
         )}
 
-        {started && !feedback && (
+        {!restoring && started && !feedback && (
           <section className="mt-10 space-y-6">
             <p className="text-xs tracking-widest text-muted-foreground uppercase">
               Situação {index + 1} de {track.prompts.length} · {prompt.seconds}s sugeridos
@@ -209,7 +292,7 @@ function Speak2TravelBriefing() {
           </section>
         )}
 
-        {feedback && (
+        {!restoring && feedback && (
           <section className="mt-10 space-y-6">
             <div className="rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur">
               <p className="text-xs tracking-widest text-muted-foreground uppercase">
@@ -257,6 +340,9 @@ function Speak2TravelBriefing() {
                 setAnswers({});
                 setIndex(0);
                 setStarted(false);
+                setResumed(false);
+                setSavedAt(null);
+                clearProgress({ data: { trackId: track.id } }).catch(() => undefined);
               }}
             >
               Refazer a prática
@@ -266,6 +352,15 @@ function Speak2TravelBriefing() {
       </div>
     </main>
   );
+}
+
+function formatSaved(iso: string) {
+  return new Date(iso).toLocaleString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 }
 
 function FeedbackList({ title, items }: { title: string; items: string[] }) {
