@@ -1,4 +1,5 @@
 import { jsPDF } from "jspdf";
+import { getLogoDataUrl } from "@/lib/pdf-logo";
 
 type WeeklyFocus = { week: number; title: string; activities: string[] };
 
@@ -15,7 +16,8 @@ const NAVY: [number, number, number] = [15, 26, 51];
 const GOLD: [number, number, number] = [193, 154, 60];
 const GRAY: [number, number, number] = [70, 70, 70];
 
-export function exportPlanVersionToPdf(input: PlanPdfInput) {
+export async function exportPlanVersionToPdf(input: PlanPdfInput) {
+  const logo = await getLogoDataUrl();
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
@@ -28,17 +30,21 @@ export function exportPlanVersionToPdf(input: PlanPdfInput) {
   // Header band
   doc.setFillColor(...NAVY);
   doc.rect(0, 0, pageWidth, 96, "F");
+  const textLeft = logo ? margin + 76 : margin;
+  if (logo) {
+    doc.addImage(logo, "PNG", margin, 12, 68, 68);
+  }
   doc.setTextColor(255, 255, 255);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(22);
-  doc.text("Speak2Co", margin, 44);
+  doc.text("Speak2Co", textLeft, 44);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
   doc.setTextColor(...GOLD);
-  doc.text("English for Every Opportunity", margin, 64);
+  doc.text("English for Every Opportunity", textLeft, 64);
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(10);
-  doc.text(`${input.reasonLabel} — ${dateLabel}`, margin, 82);
+  doc.text(`${input.reasonLabel} — ${dateLabel}`, textLeft, 82);
 
   y = 130;
 

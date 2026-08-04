@@ -1,4 +1,5 @@
 import { jsPDF } from "jspdf";
+import { getLogoDataUrl } from "@/lib/pdf-logo";
 
 export type CertificatePdfInput = {
   studentName: string;
@@ -13,7 +14,8 @@ const NAVY: [number, number, number] = [15, 26, 51];
 const GOLD: [number, number, number] = [193, 154, 60];
 const GRAY: [number, number, number] = [90, 90, 90];
 
-export function exportCertificateToPdf(input: CertificatePdfInput) {
+export async function exportCertificateToPdf(input: CertificatePdfInput) {
+  const logo = await getLogoDataUrl();
   const doc = new jsPDF({ unit: "pt", format: "a4", orientation: "landscape" });
   const width = doc.internal.pageSize.getWidth();
   const height = doc.internal.pageSize.getHeight();
@@ -27,19 +29,23 @@ export function exportCertificateToPdf(input: CertificatePdfInput) {
   doc.setLineWidth(0.6);
   doc.rect(38, 38, width - 76, height - 76);
 
-  doc.setTextColor(255, 255, 255);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(26);
-  doc.text("Speak2Co", width / 2, 96, { align: "center" });
-
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(11);
-  doc.setTextColor(...GOLD);
-  doc.text("English for Every Opportunity", width / 2, 116, { align: "center" });
+  if (logo) {
+    const logoSize = 92;
+    doc.addImage(logo, "PNG", width / 2 - logoSize / 2, 54, logoSize, logoSize);
+  } else {
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(26);
+    doc.text("Speak2Co", width / 2, 96, { align: "center" });
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(11);
+    doc.setTextColor(...GOLD);
+    doc.text("English for Every Opportunity", width / 2, 116, { align: "center" });
+  }
 
   doc.setFontSize(13);
   doc.setTextColor(230, 230, 230);
-  doc.text("Certificamos que", width / 2, 176, { align: "center" });
+  doc.text("Certificamos que", width / 2, 186, { align: "center" });
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(30);
