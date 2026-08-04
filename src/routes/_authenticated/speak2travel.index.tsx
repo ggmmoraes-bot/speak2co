@@ -188,9 +188,11 @@ function Speak2TravelHub() {
           </h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {TRAVEL_RESOURCES.map((resource) => (
-              <div
+              <Link
                 key={resource.id}
-                className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur"
+                to="/speak2travel/material/$resourceId"
+                params={{ resourceId: resource.id }}
+                className="block rounded-2xl border border-border bg-card/60 p-5 backdrop-blur transition hover:border-gold/60"
               >
                 <p className="font-semibold text-foreground">{resource.title}</p>
                 <p className="text-xs tracking-wide text-muted-foreground uppercase">
@@ -207,9 +209,13 @@ function Speak2TravelHub() {
                     </li>
                   ))}
                 </ul>
-              </div>
+                <p className="mt-4 inline-flex rounded-full bg-gold px-4 py-1.5 text-xs font-semibold text-primary-foreground">
+                  Praticar com áudio da IA
+                </p>
+              </Link>
             ))}
           </div>
+
         </section>
 
         <section className="mt-12">
