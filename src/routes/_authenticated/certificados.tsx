@@ -42,6 +42,33 @@ function CertificadosPage() {
     queryFn: () => fetchCertificates(),
   });
 
+  const [signatureText, setSignatureText] = useState(DEFAULT_SIGNATURE_TEXT);
+  const [signatureCaption, setSignatureCaption] = useState(DEFAULT_SIGNATURE_CAPTION);
+
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
+      const parsed = JSON.parse(saved) as {
+        signatureText?: string;
+        signatureCaption?: string;
+      };
+      if (typeof parsed.signatureText === "string") setSignatureText(parsed.signatureText);
+      if (typeof parsed.signatureCaption === "string")
+        setSignatureCaption(parsed.signatureCaption);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  const persist = (next: { signatureText: string; signatureCaption: string }) => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    } catch {
+      /* ignore */
+    }
+  };
+
   const certificates = data?.certificates ?? [];
   const unlocked = certificates.filter((c) => c.unlocked).length;
 
@@ -61,12 +88,75 @@ function CertificadosPage() {
             : `${unlocked} de ${certificates.length} certificados liberados.`}
         </p>
 
+        <section className="mt-8 rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
+          <h2 className="text-lg font-semibold text-gold">Configurações do certificado</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Personalize a assinatura manuscrita e a linha de identificação impressas no PDF.
+          </p>
+
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-2">
+              <Label htmlFor="signature-text">Assinatura (itálico manuscrito)</Label>
+              <Input
+                id="signature-text"
+                value={signatureText}
+                maxLength={40}
+                placeholder={DEFAULT_SIGNATURE_TEXT}
+                onChange={(e) => {
+                  setSignatureText(e.target.value);
+                  persist({ signatureText: e.target.value, signatureCaption });
+                }}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="signature-caption">Texto abaixo da linha</Label>
+              <Input
+                id="signature-caption"
+                value={signatureCaption}
+                maxLength={80}
+                placeholder={DEFAULT_SIGNATURE_CAPTION}
+                onChange={(e) => {
+                  setSignatureCaption(e.target.value);
+                  persist({ signatureText, signatureCaption: e.target.value });
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="mt-5 rounded-xl border border-gold/30 bg-background/40 px-5 py-4 text-center">
+            <p className="font-serif text-2xl italic text-gold">
+              {signatureText || DEFAULT_SIGNATURE_TEXT}
+            </p>
+            <div className="mx-auto mt-1 h-px w-56 bg-gold/60" />
+            <p className="mt-2 text-xs text-muted-foreground">
+              {signatureCaption || DEFAULT_SIGNATURE_CAPTION}
+            </p>
+          </div>
+
+          <Button
+            variant="outline"
+            className="mt-4 rounded-full"
+            onClick={() => {
+              setSignatureText(DEFAULT_SIGNATURE_TEXT);
+              setSignatureCaption(DEFAULT_SIGNATURE_CAPTION);
+              persist({
+                signatureText: DEFAULT_SIGNATURE_TEXT,
+                signatureCaption: DEFAULT_SIGNATURE_CAPTION,
+              });
+            }}
+          >
+            Restaurar padrão
+          </Button>
+        </section>
+
         <div className="mt-8 grid gap-5">
           {certificates.map((certificate) => (
             <CertificateCard
               key={certificate.id}
               certificate={certificate}
               studentName={data?.studentName ?? "Aluno Speak2Co"}
+              signatureText={signatureText}
+              signatureCaption={signatureCaption}
             />
           ))}
         </div>
@@ -78,9 +168,13 @@ function CertificadosPage() {
 function CertificateCard({
   certificate,
   studentName,
+  signatureText,
+  signatureCaption,
 }: {
   certificate: Certificate;
   studentName: string;
+  signatureText: string;
+  signatureCaption: string;
 }) {
   const percent = Math.round(certificate.progress * 100);
 
@@ -126,6 +220,8 @@ function CertificateCard({
               detail: certificate.detail,
               issuedAt: certificate.issuedAt,
               code: certificate.code,
+              signatureText,
+              signatureCaption,
             })
           }
           className="bg-gold text-primary-foreground glow-gold rounded-full font-semibold hover:opacity-90"
