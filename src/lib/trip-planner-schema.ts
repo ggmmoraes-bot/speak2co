@@ -73,8 +73,17 @@ export function normalizeTripPlan(
     weather: toText(raw.weather),
     packing: list(raw.packing),
     vocabulary: (raw.vocabulary ?? [])
-      .map((v) => ({ term: toText(v.term), meaning: toText(v.meaning) }))
+      .map((v) => {
+        if (typeof v === "string") {
+          const match = v.match(/^(.+?)\s*[—–\-(:]\s*(.+?)\)?$/);
+          return match
+            ? { term: match[1].trim(), meaning: match[2].trim() }
+            : { term: v.trim(), meaning: "" };
+        }
+        return { term: toText(v.term), meaning: toText(v.meaning) };
+      })
       .filter((v) => v.term),
+
     expressions: list(raw.expressions),
     likelySituations: list(raw.likelySituations),
     studyPlan: (raw.studyPlan ?? [])
