@@ -110,7 +110,7 @@ function CertificateCard({
         <Button
           disabled={!certificate.unlocked}
           onClick={() =>
-            exportCertificateToPdf({
+            void exportCertificateToPdf({
               studentName,
               title: certificate.title,
               subtitle: certificate.subtitle,
