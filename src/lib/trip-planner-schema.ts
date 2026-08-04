@@ -22,8 +22,14 @@ export const rawTripPlanSchema = z.object({
   weather: looseText.optional(),
   packing: z.array(looseText).optional(),
   vocabulary: z
-    .array(z.object({ term: looseText.optional(), meaning: looseText.optional() }))
+    .array(
+      z.union([
+        z.string(),
+        z.object({ term: looseText.optional(), meaning: looseText.optional() }),
+      ]),
+    )
     .optional(),
+
   expressions: z.array(looseText).optional(),
   likelySituations: z.array(looseText).optional(),
   studyPlan: z
