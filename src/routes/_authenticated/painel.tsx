@@ -584,13 +584,13 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                   asChild
                   className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                 >
-                  <Link to="/premium">Liberar com o Essential</Link>
+                  <Link to="/upgrade/essential" search={{}}>Liberar com o Essential</Link>
                 </Button>
               </div>
             )}
           </div>
 
-          {milestones.length > 0 && (
+          {fullPlan && milestones.length > 0 && (
             <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
               <p className="text-xs tracking-widest text-muted-foreground uppercase">
                 Marcos de evolução
@@ -600,6 +600,27 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                   <li key={i}>✓ {milestone}</li>
                 ))}
               </ul>
+            </div>
+          )}
+
+          {!fullPlan && (
+            <div className="rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur">
+              <div className="flex items-center gap-2 text-gold">
+                <Lock className="h-4 w-4" />
+                <p className="text-xs tracking-widest uppercase">Marcos de evolução bloqueados</p>
+              </div>
+              <p className="mt-3 text-sm text-muted-foreground">
+                Os marcos mostram cada conquista prevista no seu plano. Eles fazem parte do plano
+                Essential.
+              </p>
+              <Button
+                asChild
+                className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+              >
+                <Link to="/upgrade/essential" search={{ feature: "marcos" as const }}>
+                  Fazer upgrade para o Essential
+                </Link>
+              </Button>
             </div>
           )}
         </div>
