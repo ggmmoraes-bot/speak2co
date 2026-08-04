@@ -77,8 +77,9 @@ export function normalizeTripPlan(
         if (typeof v === "string") {
           const match = v.match(/^(.+?)\s*[—–\-(:]\s*(.+?)\)?$/);
           return match
-            ? { term: match[1].trim(), meaning: match[2].trim() }
+            ? { term: (match[1] ?? "").trim(), meaning: (match[2] ?? "").trim() }
             : { term: v.trim(), meaning: "" };
+
         }
         return { term: toText(v.term), meaning: toText(v.meaning) };
       })
