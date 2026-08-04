@@ -2,6 +2,10 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
+function clean<T extends Record<string, unknown>>(obj: T) {
+  return Object.fromEntries(Object.entries(obj).filter(([, v]) => v !== undefined)) as T;
+}
+
 async function assertAdmin(context: { supabase: any; userId: string }) {
   const { data } = await context.supabase.rpc("has_role", {
     _user_id: context.userId,
@@ -65,7 +69,7 @@ export const upsertPlan = createServerFn({ method: "POST" })
   .inputValidator((d) => planSchema.parse(d))
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
-    const { error } = await context.supabase.from("plans").upsert(data, { onConflict: "key" });
+    const { error } = await context.supabase.from("plans").upsert(clean(data) as never, { onConflict: "key" });
     if (error) throw new Error(error.message);
     return { ok: true };
   });
@@ -86,7 +90,7 @@ export const upsertFeature = createServerFn({ method: "POST" })
   .inputValidator((d) => featureSchema.parse(d))
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
-    const { error } = await context.supabase.from("features").upsert(data, { onConflict: "key" });
+    const { error } = await context.supabase.from("features").upsert(clean(data) as never, { onConflict: "key" });
     if (error) throw new Error(error.message);
     return { ok: true };
   });
