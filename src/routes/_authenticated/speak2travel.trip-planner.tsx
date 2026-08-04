@@ -189,14 +189,26 @@ function TripPlannerPage() {
   );
 }
 
-function ListCard({ title, items }: { title: string; items: string[] }) {
+function ListCard({
+  title,
+  items,
+  speak = false,
+}: {
+  title: string;
+  items: string[];
+  speak?: boolean;
+}) {
   return (
     <div className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur">
       <p className="text-xs tracking-widest text-muted-foreground uppercase">{title}</p>
       <ul className="mt-3 space-y-2">
         {items.map((item) => (
-          <li key={item} className="text-sm text-foreground/80">
-            {item}
+          <li
+            key={item}
+            className="flex items-start justify-between gap-2 text-sm text-foreground/80"
+          >
+            <span>{item}</span>
+            {speak && <SpeakButton text={englishPart(item)} label="Ouvir" />}
           </li>
         ))}
       </ul>
