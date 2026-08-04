@@ -1,10 +1,20 @@
 const MP_API = "https://api.mercadopago.com";
 
-export type PlanKey = "monthly" | "yearly";
+export type PlanKey =
+  | "essential_monthly"
+  | "essential_yearly"
+  | "premium_monthly"
+  | "premium_yearly"
+  | "signature_monthly"
+  | "signature_yearly";
 
 export const MP_PLANS: Record<PlanKey, { label: string; amount: number; frequency: number; frequency_type: "months" }> = {
-  monthly: { label: "Premium Mensal", amount: 49.9, frequency: 1, frequency_type: "months" },
-  yearly: { label: "Premium Anual", amount: 479.0, frequency: 12, frequency_type: "months" },
+  essential_monthly: { label: "Essential Mensal", amount: 19.9, frequency: 1, frequency_type: "months" },
+  essential_yearly: { label: "Essential Anual", amount: 199.0, frequency: 12, frequency_type: "months" },
+  premium_monthly: { label: "Premium Mensal", amount: 49.9, frequency: 1, frequency_type: "months" },
+  premium_yearly: { label: "Premium Anual", amount: 499.0, frequency: 12, frequency_type: "months" },
+  signature_monthly: { label: "Signature Mensal", amount: 59.9, frequency: 1, frequency_type: "months" },
+  signature_yearly: { label: "Signature Anual", amount: 599.0, frequency: 12, frequency_type: "months" },
 };
 
 function getToken() {
