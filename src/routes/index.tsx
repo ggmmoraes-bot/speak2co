@@ -41,9 +41,24 @@ const products = [
 ];
 
 const features = [
-  { icon: Sparkles, title: "Professor de IA", text: "Converse em inglês 24h e receba correções de gramática e pronúncia." },
-  { icon: GraduationCap, title: "Plano personalizado", text: "Teste de nivelamento e trilha de estudos feita para o seu objetivo." },
-  { icon: Globe, title: "Situações reais", text: "Aeroporto, hotel, reuniões e entrevistas — treine antes de viver." },
+  {
+    icon: Sparkles,
+    title: "AI Teacher",
+    subtitle: "Professor de IA",
+    text: "Converse em inglês 24h e receba correções de gramática e pronúncia.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Personalized Plan",
+    subtitle: "Plano personalizado",
+    text: "Teste de nivelamento e trilha de estudos feita para o seu objetivo.",
+  },
+  {
+    icon: Globe,
+    title: "Real Situations",
+    subtitle: "Situações reais",
+    text: "Aeroporto, hotel, reuniões e entrevistas — treine antes de viver.",
+  },
 ];
 
 function Index() {
