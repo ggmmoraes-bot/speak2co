@@ -128,10 +128,8 @@ function Speak2TravelHub() {
             {TRAVEL_TRACKS.map((track) => {
               const state = progress[track.id];
               return (
-                <Link
+                <div
                   key={track.id}
-                  to="/speak2travel/modulo/$moduleId"
-                  params={{ moduleId: track.id }}
                   className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur transition hover:border-gold/60"
                 >
                   <div className="flex items-center justify-between gap-3">
@@ -146,7 +144,13 @@ function Speak2TravelHub() {
                       <span className="text-xs text-muted-foreground">Em andamento</span>
                     ) : null}
                   </div>
-                  <p className="mt-2 text-lg font-semibold text-gold">{track.title}</p>
+                  <Link
+                    to="/speak2travel/modulo/$moduleId"
+                    params={{ moduleId: track.id }}
+                    className="mt-2 block text-lg font-semibold text-gold"
+                  >
+                    {track.title}
+                  </Link>
                   <p className="text-xs tracking-wide text-muted-foreground uppercase">
                     {track.subtitle} · {track.prompts.length} situações
                   </p>
@@ -156,7 +160,23 @@ function Speak2TravelHub() {
                       <LifeBuoy className="h-3.5 w-3.5" /> Módulo prioritário
                     </p>
                   )}
-                </Link>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Link
+                      to="/speak2travel/modulo/$moduleId"
+                      params={{ moduleId: track.id }}
+                      className="rounded-full bg-gold px-4 py-1.5 text-xs font-semibold text-primary-foreground hover:opacity-90"
+                    >
+                      Praticar
+                    </Link>
+                    <Link
+                      to="/speak2travel/revisao/$moduleId"
+                      params={{ moduleId: track.id }}
+                      className="rounded-full border border-primary/40 px-4 py-1.5 text-xs text-foreground/80 hover:border-gold/60"
+                    >
+                      Revisar ({track.vocabulary.length} cartões)
+                    </Link>
+                  </div>
+                </div>
               );
             })}
           </div>
