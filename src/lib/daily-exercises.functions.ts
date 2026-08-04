@@ -105,7 +105,7 @@ export const generateTodayExercise = createServerFn({ method: "POST" })
         model: gateway("google/gemini-2.5-flash"),
         output: Output.object({ schema: exerciseSchema }),
         system:
-          "Você é o professor de inglês da Speak2Co. Crie exercícios diários curtos de inglês. Enunciados e explicações em português do Brasil; as frases praticadas em inglês. Gere exatamente 5 questões de múltipla escolha, cada uma com 4 alternativas e uma resposta correta idêntica a uma das alternativas.",
+          "Você é o professor de inglês da Speak2Co. Crie exercícios diários curtos de inglês. Enunciados e explicações em português do Brasil; as frases praticadas em inglês. Gere exatamente 5 questões de múltipla escolha, cada uma com 4 alternativas e uma resposta correta idêntica a uma das alternativas.\n\nResponda APENAS com um objeto JSON usando exatamente estas chaves em inglês: \"title\" (string), \"instructions\" (string) e \"items\" (array). Cada item deve ter as chaves \"question\", \"options\" (array de strings), \"answer\" (string idêntica a uma das options) e \"explanation\". Nunca traduza os nomes das chaves (não use titulo, instrucoes, questoes, alternativas, resposta ou explicacao).",
         prompt: `Aluno: ${profile?.full_name ?? "aluno"}
 Nível atual: ${placement?.level ?? profile?.english_level ?? "não avaliado"}
 Nível desejado: ${profile?.target_level ?? "B2"}
@@ -118,16 +118,23 @@ Resumo do plano: ${plan.summary ?? ""}
 Foco da semana ${weekNumber}: ${week?.title ?? "inglês geral"}
 Atividades da semana: ${(week?.activities ?? []).join("; ")}
 
-Crie o exercício de hoje com título curto, instruções de 1 frase e 5 questões alinhadas ao foco da semana.`,
+Crie o exercício de hoje com título curto, instruções de 1 frase e 5 questões alinhadas ao foco da semana.
+Chaves obrigatórias do JSON: title, instructions, items[].question, items[].options, items[].answer, items[].explanation.`,
       });
       output = result.output;
     } catch (e) {
       const message = e instanceof Error ? e.message : "";
       if (message.includes("429")) throw new Error("Muitas solicitações. Tente novamente em instantes.");
       if (message.includes("402")) throw new Error("Créditos de IA esgotados. Adicione créditos para continuar.");
-      console.error("[daily-exercises] geração falhou", e);
-      throw new Error("Não foi possível gerar seus exercícios agora.");
+      const { rescueExercise } = await import("./daily-exercises.server");
+      const rescued = rescueExercise(e);
+      if (!rescued) {
+        console.error("[daily-exercises] geração falhou", e);
+        throw new Error("Não foi possível gerar seus exercícios agora.");
+      }
+      output = rescued;
     }
+
 
     const { data, error } = await context.supabase
       .from("daily_exercises")
