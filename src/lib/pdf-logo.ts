@@ -18,12 +18,18 @@ async function buildLogoDataUrl(): Promise<string | null> {
       image.onerror = () => reject(new Error("logo load failed"));
     });
 
-    const size = 512;
+    // Alta resolução: usa o maior lado nativo da arte (mínimo 1024, máximo 2048)
+    // para que a logo permaneça nítida na impressão (>= 300 DPI nos tamanhos usados).
+    const natural = Math.max(image.naturalWidth || 0, image.naturalHeight || 0);
+    const size = Math.min(2048, Math.max(1024, natural));
     const canvas = document.createElement("canvas");
     canvas.width = size;
     canvas.height = size;
     const ctx = canvas.getContext("2d");
     if (!ctx) return null;
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+    ctx.clearRect(0, 0, size, size);
     ctx.drawImage(image, 0, 0, size, size);
 
     const data = ctx.getImageData(0, 0, size, size);
@@ -33,9 +39,13 @@ async function buildLogoDataUrl(): Promise<string | null> {
         0.299 * (pixels[i] ?? 0) + 0.587 * (pixels[i + 1] ?? 0) + 0.114 * (pixels[i + 2] ?? 0);
       if (luminance < 42) {
         pixels[i + 3] = 0;
+      } else if (luminance < 70) {
+        // Borda suave: evita halo escuro serrilhado sobre o fundo marinho.
+        pixels[i + 3] = Math.round(((luminance - 42) / 28) * 255);
       }
     }
     ctx.putImageData(data, 0, 0);
+    // PNG sem perdas mantém as bordas do emblema nítidas.
     return canvas.toDataURL("image/png");
   } catch {
     return null;
@@ -60,6 +70,9 @@ export async function getLogoDataUrl(): Promise<string | null> {
 
 export const PDF_BRAND_MARGIN = 48;
 
+/** Alias único para embutir a logo uma só vez por documento. */
+const PDF_LOGO_ALIAS = "speak2co-logo";
+
 type LogoVariant = "hero" | "header" | "footer";
 
 const VARIANT_RATIO: Record<LogoVariant, number> = {
@@ -83,6 +96,8 @@ type MinimalDoc = {
     y: number,
     w: number,
     h: number,
+    alias?: string,
+    compression?: string,
   ): unknown;
 };
 
@@ -127,6 +142,8 @@ export function drawPdfLogo(
       ? pageHeight - options.bottom - size
       : (options.top ?? PDF_BRAND_MARGIN);
 
-  doc.addImage(logo, "PNG", x, y, size, size);
+  // alias reaproveita o mesmo objeto de imagem em todas as páginas;
+  // compression "NONE" preserva a resolução original (sem re-encode com perda).
+  doc.addImage(logo, "PNG", x, y, size, size, PDF_LOGO_ALIAS, "NONE");
   return { x, y, size };
 }
