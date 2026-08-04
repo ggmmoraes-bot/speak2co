@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, BookOpen } from "lucide-react";
+import { ArrowLeft, BookOpen, Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PhrasePractice } from "@/components/PhrasePractice";
 import { PronunciationLabSummary } from "@/components/PronunciationLabSummary";
@@ -11,6 +11,7 @@ import {
   TRAVEL_RESOURCE_CONTENT,
   type TravelResourceContent,
 } from "@/lib/speak2travel-resources";
+import { exportTravelMaterialToPdf } from "@/lib/travel-material-pdf";
 
 export const Route = createFileRoute("/_authenticated/speak2travel/material/$resourceId")({
   loader: ({ params }) => {
@@ -45,6 +46,15 @@ function MaterialPage() {
   const total = resource.groups.reduce((sum, g) => sum + g.items.length, 0);
   const isLab = resource.id === "pronunciation-lab";
   const [attempts, setAttempts] = useState<PronunciationAttempt[]>([]);
+  const [exporting, setExporting] = useState(false);
+  const handleExport = useCallback(async () => {
+    setExporting(true);
+    try {
+      await exportTravelMaterialToPdf(resource);
+    } finally {
+      setExporting(false);
+    }
+  }, [resource]);
   const handleAttempt = useCallback(
     (attempt: PronunciationAttempt) => setAttempts((prev) => [...prev, attempt]),
     [],
@@ -66,6 +76,19 @@ function MaterialPage() {
           <h1 className="mt-1 text-3xl font-semibold text-gold">{resource.title}</h1>
           <p className="mt-1 text-sm text-muted-foreground">{resource.subtitle}</p>
           <p className="mt-4 max-w-2xl text-sm text-foreground/80">{resource.description}</p>
+          <Button
+            onClick={handleExport}
+            disabled={exporting}
+            className="mt-5 rounded-full"
+            variant="secondary"
+          >
+            {exporting ? (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <Download className="mr-2 h-4 w-4" />
+            )}
+            Baixar PDF para estudo
+          </Button>
         </header>
 
         {isLab && (
