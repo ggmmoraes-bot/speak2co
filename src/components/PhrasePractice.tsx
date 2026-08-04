@@ -4,6 +4,11 @@ import { toast } from "sonner";
 import { Progress } from "@/components/ui/progress";
 import { MicRecorder } from "@/lib/audio-recorder";
 import { checkPronunciation, speakText, type PronunciationResult } from "@/lib/voice-client";
+import {
+  GRADE_TONE_CLASS,
+  gradePronunciation,
+  type PronunciationAttempt,
+} from "@/lib/pronunciation-grade";
 
 /**
  * Item praticável do material complementar: ouvir a pronúncia da IA e gravar
@@ -13,15 +18,18 @@ export function PhrasePractice({
   en,
   pt,
   note,
+  onAttempt,
 }: {
   en: string;
   pt: string;
   note?: string | undefined;
+  onAttempt?: ((attempt: PronunciationAttempt) => void) | undefined;
 }) {
   const [playing, setPlaying] = useState(false);
   const [recording, setRecording] = useState(false);
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<PronunciationResult | null>(null);
+  const [history, setHistory] = useState<number[]>([]);
   const recorderRef = useRef<MicRecorder | null>(null);
 
   async function playModel() {
@@ -44,7 +52,17 @@ export function PhrasePractice({
       try {
         setBusy(true);
         const { blob } = await rec.stop();
-        setResult(await checkPronunciation(blob, en));
+        const res = await checkPronunciation(blob, en);
+        setResult(res);
+        setHistory((h) => [...h, res.score]);
+        onAttempt?.({
+          id: `${en}-${Date.now()}`,
+          phrase: en,
+          score: res.score,
+          transcript: res.transcript,
+          issues: res.issues,
+          at: Date.now(),
+        });
       } catch (e) {
         toast.error(e instanceof Error ? e.message : "Não foi possível avaliar a pronúncia.");
       } finally {
@@ -116,14 +134,33 @@ export function PhrasePractice({
       {result && (
         <div className="mt-3 space-y-2 rounded-xl border border-border p-3">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-semibold">Precisão</span>
-            <span className="font-bold text-gold">{result.score}%</span>
+            <span className="font-semibold">
+              Nota automática · tentativa {history.length}
+            </span>
+            <span className="flex items-center gap-2">
+              <span
+                className={`rounded-full border px-2 py-0.5 text-[11px] font-bold ${GRADE_TONE_CLASS[gradePronunciation(result.score).tone]}`}
+              >
+                {gradePronunciation(result.score).letter} ·{" "}
+                {gradePronunciation(result.score).score10}/10
+              </span>
+              <span className="font-bold text-gold">{result.score}%</span>
+            </span>
           </div>
           <Progress value={result.score} />
+          <p className="text-xs text-muted-foreground">
+            {gradePronunciation(result.score).label}
+            {history.length > 1 ? ` · tentativas: ${history.join("% · ")}%` : ""}
+          </p>
           <p className="text-xs text-muted-foreground">
             Entendi: <span className="text-foreground italic">“{result.transcript}”</span>
           </p>
           <p className="text-xs">{result.verdict}</p>
+          {result.issues.length > 0 && (
+            <p className="text-xs font-semibold text-foreground">
+              Erros comuns nesta tentativa ({result.issues.length})
+            </p>
+          )}
           {result.issues.length > 0 && (
             <ul className="space-y-1 text-xs">
               {result.issues.map((issue, i) => (

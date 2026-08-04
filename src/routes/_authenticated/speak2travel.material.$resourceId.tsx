@@ -1,7 +1,10 @@
+import { useCallback, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PhrasePractice } from "@/components/PhrasePractice";
+import { PronunciationLabSummary } from "@/components/PronunciationLabSummary";
+import type { PronunciationAttempt } from "@/lib/pronunciation-grade";
 import {
   getTravelResource,
   TRAVEL_RESOURCE_CONTENT,
@@ -39,6 +42,12 @@ export const Route = createFileRoute("/_authenticated/speak2travel/material/$res
 function MaterialPage() {
   const { resource } = Route.useLoaderData() as { resource: TravelResourceContent };
   const total = resource.groups.reduce((sum, g) => sum + g.items.length, 0);
+  const isLab = resource.id === "pronunciation-lab";
+  const [attempts, setAttempts] = useState<PronunciationAttempt[]>([]);
+  const handleAttempt = useCallback(
+    (attempt: PronunciationAttempt) => setAttempts((prev) => [...prev, attempt]),
+    [],
+  );
 
   return (
     <main className="min-h-screen bg-background">
@@ -57,6 +66,8 @@ function MaterialPage() {
           <p className="mt-1 text-sm text-muted-foreground">{resource.subtitle}</p>
           <p className="mt-4 max-w-2xl text-sm text-foreground/80">{resource.description}</p>
         </header>
+
+        {isLab && <PronunciationLabSummary attempts={attempts} />}
 
         <section className="mt-6 rounded-2xl border border-border bg-card/60 p-5 backdrop-blur">
           <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
@@ -82,7 +93,13 @@ function MaterialPage() {
             {group.intro && <p className="mt-2 text-sm text-foreground/80">{group.intro}</p>}
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {group.items.map((item) => (
-                <PhrasePractice key={item.en} en={item.en} pt={item.pt} note={item.note} />
+                <PhrasePractice
+                  key={item.en}
+                  en={item.en}
+                  pt={item.pt}
+                  note={item.note}
+                  onAttempt={isLab ? handleAttempt : undefined}
+                />
               ))}
             </div>
           </section>
