@@ -128,14 +128,17 @@ function Index() {
                   <h3 className="text-xl font-semibold text-gold">{p.name}</h3>
                 </div>
                 <p className="mt-2 flex-1 text-sm text-muted-foreground">{p.tagline}</p>
-                {p.name === "Speak2Travel" && (
+                {(p.name === "Speak2Travel" || p.name === "Speak2Hire") && (
                   <Button
                     asChild
                     className="bg-gold text-primary-foreground mt-5 w-full rounded-full font-semibold hover:opacity-90"
                   >
-                    <Link to="/speak2travel">Começar Speak2Travel</Link>
+                    <Link to={p.name === "Speak2Travel" ? "/speak2travel" : "/speak2hire"}>
+                      Começar {p.name}
+                    </Link>
                   </Button>
                 )}
+
               </div>
             </article>
           ))}
