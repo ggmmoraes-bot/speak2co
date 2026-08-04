@@ -2,7 +2,17 @@ import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
-const planKeySchema = z.object({ planKey: z.enum(["monthly", "yearly"]), origin: z.string().url().max(300) });
+const planKeySchema = z.object({
+  planKey: z.enum([
+    "essential_monthly",
+    "essential_yearly",
+    "premium_monthly",
+    "premium_yearly",
+    "signature_monthly",
+    "signature_yearly",
+  ]),
+  origin: z.string().url().max(300),
+});
 
 export const getMySubscription = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
