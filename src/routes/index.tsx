@@ -119,18 +119,27 @@ function Index() {
           {products.map((p) => (
             <article
               key={p.name}
-              className="overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-deep)]"
+              className="flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-deep)]"
             >
               <img src={p.image} alt={`Arte ${p.name}`} className="aspect-square w-full object-cover" />
-              <div className="p-6">
+              <div className="flex flex-1 flex-col p-6">
                 <div className="flex items-center gap-2">
                   <p.icon className="h-5 w-5 text-primary" />
                   <h3 className="text-xl font-semibold text-gold">{p.name}</h3>
                 </div>
-                <p className="mt-2 text-sm text-muted-foreground">{p.tagline}</p>
+                <p className="mt-2 flex-1 text-sm text-muted-foreground">{p.tagline}</p>
+                {p.name === "Speak2Travel" && (
+                  <Button
+                    asChild
+                    className="bg-gold text-primary-foreground mt-5 w-full rounded-full font-semibold hover:opacity-90"
+                  >
+                    <Link to="/speak2travel">Começar Speak2Travel</Link>
+                  </Button>
+                )}
               </div>
             </article>
           ))}
+
         </div>
       </section>
 
