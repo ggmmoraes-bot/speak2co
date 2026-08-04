@@ -135,9 +135,8 @@ export async function exportPlanVersionToPdf(input: PlanPdfInput) {
     doc.setFontSize(9);
     doc.setTextColor(150, 150, 150);
     doc.text(`Speak2Co · ${dateLabel} · página ${i} de ${pageCount}`, margin, pageHeight - 24);
-    if (logo) {
-      doc.addImage(logo, "PNG", pageWidth - margin - 26, pageHeight - 44, 26, 26);
-    }
+    drawPdfLogo(doc, logo, { variant: "footer", align: "right", bottom: 18 });
+
   }
 
   const stamp = new Date(input.createdAt).toISOString().slice(0, 10);
