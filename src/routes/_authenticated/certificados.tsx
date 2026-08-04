@@ -1,9 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { getCertificates, type Certificate } from "@/lib/certificates.functions";
-import { exportCertificateToPdf } from "@/lib/certificate-pdf";
+import {
+  DEFAULT_SIGNATURE_CAPTION,
+  DEFAULT_SIGNATURE_TEXT,
+  exportCertificateToPdf,
+} from "@/lib/certificate-pdf";
+
+const STORAGE_KEY = "speak2co:certificate-signature";
 
 export const Route = createFileRoute("/_authenticated/certificados")({
   head: () => ({
