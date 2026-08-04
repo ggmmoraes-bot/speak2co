@@ -331,6 +331,19 @@ function TravelModule({ track }: { track: TravelTrack }) {
               className="min-h-36"
             />
 
+            <RolePlayCoach
+              trackId={track.id}
+              prompt={prompt}
+              onUseAnswer={(text) =>
+                setAnswers((prev) => ({
+                  ...prev,
+                  [prompt.id]: `${(prev[prompt.id] ?? "").trim()}\n${text}`.trim(),
+                }))
+              }
+            />
+
+
+
             <div className="flex flex-wrap gap-3">
               {index > 0 && (
                 <Button
