@@ -5,6 +5,7 @@ import { PhrasePractice } from "@/components/PhrasePractice";
 import {
   getTravelResource,
   TRAVEL_RESOURCE_CONTENT,
+  type TravelResourceContent,
 } from "@/lib/speak2travel-resources";
 
 export const Route = createFileRoute("/_authenticated/speak2travel/material/$resourceId")({
@@ -36,7 +37,7 @@ export const Route = createFileRoute("/_authenticated/speak2travel/material/$res
 });
 
 function MaterialPage() {
-  const { resource } = Route.useLoaderData();
+  const { resource } = Route.useLoaderData() as { resource: TravelResourceContent };
   const total = resource.groups.reduce((sum, g) => sum + g.items.length, 0);
 
   return (
