@@ -385,6 +385,17 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
             {previewMutation.isPending ? "Preparando prévia…" : "Ver prévia do ajuste"}
           </Button>
         )}
+        {profileReady && plan && !fullPlan && (
+          <Button
+            asChild
+            className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+          >
+            <Link to="/upgrade/essential" search={{ feature: "ajustes" as const }}>
+              <Lock className="mr-2 h-4 w-4" />
+              Ajustar com IA · Essential
+            </Link>
+          </Button>
+        )}
       </div>
 
       {limited && (
