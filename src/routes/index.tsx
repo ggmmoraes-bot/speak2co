@@ -72,8 +72,7 @@ function Index() {
         />
 
         <h1 className="mt-10 text-4xl font-semibold tracking-tight sm:text-6xl">
-          <span className="text-foreground">Speak2</span>
-          <span className="text-gold">Co</span>
+          <span className="text-foreground">Speak</span><span className="text-gold">2Co</span>
 
         </h1>
         <p className="mt-4 text-lg tracking-[0.2em] text-muted-foreground uppercase sm:text-xl">
