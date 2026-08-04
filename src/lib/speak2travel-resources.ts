@@ -1,7 +1,7 @@
 /**
  * Speak2Travel — Material Complementar.
  * Conteúdo desenvolvido de cada seção: vocabulário, gramática, laboratório de
- * pronúncia, inglês de sobrevivência, dicas culturais e mini dicionário.
+ * pronúncia, inglês de sobrevivência, dicas culturais e pocket dictionary.
  * Todo item é praticável: áudio da IA (modelo nativo) + fala do aluno para checagem.
  */
 
