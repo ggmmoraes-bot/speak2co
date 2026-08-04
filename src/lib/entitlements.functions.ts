@@ -117,9 +117,7 @@ export const getMyAccess = createServerFn({ method: "GET" })
       planKey,
       plan,
       isAdmin,
-      features: isAdmin
-        ? new Proxy(features, { get: () => true, has: () => true })
-        : features,
+      features,
       aiDailyMinutes: isAdmin ? null : (plan?.ai_daily_minutes ?? null),
       aiUsedSeconds: usageRes.data?.seconds_used ?? 0,
     };
