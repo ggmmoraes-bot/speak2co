@@ -81,15 +81,20 @@ export const previewStudyPlanRefinement = createServerFn({ method: "POST" })
     const affectedWeeks = weeks.filter((w) => problemsByWeek.has(w.week));
     const targetWeeks = affectedWeeks.filter((w) => !lockedWeeks.has(w.week));
     if (affectedWeeks.length === 0) {
-      throw new Error(
-        "Nenhuma explicação foi marcada como \"não ajudou\" ainda. Marque no histórico para eu ajustar essa parte do plano.",
-      );
+      return {
+        weeks: [],
+        notice:
+          'Nenhuma explicação foi marcada como "não ajudou" ainda. Marque no histórico para eu ajustar essa parte do plano.',
+      };
     }
     if (targetWeeks.length === 0) {
-      throw new Error(
-        "Todas as semanas afetadas pelo seu feedback estão travadas. Destrave alguma semana para ajustar o plano.",
-      );
+      return {
+        weeks: [],
+        notice:
+          "Todas as semanas afetadas pelo seu feedback estão travadas. Destrave alguma semana para ajustar o plano.",
+      };
     }
+
 
     const { describePlacement, getPlacementSnapshot } = await import("./placement-context.server");
     const placement = await getPlacementSnapshot(context.supabase, context.userId);
