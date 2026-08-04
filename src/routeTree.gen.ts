@@ -33,6 +33,7 @@ import { Route as ApiVoiceTranscribeRouteImport } from './routes/api/voice/trans
 import { Route as AuthenticatedSpeak2hireMaterialMaterialIdRouteImport } from './routes/_authenticated/speak2hire.material.$materialId'
 import { Route as AuthenticatedSpeak2hireSessaoSessionIdRouteImport } from './routes/_authenticated/speak2hire.sessao.$sessionId'
 import { Route as AuthenticatedSpeak2travelModuloModuleIdRouteImport } from './routes/_authenticated/speak2travel.modulo.$moduleId'
+import { Route as AuthenticatedSpeak2travelRevisaoModuleIdRouteImport } from './routes/_authenticated/speak2travel.revisao.$moduleId'
 import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/public/webhooks/mercadopago'
 
 const IndexRoute = IndexRouteImport.update({
@@ -164,6 +165,12 @@ const AuthenticatedSpeak2travelModuloModuleIdRoute =
     path: '/speak2travel/modulo/$moduleId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSpeak2travelRevisaoModuleIdRoute =
+  AuthenticatedSpeak2travelRevisaoModuleIdRouteImport.update({
+    id: '/speak2travel/revisao/$moduleId',
+    path: '/speak2travel/revisao/$moduleId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiPublicWebhooksMercadopagoRoute =
   ApiPublicWebhooksMercadopagoRouteImport.update({
     id: '/api/public/webhooks/mercadopago',
@@ -195,6 +202,7 @@ export interface FileRoutesByFullPath {
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   '/speak2hire/sessao/$sessionId': typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   '/speak2travel/modulo/$moduleId': typeof AuthenticatedSpeak2travelModuloModuleIdRoute
+  '/speak2travel/revisao/$moduleId': typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRoutesByTo {
@@ -220,6 +228,7 @@ export interface FileRoutesByTo {
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   '/speak2hire/sessao/$sessionId': typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   '/speak2travel/modulo/$moduleId': typeof AuthenticatedSpeak2travelModuloModuleIdRoute
+  '/speak2travel/revisao/$moduleId': typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRoutesById {
@@ -248,6 +257,7 @@ export interface FileRoutesById {
   '/_authenticated/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   '/_authenticated/speak2hire/sessao/$sessionId': typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   '/_authenticated/speak2travel/modulo/$moduleId': typeof AuthenticatedSpeak2travelModuloModuleIdRoute
+  '/_authenticated/speak2travel/revisao/$moduleId': typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
 }
 export interface FileRouteTypes {
@@ -276,6 +286,7 @@ export interface FileRouteTypes {
     | '/speak2hire/material/$materialId'
     | '/speak2hire/sessao/$sessionId'
     | '/speak2travel/modulo/$moduleId'
+    | '/speak2travel/revisao/$moduleId'
     | '/api/public/webhooks/mercadopago'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -301,6 +312,7 @@ export interface FileRouteTypes {
     | '/speak2hire/material/$materialId'
     | '/speak2hire/sessao/$sessionId'
     | '/speak2travel/modulo/$moduleId'
+    | '/speak2travel/revisao/$moduleId'
     | '/api/public/webhooks/mercadopago'
   id:
     | '__root__'
@@ -328,6 +340,7 @@ export interface FileRouteTypes {
     | '/_authenticated/speak2hire/material/$materialId'
     | '/_authenticated/speak2hire/sessao/$sessionId'
     | '/_authenticated/speak2travel/modulo/$moduleId'
+    | '/_authenticated/speak2travel/revisao/$moduleId'
     | '/api/public/webhooks/mercadopago'
   fileRoutesById: FileRoutesById
 }
@@ -513,6 +526,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSpeak2travelModuloModuleIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/speak2travel/revisao/$moduleId': {
+      id: '/_authenticated/speak2travel/revisao/$moduleId'
+      path: '/speak2travel/revisao/$moduleId'
+      fullPath: '/speak2travel/revisao/$moduleId'
+      preLoaderRoute: typeof AuthenticatedSpeak2travelRevisaoModuleIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/webhooks/mercadopago': {
       id: '/api/public/webhooks/mercadopago'
       path: '/api/public/webhooks/mercadopago'
@@ -554,6 +574,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSpeak2hireMaterialMaterialIdRoute: typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   AuthenticatedSpeak2hireSessaoSessionIdRoute: typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   AuthenticatedSpeak2travelModuloModuleIdRoute: typeof AuthenticatedSpeak2travelModuloModuleIdRoute
+  AuthenticatedSpeak2travelRevisaoModuleIdRoute: typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -575,6 +596,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedSpeak2hireSessaoSessionIdRoute,
   AuthenticatedSpeak2travelModuloModuleIdRoute:
     AuthenticatedSpeak2travelModuloModuleIdRoute,
+  AuthenticatedSpeak2travelRevisaoModuleIdRoute:
+    AuthenticatedSpeak2travelRevisaoModuleIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

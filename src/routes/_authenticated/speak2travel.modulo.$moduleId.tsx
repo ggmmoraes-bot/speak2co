@@ -150,11 +150,18 @@ function TravelModule({ track }: { track: TravelTrack }) {
   return (
     <main className="min-h-screen bg-background">
       <div className="mx-auto max-w-3xl px-6 py-12">
-        <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2 rounded-full">
-          <Link to="/speak2travel">
-            <ArrowLeft className="mr-1 h-4 w-4" /> Todos os módulos
-          </Link>
-        </Button>
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+          <Button asChild variant="ghost" size="sm" className="-ml-2 rounded-full">
+            <Link to="/speak2travel">
+              <ArrowLeft className="mr-1 h-4 w-4" /> Todos os módulos
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="sm" className="rounded-full">
+            <Link to="/speak2travel/revisao/$moduleId" params={{ moduleId: track.id }}>
+              <BookOpen className="mr-1 h-4 w-4" /> Modo revisão
+            </Link>
+          </Button>
+        </div>
 
         <header>
           <p className="text-xs tracking-widest text-muted-foreground uppercase">
