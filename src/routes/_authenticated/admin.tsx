@@ -7,14 +7,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { useAccess } from "@/lib/entitlements";
+import { useAccess, usePreviewPlan } from "@/lib/entitlements";
 import { UpgradeScreen } from "@/components/FeatureGate";
 import {
+  requireAdminAccess,
   getAdminCatalog,
   upsertPlan,
   deletePlan,
   upsertFeature,
   setPlanFeature,
+
 } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/_authenticated/admin")({
@@ -76,18 +78,32 @@ function num(value: string) {
 
 function AdminPage() {
   const { data: access, isPending: accessPending } = useAccess();
+  const previewPlan = usePreviewPlan();
   const queryClient = useQueryClient();
 
+  const checkAdmin = useServerFn(requireAdminAccess);
   const fetchCatalog = useServerFn(getAdminCatalog);
   const savePlan = useServerFn(upsertPlan);
   const removePlan = useServerFn(deletePlan);
   const saveFeature = useServerFn(upsertFeature);
   const togglePlanFeature = useServerFn(setPlanFeature);
 
+  // Validação real no backend: o servidor confirma a role de admin.
+  // Em modo "Ver como" nem chegamos a perguntar — a tela fica bloqueada.
+  const gate = useQuery({
+    queryKey: ["admin-gate"],
+    queryFn: () => checkAdmin(),
+    enabled: !previewPlan,
+    retry: false,
+    staleTime: 60_000,
+  });
+
+  const serverAdmin = gate.data?.isAdmin === true && !previewPlan;
+
   const { data, isPending } = useQuery({
     queryKey: ["admin-catalog"],
     queryFn: () => fetchCatalog(),
-    enabled: access?.isAdmin === true,
+    enabled: serverAdmin,
   });
 
   const [planForm, setPlanForm] = useState<PlanForm>(EMPTY_PLAN);
@@ -105,17 +121,22 @@ function AdminPage() {
     return map;
   }, [data]);
 
-  if (accessPending) {
+  if (!previewPlan && (accessPending || gate.isPending)) {
     return <div className="p-12 text-center text-sm text-muted-foreground">Carregando...</div>;
   }
-  if (!access?.isAdmin) {
+  if (!serverAdmin || access?.isAdmin !== true) {
     return (
       <UpgradeScreen
         title="Área restrita"
-        benefit="Esta página é exclusiva para administradores da Speak2Co."
+        benefit={
+          previewPlan
+            ? "Você está no modo “Ver como” — nesta pré-visualização o painel administrativo fica indisponível, como para qualquer aluno."
+            : "Esta página é exclusiva para administradores da Speak2Co."
+        }
       />
     );
   }
+
 
   async function refresh() {
     await queryClient.invalidateQueries({ queryKey: ["admin-catalog"] });

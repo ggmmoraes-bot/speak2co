@@ -6,13 +6,23 @@ function clean<T extends Record<string, unknown>>(obj: T) {
   return Object.fromEntries(Object.entries(obj).filter(([, v]) => v !== undefined)) as T;
 }
 
+/**
+ * Validação real no servidor: consulta a role do usuário autenticado.
+ * O modo "Ver como" do cliente nunca chega aqui e nunca libera nada.
+ */
 async function assertAdmin(context: { supabase: any; userId: string }) {
-  const { data } = await context.supabase.rpc("has_role", {
-    _user_id: context.userId,
-    _role: "admin",
-  });
-  if (data !== true) throw new Error("Acesso restrito ao administrador.");
+  const { assertAdmin: guard } = await import("@/lib/admin-guard.server");
+  await guard(context);
 }
+
+/** Portão do painel administrativo: 403 para quem não é admin de verdade. */
+export const requireAdminAccess = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await assertAdmin(context);
+    return { isAdmin: true as const };
+  });
+
 
 const planSchema = z.object({
   key: z
