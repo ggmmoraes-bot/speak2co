@@ -36,6 +36,7 @@ import { Route as AuthenticatedUpgradeEssentialRouteImport } from './routes/_aut
 import { Route as ApiVoicePronunciationRouteImport } from './routes/api/voice/pronunciation'
 import { Route as ApiVoiceSpeakRouteImport } from './routes/api/voice/speak'
 import { Route as ApiVoiceTranscribeRouteImport } from './routes/api/voice/transcribe'
+import { Route as AuthenticatedCursoBeginnerLicaoLessonIdRouteImport } from './routes/_authenticated/curso-beginner.licao.$lessonId'
 import { Route as AuthenticatedSpeak2hireMaterialMaterialIdRouteImport } from './routes/_authenticated/speak2hire.material.$materialId'
 import { Route as AuthenticatedSpeak2hireSessaoSessionIdRouteImport } from './routes/_authenticated/speak2hire.sessao.$sessionId'
 import { Route as AuthenticatedSpeak2travelMaterialResourceIdRouteImport } from './routes/_authenticated/speak2travel.material.$resourceId'
@@ -188,6 +189,12 @@ const ApiVoiceTranscribeRoute = ApiVoiceTranscribeRouteImport.update({
   path: '/api/voice/transcribe',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedCursoBeginnerLicaoLessonIdRoute =
+  AuthenticatedCursoBeginnerLicaoLessonIdRouteImport.update({
+    id: '/licao/$lessonId',
+    path: '/licao/$lessonId',
+    getParentRoute: () => AuthenticatedCursoBeginnerRoute,
+  } as any)
 const AuthenticatedSpeak2hireMaterialMaterialIdRoute =
   AuthenticatedSpeak2hireMaterialMaterialIdRouteImport.update({
     id: '/material/$materialId',
@@ -252,6 +259,7 @@ export interface FileRoutesByFullPath {
   '/professor/': typeof AuthenticatedProfessorIndexRoute
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
+  '/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   '/speak2hire/sessao/$sessionId': typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   '/speak2travel/material/$resourceId': typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
@@ -282,6 +290,7 @@ export interface FileRoutesByTo {
   '/professor': typeof AuthenticatedProfessorIndexRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel': typeof AuthenticatedSpeak2travelIndexRoute
+  '/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   '/speak2hire/sessao/$sessionId': typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   '/speak2travel/material/$resourceId': typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
@@ -318,6 +327,7 @@ export interface FileRoutesById {
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/_authenticated/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
+  '/_authenticated/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
   '/_authenticated/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   '/_authenticated/speak2hire/sessao/$sessionId': typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   '/_authenticated/speak2travel/material/$resourceId': typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
@@ -354,6 +364,7 @@ export interface FileRouteTypes {
     | '/professor/'
     | '/speak2hire/'
     | '/speak2travel/'
+    | '/curso-beginner/licao/$lessonId'
     | '/speak2hire/material/$materialId'
     | '/speak2hire/sessao/$sessionId'
     | '/speak2travel/material/$resourceId'
@@ -384,6 +395,7 @@ export interface FileRouteTypes {
     | '/professor'
     | '/speak2hire'
     | '/speak2travel'
+    | '/curso-beginner/licao/$lessonId'
     | '/speak2hire/material/$materialId'
     | '/speak2hire/sessao/$sessionId'
     | '/speak2travel/material/$resourceId'
@@ -419,6 +431,7 @@ export interface FileRouteTypes {
     | '/_authenticated/professor/'
     | '/_authenticated/speak2hire/'
     | '/_authenticated/speak2travel/'
+    | '/_authenticated/curso-beginner/licao/$lessonId'
     | '/_authenticated/speak2hire/material/$materialId'
     | '/_authenticated/speak2hire/sessao/$sessionId'
     | '/_authenticated/speak2travel/material/$resourceId'
@@ -630,6 +643,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiVoiceTranscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/curso-beginner/licao/$lessonId': {
+      id: '/_authenticated/curso-beginner/licao/$lessonId'
+      path: '/licao/$lessonId'
+      fullPath: '/curso-beginner/licao/$lessonId'
+      preLoaderRoute: typeof AuthenticatedCursoBeginnerLicaoLessonIdRouteImport
+      parentRoute: typeof AuthenticatedCursoBeginnerRoute
+    }
     '/_authenticated/speak2hire/material/$materialId': {
       id: '/_authenticated/speak2hire/material/$materialId'
       path: '/material/$materialId'
@@ -677,11 +697,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedCursoBeginnerRouteChildren {
   AuthenticatedCursoBeginnerIndexRoute: typeof AuthenticatedCursoBeginnerIndexRoute
+  AuthenticatedCursoBeginnerLicaoLessonIdRoute: typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
 }
 
 const AuthenticatedCursoBeginnerRouteChildren: AuthenticatedCursoBeginnerRouteChildren =
   {
     AuthenticatedCursoBeginnerIndexRoute: AuthenticatedCursoBeginnerIndexRoute,
+    AuthenticatedCursoBeginnerLicaoLessonIdRoute:
+      AuthenticatedCursoBeginnerLicaoLessonIdRoute,
   }
 
 const AuthenticatedCursoBeginnerRouteWithChildren =
