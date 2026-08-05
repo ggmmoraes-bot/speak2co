@@ -12,6 +12,21 @@ export type AccessSnapshot = {
 };
 
 /**
+ * Plano efetivo do aluno: calculado pela validade da assinatura, nunca apenas
+ * pelo valor gravado em `profiles.plan` (que pode estar vencido).
+ */
+export async function resolvePlanKey(supabase: Client, userId: string): Promise<string> {
+  const { syncUserPlan } = await import("@/lib/plan-sync.server");
+  try {
+    return await syncUserPlan(userId);
+  } catch (error) {
+    console.error("[entitlements] fallback to profiles.plan", error);
+    const { data } = await supabase.from("profiles").select("plan").eq("id", userId).maybeSingle();
+    return (data?.plan as string | undefined) ?? "free";
+  }
+}
+
+/**
  * Verificação de plano no SERVIDOR (fonte da verdade).
  * O FeatureGate/AiUsageGuard do cliente é apenas UX — quem realmente bloqueia é isto.
  */
@@ -20,12 +35,11 @@ export async function checkFeatureAccess(
   userId: string,
   featureKey: string,
 ): Promise<AccessSnapshot> {
-  const [profileRes, adminRes] = await Promise.all([
-    supabase.from("profiles").select("plan").eq("id", userId).maybeSingle(),
+  const [planKey, adminRes] = await Promise.all([
+    resolvePlanKey(supabase, userId),
     supabase.rpc("has_role", { _user_id: userId, _role: "admin" }),
   ]);
 
-  const planKey = (profileRes.data?.plan as string | undefined) ?? "free";
   const isAdmin = adminRes.data === true;
 
   const [featRes, planRes, usageRes] = await Promise.all([
