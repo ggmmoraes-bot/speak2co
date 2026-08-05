@@ -7,6 +7,12 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { BEGINNER_COURSE_ID, BEGINNER_LESSONS } from "@/lib/beginner-course";
+import {
+  BEGINNER_ASSESSMENT_ID,
+  BEGINNER_PASS_SCORE,
+} from "@/lib/beginner-assessment";
+import { Button } from "@/components/ui/button";
+import { Award, Lock } from "lucide-react";
 import { getCourseProgress } from "@/lib/course-progress.functions";
 
 export const Route = createFileRoute("/_authenticated/curso-beginner/")({
@@ -37,7 +43,11 @@ function BeginnerCourseIndex() {
   });
 
   const byLesson = new Map((progress ?? []).map((p) => [p.lessonId, p]));
-  const done = (progress ?? []).filter((p) => p.completed).length;
+  const rows = progress ?? [];
+  const done = rows.filter((p) => p.completed && p.lessonId !== BEGINNER_ASSESSMENT_ID).length;
+  const assessment = rows.find((p) => p.lessonId === BEGINNER_ASSESSMENT_ID) ?? null;
+  const eligible = done >= BEGINNER_LESSONS.length;
+  const certified = eligible && (assessment?.quizScore ?? 0) >= BEGINNER_PASS_SCORE;
   const percent = Math.round((done / BEGINNER_LESSONS.length) * 100);
 
   const handleExport = async () => {
@@ -91,6 +101,36 @@ function BeginnerCourseIndex() {
         </div>
       </header>
 
+
+      <section className="mt-6 rounded-3xl border border-gold/40 bg-gold/5 p-6">
+        <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gold">
+          {eligible ? <Award className="h-4 w-4" /> : <Lock className="h-4 w-4" />} Assessment final
+        </span>
+        <h2 className="mt-2 text-xl font-semibold text-foreground">
+          {certified
+            ? "Curso concluído — certificado emitido"
+            : "Assessment final do Beginner"}
+        </h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {certified
+            ? `Você foi aprovado com ${assessment?.quizScore}%. Seu certificado Beginner já está disponível.`
+            : eligible
+              ? `Todas as lições concluídas! Faça o assessment final (mínimo ${BEGINNER_PASS_SCORE}%) e o certificado é emitido automaticamente.`
+              : `Conclua as ${BEGINNER_LESSONS.length} lições para liberar o assessment final e emitir seu certificado automaticamente.`}
+        </p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Button asChild className="rounded-full" disabled={!eligible}>
+            <Link to="/curso-beginner/assessment">
+              {certified ? "Refazer assessment" : "Ir para o assessment"}
+            </Link>
+          </Button>
+          {certified && (
+            <Button asChild variant="outline" className="rounded-full">
+              <Link to="/certificados">Ver certificado</Link>
+            </Button>
+          )}
+        </div>
+      </section>
 
       <section className="mt-8 grid gap-4 sm:grid-cols-2">
         {BEGINNER_LESSONS.map((lesson) => {

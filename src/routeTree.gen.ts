@@ -27,6 +27,7 @@ import { Route as AuthenticatedSpeak2travelRouteImport } from './routes/_authent
 import { Route as AuthenticatedTesteDeNivelRouteImport } from './routes/_authenticated/teste-de-nivel'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedCursoBeginnerIndexRouteImport } from './routes/_authenticated/curso-beginner.index'
+import { Route as AuthenticatedCursoBeginnerAssessmentRouteImport } from './routes/_authenticated/curso-beginner.assessment'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2hireIndexRouteImport } from './routes/_authenticated/speak2hire.index'
@@ -136,6 +137,12 @@ const AuthenticatedCursoBeginnerIndexRoute =
   AuthenticatedCursoBeginnerIndexRouteImport.update({
     id: '/',
     path: '/',
+    getParentRoute: () => AuthenticatedCursoBeginnerRoute,
+  } as any)
+const AuthenticatedCursoBeginnerAssessmentRoute =
+  AuthenticatedCursoBeginnerAssessmentRouteImport.update({
+    id: '/assessment',
+    path: '/assessment',
     getParentRoute: () => AuthenticatedCursoBeginnerRoute,
   } as any)
 const AuthenticatedProfessorIndexRoute =
@@ -249,6 +256,7 @@ export interface FileRoutesByFullPath {
   '/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
+  '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -280,6 +288,7 @@ export interface FileRoutesByTo {
   '/ranking': typeof AuthenticatedRankingRoute
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
+  '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -317,6 +326,7 @@ export interface FileRoutesById {
   '/_authenticated/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/_authenticated/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
+  '/_authenticated/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/_authenticated/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -354,6 +364,7 @@ export interface FileRouteTypes {
     | '/speak2travel'
     | '/teste-de-nivel'
     | '/api/chat'
+    | '/curso-beginner/assessment'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -385,6 +396,7 @@ export interface FileRouteTypes {
     | '/ranking'
     | '/teste-de-nivel'
     | '/api/chat'
+    | '/curso-beginner/assessment'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -421,6 +433,7 @@ export interface FileRouteTypes {
     | '/_authenticated/speak2travel'
     | '/_authenticated/teste-de-nivel'
     | '/api/chat'
+    | '/_authenticated/curso-beginner/assessment'
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/speak2travel/trip-planner'
     | '/_authenticated/upgrade/essential'
@@ -580,6 +593,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCursoBeginnerIndexRouteImport
       parentRoute: typeof AuthenticatedCursoBeginnerRoute
     }
+    '/_authenticated/curso-beginner/assessment': {
+      id: '/_authenticated/curso-beginner/assessment'
+      path: '/assessment'
+      fullPath: '/curso-beginner/assessment'
+      preLoaderRoute: typeof AuthenticatedCursoBeginnerAssessmentRouteImport
+      parentRoute: typeof AuthenticatedCursoBeginnerRoute
+    }
     '/_authenticated/professor/': {
       id: '/_authenticated/professor/'
       path: '/'
@@ -696,12 +716,15 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedCursoBeginnerRouteChildren {
+  AuthenticatedCursoBeginnerAssessmentRoute: typeof AuthenticatedCursoBeginnerAssessmentRoute
   AuthenticatedCursoBeginnerIndexRoute: typeof AuthenticatedCursoBeginnerIndexRoute
   AuthenticatedCursoBeginnerLicaoLessonIdRoute: typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
 }
 
 const AuthenticatedCursoBeginnerRouteChildren: AuthenticatedCursoBeginnerRouteChildren =
   {
+    AuthenticatedCursoBeginnerAssessmentRoute:
+      AuthenticatedCursoBeginnerAssessmentRoute,
     AuthenticatedCursoBeginnerIndexRoute: AuthenticatedCursoBeginnerIndexRoute,
     AuthenticatedCursoBeginnerLicaoLessonIdRoute:
       AuthenticatedCursoBeginnerLicaoLessonIdRoute,
