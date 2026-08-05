@@ -9,7 +9,7 @@ function tierFromPriceKey(priceKey: string | null): string | null {
   return ["essential", "premium", "signature"].includes(base) ? base : null;
 }
 
-export const Route = createFileRoute("/api/public/webhooks/paddle")({
+export const Route = createFileRoute("/api/public/payments/webhook")({
   server: {
     handlers: {
       POST: async ({ request }) => {
