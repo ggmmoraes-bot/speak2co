@@ -71,7 +71,7 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     yPos: number,
     options?: Parameters<typeof doc.text>[3],
   ) => doc.text(safe(value), x, yPos, options);
-  const split = (value: string, w: number) => split(safe(value), w);
+  const split = (value: string, w: number) => doc.splitTextToSize(safe(value), w) as string[];
 
   const width = doc.internal.pageSize.getWidth();
   const height = doc.internal.pageSize.getHeight();
@@ -172,7 +172,7 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
   };
 
   const para = (
-    text: string,
+    body: string,
     opts: {
       size?: number;
       style?: "normal" | "bold" | "italic";
@@ -187,7 +187,7 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     doc.setFont(FONT, opts.style ?? "normal");
     doc.setFontSize(size);
     doc.setTextColor(...(opts.color ?? TEXT));
-    for (const line of split(text, contentWidth - indent)) {
+    for (const line of split(body, contentWidth - indent)) {
       ensure(lh);
       text(line, margin + indent, y);
       y += lh;
