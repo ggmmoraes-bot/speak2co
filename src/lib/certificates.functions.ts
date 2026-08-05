@@ -3,6 +3,8 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { buildCertificates, type Certificate } from "./certificates.server";
 import { BEGINNER_ASSESSMENT_ID, BEGINNER_PASS_SCORE } from "./beginner-assessment";
 import { BEGINNER_COURSE_ID, BEGINNER_LESSONS } from "./beginner-course";
+import { INTERMEDIATE_COURSE_ID, INTERMEDIATE_LESSONS } from "./intermediate-course";
+import { INTERMEDIATE_ASSESSMENT_ID, INTERMEDIATE_PASS_SCORE } from "./intermediate-assessment";
 
 export type { Certificate };
 
@@ -12,8 +14,15 @@ export const getCertificates = createServerFn({ method: "GET" })
     const supabase = context.supabase as any;
     const userId = context.userId as string;
 
-    const [profileRes, placementRes, interviewsRes, exercisesRes, chatRes, courseRes] =
-      await Promise.all([
+    const [
+      profileRes,
+      placementRes,
+      interviewsRes,
+      exercisesRes,
+      chatRes,
+      courseRes,
+      intermediateRes,
+    ] = await Promise.all([
       supabase.from("profiles").select("full_name, english_level").eq("id", userId).maybeSingle(),
       supabase
         .from("placement_tests")
@@ -28,6 +37,11 @@ export const getCertificates = createServerFn({ method: "GET" })
         .select("lesson_id, completed, quiz_score, completed_at, updated_at")
         .eq("user_id", userId)
         .eq("course_id", BEGINNER_COURSE_ID),
+      supabase
+        .from("course_progress")
+        .select("lesson_id, completed, quiz_score, completed_at, updated_at")
+        .eq("user_id", userId)
+        .eq("course_id", INTERMEDIATE_COURSE_ID),
     ]);
 
     const courseRows = (courseRes.data ?? []) as {
@@ -37,6 +51,18 @@ export const getCertificates = createServerFn({ method: "GET" })
       completed_at: string | null;
       updated_at: string | null;
     }[];
+    const intermediateRows = (intermediateRes.data ?? []) as {
+      lesson_id: string;
+      completed: boolean;
+      quiz_score: number | null;
+      completed_at: string | null;
+      updated_at: string | null;
+    }[];
+    const intermediateAssessment =
+      intermediateRows.find((row) => row.lesson_id === INTERMEDIATE_ASSESSMENT_ID) ?? null;
+    const intermediateDone = intermediateRows.filter(
+      (row) => row.completed && row.lesson_id !== INTERMEDIATE_ASSESSMENT_ID,
+    ).length;
     const assessmentRow = courseRows.find((row) => row.lesson_id === BEGINNER_ASSESSMENT_ID) ?? null;
     const lessonsCompleted = courseRows.filter(
       (row) => row.completed && row.lesson_id !== BEGINNER_ASSESSMENT_ID,
@@ -55,6 +81,12 @@ export const getCertificates = createServerFn({ method: "GET" })
         beginnerAssessmentScore: assessmentRow?.quiz_score ?? null,
         beginnerAssessmentAt: assessmentRow?.completed_at ?? assessmentRow?.updated_at ?? null,
         beginnerPassScore: BEGINNER_PASS_SCORE,
+        intermediateLessonsCompleted: intermediateDone,
+        intermediateLessonsTotal: INTERMEDIATE_LESSONS.length,
+        intermediateAssessmentScore: intermediateAssessment?.quiz_score ?? null,
+        intermediateAssessmentAt:
+          intermediateAssessment?.completed_at ?? intermediateAssessment?.updated_at ?? null,
+        intermediatePassScore: INTERMEDIATE_PASS_SCORE,
       }),
     };
   });
