@@ -46,6 +46,8 @@ export const Route = createFileRoute("/_authenticated/curso-intermediate/")({
 function IntermediateCourseIndex() {
   const load = useServerFn(getCourseProgress);
   const [exporting, setExporting] = useState(false);
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState<"all" | "done" | "pending">("all");
   const { data: progress } = useQuery({
     queryKey: ["course-progress", INTERMEDIATE_COURSE_ID],
     queryFn: () => load({ data: { courseId: INTERMEDIATE_COURSE_ID } }),
@@ -60,6 +62,22 @@ function IntermediateCourseIndex() {
   const eligible = done >= INTERMEDIATE_LESSONS.length;
   const certified = eligible && (assessment?.quizScore ?? 0) >= INTERMEDIATE_PASS_SCORE;
   const percent = Math.round((done / INTERMEDIATE_LESSONS.length) * 100);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return INTERMEDIATE_LESSONS.filter((lesson) => {
+      const isDone = Boolean(byLesson.get(lesson.id)?.completed);
+      if (filter === "done" && !isDone) return false;
+      if (filter === "pending" && isDone) return false;
+      if (!q) return true;
+      return (
+        lesson.title.toLowerCase().includes(q) ||
+        lesson.titlePt.toLowerCase().includes(q) ||
+        String(lesson.number).includes(q) ||
+        lesson.id.toLowerCase().includes(q)
+      );
+    });
+  }, [query, filter, byLesson]);
 
   const handleExport = async () => {
     setExporting(true);
