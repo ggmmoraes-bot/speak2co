@@ -9,6 +9,7 @@ import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions
 import { getPlanCatalog } from "@/lib/entitlements.functions";
 import { changePaddlePlan } from "@/lib/payments.functions";
 import { usePaddleCheckout } from "@/hooks/usePaddleCheckout";
+import { usePreviewPlan } from "@/lib/entitlements";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
 
@@ -254,14 +255,9 @@ function PremiumPage() {
       {!previewPlan && !isActive && showPending && (
         <div className="mt-8 rounded-xl border border-border bg-card p-4 text-center text-muted-foreground">
           Encontramos uma assinatura aguardando pagamento.
-          {data.subscription.init_point && (
-            <a
-              className="ml-1 font-semibold text-accent underline"
-              href={data.subscription.init_point}
-            >
-              Concluir pagamento
-            </a>
-          )}
+          <a className="ml-1 font-semibold text-accent underline" href={pending!.init_point!}>
+            Concluir pagamento
+          </a>
         </div>
       )}
 
