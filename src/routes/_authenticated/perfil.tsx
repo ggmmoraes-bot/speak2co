@@ -118,6 +118,33 @@ function PerfilPage() {
           Assim personalizamos seu plano de estudos e as práticas com o professor de IA.
         </p>
 
+        {(() => {
+          const stage = getCefrStage(englishLevel);
+          if (!stage) return null;
+          return (
+            <section className="mt-8 rounded-3xl border border-gold/40 bg-gold/10 p-6">
+              <p className="text-xs tracking-widest text-gold uppercase">
+                Seu estágio no teste de nivelamento
+              </p>
+              <p className="mt-2 text-2xl font-semibold text-foreground">
+                {stage.name} <span className="text-muted-foreground">({stage.range})</span>
+              </p>
+              <p className="mt-1 text-sm text-foreground/80">{stage.headline}</p>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Nível CEFR identificado: <span className="font-semibold text-gold">{englishLevel}</span>
+              </p>
+            </section>
+          );
+        })()}
+
+        {!englishLevel && (
+          <p className="mt-8 rounded-2xl border border-border bg-card/60 p-5 text-sm text-muted-foreground">
+            Faça o teste de nivelamento para descobrir seu estágio Speak2Co — Beginner,
+            Intermediate, Upper-Intermediate ou Advanced.
+          </p>
+        )}
+
+
         <form
           onSubmit={handleSubmit}
           className="mt-10 grid gap-5 rounded-3xl border border-border bg-card/70 p-8 backdrop-blur"
