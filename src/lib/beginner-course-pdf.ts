@@ -12,17 +12,72 @@ const GOLD: [number, number, number] = [193, 154, 60];
 const TEXT: [number, number, number] = [35, 35, 40];
 const MUTED: [number, number, number] = [110, 110, 118];
 
+const UNICODE_FONT = "DejaVuSans";
+const FONT_FILES: { style: "normal" | "bold" | "italic"; file: string }[] = [
+  { style: "normal", file: "DejaVuSans.ttf" },
+  { style: "bold", file: "DejaVuSans-Bold.ttf" },
+  { style: "italic", file: "DejaVuSans-Oblique.ttf" },
+];
+const FONT_CDN = "https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/";
+
+let fontCache: Record<string, string> | null = null;
+
+/** Fontes padrão do jsPDF não têm glifos de IPA; carregamos uma fonte Unicode. */
+async function loadUnicodeFont(): Promise<Record<string, string> | null> {
+  if (fontCache) return fontCache;
+  if (typeof window === "undefined") return null;
+  try {
+    const entries = await Promise.all(
+      FONT_FILES.map(async ({ style, file }) => {
+        const response = await fetch(FONT_CDN + file);
+        if (!response.ok) throw new Error("font fetch failed");
+        const bytes = new Uint8Array(await response.arrayBuffer());
+        let binary = "";
+        for (let i = 0; i < bytes.length; i += 8192) {
+          binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
+        }
+        return [style, btoa(binary)] as const;
+      }),
+    );
+    fontCache = Object.fromEntries(entries);
+    return fontCache;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * PDF único e completo do Beginner English Course (Método Speak2Co):
  * capa, sumário e as 20 lições com todas as seções.
  */
 export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGINNER_LESSONS) {
-  const logo = await getLogoDataUrl();
+  const [logo, fonts] = await Promise.all([getLogoDataUrl(), loadUnicodeFont()]);
   const doc = new jsPDF({ unit: "pt", format: "a4", orientation: "portrait" });
+
+  let FONT = "helvetica";
+  if (fonts) {
+    for (const { style, file } of FONT_FILES) {
+      doc.addFileToVFS(file, fonts[style]!);
+      doc.addFont(file, UNICODE_FONT, style);
+    }
+    FONT = UNICODE_FONT;
+  }
+  /** Sem fonte Unicode, remove glifos que a fonte padrão não desenha (IPA). */
+  const safe = (value: string) =>
+    FONT === UNICODE_FONT ? value : value.replace(/[^\u0000-\u024F\u2010-\u203A]/g, "");
+  const text = (
+    value: string,
+    x: number,
+    yPos: number,
+    options?: Parameters<typeof doc.text>[3],
+  ) => doc.text(safe(value), x, yPos, options);
+  const split = (value: string, w: number) => doc.splitTextToSize(safe(value), w) as string[];
+
   const width = doc.internal.pageSize.getWidth();
   const height = doc.internal.pageSize.getHeight();
   const margin = PDF_BRAND_MARGIN;
   const contentWidth = width - margin * 2;
+
 
   /* ------------------------------- Capa ------------------------------- */
   doc.setFillColor(...NAVY);
