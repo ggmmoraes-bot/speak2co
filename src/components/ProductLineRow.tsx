@@ -19,7 +19,7 @@ export type ProductLineItem = {
 };
 
 const posterBase =
-  "group relative block w-[260px] shrink-0 snap-start overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_10px_30px_-18px_rgba(0,0,0,0.9)] transition-all duration-300 ease-out hover:z-10 hover:-translate-y-2 hover:scale-[1.04] hover:border-gold/70 hover:shadow-[0_28px_60px_-24px_color-mix(in_oklab,var(--gold)_55%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 sm:w-[300px]";
+  "group relative block w-[340px] shrink-0 snap-start overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_10px_30px_-18px_color-mix(in_oklab,var(--background)_80%,transparent)] transition-all duration-300 ease-out hover:z-10 hover:-translate-y-2 hover:scale-[1.03] hover:border-gold/70 hover:shadow-[0_28px_60px_-24px_color-mix(in_oklab,var(--gold)_55%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 sm:w-[390px]";
 
 function Poster({
   titleEn,
@@ -33,20 +33,19 @@ function Poster({
 }: ProductLineItem) {
   return (
     <>
-      <div className="relative aspect-[16/10] w-full overflow-hidden">
+      <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden bg-background/60 p-4 sm:p-6">
         {imageUrl ? (
           <img
             src={imageUrl}
             alt={`${titleEn} — Speak2Co`}
             loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/40 via-background to-gold/25">
             <Icon className="icon-gold h-12 w-12" />
           </div>
         )}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/45 to-transparent" />
 
         <div className="absolute top-3 left-3 flex flex-wrap gap-2">
           {comingSoon && (
@@ -70,7 +69,7 @@ function Poster({
         </div>
       </div>
 
-      <div className="relative -mt-6 px-4 pb-4">
+      <div className="px-5 pb-5 pt-4">
         <h3 className="text-base font-semibold text-foreground">
           <BrandText text={titleEn} />
         </h3>
@@ -131,15 +130,7 @@ export function ProductLineRow({
             type="button"
             aria-label="Anterior"
             onClick={() => scrollBy(-1)}
-            className="btn-gold-outline flex h-9 w-9 items-center justify-center rounded-full text-foreground/80 transition-colors hover:text-[var(--gold)]"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            aria-label="Próximo"
-            onClick={() => scrollBy(1)}
-            className="btn-gold-outline flex h-9 w-9 items-center justify-center rounded-full text-foreground/80 transition-colors hover:text-[var(--gold)]"
+            className="btn-gold-outline flex h-9 w-9 items-center justify-center rounded-full text-foreground/80 transition-colors hover:text-gold"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
