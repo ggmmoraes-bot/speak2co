@@ -234,6 +234,7 @@ function Painel() {
             titlePt="Inglês para entrevistas"
             description="Simulador de entrevistas com IA, frameworks STAR e feedback de fala."
             icon={Briefcase}
+            imageUrl={speak2hireLogo.url}
             to="/speak2hire"
             locked={!hasFeature(access, "product_line_hire")}
             requiredPlan="Premium"
@@ -243,6 +244,7 @@ function Painel() {
             titlePt="Inglês para viagens"
             description="Aeroporto, hotel, restaurante e Trip Planner com pronúncia da IA."
             icon={Plane}
+            imageUrl={speak2travelLogo.url}
             to="/speak2travel"
             locked={!hasFeature(access, "product_line_travel")}
             requiredPlan="Premium"
@@ -252,10 +254,12 @@ function Painel() {
             titlePt="Inglês para fluência plena"
             description="A nova linha para destravar a fluência no dia a dia. Em breve."
             icon={Sparkles}
+            imageUrl={speak2coLogo.url}
             comingSoon
             locked={!hasFeature(access, "product_line_travel")}
             requiredPlan="Premium"
           />
+
         </HubSection>
 
         <HubSection titleEn="AI Resources" titlePt="Recursos de inteligência artificial">
