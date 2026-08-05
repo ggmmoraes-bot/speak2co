@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
+import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
 
 export const Route = createFileRoute("/_authenticated/premium")({
   head: () => ({
@@ -156,6 +157,7 @@ function PremiumPage() {
 
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-14">
+      <PlanUnlockedDialog />
       <header className="text-center">
         <p className="text-sm uppercase tracking-[0.3em] text-accent">Speak2Co Premium</p>
         <h1 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
