@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/speak2co-logo.asset.json";
 import { AiUsageGuard } from "@/components/AiUsageGuard";
+import { FeatureGate } from "@/components/FeatureGate";
 import {
   getThreads,
   createThread,
@@ -29,7 +30,16 @@ export const Route = createFileRoute("/_authenticated/professor")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: ProfessorLayout,
+  component: () => (
+    <FeatureGate
+      feature="ai_teacher"
+      title="Professor IA é um recurso Premium"
+      benefit="Converse em inglês 24h por dia com correções de gramática, vocabulário e pronúncia geradas por IA."
+      requiredPlan="Premium"
+    >
+      <ProfessorLayout />
+    </FeatureGate>
+  ),
 });
 
 function ProfessorLayout() {

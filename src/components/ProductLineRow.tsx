@@ -1,9 +1,17 @@
 import type { LucideIcon } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronLeft, ChevronRight, Lock, Play } from "lucide-react";
-import { toast } from "sonner";
+import { ChevronLeft, ChevronRight, Lock, Play, Sparkles } from "lucide-react";
 import { BrandText } from "@/components/BrandText";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export type ProductLineItem = {
   titleEn: string;
@@ -82,17 +90,53 @@ function Poster({
 
 function PosterCard(item: ProductLineItem) {
   const { to, params, locked, comingSoon, requiredPlan } = item;
+  const [open, setOpen] = useState(false);
 
   if (comingSoon || locked || !to) {
-    const message = comingSoon
-      ? `🚀 ${item.titleEn} — Coming Soon${requiredPlan ? ` · ${requiredPlan} Plan` : ""}`
-      : requiredPlan
-        ? `🔒 Available on ${requiredPlan} Plan — faça upgrade para desbloquear.`
-        : "🔒 Upgrade your subscription to unlock this feature.";
     return (
-      <button type="button" onClick={() => toast.info(message)} className={`${posterBase} text-left`}>
-        <Poster {...item} />
-      </button>
+      <>
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className={`${posterBase} text-left`}
+        >
+          <Poster {...item} />
+        </button>
+
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogContent className="rounded-3xl border-gold/40 bg-card">
+            <DialogHeader>
+              <span className="mb-2 flex h-12 w-12 items-center justify-center rounded-2xl border border-gold/40 bg-gold/10">
+                <Lock className="h-5 w-5 text-gold" />
+              </span>
+              <DialogTitle className="text-xl">
+                <BrandText text={item.titleEn} />
+              </DialogTitle>
+              <DialogDescription className="pt-1">
+                {comingSoon
+                  ? `Em breve na plataforma${requiredPlan ? ` — disponível no plano ${requiredPlan}.` : "."}`
+                  : requiredPlan
+                    ? `Este recurso é liberado a partir do plano ${requiredPlan}.`
+                    : "Este recurso não está incluído no seu plano atual."}
+              </DialogDescription>
+            </DialogHeader>
+            <p className="text-sm text-muted-foreground">{item.description}</p>
+            <DialogFooter className="gap-2 sm:justify-start">
+              <Button
+                asChild
+                className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+              >
+                <Link to="/premium">
+                  <Sparkles className="mr-2 h-4 w-4" /> Ver planos
+                </Link>
+              </Button>
+              <Button variant="outline" className="rounded-full" onClick={() => setOpen(false)}>
+                Fechar
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </>
     );
   }
 

@@ -8,7 +8,8 @@ import { BrandText } from "@/components/BrandText";
 import { EcosystemSection } from "@/components/EcosystemCard";
 import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
 import { buildHomeSections } from "@/lib/home-hub";
-import { useAccess, aiMinutesLeft } from "@/lib/entitlements";
+import { useAccess, aiMinutesLeft, usePreviewPlan } from "@/lib/entitlements";
+import { AdminPlanPreview } from "@/components/AdminPlanPreview";
 import { getCefrStage } from "@/lib/placement-content";
 import logo from "@/assets/speak2co-logo.asset.json";
 
@@ -47,6 +48,9 @@ function Painel() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [email, setEmail] = useState<string>("");
   const { data: access } = useAccess();
+  const previewPlan = usePreviewPlan();
+  // Ao pré-visualizar um plano, o acesso volta como aluno — mas o controle continua visível.
+  const isAdminAccount = access?.isAdmin === true || Boolean(previewPlan);
 
   useEffect(() => {
     let active = true;
@@ -89,7 +93,8 @@ function Painel() {
             </span>
           </Link>
           <div className="flex shrink-0 items-center gap-2">
-            {access?.isAdmin && (
+            {isAdminAccount && <AdminPlanPreview />}
+            {isAdminAccount && (
               <Button asChild variant="outline" className="rounded-full">
                 <Link to="/admin">
                   <ShieldCheck className="h-4 w-4 text-gold" />
