@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { requireFeature } from "@/lib/entitlement-middleware";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 export type CourseLessonProgress = {
   lessonId: string;
@@ -28,9 +28,11 @@ const saveSchema = z.object({
 
 /** Progresso do aluno em todas as lições do curso. */
 export const getCourseProgress = createServerFn({ method: "POST" })
-  .middleware([requireFeature("courses_beginner")])
+  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => courseSchema.parse(input))
   .handler(async ({ context, data }): Promise<CourseLessonProgress[]> => {
+    const { assertCourseAccess } = await import("@/lib/course-access.server");
+    await assertCourseAccess(context.supabase, context.userId, data.courseId);
     const { data: rows, error } = await context.supabase
       .from("course_progress")
       .select("*")
@@ -51,9 +53,11 @@ export const getCourseProgress = createServerFn({ method: "POST" })
 
 /** Salva (upsert) o progresso de uma lição. */
 export const saveCourseProgress = createServerFn({ method: "POST" })
-  .middleware([requireFeature("courses_beginner")])
+  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => saveSchema.parse(input))
   .handler(async ({ context, data }) => {
+    const { assertCourseAccess } = await import("@/lib/course-access.server");
+    await assertCourseAccess(context.supabase, context.userId, data.courseId);
     const completed = data.completed ?? false;
     const { error } = await context.supabase.from("course_progress").upsert(
       {

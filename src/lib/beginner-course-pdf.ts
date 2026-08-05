@@ -46,13 +46,21 @@ async function loadUnicodeFont(): Promise<Record<string, string> | null> {
   }
 }
 
+export type CoursePdfOptions = {
+  lessons: BeginnerLesson[];
+  courseTitle: string;
+  subtitle: string;
+  intro: string;
+};
+
 /**
- * PDF único e completo do Beginner English Course (Método Speak2Co):
- * capa, sumário e as 20 lições com todas as seções.
+ * Desenha um curso completo (capa, sumário e lições) em um documento jsPDF.
+ * Compartilhado pelos cursos Beginner e Intermediate.
  */
-export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGINNER_LESSONS) {
+export async function renderCoursePdf(doc: jsPDF, options: CoursePdfOptions) {
+  const { lessons, courseTitle, subtitle } = options;
   const [logo, fonts] = await Promise.all([getLogoDataUrl(), loadUnicodeFont()]);
-  const doc = new jsPDF({ unit: "pt", format: "a4", orientation: "portrait" });
+
 
   let FONT = "helvetica";
   if (fonts) {
@@ -104,20 +112,19 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
   doc.setFont(FONT, "bold");
   doc.setFontSize(26);
   doc.setTextColor(255, 255, 255);
-  text("Beginner English Course", width / 2, coverY, { align: "center" });
+  text(courseTitle, width / 2, coverY, { align: "center" });
 
   coverY += 26;
   doc.setFont(FONT, "normal");
   doc.setFontSize(12);
   doc.setTextColor(...GOLD);
-  text("Método Speak2Co · Plano Essential", width / 2, coverY, { align: "center" });
+  text(subtitle, width / 2, coverY, { align: "center" });
 
   coverY += 34;
   doc.setFontSize(10.5);
   doc.setTextColor(210, 210, 218);
-  const intro =
-    `${lessons.length} lições progressivas com warm-up, vocabulário com IPA, verbos, gramática por ` +
-    "exemplos, expressões, diálogos, laboratório de pronúncia, exercícios escritos e falados, quiz e revisão.";
+  const intro = options.intro;
+
   for (const line of split(intro, contentWidth - 60)) {
     text(line, width / 2, coverY, { align: "center" });
     coverY += 16;
@@ -149,7 +156,7 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     doc.setFont(FONT, "normal");
     doc.setFontSize(9);
     doc.setTextColor(...GOLD);
-    text(`Beginner English Course${currentLesson ? ` · ${currentLesson}` : ""}`, textX, 50);
+    text(`${courseTitle}${currentLesson ? ` · ${currentLesson}` : ""}`, textX, 50);
 
     doc.setDrawColor(220, 220, 226);
     doc.setLineWidth(0.5);
@@ -362,5 +369,21 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     }
   }
 
+}
+
+/**
+ * PDF único e completo do Beginner English Course (Método Speak2Co):
+ * capa, sumário e as 20 lições com todas as seções.
+ */
+export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGINNER_LESSONS) {
+  const doc = new jsPDF({ unit: "pt", format: "a4", orientation: "portrait" });
+  await renderCoursePdf(doc, {
+    lessons,
+    courseTitle: "Beginner English Course",
+    subtitle: "Método Speak2Co · Plano Essential",
+    intro:
+      `${lessons.length} lições progressivas com warm-up, vocabulário com IPA, verbos, gramática por ` +
+      "exemplos, expressões, diálogos, laboratório de pronúncia, exercícios escritos e falados, quiz e revisão.",
+  });
   doc.save("speak2co-beginner-english-course.pdf");
 }
