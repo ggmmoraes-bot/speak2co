@@ -11,7 +11,6 @@ import {
   BEGINNER_ASSESSMENT_ID,
   BEGINNER_PASS_SCORE,
 } from "@/lib/beginner-assessment";
-import { Button } from "@/components/ui/button";
 import { Award, Lock } from "lucide-react";
 import { getCourseProgress } from "@/lib/course-progress.functions";
 
