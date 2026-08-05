@@ -70,7 +70,7 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     x: number,
     yPos: number,
     options?: Parameters<typeof doc.text>[3],
-  ) => text(safe(value), x, yPos, options);
+  ) => doc.text(safe(value), x, yPos, options);
   const split = (value: string, w: number) => split(safe(value), w);
 
   const width = doc.internal.pageSize.getWidth();
