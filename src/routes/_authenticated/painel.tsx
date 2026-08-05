@@ -150,10 +150,24 @@ function Painel() {
             </Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/teste-de-nivel">Teste de nivelamento</Link>
+            <Link to="/teste-de-nivel">
+              {hasFeature(access, FEATURE_KEYS.placementTest) ? (
+                <GraduationCap className="mr-2 h-4 w-4 text-gold" />
+              ) : (
+                <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
+              )}
+              Teste de nivelamento
+            </Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/professor">Professor IA</Link>
+            <Link to="/professor">
+              {hasFeature(access, FEATURE_KEYS.aiTeacher) ? (
+                <Sparkles className="mr-2 h-4 w-4 text-gold" />
+              ) : (
+                <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
+              )}
+              Professor IA
+            </Link>
           </Button>
 
           <TooltipProvider delayDuration={200}>
