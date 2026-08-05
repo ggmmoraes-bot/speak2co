@@ -230,39 +230,54 @@ function Painel() {
           />
         </HubSection>
 
-        <HubSection titleEn="Product Lines" titlePt="Linhas de produto">
-          <HubCard
-            titleEn="Speak2Hire"
-            titlePt="Inglês para entrevistas"
-            description="Simulador de entrevistas com IA, frameworks STAR e feedback de fala."
-            icon={Briefcase}
-            imageUrl={speak2hireLogo.url}
-            to="/speak2hire"
-            locked={!hasFeature(access, "product_line_hire")}
-            requiredPlan="Premium"
-          />
-          <HubCard
-            titleEn="Speak2Travel"
-            titlePt="Inglês para viagens"
-            description="Aeroporto, hotel, restaurante e Trip Planner com pronúncia da IA."
-            icon={Plane}
-            imageUrl={speak2travelLogo.url}
-            to="/speak2travel"
-            locked={!hasFeature(access, "product_line_travel")}
-            requiredPlan="Premium"
-          />
-          <HubCard
-            titleEn="Speak2Fluency"
-            titlePt="Inglês para fluência plena"
-            description="A nova linha para destravar a fluência no dia a dia. Em breve."
-            icon={Sparkles}
-            imageUrl={speak2fluencyLogo.url}
-            comingSoon
-            locked={!hasFeature(access, "product_line_travel")}
-            requiredPlan="Premium"
-          />
+        <ProductLineRow
+          titleEn="Product Lines"
+          titlePt="Linhas de produto"
+          items={[
+            {
+              titleEn: "Speak2Hire",
+              titlePt: "Inglês para entrevistas",
+              description:
+                "Simulador de entrevistas com IA, frameworks STAR e feedback de fala.",
+              icon: Briefcase,
+              imageUrl: speak2hireLogo.url,
+              to: "/speak2hire",
+              locked: !hasFeature(access, "product_line_hire"),
+              requiredPlan: "Premium",
+            },
+            {
+              titleEn: "Speak2Travel",
+              titlePt: "Inglês para viagens",
+              description: "Aeroporto, hotel, restaurante e Trip Planner com pronúncia da IA.",
+              icon: Plane,
+              imageUrl: speak2travelLogo.url,
+              to: "/speak2travel",
+              locked: !hasFeature(access, "product_line_travel"),
+              requiredPlan: "Premium",
+            },
+            {
+              titleEn: "Speak2Fluency",
+              titlePt: "Inglês para fluência plena",
+              description: "A nova linha para destravar a fluência no dia a dia. Em breve.",
+              icon: Sparkles,
+              imageUrl: speak2fluencyLogo.url,
+              comingSoon: true,
+              locked: !hasFeature(access, "product_line_travel"),
+              requiredPlan: "Premium",
+            },
+            {
+              titleEn: "GiseleAI by Speak2Co",
+              titlePt: "Mentoria de IA exclusiva",
+              description: "Mentoria avançada com IA, exclusiva do plano Signature. Em breve.",
+              icon: Bot,
+              imageUrl: giseleAiLogo.url,
+              comingSoon: true,
+              locked: !hasFeature(access, FEATURE_KEYS.giseleAi),
+              requiredPlan: "Signature",
+            },
+          ]}
+        />
 
-        </HubSection>
 
         <HubSection titleEn="AI Resources" titlePt="Recursos de inteligência artificial">
           <HubCard
