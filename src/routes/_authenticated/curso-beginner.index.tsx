@@ -1,7 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
-import { BookOpen, CheckCircle2, GraduationCap, Mic } from "lucide-react";
+import { useState } from "react";
+import { BookOpen, CheckCircle2, Download, GraduationCap, Loader2, Mic } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { BEGINNER_COURSE_ID, BEGINNER_LESSONS } from "@/lib/beginner-course";
 import { getCourseProgress } from "@/lib/course-progress.functions";
@@ -27,6 +30,7 @@ export const Route = createFileRoute("/_authenticated/curso-beginner/")({
 
 function BeginnerCourseIndex() {
   const load = useServerFn(getCourseProgress);
+  const [exporting, setExporting] = useState(false);
   const { data: progress } = useQuery({
     queryKey: ["course-progress", BEGINNER_COURSE_ID],
     queryFn: () => load({ data: { courseId: BEGINNER_COURSE_ID } }),
@@ -35,6 +39,20 @@ function BeginnerCourseIndex() {
   const byLesson = new Map((progress ?? []).map((p) => [p.lessonId, p]));
   const done = (progress ?? []).filter((p) => p.completed).length;
   const percent = Math.round((done / BEGINNER_LESSONS.length) * 100);
+
+  const handleExport = async () => {
+    setExporting(true);
+    try {
+      const { exportBeginnerCourseToPdf } = await import("@/lib/beginner-course-pdf");
+      await exportBeginnerCourseToPdf();
+      toast.success("PDF completo do curso gerado.");
+    } catch {
+      toast.error("Não foi possível gerar o PDF. Tente novamente.");
+    } finally {
+      setExporting(false);
+    }
+  };
+
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
@@ -58,7 +76,21 @@ function BeginnerCourseIndex() {
           </div>
           <Progress value={percent} />
         </div>
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <Button onClick={handleExport} disabled={exporting} className="gap-2">
+            {exporting ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Download className="h-4 w-4" />
+            )}
+            Baixar curso completo em PDF
+          </Button>
+          <span className="text-xs text-muted-foreground">
+            Arquivo único com as {BEGINNER_LESSONS.length} lições, exercícios, quizzes e revisões.
+          </span>
+        </div>
       </header>
+
 
       <section className="mt-8 grid gap-4 sm:grid-cols-2">
         {BEGINNER_LESSONS.map((lesson) => {
