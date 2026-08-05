@@ -232,7 +232,6 @@
   .ring-brand {
     box-shadow: 0 0 0 1px color-mix(in oklab, var(--gold) 45%, transparent);
   }
-  }
 
   @keyframes logo-entrance {
     from {
