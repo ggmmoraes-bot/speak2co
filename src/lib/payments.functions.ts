@@ -36,8 +36,8 @@ export const createPaddlePortalSession = createServerFn({ method: "POST" })
       throw new Error("Nenhuma assinatura internacional encontrada para esta conta.");
     }
 
-    const { getPaddleClient, type PaddleEnv } = await import("@/lib/paddle.server");
-    const paddle = getPaddleClient((sub.environment ?? "live") as PaddleEnv);
+    const { getPaddleClient } = await import("@/lib/paddle.server");
+    const paddle = getPaddleClient((sub.environment ?? "live") === "sandbox" ? "sandbox" : "live");
     const session = await paddle.customerPortalSessions.create(
       sub.paddle_customer_id,
       sub.paddle_subscription_id ? [sub.paddle_subscription_id] : [],
