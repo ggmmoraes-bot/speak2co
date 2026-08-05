@@ -54,6 +54,31 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
 
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
+        // Downgrade só vale no fim do ciclo já pago: o plano atual é mantido e o
+        // novo fica agendado. Upgrade entra em vigor imediatamente.
+        const { data: existing } = await supabaseAdmin
+          .from("subscriptions")
+          .select("plan_key")
+          .eq("paddle_subscription_id", data.id)
+          .maybeSingle();
+
+        let effectivePlanKey = priceKey;
+        let scheduledPlanKey: string | null = null;
+        const stillPaid = !!periodEnd && new Date(periodEnd) > new Date();
+
+        if (existing?.plan_key && existing.plan_key !== priceKey && stillPaid) {
+          const { data: levels } = await supabaseAdmin
+            .from("plans")
+            .select("key, access_level, monthly_checkout_key, yearly_checkout_key");
+          const levelOf = (key: string) =>
+            levels?.find((p) => p.monthly_checkout_key === key || p.yearly_checkout_key === key)
+              ?.access_level ?? 0;
+          if (levelOf(priceKey) < levelOf(existing.plan_key)) {
+            effectivePlanKey = existing.plan_key;
+            scheduledPlanKey = priceKey;
+          }
+        }
+
         const { data: saved, error } = await supabaseAdmin
           .from("subscriptions")
           .upsert(
@@ -62,10 +87,11 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
               provider: "paddle",
               paddle_subscription_id: data.id,
               paddle_customer_id: data.customerId ?? null,
-              plan_key: priceKey,
+              plan_key: effectivePlanKey,
+              scheduled_plan_key: scheduledPlanKey,
               external_reference: productKey,
               status,
-              plan_label: priceKey,
+              plan_label: effectivePlanKey,
               amount,
               currency: item.price?.unitPrice?.currencyCode ?? "BRL",
               environment: env,
