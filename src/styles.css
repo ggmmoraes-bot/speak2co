@@ -217,6 +217,11 @@
     opacity: 0.85;
   }
 
+  /* Ícone dourado sólido (não usar .text-gold em SVG: fica transparente) */
+  .icon-gold {
+    color: var(--gold);
+  }
+
   /* Badge dourada (plano exigido, destaques) */
   .badge-gold {
     border: 1px solid color-mix(in oklab, var(--gold) 40%, transparent);
