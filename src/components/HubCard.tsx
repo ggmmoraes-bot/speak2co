@@ -2,6 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Lock } from "lucide-react";
 import { toast } from "sonner";
+import { BrandText } from "@/components/BrandText";
 
 export type HubCardProps = {
   titleEn: string;
