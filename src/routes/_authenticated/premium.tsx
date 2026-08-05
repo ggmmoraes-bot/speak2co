@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import { BrandText } from "@/components/BrandText";
 import { Button } from "@/components/ui/button";
 import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
+import { getPlanCatalog } from "@/lib/entitlements.functions";
+import { changePaddlePlan } from "@/lib/payments.functions";
 import { usePaddleCheckout } from "@/hooks/usePaddleCheckout";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
@@ -132,6 +134,33 @@ function PremiumPage() {
   const fetchSubscription = useServerFn(getMySubscription);
   const checkout = useServerFn(startMercadoPagoCheckout);
   const paddle = usePaddleCheckout();
+  const fetchCatalog = useServerFn(getPlanCatalog);
+  const changePlan = useServerFn(changePaddlePlan);
+  const { data: catalog } = useQuery({ queryKey: ["plan-catalog"], queryFn: () => fetchCatalog() });
+  const priceOf = (tierId: string, cycle: "monthly" | "yearly", fallback: string) => {
+    const row = catalog?.plans.find((p) => p.key === tierId);
+    const value = cycle === "yearly" ? row?.yearly_price : row?.monthly_price;
+    if (value == null) return fallback;
+    return Number(value).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: row?.currency ?? "BRL",
+    });
+  };
+  const levelOf = (tierId: string | null) =>
+    (tierId ? catalog?.plans.find((p) => p.key === tierId)?.access_level : 0) ?? 0;
+  const changeMutation = useMutation({
+    mutationFn: (priceId: string) => changePlan({ data: { priceId } }),
+    onSuccess: (result) => {
+      queryClient.invalidateQueries({ queryKey: ["subscription"] });
+      queryClient.invalidateQueries({ queryKey: ["my-access"] });
+      toast.success(
+        result.applied === "immediate"
+          ? "Upgrade aplicado! Seus novos recursos já estão liberados."
+          : "Downgrade agendado — seu plano atual continua até o fim do período já pago.",
+      );
+    },
+    onError: (error: Error) => toast.error(error.message),
+  });
   const startPaddle = (priceId: string) => {
     paddle.openCheckout(priceId).catch((error: Error) => toast.error(error.message));
   };
@@ -156,6 +185,7 @@ function PremiumPage() {
   const plan = data?.plan ?? "free";
   const isActive = plan === "essential" || plan === "premium" || plan === "signature";
   const currentTier = isActive ? plan : null;
+  const isPaddleSubscriber = data?.subscription?.provider === "paddle";
 
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-14">
@@ -240,7 +270,9 @@ function PremiumPage() {
             >
               <h2 className="text-xl font-semibold text-foreground">{tier.label}</h2>
               <p className="mt-1 text-sm text-muted-foreground">{tier.tagline}</p>
-              <p className="mt-4 text-4xl font-bold text-accent">{option.price}</p>
+              <p className="mt-4 text-4xl font-bold text-accent">
+                {priceOf(tier.id, billing, option.price)}
+              </p>
               <p className="text-sm text-muted-foreground">
                 {billing === "yearly" ? "por ano — 2 meses grátis" : "por mês"}
               </p>
@@ -250,28 +282,45 @@ function PremiumPage() {
                 ))}
               </ul>
               <div className="mt-8 space-y-2">
-                <Button
-                  className="w-full"
-                  variant={tier.highlight ? "default" : "outline"}
-                  disabled={isCurrent || paddle.loading}
-                  onClick={() => startPaddle(option.key)}
-                >
-                  {isCurrent
-                    ? "Seu plano atual"
-                    : paddle.loading
-                      ? "Abrindo checkout..."
-                      : "Assinar com cartão (internacional)"}
-                </Button>
-                <Button
-                  className="w-full"
-                  variant="ghost"
-                  disabled={isCurrent || mutation.isPending}
-                  onClick={() => mutation.mutate(option.key)}
-                >
-                  {mutation.isPending
-                    ? "Abrindo checkout..."
-                    : "Assinar com Mercado Pago (Pix/boleto)"}
-                </Button>
+                {isCurrent ? (
+                  <Button className="w-full" variant="outline" disabled>
+                    Seu plano atual
+                  </Button>
+                ) : isActive && isPaddleSubscriber ? (
+                  <Button
+                    className="w-full"
+                    variant={levelOf(tier.id) > levelOf(currentTier) ? "default" : "outline"}
+                    disabled={changeMutation.isPending}
+                    onClick={() => changeMutation.mutate(option.key)}
+                  >
+                    {changeMutation.isPending
+                      ? "Atualizando..."
+                      : levelOf(tier.id) > levelOf(currentTier)
+                        ? "Fazer upgrade agora"
+                        : "Agendar downgrade para o fim do ciclo"}
+                  </Button>
+                ) : (
+                  <>
+                    <Button
+                      className="w-full"
+                      variant={tier.highlight ? "default" : "outline"}
+                      disabled={paddle.loading}
+                      onClick={() => startPaddle(option.key)}
+                    >
+                      {paddle.loading ? "Abrindo checkout..." : "Assinar com cartão (internacional)"}
+                    </Button>
+                    <Button
+                      className="w-full"
+                      variant="ghost"
+                      disabled={mutation.isPending}
+                      onClick={() => mutation.mutate(option.key)}
+                    >
+                      {mutation.isPending
+                        ? "Abrindo checkout..."
+                        : "Assinar com Mercado Pago (Pix/boleto)"}
+                    </Button>
+                  </>
+                )}
               </div>
             </article>
           );
