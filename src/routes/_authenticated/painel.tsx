@@ -89,7 +89,8 @@ function Painel() {
             </span>
           </Link>
           <div className="flex shrink-0 items-center gap-2">
-            {access?.isAdmin && (
+            {isAdminAccount && <AdminPlanPreview />}
+            {isAdminAccount && (
               <Button asChild variant="outline" className="rounded-full">
                 <Link to="/admin">
                   <ShieldCheck className="h-4 w-4 text-gold" />
