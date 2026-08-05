@@ -161,7 +161,7 @@ export function ProductLineRow({
   const trackRef = useRef<HTMLDivElement>(null);
 
   const scrollBy = (dir: 1 | -1) => {
-    trackRef.current?.scrollBy({ left: dir * 320, behavior: "smooth" });
+    trackRef.current?.scrollBy({ left: dir * 380, behavior: "smooth" });
   };
 
   return (
