@@ -22,6 +22,11 @@ type Input = {
   beginnerAssessmentScore: number | null;
   beginnerAssessmentAt: string | null;
   beginnerPassScore: number;
+  intermediateLessonsCompleted: number;
+  intermediateLessonsTotal: number;
+  intermediateAssessmentScore: number | null;
+  intermediateAssessmentAt: string | null;
+  intermediatePassScore: number;
 };
 
 function code(userId: string, id: string) {
@@ -126,6 +131,32 @@ export function buildCertificates(input: Input): Certificate[] {
               : null,
         issuedAt: lessonsOk && passed ? input.beginnerAssessmentAt : null,
         code: code(userId, "beginner"),
+      } satisfies Certificate;
+    })(),
+    (() => {
+      const lessonsOk = input.intermediateLessonsCompleted >= input.intermediateLessonsTotal;
+      const score = input.intermediateAssessmentScore;
+      const passed = score != null && score >= input.intermediatePassScore;
+      const progress = clamp(
+        (input.intermediateLessonsCompleted / Math.max(1, input.intermediateLessonsTotal)) * 0.5 +
+          (passed ? 0.5 : score != null ? (score / 100) * 0.5 * 0.5 : 0),
+      );
+      return {
+        id: "intermediate",
+        title: "Certificado Intermediate English Course",
+        subtitle: "Método Speak2Co · Plano Essential",
+        description: `Conclua as ${input.intermediateLessonsTotal} lições do curso Intermediate e seja aprovado no assessment final (mínimo ${input.intermediatePassScore}%).`,
+        unlocked: lessonsOk && passed,
+        progress,
+        goalLabel: `${input.intermediateLessonsTotal} lições + assessment final`,
+        detail:
+          score != null
+            ? `${input.intermediateLessonsCompleted}/${input.intermediateLessonsTotal} lições · assessment ${score}%`
+            : input.intermediateLessonsCompleted
+              ? `${input.intermediateLessonsCompleted}/${input.intermediateLessonsTotal} lições concluídas`
+              : null,
+        issuedAt: lessonsOk && passed ? input.intermediateAssessmentAt : null,
+        code: code(userId, "intermediate"),
       } satisfies Certificate;
     })(),
   ];
