@@ -28,6 +28,8 @@ export const getMySubscription = createServerFn({ method: "GET" })
       .maybeSingle();
     if (error) throw new Error(error.message);
 
+    const { syncUserPlan } = await import("@/lib/plan-sync.server");
+    await syncUserPlan(context.userId).catch(() => undefined);
     const { resolvePlanKey } = await import("@/lib/entitlements-access.server");
     const plan = await resolvePlanKey(context.supabase, context.userId);
 

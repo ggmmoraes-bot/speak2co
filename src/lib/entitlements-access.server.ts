@@ -12,18 +12,12 @@ export type AccessSnapshot = {
 };
 
 /**
- * Plano efetivo do aluno: calculado pela validade da assinatura, nunca apenas
- * pelo valor gravado em `profiles.plan` (que pode estar vencido).
+ * Plano gravado no perfil. É mantido em dia pelos webhooks de pagamento e pela
+ * rotina horária `sync_expired_plans`, que devolve ao Gratuito quem expirou.
  */
 export async function resolvePlanKey(supabase: Client, userId: string): Promise<string> {
-  const { syncUserPlan } = await import("@/lib/plan-sync.server");
-  try {
-    return await syncUserPlan(userId);
-  } catch (error) {
-    console.error("[entitlements] fallback to profiles.plan", error);
-    const { data } = await supabase.from("profiles").select("plan").eq("id", userId).maybeSingle();
-    return (data?.plan as string | undefined) ?? "free";
-  }
+  const { data } = await supabase.from("profiles").select("plan").eq("id", userId).maybeSingle();
+  return (data?.plan as string | undefined) ?? "free";
 }
 
 /**

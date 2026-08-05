@@ -88,6 +88,8 @@ export const getMyAccess = createServerFn({ method: "GET" })
   .handler(async ({ context }): Promise<MyAccess> => {
     const { supabase, userId } = context;
 
+    const { syncUserPlan } = await import("@/lib/plan-sync.server");
+    await syncUserPlan(userId).catch(() => undefined);
     const { resolvePlanKey } = await import("@/lib/entitlements-access.server");
     const [planKey, adminRes] = await Promise.all([
       resolvePlanKey(supabase, userId),
