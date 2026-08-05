@@ -8,6 +8,8 @@ export type HubCardProps = {
   titlePt: string;
   description: string;
   icon: LucideIcon;
+  /** Arte oficial do produto/recurso (substitui o ícone quando presente). */
+  imageUrl?: string;
   to?: string;
   params?: Record<string, string>;
   locked?: boolean;
@@ -23,6 +25,7 @@ function Inner({
   titlePt,
   description,
   icon: Icon,
+  imageUrl,
   locked,
   comingSoon,
   requiredPlan,
@@ -33,13 +36,28 @@ function Inner({
         aria-hidden
         className="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full bg-gold/10 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
       />
-      <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-gold/30 bg-gold/10 transition-transform duration-300 group-hover:scale-105">
-        {locked && !comingSoon ? (
+      <span className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-gold/30 bg-gold/10 transition-transform duration-300 group-hover:scale-105">
+        {imageUrl ? (
+          <>
+            <img
+              src={imageUrl}
+              alt={`${titleEn} logo`}
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
+            {locked && !comingSoon && (
+              <span className="absolute inset-0 flex items-center justify-center bg-background/70">
+                <Lock className="h-5 w-5 text-gold" />
+              </span>
+            )}
+          </>
+        ) : locked && !comingSoon ? (
           <Lock className="h-5 w-5 text-muted-foreground" />
         ) : (
           <Icon className="h-5 w-5 text-gold" />
         )}
       </span>
+
 
       <h3 className="mt-5 text-lg font-semibold text-foreground">{titleEn}</h3>
       <p className="text-xs text-muted-foreground">{titlePt}</p>
