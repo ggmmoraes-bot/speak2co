@@ -70,8 +70,8 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     x: number,
     yPos: number,
     options?: Parameters<typeof doc.text>[3],
-  ) => doc.text(safe(value), x, yPos, options);
-  const split = (value: string, w: number) => doc.splitTextToSize(safe(value), w) as string[];
+  ) => text(safe(value), x, yPos, options);
+  const split = (value: string, w: number) => split(safe(value), w);
 
   const width = doc.internal.pageSize.getWidth();
   const height = doc.internal.pageSize.getHeight();
@@ -92,25 +92,25 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     doc.setFont(FONT, "bold");
     doc.setFontSize(26);
     doc.setTextColor(255, 255, 255);
-    doc.text("Speak2Co", width / 2, 150, { align: "center" });
+    text("Speak2Co", width / 2, 150, { align: "center" });
   }
 
   doc.setFont(FONT, "normal");
   doc.setFontSize(10);
   doc.setTextColor(...GOLD);
-  doc.text("ENGLISH FOR EVERY OPPORTUNITY", width / 2, coverY, { align: "center" });
+  text("ENGLISH FOR EVERY OPPORTUNITY", width / 2, coverY, { align: "center" });
 
   coverY += 54;
   doc.setFont(FONT, "bold");
   doc.setFontSize(26);
   doc.setTextColor(255, 255, 255);
-  doc.text("Beginner English Course", width / 2, coverY, { align: "center" });
+  text("Beginner English Course", width / 2, coverY, { align: "center" });
 
   coverY += 26;
   doc.setFont(FONT, "normal");
   doc.setFontSize(12);
   doc.setTextColor(...GOLD);
-  doc.text("Método Speak2Co · Plano Essential", width / 2, coverY, { align: "center" });
+  text("Método Speak2Co · Plano Essential", width / 2, coverY, { align: "center" });
 
   coverY += 34;
   doc.setFontSize(10.5);
@@ -118,14 +118,14 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
   const intro =
     `${lessons.length} lições progressivas com warm-up, vocabulário com IPA, verbos, gramática por ` +
     "exemplos, expressões, diálogos, laboratório de pronúncia, exercícios escritos e falados, quiz e revisão.";
-  for (const line of doc.splitTextToSize(intro, contentWidth - 60) as string[]) {
-    doc.text(line, width / 2, coverY, { align: "center" });
+  for (const line of split(intro, contentWidth - 60)) {
+    text(line, width / 2, coverY, { align: "center" });
     coverY += 16;
   }
 
   doc.setFontSize(9);
   doc.setTextColor(180, 180, 190);
-  doc.text(
+  text(
     `Gerado em ${new Date().toLocaleDateString("pt-BR")} · speak2co`,
     width / 2,
     height - 56,
@@ -145,11 +145,11 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     doc.setFont(FONT, "bold");
     doc.setFontSize(13);
     doc.setTextColor(255, 255, 255);
-    doc.text("Speak2Co", textX, 34);
+    text("Speak2Co", textX, 34);
     doc.setFont(FONT, "normal");
     doc.setFontSize(9);
     doc.setTextColor(...GOLD);
-    doc.text(`Beginner English Course${currentLesson ? ` · ${currentLesson}` : ""}`, textX, 50);
+    text(`Beginner English Course${currentLesson ? ` · ${currentLesson}` : ""}`, textX, 50);
 
     doc.setDrawColor(220, 220, 226);
     doc.setLineWidth(0.5);
@@ -157,8 +157,8 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     doc.setFont(FONT, "normal");
     doc.setFontSize(8);
     doc.setTextColor(...MUTED);
-    doc.text("Speak2Co · English for Every Opportunity", margin, footerTop + 20);
-    doc.text(`${doc.getNumberOfPages()}`, width - margin, footerTop + 20, { align: "right" });
+    text("Speak2Co · English for Every Opportunity", margin, footerTop + 20);
+    text(`${doc.getNumberOfPages()}`, width - margin, footerTop + 20, { align: "right" });
   };
 
   let y = 0;
@@ -187,9 +187,9 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     doc.setFont(FONT, opts.style ?? "normal");
     doc.setFontSize(size);
     doc.setTextColor(...(opts.color ?? TEXT));
-    for (const line of doc.splitTextToSize(text, contentWidth - indent) as string[]) {
+    for (const line of split(text, contentWidth - indent)) {
       ensure(lh);
-      doc.text(line, margin + indent, y);
+      text(line, margin + indent, y);
       y += lh;
     }
     y += opts.gap ?? 0;
@@ -203,7 +203,7 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     doc.setFont(FONT, "bold");
     doc.setFontSize(12.5);
     doc.setTextColor(...NAVY);
-    doc.text(title, margin, y + 6);
+    text(title, margin, y + 6);
     y += 24;
   };
 
@@ -212,17 +212,17 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
   doc.setFont(FONT, "bold");
   doc.setFontSize(16);
   doc.setTextColor(...NAVY);
-  doc.text("Sumário", margin, y);
+  text("Sumário", margin, y);
   y += 24;
   for (const lesson of lessons) {
     ensure(16);
     doc.setFont(FONT, "bold");
     doc.setFontSize(10);
     doc.setTextColor(...TEXT);
-    doc.text(`Lesson ${lesson.number} — ${lesson.title}`, margin, y);
+    text(`Lesson ${lesson.number} — ${lesson.title}`, margin, y);
     doc.setFont(FONT, "normal");
     doc.setTextColor(...MUTED);
-    doc.text(lesson.titlePt, width - margin, y, { align: "right" });
+    text(lesson.titlePt, width - margin, y, { align: "right" });
     y += 16;
   }
 
@@ -234,7 +234,7 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     doc.setFont(FONT, "bold");
     doc.setFontSize(18);
     doc.setTextColor(...NAVY);
-    doc.text(`Lesson ${lesson.number} — ${lesson.title}`, margin, y);
+    text(`Lesson ${lesson.number} — ${lesson.title}`, margin, y);
     y += 22;
     para(lesson.titlePt, { size: 11, color: GOLD, gap: 4 });
     para(`Objetivo: ${lesson.goal}`, { size: 10, color: MUTED, gap: 12 });
