@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { getMyAccess, type MyAccess } from "@/lib/entitlements.functions";
+import { getMyAccess, getPlanCatalog, type MyAccess } from "@/lib/entitlements.functions";
 
 export const FEATURE_KEYS = {
   placementTest: "placement_test",
@@ -32,11 +33,78 @@ export function aiMinutesLeft(access: MyAccess | undefined) {
   return Math.max(0, access.aiDailyMinutes - Math.floor(access.aiUsedSeconds / 60));
 }
 
+/* ------------------------------------------------------------------ */
+/* Pré-visualização de plano (somente admin) — para conferir os bloqueios */
+/* ------------------------------------------------------------------ */
+
+const PREVIEW_KEY = "speak2co:preview-plan";
+const PREVIEW_EVENT = "speak2co:preview-plan-change";
+
+export function getPreviewPlan(): string | null {
+  if (typeof window === "undefined") return null;
+  return window.localStorage.getItem(PREVIEW_KEY);
+}
+
+export function setPreviewPlan(planKey: string | null) {
+  if (typeof window === "undefined") return;
+  if (planKey) window.localStorage.setItem(PREVIEW_KEY, planKey);
+  else window.localStorage.removeItem(PREVIEW_KEY);
+  window.dispatchEvent(new Event(PREVIEW_EVENT));
+}
+
+export function usePreviewPlan() {
+  const [plan, setPlan] = useState<string | null>(null);
+  useEffect(() => {
+    const sync = () => setPlan(getPreviewPlan());
+    sync();
+    window.addEventListener(PREVIEW_EVENT, sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      window.removeEventListener(PREVIEW_EVENT, sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, []);
+  return plan;
+}
+
 export function useAccess() {
   const fetchAccess = useServerFn(getMyAccess);
-  return useQuery({
+  const fetchCatalog = useServerFn(getPlanCatalog);
+  const preview = usePreviewPlan();
+
+  const base = useQuery({
     queryKey: ["my-access"],
     queryFn: () => fetchAccess(),
     staleTime: 60_000,
   });
+
+  const previewActive = Boolean(preview) && base.data?.isAdmin === true;
+
+  const catalog = useQuery({
+    queryKey: ["plan-catalog"],
+    queryFn: () => fetchCatalog(),
+    staleTime: 300_000,
+    enabled: previewActive,
+  });
+
+  if (previewActive && preview && catalog.data && base.data) {
+    const features: Record<string, boolean> = {};
+    for (const row of catalog.data.planFeatures) {
+      if (row.plan_key === preview) features[row.feature_key] = row.enabled;
+    }
+    const plan = catalog.data.plans.find((p) => p.key === preview) ?? null;
+    return {
+      ...base,
+      data: {
+        ...base.data,
+        planKey: preview,
+        plan,
+        isAdmin: false,
+        features,
+        aiDailyMinutes: plan?.ai_daily_minutes ?? null,
+      } satisfies MyAccess,
+    } as typeof base;
+  }
+
+  return base;
 }
