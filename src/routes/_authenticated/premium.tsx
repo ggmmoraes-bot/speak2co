@@ -145,7 +145,7 @@ function PremiumPage() {
     onError: (error: Error) => toast.error(error.message),
   });
 
-  const planLabel = data?.subscription?.plan_label ?? "";
+  
   const plan = data?.plan ?? "free";
   const isActive = plan === "essential" || plan === "premium" || plan === "signature";
   const currentTier = isActive ? plan : null;
