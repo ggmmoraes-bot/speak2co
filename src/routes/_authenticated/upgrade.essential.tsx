@@ -126,7 +126,7 @@ function UpgradeEssentialPage() {
                 billing === "yearly" ? "bg-gold text-primary-foreground" : "text-muted-foreground"
               }`}
             >
-              Anual · R$ 199,00
+              Anual · R$ 379,00
             </button>
           </div>
         </div>
