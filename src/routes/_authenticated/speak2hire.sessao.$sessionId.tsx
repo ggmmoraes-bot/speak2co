@@ -16,6 +16,7 @@ import {
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { PhrasePractice } from "@/components/PhrasePractice";
 import {
   getInterviewSession,
   saveInterviewAnswer,
@@ -190,6 +191,20 @@ function SessionPage() {
             <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
             {question?.tip}
           </p>
+          {question?.prompt && (
+            <div className="mt-4">
+              <p className="text-xs tracking-widest text-muted-foreground uppercase">
+                AI Pronunciation{" "}
+                <span className="normal-case tracking-normal">(pronúncia com IA)</span>
+              </p>
+              <div className="mt-3">
+                <PhrasePractice
+                  en={question.prompt}
+                  pt="Ouça a pergunta com voz nativa e treine sua entonação antes de responder."
+                />
+              </div>
+            </div>
+          )}
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
@@ -201,9 +216,7 @@ function SessionPage() {
               >
                 {mmss(remaining)}
               </span>
-              <span className="text-xs text-muted-foreground">
-                de {mmss(limit)} recomendados
-              </span>
+              <span className="text-xs text-muted-foreground">de {mmss(limit)} recomendados</span>
             </div>
             <div className="ml-auto flex gap-2">
               <Button
@@ -249,7 +262,8 @@ function SessionPage() {
             className="mt-4 min-h-40 resize-y"
           />
           <p className="mt-2 text-xs text-muted-foreground">
-            Dica do material: grave-se em vídeo enquanto responde. O texto aqui é o que o coach de IA vai avaliar.
+            Dica do material: grave-se em vídeo enquanto responde. O texto aqui é o que o coach de
+            IA vai avaliar.
           </p>
         </section>
 

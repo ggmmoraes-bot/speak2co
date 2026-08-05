@@ -16,16 +16,10 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { RolePlayCoach } from "@/components/RolePlayCoach";
 import { TravelDrills } from "@/components/TravelDrills";
-import {
-  TRAVEL_BRIEFING,
-  getTravelTrack,
-  type TravelTrack,
-} from "@/lib/speak2travel-content";
+import { PhrasePractice } from "@/components/PhrasePractice";
+import { TRAVEL_BRIEFING, getTravelTrack, type TravelTrack } from "@/lib/speak2travel-content";
 import { getModuleContent } from "@/lib/speak2travel-modules";
-import {
-  evaluateTravelPractice,
-  type TravelFeedback,
-} from "@/lib/speak2travel.functions";
+import { evaluateTravelPractice, type TravelFeedback } from "@/lib/speak2travel.functions";
 import {
   getTravelProgress,
   resetTravelProgress,
@@ -41,7 +35,10 @@ export const Route = createFileRoute("/_authenticated/speak2travel/modulo/$modul
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Módulo indisponível — Speak2Travel" }, { name: "robots", content: "noindex" }],
+        meta: [
+          { title: "Módulo indisponível — Speak2Travel" },
+          { name: "robots", content: "noindex" },
+        ],
       };
     }
     const { track } = loaderData;
@@ -196,41 +193,35 @@ function TravelModule({ track }: { track: TravelTrack }) {
               <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
                 <BookOpen className="h-5 w-5" /> Vocabulário essencial
               </h2>
-              <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              <p className="mt-1 text-xs text-muted-foreground">
+                Essential Vocabulary (ouça a IA e grave sua voz para receber feedback)
+              </p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 {(moduleContent
                   ? moduleContent.vocabulary.map((v) => ({ term: v.en, meaning: v.pt }))
                   : track.vocabulary
                 ).map((word) => (
-                  <li key={word.term} className="text-sm text-foreground/80">
-                    <span className="font-semibold text-foreground">{word.term}</span> —{" "}
-                    {word.meaning}
-                  </li>
+                  <PhrasePractice key={word.term} en={word.term} pt={word.meaning} />
                 ))}
-              </ul>
+              </div>
             </div>
 
             <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
               <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
                 <Compass className="h-5 w-5" /> Expressões-chave
               </h2>
-              <ul className="mt-4 space-y-2">
+              <p className="mt-1 text-xs text-muted-foreground">
+                Key Expressions (pronúncia com IA)
+              </p>
+              <div className="mt-4 grid gap-3">
                 {moduleContent
                   ? moduleContent.expressions.map((e) => (
-                      <li key={e.en} className="flex gap-2 text-sm text-foreground/80">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                        <span>
-                          “{e.en}”
-                          <span className="block text-muted-foreground">{e.pt}</span>
-                        </span>
-                      </li>
+                      <PhrasePractice key={e.en} en={e.en} pt={e.pt} />
                     ))
                   : track.phrases.map((phrase) => (
-                      <li key={phrase} className="flex gap-2 text-sm text-foreground/80">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />“
-                        {phrase}”
-                      </li>
+                      <PhrasePractice key={phrase} en={phrase} pt="Pratique em voz alta." />
                     ))}
-              </ul>
+              </div>
             </div>
 
             {moduleContent && (
@@ -238,14 +229,11 @@ function TravelModule({ track }: { track: TravelTrack }) {
                 <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
                   <MessageSquare className="h-5 w-5" /> Diálogo-modelo
                 </h2>
-                <ul className="mt-4 space-y-2">
+                <div className="mt-4 space-y-3">
                   {moduleContent.dialogue.map((line, i) => (
-                    <li key={`${line.who}-${i}`} className="text-sm">
-                      <span className="font-semibold text-gold">{line.who}: </span>
-                      <span className="text-foreground/80">{line.line}</span>
-                    </li>
+                    <PhrasePractice key={`${line.who}-${i}`} en={line.line} pt={line.who} />
                   ))}
-                </ul>
+                </div>
                 <h3 className="mt-6 flex items-center gap-2 text-xs tracking-widest text-muted-foreground uppercase">
                   <Lightbulb className="h-4 w-4" /> Dicas de pronúncia
                 </h3>
@@ -258,7 +246,6 @@ function TravelModule({ track }: { track: TravelTrack }) {
                 </ul>
               </div>
             )}
-
 
             <div className="grid gap-4 sm:grid-cols-2">
               {TRAVEL_BRIEFING.steps.map((step) => (
@@ -329,9 +316,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
 
             <Textarea
               value={answers[prompt.id] ?? ""}
-              onChange={(e) =>
-                setAnswers((prev) => ({ ...prev, [prompt.id]: e.target.value }))
-              }
+              onChange={(e) => setAnswers((prev) => ({ ...prev, [prompt.id]: e.target.value }))}
               placeholder="Write your answer in English..."
               className="min-h-36"
             />
@@ -347,8 +332,6 @@ function TravelModule({ track }: { track: TravelTrack }) {
               }
               onTranscript={setCoachTranscript}
             />
-
-
 
             <div className="flex flex-wrap gap-3">
               {index > 0 && (
@@ -403,9 +386,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
                   key={item.promptId}
                   className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur"
                 >
-                  <p className="font-semibold text-gold">
-                    {source?.situation ?? item.promptId}
-                  </p>
+                  <p className="font-semibold text-gold">{source?.situation ?? item.promptId}</p>
                   <p className="mt-3 text-sm text-foreground/80">
                     <span className="text-muted-foreground">Acertos: </span>
                     {item.strengths}
@@ -421,11 +402,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
               );
             })}
 
-            <TravelDrills
-              trackId={track.id}
-              answers={answers}
-              conversation={coachTranscript}
-            />
+            <TravelDrills trackId={track.id} answers={answers} conversation={coachTranscript} />
 
             <div className="flex flex-wrap gap-3">
               <Button

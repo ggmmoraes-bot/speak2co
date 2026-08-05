@@ -2,7 +2,16 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FeatureGate } from "@/components/FeatureGate";
+import { PhrasePractice } from "@/components/PhrasePractice";
 import { getMaterial, MATERIALS } from "@/lib/speak2hire-content";
+
+/** Só oferece prática de fala em trechos escritos em inglês. */
+function isEnglishPhrase(text: string) {
+  if (text.length > 160 || text.length < 8) return false;
+  return !/[áàâãéêíóôõúçÁÀÂÃÉÊÍÓÔÕÚÇ]|\b(você|para|com|que|não|uma|sua|seu|como|quando|porque|isso)\b/i.test(
+    text,
+  );
+}
 
 export const Route = createFileRoute("/_authenticated/speak2hire/material/$materialId")({
   head: () => ({
@@ -80,14 +89,22 @@ function MaterialPage() {
                 <p className="mt-3 text-sm leading-relaxed text-foreground/80">{section.body}</p>
               )}
               {section.bullets && (
-                <ul className="mt-3 space-y-2 text-sm text-foreground/80">
-                  {section.bullets.map((bullet) => (
-                    <li key={bullet} className="flex gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="mt-3 space-y-3">
+                  {section.bullets.map((bullet) =>
+                    isEnglishPhrase(bullet) ? (
+                      <PhrasePractice
+                        key={bullet}
+                        en={bullet}
+                        pt="Pratique em voz alta com a IA."
+                      />
+                    ) : (
+                      <p key={bullet} className="flex gap-2 text-sm text-foreground/80">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                        <span>{bullet}</span>
+                      </p>
+                    ),
+                  )}
+                </div>
               )}
               {section.pairs && (
                 <div className="mt-3 space-y-3">
@@ -97,10 +114,16 @@ function MaterialPage() {
                         <X className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
                         {pair.left}
                       </p>
-                      <p className="flex gap-2 rounded-xl border border-gold/30 bg-background/40 p-3 text-sm text-foreground">
-                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                        {pair.right}
-                      </p>
+                      <div className="space-y-2">
+                        <p className="flex gap-2 rounded-xl border border-gold/30 bg-background/40 p-3 text-sm text-foreground">
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                          {pair.right}
+                        </p>
+                        <PhrasePractice
+                          en={pair.right}
+                          pt="Grave sua voz e receba feedback de pronunciation, stress, intonation e fluency."
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>

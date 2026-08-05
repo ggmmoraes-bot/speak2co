@@ -241,6 +241,36 @@ export type Database = {
         }
         Relationships: []
       }
+      founder_messages: {
+        Row: {
+          answered: boolean
+          content: string
+          created_at: string
+          id: string
+          needs_founder: boolean
+          role: string
+          user_id: string
+        }
+        Insert: {
+          answered?: boolean
+          content: string
+          created_at?: string
+          id?: string
+          needs_founder?: boolean
+          role: string
+          user_id: string
+        }
+        Update: {
+          answered?: boolean
+          content?: string
+          created_at?: string
+          id?: string
+          needs_founder?: boolean
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       interview_sessions: {
         Row: {
           answers: Json

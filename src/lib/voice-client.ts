@@ -84,18 +84,27 @@ export async function speakText(text: string, options: SpeakOptions | string = {
   if (currentAudio === audio) currentAudio = null;
 }
 
+export type PronunciationDimension = { score: number; tip: string };
+
 export type PronunciationResult = {
   score: number;
   transcript: string;
   verdict: string;
   issues: { sound: string; tip: string }[];
   praise: string;
+  dimensions?: {
+    pronunciation: PronunciationDimension;
+    stress: PronunciationDimension;
+    intonation: PronunciationDimension;
+    fluency: PronunciationDimension;
+  };
 };
 
 /** Compara a fala do aluno com a frase-alvo e devolve nota + dicas de pronúncia. */
 export async function checkPronunciation(
   blob: Blob,
   target: string,
+  durationMs?: number,
 ): Promise<PronunciationResult> {
   const transcript = await transcribeAudio(blob);
   const headers = await authHeaders();
@@ -103,7 +112,7 @@ export async function checkPronunciation(
   const res = await fetch("/api/voice/pronunciation", {
     method: "POST",
     headers,
-    body: JSON.stringify({ target, transcript }),
+    body: JSON.stringify({ target, transcript, durationMs }),
   });
   if (!res.ok) throw new Error((await res.text()) || "Não foi possível avaliar a pronúncia.");
   return (await res.json()) as PronunciationResult;

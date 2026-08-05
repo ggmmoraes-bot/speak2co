@@ -52,8 +52,8 @@ export function PhrasePractice({
       if (!rec) return;
       try {
         setBusy(true);
-        const { blob } = await rec.stop();
-        const res = await checkPronunciation(blob, en);
+        const { blob, durationMs } = await rec.stop();
+        const res = await checkPronunciation(blob, en, durationMs);
         setResult(res);
         setHistory((h) => [...h, res.score]);
         onAttempt?.({
@@ -135,9 +135,7 @@ export function PhrasePractice({
       {result && (
         <div className="mt-3 space-y-2 rounded-xl border border-border p-3">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-semibold">
-              Nota automática · tentativa {history.length}
-            </span>
+            <span className="font-semibold">Nota automática · tentativa {history.length}</span>
             <span className="flex items-center gap-2">
               <span
                 className={`rounded-full border px-2 py-0.5 text-[11px] font-bold ${GRADE_TONE_CLASS[gradePronunciation(result.score).tone]}`}
@@ -153,11 +151,8 @@ export function PhrasePractice({
             {gradePronunciation(result.score).label}
             {history.length > 1 ? ` · tentativas: ${history.join("% · ")}%` : ""}
           </p>
-          <SpeechComparison
-            target={en}
-            transcript={result.transcript}
-            onPlayModel={playModel}
-          />
+          <PronunciationDimensions result={result} />
+          <SpeechComparison target={en} transcript={result.transcript} onPlayModel={playModel} />
           <p className="text-xs">{result.verdict}</p>
           {result.issues.length > 0 && (
             <p className="text-xs font-semibold text-foreground">
@@ -176,6 +171,42 @@ export function PhrasePractice({
           <p className="text-xs text-muted-foreground">{result.praise}</p>
         </div>
       )}
+    </div>
+  );
+}
+
+const DIMENSION_LABELS: {
+  key: "pronunciation" | "stress" | "intonation" | "fluency";
+  en: string;
+  pt: string;
+}[] = [
+  { key: "pronunciation", en: "Pronunciation", pt: "Pronúncia" },
+  { key: "stress", en: "Stress", pt: "Sílaba tônica" },
+  { key: "intonation", en: "Intonation", pt: "Entonação" },
+  { key: "fluency", en: "Fluency", pt: "Fluência" },
+];
+
+/** Feedback da IA nas 4 dimensões avaliadas em toda a plataforma. */
+export function PronunciationDimensions({ result }: { result: PronunciationResult }) {
+  const dimensions = result.dimensions;
+  if (!dimensions) return null;
+  return (
+    <div className="grid gap-2 sm:grid-cols-2">
+      {DIMENSION_LABELS.map(({ key, en, pt }) => {
+        const dim = dimensions[key];
+        return (
+          <div key={key} className="rounded-xl border border-border/70 bg-background/40 p-3">
+            <div className="flex items-baseline justify-between gap-2">
+              <p className="text-xs font-semibold text-foreground">
+                {en} <span className="text-[10px] font-normal text-muted-foreground">({pt})</span>
+              </p>
+              <span className="text-xs font-bold text-gold">{dim.score}%</span>
+            </div>
+            <Progress value={dim.score} className="mt-2 h-1.5" />
+            <p className="mt-2 text-[11px] leading-snug text-muted-foreground">{dim.tip}</p>
+          </div>
+        );
+      })}
     </div>
   );
 }
