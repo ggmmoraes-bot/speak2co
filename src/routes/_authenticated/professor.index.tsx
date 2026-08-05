@@ -17,7 +17,7 @@ function ProfessorIndex() {
   async function handleNewThread() {
     try {
       const thread = await createThreadFn({ data: {} });
-      navigate({ to: "/professor/$threadId", params: { threadId: thread.id } });
+      navigate({ to: "/professor/$threadId", search: { prompt: undefined }, params: { threadId: thread.id } });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível criar a conversa.");
     }

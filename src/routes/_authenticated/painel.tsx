@@ -187,7 +187,7 @@ function Painel() {
             </Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/assinatura" search={{}}>
+            <Link to="/assinatura" search={{ simulacao: undefined }}>
               Minha assinatura
             </Link>
           </Button>

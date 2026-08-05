@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import { BrandText } from "@/components/BrandText";
 import { Button } from "@/components/ui/button";
 import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
+import { usePaddleCheckout } from "@/hooks/usePaddleCheckout";
+import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
 
 export const Route = createFileRoute("/_authenticated/premium")({
@@ -129,6 +131,10 @@ function PremiumPage() {
   const queryClient = useQueryClient();
   const fetchSubscription = useServerFn(getMySubscription);
   const checkout = useServerFn(startMercadoPagoCheckout);
+  const paddle = usePaddleCheckout();
+  const startPaddle = (priceId: string) => {
+    paddle.openCheckout(priceId).catch((error: Error) => toast.error(error.message));
+  };
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
 
   const { data } = useQuery({
@@ -154,13 +160,14 @@ function PremiumPage() {
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-14">
       <PlanUnlockedDialog />
-      <header className="text-center">
+      <PaymentTestModeBanner />
+      <header className="mt-6 text-center">
         <p className="text-sm uppercase tracking-[0.3em] text-accent">Speak2Co Premium</p>
         <h1 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
           English for Every Opportunity
         </h1>
         <p className="mt-3 text-muted-foreground">
-          Pagamento em reais com Pix, boleto ou cartão pelo Mercado Pago.
+          Cartão internacional no checkout global, ou Pix, boleto e cartão em reais pelo Mercado Pago.
         </p>
       </header>
 
@@ -196,9 +203,9 @@ function PremiumPage() {
           </p>
           <Button
             className="mt-4 rounded-full font-semibold"
-            disabled={mutation.isPending}
+            disabled={paddle.loading}
             onClick={() =>
-              mutation.mutate(billing === "yearly" ? "signature_yearly" : "signature_monthly")
+              startPaddle(billing === "yearly" ? "signature_yearly" : "signature_monthly")
             }
           >
             Fazer upgrade para Signature
@@ -242,18 +249,30 @@ function PremiumPage() {
                   <li key={perk}>• {perk}</li>
                 ))}
               </ul>
-              <Button
-                className="mt-8"
-                variant={tier.highlight ? "default" : "outline"}
-                disabled={isCurrent || mutation.isPending}
-                onClick={() => mutation.mutate(option.key)}
-              >
-                {isCurrent
-                  ? "Seu plano atual"
-                  : mutation.isPending
+              <div className="mt-8 space-y-2">
+                <Button
+                  className="w-full"
+                  variant={tier.highlight ? "default" : "outline"}
+                  disabled={isCurrent || paddle.loading}
+                  onClick={() => startPaddle(option.key)}
+                >
+                  {isCurrent
+                    ? "Seu plano atual"
+                    : paddle.loading
+                      ? "Abrindo checkout..."
+                      : "Assinar com cartão (internacional)"}
+                </Button>
+                <Button
+                  className="w-full"
+                  variant="ghost"
+                  disabled={isCurrent || mutation.isPending}
+                  onClick={() => mutation.mutate(option.key)}
+                >
+                  {mutation.isPending
                     ? "Abrindo checkout..."
-                    : "Assinar com Mercado Pago"}
-              </Button>
+                    : "Assinar com Mercado Pago (Pix/boleto)"}
+                </Button>
+              </div>
             </article>
           );
         })}
