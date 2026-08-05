@@ -16,6 +16,7 @@ import { Route as ChecklistRouteImport } from './routes/checklist'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authenticated/assinatura'
 import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
+import { Route as AuthenticatedCursoBeginnerRouteImport } from './routes/_authenticated/curso-beginner'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
 import { Route as AuthenticatedPremiumRouteImport } from './routes/_authenticated/premium'
@@ -25,6 +26,7 @@ import { Route as AuthenticatedSpeak2hireRouteImport } from './routes/_authentic
 import { Route as AuthenticatedSpeak2travelRouteImport } from './routes/_authenticated/speak2travel'
 import { Route as AuthenticatedTesteDeNivelRouteImport } from './routes/_authenticated/teste-de-nivel'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AuthenticatedCursoBeginnerIndexRouteImport } from './routes/_authenticated/curso-beginner.index'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2hireIndexRouteImport } from './routes/_authenticated/speak2hire.index'
@@ -34,6 +36,7 @@ import { Route as AuthenticatedUpgradeEssentialRouteImport } from './routes/_aut
 import { Route as ApiVoicePronunciationRouteImport } from './routes/api/voice/pronunciation'
 import { Route as ApiVoiceSpeakRouteImport } from './routes/api/voice/speak'
 import { Route as ApiVoiceTranscribeRouteImport } from './routes/api/voice/transcribe'
+import { Route as AuthenticatedCursoBeginnerLicaoLessonIdRouteImport } from './routes/_authenticated/curso-beginner.licao.$lessonId'
 import { Route as AuthenticatedSpeak2hireMaterialMaterialIdRouteImport } from './routes/_authenticated/speak2hire.material.$materialId'
 import { Route as AuthenticatedSpeak2hireSessaoSessionIdRouteImport } from './routes/_authenticated/speak2hire.sessao.$sessionId'
 import { Route as AuthenticatedSpeak2travelMaterialResourceIdRouteImport } from './routes/_authenticated/speak2travel.material.$resourceId'
@@ -74,6 +77,12 @@ const AuthenticatedCertificadosRoute =
   AuthenticatedCertificadosRouteImport.update({
     id: '/certificados',
     path: '/certificados',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCursoBeginnerRoute =
+  AuthenticatedCursoBeginnerRouteImport.update({
+    id: '/curso-beginner',
+    path: '/curso-beginner',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
@@ -123,6 +132,12 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedCursoBeginnerIndexRoute =
+  AuthenticatedCursoBeginnerIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedCursoBeginnerRoute,
+  } as any)
 const AuthenticatedProfessorIndexRoute =
   AuthenticatedProfessorIndexRouteImport.update({
     id: '/',
@@ -174,6 +189,12 @@ const ApiVoiceTranscribeRoute = ApiVoiceTranscribeRouteImport.update({
   path: '/api/voice/transcribe',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedCursoBeginnerLicaoLessonIdRoute =
+  AuthenticatedCursoBeginnerLicaoLessonIdRouteImport.update({
+    id: '/licao/$lessonId',
+    path: '/licao/$lessonId',
+    getParentRoute: () => AuthenticatedCursoBeginnerRoute,
+  } as any)
 const AuthenticatedSpeak2hireMaterialMaterialIdRoute =
   AuthenticatedSpeak2hireMaterialMaterialIdRouteImport.update({
     id: '/material/$materialId',
@@ -218,6 +239,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
+  '/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
@@ -233,9 +255,11 @@ export interface FileRoutesByFullPath {
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
+  '/curso-beginner/': typeof AuthenticatedCursoBeginnerIndexRoute
   '/professor/': typeof AuthenticatedProfessorIndexRoute
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
+  '/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   '/speak2hire/sessao/$sessionId': typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   '/speak2travel/material/$resourceId': typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
@@ -262,9 +286,11 @@ export interface FileRoutesByTo {
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
+  '/curso-beginner': typeof AuthenticatedCursoBeginnerIndexRoute
   '/professor': typeof AuthenticatedProfessorIndexRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel': typeof AuthenticatedSpeak2travelIndexRoute
+  '/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   '/speak2hire/sessao/$sessionId': typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   '/speak2travel/material/$resourceId': typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
@@ -281,6 +307,7 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
+  '/_authenticated/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
@@ -296,9 +323,11 @@ export interface FileRoutesById {
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
+  '/_authenticated/curso-beginner/': typeof AuthenticatedCursoBeginnerIndexRoute
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/_authenticated/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
+  '/_authenticated/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
   '/_authenticated/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
   '/_authenticated/speak2hire/sessao/$sessionId': typeof AuthenticatedSpeak2hireSessaoSessionIdRoute
   '/_authenticated/speak2travel/material/$resourceId': typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
@@ -315,6 +344,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/assinatura'
     | '/certificados'
+    | '/curso-beginner'
     | '/painel'
     | '/perfil'
     | '/premium'
@@ -330,9 +360,11 @@ export interface FileRouteTypes {
     | '/api/voice/pronunciation'
     | '/api/voice/speak'
     | '/api/voice/transcribe'
+    | '/curso-beginner/'
     | '/professor/'
     | '/speak2hire/'
     | '/speak2travel/'
+    | '/curso-beginner/licao/$lessonId'
     | '/speak2hire/material/$materialId'
     | '/speak2hire/sessao/$sessionId'
     | '/speak2travel/material/$resourceId'
@@ -359,9 +391,11 @@ export interface FileRouteTypes {
     | '/api/voice/pronunciation'
     | '/api/voice/speak'
     | '/api/voice/transcribe'
+    | '/curso-beginner'
     | '/professor'
     | '/speak2hire'
     | '/speak2travel'
+    | '/curso-beginner/licao/$lessonId'
     | '/speak2hire/material/$materialId'
     | '/speak2hire/sessao/$sessionId'
     | '/speak2travel/material/$resourceId'
@@ -377,6 +411,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/assinatura'
     | '/_authenticated/certificados'
+    | '/_authenticated/curso-beginner'
     | '/_authenticated/painel'
     | '/_authenticated/perfil'
     | '/_authenticated/premium'
@@ -392,9 +427,11 @@ export interface FileRouteTypes {
     | '/api/voice/pronunciation'
     | '/api/voice/speak'
     | '/api/voice/transcribe'
+    | '/_authenticated/curso-beginner/'
     | '/_authenticated/professor/'
     | '/_authenticated/speak2hire/'
     | '/_authenticated/speak2travel/'
+    | '/_authenticated/curso-beginner/licao/$lessonId'
     | '/_authenticated/speak2hire/material/$materialId'
     | '/_authenticated/speak2hire/sessao/$sessionId'
     | '/_authenticated/speak2travel/material/$resourceId'
@@ -466,6 +503,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCertificadosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/curso-beginner': {
+      id: '/_authenticated/curso-beginner'
+      path: '/curso-beginner'
+      fullPath: '/curso-beginner'
+      preLoaderRoute: typeof AuthenticatedCursoBeginnerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/painel': {
       id: '/_authenticated/painel'
       path: '/painel'
@@ -528,6 +572,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/chat'
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/curso-beginner/': {
+      id: '/_authenticated/curso-beginner/'
+      path: '/'
+      fullPath: '/curso-beginner/'
+      preLoaderRoute: typeof AuthenticatedCursoBeginnerIndexRouteImport
+      parentRoute: typeof AuthenticatedCursoBeginnerRoute
     }
     '/_authenticated/professor/': {
       id: '/_authenticated/professor/'
@@ -592,6 +643,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiVoiceTranscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/curso-beginner/licao/$lessonId': {
+      id: '/_authenticated/curso-beginner/licao/$lessonId'
+      path: '/licao/$lessonId'
+      fullPath: '/curso-beginner/licao/$lessonId'
+      preLoaderRoute: typeof AuthenticatedCursoBeginnerLicaoLessonIdRouteImport
+      parentRoute: typeof AuthenticatedCursoBeginnerRoute
+    }
     '/_authenticated/speak2hire/material/$materialId': {
       id: '/_authenticated/speak2hire/material/$materialId'
       path: '/material/$materialId'
@@ -636,6 +694,23 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AuthenticatedCursoBeginnerRouteChildren {
+  AuthenticatedCursoBeginnerIndexRoute: typeof AuthenticatedCursoBeginnerIndexRoute
+  AuthenticatedCursoBeginnerLicaoLessonIdRoute: typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
+}
+
+const AuthenticatedCursoBeginnerRouteChildren: AuthenticatedCursoBeginnerRouteChildren =
+  {
+    AuthenticatedCursoBeginnerIndexRoute: AuthenticatedCursoBeginnerIndexRoute,
+    AuthenticatedCursoBeginnerLicaoLessonIdRoute:
+      AuthenticatedCursoBeginnerLicaoLessonIdRoute,
+  }
+
+const AuthenticatedCursoBeginnerRouteWithChildren =
+  AuthenticatedCursoBeginnerRoute._addFileChildren(
+    AuthenticatedCursoBeginnerRouteChildren,
+  )
 
 interface AuthenticatedProfessorRouteChildren {
   AuthenticatedProfessorThreadIdRoute: typeof AuthenticatedProfessorThreadIdRoute
@@ -703,6 +778,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
+  AuthenticatedCursoBeginnerRoute: typeof AuthenticatedCursoBeginnerRouteWithChildren
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
@@ -718,6 +794,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
+  AuthenticatedCursoBeginnerRoute: AuthenticatedCursoBeginnerRouteWithChildren,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
