@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Award,
   BookOpen,
@@ -11,6 +11,8 @@ import {
   Loader2,
   Lock,
   Mic,
+  Search,
+  X,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
