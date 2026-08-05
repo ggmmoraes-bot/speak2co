@@ -146,14 +146,15 @@ function PremiumPage() {
   });
 
   const planLabel = data?.subscription?.plan_label ?? "";
-  const isActive = data?.plan === "premium";
+  const plan = data?.plan ?? "free";
+  const isActive = plan === "essential" || plan === "premium" || plan === "signature";
   const currentTier = isActive
-    ? planLabel.toLowerCase().includes("signature")
+    ? plan
+    : planLabel.toLowerCase().includes("signature")
       ? "signature"
       : planLabel.toLowerCase().includes("essential")
         ? "essential"
-        : "premium"
-    : null;
+        : null;
 
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-14">
