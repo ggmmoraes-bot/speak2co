@@ -198,6 +198,27 @@ function Painel() {
           </TooltipProvider>
 
           <Button asChild variant="outline" className="rounded-full font-semibold">
+            <Link to="/curso-beginner">
+              {hasFeature(access, "courses_beginner") ? (
+                <BookOpen className="mr-2 h-4 w-4 text-gold" />
+              ) : (
+                <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
+              )}
+              Curso Beginner
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="rounded-full font-semibold">
+            <Link to="/curso-intermediate">
+              {hasFeature(access, "courses_intermediate") ? (
+                <BookOpen className="mr-2 h-4 w-4 text-gold" />
+              ) : (
+                <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
+              )}
+              Curso Intermediate
+            </Link>
+          </Button>
+
+          <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/ranking">Ranking de fluência</Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
