@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import logo from "@/assets/speak2co-logo.asset.json";
+import { getCefrStage } from "@/lib/placement-content";
 
 export const Route = createFileRoute("/_authenticated/perfil")({
   head: () => ({
@@ -51,6 +52,7 @@ function PerfilPage() {
   const [fullName, setFullName] = useState("");
   const [goal, setGoal] = useState("");
   const [targetLevel, setTargetLevel] = useState<string>("");
+  const [englishLevel, setEnglishLevel] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -59,18 +61,20 @@ function PerfilPage() {
       if (!active || !userData.user) return;
       const { data } = await supabase
         .from("profiles")
-        .select("full_name, goal, target_level")
+        .select("full_name, goal, target_level, english_level")
         .eq("id", userData.user.id)
         .maybeSingle();
       if (!active || !data) return;
       setFullName(data.full_name ?? "");
       setGoal(data.goal ?? "");
       setTargetLevel(data.target_level ?? "");
+      setEnglishLevel(data.english_level ?? null);
     })();
     return () => {
       active = false;
     };
   }, []);
+
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -114,6 +118,33 @@ function PerfilPage() {
         <p className="mt-2 text-sm text-muted-foreground">
           Assim personalizamos seu plano de estudos e as práticas com o professor de IA.
         </p>
+
+        {(() => {
+          const stage = getCefrStage(englishLevel);
+          if (!stage) return null;
+          return (
+            <section className="mt-8 rounded-3xl border border-gold/40 bg-gold/10 p-6">
+              <p className="text-xs tracking-widest text-gold uppercase">
+                Seu estágio no teste de nivelamento
+              </p>
+              <p className="mt-2 text-2xl font-semibold text-foreground">
+                {stage.name} <span className="text-muted-foreground">({stage.range})</span>
+              </p>
+              <p className="mt-1 text-sm text-foreground/80">{stage.headline}</p>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Nível CEFR identificado: <span className="font-semibold text-gold">{englishLevel}</span>
+              </p>
+            </section>
+          );
+        })()}
+
+        {!englishLevel && (
+          <p className="mt-8 rounded-2xl border border-border bg-card/60 p-5 text-sm text-muted-foreground">
+            Faça o teste de nivelamento para descobrir seu estágio Speak2Co — Beginner,
+            Intermediate, Upper-Intermediate ou Advanced.
+          </p>
+        )}
+
 
         <form
           onSubmit={handleSubmit}

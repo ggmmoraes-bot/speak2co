@@ -12,6 +12,7 @@ import { getStudyPlan, generateStudyPlan, previewStudyPlanRefinement, applyStudy
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import logo from "@/assets/speak2co-logo.asset.json";
+import { getCefrStage } from "@/lib/placement-content";
 import { DailyExercisesSection } from "@/components/DailyExercisesSection";
 import { ExerciseHistorySection } from "@/components/ExerciseHistorySection";
 import { useAccess, hasFeature, aiMinutesLeft, FEATURE_KEYS } from "@/lib/entitlements";
@@ -111,7 +112,20 @@ function Painel() {
             <p className="mt-2 text-xl font-semibold text-gold">
               {profile?.english_level ?? "A definir"}
             </p>
+            {(() => {
+              const stage = getCefrStage(profile?.english_level);
+              if (!stage) return null;
+              return (
+                <>
+                  <p className="mt-2 text-sm font-semibold text-foreground">
+                    {stage.name} <span className="text-muted-foreground">({stage.range})</span>
+                  </p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">{stage.headline}</p>
+                </>
+              );
+            })()}
           </div>
+
           <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
             <p className="text-xs tracking-widest text-muted-foreground uppercase">Nível desejado</p>
             <p className="mt-2 text-xl font-semibold text-gold">

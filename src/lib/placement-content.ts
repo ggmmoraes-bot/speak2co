@@ -19,6 +19,50 @@ export const LEVEL_DESCRIPTIONS: Record<CefrLevel, string> = {
   C1: "Avançado. Você se comunica com precisão e naturalidade em contextos profissionais e acadêmicos.",
 };
 
+export type CefrStage = {
+  name: string;
+  range: string;
+  headline: string;
+};
+
+/** Estágios oficiais do Speak2Co, exibidos no perfil do aluno após o teste de nivelamento. */
+export const CEFR_STAGES: CefrStage[] = [
+  { name: "Beginner", range: "A1–A2", headline: "Construindo a base." },
+  { name: "Intermediate", range: "B1", headline: "Desenvolvendo fluência." },
+  {
+    name: "Upper-Intermediate",
+    range: "B2",
+    headline: "Comunicação profissional e situações complexas.",
+  },
+  {
+    name: "Advanced",
+    range: "C1",
+    headline: "Inglês para carreira internacional, liderança e alta performance.",
+  },
+];
+
+const STAGE_BY_LEVEL: Record<string, CefrStage> = {
+  A1: CEFR_STAGES[0]!,
+  A2: CEFR_STAGES[0]!,
+  B1: CEFR_STAGES[1]!,
+  B2: CEFR_STAGES[2]!,
+  C1: CEFR_STAGES[3]!,
+  C2: CEFR_STAGES[3]!,
+};
+
+/** Retorna o estágio Speak2Co correspondente ao nível CEFR do aluno. */
+export function getCefrStage(level: string | null | undefined): CefrStage | null {
+  if (!level) return null;
+  return STAGE_BY_LEVEL[level.trim().toUpperCase()] ?? null;
+}
+
+/** Ex.: "Beginner (A1–A2) — Construindo a base." */
+export function formatCefrStage(level: string | null | undefined): string | null {
+  const stage = getCefrStage(level);
+  return stage ? `${stage.name} (${stage.range}) — ${stage.headline}` : null;
+}
+
+
 export const WRITING_PROMPT =
   "Write 4 to 6 sentences in English about your professional goals and why you want to improve your English. Mention one situation where you need English (work, travel, interviews or studies).";
 
