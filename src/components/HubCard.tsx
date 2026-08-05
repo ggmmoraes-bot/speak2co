@@ -19,7 +19,7 @@ export type HubCardProps = {
 };
 
 const cardBase =
-  "group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/70 p-6 text-left backdrop-blur transition-all duration-300 will-change-transform hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_18px_50px_-20px_hsl(var(--gold)/0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60";
+  "group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/70 p-6 text-left backdrop-blur transition-all duration-300 will-change-transform hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_18px_50px_-20px_color-mix(in_oklab,var(--gold)_45%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60";
 
 function Inner({
   titleEn,
@@ -37,10 +37,10 @@ function Inner({
         aria-hidden
         className="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full bg-gold/10 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
       />
-      <span className="relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-gold/40 bg-gradient-to-br from-gold/30 via-gold/10 to-primary/30 shadow-[0_10px_30px_-14px_hsl(var(--gold)/0.7)] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+      <span className="relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-gold/40 bg-gradient-to-br from-gold/30 via-gold/10 to-primary/30 shadow-[0_10px_30px_-14px_color-mix(in_oklab,var(--gold)_60%,transparent)] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--gold)/0.45),transparent_60%)] opacity-70"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,color-mix(in_oklab,var(--gold)_45%,transparent),transparent_60%)] opacity-70"
         />
         {imageUrl ? (
           <>
@@ -52,14 +52,14 @@ function Inner({
             />
             {locked && !comingSoon && (
               <span className="absolute inset-0 flex items-center justify-center bg-background/70">
-                <Lock className="h-5 w-5 text-gold" />
+                <Lock className="icon-gold h-5 w-5" />
               </span>
             )}
           </>
         ) : locked && !comingSoon ? (
-          <Lock className="relative h-6 w-6 text-gold/80" />
+          <Lock className="icon-gold relative h-6 w-6 opacity-80" />
         ) : (
-          <Icon className="relative h-7 w-7 text-gold drop-shadow-[0_2px_6px_hsl(var(--gold)/0.6)]" />
+          <Icon className="icon-gold relative h-7 w-7 drop-shadow-[0_2px_6px_color-mix(in_oklab,var(--gold)_60%,transparent)]" />
         )}
       </span>
 
@@ -73,18 +73,18 @@ function Inner({
 
       <div className="mt-5 flex flex-wrap items-center gap-2">
         {comingSoon && (
-          <span className="rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[11px] font-semibold tracking-wide text-foreground/80 uppercase">
+          <span className="badge-gold rounded-full px-3 py-1 text-[11px] font-semibold tracking-widest text-gold uppercase">
             Coming Soon
           </span>
         )}
         {locked && requiredPlan && (
-          <span className="flex items-center gap-1 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-[11px] font-semibold text-gold">
-            <Lock className="h-3 w-3" /> {requiredPlan} Plan
+          <span className="badge-gold flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-semibold text-gold">
+            <Lock className="icon-gold h-3 w-3" /> {requiredPlan} Plan
           </span>
         )}
         {!locked && !comingSoon && (
-          <span className="flex items-center gap-1 text-xs font-semibold text-gold transition-transform duration-300 group-hover:translate-x-1">
-            Open <ArrowRight className="h-3.5 w-3.5" />
+          <span className="link-gold flex items-center gap-1 text-xs transition-transform duration-300 group-hover:translate-x-1">
+            Open <ArrowRight className="icon-gold h-3.5 w-3.5" />
           </span>
         )}
       </div>

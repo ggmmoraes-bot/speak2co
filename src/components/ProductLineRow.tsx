@@ -19,7 +19,7 @@ export type ProductLineItem = {
 };
 
 const posterBase =
-  "group relative block w-[260px] shrink-0 snap-start overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_10px_30px_-18px_rgba(0,0,0,0.9)] transition-all duration-300 ease-out hover:z-10 hover:-translate-y-2 hover:scale-[1.04] hover:border-gold/70 hover:shadow-[0_28px_60px_-24px_hsl(var(--gold)/0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 sm:w-[300px]";
+  "group relative block w-[260px] shrink-0 snap-start overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_10px_30px_-18px_rgba(0,0,0,0.9)] transition-all duration-300 ease-out hover:z-10 hover:-translate-y-2 hover:scale-[1.04] hover:border-gold/70 hover:shadow-[0_28px_60px_-24px_color-mix(in_oklab,var(--gold)_55%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 sm:w-[300px]";
 
 function Poster({
   titleEn,
@@ -43,25 +43,25 @@ function Poster({
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/40 via-background to-gold/25">
-            <Icon className="h-12 w-12 text-gold" />
+            <Icon className="icon-gold h-12 w-12" />
           </div>
         )}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/45 to-transparent" />
 
         <div className="absolute top-3 left-3 flex flex-wrap gap-2">
           {comingSoon && (
-            <span className="rounded-md bg-background/85 px-2 py-1 text-[10px] font-bold tracking-widest text-gold uppercase backdrop-blur">
+            <span className="badge-gold rounded-md bg-background/85 px-2 py-1 text-[10px] font-bold tracking-widest text-gold uppercase backdrop-blur">
               Coming Soon
             </span>
           )}
           {locked && requiredPlan && !comingSoon && (
-            <span className="flex items-center gap-1 rounded-md bg-background/85 px-2 py-1 text-[10px] font-bold tracking-widest text-gold uppercase backdrop-blur">
-              <Lock className="h-3 w-3" /> {requiredPlan}
+            <span className="badge-gold flex items-center gap-1 rounded-md bg-background/85 px-2 py-1 text-[10px] font-bold tracking-widest text-gold uppercase backdrop-blur">
+              <Lock className="icon-gold h-3 w-3" /> {requiredPlan}
             </span>
           )}
         </div>
 
-        <div className="absolute right-3 bottom-3 flex h-10 w-10 translate-y-2 items-center justify-center rounded-full bg-gold text-primary opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        <div className="btn-gold absolute right-3 bottom-3 flex h-10 w-10 translate-y-2 items-center justify-center rounded-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
           {locked || comingSoon ? (
             <Lock className="h-4 w-4" />
           ) : (
@@ -131,7 +131,7 @@ export function ProductLineRow({
             type="button"
             aria-label="Anterior"
             onClick={() => scrollBy(-1)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card/70 text-foreground/80 transition-colors hover:border-gold/60 hover:text-gold"
+            className="btn-gold-outline flex h-9 w-9 items-center justify-center rounded-full text-foreground/80 transition-colors hover:text-[var(--gold)]"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -139,7 +139,7 @@ export function ProductLineRow({
             type="button"
             aria-label="Próximo"
             onClick={() => scrollBy(1)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card/70 text-foreground/80 transition-colors hover:border-gold/60 hover:text-gold"
+            className="btn-gold-outline flex h-9 w-9 items-center justify-center rounded-full text-foreground/80 transition-colors hover:text-[var(--gold)]"
           >
             <ChevronRight className="h-4 w-4" />
           </button>

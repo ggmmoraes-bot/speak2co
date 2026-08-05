@@ -59,10 +59,14 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
 }
 
 :root {
   --radius: 0.75rem;
+  --gold: oklch(0.82 0.15 87);
+  --gold-deep: oklch(0.72 0.12 78);
   --background: oklch(0.16 0.06 265);
   --foreground: oklch(0.97 0.01 90);
   --card: oklch(0.21 0.06 265);
@@ -149,23 +153,83 @@
   }
 }
 
+@utility text-gold {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gold {
+  background: var(--gradient-gold);
+}
+
 @layer components {
-  .text-gold {
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .bg-gold {
-    background: var(--gradient-gold);
-  }
-
   .surface-navy {
     background: var(--gradient-navy);
   }
 
   .glow-gold {
     box-shadow: var(--shadow-gold);
+  }
+
+  /* ---- Padrão de marca: dourado consistente em botões, links e badges ---- */
+
+  /* Botão dourado sólido (CTA principal) */
+  .btn-gold {
+    background: var(--gradient-gold);
+    color: var(--primary-foreground);
+    border: 1px solid color-mix(in oklab, var(--gold) 60%, transparent);
+    box-shadow: 0 10px 30px -14px color-mix(in oklab, var(--gold) 70%, transparent);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.3s ease,
+      filter 0.2s ease;
+  }
+  .btn-gold:hover {
+    filter: brightness(1.06);
+    box-shadow: 0 16px 40px -16px color-mix(in oklab, var(--gold) 75%, transparent);
+  }
+
+  /* Botão dourado contornado (ação secundária dentro de cards) */
+  .btn-gold-outline {
+    border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+    background: color-mix(in oklab, var(--gold) 10%, transparent);
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .btn-gold-outline:hover {
+    border-color: color-mix(in oklab, var(--gold) 70%, transparent);
+    background: color-mix(in oklab, var(--gold) 16%, transparent);
+  }
+
+  /* Link/ação dourada dentro de cards e carrossel */
+  .link-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+  }
+  .link-gold:hover {
+    opacity: 0.85;
+  }
+
+  /* Ícone dourado sólido (não usar .text-gold em SVG: fica transparente) */
+  .icon-gold {
+    color: var(--gold);
+  }
+
+  /* Badge dourada (plano exigido, destaques) */
+  .badge-gold {
+    border: 1px solid color-mix(in oklab, var(--gold) 40%, transparent);
+    background: color-mix(in oklab, var(--gold) 12%, transparent);
+  }
+
+  /* Superfícies/bordas de marca reutilizáveis */
+  .ring-brand {
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--gold) 45%, transparent);
   }
 }
