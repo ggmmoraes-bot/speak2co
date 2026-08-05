@@ -11,6 +11,7 @@ import {
   sendFounderMessage,
   type FounderMessage,
 } from "@/lib/founder.functions";
+import founderPhoto from "@/assets/gisele-moraes.jpeg.asset.json";
 
 export const Route = createFileRoute("/_authenticated/central-de-mensagens")({
   head: () => ({
