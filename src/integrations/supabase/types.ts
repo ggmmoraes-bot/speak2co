@@ -655,6 +655,7 @@ export type Database = {
           preapproval_id: string | null
           provider: string
           raw: Json
+          scheduled_plan_key: string | null
           status: string
           updated_at: string
           user_id: string
@@ -677,6 +678,7 @@ export type Database = {
           preapproval_id?: string | null
           provider?: string
           raw?: Json
+          scheduled_plan_key?: string | null
           status?: string
           updated_at?: string
           user_id: string
@@ -699,6 +701,7 @@ export type Database = {
           preapproval_id?: string | null
           provider?: string
           raw?: Json
+          scheduled_plan_key?: string | null
           status?: string
           updated_at?: string
           user_id?: string
