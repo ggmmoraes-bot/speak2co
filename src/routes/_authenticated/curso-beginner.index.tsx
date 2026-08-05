@@ -36,6 +36,8 @@ export const Route = createFileRoute("/_authenticated/curso-beginner/")({
 function BeginnerCourseIndex() {
   const load = useServerFn(getCourseProgress);
   const [exporting, setExporting] = useState(false);
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState<"all" | "done" | "pending">("all");
   const { data: progress } = useQuery({
     queryKey: ["course-progress", BEGINNER_COURSE_ID],
     queryFn: () => load({ data: { courseId: BEGINNER_COURSE_ID } }),
