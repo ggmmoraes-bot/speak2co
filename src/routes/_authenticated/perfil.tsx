@@ -51,6 +51,7 @@ function PerfilPage() {
   const [fullName, setFullName] = useState("");
   const [goal, setGoal] = useState("");
   const [targetLevel, setTargetLevel] = useState<string>("");
+  const [englishLevel, setEnglishLevel] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -59,18 +60,20 @@ function PerfilPage() {
       if (!active || !userData.user) return;
       const { data } = await supabase
         .from("profiles")
-        .select("full_name, goal, target_level")
+        .select("full_name, goal, target_level, english_level")
         .eq("id", userData.user.id)
         .maybeSingle();
       if (!active || !data) return;
       setFullName(data.full_name ?? "");
       setGoal(data.goal ?? "");
       setTargetLevel(data.target_level ?? "");
+      setEnglishLevel(data.english_level ?? null);
     })();
     return () => {
       active = false;
     };
   }, []);
+
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
