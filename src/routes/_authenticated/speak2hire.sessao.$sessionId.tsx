@@ -216,9 +216,7 @@ function SessionPage() {
               >
                 {mmss(remaining)}
               </span>
-              <span className="text-xs text-muted-foreground">
-                de {mmss(limit)} recomendados
-              </span>
+              <span className="text-xs text-muted-foreground">de {mmss(limit)} recomendados</span>
             </div>
             <div className="ml-auto flex gap-2">
               <Button
@@ -264,7 +262,8 @@ function SessionPage() {
             className="mt-4 min-h-40 resize-y"
           />
           <p className="mt-2 text-xs text-muted-foreground">
-            Dica do material: grave-se em vídeo enquanto responde. O texto aqui é o que o coach de IA vai avaliar.
+            Dica do material: grave-se em vídeo enquanto responde. O texto aqui é o que o coach de
+            IA vai avaliar.
           </p>
         </section>
 

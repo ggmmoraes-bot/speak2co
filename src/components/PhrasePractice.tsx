@@ -135,9 +135,7 @@ export function PhrasePractice({
       {result && (
         <div className="mt-3 space-y-2 rounded-xl border border-border p-3">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-semibold">
-              Nota automática · tentativa {history.length}
-            </span>
+            <span className="font-semibold">Nota automática · tentativa {history.length}</span>
             <span className="flex items-center gap-2">
               <span
                 className={`rounded-full border px-2 py-0.5 text-[11px] font-bold ${GRADE_TONE_CLASS[gradePronunciation(result.score).tone]}`}
@@ -154,11 +152,7 @@ export function PhrasePractice({
             {history.length > 1 ? ` · tentativas: ${history.join("% · ")}%` : ""}
           </p>
           <PronunciationDimensions result={result} />
-          <SpeechComparison
-            target={en}
-            transcript={result.transcript}
-            onPlayModel={playModel}
-          />
+          <SpeechComparison target={en} transcript={result.transcript} onPlayModel={playModel} />
           <p className="text-xs">{result.verdict}</p>
           {result.issues.length > 0 && (
             <p className="text-xs font-semibold text-foreground">
@@ -181,7 +175,11 @@ export function PhrasePractice({
   );
 }
 
-const DIMENSION_LABELS: { key: "pronunciation" | "stress" | "intonation" | "fluency"; en: string; pt: string }[] = [
+const DIMENSION_LABELS: {
+  key: "pronunciation" | "stress" | "intonation" | "fluency";
+  en: string;
+  pt: string;
+}[] = [
   { key: "pronunciation", en: "Pronunciation", pt: "Pronúncia" },
   { key: "stress", en: "Stress", pt: "Sílaba tônica" },
   { key: "intonation", en: "Intonation", pt: "Entonação" },

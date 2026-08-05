@@ -3,12 +3,33 @@ import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { Briefcase, Plane, Lock, ShieldCheck, Sparkles, Loader2, BookOpen, GraduationCap, Award, MessageSquare, Bot, Mic, Trophy, Mail } from "lucide-react";
+import {
+  Briefcase,
+  Plane,
+  Lock,
+  ShieldCheck,
+  Sparkles,
+  Loader2,
+  BookOpen,
+  GraduationCap,
+  Award,
+  MessageSquare,
+  Bot,
+  Mic,
+  Trophy,
+  Mail,
+} from "lucide-react";
 import { HubCard, HubSection } from "@/components/HubCard";
 import { supabase } from "@/integrations/supabase/client";
 import { PlanVersionsSection } from "@/components/PlanVersionsSection";
 import { createThread } from "@/lib/chat.functions";
-import { getStudyPlan, generateStudyPlan, previewStudyPlanRefinement, applyStudyPlanRefinement, setWeekLock } from "@/lib/study-plan.functions";
+import {
+  getStudyPlan,
+  generateStudyPlan,
+  previewStudyPlanRefinement,
+  applyStudyPlanRefinement,
+  setWeekLock,
+} from "@/lib/study-plan.functions";
 
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -111,7 +132,9 @@ function Painel() {
             )}
           </div>
           <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
-            <p className="text-xs tracking-widest text-muted-foreground uppercase">Nível de inglês</p>
+            <p className="text-xs tracking-widest text-muted-foreground uppercase">
+              Nível de inglês
+            </p>
             <p className="mt-2 text-xl font-semibold text-gold">
               {profile?.english_level ?? "A definir"}
             </p>
@@ -130,7 +153,9 @@ function Painel() {
           </div>
 
           <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
-            <p className="text-xs tracking-widest text-muted-foreground uppercase">Nível desejado</p>
+            <p className="text-xs tracking-widest text-muted-foreground uppercase">
+              Nível desejado
+            </p>
             <p className="mt-2 text-xl font-semibold text-gold">
               {profile?.target_level ?? "A definir"}
             </p>
@@ -149,11 +174,15 @@ function Painel() {
             className="bg-gold text-primary-foreground glow-gold rounded-full font-semibold hover:opacity-90"
           >
             <Link to="/perfil">
-              {profile?.goal && profile?.target_level ? "Editar meu perfil" : "Completar meu perfil"}
+              {profile?.goal && profile?.target_level
+                ? "Editar meu perfil"
+                : "Completar meu perfil"}
             </Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/assinatura" search={{}}>Minha assinatura</Link>
+            <Link to="/assinatura" search={{}}>
+              Minha assinatura
+            </Link>
           </Button>
           {access?.isAdmin && (
             <Button asChild variant="outline" className="rounded-full font-semibold">
@@ -291,8 +320,10 @@ function Painel() {
           />
         </HubSection>
 
-
-        <StudyPlanSection fullPlan={hasFeature(access, FEATURE_KEYS.studyPlanFull)} profileReady={Boolean(profile?.goal && profile?.target_level)} />
+        <StudyPlanSection
+          fullPlan={hasFeature(access, FEATURE_KEYS.studyPlanFull)}
+          profileReady={Boolean(profile?.goal && profile?.target_level)}
+        />
         {hasFeature(access, FEATURE_KEYS.studyPlanFull) ? (
           <PlanVersionsSection />
         ) : (
@@ -329,7 +360,13 @@ type RefinementPreview = {
   }[];
 };
 
-function StudyPlanSection({ profileReady, fullPlan }: { profileReady: boolean; fullPlan: boolean }) {
+function StudyPlanSection({
+  profileReady,
+  fullPlan,
+}: {
+  profileReady: boolean;
+  fullPlan: boolean;
+}) {
   const fetchPlan = useServerFn(getStudyPlan);
   const generate = useServerFn(generateStudyPlan);
   const previewRefinement = useServerFn(previewStudyPlanRefinement);
@@ -367,7 +404,6 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
       setPracticeWeek(null);
     }
   }
-
 
   const { data: plan, isLoading } = useQuery({
     queryKey: ["study-plan"],
@@ -445,9 +481,11 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
   const weeks = (plan?.weekly_focus ?? []) as WeeklyFocus[];
   const milestones = (plan?.milestones ?? []) as string[];
   const limited = Boolean((plan as { limited?: boolean } | null)?.limited);
-  const totalWeeks = ((plan as { total_weeks?: number } | null)?.total_weeks ?? weeks.length);
-  const previewWeeks = ((plan as { preview_weeks?: number } | null)?.preview_weeks ?? weeks.length);
-  const lockedWeeks = new Set((((plan as { locked_weeks?: number[] } | null)?.locked_weeks ?? []) as number[]).map(Number));
+  const totalWeeks = (plan as { total_weeks?: number } | null)?.total_weeks ?? weeks.length;
+  const previewWeeks = (plan as { preview_weeks?: number } | null)?.preview_weeks ?? weeks.length;
+  const lockedWeeks = new Set(
+    (((plan as { locked_weeks?: number[] } | null)?.locked_weeks ?? []) as number[]).map(Number),
+  );
 
   return (
     <section className="mt-14">
@@ -518,8 +556,6 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
           </p>
         </div>
       )}
-
-
 
       {preview && (
         <div className="mt-6 rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur">
@@ -593,7 +629,8 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
 
       {!profileReady ? (
         <p className="mt-4 text-sm text-muted-foreground">
-          Complete seu perfil para gerarmos um plano personalizado com seu objetivo e nível desejado.
+          Complete seu perfil para gerarmos um plano personalizado com seu objetivo e nível
+          desejado.
         </p>
       ) : mutation.isPending || isLoading ? (
         <p className="mt-4 text-sm text-muted-foreground">
@@ -614,20 +651,25 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                 <div className="flex items-start justify-between gap-3">
                   <p className="text-xs tracking-widest text-muted-foreground uppercase">
                     Semana {week.week}
-                    {lockedWeeks.has(week.week) && <span className="ml-2 text-gold">🔒 travada</span>}
+                    {lockedWeeks.has(week.week) && (
+                      <span className="ml-2 text-gold">🔒 travada</span>
+                    )}
                   </p>
                   {fullPlan && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    disabled={lockMutation.isPending}
-                    onClick={() =>
-                      lockMutation.mutate({ week: week.week, locked: !lockedWeeks.has(week.week) })
-                    }
-                    className="h-7 rounded-full border-primary/40 bg-transparent px-3 text-xs text-foreground hover:bg-secondary"
-                  >
-                    {lockedWeeks.has(week.week) ? "Destravar" : "Travar"}
-                  </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      disabled={lockMutation.isPending}
+                      onClick={() =>
+                        lockMutation.mutate({
+                          week: week.week,
+                          locked: !lockedWeeks.has(week.week),
+                        })
+                      }
+                      className="h-7 rounded-full border-primary/40 bg-transparent px-3 text-xs text-foreground hover:bg-secondary"
+                    >
+                      {lockedWeeks.has(week.week) ? "Destravar" : "Travar"}
+                    </Button>
                   )}
                 </div>
                 <p className="mt-1 font-semibold text-gold">{week.title}</p>
@@ -649,7 +691,6 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                   )}
                   Praticar com a IA
                 </Button>
-
               </div>
             ))}
 
@@ -665,16 +706,18 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                   Você está vendo uma degustação do seu plano de estudos.
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  O plano Gratuito libera as {previewWeeks} primeiras semanas. Com o plano
-                  Essential você desbloqueia as {Math.max(totalWeeks - previewWeeks, 0)} semanas
-                  restantes, os marcos de evolução, os ajustes do plano com IA, o travamento de
-                  semanas e o histórico de versões.
+                  O plano Gratuito libera as {previewWeeks} primeiras semanas. Com o plano Essential
+                  você desbloqueia as {Math.max(totalWeeks - previewWeeks, 0)} semanas restantes, os
+                  marcos de evolução, os ajustes do plano com IA, o travamento de semanas e o
+                  histórico de versões.
                 </p>
                 <Button
                   asChild
                   className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                 >
-                  <Link to="/upgrade/essential" search={{}}>Liberar com o Essential</Link>
+                  <Link to="/upgrade/essential" search={{}}>
+                    Liberar com o Essential
+                  </Link>
                 </Button>
               </div>
             )}
@@ -725,4 +768,3 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
     </section>
   );
 }
-

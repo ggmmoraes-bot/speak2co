@@ -88,11 +88,7 @@ export function HubCard(props: HubCardProps) {
   }
 
   return (
-    <Link
-      to={to}
-      {...(params ? { params } : {})}
-      className={cardBase}
-    >
+    <Link to={to} {...(params ? { params } : {})} className={cardBase}>
       <Inner {...props} />
     </Link>
   );

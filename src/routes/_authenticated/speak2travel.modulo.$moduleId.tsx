@@ -17,16 +17,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { RolePlayCoach } from "@/components/RolePlayCoach";
 import { TravelDrills } from "@/components/TravelDrills";
 import { PhrasePractice } from "@/components/PhrasePractice";
-import {
-  TRAVEL_BRIEFING,
-  getTravelTrack,
-  type TravelTrack,
-} from "@/lib/speak2travel-content";
+import { TRAVEL_BRIEFING, getTravelTrack, type TravelTrack } from "@/lib/speak2travel-content";
 import { getModuleContent } from "@/lib/speak2travel-modules";
-import {
-  evaluateTravelPractice,
-  type TravelFeedback,
-} from "@/lib/speak2travel.functions";
+import { evaluateTravelPractice, type TravelFeedback } from "@/lib/speak2travel.functions";
 import {
   getTravelProgress,
   resetTravelProgress,
@@ -42,7 +35,10 @@ export const Route = createFileRoute("/_authenticated/speak2travel/modulo/$modul
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Módulo indisponível — Speak2Travel" }, { name: "robots", content: "noindex" }],
+        meta: [
+          { title: "Módulo indisponível — Speak2Travel" },
+          { name: "robots", content: "noindex" },
+        ],
       };
     }
     const { track } = loaderData;
@@ -235,11 +231,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
                 </h2>
                 <div className="mt-4 space-y-3">
                   {moduleContent.dialogue.map((line, i) => (
-                    <PhrasePractice
-                      key={`${line.who}-${i}`}
-                      en={line.line}
-                      pt={line.who}
-                    />
+                    <PhrasePractice key={`${line.who}-${i}`} en={line.line} pt={line.who} />
                   ))}
                 </div>
                 <h3 className="mt-6 flex items-center gap-2 text-xs tracking-widest text-muted-foreground uppercase">
@@ -254,7 +246,6 @@ function TravelModule({ track }: { track: TravelTrack }) {
                 </ul>
               </div>
             )}
-
 
             <div className="grid gap-4 sm:grid-cols-2">
               {TRAVEL_BRIEFING.steps.map((step) => (
@@ -325,9 +316,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
 
             <Textarea
               value={answers[prompt.id] ?? ""}
-              onChange={(e) =>
-                setAnswers((prev) => ({ ...prev, [prompt.id]: e.target.value }))
-              }
+              onChange={(e) => setAnswers((prev) => ({ ...prev, [prompt.id]: e.target.value }))}
               placeholder="Write your answer in English..."
               className="min-h-36"
             />
@@ -343,8 +332,6 @@ function TravelModule({ track }: { track: TravelTrack }) {
               }
               onTranscript={setCoachTranscript}
             />
-
-
 
             <div className="flex flex-wrap gap-3">
               {index > 0 && (
@@ -399,9 +386,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
                   key={item.promptId}
                   className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur"
                 >
-                  <p className="font-semibold text-gold">
-                    {source?.situation ?? item.promptId}
-                  </p>
+                  <p className="font-semibold text-gold">{source?.situation ?? item.promptId}</p>
                   <p className="mt-3 text-sm text-foreground/80">
                     <span className="text-muted-foreground">Acertos: </span>
                     {item.strengths}
@@ -417,11 +402,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
               );
             })}
 
-            <TravelDrills
-              trackId={track.id}
-              answers={answers}
-              conversation={coachTranscript}
-            />
+            <TravelDrills trackId={track.id} answers={answers} conversation={coachTranscript} />
 
             <div className="flex flex-wrap gap-3">
               <Button

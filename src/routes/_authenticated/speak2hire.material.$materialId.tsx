@@ -92,7 +92,11 @@ function MaterialPage() {
                 <div className="mt-3 space-y-3">
                   {section.bullets.map((bullet) =>
                     isEnglishPhrase(bullet) ? (
-                      <PhrasePractice key={bullet} en={bullet} pt="Pratique em voz alta com a IA." />
+                      <PhrasePractice
+                        key={bullet}
+                        en={bullet}
+                        pt="Pratique em voz alta com a IA."
+                      />
                     ) : (
                       <p key={bullet} className="flex gap-2 text-sm text-foreground/80">
                         <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />

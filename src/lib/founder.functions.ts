@@ -62,8 +62,7 @@ export const sendFounderMessage = createServerFn({ method: "POST" })
       .insert({ user_id: userId, role: "student", content: data.content });
     if (insertError) throw new Error(insertError.message);
 
-    let reply =
-      "Recebemos sua mensagem! A Gisele vai responder por aqui em breve.";
+    let reply = "Recebemos sua mensagem! A Gisele vai responder por aqui em breve.";
     let escalate = true;
 
     const apiKey = process.env["LOVABLE_API_KEY"];
