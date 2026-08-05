@@ -129,6 +129,10 @@ function PremiumPage() {
   const queryClient = useQueryClient();
   const fetchSubscription = useServerFn(getMySubscription);
   const checkout = useServerFn(startMercadoPagoCheckout);
+  const paddle = usePaddleCheckout();
+  const startPaddle = (priceId: string) => {
+    paddle.openCheckout(priceId).catch((error: Error) => toast.error(error.message));
+  };
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
 
   const { data } = useQuery({
