@@ -203,9 +203,9 @@ function PremiumPage() {
           </p>
           <Button
             className="mt-4 rounded-full font-semibold"
-            disabled={mutation.isPending}
+            disabled={paddle.loading}
             onClick={() =>
-              mutation.mutate(billing === "yearly" ? "signature_yearly" : "signature_monthly")
+              startPaddle(billing === "yearly" ? "signature_yearly" : "signature_monthly")
             }
           >
             Fazer upgrade para Signature
