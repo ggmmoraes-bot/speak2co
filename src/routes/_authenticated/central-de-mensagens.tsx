@@ -135,6 +135,13 @@ function FounderInbox() {
               key={message.id}
               className={message.role === "student" ? "flex justify-end" : "flex justify-start"}
             >
+              {message.role === "founder" && (
+                <img
+                  src={founderPhoto.url}
+                  alt="Gisele Moraes"
+                  className="mr-2 mt-1 h-8 w-8 shrink-0 rounded-full border border-gold/50 object-cover object-[center_30%]"
+                />
+              )}
               <div
                 className={
                   message.role === "student"
