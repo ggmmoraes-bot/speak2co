@@ -232,4 +232,26 @@
   .ring-brand {
     box-shadow: 0 0 0 1px color-mix(in oklab, var(--gold) 45%, transparent);
   }
-}
+  }
+
+  @keyframes logo-entrance {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .logo-entrance {
+    animation: logo-entrance 420ms ease-out both;
+    transform-origin: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-entrance {
+      animation: none;
+    }
+  }
