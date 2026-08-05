@@ -30,6 +30,7 @@ export const Route = createFileRoute("/_authenticated/curso-beginner/")({
 
 function BeginnerCourseIndex() {
   const load = useServerFn(getCourseProgress);
+  const [exporting, setExporting] = useState(false);
   const { data: progress } = useQuery({
     queryKey: ["course-progress", BEGINNER_COURSE_ID],
     queryFn: () => load({ data: { courseId: BEGINNER_COURSE_ID } }),
@@ -38,6 +39,20 @@ function BeginnerCourseIndex() {
   const byLesson = new Map((progress ?? []).map((p) => [p.lessonId, p]));
   const done = (progress ?? []).filter((p) => p.completed).length;
   const percent = Math.round((done / BEGINNER_LESSONS.length) * 100);
+
+  const handleExport = async () => {
+    setExporting(true);
+    try {
+      const { exportBeginnerCourseToPdf } = await import("@/lib/beginner-course-pdf");
+      await exportBeginnerCourseToPdf();
+      toast.success("PDF completo do curso gerado.");
+    } catch {
+      toast.error("Não foi possível gerar o PDF. Tente novamente.");
+    } finally {
+      setExporting(false);
+    }
+  };
+
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
