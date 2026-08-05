@@ -155,7 +155,28 @@ function rescuePlan(error: unknown): StudyPlan | null {
     return null;
   }
 
-  const pick = (...keys: string[]) => keys.map((k) => parsed[k]).find((v) => v !== undefined);
+  // Procura a chave em qualquer profundidade — o modelo às vezes embrulha o plano
+  // dentro de um objeto com dados do aluno ("aluno", "nivel_atual", "objetivo").
+  const deepFind = (node: unknown, keys: string[], depth = 0): unknown => {
+    if (depth > 6 || !node || typeof node !== "object") return undefined;
+    if (Array.isArray(node)) {
+      for (const item of node) {
+        const found = deepFind(item, keys, depth + 1);
+        if (found !== undefined) return found;
+      }
+      return undefined;
+    }
+    const record = node as Record<string, unknown>;
+    for (const key of keys) {
+      if (record[key] !== undefined) return record[key];
+    }
+    for (const value of Object.values(record)) {
+      const found = deepFind(value, keys, depth + 1);
+      if (found !== undefined) return found;
+    }
+    return undefined;
+  };
+  const pick = (...keys: string[]) => deepFind(parsed, keys);
   const toText = (value: unknown): string =>
     typeof value === "string"
       ? value
@@ -168,22 +189,46 @@ function rescuePlan(error: unknown): StudyPlan | null {
           )
         : String(value ?? "");
 
-  const summary = toText(pick("summary", "resumo", "resumo_plano"));
-  const weeksRaw = pick("weekly_focus", "plano_de_estudos", "semanas", "foco_semanal");
-  const milestonesRaw = pick("milestones", "marcos", "marcos_de_evolucao");
-  if (!summary || !Array.isArray(weeksRaw) || !Array.isArray(milestonesRaw)) return null;
+  const summary = toText(
+    pick("summary", "resumo", "resumo_plano", "resumo_do_plano", "descricao", "overview"),
+  );
+  const weeksRaw = pick(
+    "weekly_focus",
+    "plano_de_estudos",
+    "plano_semanal",
+    "semanas",
+    "foco_semanal",
+    "weeks",
+    "cronograma",
+  );
+  const milestonesRaw = pick(
+    "milestones",
+    "marcos",
+    "marcos_de_evolucao",
+    "marcos_de_progresso",
+    "objetivos",
+  );
+  if (!Array.isArray(weeksRaw)) return null;
 
   const weekly_focus = weeksRaw.map((item, index) => {
     const w = (item ?? {}) as Record<string, unknown>;
-    const activities = (w["activities"] ?? w["atividades"] ?? []) as unknown;
+    const activities = (w["activities"] ??
+      w["atividades"] ??
+      w["tarefas"] ??
+      w["acoes"] ??
+      []) as unknown;
     return {
-      week: Number(w["week"] ?? w["semana"] ?? index + 1) || index + 1,
-      title: toText(w["title"] ?? w["titulo"] ?? `Semana ${index + 1}`),
-      activities: Array.isArray(activities) ? activities.map(toText) : [],
+      week: Number(w["week"] ?? w["semana"] ?? w["numero"] ?? index + 1) || index + 1,
+      title: toText(w["title"] ?? w["titulo"] ?? w["foco"] ?? `Semana ${index + 1}`),
+      activities: Array.isArray(activities) ? activities.map(toText) : [toText(activities)],
     };
   });
 
-  const candidate = { summary, weekly_focus, milestones: milestonesRaw.map(toText) };
+  const candidate = {
+    summary: summary || "Plano de estudos personalizado gerado a partir do seu nivelamento.",
+    weekly_focus,
+    milestones: Array.isArray(milestonesRaw) ? milestonesRaw.map(toText) : [],
+  };
   const result = planSchema.safeParse(candidate);
   return result.success ? result.data : null;
 }

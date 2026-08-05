@@ -145,15 +145,10 @@ function PremiumPage() {
     onError: (error: Error) => toast.error(error.message),
   });
 
-  const planLabel = data?.subscription?.plan_label ?? "";
-  const isActive = data?.plan === "premium";
-  const currentTier = isActive
-    ? planLabel.toLowerCase().includes("signature")
-      ? "signature"
-      : planLabel.toLowerCase().includes("essential")
-        ? "essential"
-        : "premium"
-    : null;
+  
+  const plan = data?.plan ?? "free";
+  const isActive = plan === "essential" || plan === "premium" || plan === "signature";
+  const currentTier = isActive ? plan : null;
 
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-14">
