@@ -242,18 +242,30 @@ function PremiumPage() {
                   <li key={perk}>• {perk}</li>
                 ))}
               </ul>
-              <Button
-                className="mt-8"
-                variant={tier.highlight ? "default" : "outline"}
-                disabled={isCurrent || mutation.isPending}
-                onClick={() => mutation.mutate(option.key)}
-              >
-                {isCurrent
-                  ? "Seu plano atual"
-                  : mutation.isPending
+              <div className="mt-8 space-y-2">
+                <Button
+                  className="w-full"
+                  variant={tier.highlight ? "default" : "outline"}
+                  disabled={isCurrent || paddle.loading}
+                  onClick={() => startPaddle(option.key)}
+                >
+                  {isCurrent
+                    ? "Seu plano atual"
+                    : paddle.loading
+                      ? "Abrindo checkout..."
+                      : "Assinar com cartão (internacional)"}
+                </Button>
+                <Button
+                  className="w-full"
+                  variant="ghost"
+                  disabled={isCurrent || mutation.isPending}
+                  onClick={() => mutation.mutate(option.key)}
+                >
+                  {mutation.isPending
                     ? "Abrindo checkout..."
-                    : "Assinar com Mercado Pago"}
-              </Button>
+                    : "Assinar com Mercado Pago (Pix/boleto)"}
+                </Button>
+              </div>
             </article>
           );
         })}
