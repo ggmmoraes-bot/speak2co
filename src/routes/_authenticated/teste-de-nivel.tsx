@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
   CEFR_ORDER,
+  getCefrStage,
   LEVEL_DESCRIPTIONS,
   PLACEMENT_QUESTIONS,
   WRITING_PROMPT,
