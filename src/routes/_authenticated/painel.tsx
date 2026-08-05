@@ -169,6 +169,7 @@ function Painel() {
             titlePt={section.titlePt}
             items={section.items}
             {...(section.compact ? { compact: true } : {})}
+            {...(section.id === "product-lines" ? { catalog: true } : {})}
           />
         ))}
 

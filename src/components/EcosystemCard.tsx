@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Lock, Sparkles, type LucideIcon } from "lucide-react";
+import { ProductLineRow } from "@/components/ProductLineRow";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -163,19 +164,26 @@ export function EcosystemCard({ item }: { item: EcosystemItem }) {
   );
 }
 
-/** Seção do hub com título bilíngue e grade responsiva. */
+/** Seção do hub com título bilíngue, catálogo ou grade responsiva. */
 export function EcosystemSection({
   titleEn,
   titlePt,
   items,
   compact,
+  catalog,
 }: {
   titleEn: string;
   titlePt: string;
   items: EcosystemItem[];
   compact?: boolean;
+  catalog?: boolean;
 }) {
   if (items.length === 0) return null;
+
+  if (catalog) {
+    return <ProductLineCatalog titleEn={titleEn} titlePt={titlePt} items={items} />;
+  }
+
   return (
     <section className="mt-14">
       <h2 className="text-xl font-semibold text-foreground sm:text-2xl">
@@ -191,5 +199,34 @@ export function EcosystemSection({
         ))}
       </div>
     </section>
+  );
+}
+
+function ProductLineCatalog({
+  titleEn,
+  titlePt,
+  items,
+}: {
+  titleEn: string;
+  titlePt: string;
+  items: EcosystemItem[];
+}) {
+  return (
+    <ProductLineRow
+      titleEn={titleEn}
+      titlePt={titlePt}
+      items={items.map((item) => ({
+        titleEn: item.titleEn,
+        titlePt: item.titlePt ?? "",
+        description: item.description,
+        icon: item.icon,
+        ...(item.imageUrl ? { imageUrl: item.imageUrl } : {}),
+        ...(item.to ? { to: item.to } : {}),
+        ...(item.params ? { params: item.params } : {}),
+        locked: item.status !== "available",
+        comingSoon: item.status === "soon",
+        ...(item.plans?.[0] ? { requiredPlan: item.plans[0] } : {}),
+      }))}
+    />
   );
 }
