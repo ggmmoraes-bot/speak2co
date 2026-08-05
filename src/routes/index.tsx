@@ -25,7 +25,24 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let active = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (active && data.session) navigate({ to: "/painel", replace: true });
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) navigate({ to: "/painel", replace: true });
+    });
+    return () => {
+      active = false;
+      sub.subscription.unsubscribe();
+    };
+  }, [navigate]);
+
   return (
+
     <main className="surface-navy relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-12">
       <div
         aria-hidden="true"
