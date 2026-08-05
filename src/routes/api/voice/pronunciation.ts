@@ -3,12 +3,26 @@ import { generateText } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
 import { verifyChatRequest } from "@/lib/chat-auth.server";
 
+type Dimension = { score: number; tip: string };
+
 type Result = {
   score: number;
   transcript: string;
   verdict: string;
   issues: { sound: string; tip: string }[];
   praise: string;
+  dimensions: {
+    pronunciation: Dimension;
+    stress: Dimension;
+    intonation: Dimension;
+    fluency: Dimension;
+  };
+};
+
+const clampScore = (value: unknown, fallback: number) => {
+  const n = typeof value === "number" ? value : Number(value);
+  if (!Number.isFinite(n)) return fallback;
+  return Math.max(0, Math.min(100, Math.round(n)));
 };
 
 function normalize(value: string) {
