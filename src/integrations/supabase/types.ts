@@ -773,6 +773,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      current_plan_tier: { Args: { user_uuid: string }; Returns: string }
       fluency_leaderboard: {
         Args: { _limit?: number }
         Returns: {
@@ -798,6 +799,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      sync_expired_plans: { Args: never; Returns: undefined }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
