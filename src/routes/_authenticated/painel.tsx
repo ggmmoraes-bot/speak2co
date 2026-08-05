@@ -139,8 +139,13 @@ function Painel() {
                   asChild
                   className="glow-gold rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                 >
+                  <Link to="/teste-de-nivel">
+                    <Target className="mr-2 h-4 w-4" /> Fazer teste de nivelamento
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="rounded-full font-semibold">
                   <Link to="/meu-plano">
-                    <Compass className="mr-2 h-4 w-4" /> Meu plano de estudos
+                    <Compass className="mr-2 h-4 w-4 text-gold" /> Meu plano de estudos
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full font-semibold">
