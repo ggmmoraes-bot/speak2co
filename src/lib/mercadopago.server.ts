@@ -18,8 +18,13 @@ export const MP_PLANS: Record<PlanKey, { label: string; amount: number; frequenc
 };
 
 function getToken() {
-  const token = process.env["MERCADOPAGO_ACCESS_TOKEN"];
+  const token = process.env["MERCADOPAGO_ACCESS_TOKEN"]?.trim();
   if (!token) throw new Error("Pagamento indisponível: credencial do Mercado Pago não configurada.");
+  if (token.length < 30) {
+    throw new Error(
+      "Pagamento indisponível: o Access Token do Mercado Pago salvo está incompleto (apenas o prefixo foi colado). Cole o token completo de produção nas configurações.",
+    );
+  }
   return token;
 }
 
