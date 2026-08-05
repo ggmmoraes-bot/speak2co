@@ -52,11 +52,13 @@ function Index() {
       <div aria-hidden="true" className="pointer-events-none absolute h-[min(72vw,590px)] w-[min(72vw,590px)] rounded-full border border-gold/10" />
 
       <section className="relative z-10 flex w-full max-w-xl flex-col items-center text-center">
-        <img
-          src={logo.url}
-          alt="Logomarca oficial Speak2Co"
-          className="w-[min(82vw,460px)] object-contain drop-shadow-[0_24px_48px_color-mix(in_oklab,var(--gold)_30%,transparent)]"
-        />
+        <div className="aspect-square w-[min(82vw,460px)] overflow-hidden rounded-full drop-shadow-[0_24px_48px_color-mix(in_oklab,var(--gold)_30%,transparent)]">
+          <img
+            src={logo.url}
+            alt="Logomarca oficial Speak2Co"
+            className="h-full w-full object-contain"
+          />
+        </div>
 
         <p className="mt-8 text-xs font-medium tracking-[0.32em] text-muted-foreground uppercase sm:text-sm">
           English for Every Opportunity.
