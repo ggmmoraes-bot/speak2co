@@ -17,6 +17,7 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authenticated/assinatura'
 import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
 import { Route as AuthenticatedCursoBeginnerRouteImport } from './routes/_authenticated/curso-beginner'
+import { Route as AuthenticatedCursoIntermediateRouteImport } from './routes/_authenticated/curso-intermediate'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
 import { Route as AuthenticatedPremiumRouteImport } from './routes/_authenticated/premium'
@@ -84,6 +85,12 @@ const AuthenticatedCursoBeginnerRoute =
   AuthenticatedCursoBeginnerRouteImport.update({
     id: '/curso-beginner',
     path: '/curso-beginner',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCursoIntermediateRoute =
+  AuthenticatedCursoIntermediateRouteImport.update({
+    id: '/curso-intermediate',
+    path: '/curso-intermediate',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
@@ -247,6 +254,7 @@ export interface FileRoutesByFullPath {
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
+  '/curso-intermediate': typeof AuthenticatedCursoIntermediateRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
@@ -282,6 +290,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
+  '/curso-intermediate': typeof AuthenticatedCursoIntermediateRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
@@ -317,6 +326,7 @@ export interface FileRoutesById {
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
   '/_authenticated/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
+  '/_authenticated/curso-intermediate': typeof AuthenticatedCursoIntermediateRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
@@ -355,6 +365,7 @@ export interface FileRouteTypes {
     | '/assinatura'
     | '/certificados'
     | '/curso-beginner'
+    | '/curso-intermediate'
     | '/painel'
     | '/perfil'
     | '/premium'
@@ -390,6 +401,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/assinatura'
     | '/certificados'
+    | '/curso-intermediate'
     | '/painel'
     | '/perfil'
     | '/premium'
@@ -424,6 +436,7 @@ export interface FileRouteTypes {
     | '/_authenticated/assinatura'
     | '/_authenticated/certificados'
     | '/_authenticated/curso-beginner'
+    | '/_authenticated/curso-intermediate'
     | '/_authenticated/painel'
     | '/_authenticated/perfil'
     | '/_authenticated/premium'
@@ -521,6 +534,13 @@ declare module '@tanstack/react-router' {
       path: '/curso-beginner'
       fullPath: '/curso-beginner'
       preLoaderRoute: typeof AuthenticatedCursoBeginnerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/curso-intermediate': {
+      id: '/_authenticated/curso-intermediate'
+      path: '/curso-intermediate'
+      fullPath: '/curso-intermediate'
+      preLoaderRoute: typeof AuthenticatedCursoIntermediateRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/painel': {
@@ -802,6 +822,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
   AuthenticatedCursoBeginnerRoute: typeof AuthenticatedCursoBeginnerRouteWithChildren
+  AuthenticatedCursoIntermediateRoute: typeof AuthenticatedCursoIntermediateRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
@@ -818,6 +839,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
   AuthenticatedCursoBeginnerRoute: AuthenticatedCursoBeginnerRouteWithChildren,
+  AuthenticatedCursoIntermediateRoute: AuthenticatedCursoIntermediateRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
