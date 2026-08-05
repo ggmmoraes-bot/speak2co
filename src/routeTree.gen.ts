@@ -29,6 +29,8 @@ import { Route as AuthenticatedTesteDeNivelRouteImport } from './routes/_authent
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedCursoBeginnerIndexRouteImport } from './routes/_authenticated/curso-beginner.index'
 import { Route as AuthenticatedCursoBeginnerAssessmentRouteImport } from './routes/_authenticated/curso-beginner.assessment'
+import { Route as AuthenticatedCursoIntermediateIndexRouteImport } from './routes/_authenticated/curso-intermediate.index'
+import { Route as AuthenticatedCursoIntermediateAssessmentRouteImport } from './routes/_authenticated/curso-intermediate.assessment'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2hireIndexRouteImport } from './routes/_authenticated/speak2hire.index'
@@ -152,6 +154,18 @@ const AuthenticatedCursoBeginnerAssessmentRoute =
     path: '/assessment',
     getParentRoute: () => AuthenticatedCursoBeginnerRoute,
   } as any)
+const AuthenticatedCursoIntermediateIndexRoute =
+  AuthenticatedCursoIntermediateIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedCursoIntermediateRoute,
+  } as any)
+const AuthenticatedCursoIntermediateAssessmentRoute =
+  AuthenticatedCursoIntermediateAssessmentRouteImport.update({
+    id: '/assessment',
+    path: '/assessment',
+    getParentRoute: () => AuthenticatedCursoIntermediateRoute,
+  } as any)
 const AuthenticatedProfessorIndexRoute =
   AuthenticatedProfessorIndexRouteImport.update({
     id: '/',
@@ -254,7 +268,7 @@ export interface FileRoutesByFullPath {
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
-  '/curso-intermediate': typeof AuthenticatedCursoIntermediateRoute
+  '/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
@@ -265,6 +279,7 @@ export interface FileRoutesByFullPath {
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
+  '/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -272,6 +287,7 @@ export interface FileRoutesByFullPath {
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
   '/curso-beginner/': typeof AuthenticatedCursoBeginnerIndexRoute
+  '/curso-intermediate/': typeof AuthenticatedCursoIntermediateIndexRoute
   '/professor/': typeof AuthenticatedProfessorIndexRoute
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
@@ -290,7 +306,6 @@ export interface FileRoutesByTo {
   '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
-  '/curso-intermediate': typeof AuthenticatedCursoIntermediateRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
@@ -298,6 +313,7 @@ export interface FileRoutesByTo {
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
+  '/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -305,6 +321,7 @@ export interface FileRoutesByTo {
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
   '/curso-beginner': typeof AuthenticatedCursoBeginnerIndexRoute
+  '/curso-intermediate': typeof AuthenticatedCursoIntermediateIndexRoute
   '/professor': typeof AuthenticatedProfessorIndexRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel': typeof AuthenticatedSpeak2travelIndexRoute
@@ -326,7 +343,7 @@ export interface FileRoutesById {
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
   '/_authenticated/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
-  '/_authenticated/curso-intermediate': typeof AuthenticatedCursoIntermediateRoute
+  '/_authenticated/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
@@ -337,6 +354,7 @@ export interface FileRoutesById {
   '/_authenticated/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/_authenticated/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
+  '/_authenticated/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/_authenticated/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -344,6 +362,7 @@ export interface FileRoutesById {
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
   '/_authenticated/curso-beginner/': typeof AuthenticatedCursoBeginnerIndexRoute
+  '/_authenticated/curso-intermediate/': typeof AuthenticatedCursoIntermediateIndexRoute
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/_authenticated/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
@@ -376,6 +395,7 @@ export interface FileRouteTypes {
     | '/teste-de-nivel'
     | '/api/chat'
     | '/curso-beginner/assessment'
+    | '/curso-intermediate/assessment'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -383,6 +403,7 @@ export interface FileRouteTypes {
     | '/api/voice/speak'
     | '/api/voice/transcribe'
     | '/curso-beginner/'
+    | '/curso-intermediate/'
     | '/professor/'
     | '/speak2hire/'
     | '/speak2travel/'
@@ -401,7 +422,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/assinatura'
     | '/certificados'
-    | '/curso-intermediate'
     | '/painel'
     | '/perfil'
     | '/premium'
@@ -409,6 +429,7 @@ export interface FileRouteTypes {
     | '/teste-de-nivel'
     | '/api/chat'
     | '/curso-beginner/assessment'
+    | '/curso-intermediate/assessment'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -416,6 +437,7 @@ export interface FileRouteTypes {
     | '/api/voice/speak'
     | '/api/voice/transcribe'
     | '/curso-beginner'
+    | '/curso-intermediate'
     | '/professor'
     | '/speak2hire'
     | '/speak2travel'
@@ -447,6 +469,7 @@ export interface FileRouteTypes {
     | '/_authenticated/teste-de-nivel'
     | '/api/chat'
     | '/_authenticated/curso-beginner/assessment'
+    | '/_authenticated/curso-intermediate/assessment'
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/speak2travel/trip-planner'
     | '/_authenticated/upgrade/essential'
@@ -454,6 +477,7 @@ export interface FileRouteTypes {
     | '/api/voice/speak'
     | '/api/voice/transcribe'
     | '/_authenticated/curso-beginner/'
+    | '/_authenticated/curso-intermediate/'
     | '/_authenticated/professor/'
     | '/_authenticated/speak2hire/'
     | '/_authenticated/speak2travel/'
@@ -620,6 +644,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCursoBeginnerAssessmentRouteImport
       parentRoute: typeof AuthenticatedCursoBeginnerRoute
     }
+    '/_authenticated/curso-intermediate/': {
+      id: '/_authenticated/curso-intermediate/'
+      path: '/'
+      fullPath: '/curso-intermediate/'
+      preLoaderRoute: typeof AuthenticatedCursoIntermediateIndexRouteImport
+      parentRoute: typeof AuthenticatedCursoIntermediateRoute
+    }
+    '/_authenticated/curso-intermediate/assessment': {
+      id: '/_authenticated/curso-intermediate/assessment'
+      path: '/assessment'
+      fullPath: '/curso-intermediate/assessment'
+      preLoaderRoute: typeof AuthenticatedCursoIntermediateAssessmentRouteImport
+      parentRoute: typeof AuthenticatedCursoIntermediateRoute
+    }
     '/_authenticated/professor/': {
       id: '/_authenticated/professor/'
       path: '/'
@@ -755,6 +793,24 @@ const AuthenticatedCursoBeginnerRouteWithChildren =
     AuthenticatedCursoBeginnerRouteChildren,
   )
 
+interface AuthenticatedCursoIntermediateRouteChildren {
+  AuthenticatedCursoIntermediateAssessmentRoute: typeof AuthenticatedCursoIntermediateAssessmentRoute
+  AuthenticatedCursoIntermediateIndexRoute: typeof AuthenticatedCursoIntermediateIndexRoute
+}
+
+const AuthenticatedCursoIntermediateRouteChildren: AuthenticatedCursoIntermediateRouteChildren =
+  {
+    AuthenticatedCursoIntermediateAssessmentRoute:
+      AuthenticatedCursoIntermediateAssessmentRoute,
+    AuthenticatedCursoIntermediateIndexRoute:
+      AuthenticatedCursoIntermediateIndexRoute,
+  }
+
+const AuthenticatedCursoIntermediateRouteWithChildren =
+  AuthenticatedCursoIntermediateRoute._addFileChildren(
+    AuthenticatedCursoIntermediateRouteChildren,
+  )
+
 interface AuthenticatedProfessorRouteChildren {
   AuthenticatedProfessorThreadIdRoute: typeof AuthenticatedProfessorThreadIdRoute
   AuthenticatedProfessorIndexRoute: typeof AuthenticatedProfessorIndexRoute
@@ -822,7 +878,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
   AuthenticatedCursoBeginnerRoute: typeof AuthenticatedCursoBeginnerRouteWithChildren
-  AuthenticatedCursoIntermediateRoute: typeof AuthenticatedCursoIntermediateRoute
+  AuthenticatedCursoIntermediateRoute: typeof AuthenticatedCursoIntermediateRouteWithChildren
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
@@ -839,7 +895,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
   AuthenticatedCursoBeginnerRoute: AuthenticatedCursoBeginnerRouteWithChildren,
-  AuthenticatedCursoIntermediateRoute: AuthenticatedCursoIntermediateRoute,
+  AuthenticatedCursoIntermediateRoute:
+    AuthenticatedCursoIntermediateRouteWithChildren,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
