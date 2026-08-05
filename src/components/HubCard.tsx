@@ -36,7 +36,11 @@ function Inner({
         aria-hidden
         className="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full bg-gold/10 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
       />
-      <span className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-gold/30 bg-gold/10 transition-transform duration-300 group-hover:scale-105">
+      <span className="relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-gold/40 bg-gradient-to-br from-gold/30 via-gold/10 to-primary/30 shadow-[0_10px_30px_-14px_hsl(var(--gold)/0.7)] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--gold)/0.45),transparent_60%)] opacity-70"
+        />
         {imageUrl ? (
           <>
             <img
@@ -52,11 +56,12 @@ function Inner({
             )}
           </>
         ) : locked && !comingSoon ? (
-          <Lock className="h-5 w-5 text-muted-foreground" />
+          <Lock className="relative h-6 w-6 text-gold/80" />
         ) : (
-          <Icon className="h-5 w-5 text-gold" />
+          <Icon className="relative h-7 w-7 text-gold drop-shadow-[0_2px_6px_hsl(var(--gold)/0.6)]" />
         )}
       </span>
+
 
 
       <h3 className="mt-5 text-lg font-semibold text-foreground">{titleEn}</h3>
