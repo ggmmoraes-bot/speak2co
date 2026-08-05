@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, Lock, Play } from "lucide-react";
 import { toast } from "sonner";
+import { BrandText } from "@/components/BrandText";
 
 export type ProductLineItem = {
   titleEn: string;
