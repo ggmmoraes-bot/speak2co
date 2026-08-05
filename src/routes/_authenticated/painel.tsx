@@ -291,17 +291,6 @@ function Painel() {
             requiredPlan="Premium"
           />
           <HubCard
-            titleEn="GiseleAI by Speak2Co"
-            titlePt="Mentoria de IA exclusiva"
-            description="Mentoria avançada com IA, exclusiva do plano Signature. Em breve."
-            icon={Bot}
-            imageUrl={giseleAiLogo.url}
-            comingSoon
-
-            locked={!hasFeature(access, FEATURE_KEYS.giseleAi)}
-            requiredPlan="Signature"
-          />
-          <HubCard
             titleEn="AI Pronunciation"
             titlePt="Pronúncia com IA"
             description="Ouça a pronúncia nativa, grave sua voz e receba feedback de pronunciation, stress, intonation e fluency."
