@@ -186,6 +186,14 @@ function PremiumPage() {
   const isActive = plan === "essential" || plan === "premium" || plan === "signature";
   const currentTier = isActive ? plan : null;
   const isPaddleSubscriber = data?.subscription?.provider === "paddle";
+  // Só mostramos o aviso de pagamento pendente se a tentativa for recente (24h)
+  // e não estivermos na pré-visualização de plano do admin.
+  const pending = data?.subscription;
+  const pendingAgeMs = pending?.created_at
+    ? Date.now() - new Date(pending.created_at).getTime()
+    : Number.POSITIVE_INFINITY;
+  const showPending =
+    pending?.status === "pending" && Boolean(pending.init_point) && pendingAgeMs < 86_400_000;
 
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-14">
@@ -243,7 +251,7 @@ function PremiumPage() {
         </section>
       )}
 
-      {!isActive && data?.subscription?.status === "pending" && (
+      {!previewPlan && !isActive && showPending && (
         <div className="mt-8 rounded-xl border border-border bg-card p-4 text-center text-muted-foreground">
           Encontramos uma assinatura aguardando pagamento.
           {data.subscription.init_point && (
