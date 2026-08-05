@@ -194,7 +194,7 @@ function PlacementPage() {
                 <Button
                   variant="outline"
                   className="rounded-full"
-                  onClick={() => navigate({ to: "/painel" })}
+                  onClick={() => navigate({ to: "/meu-plano" })}
                 >
                   Ver meu plano de estudos
                 </Button>

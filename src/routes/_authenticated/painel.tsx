@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { ShieldCheck, Sparkles, Compass } from "lucide-react";
+import { ShieldCheck, Sparkles, Compass, Target } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { BrandText } from "@/components/BrandText";
@@ -139,8 +139,13 @@ function Painel() {
                   asChild
                   className="glow-gold rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                 >
+                  <Link to="/teste-de-nivel">
+                    <Target className="mr-2 h-4 w-4" /> Fazer teste de nivelamento
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="rounded-full font-semibold">
                   <Link to="/meu-plano">
-                    <Compass className="mr-2 h-4 w-4" /> Meu plano de estudos
+                    <Compass className="mr-2 h-4 w-4 text-gold" /> Meu plano de estudos
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full font-semibold">
