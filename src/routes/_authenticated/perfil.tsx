@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import logo from "@/assets/speak2co-logo.asset.json";
+import { getCefrStage } from "@/lib/placement-content";
 
 export const Route = createFileRoute("/_authenticated/perfil")({
   head: () => ({
