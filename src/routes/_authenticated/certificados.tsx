@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { FeatureGate } from "@/components/FeatureGate";
 import { getCertificates, type Certificate } from "@/lib/certificates.functions";
 import {
   DEFAULT_SIGNATURE_CAPTION,
@@ -32,7 +33,16 @@ export const Route = createFileRoute("/_authenticated/certificados")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: CertificadosPage,
+  component: () => (
+    <FeatureGate
+      feature="cefr_certificate"
+      title="Certificados Speak2Co"
+      benefit="Emita certificados oficiais em PDF por nível CEFR, cursos concluídos e marcos de prática."
+      requiredPlan="Essential"
+    >
+      <CertificadosPage />
+    </FeatureGate>
+  ),
 });
 
 function CertificadosPage() {

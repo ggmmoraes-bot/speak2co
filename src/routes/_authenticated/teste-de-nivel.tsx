@@ -15,6 +15,7 @@ import {
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { FeatureGate } from "@/components/FeatureGate";
 import {
   CEFR_ORDER,
   getCefrStage,
@@ -48,7 +49,16 @@ export const Route = createFileRoute("/_authenticated/teste-de-nivel")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: PlacementPage,
+  component: () => (
+    <FeatureGate
+      feature="placement_test"
+      title="Teste de nivelamento CEFR"
+      benefit="Descubra seu nível de inglês (A1 a C1) com 20 questões e uma redação avaliada pela IA."
+      requiredPlan="Essential"
+    >
+      <PlacementPage />
+    </FeatureGate>
+  ),
 });
 
 function formatDate(value: string) {
