@@ -34,25 +34,25 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
   const hero = drawPdfLogo(doc, logo, { variant: "hero", align: "center", top: 96 });
   let coverY = hero ? hero.y + hero.size + 40 : 190;
   if (!hero) {
-    doc.setFont("helvetica", "bold");
+    doc.setFont(FONT, "bold");
     doc.setFontSize(26);
     doc.setTextColor(255, 255, 255);
     doc.text("Speak2Co", width / 2, 150, { align: "center" });
   }
 
-  doc.setFont("helvetica", "normal");
+  doc.setFont(FONT, "normal");
   doc.setFontSize(10);
   doc.setTextColor(...GOLD);
   doc.text("ENGLISH FOR EVERY OPPORTUNITY", width / 2, coverY, { align: "center" });
 
   coverY += 54;
-  doc.setFont("helvetica", "bold");
+  doc.setFont(FONT, "bold");
   doc.setFontSize(26);
   doc.setTextColor(255, 255, 255);
   doc.text("Beginner English Course", width / 2, coverY, { align: "center" });
 
   coverY += 26;
-  doc.setFont("helvetica", "normal");
+  doc.setFont(FONT, "normal");
   doc.setFontSize(12);
   doc.setTextColor(...GOLD);
   doc.text("Método Speak2Co · Plano Essential", width / 2, coverY, { align: "center" });
@@ -87,11 +87,11 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     doc.rect(0, 0, width, headerHeight, "F");
     const box = drawPdfLogo(doc, logo, { variant: "header", align: "left", top: 8 });
     const textX = box ? box.x + box.size + 14 : margin;
-    doc.setFont("helvetica", "bold");
+    doc.setFont(FONT, "bold");
     doc.setFontSize(13);
     doc.setTextColor(255, 255, 255);
     doc.text("Speak2Co", textX, 34);
-    doc.setFont("helvetica", "normal");
+    doc.setFont(FONT, "normal");
     doc.setFontSize(9);
     doc.setTextColor(...GOLD);
     doc.text(`Beginner English Course${currentLesson ? ` · ${currentLesson}` : ""}`, textX, 50);
@@ -99,7 +99,7 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     doc.setDrawColor(220, 220, 226);
     doc.setLineWidth(0.5);
     doc.line(margin, footerTop, width - margin, footerTop);
-    doc.setFont("helvetica", "normal");
+    doc.setFont(FONT, "normal");
     doc.setFontSize(8);
     doc.setTextColor(...MUTED);
     doc.text("Speak2Co · English for Every Opportunity", margin, footerTop + 20);
@@ -129,7 +129,7 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     const size = opts.size ?? 10;
     const lh = size + 4;
     const indent = opts.indent ?? 0;
-    doc.setFont("helvetica", opts.style ?? "normal");
+    doc.setFont(FONT, opts.style ?? "normal");
     doc.setFontSize(size);
     doc.setTextColor(...(opts.color ?? TEXT));
     for (const line of doc.splitTextToSize(text, contentWidth - indent) as string[]) {
@@ -145,7 +145,7 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     doc.setDrawColor(...GOLD);
     doc.setLineWidth(1);
     doc.line(margin, y - 10, width - margin, y - 10);
-    doc.setFont("helvetica", "bold");
+    doc.setFont(FONT, "bold");
     doc.setFontSize(12.5);
     doc.setTextColor(...NAVY);
     doc.text(title, margin, y + 6);
@@ -154,18 +154,18 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
 
   /* ------------------------------ Sumário ------------------------------ */
   newPage();
-  doc.setFont("helvetica", "bold");
+  doc.setFont(FONT, "bold");
   doc.setFontSize(16);
   doc.setTextColor(...NAVY);
   doc.text("Sumário", margin, y);
   y += 24;
   for (const lesson of lessons) {
     ensure(16);
-    doc.setFont("helvetica", "bold");
+    doc.setFont(FONT, "bold");
     doc.setFontSize(10);
     doc.setTextColor(...TEXT);
     doc.text(`Lesson ${lesson.number} — ${lesson.title}`, margin, y);
-    doc.setFont("helvetica", "normal");
+    doc.setFont(FONT, "normal");
     doc.setTextColor(...MUTED);
     doc.text(lesson.titlePt, width - margin, y, { align: "right" });
     y += 16;
@@ -176,7 +176,7 @@ export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGI
     currentLesson = `Lesson ${lesson.number}`;
     newPage();
 
-    doc.setFont("helvetica", "bold");
+    doc.setFont(FONT, "bold");
     doc.setFontSize(18);
     doc.setTextColor(...NAVY);
     doc.text(`Lesson ${lesson.number} — ${lesson.title}`, margin, y);
