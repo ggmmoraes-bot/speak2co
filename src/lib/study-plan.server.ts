@@ -224,7 +224,11 @@ function rescuePlan(error: unknown): StudyPlan | null {
     };
   });
 
-  const candidate = { summary, weekly_focus, milestones: milestonesRaw.map(toText) };
+  const candidate = {
+    summary: summary || "Plano de estudos personalizado gerado a partir do seu nivelamento.",
+    weekly_focus,
+    milestones: Array.isArray(milestonesRaw) ? milestonesRaw.map(toText) : [],
+  };
   const result = planSchema.safeParse(candidate);
   return result.success ? result.data : null;
 }
