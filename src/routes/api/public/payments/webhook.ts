@@ -89,19 +89,10 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
           .maybeSingle();
         if (error) console.error(`Falha ao salvar assinatura: ${error.message}`);
 
-        // Acesso mantido até o fim do período já pago (cancelamento) e liberado
-        // imediatamente na compra/upgrade.
-        const hasAccess =
-          ["active", "trialing", "past_due"].includes(status) ||
-          (status === "canceled" && !!periodEnd && new Date(periodEnd) > new Date());
-        const plan = hasAccess && tier ? tier : "free";
-
-        const { error: planError } = await supabaseAdmin
-          .from("profiles")
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          .update({ plan: plan as any })
-          .eq("id", userId);
-        if (planError) console.error(`Falha ao atualizar plano do aluno: ${planError.message}`);
+        // O plano efetivo é recalculado pela validade real da assinatura
+        // (assinaturas de teste só valem para administradores).
+        const { syncUserPlan } = await import("@/lib/plan-sync.server");
+        const plan = await syncUserPlan(userId);
 
         await logSubscriptionEvent({
           user_id: userId,
