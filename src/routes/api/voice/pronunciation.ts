@@ -67,14 +67,21 @@ export const Route = createFileRoute("/api/voice/pronunciation")({
         }
 
 
-        const body = (await request.json()) as { target?: string; transcript?: string };
+        const body = (await request.json()) as {
+          target?: string;
+          transcript?: string;
+          durationMs?: number;
+        };
         const target = (body.target ?? "").trim();
         const transcript = (body.transcript ?? "").trim();
+        const durationMs = Number(body.durationMs) > 0 ? Number(body.durationMs) : null;
         if (!target || !transcript) {
           return new Response("Frase-alvo e transcrição são obrigatórias", { status: 400 });
         }
 
         const score = wordScore(target, transcript);
+        const spokenWords = normalize(transcript).length;
+        const wpm = durationMs ? Math.round((spokenWords / (durationMs / 60000)) * 1) : null;
         const apiKey = process.env["LOVABLE_API_KEY"];
         if (!apiKey) return new Response("IA indisponível no momento", { status: 503 });
 
@@ -86,15 +93,29 @@ export const Route = createFileRoute("/api/voice/pronunciation")({
             system:
               "Você é um professor de pronúncia de inglês. Responda SOMENTE com JSON válido, sem markdown, no formato " +
               '{"verdict":"string em português (1 frase)","praise":"string em português (1 frase curta e encorajadora)",' +
-              '"issues":[{"sound":"som ou palavra em inglês","tip":"dica curta em português de como articular"}]}. ' +
+              '"issues":[{"sound":"som ou palavra em inglês","tip":"dica curta em português de como articular"}],' +
+              '"dimensions":{"pronunciation":{"score":0-100,"tip":"dica curta em português"},' +
+              '"stress":{"score":0-100,"tip":"dica curta em português sobre a sílaba tônica"},' +
+              '"intonation":{"score":0-100,"tip":"dica curta em português sobre entonação"},' +
+              '"fluency":{"score":0-100,"tip":"dica curta em português sobre ritmo e pausas"}}}. ' +
               "No máximo 3 issues. Se a fala estiver correta, retorne issues vazio.",
-            prompt: `Frase-alvo: "${target}"\nO que foi reconhecido na fala do aluno: "${transcript}"\nSimilaridade calculada: ${score}%.\nAponte as prováveis falhas de pronúncia que explicam a diferença.`,
+            prompt: `Frase-alvo: "${target}"\nO que foi reconhecido na fala do aluno: "${transcript}"\nSimilaridade calculada: ${score}%.${
+              wpm ? `\nRitmo aproximado: ${wpm} palavras por minuto.` : ""
+            }\nAvalie pronunciation, stress, intonation e fluency e aponte as prováveis falhas.`,
           });
           const clean = text.replace(/```json|```/g, "").trim();
           parsed = JSON.parse(clean) as Partial<Result>;
         } catch (e) {
           console.error("[voice/pronunciation]", e);
         }
+
+        const dim = (key: keyof Result["dimensions"], fallbackTip: string): Dimension => {
+          const raw = parsed.dimensions?.[key];
+          return {
+            score: clampScore(raw?.score, score),
+            tip: raw?.tip?.trim() || fallbackTip,
+          };
+        };
 
         const result: Result = {
           score,
@@ -106,6 +127,12 @@ export const Route = createFileRoute("/api/voice/pronunciation")({
               : "Ainda há diferenças entre o que você falou e a frase-alvo."),
           issues: Array.isArray(parsed.issues) ? parsed.issues.slice(0, 3) : [],
           praise: parsed.praise ?? "Continue praticando — repetição é o que fixa a pronúncia!",
+          dimensions: {
+            pronunciation: dim("pronunciation", "Articule cada som com calma."),
+            stress: dim("stress", "Reforce a sílaba tônica das palavras-chave."),
+            intonation: dim("intonation", "Suba o tom em perguntas e desça em afirmações."),
+            fluency: dim("fluency", "Fale em blocos, evitando pausas no meio das frases."),
+          },
         };
         return Response.json(result);
       },
