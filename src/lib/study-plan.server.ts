@@ -189,18 +189,38 @@ function rescuePlan(error: unknown): StudyPlan | null {
           )
         : String(value ?? "");
 
-  const summary = toText(pick("summary", "resumo", "resumo_plano"));
-  const weeksRaw = pick("weekly_focus", "plano_de_estudos", "semanas", "foco_semanal");
-  const milestonesRaw = pick("milestones", "marcos", "marcos_de_evolucao");
-  if (!summary || !Array.isArray(weeksRaw) || !Array.isArray(milestonesRaw)) return null;
+  const summary = toText(
+    pick("summary", "resumo", "resumo_plano", "resumo_do_plano", "descricao", "overview"),
+  );
+  const weeksRaw = pick(
+    "weekly_focus",
+    "plano_de_estudos",
+    "plano_semanal",
+    "semanas",
+    "foco_semanal",
+    "weeks",
+    "cronograma",
+  );
+  const milestonesRaw = pick(
+    "milestones",
+    "marcos",
+    "marcos_de_evolucao",
+    "marcos_de_progresso",
+    "objetivos",
+  );
+  if (!Array.isArray(weeksRaw)) return null;
 
   const weekly_focus = weeksRaw.map((item, index) => {
     const w = (item ?? {}) as Record<string, unknown>;
-    const activities = (w["activities"] ?? w["atividades"] ?? []) as unknown;
+    const activities = (w["activities"] ??
+      w["atividades"] ??
+      w["tarefas"] ??
+      w["acoes"] ??
+      []) as unknown;
     return {
-      week: Number(w["week"] ?? w["semana"] ?? index + 1) || index + 1,
-      title: toText(w["title"] ?? w["titulo"] ?? `Semana ${index + 1}`),
-      activities: Array.isArray(activities) ? activities.map(toText) : [],
+      week: Number(w["week"] ?? w["semana"] ?? w["numero"] ?? index + 1) || index + 1,
+      title: toText(w["title"] ?? w["titulo"] ?? w["foco"] ?? `Semana ${index + 1}`),
+      activities: Array.isArray(activities) ? activities.map(toText) : [toText(activities)],
     };
   });
 
