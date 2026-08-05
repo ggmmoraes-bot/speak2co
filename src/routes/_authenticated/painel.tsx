@@ -23,6 +23,8 @@ import { HubCard, HubSection } from "@/components/HubCard";
 import speak2coLogo from "@/assets/speak2co-logo.asset.json";
 import speak2hireLogo from "@/assets/speak2hire.asset.json";
 import speak2travelLogo from "@/assets/speak2travel.asset.json";
+import speak2fluencyLogo from "@/assets/speak2fluency.png.asset.json";
+import giseleAiLogo from "@/assets/gisele-ai.png.asset.json";
 
 import { supabase } from "@/integrations/supabase/client";
 import { PlanVersionsSection } from "@/components/PlanVersionsSection";
@@ -254,7 +256,7 @@ function Painel() {
             titlePt="Inglês para fluência plena"
             description="A nova linha para destravar a fluência no dia a dia. Em breve."
             icon={Sparkles}
-            imageUrl={speak2coLogo.url}
+            imageUrl={speak2fluencyLogo.url}
             comingSoon
             locked={!hasFeature(access, "product_line_travel")}
             requiredPlan="Premium"
@@ -277,7 +279,7 @@ function Painel() {
             titlePt="Mentoria de IA exclusiva"
             description="Mentoria avançada com IA, exclusiva do plano Signature. Em breve."
             icon={Bot}
-            imageUrl={speak2coLogo.url}
+            imageUrl={giseleAiLogo.url}
             comingSoon
 
             locked={!hasFeature(access, FEATURE_KEYS.giseleAi)}
