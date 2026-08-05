@@ -27,7 +27,7 @@ export type ProductLineItem = {
 };
 
 const posterBase =
-  "group relative block w-[340px] shrink-0 snap-start overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_10px_30px_-18px_color-mix(in_oklab,var(--background)_80%,transparent)] transition-all duration-300 ease-out hover:z-10 hover:-translate-y-2 hover:scale-[1.03] hover:border-gold/70 hover:shadow-[0_28px_60px_-24px_color-mix(in_oklab,var(--gold)_55%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 sm:w-[390px]";
+  "group relative block w-[290px] shrink-0 snap-start overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_10px_30px_-18px_color-mix(in_oklab,var(--background)_80%,transparent)] transition-all duration-300 ease-out hover:z-10 hover:-translate-y-2 hover:scale-[1.03] hover:border-gold/70 hover:shadow-[0_28px_60px_-24px_color-mix(in_oklab,var(--gold)_55%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 sm:w-[360px]";
 
 function Poster({
   titleEn,
