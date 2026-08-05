@@ -80,7 +80,9 @@ function AssinaturaPage() {
   });
 
   const isPending = !simulation && isLoading;
-  const isPremium = simulation ? simulation.isPremium : data?.plan === "premium";
+  const isPremium = simulation
+    ? simulation.isPremium
+    : data?.plan === "essential" || data?.plan === "premium" || data?.plan === "signature";
   const subscription = simulation ? simulation.subscription : (data?.subscription ?? null);
   const renewal = formatDate(subscription?.next_payment_date);
 
