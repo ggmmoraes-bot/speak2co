@@ -115,31 +115,8 @@ export const Route = createFileRoute("/api/public/webhooks/mercadopago")({
         });
 
         if (userId) {
-          // Descobre o tier a partir do plano escolhido no checkout (tabela `plans`).
-          const { data: subRow } = await supabaseAdmin
-            .from("subscriptions")
-            .select("plan_key")
-            .eq("preapproval_id", preapproval.id)
-            .maybeSingle();
-          const checkoutKey = subRow?.plan_key ?? null;
-          let tier = "premium";
-          if (checkoutKey) {
-            const { data: planRow } = await supabaseAdmin
-              .from("plans")
-              .select("key")
-              .or(
-                `monthly_checkout_key.eq.${checkoutKey},yearly_checkout_key.eq.${checkoutKey}`,
-              )
-              .maybeSingle();
-            if (planRow?.key) tier = planRow.key;
-          }
-          const plan = preapproval.status === "authorized" ? tier : "free";
-          const { error: planError } = await supabaseAdmin
-            .from("profiles")
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            .update({ plan: plan as any })
-            .eq("id", userId);
-          if (planError) console.error(`Falha ao atualizar plano do aluno: ${planError.message}`);
+          const { syncUserPlan } = await import("@/lib/plan-sync.server");
+          const plan = await syncUserPlan(userId);
           await logSubscriptionEvent({
             user_id: userId,
             subscription_id: existing?.id ?? null,

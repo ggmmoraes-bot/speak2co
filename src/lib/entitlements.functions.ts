@@ -88,12 +88,14 @@ export const getMyAccess = createServerFn({ method: "GET" })
   .handler(async ({ context }): Promise<MyAccess> => {
     const { supabase, userId } = context;
 
-    const [profileRes, adminRes] = await Promise.all([
-      supabase.from("profiles").select("plan").eq("id", userId).maybeSingle(),
+    const { syncUserPlan } = await import("@/lib/plan-sync.server");
+    await syncUserPlan(userId).catch(() => undefined);
+    const { resolvePlanKey } = await import("@/lib/entitlements-access.server");
+    const [planKey, adminRes] = await Promise.all([
+      resolvePlanKey(supabase, userId),
       supabase.rpc("has_role", { _user_id: userId, _role: "admin" }),
     ]);
 
-    const planKey = (profileRes.data?.plan as string | undefined) ?? "free";
     const isAdmin = adminRes.data === true;
 
     const [planRes, featRes, usageRes] = await Promise.all([

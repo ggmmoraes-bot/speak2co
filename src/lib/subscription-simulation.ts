@@ -36,6 +36,9 @@ type SimulatedSubscription = {
   currency: string;
   next_payment_date: string | null;
   init_point: string | null;
+  provider?: string;
+  current_period_end?: string | null;
+  cancel_at_period_end?: boolean;
 };
 
 export type SimulationData = {

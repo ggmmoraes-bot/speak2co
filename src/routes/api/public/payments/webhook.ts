@@ -2,13 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 
 type PaddleEnv = "sandbox" | "live";
 
-/** Deriva o tier (essential/premium/signature) a partir da chave de checkout. */
-function tierFromPriceKey(priceKey: string | null): string | null {
-  if (!priceKey) return null;
-  const base = priceKey.replace(/_(monthly|yearly)$/, "");
-  return ["essential", "premium", "signature"].includes(base) ? base : null;
-}
-
 export const Route = createFileRoute("/api/public/payments/webhook")({
   server: {
     handlers: {
@@ -42,7 +35,6 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
         const item = data.items?.[0] ?? {};
         const priceKey: string | null = item.price?.importMeta?.externalId ?? null;
         const productKey: string | null = item.price?.productId ?? null;
-        const tier = tierFromPriceKey(priceKey);
 
         if (!userId || !priceKey) {
           await logSubscriptionEvent({
@@ -62,6 +54,31 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
 
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
+        // Downgrade só vale no fim do ciclo já pago: o plano atual é mantido e o
+        // novo fica agendado. Upgrade entra em vigor imediatamente.
+        const { data: existing } = await supabaseAdmin
+          .from("subscriptions")
+          .select("plan_key")
+          .eq("paddle_subscription_id", data.id)
+          .maybeSingle();
+
+        let effectivePlanKey = priceKey;
+        let scheduledPlanKey: string | null = null;
+        const stillPaid = !!periodEnd && new Date(periodEnd) > new Date();
+
+        if (existing?.plan_key && existing.plan_key !== priceKey && stillPaid) {
+          const { data: levels } = await supabaseAdmin
+            .from("plans")
+            .select("key, access_level, monthly_checkout_key, yearly_checkout_key");
+          const levelOf = (key: string) =>
+            levels?.find((p) => p.monthly_checkout_key === key || p.yearly_checkout_key === key)
+              ?.access_level ?? 0;
+          if (levelOf(priceKey) < levelOf(existing.plan_key)) {
+            effectivePlanKey = existing.plan_key;
+            scheduledPlanKey = priceKey;
+          }
+        }
+
         const { data: saved, error } = await supabaseAdmin
           .from("subscriptions")
           .upsert(
@@ -70,10 +87,11 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
               provider: "paddle",
               paddle_subscription_id: data.id,
               paddle_customer_id: data.customerId ?? null,
-              plan_key: priceKey,
+              plan_key: effectivePlanKey,
+              scheduled_plan_key: scheduledPlanKey,
               external_reference: productKey,
               status,
-              plan_label: priceKey,
+              plan_label: effectivePlanKey,
               amount,
               currency: item.price?.unitPrice?.currencyCode ?? "BRL",
               environment: env,
@@ -89,19 +107,10 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
           .maybeSingle();
         if (error) console.error(`Falha ao salvar assinatura: ${error.message}`);
 
-        // Acesso mantido até o fim do período já pago (cancelamento) e liberado
-        // imediatamente na compra/upgrade.
-        const hasAccess =
-          ["active", "trialing", "past_due"].includes(status) ||
-          (status === "canceled" && !!periodEnd && new Date(periodEnd) > new Date());
-        const plan = hasAccess && tier ? tier : "free";
-
-        const { error: planError } = await supabaseAdmin
-          .from("profiles")
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          .update({ plan: plan as any })
-          .eq("id", userId);
-        if (planError) console.error(`Falha ao atualizar plano do aluno: ${planError.message}`);
+        // O plano efetivo é recalculado pela validade real da assinatura
+        // (assinaturas de teste só valem para administradores).
+        const { syncUserPlan } = await import("@/lib/plan-sync.server");
+        const plan = await syncUserPlan(userId);
 
         await logSubscriptionEvent({
           user_id: userId,

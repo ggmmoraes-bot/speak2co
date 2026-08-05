@@ -20,7 +20,7 @@ export const getMySubscription = createServerFn({ method: "GET" })
     const { data, error } = await context.supabase
       .from("subscriptions")
       .select(
-        "id, status, plan_label, amount, currency, init_point, next_payment_date, created_at, updated_at",
+        "id, provider, environment, status, plan_key, plan_label, amount, currency, init_point, next_payment_date, current_period_end, cancel_at_period_end, paddle_subscription_id, created_at, updated_at",
       )
       .eq("user_id", context.userId)
       .order("created_at", { ascending: false })
@@ -28,13 +28,12 @@ export const getMySubscription = createServerFn({ method: "GET" })
       .maybeSingle();
     if (error) throw new Error(error.message);
 
-    const { data: profile } = await context.supabase
-      .from("profiles")
-      .select("plan")
-      .eq("id", context.userId)
-      .maybeSingle();
+    const { syncUserPlan } = await import("@/lib/plan-sync.server");
+    await syncUserPlan(context.userId).catch(() => undefined);
+    const { resolvePlanKey } = await import("@/lib/entitlements-access.server");
+    const plan = await resolvePlanKey(context.supabase, context.userId);
 
-    return { subscription: data, plan: profile?.plan ?? "free" };
+    return { subscription: data, plan };
   });
 
 export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
@@ -61,6 +60,7 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
       .insert({
         user_id: context.userId,
         provider: "mercadopago",
+        environment: "live",
         preapproval_id: preapproval.id,
         plan_key: data.planKey,
         external_reference: externalReference,

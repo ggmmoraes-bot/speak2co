@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { Button } from "@/components/ui/button";
 import { getMySubscription } from "@/lib/subscriptions.functions";
+import { cancelPaddleSubscription, createPaddlePortalSession } from "@/lib/payments.functions";
 import { SubscriptionEventsSection } from "@/components/SubscriptionEventsSection";
 import {
   SIMULATION_MODES,
@@ -46,10 +48,16 @@ const PREMIUM_FEATURES = [
 ];
 
 const STATUS_LABEL: Record<string, string> = {
+  // Mercado Pago
   authorized: "Ativa",
   pending: "Aguardando pagamento",
   paused: "Pausada",
   cancelled: "Cancelada",
+  // Cartão internacional
+  active: "Ativa",
+  trialing: "Em período de teste",
+  past_due: "Pagamento pendente",
+  canceled: "Cancelada",
 };
 
 function formatDate(value: string | null | undefined) {
@@ -84,7 +92,24 @@ function AssinaturaPage() {
     ? simulation.isPremium
     : data?.plan === "essential" || data?.plan === "premium" || data?.plan === "signature";
   const subscription = simulation ? simulation.subscription : (data?.subscription ?? null);
-  const renewal = formatDate(subscription?.next_payment_date);
+  const renewal = formatDate(subscription?.next_payment_date ?? subscription?.current_period_end);
+  const queryClient = useQueryClient();
+  const openPortal = useServerFn(createPaddlePortalSession);
+  const cancelSubscription = useServerFn(cancelPaddleSubscription);
+  const isPaddle = subscription?.provider === "paddle";
+  const portalMutation = useMutation({
+    mutationFn: () => openPortal(),
+    onSuccess: (result) => window.open(result.url, "_blank", "noopener"),
+    onError: (error: Error) => toast.error(error.message),
+  });
+  const cancelMutation = useMutation({
+    mutationFn: () => cancelSubscription(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["subscription"] });
+      toast.success("Cancelamento agendado — seu acesso continua até o fim do período já pago.");
+    },
+    onError: (error: Error) => toast.error(error.message),
+  });
 
   return (
     <main className="mx-auto w-full max-w-4xl px-6 py-14">
@@ -188,7 +213,9 @@ function AssinaturaPage() {
         <div>
           <p className="text-xs uppercase tracking-wider text-muted-foreground">Próxima renovação</p>
           <p className="mt-1 font-semibold text-foreground">
-            {renewal ?? (isPremium ? "Aguardando confirmação do Mercado Pago" : "—")}
+            {subscription?.cancel_at_period_end && renewal
+              ? `Acesso até ${renewal}`
+              : (renewal ?? (isPremium ? "Aguardando confirmação do pagamento" : "—"))}
           </p>
         </div>
       </section>
@@ -236,6 +263,33 @@ function AssinaturaPage() {
         {!isPremium && subscription?.status === "pending" && subscription.init_point && (
           <Button asChild variant="outline" className="rounded-full font-semibold">
             <a href={subscription.init_point}>Concluir pagamento</a>
+          </Button>
+        )}
+        {isPaddle && !simulation && (
+          <>
+            <Button
+              variant="outline"
+              className="rounded-full font-semibold"
+              disabled={portalMutation.isPending}
+              onClick={() => portalMutation.mutate()}
+            >
+              {portalMutation.isPending ? "Abrindo..." : "Gerenciar pagamento e faturas"}
+            </Button>
+            {!subscription?.cancel_at_period_end && (
+              <Button
+                variant="ghost"
+                className="rounded-full font-semibold text-destructive"
+                disabled={cancelMutation.isPending}
+                onClick={() => cancelMutation.mutate()}
+              >
+                {cancelMutation.isPending ? "Cancelando..." : "Cancelar assinatura"}
+              </Button>
+            )}
+          </>
+        )}
+        {isPremium && (
+          <Button asChild variant="outline" className="rounded-full font-semibold">
+            <Link to="/premium">Trocar de plano</Link>
           </Button>
         )}
         <Button asChild variant="outline" className="rounded-full font-semibold">
