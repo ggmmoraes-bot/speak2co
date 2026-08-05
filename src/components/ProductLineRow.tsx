@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, Lock, Play } from "lucide-react";
 import { toast } from "sonner";
+import { BrandText } from "@/components/BrandText";
 
 export type ProductLineItem = {
   titleEn: string;
@@ -70,7 +71,9 @@ function Poster({
       </div>
 
       <div className="relative -mt-6 px-4 pb-4">
-        <h3 className="text-base font-semibold text-foreground">{titleEn}</h3>
+        <h3 className="text-base font-semibold text-foreground">
+          <BrandText text={titleEn} />
+        </h3>
         <p className="text-[11px] tracking-wide text-muted-foreground uppercase">{titlePt}</p>
         <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-foreground/70">{description}</p>
       </div>

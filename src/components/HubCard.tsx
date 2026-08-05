@@ -2,6 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Lock } from "lucide-react";
 import { toast } from "sonner";
+import { BrandText } from "@/components/BrandText";
 
 export type HubCardProps = {
   titleEn: string;
@@ -64,7 +65,9 @@ function Inner({
 
 
 
-      <h3 className="mt-5 text-lg font-semibold text-foreground">{titleEn}</h3>
+      <h3 className="mt-5 text-lg font-semibold text-foreground">
+        <BrandText text={titleEn} />
+      </h3>
       <p className="text-xs text-muted-foreground">{titlePt}</p>
       <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/75">{description}</p>
 

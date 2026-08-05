@@ -12,6 +12,7 @@ import {
   Trophy,
 } from "lucide-react";
 import { toast } from "sonner";
+import { BrandText } from "@/components/BrandText";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/speak2hire.asset.json";
 import { INTERVIEW_TRACKS, MATERIALS } from "@/lib/speak2hire-content";
@@ -112,7 +113,7 @@ function Speak2HireHub() {
         <header className="flex flex-wrap items-center gap-5">
           <img src={logo.url} alt="Speak2Hire" className="h-20 w-20 rounded-2xl object-contain" />
           <div>
-            <h1 className="text-3xl font-semibold text-gold">Speak2Hire</h1>
+            <h1 className="text-3xl font-semibold"><BrandText text="Speak2Hire" /></h1>
             <p className="text-sm text-muted-foreground">
               Ace your Interview — English for Global Careers. Frameworks, not just vocabulary.
             </p>
