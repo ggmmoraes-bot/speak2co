@@ -160,13 +160,14 @@ function PremiumPage() {
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-14">
       <PlanUnlockedDialog />
-      <header className="text-center">
+      <PaymentTestModeBanner />
+      <header className="mt-6 text-center">
         <p className="text-sm uppercase tracking-[0.3em] text-accent">Speak2Co Premium</p>
         <h1 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
           English for Every Opportunity
         </h1>
         <p className="mt-3 text-muted-foreground">
-          Pagamento em reais com Pix, boleto ou cartão pelo Mercado Pago.
+          Cartão internacional no checkout global, ou Pix, boleto e cartão em reais pelo Mercado Pago.
         </p>
       </header>
 
