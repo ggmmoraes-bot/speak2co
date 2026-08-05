@@ -353,6 +353,7 @@ function InfoCard({ icon, label, value }: { icon: React.ReactNode; label: string
 
 function ResultView({ test }: { test: PlacementTest }) {
   const feedback = test.feedback;
+  const stage = getCefrStage(test.level);
   return (
     <div>
       <p className="text-xs tracking-widest text-muted-foreground uppercase">Seu resultado</p>
@@ -362,8 +363,17 @@ function ResultView({ test }: { test: PlacementTest }) {
           {test.correct_count}/{test.total_questions} acertos · {test.score ?? 0}%
         </span>
       </div>
+      {stage && (
+        <div className="mt-4 rounded-xl border border-gold/40 bg-gold/10 p-4">
+          <p className="text-xs tracking-widest text-gold uppercase">Estágio Speak2Co</p>
+          <p className="mt-1 text-lg font-semibold text-foreground">
+            {stage.name} <span className="text-muted-foreground">({stage.range})</span>
+          </p>
+          <p className="mt-1 text-sm text-foreground/80">{stage.headline}</p>
+        </div>
+      )}
       {test.level && (
-        <p className="mt-2 text-sm text-foreground/80">{LEVEL_DESCRIPTIONS[test.level]}</p>
+        <p className="mt-3 text-sm text-foreground/80">{LEVEL_DESCRIPTIONS[test.level]}</p>
       )}
 
       <div className="mt-4 flex gap-1">
@@ -380,6 +390,7 @@ function ResultView({ test }: { test: PlacementTest }) {
           </div>
         ))}
       </div>
+
 
       {feedback && (
         <div className="mt-6 grid gap-4">
