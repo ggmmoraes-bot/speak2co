@@ -48,8 +48,8 @@ import { Route as AuthenticatedSpeak2hireSessaoSessionIdRouteImport } from './ro
 import { Route as AuthenticatedSpeak2travelMaterialResourceIdRouteImport } from './routes/_authenticated/speak2travel.material.$resourceId'
 import { Route as AuthenticatedSpeak2travelModuloModuleIdRouteImport } from './routes/_authenticated/speak2travel.modulo.$moduleId'
 import { Route as AuthenticatedSpeak2travelRevisaoModuleIdRouteImport } from './routes/_authenticated/speak2travel.revisao.$moduleId'
+import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/public/webhooks/mercadopago'
-import { Route as ApiPublicWebhooksPaddleRouteImport } from './routes/api/public/webhooks/paddle'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -268,17 +268,18 @@ const AuthenticatedSpeak2travelRevisaoModuleIdRoute =
     path: '/revisao/$moduleId',
     getParentRoute: () => AuthenticatedSpeak2travelRoute,
   } as any)
+const ApiPublicPaymentsWebhookRoute =
+  ApiPublicPaymentsWebhookRouteImport.update({
+    id: '/api/public/payments/webhook',
+    path: '/api/public/payments/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicWebhooksMercadopagoRoute =
   ApiPublicWebhooksMercadopagoRouteImport.update({
     id: '/api/public/webhooks/mercadopago',
     path: '/api/public/webhooks/mercadopago',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicWebhooksPaddleRoute = ApiPublicWebhooksPaddleRouteImport.update({
-  id: '/api/public/webhooks/paddle',
-  path: '/api/public/webhooks/paddle',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -319,8 +320,8 @@ export interface FileRoutesByFullPath {
   '/speak2travel/material/$resourceId': typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
   '/speak2travel/modulo/$moduleId': typeof AuthenticatedSpeak2travelModuloModuleIdRoute
   '/speak2travel/revisao/$moduleId': typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
-  '/api/public/webhooks/paddle': typeof ApiPublicWebhooksPaddleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -356,8 +357,8 @@ export interface FileRoutesByTo {
   '/speak2travel/material/$resourceId': typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
   '/speak2travel/modulo/$moduleId': typeof AuthenticatedSpeak2travelModuloModuleIdRoute
   '/speak2travel/revisao/$moduleId': typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
-  '/api/public/webhooks/paddle': typeof ApiPublicWebhooksPaddleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -400,8 +401,8 @@ export interface FileRoutesById {
   '/_authenticated/speak2travel/material/$resourceId': typeof AuthenticatedSpeak2travelMaterialResourceIdRoute
   '/_authenticated/speak2travel/modulo/$moduleId': typeof AuthenticatedSpeak2travelModuloModuleIdRoute
   '/_authenticated/speak2travel/revisao/$moduleId': typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
-  '/api/public/webhooks/paddle': typeof ApiPublicWebhooksPaddleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -444,8 +445,8 @@ export interface FileRouteTypes {
     | '/speak2travel/material/$resourceId'
     | '/speak2travel/modulo/$moduleId'
     | '/speak2travel/revisao/$moduleId'
+    | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
-    | '/api/public/webhooks/paddle'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -481,8 +482,8 @@ export interface FileRouteTypes {
     | '/speak2travel/material/$resourceId'
     | '/speak2travel/modulo/$moduleId'
     | '/speak2travel/revisao/$moduleId'
+    | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
-    | '/api/public/webhooks/paddle'
   id:
     | '__root__'
     | '/'
@@ -524,8 +525,8 @@ export interface FileRouteTypes {
     | '/_authenticated/speak2travel/material/$resourceId'
     | '/_authenticated/speak2travel/modulo/$moduleId'
     | '/_authenticated/speak2travel/revisao/$moduleId'
+    | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
-    | '/api/public/webhooks/paddle'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -537,8 +538,8 @@ export interface RootRouteChildren {
   ApiVoicePronunciationRoute: typeof ApiVoicePronunciationRoute
   ApiVoiceSpeakRoute: typeof ApiVoiceSpeakRoute
   ApiVoiceTranscribeRoute: typeof ApiVoiceTranscribeRoute
+  ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   ApiPublicWebhooksMercadopagoRoute: typeof ApiPublicWebhooksMercadopagoRoute
-  ApiPublicWebhooksPaddleRoute: typeof ApiPublicWebhooksPaddleRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -816,18 +817,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSpeak2travelRevisaoModuleIdRouteImport
       parentRoute: typeof AuthenticatedSpeak2travelRoute
     }
+    '/api/public/payments/webhook': {
+      id: '/api/public/payments/webhook'
+      path: '/api/public/payments/webhook'
+      fullPath: '/api/public/payments/webhook'
+      preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/webhooks/mercadopago': {
       id: '/api/public/webhooks/mercadopago'
       path: '/api/public/webhooks/mercadopago'
       fullPath: '/api/public/webhooks/mercadopago'
       preLoaderRoute: typeof ApiPublicWebhooksMercadopagoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/webhooks/paddle': {
-      id: '/api/public/webhooks/paddle'
-      path: '/api/public/webhooks/paddle'
-      fullPath: '/api/public/webhooks/paddle'
-      preLoaderRoute: typeof ApiPublicWebhooksPaddleRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -985,9 +986,19 @@ const rootRouteChildren: RootRouteChildren = {
   ApiVoicePronunciationRoute: ApiVoicePronunciationRoute,
   ApiVoiceSpeakRoute: ApiVoiceSpeakRoute,
   ApiVoiceTranscribeRoute: ApiVoiceTranscribeRoute,
+  ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   ApiPublicWebhooksMercadopagoRoute: ApiPublicWebhooksMercadopagoRoute,
-  ApiPublicWebhooksPaddleRoute: ApiPublicWebhooksPaddleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
