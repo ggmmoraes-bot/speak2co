@@ -12,6 +12,7 @@ import { getStudyPlan, generateStudyPlan, previewStudyPlanRefinement, applyStudy
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import logo from "@/assets/speak2co-logo.asset.json";
+import { getCefrStage } from "@/lib/placement-content";
 import { DailyExercisesSection } from "@/components/DailyExercisesSection";
 import { ExerciseHistorySection } from "@/components/ExerciseHistorySection";
 import { useAccess, hasFeature, aiMinutesLeft, FEATURE_KEYS } from "@/lib/entitlements";
