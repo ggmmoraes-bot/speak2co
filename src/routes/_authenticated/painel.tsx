@@ -279,7 +279,7 @@ function Painel() {
             titlePt="Mentoria de IA exclusiva"
             description="Mentoria avançada com IA, exclusiva do plano Signature. Em breve."
             icon={Bot}
-            imageUrl={speak2coLogo.url}
+            imageUrl={giseleAiLogo.url}
             comingSoon
 
             locked={!hasFeature(access, FEATURE_KEYS.giseleAi)}
