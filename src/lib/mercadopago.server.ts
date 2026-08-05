@@ -10,7 +10,7 @@ export type PlanKey =
 
 export const MP_PLANS: Record<PlanKey, { label: string; amount: number; frequency: number; frequency_type: "months" }> = {
   essential_monthly: { label: "Essential Mensal", amount: 37.9, frequency: 1, frequency_type: "months" },
-  essential_yearly: { label: "Essential Anual", amount: 199.0, frequency: 12, frequency_type: "months" },
+  essential_yearly: { label: "Essential Anual", amount: 379.0, frequency: 12, frequency_type: "months" },
   premium_monthly: { label: "Premium Mensal", amount: 49.9, frequency: 1, frequency_type: "months" },
   premium_yearly: { label: "Premium Anual", amount: 499.0, frequency: 12, frequency_type: "months" },
   signature_monthly: { label: "Signature Mensal", amount: 59.9, frequency: 1, frequency_type: "months" },

@@ -33,7 +33,7 @@ const TIERS = [
     label: "Essential",
     tagline: "Comece a estudar todos os dias",
     monthly: { key: "essential_monthly" as const, price: "R$ 37,90" },
-    yearly: { key: "essential_yearly" as const, price: "R$ 199,00" },
+    yearly: { key: "essential_yearly" as const, price: "R$ 379,00" },
     perks: ["Aulas guiadas", "Exercícios diários", "Quizzes de vocabulário e gramática"],
     highlight: false,
   },
@@ -351,7 +351,7 @@ function PremiumPage() {
               </tr>
               <tr>
                 <td className="px-6 py-4 text-muted-foreground">Preço anual (2 meses grátis)</td>
-                <td className="px-6 py-4 text-center text-foreground">R$ 199,00</td>
+                <td className="px-6 py-4 text-center text-foreground">R$ 379,00</td>
                 <td className="px-6 py-4 text-center text-foreground">R$ 499,00</td>
                 <td className="px-6 py-4 text-center text-accent">R$ 599,00</td>
               </tr>
