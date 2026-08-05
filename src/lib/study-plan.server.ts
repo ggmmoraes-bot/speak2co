@@ -155,7 +155,28 @@ function rescuePlan(error: unknown): StudyPlan | null {
     return null;
   }
 
-  const pick = (...keys: string[]) => keys.map((k) => parsed[k]).find((v) => v !== undefined);
+  // Procura a chave em qualquer profundidade — o modelo às vezes embrulha o plano
+  // dentro de um objeto com dados do aluno ("aluno", "nivel_atual", "objetivo").
+  const deepFind = (node: unknown, keys: string[], depth = 0): unknown => {
+    if (depth > 6 || !node || typeof node !== "object") return undefined;
+    if (Array.isArray(node)) {
+      for (const item of node) {
+        const found = deepFind(item, keys, depth + 1);
+        if (found !== undefined) return found;
+      }
+      return undefined;
+    }
+    const record = node as Record<string, unknown>;
+    for (const key of keys) {
+      if (record[key] !== undefined) return record[key];
+    }
+    for (const value of Object.values(record)) {
+      const found = deepFind(value, keys, depth + 1);
+      if (found !== undefined) return found;
+    }
+    return undefined;
+  };
+  const pick = (...keys: string[]) => deepFind(parsed, keys);
   const toText = (value: unknown): string =>
     typeof value === "string"
       ? value
