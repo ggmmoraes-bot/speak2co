@@ -73,7 +73,7 @@ function Inner({
 
       <div className="mt-5 flex flex-wrap items-center gap-2">
         {comingSoon && (
-          <span className="rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[11px] font-semibold tracking-wide text-foreground/80 uppercase">
+          <span className="badge-gold rounded-full px-3 py-1 text-[11px] font-semibold tracking-widest text-gold uppercase">
             Coming Soon
           </span>
         )}
