@@ -2,13 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 
 type PaddleEnv = "sandbox" | "live";
 
-/** Deriva o tier (essential/premium/signature) a partir da chave de checkout. */
-function tierFromPriceKey(priceKey: string | null): string | null {
-  if (!priceKey) return null;
-  const base = priceKey.replace(/_(monthly|yearly)$/, "");
-  return ["essential", "premium", "signature"].includes(base) ? base : null;
-}
-
 export const Route = createFileRoute("/api/public/payments/webhook")({
   server: {
     handlers: {
@@ -42,7 +35,6 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
         const item = data.items?.[0] ?? {};
         const priceKey: string | null = item.price?.importMeta?.externalId ?? null;
         const productKey: string | null = item.price?.productId ?? null;
-        const tier = tierFromPriceKey(priceKey);
 
         if (!userId || !priceKey) {
           await logSubscriptionEvent({
