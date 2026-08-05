@@ -46,13 +46,21 @@ async function loadUnicodeFont(): Promise<Record<string, string> | null> {
   }
 }
 
+export type CoursePdfOptions = {
+  lessons: BeginnerLesson[];
+  courseTitle: string;
+  subtitle: string;
+  intro: string;
+};
+
 /**
- * PDF único e completo do Beginner English Course (Método Speak2Co):
- * capa, sumário e as 20 lições com todas as seções.
+ * Desenha um curso completo (capa, sumário e lições) em um documento jsPDF.
+ * Compartilhado pelos cursos Beginner e Intermediate.
  */
-export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGINNER_LESSONS) {
+export async function renderCoursePdf(doc: jsPDF, options: CoursePdfOptions) {
+  const { lessons, courseTitle, subtitle } = options;
   const [logo, fonts] = await Promise.all([getLogoDataUrl(), loadUnicodeFont()]);
-  const doc = new jsPDF({ unit: "pt", format: "a4", orientation: "portrait" });
+
 
   let FONT = "helvetica";
   if (fonts) {
