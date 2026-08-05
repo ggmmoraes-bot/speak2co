@@ -19,6 +19,7 @@ import {
   TRAVEL_TRACKS,
 } from "@/lib/speak2travel-content";
 import { listTravelProgress } from "@/lib/speak2travel-progress.functions";
+import { BrandText } from "@/components/BrandText";
 
 export const Route = createFileRoute("/_authenticated/speak2travel/")({
   head: () => ({
@@ -86,7 +87,7 @@ function Speak2TravelHub() {
             className="h-20 w-20 rounded-2xl object-cover"
           />
           <div>
-            <h1 className="text-3xl font-semibold text-gold">Speak2Travel</h1>
+            <h1 className="text-3xl font-semibold"><BrandText text="Speak2Travel" /></h1>
             <p className="text-sm text-muted-foreground">
               Your passport to confidence. Anywhere in the world.
             </p>

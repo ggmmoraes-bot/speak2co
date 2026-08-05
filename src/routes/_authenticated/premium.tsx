@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
+import { BrandText } from "@/components/BrandText";
 import { Button } from "@/components/ui/button";
 import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
 import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
@@ -188,7 +189,7 @@ function PremiumPage() {
 
       {currentTier === "premium" && (
         <section className="mt-8 rounded-2xl border-2 border-accent/60 bg-accent/10 p-6 text-center">
-          <p className="text-lg font-bold text-foreground">🔒 Unlock GiseleAI</p>
+          <p className="text-lg font-bold text-foreground">🔒 Unlock <BrandText text="GiseleAI" /></p>
           <p className="mt-2 text-sm text-muted-foreground">
             Upgrade to Signature for only R$ 10,00 more. GiseleAI ilimitada, feedback personalizado e
             conversação 24/7.
