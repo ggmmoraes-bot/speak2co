@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { Briefcase, Plane, Lock, ShieldCheck, Sparkles, Loader2, BookOpen } from "lucide-react";
+import { Briefcase, Plane, Lock, ShieldCheck, Sparkles, Loader2, BookOpen, GraduationCap, Award } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { PlanVersionsSection } from "@/components/PlanVersionsSection";
 import { createThread } from "@/lib/chat.functions";
@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import logo from "@/assets/speak2co-logo.asset.json";
 import { getCefrStage } from "@/lib/placement-content";
+import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
 import { DailyExercisesSection } from "@/components/DailyExercisesSection";
 import { ExerciseHistorySection } from "@/components/ExerciseHistorySection";
 import { useAccess, hasFeature, aiMinutesLeft, FEATURE_KEYS } from "@/lib/entitlements";
@@ -78,6 +79,7 @@ function Painel() {
 
   return (
     <main className="surface-navy min-h-screen px-6 py-12">
+      <PlanUnlockedDialog />
       <div className="mx-auto max-w-3xl">
         <div className="flex items-center justify-between">
           <img src={logo.url} alt="Logo Speak2Co" className="w-14 rounded-full" />
@@ -236,7 +238,14 @@ function Painel() {
             <Link to="/ranking">Ranking de fluência</Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/certificados">Meus certificados</Link>
+            <Link to="/certificados">
+              {hasFeature(access, FEATURE_KEYS.cefrCertificate) ? (
+                <Award className="mr-2 h-4 w-4 text-gold" />
+              ) : (
+                <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
+              )}
+              Meus certificados
+            </Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/assinatura" search={{}}>Minha assinatura</Link>
