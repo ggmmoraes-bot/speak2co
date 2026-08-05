@@ -132,6 +132,14 @@ export function ProductLineRow({
             onClick={() => scrollBy(-1)}
             className="btn-gold-outline flex h-9 w-9 items-center justify-center rounded-full text-foreground/80 transition-colors hover:text-gold"
           >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            aria-label="Próximo"
+            onClick={() => scrollBy(1)}
+            className="btn-gold-outline flex h-9 w-9 items-center justify-center rounded-full text-foreground/80 transition-colors hover:text-gold"
+          >
             <ChevronRight className="h-4 w-4" />
           </button>
         </div>

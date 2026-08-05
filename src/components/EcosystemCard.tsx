@@ -216,10 +216,16 @@ function ProductLineCatalog({
       titleEn={titleEn}
       titlePt={titlePt}
       items={items.map((item) => ({
-        ...item,
+        titleEn: item.titleEn,
+        titlePt: item.titlePt ?? "",
+        description: item.description,
+        icon: item.icon,
+        ...(item.imageUrl ? { imageUrl: item.imageUrl } : {}),
+        ...(item.to ? { to: item.to } : {}),
+        ...(item.params ? { params: item.params } : {}),
         locked: item.status !== "available",
         comingSoon: item.status === "soon",
-        requiredPlan: item.plans?.[0],
+        ...(item.plans?.[0] ? { requiredPlan: item.plans[0] } : {}),
       }))}
     />
   );
