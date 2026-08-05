@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { Briefcase, Plane, Lock, ShieldCheck, Sparkles, Loader2 } from "lucide-react";
+import { Briefcase, Plane, Lock, ShieldCheck, Sparkles, Loader2, BookOpen } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { PlanVersionsSection } from "@/components/PlanVersionsSection";
 import { createThread } from "@/lib/chat.functions";
@@ -196,6 +196,27 @@ function Painel() {
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
+
+          <Button asChild variant="outline" className="rounded-full font-semibold">
+            <Link to="/curso-beginner">
+              {hasFeature(access, "courses_beginner") ? (
+                <BookOpen className="mr-2 h-4 w-4 text-gold" />
+              ) : (
+                <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
+              )}
+              Curso Beginner
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="rounded-full font-semibold">
+            <Link to="/curso-intermediate">
+              {hasFeature(access, "courses_intermediate") ? (
+                <BookOpen className="mr-2 h-4 w-4 text-gold" />
+              ) : (
+                <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
+              )}
+              Curso Intermediate
+            </Link>
+          </Button>
 
           <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/ranking">Ranking de fluência</Link>
