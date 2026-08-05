@@ -41,13 +41,14 @@ function Poster({
 }: ProductLineItem) {
   return (
     <>
-      <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden bg-background/60 p-4 sm:p-6">
+      <div className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden bg-background/60 p-3 sm:p-5">
         {imageUrl ? (
           <img
             src={imageUrl}
             alt={`${titleEn} — Speak2Co`}
             loading="lazy"
-            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
+            decoding="async"
+            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]" 
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/40 via-background to-gold/25">
