@@ -20,13 +20,16 @@ export const MP_PLANS: Record<PlanKey, { label: string; amount: number; frequenc
 function getToken() {
   const token = process.env["MERCADOPAGO_ACCESS_TOKEN"]?.trim();
   if (!token) throw new Error("Pagamento indisponível: credencial do Mercado Pago não configurada.");
-  if (token.length < 30) {
+  const segments = token.split("-");
+  // Access Token de produção tem o formato APP_USR-<app_id>-<data>-<hash 32>-<user_id>
+  if (token.length < 60 || segments.length < 5) {
     throw new Error(
-      "Pagamento indisponível: o Access Token do Mercado Pago salvo está incompleto (apenas o prefixo foi colado). Cole o token completo de produção nas configurações.",
+      "Pagamento indisponível: o Access Token do Mercado Pago salvo está incompleto. Copie o Access Token completo de produção (formato APP_USR-...-...-...-..., com cerca de 70 caracteres) e salve novamente.",
     );
   }
   return token;
 }
+
 
 export async function mpRequest<T>(path: string, init?: { method?: string; body?: unknown }): Promise<T> {
   const response = await fetch(`${MP_API}${path}`, {
