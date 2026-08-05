@@ -7,13 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { PhrasePractice } from "@/components/PhrasePractice";
 import {
-  INTERMEDIATE_COURSE_ID,
   LESSON_SECTIONS,
   SPEAKING_LABEL,
   WRITTEN_LABEL,
-  getIntermediateLesson,
   type BeginnerLesson,
   type LessonSectionKey,
+} from "@/lib/beginner-course";
+import {
+  INTERMEDIATE_COURSE_ID,
+  getIntermediateLesson,
 } from "@/lib/intermediate-course";
 import { saveCourseProgress } from "@/lib/course-progress.functions";
 import { averageScore, type PronunciationAttempt } from "@/lib/pronunciation-grade";
