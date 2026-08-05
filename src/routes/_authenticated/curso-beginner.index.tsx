@@ -51,6 +51,22 @@ function BeginnerCourseIndex() {
   const certified = eligible && (assessment?.quizScore ?? 0) >= BEGINNER_PASS_SCORE;
   const percent = Math.round((done / BEGINNER_LESSONS.length) * 100);
 
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return BEGINNER_LESSONS.filter((lesson) => {
+      const isDone = Boolean(byLesson.get(lesson.id)?.completed);
+      if (filter === "done" && !isDone) return false;
+      if (filter === "pending" && isDone) return false;
+      if (!q) return true;
+      return (
+        lesson.title.toLowerCase().includes(q) ||
+        lesson.titlePt.toLowerCase().includes(q) ||
+        String(lesson.number).includes(q) ||
+        lesson.id.toLowerCase().includes(q)
+      );
+    });
+  }, [query, filter, byLesson]);
+
   const handleExport = async () => {
     setExporting(true);
     try {
