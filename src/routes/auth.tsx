@@ -96,6 +96,24 @@ function AuthPage() {
     setSent(true);
   }
 
+  async function handleForgotPassword() {
+    const parsed = emailSchema.safeParse(email);
+    if (!parsed.success) {
+      toast.error("Informe seu e-mail no campo acima para redefinir a senha.");
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(parsed.data, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setLoading(false);
+    if (error) {
+      toast.error("Não foi possível enviar o e-mail de redefinição. Tente novamente.");
+      return;
+    }
+    toast.success("Enviamos um link de redefinição para o seu e-mail.");
+  }
+
   async function handleOAuth(provider: "google" | "apple") {
     setLoading(true);
     const result = await lovable.auth.signInWithOAuth(provider, {
@@ -193,6 +211,14 @@ function AuthPage() {
                   >
                     Entrar
                   </Button>
+                  <button
+                    type="button"
+                    onClick={handleForgotPassword}
+                    disabled={loading}
+                    className="text-gold mt-1 text-center text-sm underline-offset-4 hover:underline"
+                  >
+                    Esqueci minha senha
+                  </button>
                 </form>
               </TabsContent>
 
