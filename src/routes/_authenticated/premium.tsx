@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import { BrandText } from "@/components/BrandText";
 import { Button } from "@/components/ui/button";
 import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
+import { usePaddleCheckout } from "@/hooks/usePaddleCheckout";
+import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
 
 export const Route = createFileRoute("/_authenticated/premium")({
