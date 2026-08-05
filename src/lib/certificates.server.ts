@@ -17,6 +17,11 @@ type Input = {
   interviews: { score: number | null; completed_at: string | null }[];
   exercises: { score: number | null; updated_at: string | null }[];
   chatMessages: number;
+  beginnerLessonsCompleted: number;
+  beginnerLessonsTotal: number;
+  beginnerAssessmentScore: number | null;
+  beginnerAssessmentAt: string | null;
+  beginnerPassScore: number;
 };
 
 function code(userId: string, id: string) {
@@ -96,5 +101,32 @@ export function buildCertificates(input: Input): Certificate[] {
       issuedAt: null,
       code: code(userId, "conversa"),
     },
+    (() => {
+      const lessonsOk = input.beginnerLessonsCompleted >= input.beginnerLessonsTotal;
+      const score = input.beginnerAssessmentScore;
+      const passed = score != null && score >= input.beginnerPassScore;
+      // Metade do progresso vem das lições, metade do assessment final.
+      const progress = clamp(
+        (input.beginnerLessonsCompleted / Math.max(1, input.beginnerLessonsTotal)) * 0.5 +
+          (passed ? 0.5 : score != null ? (score / 100) * 0.5 * 0.5 : 0),
+      );
+      return {
+        id: "beginner",
+        title: "Certificado Beginner English Course",
+        subtitle: "Método Speak2Co · Plano Essential",
+        description: `Conclua as ${input.beginnerLessonsTotal} lições do curso Beginner e seja aprovado no assessment final (mínimo ${input.beginnerPassScore}%).`,
+        unlocked: lessonsOk && passed,
+        progress,
+        goalLabel: `${input.beginnerLessonsTotal} lições + assessment final`,
+        detail:
+          score != null
+            ? `${input.beginnerLessonsCompleted}/${input.beginnerLessonsTotal} lições · assessment ${score}%`
+            : input.beginnerLessonsCompleted
+              ? `${input.beginnerLessonsCompleted}/${input.beginnerLessonsTotal} lições concluídas`
+              : null,
+        issuedAt: lessonsOk && passed ? input.beginnerAssessmentAt : null,
+        code: code(userId, "beginner"),
+      } satisfies Certificate;
+    })(),
   ];
 }
