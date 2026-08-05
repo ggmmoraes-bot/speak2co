@@ -256,7 +256,7 @@ function Painel() {
             titlePt="Inglês para fluência plena"
             description="A nova linha para destravar a fluência no dia a dia. Em breve."
             icon={Sparkles}
-            imageUrl={speak2coLogo.url}
+            imageUrl={speak2fluencyLogo.url}
             comingSoon
             locked={!hasFeature(access, "product_line_travel")}
             requiredPlan="Premium"
