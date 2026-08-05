@@ -153,18 +153,18 @@
   }
 }
 
+@utility text-gold {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gold {
+  background: var(--gradient-gold);
+}
+
 @layer components {
-  .text-gold {
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .bg-gold {
-    background: var(--gradient-gold);
-  }
-
   .surface-navy {
     background: var(--gradient-navy);
   }
