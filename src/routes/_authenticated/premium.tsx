@@ -131,6 +131,7 @@ const MOBILE_TIERS: {
 ];
 
 function PremiumPage() {
+  const previewPlan = usePreviewPlan();
   const queryClient = useQueryClient();
   const fetchSubscription = useServerFn(getMySubscription);
   const checkout = useServerFn(startMercadoPagoCheckout);
