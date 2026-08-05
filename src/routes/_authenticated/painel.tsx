@@ -20,6 +20,7 @@ import {
   Mail,
 } from "lucide-react";
 import { HubCard, HubSection } from "@/components/HubCard";
+import { ProductLineRow } from "@/components/ProductLineRow";
 import speak2coLogo from "@/assets/speak2co-logo.asset.json";
 import speak2hireLogo from "@/assets/speak2hire.asset.json";
 import speak2travelLogo from "@/assets/speak2travel.asset.json";
