@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ChecklistRouteImport } from './routes/checklist'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authenticated/assinatura'
+import { Route as AuthenticatedCentralDeMensagensRouteImport } from './routes/_authenticated/central-de-mensagens'
 import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
 import { Route as AuthenticatedCursoBeginnerRouteImport } from './routes/_authenticated/curso-beginner'
 import { Route as AuthenticatedCursoIntermediateRouteImport } from './routes/_authenticated/curso-intermediate'
@@ -78,6 +79,12 @@ const AuthenticatedAssinaturaRoute = AuthenticatedAssinaturaRouteImport.update({
   path: '/assinatura',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCentralDeMensagensRoute =
+  AuthenticatedCentralDeMensagensRouteImport.update({
+    id: '/central-de-mensagens',
+    path: '/central-de-mensagens',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedCertificadosRoute =
   AuthenticatedCertificadosRouteImport.update({
     id: '/certificados',
@@ -273,6 +280,7 @@ export interface FileRoutesByFullPath {
   '/checklist': typeof ChecklistRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
+  '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
@@ -313,6 +321,7 @@ export interface FileRoutesByTo {
   '/checklist': typeof ChecklistRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
+  '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
@@ -350,6 +359,7 @@ export interface FileRoutesById {
   '/checklist': typeof ChecklistRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
+  '/_authenticated/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
   '/_authenticated/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/_authenticated/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
@@ -392,6 +402,7 @@ export interface FileRouteTypes {
     | '/checklist'
     | '/admin'
     | '/assinatura'
+    | '/central-de-mensagens'
     | '/certificados'
     | '/curso-beginner'
     | '/curso-intermediate'
@@ -432,6 +443,7 @@ export interface FileRouteTypes {
     | '/checklist'
     | '/admin'
     | '/assinatura'
+    | '/central-de-mensagens'
     | '/certificados'
     | '/painel'
     | '/perfil'
@@ -468,6 +480,7 @@ export interface FileRouteTypes {
     | '/checklist'
     | '/_authenticated/admin'
     | '/_authenticated/assinatura'
+    | '/_authenticated/central-de-mensagens'
     | '/_authenticated/certificados'
     | '/_authenticated/curso-beginner'
     | '/_authenticated/curso-intermediate'
@@ -557,6 +570,13 @@ declare module '@tanstack/react-router' {
       path: '/assinatura'
       fullPath: '/assinatura'
       preLoaderRoute: typeof AuthenticatedAssinaturaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/central-de-mensagens': {
+      id: '/_authenticated/central-de-mensagens'
+      path: '/central-de-mensagens'
+      fullPath: '/central-de-mensagens'
+      preLoaderRoute: typeof AuthenticatedCentralDeMensagensRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/certificados': {
@@ -899,6 +919,7 @@ const AuthenticatedSpeak2travelRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
+  AuthenticatedCentralDeMensagensRoute: typeof AuthenticatedCentralDeMensagensRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
   AuthenticatedCursoBeginnerRoute: typeof AuthenticatedCursoBeginnerRouteWithChildren
   AuthenticatedCursoIntermediateRoute: typeof AuthenticatedCursoIntermediateRouteWithChildren
@@ -916,6 +937,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
+  AuthenticatedCentralDeMensagensRoute: AuthenticatedCentralDeMensagensRoute,
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
   AuthenticatedCursoBeginnerRoute: AuthenticatedCursoBeginnerRouteWithChildren,
   AuthenticatedCursoIntermediateRoute:

@@ -152,102 +152,6 @@ function Painel() {
             </Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/teste-de-nivel">
-              {hasFeature(access, FEATURE_KEYS.placementTest) ? (
-                <GraduationCap className="mr-2 h-4 w-4 text-gold" />
-              ) : (
-                <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
-              )}
-              Teste de nivelamento
-            </Link>
-          </Button>
-          <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/professor">
-              {hasFeature(access, FEATURE_KEYS.aiTeacher) ? (
-                <Sparkles className="mr-2 h-4 w-4 text-gold" />
-              ) : (
-                <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
-              )}
-              Professor IA
-            </Link>
-          </Button>
-
-          <TooltipProvider delayDuration={200}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className="inline-flex">
-                  <Button asChild variant="outline" className="rounded-full font-semibold">
-                    <Link to="/speak2hire">
-                      {hasFeature(access, "product_line_hire") ? (
-                        <Briefcase className="mr-2 h-4 w-4 text-gold" />
-                      ) : (
-                        <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
-                      )}
-                      Começar Speak2Hire
-                    </Link>
-                  </Button>
-                </span>
-              </TooltipTrigger>
-              <TooltipContent side="bottom" className="max-w-xs text-center">
-                Simulador de entrevistas com IA: treine perguntas e respostas em inglês e receba correções de gramática e pronúncia.
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className="inline-flex">
-                  <Button asChild variant="outline" className="rounded-full font-semibold">
-                    <Link to="/speak2travel">
-                      {hasFeature(access, "product_line_travel") ? (
-                        <Plane className="mr-2 h-4 w-4 text-gold" />
-                      ) : (
-                        <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
-                      )}
-                      Começar Speak2Travel
-                    </Link>
-                  </Button>
-                </span>
-              </TooltipTrigger>
-              <TooltipContent side="bottom" className="max-w-xs text-center">
-                Curso de inglês para viagens: role play de aeroporto, hotel, restaurante e mais, com vocabulário e exercícios por módulo.
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-
-          <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/curso-beginner">
-              {hasFeature(access, "courses_beginner") ? (
-                <BookOpen className="mr-2 h-4 w-4 text-gold" />
-              ) : (
-                <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
-              )}
-              Curso Beginner
-            </Link>
-          </Button>
-          <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/curso-intermediate">
-              {hasFeature(access, "courses_intermediate") ? (
-                <BookOpen className="mr-2 h-4 w-4 text-gold" />
-              ) : (
-                <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
-              )}
-              Curso Intermediate
-            </Link>
-          </Button>
-
-          <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/ranking">Ranking de fluência</Link>
-          </Button>
-          <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/certificados">
-              {hasFeature(access, FEATURE_KEYS.cefrCertificate) ? (
-                <Award className="mr-2 h-4 w-4 text-gold" />
-              ) : (
-                <Lock className="mr-2 h-4 w-4 text-muted-foreground" />
-              )}
-              Meus certificados
-            </Link>
-          </Button>
-          <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/assinatura" search={{}}>Minha assinatura</Link>
           </Button>
           {access?.isAdmin && (
@@ -259,6 +163,133 @@ function Painel() {
             </Button>
           )}
         </div>
+
+        <HubSection titleEn="English Courses" titlePt="Cursos de inglês">
+          <HubCard
+            titleEn="Beginner English Course"
+            titlePt="Curso de inglês iniciante"
+            description="20 lições A1–A2 com vocabulário, gramática, diálogos e AI Pronunciation."
+            icon={BookOpen}
+            to="/curso-beginner"
+            locked={!hasFeature(access, "courses_beginner")}
+            requiredPlan="Essential"
+          />
+          <HubCard
+            titleEn="Intermediate English Course"
+            titlePt="Curso de inglês intermediário"
+            description="20 lições B1 para desenvolver fluência, com avaliação final e certificado."
+            icon={BookOpen}
+            to="/curso-intermediate"
+            locked={!hasFeature(access, "courses_intermediate")}
+            requiredPlan="Essential"
+          />
+          <HubCard
+            titleEn="Upper Intermediate English Course"
+            titlePt="Curso de inglês avançado intermediário"
+            description="Comunicação profissional e situações complexas (B2). Em breve na plataforma."
+            icon={GraduationCap}
+            comingSoon
+            locked={!hasFeature(access, "courses_intermediate")}
+            requiredPlan="Premium"
+          />
+        </HubSection>
+
+        <HubSection titleEn="Product Lines" titlePt="Linhas de produto">
+          <HubCard
+            titleEn="Speak2Hire"
+            titlePt="Inglês para entrevistas"
+            description="Simulador de entrevistas com IA, frameworks STAR e feedback de fala."
+            icon={Briefcase}
+            to="/speak2hire"
+            locked={!hasFeature(access, "product_line_hire")}
+            requiredPlan="Premium"
+          />
+          <HubCard
+            titleEn="Speak2Travel"
+            titlePt="Inglês para viagens"
+            description="Aeroporto, hotel, restaurante e Trip Planner com pronúncia da IA."
+            icon={Plane}
+            to="/speak2travel"
+            locked={!hasFeature(access, "product_line_travel")}
+            requiredPlan="Premium"
+          />
+          <HubCard
+            titleEn="Speak2Fluency"
+            titlePt="Inglês para fluência plena"
+            description="A nova linha para destravar a fluência no dia a dia. Em breve."
+            icon={Sparkles}
+            comingSoon
+            locked={!hasFeature(access, "product_line_travel")}
+            requiredPlan="Premium"
+          />
+        </HubSection>
+
+        <HubSection titleEn="AI Resources" titlePt="Recursos de inteligência artificial">
+          <HubCard
+            titleEn="AI Teacher"
+            titlePt="Professor de IA"
+            description="Converse em inglês 24h e receba correções de gramática e pronúncia."
+            icon={MessageSquare}
+            to="/professor"
+            locked={!hasFeature(access, FEATURE_KEYS.aiTeacher)}
+            requiredPlan="Premium"
+          />
+          <HubCard
+            titleEn="GiseleAI by Speak2Co"
+            titlePt="Mentoria de IA exclusiva"
+            description="Mentoria avançada com IA, exclusiva do plano Signature. Em breve."
+            icon={Bot}
+            comingSoon
+            locked={!hasFeature(access, FEATURE_KEYS.giseleAi)}
+            requiredPlan="Signature"
+          />
+          <HubCard
+            titleEn="AI Pronunciation"
+            titlePt="Pronúncia com IA"
+            description="Ouça a pronúncia nativa, grave sua voz e receba feedback de pronunciation, stress, intonation e fluency."
+            icon={Mic}
+            to="/speak2travel/material/$resourceId"
+            params={{ resourceId: "pronunciation-lab" }}
+            locked={!hasFeature(access, FEATURE_KEYS.pronunciationChecker)}
+            requiredPlan="Essential"
+          />
+        </HubSection>
+
+        <HubSection titleEn="Your Journey" titlePt="Sua jornada">
+          <HubCard
+            titleEn="Placement Test"
+            titlePt="Teste de nivelamento"
+            description="Descubra seu nível CEFR e receba o plano de estudos personalizado."
+            icon={GraduationCap}
+            to="/teste-de-nivel"
+            locked={!hasFeature(access, FEATURE_KEYS.placementTest)}
+            requiredPlan="Essential"
+          />
+          <HubCard
+            titleEn="My Certificates"
+            titlePt="Meus certificados"
+            description="Baixe seus certificados oficiais Speak2Co em PDF."
+            icon={Award}
+            to="/certificados"
+            locked={!hasFeature(access, FEATURE_KEYS.cefrCertificate)}
+            requiredPlan="Essential"
+          />
+          <HubCard
+            titleEn="Fluency Ranking"
+            titlePt="Ranking de fluência"
+            description="Veja sua posição entre os alunos e acompanhe sua evolução."
+            icon={Trophy}
+            to="/ranking"
+          />
+          <HubCard
+            titleEn="Talk to the Founder"
+            titlePt="Fale com a fundadora"
+            description="Sugestões, dúvidas e feedback direto com Gisele Moraes, Founder | English Mentor."
+            icon={Mail}
+            to="/central-de-mensagens"
+          />
+        </HubSection>
+
 
         <StudyPlanSection fullPlan={hasFeature(access, FEATURE_KEYS.studyPlanFull)} profileReady={Boolean(profile?.goal && profile?.target_level)} />
         {hasFeature(access, FEATURE_KEYS.studyPlanFull) ? (
