@@ -310,7 +310,9 @@ function Painel() {
             titlePt="Meus certificados"
             description="Baixe seus certificados oficiais Speak2Co em PDF."
             icon={Award}
+            imageUrl={speak2coLogo.url}
             to="/certificados"
+
             locked={!hasFeature(access, FEATURE_KEYS.cefrCertificate)}
             requiredPlan="Essential"
           />
