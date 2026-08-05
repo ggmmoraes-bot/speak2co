@@ -32,6 +32,7 @@ import speak2hireLogo from "@/assets/speak2hire.asset.json";
 import speak2travelLogo from "@/assets/speak2travel.asset.json";
 import speak2fluencyLogo from "@/assets/speak2fluency.png.asset.json";
 import giseleAiLogo from "@/assets/gisele-ai.png.asset.json";
+import founderPhoto from "@/assets/gisele-moraes.jpeg.asset.json";
 
 type Access = MyAccess | undefined;
 
@@ -324,6 +325,7 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           description:
             "Envie dúvidas, sugestões, feedback e ideias direto para Gisele Moraes. Respostas rápidas por IA e retorno pessoal quando necessário.",
           icon: Mail,
+          imageUrl: founderPhoto.url,
           to: "/central-de-mensagens",
           status: "available",
         },

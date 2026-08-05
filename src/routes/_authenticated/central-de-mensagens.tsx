@@ -11,6 +11,7 @@ import {
   sendFounderMessage,
   type FounderMessage,
 } from "@/lib/founder.functions";
+import founderPhoto from "@/assets/gisele-moraes.jpeg.asset.json";
 
 export const Route = createFileRoute("/_authenticated/central-de-mensagens")({
   head: () => ({
@@ -87,9 +88,11 @@ function FounderInbox() {
         </Button>
 
         <header className="flex flex-wrap items-center gap-5 rounded-3xl border border-border bg-card/70 p-6 backdrop-blur">
-          <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-gold/40 bg-gold/10 text-2xl font-semibold text-gold">
-            GM
-          </span>
+          <img
+            src={founderPhoto.url}
+            alt="Gisele Moraes, fundadora e mentora de inglês da Speak2Co"
+            className="h-20 w-20 shrink-0 rounded-full border-2 border-gold/60 object-cover object-[center_30%] shadow-[0_8px_30px_-12px_var(--gold)]"
+          />
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Talk to the Founder</h1>
             <p className="text-xs text-muted-foreground">Fale com a fundadora</p>
@@ -132,6 +135,13 @@ function FounderInbox() {
               key={message.id}
               className={message.role === "student" ? "flex justify-end" : "flex justify-start"}
             >
+              {message.role === "founder" && (
+                <img
+                  src={founderPhoto.url}
+                  alt="Gisele Moraes"
+                  className="mr-2 mt-1 h-8 w-8 shrink-0 rounded-full border border-gold/50 object-cover object-[center_30%]"
+                />
+              )}
               <div
                 className={
                   message.role === "student"
