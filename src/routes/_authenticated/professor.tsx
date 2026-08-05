@@ -58,7 +58,7 @@ function ProfessorLayout() {
       setCreating(true);
       const thread = await createThreadFn({ data: {} });
       await queryClient.invalidateQueries({ queryKey: ["chat-threads"] });
-      navigate({ to: "/professor/$threadId", params: { threadId: thread.id } });
+      navigate({ to: "/professor/$threadId", search: { prompt: undefined }, params: { threadId: thread.id } });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível criar a conversa.");
     } finally {
@@ -124,7 +124,7 @@ function ProfessorLayout() {
               <button
                 type="button"
                 onClick={() =>
-                  navigate({ to: "/professor/$threadId", params: { threadId: t.id } })
+                  navigate({ to: "/professor/$threadId", search: { prompt: undefined }, params: { threadId: t.id } })
                 }
                 className="flex flex-1 items-center gap-2 truncate text-left"
               >
