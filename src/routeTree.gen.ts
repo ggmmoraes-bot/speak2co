@@ -26,6 +26,7 @@ import { Route as AuthenticatedSpeak2hireRouteImport } from './routes/_authentic
 import { Route as AuthenticatedSpeak2travelRouteImport } from './routes/_authenticated/speak2travel'
 import { Route as AuthenticatedTesteDeNivelRouteImport } from './routes/_authenticated/teste-de-nivel'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AuthenticatedCursoBeginnerIndexRouteImport } from './routes/_authenticated/curso-beginner.index'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2hireIndexRouteImport } from './routes/_authenticated/speak2hire.index'
@@ -130,6 +131,12 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedCursoBeginnerIndexRoute =
+  AuthenticatedCursoBeginnerIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedCursoBeginnerRoute,
+  } as any)
 const AuthenticatedProfessorIndexRoute =
   AuthenticatedProfessorIndexRouteImport.update({
     id: '/',
@@ -225,7 +232,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
-  '/curso-beginner': typeof AuthenticatedCursoBeginnerRoute
+  '/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
@@ -241,6 +248,7 @@ export interface FileRoutesByFullPath {
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
+  '/curso-beginner/': typeof AuthenticatedCursoBeginnerIndexRoute
   '/professor/': typeof AuthenticatedProfessorIndexRoute
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
@@ -258,7 +266,6 @@ export interface FileRoutesByTo {
   '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
-  '/curso-beginner': typeof AuthenticatedCursoBeginnerRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
@@ -271,6 +278,7 @@ export interface FileRoutesByTo {
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
+  '/curso-beginner': typeof AuthenticatedCursoBeginnerIndexRoute
   '/professor': typeof AuthenticatedProfessorIndexRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel': typeof AuthenticatedSpeak2travelIndexRoute
@@ -290,7 +298,7 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
-  '/_authenticated/curso-beginner': typeof AuthenticatedCursoBeginnerRoute
+  '/_authenticated/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
@@ -306,6 +314,7 @@ export interface FileRoutesById {
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
+  '/_authenticated/curso-beginner/': typeof AuthenticatedCursoBeginnerIndexRoute
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/_authenticated/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
@@ -341,6 +350,7 @@ export interface FileRouteTypes {
     | '/api/voice/pronunciation'
     | '/api/voice/speak'
     | '/api/voice/transcribe'
+    | '/curso-beginner/'
     | '/professor/'
     | '/speak2hire/'
     | '/speak2travel/'
@@ -358,7 +368,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/assinatura'
     | '/certificados'
-    | '/curso-beginner'
     | '/painel'
     | '/perfil'
     | '/premium'
@@ -371,6 +380,7 @@ export interface FileRouteTypes {
     | '/api/voice/pronunciation'
     | '/api/voice/speak'
     | '/api/voice/transcribe'
+    | '/curso-beginner'
     | '/professor'
     | '/speak2hire'
     | '/speak2travel'
@@ -405,6 +415,7 @@ export interface FileRouteTypes {
     | '/api/voice/pronunciation'
     | '/api/voice/speak'
     | '/api/voice/transcribe'
+    | '/_authenticated/curso-beginner/'
     | '/_authenticated/professor/'
     | '/_authenticated/speak2hire/'
     | '/_authenticated/speak2travel/'
@@ -549,6 +560,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/curso-beginner/': {
+      id: '/_authenticated/curso-beginner/'
+      path: '/'
+      fullPath: '/curso-beginner/'
+      preLoaderRoute: typeof AuthenticatedCursoBeginnerIndexRouteImport
+      parentRoute: typeof AuthenticatedCursoBeginnerRoute
+    }
     '/_authenticated/professor/': {
       id: '/_authenticated/professor/'
       path: '/'
@@ -657,6 +675,20 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedCursoBeginnerRouteChildren {
+  AuthenticatedCursoBeginnerIndexRoute: typeof AuthenticatedCursoBeginnerIndexRoute
+}
+
+const AuthenticatedCursoBeginnerRouteChildren: AuthenticatedCursoBeginnerRouteChildren =
+  {
+    AuthenticatedCursoBeginnerIndexRoute: AuthenticatedCursoBeginnerIndexRoute,
+  }
+
+const AuthenticatedCursoBeginnerRouteWithChildren =
+  AuthenticatedCursoBeginnerRoute._addFileChildren(
+    AuthenticatedCursoBeginnerRouteChildren,
+  )
+
 interface AuthenticatedProfessorRouteChildren {
   AuthenticatedProfessorThreadIdRoute: typeof AuthenticatedProfessorThreadIdRoute
   AuthenticatedProfessorIndexRoute: typeof AuthenticatedProfessorIndexRoute
@@ -723,7 +755,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
-  AuthenticatedCursoBeginnerRoute: typeof AuthenticatedCursoBeginnerRoute
+  AuthenticatedCursoBeginnerRoute: typeof AuthenticatedCursoBeginnerRouteWithChildren
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
@@ -739,7 +771,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
-  AuthenticatedCursoBeginnerRoute: AuthenticatedCursoBeginnerRoute,
+  AuthenticatedCursoBeginnerRoute: AuthenticatedCursoBeginnerRouteWithChildren,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
