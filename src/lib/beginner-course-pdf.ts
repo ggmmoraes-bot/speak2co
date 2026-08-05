@@ -112,20 +112,19 @@ export async function renderCoursePdf(doc: jsPDF, options: CoursePdfOptions) {
   doc.setFont(FONT, "bold");
   doc.setFontSize(26);
   doc.setTextColor(255, 255, 255);
-  text("Beginner English Course", width / 2, coverY, { align: "center" });
+  text(courseTitle, width / 2, coverY, { align: "center" });
 
   coverY += 26;
   doc.setFont(FONT, "normal");
   doc.setFontSize(12);
   doc.setTextColor(...GOLD);
-  text("Método Speak2Co · Plano Essential", width / 2, coverY, { align: "center" });
+  text(subtitle, width / 2, coverY, { align: "center" });
 
   coverY += 34;
   doc.setFontSize(10.5);
   doc.setTextColor(210, 210, 218);
-  const intro =
-    `${lessons.length} lições progressivas com warm-up, vocabulário com IPA, verbos, gramática por ` +
-    "exemplos, expressões, diálogos, laboratório de pronúncia, exercícios escritos e falados, quiz e revisão.";
+  const intro = options.intro;
+
   for (const line of split(intro, contentWidth - 60)) {
     text(line, width / 2, coverY, { align: "center" });
     coverY += 16;
