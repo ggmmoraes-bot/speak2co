@@ -117,7 +117,7 @@ function UpgradeEssentialPage() {
                 billing === "monthly" ? "bg-gold text-primary-foreground" : "text-muted-foreground"
               }`}
             >
-              Mensal · R$ 19,90
+              Mensal · R$ 37,90
             </button>
             <button
               type="button"

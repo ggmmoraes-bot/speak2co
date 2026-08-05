@@ -32,7 +32,7 @@ const TIERS = [
     id: "essential",
     label: "Essential",
     tagline: "Comece a estudar todos os dias",
-    monthly: { key: "essential_monthly" as const, price: "R$ 19,90" },
+    monthly: { key: "essential_monthly" as const, price: "R$ 37,90" },
     yearly: { key: "essential_yearly" as const, price: "R$ 199,00" },
     perks: ["Aulas guiadas", "Exercícios diários", "Quizzes de vocabulário e gramática"],
     highlight: false,
@@ -103,7 +103,7 @@ const MOBILE_TIERS: {
   {
     id: "essential",
     label: "Essential",
-    price: "R$ 19,90/mês",
+    price: "R$ 37,90/mês",
     highlight: false,
     rows: COMPARISON_ROWS.map((r) => ({ feature: r.feature, value: r.essential })),
   },
@@ -345,7 +345,7 @@ function PremiumPage() {
               </tr>
               <tr>
                 <td className="px-6 py-4 text-muted-foreground">Preço mensal</td>
-                <td className="px-6 py-4 text-center text-foreground">R$ 19,90</td>
+                <td className="px-6 py-4 text-center text-foreground">R$ 37,90</td>
                 <td className="px-6 py-4 text-center text-foreground">R$ 49,90</td>
                 <td className="px-6 py-4 text-center text-accent">R$ 59,90</td>
               </tr>
