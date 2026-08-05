@@ -76,7 +76,21 @@ function BeginnerCourseIndex() {
           </div>
           <Progress value={percent} />
         </div>
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <Button onClick={handleExport} disabled={exporting} className="gap-2">
+            {exporting ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Download className="h-4 w-4" />
+            )}
+            Baixar curso completo em PDF
+          </Button>
+          <span className="text-xs text-muted-foreground">
+            Arquivo único com as {BEGINNER_LESSONS.length} lições, exercícios, quizzes e revisões.
+          </span>
+        </div>
       </header>
+
 
       <section className="mt-8 grid gap-4 sm:grid-cols-2">
         {BEGINNER_LESSONS.map((lesson) => {
