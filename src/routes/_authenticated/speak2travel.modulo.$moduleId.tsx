@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { RolePlayCoach } from "@/components/RolePlayCoach";
 import { TravelDrills } from "@/components/TravelDrills";
+import { PhrasePractice } from "@/components/PhrasePractice";
 import {
   TRAVEL_BRIEFING,
   getTravelTrack,
@@ -196,41 +197,35 @@ function TravelModule({ track }: { track: TravelTrack }) {
               <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
                 <BookOpen className="h-5 w-5" /> Vocabulário essencial
               </h2>
-              <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              <p className="mt-1 text-xs text-muted-foreground">
+                Essential Vocabulary (ouça a IA e grave sua voz para receber feedback)
+              </p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 {(moduleContent
                   ? moduleContent.vocabulary.map((v) => ({ term: v.en, meaning: v.pt }))
                   : track.vocabulary
                 ).map((word) => (
-                  <li key={word.term} className="text-sm text-foreground/80">
-                    <span className="font-semibold text-foreground">{word.term}</span> —{" "}
-                    {word.meaning}
-                  </li>
+                  <PhrasePractice key={word.term} en={word.term} pt={word.meaning} />
                 ))}
-              </ul>
+              </div>
             </div>
 
             <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
               <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
                 <Compass className="h-5 w-5" /> Expressões-chave
               </h2>
-              <ul className="mt-4 space-y-2">
+              <p className="mt-1 text-xs text-muted-foreground">
+                Key Expressions (pronúncia com IA)
+              </p>
+              <div className="mt-4 grid gap-3">
                 {moduleContent
                   ? moduleContent.expressions.map((e) => (
-                      <li key={e.en} className="flex gap-2 text-sm text-foreground/80">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                        <span>
-                          “{e.en}”
-                          <span className="block text-muted-foreground">{e.pt}</span>
-                        </span>
-                      </li>
+                      <PhrasePractice key={e.en} en={e.en} pt={e.pt} />
                     ))
                   : track.phrases.map((phrase) => (
-                      <li key={phrase} className="flex gap-2 text-sm text-foreground/80">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />“
-                        {phrase}”
-                      </li>
+                      <PhrasePractice key={phrase} en={phrase} pt="Pratique em voz alta." />
                     ))}
-              </ul>
+              </div>
             </div>
 
             {moduleContent && (
@@ -238,14 +233,15 @@ function TravelModule({ track }: { track: TravelTrack }) {
                 <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
                   <MessageSquare className="h-5 w-5" /> Diálogo-modelo
                 </h2>
-                <ul className="mt-4 space-y-2">
+                <div className="mt-4 space-y-3">
                   {moduleContent.dialogue.map((line, i) => (
-                    <li key={`${line.who}-${i}`} className="text-sm">
-                      <span className="font-semibold text-gold">{line.who}: </span>
-                      <span className="text-foreground/80">{line.line}</span>
-                    </li>
+                    <PhrasePractice
+                      key={`${line.who}-${i}`}
+                      en={line.line}
+                      pt={line.who}
+                    />
                   ))}
-                </ul>
+                </div>
                 <h3 className="mt-6 flex items-center gap-2 text-xs tracking-widest text-muted-foreground uppercase">
                   <Lightbulb className="h-4 w-4" /> Dicas de pronúncia
                 </h3>
