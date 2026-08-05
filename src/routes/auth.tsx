@@ -211,6 +211,14 @@ function AuthPage() {
                   >
                     Entrar
                   </Button>
+                  <button
+                    type="button"
+                    onClick={handleForgotPassword}
+                    disabled={loading}
+                    className="text-gold mt-1 text-center text-sm underline-offset-4 hover:underline"
+                  >
+                    Esqueci minha senha
+                  </button>
                 </form>
               </TabsContent>
 
