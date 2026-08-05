@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { ShieldCheck, Sparkles, Compass, Lock, Target } from "lucide-react";
+import { ShieldCheck, Sparkles, Compass, Target } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { BrandText } from "@/components/BrandText";
