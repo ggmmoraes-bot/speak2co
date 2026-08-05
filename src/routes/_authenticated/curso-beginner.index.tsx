@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { BookOpen, CheckCircle2, Download, GraduationCap, Loader2, Mic } from "lucide-react";
+import { useMemo, useState } from "react";
+import { BookOpen, CheckCircle2, Download, GraduationCap, Loader2, Mic, Search, X } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -36,6 +36,8 @@ export const Route = createFileRoute("/_authenticated/curso-beginner/")({
 function BeginnerCourseIndex() {
   const load = useServerFn(getCourseProgress);
   const [exporting, setExporting] = useState(false);
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState<"all" | "done" | "pending">("all");
   const { data: progress } = useQuery({
     queryKey: ["course-progress", BEGINNER_COURSE_ID],
     queryFn: () => load({ data: { courseId: BEGINNER_COURSE_ID } }),
@@ -48,6 +50,22 @@ function BeginnerCourseIndex() {
   const eligible = done >= BEGINNER_LESSONS.length;
   const certified = eligible && (assessment?.quizScore ?? 0) >= BEGINNER_PASS_SCORE;
   const percent = Math.round((done / BEGINNER_LESSONS.length) * 100);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return BEGINNER_LESSONS.filter((lesson) => {
+      const isDone = Boolean(byLesson.get(lesson.id)?.completed);
+      if (filter === "done" && !isDone) return false;
+      if (filter === "pending" && isDone) return false;
+      if (!q) return true;
+      return (
+        lesson.title.toLowerCase().includes(q) ||
+        lesson.titlePt.toLowerCase().includes(q) ||
+        String(lesson.number).includes(q) ||
+        lesson.id.toLowerCase().includes(q)
+      );
+    });
+  }, [query, filter, byLesson]);
 
   const handleExport = async () => {
     setExporting(true);
@@ -131,8 +149,50 @@ function BeginnerCourseIndex() {
         </div>
       </section>
 
-      <section className="mt-8 grid gap-4 sm:grid-cols-2">
-        {BEGINNER_LESSONS.map((lesson) => {
+      {/* Busca e filtros */}
+      <div className="mt-8 space-y-4">
+        <div className="relative">
+          <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Buscar lição por título, número ou conteúdo…"
+            className="w-full rounded-full border border-border bg-card/60 py-3 pl-12 pr-10 text-sm text-foreground outline-none transition focus:border-gold/60"
+          />
+          {query && (
+            <button
+              onClick={() => setQuery("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              aria-label="Limpar busca"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          {(["all", "done", "pending"] as const).map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={
+                "rounded-full border px-4 py-1.5 text-xs font-semibold transition " +
+                (filter === f
+                  ? "border-gold bg-gold/15 text-gold"
+                  : "border-border bg-card/40 text-muted-foreground hover:border-gold/40 hover:text-foreground")
+              }
+            >
+              {f === "all" ? "Todas" : f === "done" ? "Concluídas" : "Pendentes"}
+            </button>
+          ))}
+          <span className="text-xs text-muted-foreground">
+            {filtered.length} de {BEGINNER_LESSONS.length} lições
+          </span>
+        </div>
+      </div>
+
+      <section className="mt-4 grid gap-4 sm:grid-cols-2">
+        {filtered.map((lesson) => {
           const p = byLesson.get(lesson.id);
           return (
             <Link
@@ -163,6 +223,11 @@ function BeginnerCourseIndex() {
             </Link>
           );
         })}
+        {filtered.length === 0 && (
+          <div className="col-span-full rounded-2xl border border-border bg-card/40 p-8 text-center text-sm text-muted-foreground">
+            Nenhuma lição encontrada com esses filtros.
+          </div>
+        )}
       </section>
     </main>
   );
