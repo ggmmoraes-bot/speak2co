@@ -11,7 +11,15 @@ import { withGiselePersona } from "@/lib/gisele-ai-persona";
 import { FOCUS_LABEL } from "@/lib/gisele-focus";
 import type { GiseleFocus } from "@/lib/gisele.functions";
 
-type Body = { messages?: UIMessage[]; threadId?: string };
+type SupportLanguage = "en" | "bilingual" | "pt";
+type Body = { messages?: UIMessage[]; threadId?: string; supportLanguage?: SupportLanguage };
+
+const LANGUAGE_RULE: Record<SupportLanguage, string> = {
+  en: "IDIOMA: fale exclusivamente em inglês, ajustando o vocabulário ao nível do aluno. Não traduza para português.",
+  bilingual:
+    "IDIOMA: fale PRINCIPALMENTE em inglês. Quando a instrução for importante e puder gerar dúvida, escreva a frase em inglês e uma tradução curta em português na linha de baixo, em itálico. Onde for óbvio, dispense a tradução.",
+  pt: "IDIOMA: a prática (exemplos, frases-alvo, role plays) continua em inglês, mas explique regras, correções e instruções em português claro.",
+};
 
 export const Route = createFileRoute("/api/gisele-chat")({
   server: {
@@ -67,6 +75,10 @@ export const Route = createFileRoute("/api/gisele-chat")({
         const snapshot = await buildStudentSnapshot(supabase, userId);
         const focus = (session?.focus ?? "conversation") as GiseleFocus;
         const focusLabel = FOCUS_LABEL[focus] ?? FOCUS_LABEL.conversation;
+        const supportLanguage: SupportLanguage =
+          body.supportLanguage && body.supportLanguage in LANGUAGE_RULE
+            ? body.supportLanguage
+            : "bilingual";
 
         const system = withGiselePersona(
           `Esta é a experiência Signature "Gisele AI by Speak2Co" — a mentoria completa e exclusiva desse plano.
@@ -78,7 +90,7 @@ ${describeSnapshot(snapshot)}
 
 COMO CONDUZIR:
 - Siga o ciclo Diagnosticar → Propor → Praticar → Observar → Corrigir → Repetir → Consolidar → Avançar. Não entregue teoria longa: proponha prática e faça o aluno produzir inglês.
-- Fale PRINCIPALMENTE em inglês, no nível do aluno. Quando a instrução for importante e puder gerar dúvida, escreva a frase em inglês e uma tradução curta em português na linha de baixo, em itálico. Onde for óbvio, dispense a tradução.
+- ${LANGUAGE_RULE[supportLanguage]}
 - No máximo 2 prioridades de correção por vez, em uma linha curta iniciada por "💡 Correction:".
 - Use o progresso real acima para recomendar lições, módulos e materiais que existem na Speak2Co. Nunca invente conteúdo, notas ou certificados.
 - Traga de volta os itens de revisão espaçada quando fizer sentido (recuperação ativa).
