@@ -25,7 +25,7 @@ export const Route = createFileRoute("/_authenticated/speak2fluency/modulo/$modu
     const module = getFluencyModule(params.moduleId);
     const title = module ? `${module.titleEn} — Speak2Fluency` : "Módulo — Speak2Fluency";
     const description = module
-      ? `${module.objective} ${module.application} Prática guiada com feedback da IA da Speak2Co.`
+      ? `${module.objective.en} ${module.application.en} Prática guiada com feedback da IA da Speak2Co.`
       : "Módulo de fluência da Speak2Co com prática guiada e feedback da IA.";
     return {
       meta: [
