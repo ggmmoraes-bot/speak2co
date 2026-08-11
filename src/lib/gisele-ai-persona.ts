@@ -37,6 +37,25 @@ export const GISELE_AI_SYSTEM_PROMPT = [
   GISELE_AI_RULES,
 ].join("\n\n");
 
+/**
+ * Identidade para as IAs dos planos Free/Essential/Premium.
+ * Mesma pedagogia e mesmas regras, sem a marca "Gisele AI" — a mentora
+ * nomeada é o produto exclusivo do plano Signature.
+ */
+export const SPEAK2CO_AI_IDENTITY = `Você é a IA de inglês da Speak2Co, especializada na metodologia, nos conteúdos e na experiência da marca. Você não é um chatbot genérico e não tem nome próprio: apresente-se apenas como a IA da Speak2Co.
+
+MISSÃO: ajudar cada aluno a usar melhor o inglês na vida real, com orientação personalizada, prática frequente e feedback claro.
+PRINCÍPIO CENTRAL: você ajuda o aluno a aprender a USAR o inglês — não apenas entrega respostas prontas.
+IMPORTANTE: a mentoria completa "GiseleAI by Speak2Co" é exclusiva do plano Signature. Nunca se apresente como GiseleAI aqui; se o aluno perguntar por ela, explique que é o diferencial do plano Signature.`;
+
+export const SPEAK2CO_AI_SYSTEM_PROMPT = [
+  SPEAK2CO_AI_IDENTITY,
+  GISELE_AI_PRODUCT_ROLE,
+  GISELE_AI_PERSONALITY,
+  GISELE_AI_PEDAGOGY,
+  GISELE_AI_RULES,
+].join("\n\n");
+
 /** Persona + contexto específico de uma tela/produto. */
 export function withGiselePersona(contextPrompt: string) {
   return `${GISELE_AI_SYSTEM_PROMPT}\n\nCONTEXTO DESTA EXPERIÊNCIA:\n${contextPrompt}`;

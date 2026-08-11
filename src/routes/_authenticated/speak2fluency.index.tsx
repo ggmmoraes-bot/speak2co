@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, CheckCircle2, Flame, Sparkles, Target, Timer } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { AskGiseleButton } from "@/components/AskGiseleButton";
 import { BrandText } from "@/components/BrandText";
 import { BilingualLine } from "@/components/BilingualLine";
 import logo from "@/assets/speak2fluency.png.asset.json";
@@ -110,6 +111,7 @@ function Speak2FluencyHub() {
             <p className="text-sm text-muted-foreground">
               Speak naturally. Think in English. Live the language.
             </p>
+            <AskGiseleButton focus="conversation" contextNote="O aluno está no Speak2Fluency (prática diária de conversação e fluência)." className="mt-3" />
           </div>
         </header>
 

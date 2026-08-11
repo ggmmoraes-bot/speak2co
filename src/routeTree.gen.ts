@@ -20,6 +20,7 @@ import { Route as AuthenticatedCentralDeMensagensRouteImport } from './routes/_a
 import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
 import { Route as AuthenticatedCursoBeginnerRouteImport } from './routes/_authenticated/curso-beginner'
 import { Route as AuthenticatedCursoIntermediateRouteImport } from './routes/_authenticated/curso-intermediate'
+import { Route as AuthenticatedGiseleRouteImport } from './routes/_authenticated/gisele'
 import { Route as AuthenticatedMeuPlanoRouteImport } from './routes/_authenticated/meu-plano'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
@@ -31,10 +32,13 @@ import { Route as AuthenticatedSpeak2hireRouteImport } from './routes/_authentic
 import { Route as AuthenticatedSpeak2travelRouteImport } from './routes/_authenticated/speak2travel'
 import { Route as AuthenticatedTesteDeNivelRouteImport } from './routes/_authenticated/teste-de-nivel'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ApiGiseleChatRouteImport } from './routes/api/gisele-chat'
 import { Route as AuthenticatedCursoBeginnerIndexRouteImport } from './routes/_authenticated/curso-beginner.index'
 import { Route as AuthenticatedCursoBeginnerAssessmentRouteImport } from './routes/_authenticated/curso-beginner.assessment'
 import { Route as AuthenticatedCursoIntermediateIndexRouteImport } from './routes/_authenticated/curso-intermediate.index'
 import { Route as AuthenticatedCursoIntermediateAssessmentRouteImport } from './routes/_authenticated/curso-intermediate.assessment'
+import { Route as AuthenticatedGiseleIndexRouteImport } from './routes/_authenticated/gisele.index'
+import { Route as AuthenticatedGiseleThreadIdRouteImport } from './routes/_authenticated/gisele.$threadId'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2fluencyIndexRouteImport } from './routes/_authenticated/speak2fluency.index'
@@ -114,6 +118,11 @@ const AuthenticatedCursoIntermediateRoute =
     path: '/curso-intermediate',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedGiseleRoute = AuthenticatedGiseleRouteImport.update({
+  id: '/gisele',
+  path: '/gisele',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedMeuPlanoRoute = AuthenticatedMeuPlanoRouteImport.update({
   id: '/meu-plano',
   path: '/meu-plano',
@@ -172,6 +181,11 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiGiseleChatRoute = ApiGiseleChatRouteImport.update({
+  id: '/api/gisele-chat',
+  path: '/api/gisele-chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedCursoBeginnerIndexRoute =
   AuthenticatedCursoBeginnerIndexRouteImport.update({
     id: '/',
@@ -195,6 +209,18 @@ const AuthenticatedCursoIntermediateAssessmentRoute =
     id: '/assessment',
     path: '/assessment',
     getParentRoute: () => AuthenticatedCursoIntermediateRoute,
+  } as any)
+const AuthenticatedGiseleIndexRoute =
+  AuthenticatedGiseleIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
+const AuthenticatedGiseleThreadIdRoute =
+  AuthenticatedGiseleThreadIdRouteImport.update({
+    id: '/$threadId',
+    path: '/$threadId',
+    getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
 const AuthenticatedProfessorIndexRoute =
   AuthenticatedProfessorIndexRouteImport.update({
@@ -325,6 +351,7 @@ export interface FileRoutesByFullPath {
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
+  '/gisele': typeof AuthenticatedGiseleRouteWithChildren
   '/meu-plano': typeof AuthenticatedMeuPlanoRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
@@ -336,8 +363,10 @@ export interface FileRoutesByFullPath {
   '/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/gisele-chat': typeof ApiGiseleChatRoute
   '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
   '/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
+  '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -346,6 +375,7 @@ export interface FileRoutesByFullPath {
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
   '/curso-beginner/': typeof AuthenticatedCursoBeginnerIndexRoute
   '/curso-intermediate/': typeof AuthenticatedCursoIntermediateIndexRoute
+  '/gisele/': typeof AuthenticatedGiseleIndexRoute
   '/professor/': typeof AuthenticatedProfessorIndexRoute
   '/speak2fluency/': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
@@ -377,8 +407,10 @@ export interface FileRoutesByTo {
   '/ranking': typeof AuthenticatedRankingRoute
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/gisele-chat': typeof ApiGiseleChatRoute
   '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
   '/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
+  '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -387,6 +419,7 @@ export interface FileRoutesByTo {
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
   '/curso-beginner': typeof AuthenticatedCursoBeginnerIndexRoute
   '/curso-intermediate': typeof AuthenticatedCursoIntermediateIndexRoute
+  '/gisele': typeof AuthenticatedGiseleIndexRoute
   '/professor': typeof AuthenticatedProfessorIndexRoute
   '/speak2fluency': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
@@ -415,6 +448,7 @@ export interface FileRoutesById {
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
   '/_authenticated/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/_authenticated/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
+  '/_authenticated/gisele': typeof AuthenticatedGiseleRouteWithChildren
   '/_authenticated/meu-plano': typeof AuthenticatedMeuPlanoRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
@@ -426,8 +460,10 @@ export interface FileRoutesById {
   '/_authenticated/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/_authenticated/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/gisele-chat': typeof ApiGiseleChatRoute
   '/_authenticated/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
   '/_authenticated/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
+  '/_authenticated/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/_authenticated/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -436,6 +472,7 @@ export interface FileRoutesById {
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
   '/_authenticated/curso-beginner/': typeof AuthenticatedCursoBeginnerIndexRoute
   '/_authenticated/curso-intermediate/': typeof AuthenticatedCursoIntermediateIndexRoute
+  '/_authenticated/gisele/': typeof AuthenticatedGiseleIndexRoute
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
   '/_authenticated/speak2fluency/': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
@@ -464,6 +501,7 @@ export interface FileRouteTypes {
     | '/certificados'
     | '/curso-beginner'
     | '/curso-intermediate'
+    | '/gisele'
     | '/meu-plano'
     | '/painel'
     | '/perfil'
@@ -475,8 +513,10 @@ export interface FileRouteTypes {
     | '/speak2travel'
     | '/teste-de-nivel'
     | '/api/chat'
+    | '/api/gisele-chat'
     | '/curso-beginner/assessment'
     | '/curso-intermediate/assessment'
+    | '/gisele/$threadId'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -485,6 +525,7 @@ export interface FileRouteTypes {
     | '/api/voice/transcribe'
     | '/curso-beginner/'
     | '/curso-intermediate/'
+    | '/gisele/'
     | '/professor/'
     | '/speak2fluency/'
     | '/speak2hire/'
@@ -516,8 +557,10 @@ export interface FileRouteTypes {
     | '/ranking'
     | '/teste-de-nivel'
     | '/api/chat'
+    | '/api/gisele-chat'
     | '/curso-beginner/assessment'
     | '/curso-intermediate/assessment'
+    | '/gisele/$threadId'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -526,6 +569,7 @@ export interface FileRouteTypes {
     | '/api/voice/transcribe'
     | '/curso-beginner'
     | '/curso-intermediate'
+    | '/gisele'
     | '/professor'
     | '/speak2fluency'
     | '/speak2hire'
@@ -553,6 +597,7 @@ export interface FileRouteTypes {
     | '/_authenticated/certificados'
     | '/_authenticated/curso-beginner'
     | '/_authenticated/curso-intermediate'
+    | '/_authenticated/gisele'
     | '/_authenticated/meu-plano'
     | '/_authenticated/painel'
     | '/_authenticated/perfil'
@@ -564,8 +609,10 @@ export interface FileRouteTypes {
     | '/_authenticated/speak2travel'
     | '/_authenticated/teste-de-nivel'
     | '/api/chat'
+    | '/api/gisele-chat'
     | '/_authenticated/curso-beginner/assessment'
     | '/_authenticated/curso-intermediate/assessment'
+    | '/_authenticated/gisele/$threadId'
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/speak2travel/trip-planner'
     | '/_authenticated/upgrade/essential'
@@ -574,6 +621,7 @@ export interface FileRouteTypes {
     | '/api/voice/transcribe'
     | '/_authenticated/curso-beginner/'
     | '/_authenticated/curso-intermediate/'
+    | '/_authenticated/gisele/'
     | '/_authenticated/professor/'
     | '/_authenticated/speak2fluency/'
     | '/_authenticated/speak2hire/'
@@ -597,6 +645,7 @@ export interface RootRouteChildren {
   ChecklistRoute: typeof ChecklistRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ApiChatRoute: typeof ApiChatRoute
+  ApiGiseleChatRoute: typeof ApiGiseleChatRoute
   ApiVoicePronunciationRoute: typeof ApiVoicePronunciationRoute
   ApiVoiceSpeakRoute: typeof ApiVoiceSpeakRoute
   ApiVoiceTranscribeRoute: typeof ApiVoiceTranscribeRoute
@@ -683,6 +732,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCursoIntermediateRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/gisele': {
+      id: '/_authenticated/gisele'
+      path: '/gisele'
+      fullPath: '/gisele'
+      preLoaderRoute: typeof AuthenticatedGiseleRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/meu-plano': {
       id: '/_authenticated/meu-plano'
       path: '/meu-plano'
@@ -760,6 +816,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/gisele-chat': {
+      id: '/api/gisele-chat'
+      path: '/api/gisele-chat'
+      fullPath: '/api/gisele-chat'
+      preLoaderRoute: typeof ApiGiseleChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/curso-beginner/': {
       id: '/_authenticated/curso-beginner/'
       path: '/'
@@ -787,6 +850,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/curso-intermediate/assessment'
       preLoaderRoute: typeof AuthenticatedCursoIntermediateAssessmentRouteImport
       parentRoute: typeof AuthenticatedCursoIntermediateRoute
+    }
+    '/_authenticated/gisele/': {
+      id: '/_authenticated/gisele/'
+      path: '/'
+      fullPath: '/gisele/'
+      preLoaderRoute: typeof AuthenticatedGiseleIndexRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
+    '/_authenticated/gisele/$threadId': {
+      id: '/_authenticated/gisele/$threadId'
+      path: '/$threadId'
+      fullPath: '/gisele/$threadId'
+      preLoaderRoute: typeof AuthenticatedGiseleThreadIdRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
     }
     '/_authenticated/professor/': {
       id: '/_authenticated/professor/'
@@ -972,6 +1049,19 @@ const AuthenticatedCursoIntermediateRouteWithChildren =
     AuthenticatedCursoIntermediateRouteChildren,
   )
 
+interface AuthenticatedGiseleRouteChildren {
+  AuthenticatedGiseleThreadIdRoute: typeof AuthenticatedGiseleThreadIdRoute
+  AuthenticatedGiseleIndexRoute: typeof AuthenticatedGiseleIndexRoute
+}
+
+const AuthenticatedGiseleRouteChildren: AuthenticatedGiseleRouteChildren = {
+  AuthenticatedGiseleThreadIdRoute: AuthenticatedGiseleThreadIdRoute,
+  AuthenticatedGiseleIndexRoute: AuthenticatedGiseleIndexRoute,
+}
+
+const AuthenticatedGiseleRouteWithChildren =
+  AuthenticatedGiseleRoute._addFileChildren(AuthenticatedGiseleRouteChildren)
+
 interface AuthenticatedProfessorRouteChildren {
   AuthenticatedProfessorThreadIdRoute: typeof AuthenticatedProfessorThreadIdRoute
   AuthenticatedProfessorIndexRoute: typeof AuthenticatedProfessorIndexRoute
@@ -1058,6 +1148,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
   AuthenticatedCursoBeginnerRoute: typeof AuthenticatedCursoBeginnerRouteWithChildren
   AuthenticatedCursoIntermediateRoute: typeof AuthenticatedCursoIntermediateRouteWithChildren
+  AuthenticatedGiseleRoute: typeof AuthenticatedGiseleRouteWithChildren
   AuthenticatedMeuPlanoRoute: typeof AuthenticatedMeuPlanoRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
@@ -1079,6 +1170,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCursoBeginnerRoute: AuthenticatedCursoBeginnerRouteWithChildren,
   AuthenticatedCursoIntermediateRoute:
     AuthenticatedCursoIntermediateRouteWithChildren,
+  AuthenticatedGiseleRoute: AuthenticatedGiseleRouteWithChildren,
   AuthenticatedMeuPlanoRoute: AuthenticatedMeuPlanoRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
@@ -1102,6 +1194,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChecklistRoute: ChecklistRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ApiChatRoute: ApiChatRoute,
+  ApiGiseleChatRoute: ApiGiseleChatRoute,
   ApiVoicePronunciationRoute: ApiVoicePronunciationRoute,
   ApiVoiceSpeakRoute: ApiVoiceSpeakRoute,
   ApiVoiceTranscribeRoute: ApiVoiceTranscribeRoute,
@@ -1111,13 +1204,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
