@@ -112,6 +112,15 @@ function GiseleLayout() {
           >
             Mentorship hub
           </Link>
+          {GISELE_NAV.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className="block rounded-lg px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {item.label}
+            </Link>
+          ))}
           <Link
             to="/gisele/configuracoes"
             className="flex items-center gap-2 rounded-lg px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
@@ -119,6 +128,7 @@ function GiseleLayout() {
             <Settings className="h-3.5 w-3.5" /> Voice &amp; language
           </Link>
         </div>
+
 
         <nav className="mt-2 flex-1 space-y-1 overflow-y-auto p-3">
           {threads && threads.length === 0 && (
