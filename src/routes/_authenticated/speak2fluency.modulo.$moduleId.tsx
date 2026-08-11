@@ -420,7 +420,7 @@ function Section({
           <p className="text-xs tracking-widest text-muted-foreground uppercase">{subtitle}</p>
         </div>
         <Button variant="outline" size="sm" className="rounded-full" onClick={onDone}>
-          Marcar como concluído
+          Mark as done
         </Button>
       </div>
       <div className="mt-4">{children}</div>
