@@ -87,6 +87,7 @@ function VoiceSessionPage() {
       volume: voice.volume,
       rate: voice.rate,
       provider: voice.ttsProvider,
+      scope: "gisele",
     })
       .catch((e) => toast.error(e instanceof Error ? e.message : "Não foi possível falar."))
       .finally(() => setPhase("idle"));
