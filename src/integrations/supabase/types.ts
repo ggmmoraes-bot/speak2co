@@ -241,6 +241,84 @@ export type Database = {
         }
         Relationships: []
       }
+      fluency_missions: {
+        Row: {
+          blocks: Json
+          completed: boolean
+          created_at: string
+          id: string
+          minutes: number
+          mission_date: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          blocks?: Json
+          completed?: boolean
+          created_at?: string
+          id?: string
+          minutes?: number
+          mission_date?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          blocks?: Json
+          completed?: boolean
+          created_at?: string
+          id?: string
+          minutes?: number
+          mission_date?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      fluency_progress: {
+        Row: {
+          answers: Json
+          attempts: number
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          feedback: Json | null
+          id: string
+          module_id: string
+          score: number | null
+          sections_done: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          answers?: Json
+          attempts?: number
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          feedback?: Json | null
+          id?: string
+          module_id: string
+          score?: number | null
+          sections_done?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          answers?: Json
+          attempts?: number
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          feedback?: Json | null
+          id?: string
+          module_id?: string
+          score?: number | null
+          sections_done?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       founder_messages: {
         Row: {
           answered: boolean
