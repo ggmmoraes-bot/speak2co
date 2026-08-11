@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CONVERSATION_CONTEXTS } from "@/lib/gisele-contexts";
 import { createGiseleThread } from "@/lib/gisele.functions";
+import { AiVoiceDisclosure } from "@/components/AiVoiceDisclosure";
+import { isBrandVoice, useVoiceSettings } from "@/lib/use-voice-settings";
 
 export const Route = createFileRoute("/_authenticated/gisele/voice-room")({
   component: VoiceRoomPage,
@@ -17,6 +19,7 @@ function VoiceRoomPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const createFn = useServerFn(createGiseleThread);
+  const { settings: voice } = useVoiceSettings();
   const [loading, setLoading] = useState<string | null>(null);
 
   async function start(id: string) {
@@ -45,6 +48,14 @@ function VoiceRoomPage() {
           Escolha uma situação e fale em inglês: use o botão de microfone dentro da sessão.
         </p>
       </header>
+
+      <AiVoiceDisclosure />
+      {isBrandVoice(voice.voice) ? (
+        <p className="text-[11px] text-muted-foreground">
+          Authorized brand voice active · Voz autorizada da marca ativa (síntese licenciada pela
+          Speak2Co).
+        </p>
+      ) : null}
 
       <div className="grid gap-3 sm:grid-cols-2">
         {CONVERSATION_CONTEXTS.map((c) => (

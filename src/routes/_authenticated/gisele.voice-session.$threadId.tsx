@@ -9,7 +9,8 @@ import { Card } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { MicRecorder } from "@/lib/audio-recorder";
 import { speakText, stopSpeaking, transcribeAudio } from "@/lib/voice-client";
-import { useVoiceSettings } from "@/lib/use-voice-settings";
+import { isBrandVoice, useVoiceSettings } from "@/lib/use-voice-settings";
+import { AiVoiceDisclosure } from "@/components/AiVoiceDisclosure";
 import { requestSessionFeedback, type SessionFeedbackDTO } from "@/lib/gisele-data.functions";
 
 export const Route = createFileRoute("/_authenticated/gisele/voice-session/$threadId")({
