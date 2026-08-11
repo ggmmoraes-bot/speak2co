@@ -7,6 +7,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 import { FOCUS_LABEL } from "@/lib/gisele-focus";
 import { getSessionHistory } from "@/lib/gisele-data.functions";
 import type { GiseleFocus } from "@/lib/gisele.functions";
+import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/historico")({
   component: HistoryPage,
@@ -20,7 +21,7 @@ function HistoryPage() {
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 space-y-6 px-6 py-10">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-foreground">History</h1>
+        <h1 className="text-2xl font-bold"><AltHeading text={"History"} /></h1>
         <p className="text-sm italic text-muted-foreground">
           Todas as suas conversas e sessões com a Gisele.
         </p>

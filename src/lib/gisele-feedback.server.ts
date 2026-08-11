@@ -72,7 +72,7 @@ export async function generateSessionFeedback(
   const apiKey = process.env["LOVABLE_API_KEY"];
   if (!apiKey) throw new Error("IA indisponível no momento.");
 
-  const gateway = createLovableAiGatewayProvider(apiKey);
+  const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
   const result = streamText({
     model: gateway("google/gemini-3.6-flash"),
     system: withGiselePersona(
@@ -90,7 +90,26 @@ Regras:
     output: Output.object({ schema: FeedbackSchema }),
   });
 
-  const feedback = (await result.output) as SessionFeedback;
+  // Degradação graciosa: se a saída estruturada falhar, tentamos JSON puro
+  // antes de devolver erro ao aluno.
+  let feedback: SessionFeedback;
+  try {
+    feedback = (await result.output) as SessionFeedback;
+  } catch (structuredError) {
+    console.warn("[gisele-feedback] structured output failed", structuredError);
+    const retry = streamText({
+      model: gateway("google/gemini-3.6-flash"),
+      system:
+        'Responda APENAS com um JSON válido, sem markdown, no formato {"whatWentWell":string,"mainImprovement":string,"howToImprove":string,"retryInvite":string,"category":"grammar"|"vocabulary"|"pronunciation"|"fluency"|"strategy","priority":1|2|3,"recommendations":[{"type":"practice"|"lesson"|"review"|"mission","content":string,"priority":1|2|3}]}',
+      prompt: `Transcrição da sessão:\n${transcript}`,
+    });
+    const raw = (await retry.text).trim().replace(/^```(?:json)?|```$/g, "");
+    const parsed = FeedbackSchema.safeParse(JSON.parse(raw));
+    if (!parsed.success) {
+      throw new Error("Não consegui gerar o feedback agora. Continue a conversa e tente de novo.");
+    }
+    feedback = parsed.data;
+  }
 
   const { data: session } = await supabase
     .from("gisele_sessions")

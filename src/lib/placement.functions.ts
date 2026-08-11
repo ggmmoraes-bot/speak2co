@@ -139,7 +139,7 @@ export const finishPlacementTest = createServerFn({ method: "POST" })
     ).join(" | ");
 
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
-    const gateway = createLovableAiGatewayProvider(apiKey);
+    const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
 
     let feedback: PlacementFeedback;
     try {

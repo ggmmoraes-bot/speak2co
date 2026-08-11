@@ -12,6 +12,7 @@ import { speakText, stopSpeaking, transcribeAudio } from "@/lib/voice-client";
 import { isBrandVoice, useVoiceSettings } from "@/lib/use-voice-settings";
 import { AiVoiceDisclosure } from "@/components/AiVoiceDisclosure";
 import { requestSessionFeedback, type SessionFeedbackDTO } from "@/lib/gisele-data.functions";
+import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/voice-session/$threadId")({
   component: VoiceSessionPage,
@@ -39,6 +40,7 @@ function VoiceSessionPage() {
   const { settings: voice } = useVoiceSettings();
   const [phase, setPhase] = useState<Phase>("idle");
   const [showText, setShowText] = useState(false);
+  const [voiceDegraded, setVoiceDegraded] = useState(false);
   const [lastTranscript, setLastTranscript] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<SessionFeedbackDTO | null>(null);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
@@ -90,7 +92,14 @@ function VoiceSessionPage() {
       provider: voice.ttsProvider,
       scope: "gisele",
     })
-      .catch((e) => toast.error(e instanceof Error ? e.message : "Não foi possível falar."))
+      // Degradação graciosa: se o áudio falhar, a sessão continua por texto.
+      .catch(() => {
+        setShowText(true);
+        setVoiceDegraded(true);
+        toast.warning(
+          "Áudio indisponível agora — continuando por texto. Audio unavailable, switching to text.",
+        );
+      })
       .finally(() => setPhase("idle"));
   }, [streaming, lastAssistant, voice.voice, voice.volume, voice.rate, voice.ttsProvider]);
 
@@ -153,7 +162,7 @@ function VoiceSessionPage() {
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 space-y-6 px-6 py-10">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-foreground">Voice Room</h1>
+        <h1 className="text-2xl font-bold"><AltHeading text={"Voice Room"} /></h1>
         <p className="text-sm italic text-muted-foreground">
           Fale em inglês, ouça a Gisele e continue a conversa. A voz é gerada por IA.
         </p>
@@ -166,6 +175,15 @@ function VoiceSessionPage() {
           Speak2Co, com consentimento registrado nas configurações).
         </p>
       ) : null}
+
+      {voiceDegraded && (
+        <p className="rounded-lg border border-gold/40 bg-gold/5 px-4 py-2 text-xs text-muted-foreground">
+          Voice playback is unavailable right now — the session continues in text.
+          <span className="block italic">
+            O áudio falhou, mas a conversa segue normalmente por texto.
+          </span>
+        </p>
+      )}
 
 
       <Card className="flex flex-col items-center gap-4 p-8">

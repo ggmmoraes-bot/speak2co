@@ -7,6 +7,7 @@ import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { getVoiceSettings, saveVoiceSettings } from "@/lib/gisele-data.functions";
+import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/privacidade")({
   component: PrivacyPage,
@@ -41,7 +42,7 @@ function PrivacyPage() {
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 space-y-6 px-6 py-10">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-foreground">Privacy</h1>
+        <h1 className="text-2xl font-bold"><AltHeading text={"Privacy"} /></h1>
         <p className="text-sm italic text-muted-foreground">
           Você controla como sua voz e suas conversas são usadas.
         </p>

@@ -208,7 +208,7 @@ export const evaluateFluencyChallenge = createServerFn({ method: "POST" })
       .maybeSingle();
 
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
-    const gateway = createLovableAiGatewayProvider(apiKey);
+    const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
 
     try {
       const result = await generateText({

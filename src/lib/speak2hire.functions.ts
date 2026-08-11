@@ -166,7 +166,7 @@ export const finishInterviewSession = createServerFn({ method: "POST" })
       .join("\n\n");
 
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
-    const gateway = createLovableAiGatewayProvider(apiKey);
+    const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
 
     let feedback: InterviewFeedback;
     try {
