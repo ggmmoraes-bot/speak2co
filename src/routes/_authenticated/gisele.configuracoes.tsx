@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Loader2, RotateCcw, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,8 +15,12 @@ import {
   SUPPORT_LANGUAGES,
   TTS_PROVIDERS,
   useVoiceSettings,
+  isBrandVoice,
+  FOUNDER_VOICE_ID,
   type SupportLanguage,
 } from "@/lib/use-voice-settings";
+import { AiVoiceDisclosure } from "@/components/AiVoiceDisclosure";
+import { getVoiceSettings, saveVoiceSettings } from "@/lib/gisele-data.functions";
 
 
 export const Route = createFileRoute("/_authenticated/gisele/configuracoes")({
@@ -44,6 +50,35 @@ const SAMPLE =
 function GiseleSettingsPage() {
   const { settings, update, reset } = useVoiceSettings();
   const [testing, setTesting] = useState(false);
+  const queryClient = useQueryClient();
+  const loadRemote = useServerFn(getVoiceSettings);
+  const saveRemote = useServerFn(saveVoiceSettings);
+
+  const remote = useQuery({
+    queryKey: ["gisele-voice-settings"],
+    queryFn: () => loadRemote({}),
+  });
+  const brandConsent = remote.data?.consent_status === "granted";
+
+  async function setBrandConsent(granted: boolean) {
+    try {
+      await saveRemote({
+        data: {
+          consent_status: granted ? "granted" : "revoked",
+          ...(granted ? { provider: "elevenlabs" as const, voice_id: FOUNDER_VOICE_ID } : {}),
+        },
+      });
+      await queryClient.invalidateQueries({ queryKey: ["gisele-voice-settings"] });
+      if (!granted && isBrandVoice(settings.voice)) update({ voice: "alloy" });
+      toast.success(
+        granted
+          ? "Voz autorizada da marca ativada — a fala continua sendo gerada por IA."
+          : "Autorização revogada. Voltamos para as vozes de estúdio.",
+      );
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Não foi possível salvar a autorização.");
+    }
+  }
 
   async function testVoice(voice?: string) {
     try {
@@ -79,14 +114,22 @@ function GiseleSettingsPage() {
           <h2 className="text-sm font-semibold text-foreground">Voice · Voz</h2>
           <p className="text-xs text-muted-foreground">Toque para ouvir uma amostra.</p>
         </div>
+        <AiVoiceDisclosure />
         <div className="grid gap-3 sm:grid-cols-2">
           {AI_VOICES.map((v) => {
             const active = settings.voice === v.id;
+            const locked = isBrandVoice(v.id) && !brandConsent;
             return (
               <button
                 key={v.id}
                 type="button"
                 onClick={() => {
+                  if (locked) {
+                    toast.error(
+                      "Ative a autorização da voz da marca (gerada por IA) mais abaixo para usá-la.",
+                    );
+                    return;
+                  }
                   update({ voice: v.id });
                   void testVoice(v.id);
                 }}
@@ -276,6 +319,45 @@ function GiseleSettingsPage() {
         </div>
       </section>
 
+
+      <section className="space-y-4 rounded-2xl border border-gold/30 bg-card/60 p-6 backdrop-blur">
+        <div>
+          <h2 className="text-sm font-semibold text-foreground">
+            Authorized brand voice · Voz autorizada da marca
+          </h2>
+          <p className="text-xs text-muted-foreground">
+            Opção configurável — não é o padrão. A voz da fundadora é reproduzida por síntese de IA
+            licenciada pela Speak2Co.
+          </p>
+        </div>
+
+        <AiVoiceDisclosure />
+
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <Label>Enable AI-generated brand voice · Ativar voz autorizada</Label>
+            <p className="text-xs text-muted-foreground">
+              Entendo que a voz é gerada por inteligência artificial e que não estou falando com uma
+              pessoa humana.
+            </p>
+          </div>
+          <Switch
+            checked={brandConsent}
+            disabled={remote.isLoading}
+            onCheckedChange={(checked) => void setBrandConsent(checked)}
+          />
+        </div>
+
+        <p className="text-[11px] text-muted-foreground">
+          Authorization status · Status da autorização:{" "}
+          <span className="font-medium text-foreground">
+            {remote.data?.consent_status ?? "pending"}
+          </span>
+          {isBrandVoice(settings.voice) && brandConsent
+            ? " · voz autorizada ativa nesta conta"
+            : ""}
+        </p>
+      </section>
 
       <Button
         variant="ghost"
