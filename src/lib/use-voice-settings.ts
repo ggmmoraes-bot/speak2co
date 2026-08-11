@@ -1,7 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import { applyPlaybackSettings } from "@/lib/voice-client";
 
+/** Voz clonada da fundadora (ElevenLabs). */
+export const FOUNDER_VOICE_ID = "m3m72XeqSLA8AEuQecN0";
+
 export const AI_VOICES = [
+  {
+    id: FOUNDER_VOICE_ID,
+    label: "Gisele Moraes (Founder)",
+    description: "Voz clonada da fundadora — gerada por IA",
+  },
   { id: "alloy", label: "Alloy", description: "Neutra e equilibrada" },
   { id: "nova", label: "Nova", description: "Feminina, clara e acolhedora" },
   { id: "shimmer", label: "Shimmer", description: "Feminina, suave" },
