@@ -14,9 +14,179 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_feedback: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          observation: string
+          priority: number
+          session_id: string | null
+          user_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          id?: string
+          observation: string
+          priority?: number
+          session_id?: string | null
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          observation?: string
+          priority?: number
+          session_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_feedback_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "gisele_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ai_missions: {
+        Row: {
+          context: string
+          created_at: string
+          criteria: Json
+          focus: string
+          id: string
+          is_active: boolean
+          key: string
+          level: string
+          minutes: number
+          objective: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          context: string
+          created_at?: string
+          criteria?: Json
+          focus?: string
+          id?: string
+          is_active?: boolean
+          key: string
+          level?: string
+          minutes?: number
+          objective: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          context?: string
+          created_at?: string
+          criteria?: Json
+          focus?: string
+          id?: string
+          is_active?: boolean
+          key?: string
+          level?: string
+          minutes?: number
+          objective?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      ai_profiles: {
+        Row: {
+          created_at: string
+          id: string
+          level: string | null
+          objective: string | null
+          onboarding_completed: boolean
+          preferences: Json
+          preferred_voice: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          level?: string | null
+          objective?: string | null
+          onboarding_completed?: boolean
+          preferences?: Json
+          preferred_voice?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          level?: string | null
+          objective?: string | null
+          onboarding_completed?: boolean
+          preferences?: Json
+          preferred_voice?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      ai_recommendations: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          priority: number
+          route: string | null
+          session_id: string | null
+          status: string
+          type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          priority?: number
+          route?: string | null
+          session_id?: string | null
+          status?: string
+          type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          priority?: number
+          route?: string | null
+          session_id?: string | null
+          status?: string
+          type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_recommendations_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "gisele_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       ai_usage_daily: {
         Row: {
           created_at: string
+          estimated_cost: number
           feature_key: string
           id: string
           seconds_used: number
@@ -26,6 +196,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          estimated_cost?: number
           feature_key?: string
           id?: string
           seconds_used?: number
@@ -35,12 +206,55 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          estimated_cost?: number
           feature_key?: string
           id?: string
           seconds_used?: number
           updated_at?: string
           usage_date?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      ai_voice_settings: {
+        Row: {
+          auto_speak: boolean
+          consent_status: string
+          created_at: string
+          id: string
+          provider: string
+          rate: number
+          support_language: string
+          updated_at: string
+          user_id: string
+          voice_id: string
+          volume: number
+        }
+        Insert: {
+          auto_speak?: boolean
+          consent_status?: string
+          created_at?: string
+          id?: string
+          provider?: string
+          rate?: number
+          support_language?: string
+          updated_at?: string
+          user_id: string
+          voice_id?: string
+          volume?: number
+        }
+        Update: {
+          auto_speak?: boolean
+          consent_status?: string
+          created_at?: string
+          id?: string
+          provider?: string
+          rate?: number
+          support_language?: string
+          updated_at?: string
+          user_id?: string
+          voice_id?: string
+          volume?: number
         }
         Relationships: []
       }
@@ -81,25 +295,34 @@ export type Database = {
       }
       chat_threads: {
         Row: {
+          context: string | null
           created_at: string
+          ended_at: string | null
           id: string
           product: string
+          started_at: string
           title: string
           updated_at: string
           user_id: string
         }
         Insert: {
+          context?: string | null
           created_at?: string
+          ended_at?: string | null
           id?: string
           product?: string
+          started_at?: string
           title?: string
           updated_at?: string
           user_id: string
         }
         Update: {
+          context?: string | null
           created_at?: string
+          ended_at?: string | null
           id?: string
           product?: string
+          started_at?: string
           title?: string
           updated_at?: string
           user_id?: string
@@ -392,6 +615,9 @@ export type Database = {
           focus: string
           id: string
           minutes: number
+          score: number | null
+          session_date: string
+          session_type: string
           summary: string | null
           thread_id: string | null
           updated_at: string
@@ -403,6 +629,9 @@ export type Database = {
           focus?: string
           id?: string
           minutes?: number
+          score?: number | null
+          session_date?: string
+          session_type?: string
           summary?: string | null
           thread_id?: string | null
           updated_at?: string
@@ -414,6 +643,9 @@ export type Database = {
           focus?: string
           id?: string
           minutes?: number
+          score?: number | null
+          session_date?: string
+          session_type?: string
           summary?: string | null
           thread_id?: string | null
           updated_at?: string
