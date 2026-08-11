@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { PhrasePractice } from "@/components/PhrasePractice";
+import { BilingualLine } from "@/components/BilingualLine";
 import {
   FLUENCY_STEPS,
   getFluencyModule,
@@ -163,11 +164,13 @@ function FluencyModulePage() {
         </Button>
 
         <p className="text-xs tracking-widest text-muted-foreground uppercase">
-          Módulo {module.order} · {module.minutes} min
+          Module {module.order} · {module.minutes} min
         </p>
         <h1 className="mt-1 text-3xl font-semibold text-gold">{module.titleEn}</h1>
         <p className="text-sm text-muted-foreground">{module.titlePt}</p>
-        <p className="mt-4 text-sm text-foreground/80">{module.opening}</p>
+        <div className="mt-4 text-sm text-foreground/80">
+          <BilingualLine value={module.opening} />
+        </div>
 
         <ol className="mt-6 flex flex-wrap gap-2">
           {FLUENCY_STEPS.map((step) => (
@@ -179,21 +182,27 @@ function FluencyModulePage() {
                   : "border-primary/30 text-muted-foreground"
               }`}
             >
-              {step.labelPt}
+              {step.labelEn}
             </li>
           ))}
         </ol>
 
-        <Section title="Aquecimento" subtitle="Warm-up" onDone={() => markStep("warmup")}>
-          <ul className="space-y-2 text-sm text-foreground/80">
+        <Section title="Warm-up" subtitle="Aquecimento" onDone={() => markStep("warmup")}>
+          <ul className="space-y-3 text-sm text-foreground/80">
             {module.warmUp.map((item) => (
-              <li key={item}>• {item}</li>
+              <li key={item.en}>
+                <BilingualLine value={item} />
+              </li>
             ))}
           </ul>
         </Section>
 
-        <Section title="Escuta e leitura" subtitle="Input" onDone={() => markStep("input")}>
-          <p className="text-sm text-muted-foreground">{module.input.context}</p>
+        <Section
+          title="Listening & Reading"
+          subtitle="Escuta e leitura"
+          onDone={() => markStep("input")}
+        >
+          <BilingualLine value={module.input.context} className="text-sm text-muted-foreground" />
           <div className="mt-4 space-y-3">
             {module.input.dialogue.map((line, i) => (
               <div key={`${line.who}-${i}`} className="rounded-xl border border-border bg-card/60 p-3">
@@ -204,13 +213,21 @@ function FluencyModulePage() {
           </div>
         </Section>
 
-        <Section title="Padrões observados" subtitle="Notice" onDone={() => markStep("notice")}>
-          <ul className="space-y-2 text-sm text-foreground/80">
+        <Section
+          title="Notice the Patterns"
+          subtitle="Padrões observados"
+          onDone={() => markStep("notice")}
+        >
+          <ul className="space-y-3 text-sm text-foreground/80">
             {module.notice.map((item) => (
-              <li key={item}>• {item}</li>
+              <li key={item.en}>
+                <BilingualLine value={item} />
+              </li>
             ))}
           </ul>
-          <h3 className="mt-6 text-sm font-semibold text-gold">Chunks do módulo</h3>
+          <h3 className="mt-6 text-sm font-semibold text-gold">
+            Key chunks <span className="text-muted-foreground">· Chunks do módulo</span>
+          </h3>
           <div className="mt-3 space-y-3">
             {module.chunks.map((chunk) => (
               <div key={chunk.en} className="rounded-xl border border-border bg-card/60 p-3">
@@ -220,16 +237,16 @@ function FluencyModulePage() {
           </div>
         </Section>
 
-        <Section title="Prática guiada" subtitle="Practice" onDone={() => markStep("practice")}>
+        <Section title="Guided Practice" subtitle="Prática guiada" onDone={() => markStep("practice")}>
           <div className="space-y-4">
             {module.practice.map((item, i) => (
-              <div key={item.prompt} className="rounded-xl border border-border bg-card/60 p-4">
-                <p className="text-sm font-semibold text-foreground">{item.prompt}</p>
-                <p className="text-xs text-muted-foreground">{item.hint}</p>
+              <div key={item.prompt.en} className="rounded-xl border border-border bg-card/60 p-4">
+                <BilingualLine value={item.prompt} className="text-sm font-semibold text-foreground" />
+                <BilingualLine value={item.hint} className="text-xs text-muted-foreground" />
                 <Textarea
                   className="mt-3"
                   rows={2}
-                  placeholder="Escreva sua resposta em inglês…"
+                  placeholder="Type your answer in English…"
                   value={answers[`practice-${i}`] ?? ""}
                   onChange={(e) =>
                     setAnswers((prev) => ({ ...prev, [`practice-${i}`]: e.target.value }))
@@ -241,16 +258,18 @@ function FluencyModulePage() {
         </Section>
 
         <Section
-          title="Desafio de fala"
-          subtitle={`Challenge · ${module.challenge.seconds}s`}
+          title="Speaking Challenge"
+          subtitle={`Desafio de fala · ${module.challenge.seconds}s`}
           onDone={() => markStep("challenge")}
         >
-          <p className="text-sm text-muted-foreground">{module.challenge.context}</p>
-          <p className="mt-2 text-sm text-foreground/80">{module.challenge.goal}</p>
+          <BilingualLine value={module.challenge.context} className="text-sm text-muted-foreground" />
+          <div className="mt-2">
+            <BilingualLine value={module.challenge.goal} className="text-sm text-foreground/80" />
+          </div>
           <Textarea
             className="mt-4"
             rows={5}
-            placeholder="Transcreva aqui o que você falou (ou escreva antes de gravar)…"
+            placeholder="Write or transcribe what you said…"
             value={transcript}
             onChange={(e) => setTranscript(e.target.value)}
           />
@@ -264,14 +283,20 @@ function FluencyModulePage() {
             ) : (
               <Sparkles className="mr-2 h-4 w-4" />
             )}
-            Receber feedback da IA
+            Get AI feedback
           </Button>
         </Section>
+
 
         {feedback && (
           <section className="mt-8 rounded-2xl border border-gold/50 bg-gold/5 p-5">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-gold">Feedback da IA</h2>
+              <div>
+                <h2 className="text-lg font-semibold text-gold">AI Feedback</h2>
+                <p className="text-xs tracking-widest text-muted-foreground uppercase">
+                  Feedback da IA
+                </p>
+              </div>
               <span className="rounded-full bg-gold px-3 py-1 text-xs font-semibold text-primary-foreground">
                 {feedback.score}/100
               </span>
@@ -283,13 +308,13 @@ function FluencyModulePage() {
               <Metric label="Intonation" value={feedback.intonation} />
               <Metric label="Fluency" value={feedback.fluency} />
             </div>
-            <h3 className="mt-5 text-sm font-semibold text-gold">Acertos</h3>
+            <h3 className="mt-5 text-sm font-semibold text-gold">What worked well</h3>
             <ul className="mt-2 space-y-1 text-sm text-foreground/80">
               {feedback.highlights.map((h) => (
                 <li key={h}>• {h}</li>
               ))}
             </ul>
-            <h3 className="mt-4 text-sm font-semibold text-gold">Prioridades</h3>
+            <h3 className="mt-4 text-sm font-semibold text-gold">Priorities</h3>
             <ul className="mt-2 space-y-1 text-sm text-foreground/80">
               {feedback.focus.map((f) => (
                 <li key={f}>• {f}</li>
@@ -297,26 +322,31 @@ function FluencyModulePage() {
             </ul>
             <div className="mt-5 rounded-xl border border-border bg-card/60 p-3">
               <p className="text-xs tracking-widest text-muted-foreground uppercase">
-                Versão modelo
+                Model answer
               </p>
               <PhrasePractice en={feedback.rewrite} pt="" />
             </div>
             <p className="mt-4 text-sm text-foreground/80">
-              <span className="text-gold">Próximo passo:</span> {feedback.nextStep}
+              <span className="text-gold">Next step:</span> {feedback.nextStep}
             </p>
           </section>
         )}
 
-        <Section title="Reflexão" subtitle="Reflection" onDone={() => markStep("reflection")}>
-          <ul className="space-y-2 text-sm text-foreground/80">
+        <Section title="Reflection" subtitle="Reflexão" onDone={() => markStep("reflection")}>
+          <ul className="space-y-3 text-sm text-foreground/80">
             {module.reflection.map((item) => (
-              <li key={item}>• {item}</li>
+              <li key={item.en}>
+                <BilingualLine value={item} />
+              </li>
             ))}
           </ul>
         </Section>
 
         <section className="mt-10">
           <h2 className="text-lg font-semibold text-gold">Checkpoint</h2>
+          <p className="text-xs tracking-widest text-muted-foreground uppercase">
+            Choose the correct option
+          </p>
           <div className="mt-4 space-y-4">
             {module.checkpoint.map((q, i) => (
               <div key={q.question} className="rounded-xl border border-border bg-card/60 p-4">
@@ -347,15 +377,16 @@ function FluencyModulePage() {
             ))}
           </div>
           <p className="mt-4 text-xs text-muted-foreground">
-            {checkpointCorrect} de {module.checkpoint.length} corretas
+            {checkpointCorrect} / {module.checkpoint.length} correct
           </p>
           <Button
             onClick={finishModule}
             className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
           >
-            <CheckCircle2 className="mr-2 h-4 w-4" /> Concluir módulo
+            <CheckCircle2 className="mr-2 h-4 w-4" /> Complete module
           </Button>
         </section>
+
       </div>
     </main>
   );
@@ -389,7 +420,7 @@ function Section({
           <p className="text-xs tracking-widest text-muted-foreground uppercase">{subtitle}</p>
         </div>
         <Button variant="outline" size="sm" className="rounded-full" onClick={onDone}>
-          Marcar como concluído
+          Mark as done
         </Button>
       </div>
       <div className="mt-4">{children}</div>
