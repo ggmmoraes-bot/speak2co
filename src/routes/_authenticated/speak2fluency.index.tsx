@@ -29,8 +29,10 @@ export const Route = createFileRoute("/_authenticated/speak2fluency/")({
           "Destrave a fala espontânea com missões diárias, desafios reais e feedback da IA da Speak2Co.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: siteUrl("/speak2fluency") },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: siteUrl("/speak2fluency") }],
   }),
   component: Speak2FluencyHub,
 });
