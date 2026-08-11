@@ -41,6 +41,7 @@ import { Route as AuthenticatedGiseleIndexRouteImport } from './routes/_authenti
 import { Route as AuthenticatedGiseleThreadIdRouteImport } from './routes/_authenticated/gisele.$threadId'
 import { Route as AuthenticatedGiseleConfiguracoesRouteImport } from './routes/_authenticated/gisele.configuracoes'
 import { Route as AuthenticatedGiseleFeedbackRouteImport } from './routes/_authenticated/gisele.feedback'
+import { Route as AuthenticatedGiseleMeuPlanoRouteImport } from './routes/_authenticated/gisele.meu-plano'
 import { Route as AuthenticatedGiseleMissaoDoDiaRouteImport } from './routes/_authenticated/gisele.missao-do-dia'
 import { Route as AuthenticatedGiseleOnboardingRouteImport } from './routes/_authenticated/gisele.onboarding'
 import { Route as AuthenticatedGiseleVoiceRoomRouteImport } from './routes/_authenticated/gisele.voice-room'
@@ -239,6 +240,12 @@ const AuthenticatedGiseleFeedbackRoute =
     path: '/feedback',
     getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
+const AuthenticatedGiseleMeuPlanoRoute =
+  AuthenticatedGiseleMeuPlanoRouteImport.update({
+    id: '/meu-plano',
+    path: '/meu-plano',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
 const AuthenticatedGiseleMissaoDoDiaRoute =
   AuthenticatedGiseleMissaoDoDiaRouteImport.update({
     id: '/missao-do-dia',
@@ -404,6 +411,7 @@ export interface FileRoutesByFullPath {
   '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
+  '/gisele/meu-plano': typeof AuthenticatedGiseleMeuPlanoRoute
   '/gisele/missao-do-dia': typeof AuthenticatedGiseleMissaoDoDiaRoute
   '/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
   '/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
@@ -453,6 +461,7 @@ export interface FileRoutesByTo {
   '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
+  '/gisele/meu-plano': typeof AuthenticatedGiseleMeuPlanoRoute
   '/gisele/missao-do-dia': typeof AuthenticatedGiseleMissaoDoDiaRoute
   '/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
   '/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
@@ -511,6 +520,7 @@ export interface FileRoutesById {
   '/_authenticated/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/_authenticated/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/_authenticated/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
+  '/_authenticated/gisele/meu-plano': typeof AuthenticatedGiseleMeuPlanoRoute
   '/_authenticated/gisele/missao-do-dia': typeof AuthenticatedGiseleMissaoDoDiaRoute
   '/_authenticated/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
   '/_authenticated/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
@@ -569,6 +579,7 @@ export interface FileRouteTypes {
     | '/gisele/$threadId'
     | '/gisele/configuracoes'
     | '/gisele/feedback'
+    | '/gisele/meu-plano'
     | '/gisele/missao-do-dia'
     | '/gisele/onboarding'
     | '/gisele/voice-room'
@@ -618,6 +629,7 @@ export interface FileRouteTypes {
     | '/gisele/$threadId'
     | '/gisele/configuracoes'
     | '/gisele/feedback'
+    | '/gisele/meu-plano'
     | '/gisele/missao-do-dia'
     | '/gisele/onboarding'
     | '/gisele/voice-room'
@@ -675,6 +687,7 @@ export interface FileRouteTypes {
     | '/_authenticated/gisele/$threadId'
     | '/_authenticated/gisele/configuracoes'
     | '/_authenticated/gisele/feedback'
+    | '/_authenticated/gisele/meu-plano'
     | '/_authenticated/gisele/missao-do-dia'
     | '/_authenticated/gisele/onboarding'
     | '/_authenticated/gisele/voice-room'
@@ -944,6 +957,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGiseleFeedbackRouteImport
       parentRoute: typeof AuthenticatedGiseleRoute
     }
+    '/_authenticated/gisele/meu-plano': {
+      id: '/_authenticated/gisele/meu-plano'
+      path: '/meu-plano'
+      fullPath: '/gisele/meu-plano'
+      preLoaderRoute: typeof AuthenticatedGiseleMeuPlanoRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
     '/_authenticated/gisele/missao-do-dia': {
       id: '/_authenticated/gisele/missao-do-dia'
       path: '/missao-do-dia'
@@ -1153,6 +1173,7 @@ interface AuthenticatedGiseleRouteChildren {
   AuthenticatedGiseleThreadIdRoute: typeof AuthenticatedGiseleThreadIdRoute
   AuthenticatedGiseleConfiguracoesRoute: typeof AuthenticatedGiseleConfiguracoesRoute
   AuthenticatedGiseleFeedbackRoute: typeof AuthenticatedGiseleFeedbackRoute
+  AuthenticatedGiseleMeuPlanoRoute: typeof AuthenticatedGiseleMeuPlanoRoute
   AuthenticatedGiseleMissaoDoDiaRoute: typeof AuthenticatedGiseleMissaoDoDiaRoute
   AuthenticatedGiseleOnboardingRoute: typeof AuthenticatedGiseleOnboardingRoute
   AuthenticatedGiseleVoiceRoomRoute: typeof AuthenticatedGiseleVoiceRoomRoute
@@ -1163,6 +1184,7 @@ const AuthenticatedGiseleRouteChildren: AuthenticatedGiseleRouteChildren = {
   AuthenticatedGiseleThreadIdRoute: AuthenticatedGiseleThreadIdRoute,
   AuthenticatedGiseleConfiguracoesRoute: AuthenticatedGiseleConfiguracoesRoute,
   AuthenticatedGiseleFeedbackRoute: AuthenticatedGiseleFeedbackRoute,
+  AuthenticatedGiseleMeuPlanoRoute: AuthenticatedGiseleMeuPlanoRoute,
   AuthenticatedGiseleMissaoDoDiaRoute: AuthenticatedGiseleMissaoDoDiaRoute,
   AuthenticatedGiseleOnboardingRoute: AuthenticatedGiseleOnboardingRoute,
   AuthenticatedGiseleVoiceRoomRoute: AuthenticatedGiseleVoiceRoomRoute,
