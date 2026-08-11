@@ -248,8 +248,13 @@ function AdminPage() {
                     <p className="text-xs text-muted-foreground">{plan.key}</p>
                   </td>
                   <td>{plan.access_level}</td>
-                  <td>{plan.monthly_price != null ? `R$ ${Number(plan.monthly_price).toFixed(2)}` : "—"}</td>
                   <td>{plan.yearly_price != null ? `R$ ${Number(plan.yearly_price).toFixed(2)}` : "—"}</td>
+                  <td>
+                    {plan.yearly_price != null
+                      ? `12x R$ ${(Number(plan.yearly_price) / 12).toFixed(2)}`
+                      : "—"}
+                  </td>
+
                   <td>{plan.ai_daily_minutes == null ? "Ilimitado" : `${plan.ai_daily_minutes} min`}</td>
                   <td>{plan.is_active ? "Sim" : "Não"}</td>
                   <td className="py-3 text-right">
