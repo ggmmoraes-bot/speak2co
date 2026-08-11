@@ -204,13 +204,24 @@ export const getFeedbackList = createServerFn({ method: "GET" })
     return (data ?? []) as FeedbackItem[];
   });
 
+export type SessionFeedbackDTO = {
+  whatWentWell: string;
+  mainImprovement: string;
+  howToImprove: string;
+  retryInvite: string;
+  category: string;
+  priority: number;
+  recommendations: { type: string; content: string; priority: number }[];
+};
+
 /** Gera o feedback estruturado da sessão atual (4 blocos + recomendações). */
 export const requestSessionFeedback = createServerFn({ method: "POST" })
   .middleware([requireFeature("gisele_ai")])
   .inputValidator((input: unknown) => z.object({ threadId: z.string().uuid() }).parse(input))
   .handler(async ({ context, data }) => {
     const { generateSessionFeedback } = await import("@/lib/gisele-feedback.server");
-    return generateSessionFeedback(context.supabase, context.userId, data.threadId);
+    const result = await generateSessionFeedback(context.supabase, context.userId, data.threadId);
+    return result as SessionFeedbackDTO;
   });
 
 /* --------------------------- Recommendations --------------------------- */
