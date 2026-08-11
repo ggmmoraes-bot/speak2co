@@ -16,6 +16,7 @@ export const FEATURE_KEYS = {
   premiumMaterials: "premium_materials",
   productLineTravel: "product_line_travel",
   productLineHire: "product_line_hire",
+  productLineFluency: "product_line_fluency",
   giseleAi: "gisele_ai",
 } as const;
 
