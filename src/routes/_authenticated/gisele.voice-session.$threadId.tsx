@@ -159,6 +159,15 @@ function VoiceSessionPage() {
         </p>
       </header>
 
+      <AiVoiceDisclosure />
+      {isBrandVoice(voice.voice) ? (
+        <p className="text-[11px] text-muted-foreground">
+          Authorized brand voice active · Voz autorizada da marca ativa (síntese licenciada pela
+          Speak2Co, com consentimento registrado nas configurações).
+        </p>
+      ) : null}
+
+
       <Card className="flex flex-col items-center gap-4 p-8">
         <div
           className={`flex h-28 w-28 items-center justify-center rounded-full border-2 transition ${
