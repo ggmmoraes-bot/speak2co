@@ -7,6 +7,7 @@ import {
   withLovableAiGatewayRunIdHeader,
 } from "@/lib/ai-gateway.server";
 import { verifyChatRequest } from "@/lib/chat-auth.server";
+import { GISELE_AI_SYSTEM_PROMPT } from "@/lib/gisele-ai-persona";
 
 type ChatRequestBody = {
   messages?: UIMessage[];
