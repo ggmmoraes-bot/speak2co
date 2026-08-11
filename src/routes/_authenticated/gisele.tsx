@@ -44,6 +44,20 @@ export const Route = createFileRoute("/_authenticated/gisele")({
   ),
 });
 
+const GISELE_NAV = [
+  { to: "/gisele/onboarding", label: "Onboarding" },
+  { to: "/gisele/missao-do-dia", label: "Mission of the day" },
+  { to: "/gisele/voice-room", label: "Voice Room" },
+  { to: "/gisele/meu-plano", label: "My plan" },
+  { to: "/gisele/meu-progresso", label: "My progress" },
+  { to: "/gisele/feedback", label: "Feedback" },
+  { to: "/gisele/recomendacoes", label: "Recommendations" },
+  { to: "/gisele/historico", label: "History" },
+  { to: "/gisele/preferencias", label: "Preferences" },
+  { to: "/gisele/privacidade", label: "Privacy" },
+] as const;
+
+
 function GiseleLayout() {
   const navigate = useNavigate();
   const router = useRouter();
