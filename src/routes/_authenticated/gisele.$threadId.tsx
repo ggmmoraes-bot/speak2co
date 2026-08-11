@@ -141,7 +141,13 @@ function GiseleChat({
     }
     try {
       setSpeakingId(m.id);
-      await speakText(text, { voice: voice.voice, volume: voice.volume, rate: voice.rate });
+      await speakText(text, {
+        voice: voice.voice,
+        volume: voice.volume,
+        rate: voice.rate,
+        provider: voice.ttsProvider,
+        scope: "gisele",
+      });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível gerar o áudio.");
     } finally {
@@ -171,7 +177,7 @@ function GiseleChat({
       try {
         setTranscribing(true);
         const { blob } = await rec.stop();
-        const text = await transcribeAudio(blob);
+        const text = await transcribeAudio(blob, { provider: voice.sttProvider, scope: "gisele" });
         await submit(text);
       } catch (e) {
         toast.error(e instanceof Error ? e.message : "Não foi possível transcrever o áudio.");

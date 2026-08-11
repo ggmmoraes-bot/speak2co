@@ -116,7 +116,7 @@ function VoiceSessionPage() {
     setPhase("transcribing");
     try {
       const { blob } = await recorder.stop();
-      const text = await transcribeAudio(blob, { provider: voice.sttProvider });
+      const text = await transcribeAudio(blob, { provider: voice.sttProvider, scope: "gisele" });
       setLastTranscript(text);
       setPhase("thinking");
       sendMessage({ text });
