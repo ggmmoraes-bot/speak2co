@@ -5,6 +5,7 @@ import { ArrowLeft, CheckCircle2, Flame, Sparkles, Target, Timer } from "lucide-
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { BrandText } from "@/components/BrandText";
+import { BilingualLine } from "@/components/BilingualLine";
 import logo from "@/assets/speak2fluency.png.asset.json";
 import {
   DAILY_BLOCKS,
