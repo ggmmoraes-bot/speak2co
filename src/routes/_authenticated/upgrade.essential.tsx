@@ -58,13 +58,12 @@ export const Route = createFileRoute("/_authenticated/upgrade/essential")({
 function UpgradeEssentialPage() {
   const feature = Route.useSearch().feature as UpgradeFeature | undefined;
   const checkout = useServerFn(startMercadoPagoCheckout);
-  const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
 
   const mutation = useMutation({
     mutationFn: () =>
       checkout({
         data: {
-          planKey: (billing === "yearly" ? "essential_yearly" : "essential_monthly") as never,
+          planKey: "essential_yearly" as never,
           origin: window.location.origin,
         },
       }),
