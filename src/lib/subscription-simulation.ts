@@ -1,7 +1,7 @@
 /**
  * Modo de simulação da tela /assinatura.
  * Apenas visual: nada é gravado no banco e nenhum plano é alterado de verdade.
- * Ative com ?simulacao=mensal | anual | pendente | cancelada
+ * Ative com ?simulacao=anual | pendente | cancelada
  */
 
 export type SubscriptionEventView = {
@@ -16,10 +16,9 @@ export type SubscriptionEventView = {
   created_at: string;
 };
 
-export type SimulationMode = "mensal" | "anual" | "pendente" | "cancelada";
+export type SimulationMode = "anual" | "pendente" | "cancelada";
 
 export const SIMULATION_MODES: { value: SimulationMode; label: string }[] = [
-  { value: "mensal", label: "Premium mensal" },
   { value: "anual", label: "Premium anual" },
   { value: "pendente", label: "Pagamento pendente" },
   { value: "cancelada", label: "Assinatura cancelada" },
@@ -62,9 +61,9 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
       mode,
       isPremium: false,
       subscription: {
-        plan_label: "Premium mensal",
+        plan_label: "Premium anual",
         status: "pending",
-        amount: 49.9,
+        amount: 479.0,
         currency: "BRL",
         next_payment_date: null,
         init_point: null,
@@ -74,7 +73,7 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
           id: "sim-1",
           event_type: "checkout_created",
           status: "pending",
-          amount: 49.9,
+          amount: 479.0,
           currency: "BRL",
           message: "Checkout de simulação criado — nenhuma cobrança real foi feita.",
           preapproval_id: preapprovalId,
@@ -97,9 +96,9 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
       mode,
       isPremium: false,
       subscription: {
-        plan_label: "Premium mensal",
+        plan_label: "Premium anual",
         status: "cancelled",
-        amount: 49.9,
+        amount: 479.0,
         currency: "BRL",
         next_payment_date: null,
         init_point: null,
@@ -109,7 +108,7 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
           id: "sim-1",
           event_type: "subscription_authorized",
           status: "authorized",
-          amount: 49.9,
+          amount: 479.0,
           currency: "BRL",
           next_payment_date: daysFromNow(-35),
           message: "Premium liberado (simulação).",
@@ -120,7 +119,7 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
           id: "sim-2",
           event_type: "subscription_renewed",
           status: "authorized",
-          amount: 49.9,
+          amount: 479.0,
           currency: "BRL",
           next_payment_date: daysFromNow(-5),
           message: "Renovação confirmada (simulação).",
@@ -139,19 +138,18 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
     };
   }
 
-  const yearly = mode === "anual";
-  const amount = yearly ? 479.0 : 49.9;
-  const cycleDays = yearly ? 365 : 30;
+  const amount = 479.0;
+  const cycleDays = 365;
 
   return {
     mode,
     isPremium: true,
     subscription: {
-      plan_label: yearly ? "Premium anual" : "Premium mensal",
+      plan_label: "Premium anual",
       status: "authorized",
       amount,
       currency: "BRL",
-      next_payment_date: daysFromNow(yearly ? 300 : 12),
+      next_payment_date: daysFromNow(300),
       init_point: null,
     },
     events: [
@@ -182,7 +180,7 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
         status: "authorized",
         amount,
         currency: "BRL",
-        next_payment_date: daysFromNow(yearly ? 300 : 12),
+        next_payment_date: daysFromNow(300),
         message: "Renovação confirmada (simulação).",
         preapproval_id: preapprovalId,
         created_at: daysFromNow(-3),

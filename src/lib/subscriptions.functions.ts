@@ -3,14 +3,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 const planKeySchema = z.object({
-  planKey: z.enum([
-    "essential_monthly",
-    "essential_yearly",
-    "premium_monthly",
-    "premium_yearly",
-    "signature_monthly",
-    "signature_yearly",
-  ]),
+  planKey: z.enum(["essential_yearly", "premium_yearly", "signature_yearly"]),
   origin: z.string().url().max(300),
 });
 

@@ -93,7 +93,7 @@ const ROUTES: RouteItem[] = [
   {
     path: "/premium",
     title: "Assinar Premium",
-    description: "Planos mensal e anual com checkout do Mercado Pago.",
+    description: "Planos anuais com checkout do Mercado Pago e parcelamento em até 12x.",
     status: "protected",
   },
   {

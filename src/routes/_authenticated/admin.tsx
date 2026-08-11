@@ -232,8 +232,9 @@ function AdminPage() {
               <tr className="text-left text-xs uppercase tracking-wider text-muted-foreground">
                 <th className="pb-2">Plano</th>
                 <th className="pb-2">Nível</th>
-                <th className="pb-2">Mensal</th>
                 <th className="pb-2">Anual</th>
+                <th className="pb-2">12x</th>
+
                 <th className="pb-2">IA / dia</th>
                 <th className="pb-2">Ativo</th>
                 <th className="pb-2" />
@@ -247,8 +248,13 @@ function AdminPage() {
                     <p className="text-xs text-muted-foreground">{plan.key}</p>
                   </td>
                   <td>{plan.access_level}</td>
-                  <td>{plan.monthly_price != null ? `R$ ${Number(plan.monthly_price).toFixed(2)}` : "—"}</td>
                   <td>{plan.yearly_price != null ? `R$ ${Number(plan.yearly_price).toFixed(2)}` : "—"}</td>
+                  <td>
+                    {plan.yearly_price != null
+                      ? `12x R$ ${(Number(plan.yearly_price) / 12).toFixed(2)}`
+                      : "—"}
+                  </td>
+
                   <td>{plan.ai_daily_minutes == null ? "Ilimitado" : `${plan.ai_daily_minutes} min`}</td>
                   <td>{plan.is_active ? "Sim" : "Não"}</td>
                   <td className="py-3 text-right">
@@ -344,14 +350,6 @@ function AdminPage() {
               />
             </div>
             <div>
-              <Label htmlFor="plan-monthly">Preço mensal (R$)</Label>
-              <Input
-                id="plan-monthly"
-                value={planForm.monthly_price}
-                onChange={(e) => setPlanForm({ ...planForm, monthly_price: e.target.value })}
-              />
-            </div>
-            <div>
               <Label htmlFor="plan-yearly">Preço anual (R$)</Label>
               <Input
                 id="plan-yearly"
@@ -359,6 +357,7 @@ function AdminPage() {
                 onChange={(e) => setPlanForm({ ...planForm, yearly_price: e.target.value })}
               />
             </div>
+
             <div>
               <Label htmlFor="plan-ai">Minutos de IA por dia (vazio = ilimitado)</Label>
               <Input
@@ -368,14 +367,18 @@ function AdminPage() {
               />
             </div>
             <div>
-              <Label htmlFor="plan-ck-m">Checkout mensal</Label>
+              <Label htmlFor="plan-installment">Parcelamento (12x sem juros)</Label>
               <Input
-                id="plan-ck-m"
-                value={planForm.monthly_checkout_key}
-                onChange={(e) => setPlanForm({ ...planForm, monthly_checkout_key: e.target.value })}
-                placeholder="premium_monthly"
+                id="plan-installment"
+                readOnly
+                value={
+                  planForm.yearly_price
+                    ? `12x de R$ ${(Number(planForm.yearly_price) / 12).toFixed(2)}`
+                    : "—"
+                }
               />
             </div>
+
             <div>
               <Label htmlFor="plan-ck-y">Checkout anual</Label>
               <Input

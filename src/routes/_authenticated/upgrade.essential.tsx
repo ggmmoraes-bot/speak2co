@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+
 import { useMutation } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
@@ -58,13 +58,12 @@ export const Route = createFileRoute("/_authenticated/upgrade/essential")({
 function UpgradeEssentialPage() {
   const feature = Route.useSearch().feature as UpgradeFeature | undefined;
   const checkout = useServerFn(startMercadoPagoCheckout);
-  const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
 
   const mutation = useMutation({
     mutationFn: () =>
       checkout({
         data: {
-          planKey: (billing === "yearly" ? "essential_yearly" : "essential_monthly") as never,
+          planKey: "essential_yearly" as never,
           origin: window.location.origin,
         },
       }),
@@ -108,28 +107,20 @@ function UpgradeEssentialPage() {
       </div>
 
       <section className="mt-10 rounded-2xl border border-gold/40 bg-card/60 p-8 backdrop-blur">
-        <div className="flex justify-center">
-          <div className="inline-flex rounded-full border border-border bg-card p-1">
-            <button
-              type="button"
-              onClick={() => setBilling("monthly")}
-              className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
-                billing === "monthly" ? "bg-gold text-primary-foreground" : "text-muted-foreground"
-              }`}
-            >
-              Mensal · R$ 37,90
-            </button>
-            <button
-              type="button"
-              onClick={() => setBilling("yearly")}
-              className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
-                billing === "yearly" ? "bg-gold text-primary-foreground" : "text-muted-foreground"
-              }`}
-            >
-              Anual · R$ 379,00
-            </button>
-          </div>
+        <div className="text-center">
+          <span className="rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold text-gold">
+            Ideal para iniciantes
+          </span>
+          <p className="mt-4 text-4xl font-bold text-gold">R$ 430,80</p>
+          <p className="text-sm font-medium text-foreground">por ano</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            ou em até 12x sem juros de R$ 35,90
+          </p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Acesso por 12 meses · Renovação anual automática conforme os termos
+          </p>
         </div>
+
 
         <ul className="mx-auto mt-6 grid max-w-md gap-2 text-sm text-muted-foreground">
           {[

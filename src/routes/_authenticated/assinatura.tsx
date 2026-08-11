@@ -217,8 +217,12 @@ function AssinaturaPage() {
               ? `Acesso até ${renewal}`
               : (renewal ?? (isPremium ? "Aguardando confirmação do pagamento" : "—"))}
           </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Acesso por 12 meses · Renovação anual automática conforme os termos
+          </p>
         </div>
       </section>
+
 
       {subscription?.amount != null && (
         <p className="mt-3 text-sm text-muted-foreground">
