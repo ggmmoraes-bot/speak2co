@@ -1,3 +1,4 @@
+import { BrandText } from "@/components/BrandText";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -94,9 +95,8 @@ function GiseleHub() {
         />
         <div className="space-y-1">
           <h1 className="text-3xl font-bold">
-            <span className="text-foreground">Gisele</span>
-            <span className="text-gold">AI</span>{" "}
-            <span className="text-foreground">by Speak2Co</span>
+            <BrandText text="GiseleAI" /> <span className="text-foreground">by</span>{" "}
+            <BrandText text="Speak2Co" />
           </h1>
           <p className="text-sm text-muted-foreground">
             Your Personal English Mentor powered by AI.

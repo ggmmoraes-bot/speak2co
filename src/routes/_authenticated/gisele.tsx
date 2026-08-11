@@ -1,3 +1,4 @@
+import { BrandText } from "@/components/BrandText";
 import { createFileRoute, Link, Outlet, useNavigate, useRouter } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -87,10 +88,7 @@ function GiseleLayout() {
         <div className="flex items-center justify-between gap-2 p-4">
           <Link to="/painel" className="flex items-center gap-2">
             <img src={giseleLogo.url} alt="GiseleAI by Speak2Co" className="h-9 w-9 rounded-full object-cover" />
-            <span className="text-sm font-semibold">
-              <span className="text-foreground">Gisele</span>
-              <span className="text-gold">AI</span>
-            </span>
+            <BrandText text="GiseleAI" className="text-sm font-semibold" />
           </Link>
           <Link
             to="/painel"
