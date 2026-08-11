@@ -344,14 +344,6 @@ function AdminPage() {
               />
             </div>
             <div>
-              <Label htmlFor="plan-monthly">Preço mensal (R$)</Label>
-              <Input
-                id="plan-monthly"
-                value={planForm.monthly_price}
-                onChange={(e) => setPlanForm({ ...planForm, monthly_price: e.target.value })}
-              />
-            </div>
-            <div>
               <Label htmlFor="plan-yearly">Preço anual (R$)</Label>
               <Input
                 id="plan-yearly"
@@ -359,6 +351,7 @@ function AdminPage() {
                 onChange={(e) => setPlanForm({ ...planForm, yearly_price: e.target.value })}
               />
             </div>
+
             <div>
               <Label htmlFor="plan-ai">Minutos de IA por dia (vazio = ilimitado)</Label>
               <Input
