@@ -70,7 +70,7 @@ const TIERS: Tier[] = [
     yearly: { key: "premium_yearly", price: 479.0 },
     perks: [
       "Tudo do Essential",
-      "Speak2Hire e Speak2Travel completos",
+      "Speak2Hire, Speak2Travel e Speak2Fluency completos",
       "Certificados de evolução",
       "Professor IA ilimitado",
     ],
@@ -103,6 +103,9 @@ const COMPARISON_ROWS: { feature: string; essential: CellValue; premium: CellVal
   { feature: "Teste de nivelamento (CEFR)", essential: true, premium: true, signature: true },
   { feature: "Trilhas completas — Speak2Hire", essential: false, premium: true, signature: true },
   { feature: "Trilhas completas — Speak2Travel (10 módulos)", essential: false, premium: true, signature: true },
+  { feature: "Trilhas completas — Speak2Fluency (8 módulos)", essential: false, premium: true, signature: true },
+  { feature: "Rotina diária de fluência (25 min) — Speak2Fluency", essential: false, premium: true, signature: true },
+  { feature: "Feedback de IA em pronunciation, stress, intonation e fluency", essential: false, premium: true, signature: true },
   { feature: "Simulador de entrevista com IA", essential: false, premium: true, signature: true },
   { feature: "Role play de viagem com IA", essential: false, premium: true, signature: true },
   { feature: "Certificados de evolução", essential: false, premium: true, signature: true },
