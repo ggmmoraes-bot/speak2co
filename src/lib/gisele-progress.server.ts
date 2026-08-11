@@ -154,7 +154,7 @@ export async function generateProgressReport(
   const snapshot = await buildStudentSnapshot(supabase, userId);
   const dashboard = await buildProgressDashboard(supabase, userId);
 
-  const gateway = createLovableAiGatewayProvider(apiKey);
+  const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
   const result = streamText({
     model: gateway("google/gemini-3.6-flash"),
     system: withGiselePersona(

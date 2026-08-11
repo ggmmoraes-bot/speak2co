@@ -49,7 +49,7 @@ export async function summarizeSession(supabase: Client, userId: string, threadI
   const apiKey = process.env["LOVABLE_API_KEY"];
   if (!apiKey) throw new Error("IA indisponível no momento.");
 
-  const gateway = createLovableAiGatewayProvider(apiKey);
+  const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
   const { output } = await generateText({
     model: gateway("google/gemini-3.6-flash"),
     output: Output.object({ schema: SummarySchema }),
