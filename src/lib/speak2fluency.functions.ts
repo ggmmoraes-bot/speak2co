@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireFeature } from "@/lib/entitlement-middleware";
+import { GISELE_AI_SYSTEM_PROMPT } from "@/lib/gisele-ai-persona";
 import { generateText, Output } from "ai";
 import { z } from "zod";
 
