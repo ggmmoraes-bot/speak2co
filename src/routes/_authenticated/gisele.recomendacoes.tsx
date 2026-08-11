@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { getRecommendations, updateRecommendationStatus } from "@/lib/gisele-data.functions";
+import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/recomendacoes")({
   component: RecommendationsPage,
@@ -41,7 +42,7 @@ function RecommendationsPage() {
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 space-y-6 px-6 py-10">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-foreground">Recommendations</h1>
+        <h1 className="text-2xl font-bold"><AltHeading text={"Recommendations"} /></h1>
         <p className="text-sm italic text-muted-foreground">
           Próximos passos sugeridos pela Gisele ao final de cada sessão.
         </p>

@@ -9,6 +9,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 import { FOCUS_LABEL } from "@/lib/gisele-focus";
 import { getGiseleProgress, getGiseleReport } from "@/lib/gisele-data.functions";
 import type { GiseleFocus } from "@/lib/gisele.functions";
+import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/meu-progresso")({
   component: ProgressPage,
@@ -49,7 +50,7 @@ function ProgressPage() {
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 space-y-6 px-6 py-10">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-foreground">My progress</h1>
+        <h1 className="text-2xl font-bold"><AltHeading text={"My progress"} /></h1>
         <p className="text-sm italic text-muted-foreground">
           Seu ritmo de prática com a Gisele, em números reais.
         </p>

@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { getAIProfile, saveAIProfile } from "@/lib/gisele-data.functions";
 import { SUPPORT_LANGUAGES, useVoiceSettings } from "@/lib/use-voice-settings";
+import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/preferencias")({
   component: PreferencesPage,
@@ -70,7 +71,7 @@ function PreferencesPage() {
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 space-y-6 px-6 py-10">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-foreground">Preferences</h1>
+        <h1 className="text-2xl font-bold"><AltHeading text={"Preferences"} /></h1>
         <p className="text-sm italic text-muted-foreground">
           Objetivo, nível e idioma de apoio da mentoria.
         </p>

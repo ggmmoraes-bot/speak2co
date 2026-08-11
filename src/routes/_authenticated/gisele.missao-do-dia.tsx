@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { getDailyMission } from "@/lib/gisele-data.functions";
 import { createGiseleThread, type GiseleFocus } from "@/lib/gisele.functions";
+import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/missao-do-dia")({
   component: MissionPage,
@@ -55,7 +56,7 @@ function MissionPage() {
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 space-y-6 px-6 py-10">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-foreground">Mission of the day</h1>
+        <h1 className="text-2xl font-bold"><AltHeading text={"Mission of the day"} /></h1>
         <p className="text-sm italic text-muted-foreground">
           Uma prática curta e objetiva para manter a constância.
         </p>

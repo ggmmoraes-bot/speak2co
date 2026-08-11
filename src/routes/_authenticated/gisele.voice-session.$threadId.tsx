@@ -12,6 +12,7 @@ import { speakText, stopSpeaking, transcribeAudio } from "@/lib/voice-client";
 import { isBrandVoice, useVoiceSettings } from "@/lib/use-voice-settings";
 import { AiVoiceDisclosure } from "@/components/AiVoiceDisclosure";
 import { requestSessionFeedback, type SessionFeedbackDTO } from "@/lib/gisele-data.functions";
+import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/voice-session/$threadId")({
   component: VoiceSessionPage,
@@ -153,7 +154,7 @@ function VoiceSessionPage() {
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 space-y-6 px-6 py-10">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-foreground">Voice Room</h1>
+        <h1 className="text-2xl font-bold"><AltHeading text={"Voice Room"} /></h1>
         <p className="text-sm italic text-muted-foreground">
           Fale em inglês, ouça a Gisele e continue a conversa. A voz é gerada por IA.
         </p>

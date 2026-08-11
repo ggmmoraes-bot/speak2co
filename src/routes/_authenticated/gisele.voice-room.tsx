@@ -10,6 +10,7 @@ import { CONVERSATION_CONTEXTS } from "@/lib/gisele-contexts";
 import { createGiseleThread } from "@/lib/gisele.functions";
 import { AiVoiceDisclosure } from "@/components/AiVoiceDisclosure";
 import { isBrandVoice, useVoiceSettings } from "@/lib/use-voice-settings";
+import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/voice-room")({
   component: VoiceRoomPage,
@@ -43,7 +44,7 @@ function VoiceRoomPage() {
   return (
     <main className="mx-auto w-full max-w-4xl flex-1 space-y-6 px-6 py-10">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-foreground">Voice Room</h1>
+        <h1 className="text-2xl font-bold"><AltHeading text={"Voice Room"} /></h1>
         <p className="text-sm italic text-muted-foreground">
           Escolha uma situação e fale em inglês: use o botão de microfone dentro da sessão.
         </p>

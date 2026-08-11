@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { getStudyPlan, type StudyPlan } from "@/lib/study-plan.functions";
+import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/meu-plano")({
   component: GiselePlanPage,
@@ -19,7 +20,7 @@ function GiselePlanPage() {
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 space-y-6 px-6 py-10">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-foreground">My plan</h1>
+        <h1 className="text-2xl font-bold"><AltHeading text={"My plan"} /></h1>
         <p className="text-sm italic text-muted-foreground">
           O plano de estudos que orienta as recomendações da Gisele.
         </p>
