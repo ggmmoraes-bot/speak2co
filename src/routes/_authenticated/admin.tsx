@@ -232,8 +232,9 @@ function AdminPage() {
               <tr className="text-left text-xs uppercase tracking-wider text-muted-foreground">
                 <th className="pb-2">Plano</th>
                 <th className="pb-2">Nível</th>
-                <th className="pb-2">Mensal</th>
                 <th className="pb-2">Anual</th>
+                <th className="pb-2">12x</th>
+
                 <th className="pb-2">IA / dia</th>
                 <th className="pb-2">Ativo</th>
                 <th className="pb-2" />
