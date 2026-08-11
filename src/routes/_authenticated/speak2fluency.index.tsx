@@ -122,17 +122,17 @@ function Speak2FluencyHub() {
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           <StatCard
             icon={<Flame className="h-5 w-5" />}
-            label="Sequência atual"
-            value={`${streak} ${streak === 1 ? "dia" : "dias"}`}
+            label="Current streak"
+            value={`${streak} ${streak === 1 ? "day" : "days"}`}
           />
           <StatCard
             icon={<Target className="h-5 w-5" />}
-            label="Módulos concluídos"
-            value={`${completedCount} de ${FLUENCY_MODULES.length}`}
+            label="Modules completed"
+            value={`${completedCount} of ${FLUENCY_MODULES.length}`}
           />
           <StatCard
             icon={<Timer className="h-5 w-5" />}
-            label="Rotina de hoje"
+            label="Today's routine"
             value={`${doneMinutes} / ${totalMinutes} min`}
           />
         </div>
@@ -229,7 +229,7 @@ function Speak2FluencyHub() {
                     params={{ moduleId: module.id }}
                     className="mt-4 inline-flex rounded-full bg-gold px-4 py-1.5 text-xs font-semibold text-primary-foreground hover:opacity-90"
                   >
-                    {state?.completed ? "Refazer módulo" : "Começar módulo"}
+                    {state?.completed ? "Redo module" : "Start module"}
                   </Link>
                 </div>
               );
