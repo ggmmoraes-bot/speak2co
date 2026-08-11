@@ -139,10 +139,12 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           id: "gisele",
           titleEn: "GiseleAI by Speak2Co",
           titlePt: "Sua mentora de inglês com IA",
-          description: "Your Personal English Mentor powered by AI. Em breve na plataforma.",
+          description:
+            "Your Personal English Mentor powered by AI: mentoria contínua, próximos passos e revisão espaçada.",
           icon: Bot,
           imageUrl: giseleAiLogo.url,
-          status: "soon",
+          to: "/gisele",
+          status: gate(access, FEATURE_KEYS.giseleAi),
           plans: ["Signature"],
         },
         {
