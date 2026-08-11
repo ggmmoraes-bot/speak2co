@@ -146,7 +146,7 @@ function FluencyModulePage() {
         completed: true,
       },
     })
-      .then(() => toast.success(`Módulo concluído! Selo: ${module.passportBadge}`))
+      .then(() => toast.success(`Módulo concluído! Selo: ${badge}`))
       .catch(() => undefined);
   }
 
