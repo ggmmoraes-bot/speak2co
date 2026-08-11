@@ -9,13 +9,17 @@ async function authHeaders(): Promise<Headers> {
 }
 
 /** Envia o áudio gravado e devolve a transcrição em texto. */
-export async function transcribeAudio(blob: Blob): Promise<string> {
+export async function transcribeAudio(
+  blob: Blob,
+  options: { provider?: string } = {},
+): Promise<string> {
   if (blob.size < 2048) {
     throw new Error("Gravação muito curta — tente novamente falando um pouco mais.");
   }
   const headers = await authHeaders();
   const form = new FormData();
   form.append("audio", blob, "recording.wav");
+  if (options.provider) form.append("provider", options.provider);
   const res = await fetch("/api/voice/transcribe", { method: "POST", headers, body: form });
   if (!res.ok) throw new Error((await res.text()) || "Não foi possível transcrever o áudio.");
   const json = (await res.json()) as { text?: string };
@@ -23,6 +27,7 @@ export async function transcribeAudio(blob: Blob): Promise<string> {
   if (!text) throw new Error("Não consegui entender o áudio. Tente falar mais perto do microfone.");
   return text;
 }
+
 
 const audioCache = new Map<string, string>();
 let currentAudio: HTMLAudioElement | null = null;
