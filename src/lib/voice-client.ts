@@ -50,6 +50,8 @@ export type SpeakOptions = {
   volume?: number;
   /** 0.5 a 2 */
   rate?: number;
+  /** Provider de TTS: "auto" (pela voz), "openai" ou "elevenlabs". */
+  provider?: string;
 };
 
 const clamp = (value: number, min: number, max: number) =>
@@ -59,9 +61,10 @@ const clamp = (value: number, min: number, max: number) =>
 export async function speakText(text: string, options: SpeakOptions | string = {}): Promise<void> {
   const opts: SpeakOptions = typeof options === "string" ? { voice: options } : options;
   const voice = opts.voice ?? "alloy";
+  const provider = opts.provider ?? "auto";
   const volume = clamp(opts.volume ?? 1, 0, 1);
   const rate = clamp(opts.rate ?? 1, 0.5, 2);
-  const key = `${voice}:${text}`;
+  const key = `${provider}:${voice}:${text}`;
   let url = audioCache.get(key);
   if (!url) {
     const headers = await authHeaders();
@@ -69,12 +72,13 @@ export async function speakText(text: string, options: SpeakOptions | string = {
     const res = await fetch("/api/voice/speak", {
       method: "POST",
       headers,
-      body: JSON.stringify({ text, voice }),
+      body: JSON.stringify({ text, voice, provider }),
     });
     if (!res.ok) throw new Error((await res.text()) || "Não foi possível gerar o áudio.");
     url = URL.createObjectURL(await res.blob());
     audioCache.set(key, url);
   }
+
   stopSpeaking();
   const audio = new Audio(url);
   audio.volume = volume;
