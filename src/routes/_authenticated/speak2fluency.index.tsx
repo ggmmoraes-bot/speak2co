@@ -76,7 +76,8 @@ function Speak2FluencyHub() {
       const res = await saveMission({ data: { blocks: next, minutes } });
       if (res.completed) {
         toast.success("Missão diária concluída! 🔥");
-        setStreak((s) => (blocks.listening && blocks.speaking && blocks.vocabulary ? s : s + 1));
+        const already = ["listening", "speaking", "vocabulary"].every((b) => blocks[b] === true);
+        setStreak((s) => (already ? s : s + 1));
       }
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível salvar sua missão.");

@@ -37,6 +37,7 @@ import { Route as AuthenticatedCursoIntermediateIndexRouteImport } from './route
 import { Route as AuthenticatedCursoIntermediateAssessmentRouteImport } from './routes/_authenticated/curso-intermediate.assessment'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
+import { Route as AuthenticatedSpeak2fluencyIndexRouteImport } from './routes/_authenticated/speak2fluency.index'
 import { Route as AuthenticatedSpeak2hireIndexRouteImport } from './routes/_authenticated/speak2hire.index'
 import { Route as AuthenticatedSpeak2travelIndexRouteImport } from './routes/_authenticated/speak2travel.index'
 import { Route as AuthenticatedSpeak2travelTripPlannerRouteImport } from './routes/_authenticated/speak2travel.trip-planner'
@@ -206,6 +207,12 @@ const AuthenticatedProfessorThreadIdRoute =
     path: '/$threadId',
     getParentRoute: () => AuthenticatedProfessorRoute,
   } as any)
+const AuthenticatedSpeak2fluencyIndexRoute =
+  AuthenticatedSpeak2fluencyIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedSpeak2fluencyRoute,
+  } as any)
 const AuthenticatedSpeak2hireIndexRoute =
   AuthenticatedSpeak2hireIndexRouteImport.update({
     id: '/',
@@ -317,7 +324,7 @@ export interface FileRoutesByFullPath {
   '/premium': typeof AuthenticatedPremiumRoute
   '/professor': typeof AuthenticatedProfessorRouteWithChildren
   '/ranking': typeof AuthenticatedRankingRoute
-  '/speak2fluency': typeof AuthenticatedSpeak2fluencyRoute
+  '/speak2fluency': typeof AuthenticatedSpeak2fluencyRouteWithChildren
   '/speak2hire': typeof AuthenticatedSpeak2hireRouteWithChildren
   '/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
@@ -333,6 +340,7 @@ export interface FileRoutesByFullPath {
   '/curso-beginner/': typeof AuthenticatedCursoBeginnerIndexRoute
   '/curso-intermediate/': typeof AuthenticatedCursoIntermediateIndexRoute
   '/professor/': typeof AuthenticatedProfessorIndexRoute
+  '/speak2fluency/': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
   '/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
@@ -359,7 +367,6 @@ export interface FileRoutesByTo {
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
   '/ranking': typeof AuthenticatedRankingRoute
-  '/speak2fluency': typeof AuthenticatedSpeak2fluencyRoute
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
@@ -373,6 +380,7 @@ export interface FileRoutesByTo {
   '/curso-beginner': typeof AuthenticatedCursoBeginnerIndexRoute
   '/curso-intermediate': typeof AuthenticatedCursoIntermediateIndexRoute
   '/professor': typeof AuthenticatedProfessorIndexRoute
+  '/speak2fluency': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel': typeof AuthenticatedSpeak2travelIndexRoute
   '/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
@@ -404,7 +412,7 @@ export interface FileRoutesById {
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
   '/_authenticated/professor': typeof AuthenticatedProfessorRouteWithChildren
   '/_authenticated/ranking': typeof AuthenticatedRankingRoute
-  '/_authenticated/speak2fluency': typeof AuthenticatedSpeak2fluencyRoute
+  '/_authenticated/speak2fluency': typeof AuthenticatedSpeak2fluencyRouteWithChildren
   '/_authenticated/speak2hire': typeof AuthenticatedSpeak2hireRouteWithChildren
   '/_authenticated/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/_authenticated/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
@@ -420,6 +428,7 @@ export interface FileRoutesById {
   '/_authenticated/curso-beginner/': typeof AuthenticatedCursoBeginnerIndexRoute
   '/_authenticated/curso-intermediate/': typeof AuthenticatedCursoIntermediateIndexRoute
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
+  '/_authenticated/speak2fluency/': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/_authenticated/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
   '/_authenticated/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
@@ -467,6 +476,7 @@ export interface FileRouteTypes {
     | '/curso-beginner/'
     | '/curso-intermediate/'
     | '/professor/'
+    | '/speak2fluency/'
     | '/speak2hire/'
     | '/speak2travel/'
     | '/curso-beginner/licao/$lessonId'
@@ -493,7 +503,6 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/premium'
     | '/ranking'
-    | '/speak2fluency'
     | '/teste-de-nivel'
     | '/api/chat'
     | '/curso-beginner/assessment'
@@ -507,6 +516,7 @@ export interface FileRouteTypes {
     | '/curso-beginner'
     | '/curso-intermediate'
     | '/professor'
+    | '/speak2fluency'
     | '/speak2hire'
     | '/speak2travel'
     | '/curso-beginner/licao/$lessonId'
@@ -553,6 +563,7 @@ export interface FileRouteTypes {
     | '/_authenticated/curso-beginner/'
     | '/_authenticated/curso-intermediate/'
     | '/_authenticated/professor/'
+    | '/_authenticated/speak2fluency/'
     | '/_authenticated/speak2hire/'
     | '/_authenticated/speak2travel/'
     | '/_authenticated/curso-beginner/licao/$lessonId'
@@ -778,6 +789,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfessorThreadIdRouteImport
       parentRoute: typeof AuthenticatedProfessorRoute
     }
+    '/_authenticated/speak2fluency/': {
+      id: '/_authenticated/speak2fluency/'
+      path: '/'
+      fullPath: '/speak2fluency/'
+      preLoaderRoute: typeof AuthenticatedSpeak2fluencyIndexRouteImport
+      parentRoute: typeof AuthenticatedSpeak2fluencyRoute
+    }
     '/_authenticated/speak2hire/': {
       id: '/_authenticated/speak2hire/'
       path: '/'
@@ -950,6 +968,20 @@ const AuthenticatedProfessorRouteWithChildren =
     AuthenticatedProfessorRouteChildren,
   )
 
+interface AuthenticatedSpeak2fluencyRouteChildren {
+  AuthenticatedSpeak2fluencyIndexRoute: typeof AuthenticatedSpeak2fluencyIndexRoute
+}
+
+const AuthenticatedSpeak2fluencyRouteChildren: AuthenticatedSpeak2fluencyRouteChildren =
+  {
+    AuthenticatedSpeak2fluencyIndexRoute: AuthenticatedSpeak2fluencyIndexRoute,
+  }
+
+const AuthenticatedSpeak2fluencyRouteWithChildren =
+  AuthenticatedSpeak2fluencyRoute._addFileChildren(
+    AuthenticatedSpeak2fluencyRouteChildren,
+  )
+
 interface AuthenticatedSpeak2hireRouteChildren {
   AuthenticatedSpeak2hireIndexRoute: typeof AuthenticatedSpeak2hireIndexRoute
   AuthenticatedSpeak2hireMaterialMaterialIdRoute: typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -1009,7 +1041,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
   AuthenticatedProfessorRoute: typeof AuthenticatedProfessorRouteWithChildren
   AuthenticatedRankingRoute: typeof AuthenticatedRankingRoute
-  AuthenticatedSpeak2fluencyRoute: typeof AuthenticatedSpeak2fluencyRoute
+  AuthenticatedSpeak2fluencyRoute: typeof AuthenticatedSpeak2fluencyRouteWithChildren
   AuthenticatedSpeak2hireRoute: typeof AuthenticatedSpeak2hireRouteWithChildren
   AuthenticatedSpeak2travelRoute: typeof AuthenticatedSpeak2travelRouteWithChildren
   AuthenticatedTesteDeNivelRoute: typeof AuthenticatedTesteDeNivelRoute
@@ -1030,7 +1062,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
   AuthenticatedProfessorRoute: AuthenticatedProfessorRouteWithChildren,
   AuthenticatedRankingRoute: AuthenticatedRankingRoute,
-  AuthenticatedSpeak2fluencyRoute: AuthenticatedSpeak2fluencyRoute,
+  AuthenticatedSpeak2fluencyRoute: AuthenticatedSpeak2fluencyRouteWithChildren,
   AuthenticatedSpeak2hireRoute: AuthenticatedSpeak2hireRouteWithChildren,
   AuthenticatedSpeak2travelRoute: AuthenticatedSpeak2travelRouteWithChildren,
   AuthenticatedTesteDeNivelRoute: AuthenticatedTesteDeNivelRoute,
