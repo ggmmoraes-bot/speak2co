@@ -7,7 +7,7 @@ import { requireFeature } from "@/lib/entitlement-middleware";
 export type AIProfile = {
   objective: string | null;
   level: string | null;
-  preferences: Record<string, unknown>;
+  preferences: Record<string, string | number | boolean | null>;
   preferred_voice: string | null;
   onboarding_completed: boolean;
 };
@@ -24,7 +24,7 @@ export const getAIProfile = createServerFn({ method: "GET" })
     return {
       objective: data.objective,
       level: data.level,
-      preferences: (data.preferences ?? {}) as Record<string, unknown>,
+      preferences: (data.preferences ?? {}) as Record<string, string | number | boolean | null>,
       preferred_voice: data.preferred_voice,
       onboarding_completed: data.onboarding_completed,
     };
@@ -37,7 +37,7 @@ export const saveAIProfile = createServerFn({ method: "POST" })
       .object({
         objective: z.string().max(300).optional(),
         level: z.string().max(20).optional(),
-        preferences: z.record(z.string(), z.unknown()).optional(),
+        preferences: z.record(z.string(), z.union([z.string(), z.number(), z.boolean(), z.null()])).optional(),
         preferred_voice: z.string().max(60).optional(),
         onboarding_completed: z.boolean().optional(),
       })
@@ -103,7 +103,10 @@ export const saveVoiceSettings = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { error } = await context.supabase
       .from("ai_voice_settings")
-      .upsert({ user_id: context.userId, ...data }, { onConflict: "user_id" });
+      .upsert(
+        { user_id: context.userId, ...JSON.parse(JSON.stringify(data)) },
+        { onConflict: "user_id" },
+      );
     if (error) throw new Error(error.message);
     return { ok: true };
   });
