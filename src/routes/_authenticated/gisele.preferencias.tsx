@@ -90,6 +90,53 @@ function PreferencesPage() {
 
         <div className="space-y-2">
           <p className="text-sm font-semibold text-foreground">
+            Time available per day{" "}
+            <span className="italic text-muted-foreground">/ Tempo disponível por dia</span>
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {[10, 15, 25, 40].map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setMinutes(m)}
+                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition-colors ${
+                  minutes === m
+                    ? "border-gold bg-gold/15 text-gold"
+                    : "border-border text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {m} min
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-sm font-semibold text-foreground">
+            Preferred practice format{" "}
+            <span className="italic text-muted-foreground">/ Formato preferido</span>
+          </p>
+          <div className="grid gap-2">
+            {FORMATS.map((f) => (
+              <button
+                key={f.id}
+                type="button"
+                onClick={() => setFormat(f.id)}
+                className={`rounded-lg border px-3 py-2 text-left text-xs transition-colors ${
+                  format === f.id
+                    ? "border-gold bg-gold/10 text-foreground"
+                    : "border-border text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <span className="block font-semibold">{f.label}</span>
+                {f.description}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-sm font-semibold text-foreground">
             Support language{" "}
             <span className="italic text-muted-foreground">/ Idioma de apoio</span>
           </p>
