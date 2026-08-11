@@ -2,7 +2,7 @@ import { BrandText } from "@/components/BrandText";
 import { createFileRoute, Link, Outlet, useNavigate, useRouter } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { ArrowLeft, MessageSquare, Plus, Trash2 } from "lucide-react";
+import { ArrowLeft, MessageSquare, Plus, Settings, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { FeatureGate } from "@/components/FeatureGate";
@@ -111,6 +111,12 @@ function GiseleLayout() {
             className="mt-2 block rounded-lg px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             Mentorship hub
+          </Link>
+          <Link
+            to="/gisele/configuracoes"
+            className="flex items-center gap-2 rounded-lg px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Settings className="h-3.5 w-3.5" /> Voice &amp; language
           </Link>
         </div>
 

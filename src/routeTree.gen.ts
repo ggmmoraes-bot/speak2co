@@ -39,6 +39,7 @@ import { Route as AuthenticatedCursoIntermediateIndexRouteImport } from './route
 import { Route as AuthenticatedCursoIntermediateAssessmentRouteImport } from './routes/_authenticated/curso-intermediate.assessment'
 import { Route as AuthenticatedGiseleIndexRouteImport } from './routes/_authenticated/gisele.index'
 import { Route as AuthenticatedGiseleThreadIdRouteImport } from './routes/_authenticated/gisele.$threadId'
+import { Route as AuthenticatedGiseleConfiguracoesRouteImport } from './routes/_authenticated/gisele.configuracoes'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2fluencyIndexRouteImport } from './routes/_authenticated/speak2fluency.index'
@@ -222,6 +223,12 @@ const AuthenticatedGiseleThreadIdRoute =
     path: '/$threadId',
     getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
+const AuthenticatedGiseleConfiguracoesRoute =
+  AuthenticatedGiseleConfiguracoesRouteImport.update({
+    id: '/configuracoes',
+    path: '/configuracoes',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
 const AuthenticatedProfessorIndexRoute =
   AuthenticatedProfessorIndexRouteImport.update({
     id: '/',
@@ -367,6 +374,7 @@ export interface FileRoutesByFullPath {
   '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
   '/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
   '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
+  '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -411,6 +419,7 @@ export interface FileRoutesByTo {
   '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
   '/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
   '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
+  '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -464,6 +473,7 @@ export interface FileRoutesById {
   '/_authenticated/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
   '/_authenticated/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
   '/_authenticated/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
+  '/_authenticated/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/_authenticated/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -517,6 +527,7 @@ export interface FileRouteTypes {
     | '/curso-beginner/assessment'
     | '/curso-intermediate/assessment'
     | '/gisele/$threadId'
+    | '/gisele/configuracoes'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -561,6 +572,7 @@ export interface FileRouteTypes {
     | '/curso-beginner/assessment'
     | '/curso-intermediate/assessment'
     | '/gisele/$threadId'
+    | '/gisele/configuracoes'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -613,6 +625,7 @@ export interface FileRouteTypes {
     | '/_authenticated/curso-beginner/assessment'
     | '/_authenticated/curso-intermediate/assessment'
     | '/_authenticated/gisele/$threadId'
+    | '/_authenticated/gisele/configuracoes'
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/speak2travel/trip-planner'
     | '/_authenticated/upgrade/essential'
@@ -865,6 +878,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGiseleThreadIdRouteImport
       parentRoute: typeof AuthenticatedGiseleRoute
     }
+    '/_authenticated/gisele/configuracoes': {
+      id: '/_authenticated/gisele/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/gisele/configuracoes'
+      preLoaderRoute: typeof AuthenticatedGiseleConfiguracoesRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
     '/_authenticated/professor/': {
       id: '/_authenticated/professor/'
       path: '/'
@@ -1051,11 +1071,13 @@ const AuthenticatedCursoIntermediateRouteWithChildren =
 
 interface AuthenticatedGiseleRouteChildren {
   AuthenticatedGiseleThreadIdRoute: typeof AuthenticatedGiseleThreadIdRoute
+  AuthenticatedGiseleConfiguracoesRoute: typeof AuthenticatedGiseleConfiguracoesRoute
   AuthenticatedGiseleIndexRoute: typeof AuthenticatedGiseleIndexRoute
 }
 
 const AuthenticatedGiseleRouteChildren: AuthenticatedGiseleRouteChildren = {
   AuthenticatedGiseleThreadIdRoute: AuthenticatedGiseleThreadIdRoute,
+  AuthenticatedGiseleConfiguracoesRoute: AuthenticatedGiseleConfiguracoesRoute,
   AuthenticatedGiseleIndexRoute: AuthenticatedGiseleIndexRoute,
 }
 
