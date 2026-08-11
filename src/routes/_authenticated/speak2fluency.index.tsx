@@ -138,10 +138,13 @@ function Speak2FluencyHub() {
 
         <section className="mt-12">
           <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
-            <Timer className="h-5 w-5" /> Missão diária — 25 minutos
+            <Timer className="h-5 w-5" /> Daily Mission — 25 minutes
           </h2>
+          <p className="text-xs tracking-widest text-muted-foreground uppercase">
+            Missão diária de 25 minutos
+          </p>
           <p className="mt-2 text-sm text-muted-foreground">
-            Consistência vale mais que volume. Marque cada bloco ao concluir.
+            Consistency beats volume. Tick each block when you finish it.
           </p>
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
             {DAILY_BLOCKS.map((block) => {
@@ -159,13 +162,14 @@ function Speak2FluencyHub() {
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <p className="font-semibold text-foreground">{block.labelPt}</p>
+                    <p className="font-semibold text-foreground">{block.labelEn}</p>
                     {done && <CheckCircle2 className="h-4 w-4 text-gold" />}
                   </div>
                   <p className="text-xs tracking-wide text-muted-foreground uppercase">
-                    {block.labelEn} · {block.minutes} min
+                    {block.labelPt} · {block.minutes} min
                   </p>
-                  <p className="mt-2 text-sm text-foreground/80">{block.goal}</p>
+                  <p className="mt-2 text-sm text-foreground/80">{block.goalEn}</p>
+                  <p className="text-xs text-muted-foreground italic">{block.goalPt}</p>
                 </button>
               );
             })}
@@ -174,7 +178,7 @@ function Speak2FluencyHub() {
 
         <section className="mt-12">
           <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
-            <Sparkles className="h-5 w-5" /> Os 8 módulos
+            <Sparkles className="h-5 w-5" /> The 8 modules
           </h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             {FLUENCY_MODULES.map((module) => {
@@ -186,11 +190,11 @@ function Speak2FluencyHub() {
                 >
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-xs tracking-widest text-muted-foreground uppercase">
-                      Módulo {module.order}
+                      Module {module.order}
                     </p>
                     {state?.completed ? (
                       <span className="flex items-center gap-1 text-xs text-primary">
-                        <CheckCircle2 className="h-4 w-4" /> Concluído
+                        <CheckCircle2 className="h-4 w-4" /> Completed
                         {state.score != null ? ` · ${state.score}` : ""}
                       </span>
                     ) : null}
@@ -205,14 +209,17 @@ function Speak2FluencyHub() {
                   <p className="text-xs tracking-wide text-muted-foreground uppercase">
                     {module.titlePt} · {module.minutes} min
                   </p>
-                  <p className="mt-3 text-sm text-foreground/80">{module.objective}</p>
+                  <div className="mt-3">
+                    <BilingualLine value={module.objective} className="text-sm text-foreground/80" />
+                  </div>
                   <ul className="mt-3 flex flex-wrap gap-2">
                     {module.skills.map((skill) => (
                       <li
                         key={skill}
                         className="rounded-full border border-primary/30 px-2.5 py-0.5 text-xs text-muted-foreground"
                       >
-                        {FLUENCY_SKILL_LABELS[skill].pt}
+                        {FLUENCY_SKILL_LABELS[skill].en}
+
                       </li>
                     ))}
                   </ul>
