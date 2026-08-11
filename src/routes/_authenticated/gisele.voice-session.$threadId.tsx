@@ -40,6 +40,7 @@ function VoiceSessionPage() {
   const { settings: voice } = useVoiceSettings();
   const [phase, setPhase] = useState<Phase>("idle");
   const [showText, setShowText] = useState(false);
+  const [voiceDegraded, setVoiceDegraded] = useState(false);
   const [lastTranscript, setLastTranscript] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<SessionFeedbackDTO | null>(null);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
