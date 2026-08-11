@@ -37,6 +37,7 @@ import { Route as AuthenticatedCursoBeginnerIndexRouteImport } from './routes/_a
 import { Route as AuthenticatedCursoBeginnerAssessmentRouteImport } from './routes/_authenticated/curso-beginner.assessment'
 import { Route as AuthenticatedCursoIntermediateIndexRouteImport } from './routes/_authenticated/curso-intermediate.index'
 import { Route as AuthenticatedCursoIntermediateAssessmentRouteImport } from './routes/_authenticated/curso-intermediate.assessment'
+import { Route as AuthenticatedGiseleIndexRouteImport } from './routes/_authenticated/gisele.index'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2fluencyIndexRouteImport } from './routes/_authenticated/speak2fluency.index'
@@ -208,6 +209,12 @@ const AuthenticatedCursoIntermediateAssessmentRoute =
     path: '/assessment',
     getParentRoute: () => AuthenticatedCursoIntermediateRoute,
   } as any)
+const AuthenticatedGiseleIndexRoute =
+  AuthenticatedGiseleIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
 const AuthenticatedProfessorIndexRoute =
   AuthenticatedProfessorIndexRouteImport.update({
     id: '/',
@@ -337,7 +344,7 @@ export interface FileRoutesByFullPath {
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
-  '/gisele': typeof AuthenticatedGiseleRoute
+  '/gisele': typeof AuthenticatedGiseleRouteWithChildren
   '/meu-plano': typeof AuthenticatedMeuPlanoRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
@@ -360,6 +367,7 @@ export interface FileRoutesByFullPath {
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
   '/curso-beginner/': typeof AuthenticatedCursoBeginnerIndexRoute
   '/curso-intermediate/': typeof AuthenticatedCursoIntermediateIndexRoute
+  '/gisele/': typeof AuthenticatedGiseleIndexRoute
   '/professor/': typeof AuthenticatedProfessorIndexRoute
   '/speak2fluency/': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
@@ -384,7 +392,6 @@ export interface FileRoutesByTo {
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
-  '/gisele': typeof AuthenticatedGiseleRoute
   '/meu-plano': typeof AuthenticatedMeuPlanoRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
@@ -403,6 +410,7 @@ export interface FileRoutesByTo {
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
   '/curso-beginner': typeof AuthenticatedCursoBeginnerIndexRoute
   '/curso-intermediate': typeof AuthenticatedCursoIntermediateIndexRoute
+  '/gisele': typeof AuthenticatedGiseleIndexRoute
   '/professor': typeof AuthenticatedProfessorIndexRoute
   '/speak2fluency': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
@@ -431,7 +439,7 @@ export interface FileRoutesById {
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
   '/_authenticated/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/_authenticated/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
-  '/_authenticated/gisele': typeof AuthenticatedGiseleRoute
+  '/_authenticated/gisele': typeof AuthenticatedGiseleRouteWithChildren
   '/_authenticated/meu-plano': typeof AuthenticatedMeuPlanoRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
@@ -454,6 +462,7 @@ export interface FileRoutesById {
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
   '/_authenticated/curso-beginner/': typeof AuthenticatedCursoBeginnerIndexRoute
   '/_authenticated/curso-intermediate/': typeof AuthenticatedCursoIntermediateIndexRoute
+  '/_authenticated/gisele/': typeof AuthenticatedGiseleIndexRoute
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
   '/_authenticated/speak2fluency/': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
@@ -505,6 +514,7 @@ export interface FileRouteTypes {
     | '/api/voice/transcribe'
     | '/curso-beginner/'
     | '/curso-intermediate/'
+    | '/gisele/'
     | '/professor/'
     | '/speak2fluency/'
     | '/speak2hire/'
@@ -529,7 +539,6 @@ export interface FileRouteTypes {
     | '/assinatura'
     | '/central-de-mensagens'
     | '/certificados'
-    | '/gisele'
     | '/meu-plano'
     | '/painel'
     | '/perfil'
@@ -548,6 +557,7 @@ export interface FileRouteTypes {
     | '/api/voice/transcribe'
     | '/curso-beginner'
     | '/curso-intermediate'
+    | '/gisele'
     | '/professor'
     | '/speak2fluency'
     | '/speak2hire'
@@ -598,6 +608,7 @@ export interface FileRouteTypes {
     | '/api/voice/transcribe'
     | '/_authenticated/curso-beginner/'
     | '/_authenticated/curso-intermediate/'
+    | '/_authenticated/gisele/'
     | '/_authenticated/professor/'
     | '/_authenticated/speak2fluency/'
     | '/_authenticated/speak2hire/'
@@ -827,6 +838,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCursoIntermediateAssessmentRouteImport
       parentRoute: typeof AuthenticatedCursoIntermediateRoute
     }
+    '/_authenticated/gisele/': {
+      id: '/_authenticated/gisele/'
+      path: '/'
+      fullPath: '/gisele/'
+      preLoaderRoute: typeof AuthenticatedGiseleIndexRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
     '/_authenticated/professor/': {
       id: '/_authenticated/professor/'
       path: '/'
@@ -1011,6 +1029,17 @@ const AuthenticatedCursoIntermediateRouteWithChildren =
     AuthenticatedCursoIntermediateRouteChildren,
   )
 
+interface AuthenticatedGiseleRouteChildren {
+  AuthenticatedGiseleIndexRoute: typeof AuthenticatedGiseleIndexRoute
+}
+
+const AuthenticatedGiseleRouteChildren: AuthenticatedGiseleRouteChildren = {
+  AuthenticatedGiseleIndexRoute: AuthenticatedGiseleIndexRoute,
+}
+
+const AuthenticatedGiseleRouteWithChildren =
+  AuthenticatedGiseleRoute._addFileChildren(AuthenticatedGiseleRouteChildren)
+
 interface AuthenticatedProfessorRouteChildren {
   AuthenticatedProfessorThreadIdRoute: typeof AuthenticatedProfessorThreadIdRoute
   AuthenticatedProfessorIndexRoute: typeof AuthenticatedProfessorIndexRoute
@@ -1097,7 +1126,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
   AuthenticatedCursoBeginnerRoute: typeof AuthenticatedCursoBeginnerRouteWithChildren
   AuthenticatedCursoIntermediateRoute: typeof AuthenticatedCursoIntermediateRouteWithChildren
-  AuthenticatedGiseleRoute: typeof AuthenticatedGiseleRoute
+  AuthenticatedGiseleRoute: typeof AuthenticatedGiseleRouteWithChildren
   AuthenticatedMeuPlanoRoute: typeof AuthenticatedMeuPlanoRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
@@ -1119,7 +1148,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCursoBeginnerRoute: AuthenticatedCursoBeginnerRouteWithChildren,
   AuthenticatedCursoIntermediateRoute:
     AuthenticatedCursoIntermediateRouteWithChildren,
-  AuthenticatedGiseleRoute: AuthenticatedGiseleRoute,
+  AuthenticatedGiseleRoute: AuthenticatedGiseleRouteWithChildren,
   AuthenticatedMeuPlanoRoute: AuthenticatedMeuPlanoRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
