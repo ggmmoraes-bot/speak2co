@@ -13,7 +13,12 @@ export const Route = createFileRoute("/api/voice/speak")({
         const apiKey = process.env["LOVABLE_API_KEY"];
         if (!apiKey) return new Response("IA indisponível no momento", { status: 503 });
 
-        const body = (await request.json()) as { text?: string; voice?: string; provider?: string };
+        const body = (await request.json()) as {
+          text?: string;
+          voice?: string;
+          provider?: string;
+          scope?: string;
+        };
         const text = (body.text ?? "").trim().slice(0, MAX_CHARS);
         if (!text) return new Response("Texto obrigatório", { status: 400 });
 
@@ -25,8 +30,23 @@ export const Route = createFileRoute("/api/voice/speak")({
             ? "openai"
             : "elevenlabs";
 
-        // ElevenLabs: Voice IDs próprios (ex.: voz clonada da fundadora).
+        // Escopo completo da Gisele AI (Signature) — checagem real de plano.
+        if (body.scope === "gisele") {
+          const { assertGiseleScope } = await import("@/lib/brand-voice.server");
+          try {
+            await assertGiseleScope(auth.supabase, auth.userId);
+          } catch (e) {
+            return new Response(e instanceof Error ? e.message : "Acesso negado", { status: 403 });
+          }
+        }
+
+        // ElevenLabs: Voice IDs próprios (ex.: voz autorizada da fundadora).
         if (provider === "elevenlabs") {
+          const { checkBrandVoiceAccess } = await import("@/lib/brand-voice.server");
+          const brand = await checkBrandVoiceAccess(auth.supabase, auth.userId);
+          if (!brand.allowed) {
+            return new Response(brand.reason ?? "Voz não autorizada", { status: 403 });
+          }
           const elevenKey =
             process.env["ELEVENLABS_TTS_API_KEY"] || process.env["ELEVENLABS_API_KEY"];
           if (!elevenKey) return new Response("Voz indisponível no momento", { status: 503 });
