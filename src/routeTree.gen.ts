@@ -38,6 +38,7 @@ import { Route as AuthenticatedCursoBeginnerAssessmentRouteImport } from './rout
 import { Route as AuthenticatedCursoIntermediateIndexRouteImport } from './routes/_authenticated/curso-intermediate.index'
 import { Route as AuthenticatedCursoIntermediateAssessmentRouteImport } from './routes/_authenticated/curso-intermediate.assessment'
 import { Route as AuthenticatedGiseleIndexRouteImport } from './routes/_authenticated/gisele.index'
+import { Route as AuthenticatedGiseleThreadIdRouteImport } from './routes/_authenticated/gisele.$threadId'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2fluencyIndexRouteImport } from './routes/_authenticated/speak2fluency.index'
@@ -215,6 +216,12 @@ const AuthenticatedGiseleIndexRoute =
     path: '/',
     getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
+const AuthenticatedGiseleThreadIdRoute =
+  AuthenticatedGiseleThreadIdRouteImport.update({
+    id: '/$threadId',
+    path: '/$threadId',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
 const AuthenticatedProfessorIndexRoute =
   AuthenticatedProfessorIndexRouteImport.update({
     id: '/',
@@ -359,6 +366,7 @@ export interface FileRoutesByFullPath {
   '/api/gisele-chat': typeof ApiGiseleChatRoute
   '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
   '/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
+  '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -402,6 +410,7 @@ export interface FileRoutesByTo {
   '/api/gisele-chat': typeof ApiGiseleChatRoute
   '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
   '/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
+  '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -454,6 +463,7 @@ export interface FileRoutesById {
   '/api/gisele-chat': typeof ApiGiseleChatRoute
   '/_authenticated/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
   '/_authenticated/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
+  '/_authenticated/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/_authenticated/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -506,6 +516,7 @@ export interface FileRouteTypes {
     | '/api/gisele-chat'
     | '/curso-beginner/assessment'
     | '/curso-intermediate/assessment'
+    | '/gisele/$threadId'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -549,6 +560,7 @@ export interface FileRouteTypes {
     | '/api/gisele-chat'
     | '/curso-beginner/assessment'
     | '/curso-intermediate/assessment'
+    | '/gisele/$threadId'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -600,6 +612,7 @@ export interface FileRouteTypes {
     | '/api/gisele-chat'
     | '/_authenticated/curso-beginner/assessment'
     | '/_authenticated/curso-intermediate/assessment'
+    | '/_authenticated/gisele/$threadId'
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/speak2travel/trip-planner'
     | '/_authenticated/upgrade/essential'
@@ -845,6 +858,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGiseleIndexRouteImport
       parentRoute: typeof AuthenticatedGiseleRoute
     }
+    '/_authenticated/gisele/$threadId': {
+      id: '/_authenticated/gisele/$threadId'
+      path: '/$threadId'
+      fullPath: '/gisele/$threadId'
+      preLoaderRoute: typeof AuthenticatedGiseleThreadIdRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
     '/_authenticated/professor/': {
       id: '/_authenticated/professor/'
       path: '/'
@@ -1030,10 +1050,12 @@ const AuthenticatedCursoIntermediateRouteWithChildren =
   )
 
 interface AuthenticatedGiseleRouteChildren {
+  AuthenticatedGiseleThreadIdRoute: typeof AuthenticatedGiseleThreadIdRoute
   AuthenticatedGiseleIndexRoute: typeof AuthenticatedGiseleIndexRoute
 }
 
 const AuthenticatedGiseleRouteChildren: AuthenticatedGiseleRouteChildren = {
+  AuthenticatedGiseleThreadIdRoute: AuthenticatedGiseleThreadIdRoute,
   AuthenticatedGiseleIndexRoute: AuthenticatedGiseleIndexRoute,
 }
 
