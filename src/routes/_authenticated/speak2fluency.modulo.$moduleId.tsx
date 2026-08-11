@@ -33,8 +33,10 @@ export const Route = createFileRoute("/_authenticated/speak2fluency/modulo/$modu
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:type", content: "article" },
+        { property: "og:url", content: siteUrl(`/speak2fluency/modulo/${params.moduleId}`) },
         { name: "twitter:card", content: "summary_large_image" },
       ],
+      links: [{ rel: "canonical", href: siteUrl(`/speak2fluency/modulo/${params.moduleId}`) }],
     };
   },
   component: FluencyModulePage,
