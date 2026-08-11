@@ -163,11 +163,13 @@ function FluencyModulePage() {
         </Button>
 
         <p className="text-xs tracking-widest text-muted-foreground uppercase">
-          Módulo {module.order} · {module.minutes} min
+          Module {module.order} · {module.minutes} min
         </p>
         <h1 className="mt-1 text-3xl font-semibold text-gold">{module.titleEn}</h1>
         <p className="text-sm text-muted-foreground">{module.titlePt}</p>
-        <p className="mt-4 text-sm text-foreground/80">{module.opening}</p>
+        <div className="mt-4 text-sm text-foreground/80">
+          <BilingualLine value={module.opening} />
+        </div>
 
         <ol className="mt-6 flex flex-wrap gap-2">
           {FLUENCY_STEPS.map((step) => (
@@ -179,21 +181,27 @@ function FluencyModulePage() {
                   : "border-primary/30 text-muted-foreground"
               }`}
             >
-              {step.labelPt}
+              {step.labelEn}
             </li>
           ))}
         </ol>
 
-        <Section title="Aquecimento" subtitle="Warm-up" onDone={() => markStep("warmup")}>
-          <ul className="space-y-2 text-sm text-foreground/80">
+        <Section title="Warm-up" subtitle="Aquecimento" onDone={() => markStep("warmup")}>
+          <ul className="space-y-3 text-sm text-foreground/80">
             {module.warmUp.map((item) => (
-              <li key={item}>• {item}</li>
+              <li key={item.en}>
+                <BilingualLine value={item} />
+              </li>
             ))}
           </ul>
         </Section>
 
-        <Section title="Escuta e leitura" subtitle="Input" onDone={() => markStep("input")}>
-          <p className="text-sm text-muted-foreground">{module.input.context}</p>
+        <Section
+          title="Listening & Reading"
+          subtitle="Escuta e leitura"
+          onDone={() => markStep("input")}
+        >
+          <BilingualLine value={module.input.context} className="text-sm text-muted-foreground" />
           <div className="mt-4 space-y-3">
             {module.input.dialogue.map((line, i) => (
               <div key={`${line.who}-${i}`} className="rounded-xl border border-border bg-card/60 p-3">
@@ -204,13 +212,21 @@ function FluencyModulePage() {
           </div>
         </Section>
 
-        <Section title="Padrões observados" subtitle="Notice" onDone={() => markStep("notice")}>
-          <ul className="space-y-2 text-sm text-foreground/80">
+        <Section
+          title="Notice the Patterns"
+          subtitle="Padrões observados"
+          onDone={() => markStep("notice")}
+        >
+          <ul className="space-y-3 text-sm text-foreground/80">
             {module.notice.map((item) => (
-              <li key={item}>• {item}</li>
+              <li key={item.en}>
+                <BilingualLine value={item} />
+              </li>
             ))}
           </ul>
-          <h3 className="mt-6 text-sm font-semibold text-gold">Chunks do módulo</h3>
+          <h3 className="mt-6 text-sm font-semibold text-gold">
+            Key chunks <span className="text-muted-foreground">· Chunks do módulo</span>
+          </h3>
           <div className="mt-3 space-y-3">
             {module.chunks.map((chunk) => (
               <div key={chunk.en} className="rounded-xl border border-border bg-card/60 p-3">
@@ -220,16 +236,16 @@ function FluencyModulePage() {
           </div>
         </Section>
 
-        <Section title="Prática guiada" subtitle="Practice" onDone={() => markStep("practice")}>
+        <Section title="Guided Practice" subtitle="Prática guiada" onDone={() => markStep("practice")}>
           <div className="space-y-4">
             {module.practice.map((item, i) => (
-              <div key={item.prompt} className="rounded-xl border border-border bg-card/60 p-4">
-                <p className="text-sm font-semibold text-foreground">{item.prompt}</p>
-                <p className="text-xs text-muted-foreground">{item.hint}</p>
+              <div key={item.prompt.en} className="rounded-xl border border-border bg-card/60 p-4">
+                <BilingualLine value={item.prompt} className="text-sm font-semibold text-foreground" />
+                <BilingualLine value={item.hint} className="text-xs text-muted-foreground" />
                 <Textarea
                   className="mt-3"
                   rows={2}
-                  placeholder="Escreva sua resposta em inglês…"
+                  placeholder="Type your answer in English…"
                   value={answers[`practice-${i}`] ?? ""}
                   onChange={(e) =>
                     setAnswers((prev) => ({ ...prev, [`practice-${i}`]: e.target.value }))
@@ -241,16 +257,18 @@ function FluencyModulePage() {
         </Section>
 
         <Section
-          title="Desafio de fala"
-          subtitle={`Challenge · ${module.challenge.seconds}s`}
+          title="Speaking Challenge"
+          subtitle={`Desafio de fala · ${module.challenge.seconds}s`}
           onDone={() => markStep("challenge")}
         >
-          <p className="text-sm text-muted-foreground">{module.challenge.context}</p>
-          <p className="mt-2 text-sm text-foreground/80">{module.challenge.goal}</p>
+          <BilingualLine value={module.challenge.context} className="text-sm text-muted-foreground" />
+          <div className="mt-2">
+            <BilingualLine value={module.challenge.goal} className="text-sm text-foreground/80" />
+          </div>
           <Textarea
             className="mt-4"
             rows={5}
-            placeholder="Transcreva aqui o que você falou (ou escreva antes de gravar)…"
+            placeholder="Write or transcribe what you said…"
             value={transcript}
             onChange={(e) => setTranscript(e.target.value)}
           />
@@ -264,9 +282,10 @@ function FluencyModulePage() {
             ) : (
               <Sparkles className="mr-2 h-4 w-4" />
             )}
-            Receber feedback da IA
+            Get AI feedback
           </Button>
         </Section>
+
 
         {feedback && (
           <section className="mt-8 rounded-2xl border border-gold/50 bg-gold/5 p-5">
