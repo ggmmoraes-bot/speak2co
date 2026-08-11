@@ -40,6 +40,7 @@ import { Route as AuthenticatedCursoIntermediateAssessmentRouteImport } from './
 import { Route as AuthenticatedGiseleIndexRouteImport } from './routes/_authenticated/gisele.index'
 import { Route as AuthenticatedGiseleThreadIdRouteImport } from './routes/_authenticated/gisele.$threadId'
 import { Route as AuthenticatedGiseleConfiguracoesRouteImport } from './routes/_authenticated/gisele.configuracoes'
+import { Route as AuthenticatedGiseleFeedbackRouteImport } from './routes/_authenticated/gisele.feedback'
 import { Route as AuthenticatedGiseleOnboardingRouteImport } from './routes/_authenticated/gisele.onboarding'
 import { Route as AuthenticatedGiseleVoiceRoomRouteImport } from './routes/_authenticated/gisele.voice-room'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
@@ -231,6 +232,12 @@ const AuthenticatedGiseleConfiguracoesRoute =
     path: '/configuracoes',
     getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
+const AuthenticatedGiseleFeedbackRoute =
+  AuthenticatedGiseleFeedbackRouteImport.update({
+    id: '/feedback',
+    path: '/feedback',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
 const AuthenticatedGiseleOnboardingRoute =
   AuthenticatedGiseleOnboardingRouteImport.update({
     id: '/onboarding',
@@ -389,6 +396,7 @@ export interface FileRoutesByFullPath {
   '/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
   '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
+  '/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
   '/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
   '/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
@@ -436,6 +444,7 @@ export interface FileRoutesByTo {
   '/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
   '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
+  '/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
   '/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
   '/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
@@ -492,6 +501,7 @@ export interface FileRoutesById {
   '/_authenticated/curso-intermediate/assessment': typeof AuthenticatedCursoIntermediateAssessmentRoute
   '/_authenticated/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/_authenticated/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
+  '/_authenticated/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
   '/_authenticated/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
   '/_authenticated/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
@@ -548,6 +558,7 @@ export interface FileRouteTypes {
     | '/curso-intermediate/assessment'
     | '/gisele/$threadId'
     | '/gisele/configuracoes'
+    | '/gisele/feedback'
     | '/gisele/onboarding'
     | '/gisele/voice-room'
     | '/professor/$threadId'
@@ -595,6 +606,7 @@ export interface FileRouteTypes {
     | '/curso-intermediate/assessment'
     | '/gisele/$threadId'
     | '/gisele/configuracoes'
+    | '/gisele/feedback'
     | '/gisele/onboarding'
     | '/gisele/voice-room'
     | '/professor/$threadId'
@@ -650,6 +662,7 @@ export interface FileRouteTypes {
     | '/_authenticated/curso-intermediate/assessment'
     | '/_authenticated/gisele/$threadId'
     | '/_authenticated/gisele/configuracoes'
+    | '/_authenticated/gisele/feedback'
     | '/_authenticated/gisele/onboarding'
     | '/_authenticated/gisele/voice-room'
     | '/_authenticated/professor/$threadId'
@@ -911,6 +924,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGiseleConfiguracoesRouteImport
       parentRoute: typeof AuthenticatedGiseleRoute
     }
+    '/_authenticated/gisele/feedback': {
+      id: '/_authenticated/gisele/feedback'
+      path: '/feedback'
+      fullPath: '/gisele/feedback'
+      preLoaderRoute: typeof AuthenticatedGiseleFeedbackRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
     '/_authenticated/gisele/onboarding': {
       id: '/_authenticated/gisele/onboarding'
       path: '/onboarding'
@@ -1112,6 +1132,7 @@ const AuthenticatedCursoIntermediateRouteWithChildren =
 interface AuthenticatedGiseleRouteChildren {
   AuthenticatedGiseleThreadIdRoute: typeof AuthenticatedGiseleThreadIdRoute
   AuthenticatedGiseleConfiguracoesRoute: typeof AuthenticatedGiseleConfiguracoesRoute
+  AuthenticatedGiseleFeedbackRoute: typeof AuthenticatedGiseleFeedbackRoute
   AuthenticatedGiseleOnboardingRoute: typeof AuthenticatedGiseleOnboardingRoute
   AuthenticatedGiseleVoiceRoomRoute: typeof AuthenticatedGiseleVoiceRoomRoute
   AuthenticatedGiseleIndexRoute: typeof AuthenticatedGiseleIndexRoute
@@ -1120,6 +1141,7 @@ interface AuthenticatedGiseleRouteChildren {
 const AuthenticatedGiseleRouteChildren: AuthenticatedGiseleRouteChildren = {
   AuthenticatedGiseleThreadIdRoute: AuthenticatedGiseleThreadIdRoute,
   AuthenticatedGiseleConfiguracoesRoute: AuthenticatedGiseleConfiguracoesRoute,
+  AuthenticatedGiseleFeedbackRoute: AuthenticatedGiseleFeedbackRoute,
   AuthenticatedGiseleOnboardingRoute: AuthenticatedGiseleOnboardingRoute,
   AuthenticatedGiseleVoiceRoomRoute: AuthenticatedGiseleVoiceRoomRoute,
   AuthenticatedGiseleIndexRoute: AuthenticatedGiseleIndexRoute,
