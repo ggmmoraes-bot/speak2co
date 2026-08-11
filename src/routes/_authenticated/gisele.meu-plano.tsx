@@ -4,7 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Shimmer } from "@/components/ai-elements/shimmer";
-import { getStudyPlan } from "@/lib/study-plan.functions";
+import { getStudyPlan, type StudyPlan } from "@/lib/study-plan.functions";
 
 export const Route = createFileRoute("/_authenticated/gisele/meu-plano")({
   component: GiselePlanPage,
@@ -13,6 +13,8 @@ export const Route = createFileRoute("/_authenticated/gisele/meu-plano")({
 function GiselePlanPage() {
   const fetchPlan = useServerFn(getStudyPlan);
   const { data, isPending } = useQuery({ queryKey: ["study-plan"], queryFn: () => fetchPlan() });
+
+  const weeks = (data?.weekly_focus ?? []) as StudyPlan["weekly_focus"];
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 space-y-6 px-6 py-10">
@@ -25,7 +27,7 @@ function GiselePlanPage() {
 
       {isPending && <Shimmer>Loading your plan…</Shimmer>}
 
-      {!isPending && !data?.plan && (
+      {!isPending && !data && (
         <Card className="space-y-3 p-8 text-center text-sm text-muted-foreground">
           <p>Você ainda não gerou um plano personalizado.</p>
           <Link
@@ -37,19 +39,23 @@ function GiselePlanPage() {
         </Card>
       )}
 
-      {data?.plan && (
+      {data && (
         <>
-          <Card className="space-y-2 p-6">
-            <p className="text-sm text-muted-foreground">{data.plan.summary}</p>
+          <Card className="p-6">
+            <p className="text-sm text-muted-foreground">{data.summary}</p>
           </Card>
           <div className="space-y-3">
-            {data.plan.weeklyFocus.map((week) => (
+            {weeks.map((week) => (
               <Card key={week.week} className="space-y-1 p-4">
                 <p className="text-xs font-semibold uppercase tracking-wide text-gold">
                   Week {week.week}
                 </p>
                 <p className="text-sm font-semibold text-foreground">{week.title}</p>
-                <p className="text-xs text-muted-foreground">{week.goal}</p>
+                <ul className="list-inside list-disc text-xs text-muted-foreground">
+                  {week.activities.map((a) => (
+                    <li key={a}>{a}</li>
+                  ))}
+                </ul>
               </Card>
             ))}
           </div>
