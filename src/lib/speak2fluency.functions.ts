@@ -216,8 +216,8 @@ export const evaluateFluencyChallenge = createServerFn({ method: "POST" })
         system:
           "Você é o coach do Speak2Fluency (Speak2Co), produto focado em transformar inglês funcional em comunicação espontânea. Avalie a fala do aluno em quatro dimensões: pronunciation, stress, intonation e fluency. Comentários sempre em português do Brasil, diretos e encorajadores; exemplos e a reescrita ('rewrite') em inglês natural com chunks reais. Aponte no máximo 2 prioridades por vez. Dê uma nota de 0 a 100 considerando naturalidade, uso de chunks, ritmo e ausência de tradução literal.",
         prompt: `Aluno: ${profile?.full_name ?? "aluno"} (nível ${profile?.english_level ?? "não avaliado"}, meta ${profile?.target_level ?? "B1"}, objetivo ${profile?.goal ?? "fluência no dia a dia"})
-Módulo ${module.order}: ${module.titleEn} — ${module.objective}
-Desafio: ${module.challenge.context} | Meta: ${module.challenge.goal}
+Módulo ${module.order}: ${module.titleEn} — ${module.objective.en}
+Desafio: ${module.challenge.context.en} | Meta: ${module.challenge.goal.en}
 Chunks-alvo: ${module.chunks.map((c) => c.en).join(" | ")}
 Tentativa número: ${data.attempt}
 
