@@ -7,7 +7,7 @@ import {
   withLovableAiGatewayRunIdHeader,
 } from "@/lib/ai-gateway.server";
 import { verifyChatRequest } from "@/lib/chat-auth.server";
-import { GISELE_AI_SYSTEM_PROMPT } from "@/lib/gisele-ai-persona";
+import { SPEAK2CO_AI_SYSTEM_PROMPT } from "@/lib/gisele-ai-persona";
 
 type ChatRequestBody = {
   messages?: UIMessage[];
@@ -31,7 +31,7 @@ function buildSystemPrompt(
   const goal = profile.goal || "melhorar o inglês geral";
   const target = profile.target_level || "avançado";
 
-  return `${GISELE_AI_SYSTEM_PROMPT}
+  return `${SPEAK2CO_AI_SYSTEM_PROMPT}
 
 CONTEXTO DESTA EXPERIÊNCIA: você atua aqui como Professor IA da Speak2Co, conversando com o aluno ${name} para praticar inglês.
 
