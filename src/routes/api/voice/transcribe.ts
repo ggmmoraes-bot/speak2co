@@ -22,9 +22,15 @@ export const Route = createFileRoute("/api/voice/transcribe")({
           return new Response("Áudio muito longo", { status: 413 });
         }
 
+        // Provider de STT configurável (VoiceSettings); hoje só OpenAI está habilitado.
+        const provider = String(form.get("provider") ?? "auto");
+        const model =
+          provider === "openai" ? "openai/gpt-4o-transcribe" : "openai/gpt-4o-transcribe";
+
         const upstream = new FormData();
-        upstream.append("model", "openai/gpt-4o-transcribe");
+        upstream.append("model", model);
         upstream.append("file", audio, "recording.wav");
+
 
         const res = await fetch("https://ai.gateway.lovable.dev/v1/audio/transcriptions", {
           method: "POST",
