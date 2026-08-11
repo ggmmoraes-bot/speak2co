@@ -2,7 +2,7 @@ import { BrandText } from "@/components/BrandText";
 import { createFileRoute, Link, Outlet, useNavigate, useRouter } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { ArrowLeft, MessageSquare, Plus, Trash2 } from "lucide-react";
+import { ArrowLeft, MessageSquare, Plus, Settings, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { FeatureGate } from "@/components/FeatureGate";
