@@ -72,7 +72,7 @@ export async function generateSessionFeedback(
   const apiKey = process.env["LOVABLE_API_KEY"];
   if (!apiKey) throw new Error("IA indisponível no momento.");
 
-  const gateway = createLovableAiGatewayProvider(apiKey);
+  const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
   const result = streamText({
     model: gateway("google/gemini-3.6-flash"),
     system: withGiselePersona(
