@@ -88,6 +88,8 @@ function GiseleSettingsPage() {
         voice: voice ?? settings.voice,
         volume: settings.volume,
         rate: settings.rate,
+        provider: settings.ttsProvider,
+        scope: "gisele",
       });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível tocar o áudio.");

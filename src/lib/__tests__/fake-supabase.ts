@@ -15,6 +15,8 @@ export type FakeState = {
   aiDailyMinutes: Record<string, number | null>;
   /** segundos de IA já usados hoje */
   usedSeconds?: number;
+  /** consentimento da voz autorizada da marca (ai_voice_settings) */
+  consentStatus?: string | null;
 };
 
 type Filters = Record<string, unknown>;
@@ -34,6 +36,8 @@ function rowFor(table: string, filters: Filters, state: FakeState): unknown {
       if (!(key in state.aiDailyMinutes)) return null;
       return { ai_daily_minutes: state.aiDailyMinutes[key] };
     }
+    case "ai_voice_settings":
+      return state.consentStatus == null ? null : { consent_status: state.consentStatus };
     case "ai_usage_daily":
       return state.usedSeconds == null ? null : { seconds_used: state.usedSeconds };
     default:
