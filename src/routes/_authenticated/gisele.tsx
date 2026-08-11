@@ -112,6 +112,12 @@ function GiseleLayout() {
           >
             Mentorship hub
           </Link>
+          <Link
+            to="/gisele/configuracoes"
+            className="flex items-center gap-2 rounded-lg px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Settings className="h-3.5 w-3.5" /> Voice &amp; language
+          </Link>
         </div>
 
         <nav className="mt-2 flex-1 space-y-1 overflow-y-auto p-3">
