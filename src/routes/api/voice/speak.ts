@@ -68,7 +68,7 @@ export const Route = createFileRoute("/api/voice/speak")({
           body: JSON.stringify({
             model: "openai/gpt-4o-mini-tts",
             input: text,
-            voice,
+            voice: OPENAI_VOICES.includes(voice) ? voice : "alloy",
             response_format: "mp3",
             instructions:
               "Speak clear, natural American English at a slightly slow, teacher-like pace for an English learner.",
