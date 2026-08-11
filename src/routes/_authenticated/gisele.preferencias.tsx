@@ -16,6 +16,14 @@ export const Route = createFileRoute("/_authenticated/gisele/preferencias")({
 
 const LEVELS = ["A1", "A2", "B1", "B2", "C1"];
 
+type PracticeFormat = "text" | "audio" | "voice";
+
+const FORMATS: { id: PracticeFormat; label: string; description: string }[] = [
+  { id: "voice", label: "Voice", description: "Conversa falada, com turnos curtos." },
+  { id: "audio", label: "Audio", description: "Ouvir e repetir frases-alvo." },
+  { id: "text", label: "Text", description: "Escrever respostas e receber correções." },
+];
+
 function PreferencesPage() {
   const fetchProfile = useServerFn(getAIProfile);
   const saveFn = useServerFn(saveAIProfile);
@@ -24,18 +32,32 @@ function PreferencesPage() {
 
   const [objective, setObjective] = useState("");
   const [level, setLevel] = useState("B1");
+  const [minutes, setMinutes] = useState(15);
+  const [format, setFormat] = useState<PracticeFormat>("voice");
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (!data) return;
     setObjective(data.objective ?? "");
     setLevel(data.level ?? "B1");
+    const stored = Number(data.preferences?.["minutesPerDay"]);
+    if (Number.isFinite(stored) && stored > 0) setMinutes(stored);
+    const storedFormat = String(data.preferences?.["format"] ?? "");
+    if (storedFormat === "text" || storedFormat === "audio" || storedFormat === "voice") {
+      setFormat(storedFormat);
+    }
   }, [data]);
 
   async function save() {
     try {
       setSaving(true);
-      await saveFn({ data: { objective, level } });
+      await saveFn({
+        data: {
+          objective,
+          level,
+          preferences: { minutesPerDay: minutes, format },
+        },
+      });
       toast.success("Preferências salvas.");
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível salvar.");
@@ -43,6 +65,7 @@ function PreferencesPage() {
       setSaving(false);
     }
   }
+
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 space-y-6 px-6 py-10">
