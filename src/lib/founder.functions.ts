@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { GISELE_AI_SYSTEM_PROMPT } from "@/lib/gisele-ai-persona";
 
 export type FounderMessage = {
   id: string;
