@@ -113,7 +113,6 @@ function GiseleChat({
     focusTextarea();
   }, [threadId]);
 
-  const [input, setInput] = useState("");
   const [recording, setRecording] = useState(false);
   const [transcribing, setTranscribing] = useState(false);
   const [speakingId, setSpeakingId] = useState<string | null>(null);
@@ -146,7 +145,6 @@ function GiseleChat({
   async function submit(text: string) {
     const value = text.trim();
     if (!value || isBusy) return;
-    setInput("");
     try {
       await sendMessage({ text: value });
       await queryClient.invalidateQueries({ queryKey: ["gisele-threads"] });
@@ -319,19 +317,14 @@ function GiseleChat({
 
         <PromptInput
           className="mx-auto max-w-3xl"
-          onSubmit={(e) => {
-            e.preventDefault();
-            void submit(input);
-          }}
+          onSubmit={(message) => void submit(message.text ?? "")}
         >
           <PromptInputTextarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type in English…"
+            placeholder={recording ? "Recording… speak in English" : "Type or speak in English…"}
+            disabled={isBusy || transcribing}
           />
-          <PromptInputFooter>
-            <span />
-            <PromptInputSubmit status={status} disabled={isBusy || !input.trim()} />
+          <PromptInputFooter className="justify-end">
+            <PromptInputSubmit status={status} disabled={isBusy} />
           </PromptInputFooter>
         </PromptInput>
       </div>
