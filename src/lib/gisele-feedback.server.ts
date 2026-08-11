@@ -95,7 +95,8 @@ Regras:
   let feedback: SessionFeedback;
   try {
     feedback = (await result.output) as SessionFeedback;
-  } catch {
+  } catch (structuredError) {
+    console.warn("[gisele-feedback] structured output failed", structuredError);
     const retry = streamText({
       model: gateway("google/gemini-3.6-flash"),
       system:
