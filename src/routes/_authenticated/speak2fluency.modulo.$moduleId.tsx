@@ -126,8 +126,11 @@ function FluencyModulePage() {
     (q, i) => checkpoint[i] === q.answer,
   ).length;
 
+  const total = module.checkpoint.length;
+  const badge = module.passportBadge;
+
   function finishModule() {
-    if (checkpointCorrect < module.checkpoint.length) {
+    if (checkpointCorrect < total) {
       toast.error("Acerte todas as questões do checkpoint para concluir o módulo.");
       return;
     }
