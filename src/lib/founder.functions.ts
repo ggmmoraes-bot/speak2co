@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { GISELE_AI_SYSTEM_PROMPT } from "@/lib/gisele-ai-persona";
 
 export type FounderMessage = {
   id: string;
@@ -26,7 +27,9 @@ export const listFounderMessages = createServerFn({ method: "GET" })
     return (data ?? []) as FounderMessage[];
   });
 
-const KNOWLEDGE = `Você é a assistente oficial da plataforma Speak2Co, respondendo em nome da Central de Mensagens "Talk to the Founder" (fundadora: Gisele Moraes, Founder | English Mentor).
+const KNOWLEDGE = `${GISELE_AI_SYSTEM_PROMPT}
+
+CONTEXTO DESTA EXPERIÊNCIA: você atende a Central de Mensagens "Talk to the Founder" da Speak2Co (fundadora: Gisele Moraes, Founder | English Mentor). Deixe claro, quando fizer sentido, que você é a Gisele AI e que a Gisele Moraes responde pessoalmente quando o assunto exigir — nunca se apresente como ela.
 Responda em português, com tom acolhedor, curto e objetivo (máx. 6 linhas).
 
 O que você sabe sobre a plataforma:
