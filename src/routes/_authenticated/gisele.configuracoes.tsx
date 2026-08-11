@@ -209,6 +209,70 @@ function GiseleSettingsPage() {
           })}
         </div>
       </section>
+      <section className="space-y-4 rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
+        <div>
+          <h2 className="text-sm font-semibold text-foreground">Voice engines · Motores de voz</h2>
+          <p className="text-xs text-muted-foreground">
+            Defina quais motores a GiseleAI usa para ouvir você (STT) e para falar (TTS).
+          </p>
+        </div>
+
+        <div className="space-y-2">
+          <Label>Speech-to-text · Reconhecimento de fala</Label>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {STT_PROVIDERS.map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => update({ sttProvider: p.id })}
+                className={`rounded-xl border px-4 py-3 text-left text-xs transition-colors ${
+                  settings.sttProvider === p.id
+                    ? "border-gold bg-secondary text-foreground"
+                    : "border-border text-muted-foreground hover:border-gold/50 hover:text-foreground"
+                }`}
+              >
+                <span className="block text-sm font-medium">{p.label}</span>
+                {p.description}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <Label>Text-to-speech · Síntese de voz</Label>
+          <div className="grid gap-2 sm:grid-cols-3">
+            {TTS_PROVIDERS.map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => update({ ttsProvider: p.id })}
+                className={`rounded-xl border px-4 py-3 text-left text-xs transition-colors ${
+                  settings.ttsProvider === p.id
+                    ? "border-gold bg-secondary text-foreground"
+                    : "border-border text-muted-foreground hover:border-gold/50 hover:text-foreground"
+                }`}
+              >
+                <span className="block text-sm font-medium">{p.label}</span>
+                {p.description}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <Label>Microphone consent · Consentimento de microfone</Label>
+            <p className="text-xs text-muted-foreground">
+              Autorizo gravar minha voz e enviá-la para transcrição durante as sessões.
+            </p>
+          </div>
+          <Switch
+            checked={settings.voiceConsent}
+            onCheckedChange={(checked) => update({ voiceConsent: checked })}
+          />
+        </div>
+      </section>
+
 
       <Button
         variant="ghost"
