@@ -12,6 +12,7 @@ import {
   FLUENCY_SKILL_LABELS,
 } from "@/lib/speak2fluency-content";
 import { getFluencyOverview, saveDailyMission } from "@/lib/speak2fluency.functions";
+import { siteUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/_authenticated/speak2fluency/")({
   head: () => ({

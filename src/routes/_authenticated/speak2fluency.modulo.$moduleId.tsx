@@ -17,6 +17,7 @@ import {
   saveFluencyProgress,
   type FluencyFeedback,
 } from "@/lib/speak2fluency.functions";
+import { siteUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/_authenticated/speak2fluency/modulo/$moduleId")({
   head: ({ params }) => {
