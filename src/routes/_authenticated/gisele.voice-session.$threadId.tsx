@@ -176,6 +176,15 @@ function VoiceSessionPage() {
         </p>
       ) : null}
 
+      {voiceDegraded && (
+        <p className="rounded-lg border border-gold/40 bg-gold/5 px-4 py-2 text-xs text-muted-foreground">
+          Voice playback is unavailable right now — the session continues in text.
+          <span className="block italic">
+            O áudio falhou, mas a conversa segue normalmente por texto.
+          </span>
+        </p>
+      )}
+
 
       <Card className="flex flex-col items-center gap-4 p-8">
         <div
