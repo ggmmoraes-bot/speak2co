@@ -22,6 +22,16 @@ export const Route = createFileRoute("/api/voice/transcribe")({
           return new Response("Áudio muito longo", { status: 413 });
         }
 
+        // Voice Room da Gisele AI é exclusivo do Signature — checagem no servidor.
+        if (String(form.get("scope") ?? "") === "gisele") {
+          const { assertGiseleScope } = await import("@/lib/brand-voice.server");
+          try {
+            await assertGiseleScope(auth.supabase, auth.userId);
+          } catch (e) {
+            return new Response(e instanceof Error ? e.message : "Acesso negado", { status: 403 });
+          }
+        }
+
         // Provider de STT configurável (VoiceSettings); hoje só OpenAI está habilitado.
         const provider = String(form.get("provider") ?? "auto");
         const model =
