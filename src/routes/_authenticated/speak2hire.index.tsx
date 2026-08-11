@@ -12,6 +12,7 @@ import {
   Trophy,
 } from "lucide-react";
 import { toast } from "sonner";
+import { AskGiseleButton } from "@/components/AskGiseleButton";
 import { BrandText } from "@/components/BrandText";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/speak2hire.asset.json";
@@ -117,6 +118,7 @@ function Speak2HireHub() {
             <p className="text-sm text-muted-foreground">
               Ace your Interview — English for Global Careers. Frameworks, not just vocabulary.
             </p>
+            <AskGiseleButton focus="interview" contextNote="O aluno está no Speak2Hire (entrevistas, carreira e apresentações em inglês)." className="mt-3" />
           </div>
         </header>
 
