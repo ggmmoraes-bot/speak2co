@@ -13,20 +13,27 @@ export const Route = createFileRoute("/api/voice/speak")({
         const apiKey = process.env["LOVABLE_API_KEY"];
         if (!apiKey) return new Response("IA indisponível no momento", { status: 503 });
 
-        const body = (await request.json()) as { text?: string; voice?: string };
+        const body = (await request.json()) as { text?: string; voice?: string; provider?: string };
         const text = (body.text ?? "").trim().slice(0, MAX_CHARS);
         if (!text) return new Response("Texto obrigatório", { status: 400 });
 
         const voice = body.voice || "alloy";
         const OPENAI_VOICES = ["alloy", "nova", "shimmer", "fable", "echo", "onyx"];
+        const provider = body.provider === "openai" || body.provider === "elevenlabs"
+          ? body.provider
+          : OPENAI_VOICES.includes(voice)
+            ? "openai"
+            : "elevenlabs";
 
-        // Vozes que não são do OpenAI são Voice IDs da ElevenLabs (ex.: voz clonada da fundadora).
-        if (!OPENAI_VOICES.includes(voice)) {
+        // ElevenLabs: Voice IDs próprios (ex.: voz clonada da fundadora).
+        if (provider === "elevenlabs") {
           const elevenKey =
             process.env["ELEVENLABS_TTS_API_KEY"] || process.env["ELEVENLABS_API_KEY"];
           if (!elevenKey) return new Response("Voz indisponível no momento", { status: 503 });
+          const elevenVoice = OPENAI_VOICES.includes(voice) ? "m3m72XeqSLA8AEuQecN0" : voice;
           const elevenRes = await fetch(
-            `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voice)}?output_format=mp3_44100_128`,
+            `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(elevenVoice)}?output_format=mp3_44100_128`,
+
             {
               method: "POST",
               headers: { "xi-api-key": elevenKey, "Content-Type": "application/json" },
@@ -61,7 +68,7 @@ export const Route = createFileRoute("/api/voice/speak")({
           body: JSON.stringify({
             model: "openai/gpt-4o-mini-tts",
             input: text,
-            voice,
+            voice: OPENAI_VOICES.includes(voice) ? voice : "alloy",
             response_format: "mp3",
             instructions:
               "Speak clear, natural American English at a slightly slow, teacher-like pace for an English learner.",

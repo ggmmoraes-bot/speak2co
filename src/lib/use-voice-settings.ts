@@ -34,12 +34,31 @@ export const SUPPORT_LANGUAGES: { id: SupportLanguage; label: string; descriptio
   },
 ];
 
+/** Providers configuráveis de fala (STT) e voz (TTS). */
+export type SttProvider = "auto" | "openai";
+export type TtsProvider = "auto" | "openai" | "elevenlabs";
+
+export const STT_PROVIDERS: { id: SttProvider; label: string; description: string }[] = [
+  { id: "auto", label: "Automatic", description: "A plataforma escolhe o melhor motor." },
+  { id: "openai", label: "OpenAI transcribe", description: "Alta precisão para inglês." },
+];
+
+export const TTS_PROVIDERS: { id: TtsProvider; label: string; description: string }[] = [
+  { id: "auto", label: "Automatic", description: "Definido pela voz escolhida." },
+  { id: "openai", label: "Standard voices", description: "Vozes neutras de estúdio." },
+  { id: "elevenlabs", label: "Cloned voice", description: "Voz clonada da fundadora." },
+];
+
 export type VoiceSettings = {
   autoSpeak: boolean;
   volume: number; // 0 a 1
   rate: number; // 0.5 a 2
   voice: string;
   supportLanguage: SupportLanguage;
+  sttProvider: SttProvider;
+  ttsProvider: TtsProvider;
+  /** Consentimento explícito para gravar e enviar áudio. */
+  voiceConsent: boolean;
 };
 
 const STORAGE_KEY = "speak2co:voice-settings";
@@ -49,6 +68,9 @@ const DEFAULTS: VoiceSettings = {
   rate: 1,
   voice: "alloy",
   supportLanguage: "bilingual",
+  sttProvider: "auto",
+  ttsProvider: "auto",
+  voiceConsent: false,
 };
 
 function read(): VoiceSettings {
@@ -60,12 +82,21 @@ function read(): VoiceSettings {
     const supportLanguage = SUPPORT_LANGUAGES.some((l) => l.id === parsed.supportLanguage)
       ? (parsed.supportLanguage as SupportLanguage)
       : DEFAULTS.supportLanguage;
+    const sttProvider = STT_PROVIDERS.some((p) => p.id === parsed.sttProvider)
+      ? (parsed.sttProvider as SttProvider)
+      : DEFAULTS.sttProvider;
+    const ttsProvider = TTS_PROVIDERS.some((p) => p.id === parsed.ttsProvider)
+      ? (parsed.ttsProvider as TtsProvider)
+      : DEFAULTS.ttsProvider;
     return {
       autoSpeak: Boolean(parsed.autoSpeak),
       volume: Math.min(1, Math.max(0, Number(parsed.volume ?? 1))),
       rate: Math.min(2, Math.max(0.5, Number(parsed.rate ?? 1))),
       voice,
       supportLanguage,
+      sttProvider,
+      ttsProvider,
+      voiceConsent: Boolean(parsed.voiceConsent),
     };
   } catch {
     return DEFAULTS;

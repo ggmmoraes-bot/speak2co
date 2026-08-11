@@ -9,13 +9,17 @@ async function authHeaders(): Promise<Headers> {
 }
 
 /** Envia o áudio gravado e devolve a transcrição em texto. */
-export async function transcribeAudio(blob: Blob): Promise<string> {
+export async function transcribeAudio(
+  blob: Blob,
+  options: { provider?: string } = {},
+): Promise<string> {
   if (blob.size < 2048) {
     throw new Error("Gravação muito curta — tente novamente falando um pouco mais.");
   }
   const headers = await authHeaders();
   const form = new FormData();
   form.append("audio", blob, "recording.wav");
+  if (options.provider) form.append("provider", options.provider);
   const res = await fetch("/api/voice/transcribe", { method: "POST", headers, body: form });
   if (!res.ok) throw new Error((await res.text()) || "Não foi possível transcrever o áudio.");
   const json = (await res.json()) as { text?: string };
@@ -23,6 +27,7 @@ export async function transcribeAudio(blob: Blob): Promise<string> {
   if (!text) throw new Error("Não consegui entender o áudio. Tente falar mais perto do microfone.");
   return text;
 }
+
 
 const audioCache = new Map<string, string>();
 let currentAudio: HTMLAudioElement | null = null;
@@ -45,6 +50,8 @@ export type SpeakOptions = {
   volume?: number;
   /** 0.5 a 2 */
   rate?: number;
+  /** Provider de TTS: "auto" (pela voz), "openai" ou "elevenlabs". */
+  provider?: string;
 };
 
 const clamp = (value: number, min: number, max: number) =>
@@ -54,9 +61,10 @@ const clamp = (value: number, min: number, max: number) =>
 export async function speakText(text: string, options: SpeakOptions | string = {}): Promise<void> {
   const opts: SpeakOptions = typeof options === "string" ? { voice: options } : options;
   const voice = opts.voice ?? "alloy";
+  const provider = opts.provider ?? "auto";
   const volume = clamp(opts.volume ?? 1, 0, 1);
   const rate = clamp(opts.rate ?? 1, 0.5, 2);
-  const key = `${voice}:${text}`;
+  const key = `${provider}:${voice}:${text}`;
   let url = audioCache.get(key);
   if (!url) {
     const headers = await authHeaders();
@@ -64,12 +72,13 @@ export async function speakText(text: string, options: SpeakOptions | string = {
     const res = await fetch("/api/voice/speak", {
       method: "POST",
       headers,
-      body: JSON.stringify({ text, voice }),
+      body: JSON.stringify({ text, voice, provider }),
     });
     if (!res.ok) throw new Error((await res.text()) || "Não foi possível gerar o áudio.");
     url = URL.createObjectURL(await res.blob());
     audioCache.set(key, url);
   }
+
   stopSpeaking();
   const audio = new Audio(url);
   audio.volume = volume;

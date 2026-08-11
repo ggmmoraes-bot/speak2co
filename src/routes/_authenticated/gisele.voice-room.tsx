@@ -28,7 +28,8 @@ function VoiceRoomPage() {
         data: { focus: ctx.focus, title: ctx.titleEn, contextId: ctx.id },
       });
       await queryClient.invalidateQueries({ queryKey: ["gisele-threads"] });
-      navigate({ to: "/gisele/$threadId", params: { threadId: thread.id } });
+      navigate({ to: "/gisele/voice-session/$threadId", params: { threadId: thread.id } });
+
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível abrir a sala.");
     } finally {
