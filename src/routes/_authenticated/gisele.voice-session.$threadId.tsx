@@ -91,7 +91,14 @@ function VoiceSessionPage() {
       provider: voice.ttsProvider,
       scope: "gisele",
     })
-      .catch((e) => toast.error(e instanceof Error ? e.message : "Não foi possível falar."))
+      // Degradação graciosa: se o áudio falhar, a sessão continua por texto.
+      .catch(() => {
+        setShowText(true);
+        setVoiceDegraded(true);
+        toast.warning(
+          "Áudio indisponível agora — continuando por texto. Audio unavailable, switching to text.",
+        );
+      })
       .finally(() => setPhase("idle"));
   }, [streaming, lastAssistant, voice.voice, voice.volume, voice.rate, voice.ttsProvider]);
 
