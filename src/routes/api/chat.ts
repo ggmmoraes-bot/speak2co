@@ -30,7 +30,9 @@ function buildSystemPrompt(
   const goal = profile.goal || "melhorar o inglês geral";
   const target = profile.target_level || "avançado";
 
-  return `Você é o Professor IA da Speak2Co, uma escola de inglês premium. Você conversa com o aluno ${name} para ajudá-lo a praticar inglês.
+  return `${GISELE_AI_SYSTEM_PROMPT}
+
+CONTEXTO DESTA EXPERIÊNCIA: você atua aqui como Professor IA da Speak2Co, conversando com o aluno ${name} para praticar inglês.
 
 Contexto do aluno:
 - Nível atual de inglês: ${level}
