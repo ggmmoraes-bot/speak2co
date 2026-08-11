@@ -41,6 +41,7 @@ import { Route as AuthenticatedGiseleIndexRouteImport } from './routes/_authenti
 import { Route as AuthenticatedGiseleThreadIdRouteImport } from './routes/_authenticated/gisele.$threadId'
 import { Route as AuthenticatedGiseleConfiguracoesRouteImport } from './routes/_authenticated/gisele.configuracoes'
 import { Route as AuthenticatedGiseleOnboardingRouteImport } from './routes/_authenticated/gisele.onboarding'
+import { Route as AuthenticatedGiseleVoiceRoomRouteImport } from './routes/_authenticated/gisele.voice-room'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2fluencyIndexRouteImport } from './routes/_authenticated/speak2fluency.index'
@@ -236,6 +237,12 @@ const AuthenticatedGiseleOnboardingRoute =
     path: '/onboarding',
     getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
+const AuthenticatedGiseleVoiceRoomRoute =
+  AuthenticatedGiseleVoiceRoomRouteImport.update({
+    id: '/voice-room',
+    path: '/voice-room',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
 const AuthenticatedProfessorIndexRoute =
   AuthenticatedProfessorIndexRouteImport.update({
     id: '/',
@@ -383,6 +390,7 @@ export interface FileRoutesByFullPath {
   '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
+  '/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -429,6 +437,7 @@ export interface FileRoutesByTo {
   '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
+  '/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -484,6 +493,7 @@ export interface FileRoutesById {
   '/_authenticated/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/_authenticated/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/_authenticated/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
+  '/_authenticated/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/_authenticated/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -539,6 +549,7 @@ export interface FileRouteTypes {
     | '/gisele/$threadId'
     | '/gisele/configuracoes'
     | '/gisele/onboarding'
+    | '/gisele/voice-room'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -585,6 +596,7 @@ export interface FileRouteTypes {
     | '/gisele/$threadId'
     | '/gisele/configuracoes'
     | '/gisele/onboarding'
+    | '/gisele/voice-room'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -639,6 +651,7 @@ export interface FileRouteTypes {
     | '/_authenticated/gisele/$threadId'
     | '/_authenticated/gisele/configuracoes'
     | '/_authenticated/gisele/onboarding'
+    | '/_authenticated/gisele/voice-room'
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/speak2travel/trip-planner'
     | '/_authenticated/upgrade/essential'
@@ -905,6 +918,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGiseleOnboardingRouteImport
       parentRoute: typeof AuthenticatedGiseleRoute
     }
+    '/_authenticated/gisele/voice-room': {
+      id: '/_authenticated/gisele/voice-room'
+      path: '/voice-room'
+      fullPath: '/gisele/voice-room'
+      preLoaderRoute: typeof AuthenticatedGiseleVoiceRoomRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
     '/_authenticated/professor/': {
       id: '/_authenticated/professor/'
       path: '/'
@@ -1093,6 +1113,7 @@ interface AuthenticatedGiseleRouteChildren {
   AuthenticatedGiseleThreadIdRoute: typeof AuthenticatedGiseleThreadIdRoute
   AuthenticatedGiseleConfiguracoesRoute: typeof AuthenticatedGiseleConfiguracoesRoute
   AuthenticatedGiseleOnboardingRoute: typeof AuthenticatedGiseleOnboardingRoute
+  AuthenticatedGiseleVoiceRoomRoute: typeof AuthenticatedGiseleVoiceRoomRoute
   AuthenticatedGiseleIndexRoute: typeof AuthenticatedGiseleIndexRoute
 }
 
@@ -1100,6 +1121,7 @@ const AuthenticatedGiseleRouteChildren: AuthenticatedGiseleRouteChildren = {
   AuthenticatedGiseleThreadIdRoute: AuthenticatedGiseleThreadIdRoute,
   AuthenticatedGiseleConfiguracoesRoute: AuthenticatedGiseleConfiguracoesRoute,
   AuthenticatedGiseleOnboardingRoute: AuthenticatedGiseleOnboardingRoute,
+  AuthenticatedGiseleVoiceRoomRoute: AuthenticatedGiseleVoiceRoomRoute,
   AuthenticatedGiseleIndexRoute: AuthenticatedGiseleIndexRoute,
 }
 
