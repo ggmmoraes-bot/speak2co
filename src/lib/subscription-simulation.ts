@@ -1,7 +1,7 @@
 /**
  * Modo de simulação da tela /assinatura.
  * Apenas visual: nada é gravado no banco e nenhum plano é alterado de verdade.
- * Ative com ?simulacao=mensal | anual | pendente | cancelada
+ * Ative com ?simulacao=anual | pendente | cancelada
  */
 
 export type SubscriptionEventView = {
@@ -16,10 +16,9 @@ export type SubscriptionEventView = {
   created_at: string;
 };
 
-export type SimulationMode = "mensal" | "anual" | "pendente" | "cancelada";
+export type SimulationMode = "anual" | "pendente" | "cancelada";
 
 export const SIMULATION_MODES: { value: SimulationMode; label: string }[] = [
-  { value: "mensal", label: "Premium mensal" },
   { value: "anual", label: "Premium anual" },
   { value: "pendente", label: "Pagamento pendente" },
   { value: "cancelada", label: "Assinatura cancelada" },
