@@ -368,14 +368,18 @@ function AdminPage() {
               />
             </div>
             <div>
-              <Label htmlFor="plan-ck-m">Checkout mensal</Label>
+              <Label htmlFor="plan-installment">Parcelamento (12x sem juros)</Label>
               <Input
-                id="plan-ck-m"
-                value={planForm.monthly_checkout_key}
-                onChange={(e) => setPlanForm({ ...planForm, monthly_checkout_key: e.target.value })}
-                placeholder="premium_monthly"
+                id="plan-installment"
+                readOnly
+                value={
+                  planForm.yearly_price
+                    ? `12x de R$ ${(Number(planForm.yearly_price) / 12).toFixed(2)}`
+                    : "—"
+                }
               />
             </div>
+
             <div>
               <Label htmlFor="plan-ck-y">Checkout anual</Label>
               <Input
