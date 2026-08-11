@@ -41,6 +41,7 @@ import { Route as AuthenticatedGiseleIndexRouteImport } from './routes/_authenti
 import { Route as AuthenticatedGiseleThreadIdRouteImport } from './routes/_authenticated/gisele.$threadId'
 import { Route as AuthenticatedGiseleConfiguracoesRouteImport } from './routes/_authenticated/gisele.configuracoes'
 import { Route as AuthenticatedGiseleFeedbackRouteImport } from './routes/_authenticated/gisele.feedback'
+import { Route as AuthenticatedGiseleHistoricoRouteImport } from './routes/_authenticated/gisele.historico'
 import { Route as AuthenticatedGiseleMeuPlanoRouteImport } from './routes/_authenticated/gisele.meu-plano'
 import { Route as AuthenticatedGiseleMeuProgressoRouteImport } from './routes/_authenticated/gisele.meu-progresso'
 import { Route as AuthenticatedGiseleMissaoDoDiaRouteImport } from './routes/_authenticated/gisele.missao-do-dia'
@@ -241,6 +242,12 @@ const AuthenticatedGiseleFeedbackRoute =
     path: '/feedback',
     getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
+const AuthenticatedGiseleHistoricoRoute =
+  AuthenticatedGiseleHistoricoRouteImport.update({
+    id: '/historico',
+    path: '/historico',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
 const AuthenticatedGiseleMeuPlanoRoute =
   AuthenticatedGiseleMeuPlanoRouteImport.update({
     id: '/meu-plano',
@@ -418,6 +425,7 @@ export interface FileRoutesByFullPath {
   '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
+  '/gisele/historico': typeof AuthenticatedGiseleHistoricoRoute
   '/gisele/meu-plano': typeof AuthenticatedGiseleMeuPlanoRoute
   '/gisele/meu-progresso': typeof AuthenticatedGiseleMeuProgressoRoute
   '/gisele/missao-do-dia': typeof AuthenticatedGiseleMissaoDoDiaRoute
@@ -469,6 +477,7 @@ export interface FileRoutesByTo {
   '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
+  '/gisele/historico': typeof AuthenticatedGiseleHistoricoRoute
   '/gisele/meu-plano': typeof AuthenticatedGiseleMeuPlanoRoute
   '/gisele/meu-progresso': typeof AuthenticatedGiseleMeuProgressoRoute
   '/gisele/missao-do-dia': typeof AuthenticatedGiseleMissaoDoDiaRoute
@@ -529,6 +538,7 @@ export interface FileRoutesById {
   '/_authenticated/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/_authenticated/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/_authenticated/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
+  '/_authenticated/gisele/historico': typeof AuthenticatedGiseleHistoricoRoute
   '/_authenticated/gisele/meu-plano': typeof AuthenticatedGiseleMeuPlanoRoute
   '/_authenticated/gisele/meu-progresso': typeof AuthenticatedGiseleMeuProgressoRoute
   '/_authenticated/gisele/missao-do-dia': typeof AuthenticatedGiseleMissaoDoDiaRoute
@@ -589,6 +599,7 @@ export interface FileRouteTypes {
     | '/gisele/$threadId'
     | '/gisele/configuracoes'
     | '/gisele/feedback'
+    | '/gisele/historico'
     | '/gisele/meu-plano'
     | '/gisele/meu-progresso'
     | '/gisele/missao-do-dia'
@@ -640,6 +651,7 @@ export interface FileRouteTypes {
     | '/gisele/$threadId'
     | '/gisele/configuracoes'
     | '/gisele/feedback'
+    | '/gisele/historico'
     | '/gisele/meu-plano'
     | '/gisele/meu-progresso'
     | '/gisele/missao-do-dia'
@@ -699,6 +711,7 @@ export interface FileRouteTypes {
     | '/_authenticated/gisele/$threadId'
     | '/_authenticated/gisele/configuracoes'
     | '/_authenticated/gisele/feedback'
+    | '/_authenticated/gisele/historico'
     | '/_authenticated/gisele/meu-plano'
     | '/_authenticated/gisele/meu-progresso'
     | '/_authenticated/gisele/missao-do-dia'
@@ -970,6 +983,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGiseleFeedbackRouteImport
       parentRoute: typeof AuthenticatedGiseleRoute
     }
+    '/_authenticated/gisele/historico': {
+      id: '/_authenticated/gisele/historico'
+      path: '/historico'
+      fullPath: '/gisele/historico'
+      preLoaderRoute: typeof AuthenticatedGiseleHistoricoRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
     '/_authenticated/gisele/meu-plano': {
       id: '/_authenticated/gisele/meu-plano'
       path: '/meu-plano'
@@ -1193,6 +1213,7 @@ interface AuthenticatedGiseleRouteChildren {
   AuthenticatedGiseleThreadIdRoute: typeof AuthenticatedGiseleThreadIdRoute
   AuthenticatedGiseleConfiguracoesRoute: typeof AuthenticatedGiseleConfiguracoesRoute
   AuthenticatedGiseleFeedbackRoute: typeof AuthenticatedGiseleFeedbackRoute
+  AuthenticatedGiseleHistoricoRoute: typeof AuthenticatedGiseleHistoricoRoute
   AuthenticatedGiseleMeuPlanoRoute: typeof AuthenticatedGiseleMeuPlanoRoute
   AuthenticatedGiseleMeuProgressoRoute: typeof AuthenticatedGiseleMeuProgressoRoute
   AuthenticatedGiseleMissaoDoDiaRoute: typeof AuthenticatedGiseleMissaoDoDiaRoute
@@ -1205,6 +1226,7 @@ const AuthenticatedGiseleRouteChildren: AuthenticatedGiseleRouteChildren = {
   AuthenticatedGiseleThreadIdRoute: AuthenticatedGiseleThreadIdRoute,
   AuthenticatedGiseleConfiguracoesRoute: AuthenticatedGiseleConfiguracoesRoute,
   AuthenticatedGiseleFeedbackRoute: AuthenticatedGiseleFeedbackRoute,
+  AuthenticatedGiseleHistoricoRoute: AuthenticatedGiseleHistoricoRoute,
   AuthenticatedGiseleMeuPlanoRoute: AuthenticatedGiseleMeuPlanoRoute,
   AuthenticatedGiseleMeuProgressoRoute: AuthenticatedGiseleMeuProgressoRoute,
   AuthenticatedGiseleMissaoDoDiaRoute: AuthenticatedGiseleMissaoDoDiaRoute,
