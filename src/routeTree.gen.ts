@@ -26,6 +26,7 @@ import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedPremiumRouteImport } from './routes/_authenticated/premium'
 import { Route as AuthenticatedProfessorRouteImport } from './routes/_authenticated/professor'
 import { Route as AuthenticatedRankingRouteImport } from './routes/_authenticated/ranking'
+import { Route as AuthenticatedSpeak2fluencyRouteImport } from './routes/_authenticated/speak2fluency'
 import { Route as AuthenticatedSpeak2hireRouteImport } from './routes/_authenticated/speak2hire'
 import { Route as AuthenticatedSpeak2travelRouteImport } from './routes/_authenticated/speak2travel'
 import { Route as AuthenticatedTesteDeNivelRouteImport } from './routes/_authenticated/teste-de-nivel'
@@ -141,6 +142,12 @@ const AuthenticatedRankingRoute = AuthenticatedRankingRouteImport.update({
   path: '/ranking',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSpeak2fluencyRoute =
+  AuthenticatedSpeak2fluencyRouteImport.update({
+    id: '/speak2fluency',
+    path: '/speak2fluency',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSpeak2hireRoute = AuthenticatedSpeak2hireRouteImport.update({
   id: '/speak2hire',
   path: '/speak2hire',
@@ -310,6 +317,7 @@ export interface FileRoutesByFullPath {
   '/premium': typeof AuthenticatedPremiumRoute
   '/professor': typeof AuthenticatedProfessorRouteWithChildren
   '/ranking': typeof AuthenticatedRankingRoute
+  '/speak2fluency': typeof AuthenticatedSpeak2fluencyRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireRouteWithChildren
   '/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
@@ -351,6 +359,7 @@ export interface FileRoutesByTo {
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
   '/ranking': typeof AuthenticatedRankingRoute
+  '/speak2fluency': typeof AuthenticatedSpeak2fluencyRoute
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/api/chat': typeof ApiChatRoute
   '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
@@ -395,6 +404,7 @@ export interface FileRoutesById {
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
   '/_authenticated/professor': typeof AuthenticatedProfessorRouteWithChildren
   '/_authenticated/ranking': typeof AuthenticatedRankingRoute
+  '/_authenticated/speak2fluency': typeof AuthenticatedSpeak2fluencyRoute
   '/_authenticated/speak2hire': typeof AuthenticatedSpeak2hireRouteWithChildren
   '/_authenticated/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/_authenticated/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
@@ -441,6 +451,7 @@ export interface FileRouteTypes {
     | '/premium'
     | '/professor'
     | '/ranking'
+    | '/speak2fluency'
     | '/speak2hire'
     | '/speak2travel'
     | '/teste-de-nivel'
@@ -482,6 +493,7 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/premium'
     | '/ranking'
+    | '/speak2fluency'
     | '/teste-de-nivel'
     | '/api/chat'
     | '/curso-beginner/assessment'
@@ -525,6 +537,7 @@ export interface FileRouteTypes {
     | '/_authenticated/premium'
     | '/_authenticated/professor'
     | '/_authenticated/ranking'
+    | '/_authenticated/speak2fluency'
     | '/_authenticated/speak2hire'
     | '/_authenticated/speak2travel'
     | '/_authenticated/teste-de-nivel'
@@ -686,6 +699,13 @@ declare module '@tanstack/react-router' {
       path: '/ranking'
       fullPath: '/ranking'
       preLoaderRoute: typeof AuthenticatedRankingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/speak2fluency': {
+      id: '/_authenticated/speak2fluency'
+      path: '/speak2fluency'
+      fullPath: '/speak2fluency'
+      preLoaderRoute: typeof AuthenticatedSpeak2fluencyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/speak2hire': {
@@ -989,6 +1009,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
   AuthenticatedProfessorRoute: typeof AuthenticatedProfessorRouteWithChildren
   AuthenticatedRankingRoute: typeof AuthenticatedRankingRoute
+  AuthenticatedSpeak2fluencyRoute: typeof AuthenticatedSpeak2fluencyRoute
   AuthenticatedSpeak2hireRoute: typeof AuthenticatedSpeak2hireRouteWithChildren
   AuthenticatedSpeak2travelRoute: typeof AuthenticatedSpeak2travelRouteWithChildren
   AuthenticatedTesteDeNivelRoute: typeof AuthenticatedTesteDeNivelRoute
@@ -1009,6 +1030,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
   AuthenticatedProfessorRoute: AuthenticatedProfessorRouteWithChildren,
   AuthenticatedRankingRoute: AuthenticatedRankingRoute,
+  AuthenticatedSpeak2fluencyRoute: AuthenticatedSpeak2fluencyRoute,
   AuthenticatedSpeak2hireRoute: AuthenticatedSpeak2hireRouteWithChildren,
   AuthenticatedSpeak2travelRoute: AuthenticatedSpeak2travelRouteWithChildren,
   AuthenticatedTesteDeNivelRoute: AuthenticatedTesteDeNivelRoute,
@@ -1034,13 +1056,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
