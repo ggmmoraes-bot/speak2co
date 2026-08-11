@@ -83,6 +83,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          product: string
           title: string
           updated_at: string
           user_id: string
@@ -90,6 +91,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          product?: string
           title?: string
           updated_at?: string
           user_id: string
@@ -97,6 +99,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          product?: string
           title?: string
           updated_at?: string
           user_id?: string
@@ -348,6 +351,83 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      gisele_memory: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          kind: string
+          review_at: string | null
+          source: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          kind: string
+          review_at?: string | null
+          source?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          review_at?: string | null
+          source?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      gisele_sessions: {
+        Row: {
+          corrections: Json
+          created_at: string
+          focus: string
+          id: string
+          minutes: number
+          summary: string | null
+          thread_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          corrections?: Json
+          created_at?: string
+          focus?: string
+          id?: string
+          minutes?: number
+          summary?: string | null
+          thread_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          corrections?: Json
+          created_at?: string
+          focus?: string
+          id?: string
+          minutes?: number
+          summary?: string | null
+          thread_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gisele_sessions_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "chat_threads"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       interview_sessions: {
         Row: {
