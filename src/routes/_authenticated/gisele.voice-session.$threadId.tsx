@@ -9,7 +9,8 @@ import { Card } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { MicRecorder } from "@/lib/audio-recorder";
 import { speakText, stopSpeaking, transcribeAudio } from "@/lib/voice-client";
-import { useVoiceSettings } from "@/lib/use-voice-settings";
+import { isBrandVoice, useVoiceSettings } from "@/lib/use-voice-settings";
+import { AiVoiceDisclosure } from "@/components/AiVoiceDisclosure";
 import { requestSessionFeedback, type SessionFeedbackDTO } from "@/lib/gisele-data.functions";
 
 export const Route = createFileRoute("/_authenticated/gisele/voice-session/$threadId")({
@@ -87,6 +88,7 @@ function VoiceSessionPage() {
       volume: voice.volume,
       rate: voice.rate,
       provider: voice.ttsProvider,
+      scope: "gisele",
     })
       .catch((e) => toast.error(e instanceof Error ? e.message : "Não foi possível falar."))
       .finally(() => setPhase("idle"));
@@ -116,7 +118,7 @@ function VoiceSessionPage() {
     setPhase("transcribing");
     try {
       const { blob } = await recorder.stop();
-      const text = await transcribeAudio(blob, { provider: voice.sttProvider });
+      const text = await transcribeAudio(blob, { provider: voice.sttProvider, scope: "gisele" });
       setLastTranscript(text);
       setPhase("thinking");
       sendMessage({ text });
@@ -156,6 +158,15 @@ function VoiceSessionPage() {
           Fale em inglês, ouça a Gisele e continue a conversa. A voz é gerada por IA.
         </p>
       </header>
+
+      <AiVoiceDisclosure />
+      {isBrandVoice(voice.voice) ? (
+        <p className="text-[11px] text-muted-foreground">
+          Authorized brand voice active · Voz autorizada da marca ativa (síntese licenciada pela
+          Speak2Co, com consentimento registrado nas configurações).
+        </p>
+      ) : null}
+
 
       <Card className="flex flex-col items-center gap-4 p-8">
         <div

@@ -4,11 +4,16 @@ import { applyPlaybackSettings } from "@/lib/voice-client";
 /** Voz clonada da fundadora (ElevenLabs). */
 export const FOUNDER_VOICE_ID = "m3m72XeqSLA8AEuQecN0";
 
+/** A voz autorizada da marca é sempre sintética (gerada por IA). */
+export function isBrandVoice(voiceId: string | undefined | null) {
+  return (voiceId ?? "") === FOUNDER_VOICE_ID;
+}
+
 export const AI_VOICES = [
   {
     id: FOUNDER_VOICE_ID,
-    label: "Gisele Moraes (Founder)",
-    description: "Voz clonada da fundadora — gerada por IA",
+    label: "Gisele Moraes (Founder) · AI voice",
+    description: "Voz sintética autorizada da fundadora — gerada por IA, não é uma pessoa real",
   },
   { id: "alloy", label: "Alloy", description: "Neutra e equilibrada" },
   { id: "nova", label: "Nova", description: "Feminina, clara e acolhedora" },
