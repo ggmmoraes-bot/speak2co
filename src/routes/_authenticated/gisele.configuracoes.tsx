@@ -9,10 +9,13 @@ import { Label } from "@/components/ui/label";
 import { speakText, stopSpeaking } from "@/lib/voice-client";
 import {
   AI_VOICES,
+  STT_PROVIDERS,
   SUPPORT_LANGUAGES,
+  TTS_PROVIDERS,
   useVoiceSettings,
   type SupportLanguage,
 } from "@/lib/use-voice-settings";
+
 
 export const Route = createFileRoute("/_authenticated/gisele/configuracoes")({
   head: () => ({
