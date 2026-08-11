@@ -11,7 +11,7 @@ async function authHeaders(): Promise<Headers> {
 /** Envia o áudio gravado e devolve a transcrição em texto. */
 export async function transcribeAudio(
   blob: Blob,
-  options: { provider?: string } = {},
+  options: { provider?: string; scope?: string } = {},
 ): Promise<string> {
   if (blob.size < 2048) {
     throw new Error("Gravação muito curta — tente novamente falando um pouco mais.");
@@ -20,6 +20,7 @@ export async function transcribeAudio(
   const form = new FormData();
   form.append("audio", blob, "recording.wav");
   if (options.provider) form.append("provider", options.provider);
+  if (options.scope) form.append("scope", options.scope);
   const res = await fetch("/api/voice/transcribe", { method: "POST", headers, body: form });
   if (!res.ok) throw new Error((await res.text()) || "Não foi possível transcrever o áudio.");
   const json = (await res.json()) as { text?: string };
@@ -52,6 +53,8 @@ export type SpeakOptions = {
   rate?: number;
   /** Provider de TTS: "auto" (pela voz), "openai" ou "elevenlabs". */
   provider?: string;
+  /** Escopo de permissão verificado no servidor (ex.: "gisele"). */
+  scope?: string;
 };
 
 const clamp = (value: number, min: number, max: number) =>
@@ -64,7 +67,7 @@ export async function speakText(text: string, options: SpeakOptions | string = {
   const provider = opts.provider ?? "auto";
   const volume = clamp(opts.volume ?? 1, 0, 1);
   const rate = clamp(opts.rate ?? 1, 0.5, 2);
-  const key = `${provider}:${voice}:${text}`;
+  const key = `${provider}:${voice}:${opts.scope ?? ""}:${text}`;
   let url = audioCache.get(key);
   if (!url) {
     const headers = await authHeaders();
@@ -72,7 +75,7 @@ export async function speakText(text: string, options: SpeakOptions | string = {
     const res = await fetch("/api/voice/speak", {
       method: "POST",
       headers,
-      body: JSON.stringify({ text, voice, provider }),
+      body: JSON.stringify({ text, voice, provider, scope: opts.scope }),
     });
     if (!res.ok) throw new Error((await res.text()) || "Não foi possível gerar o áudio.");
     url = URL.createObjectURL(await res.blob());
