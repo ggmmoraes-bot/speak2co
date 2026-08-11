@@ -5,7 +5,7 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
-import { AudioLines, CheckCircle2, Loader2, Mic, Square, Volume2 } from "lucide-react";
+import { AudioLines, CheckCircle2, Loader2, Mic, RotateCcw, Sparkles, Square, Volume2 } from "lucide-react";
 import {
   Conversation,
   ConversationContent,
@@ -27,6 +27,7 @@ import { transcribeAudio, speakText, stopSpeaking } from "@/lib/voice-client";
 import { useVoiceSettings } from "@/lib/use-voice-settings";
 import { supabase } from "@/integrations/supabase/client";
 import { FOCUS_LABEL } from "@/lib/gisele-focus";
+import { requestSessionFeedback, type SessionFeedbackDTO } from "@/lib/gisele-data.functions";
 import {
   closeGiseleSession,
   getGiseleSession,
@@ -66,6 +67,7 @@ function GiseleThreadPage() {
       threadId={threadId}
       initialMessages={initialMessages as unknown as UIMessage[]}
       focus={(session?.focus as GiseleFocus | undefined) ?? "conversation"}
+      contextNote={session?.summary ?? null}
     />
   );
 }
@@ -74,13 +76,16 @@ function GiseleChat({
   threadId,
   initialMessages,
   focus,
+  contextNote,
 }: {
   threadId: string;
   initialMessages: UIMessage[];
   focus: GiseleFocus;
+  contextNote: string | null;
 }) {
   const queryClient = useQueryClient();
   const closeFn = useServerFn(closeGiseleSession);
+  const feedbackFn = useServerFn(requestSessionFeedback);
   const promptRef = useRef<HTMLDivElement | null>(null);
   const label = FOCUS_LABEL[focus] ?? FOCUS_LABEL.conversation;
   const { settings: voice } = useVoiceSettings();
@@ -119,6 +124,8 @@ function GiseleChat({
   const [speakingId, setSpeakingId] = useState<string | null>(null);
   const [pronOpen, setPronOpen] = useState(false);
   const [closing, setClosing] = useState(false);
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [feedback, setFeedback] = useState<SessionFeedbackDTO | null>(null);
   const recorderRef = useRef<MicRecorder | null>(null);
 
   const messageText = (m: UIMessage) =>
@@ -183,6 +190,28 @@ function GiseleChat({
     }
   }
 
+  const lastUserText = [...messages].reverse().find((m) => m.role === "user");
+
+  async function retry() {
+    const text = lastUserText ? messageText(lastUserText) : "";
+    if (!text) return;
+    await submit(text);
+  }
+
+  async function getFeedback() {
+    try {
+      setFeedbackLoading(true);
+      const result = await feedbackFn({ data: { threadId } });
+      setFeedback(result);
+      await queryClient.invalidateQueries({ queryKey: ["gisele-feedback"] });
+      await queryClient.invalidateQueries({ queryKey: ["gisele-recommendations"] });
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Não foi possível gerar o feedback.");
+    } finally {
+      setFeedbackLoading(false);
+    }
+  }
+
   async function endSession() {
     try {
       setClosing(true);
@@ -211,6 +240,21 @@ function GiseleChat({
           <p className="text-sm font-semibold text-foreground">{label.en}</p>
           <p className="text-xs italic text-muted-foreground">{label.pt}</p>
         </div>
+        <div className="flex flex-wrap gap-2">
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={getFeedback}
+          disabled={feedbackLoading || messages.length === 0}
+          className="gap-1 rounded-full text-xs"
+        >
+          {feedbackLoading ? (
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          ) : (
+            <Sparkles className="h-3.5 w-3.5" />
+          )}
+          Get feedback
+        </Button>
         <Button
           size="sm"
           variant="outline"
@@ -221,7 +265,32 @@ function GiseleChat({
           {closing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <CheckCircle2 className="h-3.5 w-3.5" />}
           End session
         </Button>
+        </div>
       </div>
+
+      {contextNote && (
+        <div className="border-b border-border bg-secondary/30 px-4 py-2 text-xs text-muted-foreground">
+          <span className="font-semibold text-foreground">Scenario:</span> {contextNote}
+        </div>
+      )}
+
+      {feedback && (
+        <div className="mx-auto mt-4 w-full max-w-3xl space-y-2 rounded-xl border border-gold/40 bg-gold/5 p-4 text-sm">
+          <p className="text-xs font-semibold uppercase tracking-wide text-gold">Session feedback</p>
+          <p><span className="font-semibold text-foreground">1. What went well:</span> {feedback.whatWentWell}</p>
+          <p><span className="font-semibold text-foreground">2. Main point to improve:</span> {feedback.mainImprovement}</p>
+          <p><span className="font-semibold text-foreground">3. How to improve:</span> {feedback.howToImprove}</p>
+          <p><span className="font-semibold text-foreground">4. Try again:</span> {feedback.retryInvite}</p>
+          <div className="flex flex-wrap gap-2 pt-1">
+            <Button size="sm" variant="outline" onClick={retry} className="gap-1 rounded-full text-xs">
+              <RotateCcw className="h-3.5 w-3.5" /> Try again
+            </Button>
+            <Button size="sm" variant="ghost" onClick={() => setFeedback(null)} className="rounded-full text-xs">
+              Close
+            </Button>
+          </div>
+        </div>
+      )}
 
       <Conversation className="flex-1">
         <ConversationContent className="mx-auto w-full max-w-3xl">
@@ -309,6 +378,16 @@ function GiseleChat({
               <Mic className="h-4 w-4" />
             )}
             {recording ? "Stop and send" : "Speak"}
+          </Button>
+          <Button
+            type="button"
+            size="sm"
+            variant="ghost"
+            onClick={retry}
+            disabled={isBusy || !lastUserText}
+            className="gap-1 text-xs"
+          >
+            <RotateCcw className="h-4 w-4" /> Try again
           </Button>
           <span className="text-[11px] text-muted-foreground">
             Voz gerada por IA · você pode encerrar a sessão quando quiser.

@@ -44,6 +44,20 @@ export const Route = createFileRoute("/_authenticated/gisele")({
   ),
 });
 
+const GISELE_NAV = [
+  { to: "/gisele/onboarding", label: "Onboarding" },
+  { to: "/gisele/missao-do-dia", label: "Mission of the day" },
+  { to: "/gisele/voice-room", label: "Voice Room" },
+  { to: "/gisele/meu-plano", label: "My plan" },
+  { to: "/gisele/meu-progresso", label: "My progress" },
+  { to: "/gisele/feedback", label: "Feedback" },
+  { to: "/gisele/recomendacoes", label: "Recommendations" },
+  { to: "/gisele/historico", label: "History" },
+  { to: "/gisele/preferencias", label: "Preferences" },
+  { to: "/gisele/privacidade", label: "Privacy" },
+] as const;
+
+
 function GiseleLayout() {
   const navigate = useNavigate();
   const router = useRouter();
@@ -112,6 +126,15 @@ function GiseleLayout() {
           >
             Mentorship hub
           </Link>
+          {GISELE_NAV.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className="block rounded-lg px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {item.label}
+            </Link>
+          ))}
           <Link
             to="/gisele/configuracoes"
             className="flex items-center gap-2 rounded-lg px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
@@ -119,6 +142,7 @@ function GiseleLayout() {
             <Settings className="h-3.5 w-3.5" /> Voice &amp; language
           </Link>
         </div>
+
 
         <nav className="mt-2 flex-1 space-y-1 overflow-y-auto p-3">
           {threads && threads.length === 0 && (

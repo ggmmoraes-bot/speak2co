@@ -92,18 +92,26 @@ export const createGiseleThread = createServerFn({ method: "POST" })
         focus: z.enum(GISELE_FOCUSES).optional(),
         title: z.string().max(80).optional(),
         contextNote: z.string().max(400).optional(),
+        contextId: z.string().max(60).optional(),
       })
       .parse(input ?? {}),
   )
   .handler(async ({ context, data }) => {
     const focus = data.focus ?? "conversation";
     const { FOCUS_LABEL } = await import("@/lib/gisele-focus");
+    const { findContext } = await import("@/lib/gisele-contexts");
+    const scenario = findContext(data.contextId);
+    const contextText =
+      data.contextNote ??
+      (scenario ? `${scenario.titleEn}: ${scenario.scenarioEn} Goal: ${scenario.goalEn}` : null);
+
     const { data: thread, error } = await context.supabase
       .from("chat_threads")
       .insert({
         user_id: context.userId,
         product: "gisele",
-        title: data.title?.trim() || FOCUS_LABEL[focus].en,
+        title: data.title?.trim() || scenario?.titleEn || FOCUS_LABEL[focus].en,
+        ...(contextText ? { context: contextText } : {}),
       })
       .select("id, title, created_at, updated_at")
       .single();
@@ -113,12 +121,14 @@ export const createGiseleThread = createServerFn({ method: "POST" })
       user_id: context.userId,
       thread_id: thread.id,
       focus,
-      ...(data.contextNote ? { summary: data.contextNote } : {}),
+      session_type: "chat",
+      ...(contextText ? { summary: contextText } : {}),
     });
     if (sessionError) console.error("[gisele] session insert failed", sessionError.message);
 
     return thread as GiseleThread;
   });
+
 
 export const deleteGiseleThread = createServerFn({ method: "POST" })
   .middleware([requireFeature("gisele_ai")])
