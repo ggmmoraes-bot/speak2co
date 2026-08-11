@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import logo from "@/assets/speak2co-logo.asset.json";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import { siteUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -18,8 +19,10 @@ export const Route = createFileRoute("/")({
         content: "Acesse a experiência Speak2Co e transforme seu inglês em novas oportunidades.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: siteUrl("/") },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: siteUrl("/") }],
   }),
   component: Index,
 });
