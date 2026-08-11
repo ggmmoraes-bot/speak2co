@@ -271,49 +271,21 @@ export const updateRecommendationStatus = createServerFn({ method: "POST" })
 
 /* ------------------------------- Progress ------------------------------ */
 
-export type GiseleProgress = {
-  sessions: number;
-  minutes: number;
-  corrections: number;
-  feedbackCount: number;
-  openRecommendations: number;
-  byFocus: { focus: string; sessions: number; minutes: number }[];
-};
+export type GiseleProgress = import("@/lib/gisele-progress.server").ProgressDashboard;
+export type GiseleReport = import("@/lib/gisele-progress.server").ProgressReport;
 
 export const getGiseleProgress = createServerFn({ method: "GET" })
   .middleware([requireFeature("gisele_ai")])
   .handler(async ({ context }): Promise<GiseleProgress> => {
-    const [{ data: sessions }, { data: feedback }, { data: recs }] = await Promise.all([
-      context.supabase
-        .from("gisele_sessions")
-        .select("focus, minutes, corrections")
-        .eq("user_id", context.userId),
-      context.supabase.from("ai_feedback").select("id").eq("user_id", context.userId),
-      context.supabase
-        .from("ai_recommendations")
-        .select("id")
-        .eq("user_id", context.userId)
-        .eq("status", "pending"),
-    ]);
-
-    const rows = sessions ?? [];
-    const map = new Map<string, { focus: string; sessions: number; minutes: number }>();
-    for (const row of rows) {
-      const current = map.get(row.focus) ?? { focus: row.focus, sessions: 0, minutes: 0 };
-      current.sessions += 1;
-      current.minutes += row.minutes ?? 0;
-      map.set(row.focus, current);
-    }
-
-    return {
-      sessions: rows.length,
-      minutes: rows.reduce((sum, r) => sum + (r.minutes ?? 0), 0),
-      corrections: rows.reduce(
-        (sum, r) => sum + (Array.isArray(r.corrections) ? r.corrections.length : 0),
-        0,
-      ),
-      feedbackCount: feedback?.length ?? 0,
-      openRecommendations: recs?.length ?? 0,
-      byFocus: [...map.values()].sort((a, b) => b.sessions - a.sessions),
-    };
+    const { buildProgressDashboard } = await import("@/lib/gisele-progress.server");
+    return buildProgressDashboard(context.supabase, context.userId);
   });
+
+/** Relatório periódico em 3 blocos: melhorou / vamos trabalhar / próxima missão. */
+export const getGiseleReport = createServerFn({ method: "POST" })
+  .middleware([requireFeature("gisele_ai")])
+  .handler(async ({ context }): Promise<GiseleReport> => {
+    const { generateProgressReport } = await import("@/lib/gisele-progress.server");
+    return generateProgressReport(context.supabase, context.userId);
+  });
+
