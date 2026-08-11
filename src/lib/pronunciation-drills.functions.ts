@@ -60,7 +60,7 @@ export const generatePronunciationDrills = createServerFn({ method: "POST" })
       .maybeSingle();
 
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
-    const gateway = createLovableAiGatewayProvider(apiKey);
+    const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
 
     const issueList = data.issues
       .map((i) => `- ${i.sound} (${i.count}x)${i.tip ? ` — dica anterior: ${i.tip}` : ""}`)

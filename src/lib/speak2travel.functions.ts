@@ -58,7 +58,7 @@ export const evaluateTravelPractice = createServerFn({ method: "POST" })
       .join("\n\n");
 
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
-    const gateway = createLovableAiGatewayProvider(apiKey);
+    const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
 
     try {
       const result = await generateText({
@@ -142,7 +142,7 @@ export const chatTravelRolePlay = createServerFn({ method: "POST" })
       .join("\n");
 
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
-    const gateway = createLovableAiGatewayProvider(apiKey);
+    const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
 
     try {
       const result = await generateText({
@@ -238,7 +238,7 @@ export const generateTravelDrills = createServerFn({ method: "POST" })
     ].join("\n\n");
 
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
-    const gateway = createLovableAiGatewayProvider(apiKey);
+    const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
 
     try {
       const result = await generateText({

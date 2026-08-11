@@ -66,7 +66,7 @@ export async function buildAndSaveStudyPlan(
       : `Explicações que ajudaram (reforce esse estilo e temas): ${helpfulTopics.slice(0, 10).join(" | ") || "nenhuma"}\nExplicações que NÃO ajudaram (explique esses temas de outra forma, com mais exemplos e passo a passo): ${unhelpfulTopics.slice(0, 10).join(" | ") || "nenhuma"}`;
 
   const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
-  const gateway = createLovableAiGatewayProvider(apiKey);
+  const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
 
   let output: StudyPlan;
   try {

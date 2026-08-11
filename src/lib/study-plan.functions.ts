@@ -120,7 +120,7 @@ export const previewStudyPlanRefinement = createServerFn({ method: "POST" })
     const placement = await getPlacementSnapshot(context.supabase, context.userId);
 
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
-    const gateway = createLovableAiGatewayProvider(apiKey);
+    const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
 
     const refinedSchema = z.object({
       weekly_focus: z.array(

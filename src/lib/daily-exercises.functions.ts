@@ -97,7 +97,7 @@ export const generateTodayExercise = createServerFn({ method: "POST" })
     const placement = await getPlacementSnapshot(context.supabase, context.userId);
 
     const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
-    const gateway = createLovableAiGatewayProvider(apiKey);
+    const gateway = createLovableAiGatewayProvider(apiKey, undefined, { structuredOutputs: true });
 
     let output: z.infer<typeof exerciseSchema>;
     try {
