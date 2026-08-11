@@ -2,13 +2,19 @@
  * Speak2Fluency — arquitetura curricular do PRD v1.0.
  * 8 módulos, cada um com a estrutura de 10 etapas: opening, warm-up, input,
  * notice, practice, challenge, AI feedback, retry, reflection e checkpoint.
+ *
+ * Padrão bilíngue: o enunciado principal é sempre em inglês (`en`) e a
+ * tradução (`pt`) é opcional — só entra quando o inglês não for óbvio.
  */
 
 export type FluencySkill = "listening" | "speaking" | "vocabulary" | "pronunciation" | "confidence";
 
+/** Enunciado bilíngue: inglês em destaque, tradução opcional abaixo. */
+export type Bilingual = { en: string; pt?: string };
+
 export type FluencyChunk = { en: string; pt: string };
 export type FluencyDialogueLine = { who: string; line: string };
-export type FluencyPractice = { prompt: string; hint: string };
+export type FluencyPractice = { prompt: Bilingual; hint: Bilingual };
 export type FluencyCheckpoint = { question: string; options: string[]; answer: string };
 
 export type FluencyModule = {
@@ -16,18 +22,18 @@ export type FluencyModule = {
   order: number;
   titleEn: string;
   titlePt: string;
-  objective: string;
-  application: string;
+  objective: Bilingual;
+  application: Bilingual;
   skills: FluencySkill[];
   minutes: number;
-  opening: string;
-  warmUp: string[];
-  input: { context: string; dialogue: FluencyDialogueLine[] };
-  notice: string[];
+  opening: Bilingual;
+  warmUp: Bilingual[];
+  input: { context: Bilingual; dialogue: FluencyDialogueLine[] };
+  notice: Bilingual[];
   chunks: FluencyChunk[];
   practice: FluencyPractice[];
-  challenge: { context: string; goal: string; seconds: number };
-  reflection: string[];
+  challenge: { context: Bilingual; goal: Bilingual; seconds: number };
+  reflection: Bilingual[];
   checkpoint: FluencyCheckpoint[];
   passportBadge: string;
 };
@@ -35,10 +41,10 @@ export type FluencyModule = {
 export const FLUENCY_STEPS = [
   { id: "opening", labelEn: "Opening", labelPt: "Abertura" },
   { id: "warmup", labelEn: "Warm-up", labelPt: "Aquecimento" },
-  { id: "input", labelEn: "Input", labelPt: "Escuta e leitura" },
-  { id: "notice", labelEn: "Notice", labelPt: "Padrões" },
-  { id: "practice", labelEn: "Practice", labelPt: "Prática" },
-  { id: "challenge", labelEn: "Challenge", labelPt: "Desafio" },
+  { id: "input", labelEn: "Listening & Reading", labelPt: "Escuta e leitura" },
+  { id: "notice", labelEn: "Notice the Patterns", labelPt: "Padrões observados" },
+  { id: "practice", labelEn: "Guided Practice", labelPt: "Prática guiada" },
+  { id: "challenge", labelEn: "Speaking Challenge", labelPt: "Desafio de fala" },
   { id: "feedback", labelEn: "AI Feedback", labelPt: "Feedback da IA" },
   { id: "reflection", labelEn: "Reflection", labelPt: "Reflexão" },
   { id: "checkpoint", labelEn: "Checkpoint", labelPt: "Checkpoint" },
@@ -52,19 +58,24 @@ export const FLUENCY_MODULES: FluencyModule[] = [
     order: 1,
     titleEn: "Think in English",
     titlePt: "Pensar em inglês",
-    objective: "Reduzir a dependência de tradução mental.",
-    application: "Resposta rápida e associação direta de ideias.",
+    objective: {
+      en: "Reduce your dependence on mental translation.",
+      pt: "Reduzir a dependência de tradução mental.",
+    },
+    application: { en: "Fast answers and direct idea association." },
     skills: ["speaking", "vocabulary"],
     minutes: 25,
-    opening:
-      "Nesta etapa você treina responder sem traduzir. O objetivo não é a resposta perfeita: é a resposta imediata.",
+    opening: {
+      en: "In this module you train answering without translating. The goal is not the perfect answer — it's the immediate one.",
+      pt: "Aqui você treina responder sem traduzir. O objetivo não é a resposta perfeita: é a resposta imediata.",
+    },
     warmUp: [
-      "Diga em voz alta 5 objetos que você vê agora, em inglês, sem traduzir.",
-      "Descreva seu dia de ontem em 3 frases curtas.",
-      "Responda em 3 segundos: What did you have for breakfast?",
+      { en: "Say out loud 5 objects you can see right now — in English, no translating." },
+      { en: "Describe your day yesterday in 3 short sentences." },
+      { en: "Answer in 3 seconds: What did you have for breakfast?" },
     ],
     input: {
-      context: "Duas colegas se encontram no corredor do escritório.",
+      context: { en: "Two colleagues meet in the office hallway." },
       dialogue: [
         { who: "Ana", line: "Hey, how's it going?" },
         { who: "Beth", line: "Pretty good, actually. Busy morning, but I'm getting there." },
@@ -74,9 +85,14 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       ],
     },
     notice: [
-      "\"Pretty good, actually\" — respostas naturais raramente são só \"fine\".",
-      "\"I'm getting there\" é um chunk pronto: significa \"estou chegando lá\".",
-      "\"Did you manage to…\" substitui \"Did you finish\" com mais naturalidade.",
+      {
+        en: '"Pretty good, actually" — natural answers are rarely just "fine".',
+        pt: 'Respostas naturais raramente são só "fine".',
+      },
+      { en: '"I\'m getting there" is a ready-made chunk.', pt: 'Significa "estou chegando lá".' },
+      {
+        en: '"Did you manage to…" sounds more natural than "Did you finish".',
+      },
     ],
     chunks: [
       { en: "I'm getting there.", pt: "Estou chegando lá." },
@@ -86,28 +102,40 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       { en: "Off the top of my head…", pt: "Assim de cabeça…" },
     ],
     practice: [
-      { prompt: "How's your week going?", hint: "Responda em 10 segundos usando um chunk do módulo." },
-      { prompt: "What are you working on right now?", hint: "Use o presente contínuo, sem traduzir." },
-      { prompt: "Describe your desk in English.", hint: "5 frases curtas, sem parar para pensar." },
+      {
+        prompt: { en: "How's your week going?" },
+        hint: { en: "Answer in 10 seconds using one chunk from this module." },
+      },
+      {
+        prompt: { en: "What are you working on right now?" },
+        hint: { en: "Use the present continuous — no translating." },
+      },
+      {
+        prompt: { en: "Describe your desk in English." },
+        hint: { en: "5 short sentences, without stopping to think." },
+      },
     ],
     challenge: {
-      context: "Um colega estrangeiro pergunta sobre sua rotina de trabalho.",
-      goal: "Fale por 60 segundos sobre sua rotina usando pelo menos 2 chunks do módulo.",
+      context: { en: "An international colleague asks about your work routine." },
+      goal: {
+        en: "Speak for 60 seconds about your routine using at least 2 chunks from this module.",
+        pt: "Fale 60 segundos sobre sua rotina usando pelo menos 2 chunks do módulo.",
+      },
       seconds: 60,
     },
     reflection: [
-      "Você traduziu mentalmente em algum momento?",
-      "Qual chunk saiu automático e qual ainda travou?",
+      { en: "Did you translate in your head at any point?" },
+      { en: "Which chunk came out automatically, and which one still blocked you?" },
     ],
     checkpoint: [
-      { question: "\"I'm getting ___\" (estou chegando lá).", options: ["there", "here", "it"], answer: "there" },
+      { question: "\"I'm getting ___.\" (estou chegando lá)", options: ["there", "here", "it"], answer: "there" },
       {
-        question: "Resposta mais natural para \"How's it going?\":",
+        question: 'Most natural answer to "How\'s it going?"',
         options: ["I am fine, thank you.", "Pretty good, actually.", "Yes, it goes."],
         answer: "Pretty good, actually.",
       },
       {
-        question: "\"Did you ___ to finish the report?\"",
+        question: '"Did you ___ to finish the report?"',
         options: ["manage", "managed", "managing"],
         answer: "manage",
       },
@@ -119,18 +147,20 @@ export const FLUENCY_MODULES: FluencyModule[] = [
     order: 2,
     titleEn: "Speak Naturally",
     titlePt: "Falar com naturalidade",
-    objective: "Aumentar a naturalidade da fala.",
-    application: "Chunks, conectores e reformulação.",
+    objective: { en: "Make your speech sound more natural.", pt: "Aumentar a naturalidade da fala." },
+    application: { en: "Chunks, connectors and rephrasing." },
     skills: ["speaking", "pronunciation", "vocabulary"],
     minutes: 25,
-    opening:
-      "Naturalidade vem de blocos prontos e conectores. Você vai trocar frases traduzidas por expressões que nativos realmente usam.",
+    opening: {
+      en: "Natural speech comes from ready-made blocks and connectors. You'll replace translated sentences with expressions native speakers really use.",
+      pt: "Naturalidade vem de blocos prontos e conectores: troque frases traduzidas por expressões reais.",
+    },
     warmUp: [
-      "Reformule: \"I think that is a good idea\" em 3 versões diferentes.",
-      "Ligue duas ideias suas com \"that's why\" e \"even though\".",
+      { en: 'Rephrase "I think that is a good idea" in 3 different ways.' },
+      { en: 'Link two of your own ideas with "that\'s why" and "even though".' },
     ],
     input: {
-      context: "Reunião curta de alinhamento entre time e cliente.",
+      context: { en: "A short alignment meeting between the team and the client." },
       dialogue: [
         { who: "Client", line: "So, where are we with the launch?" },
         { who: "Lead", line: "We're on track, more or less. The design is done, and we're wrapping up the copy." },
@@ -140,9 +170,9 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       ],
     },
     notice: [
-      "\"More or less\" e \"nothing major\" suavizam a resposta.",
-      "\"That said\" introduz uma ressalva sem soar negativo.",
-      "\"That works for me\" é a forma natural de concordar.",
+      { en: '"More or less" and "nothing major" soften the answer.' },
+      { en: '"That said" adds a caveat without sounding negative.' },
+      { en: '"That works for me" is the natural way to agree.' },
     ],
     chunks: [
       { en: "We're on track.", pt: "Estamos no prazo." },
@@ -152,20 +182,36 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       { en: "We're wrapping up…", pt: "Estamos finalizando…" },
     ],
     practice: [
-      { prompt: "Reformule: \"I not agree with this idea.\"", hint: "Use \"I'm not sure I agree…\"." },
-      { prompt: "Dê uma atualização de projeto em 3 frases.", hint: "Use \"on track\" e \"that said\"." },
-      { prompt: "Discorde com educação de uma sugestão.", hint: "Comece com \"I see your point, but…\"." },
+      {
+        prompt: { en: 'Rephrase: "I not agree with this idea."' },
+        hint: { en: 'Use "I\'m not sure I agree…".' },
+      },
+      {
+        prompt: { en: "Give a project update in 3 sentences." },
+        hint: { en: 'Use "on track" and "that said".' },
+      },
+      {
+        prompt: { en: "Disagree politely with a suggestion." },
+        hint: { en: 'Start with "I see your point, but…".' },
+      },
     ],
     challenge: {
-      context: "Você precisa dar um status update para um cliente internacional.",
-      goal: "Grave 60 a 90 segundos com 3 conectores e 2 chunks do módulo.",
+      context: { en: "You need to give a status update to an international client." },
+      goal: { en: "Record 60 to 90 seconds using 3 connectors and 2 chunks from this module." },
       seconds: 90,
     },
-    reflection: ["Sua fala soou mais fluida ou mais 'traduzida'?", "Quais conectores você repetiu demais?"],
+    reflection: [
+      { en: "Did your speech sound more fluid or more 'translated'?" },
+      { en: "Which connectors did you overuse?" },
+    ],
     checkpoint: [
-      { question: "\"___ said, we might need more time.\"", options: ["That", "This", "It"], answer: "That" },
-      { question: "Concordância natural:", options: ["That works for me.", "It works to me.", "That work for me."], answer: "That works for me." },
-      { question: "\"We're ___ up the copy.\"", options: ["wrapping", "wrap", "wrapped"], answer: "wrapping" },
+      { question: '"___ said, we might need more time."', options: ["That", "This", "It"], answer: "That" },
+      {
+        question: "Natural way to agree:",
+        options: ["That works for me.", "It works to me.", "That work for me."],
+        answer: "That works for me.",
+      },
+      { question: '"We\'re ___ up the copy."', options: ["wrapping", "wrap", "wrapped"], answer: "wrapping" },
     ],
     passportBadge: "Speak Naturally",
   },
@@ -174,17 +220,20 @@ export const FLUENCY_MODULES: FluencyModule[] = [
     order: 3,
     titleEn: "Everyday Conversations",
     titlePt: "Conversas do dia a dia",
-    objective: "Sustentar conversas por mais tempo.",
-    application: "Perguntas e follow-ups.",
+    objective: { en: "Keep conversations going for longer.", pt: "Sustentar conversas por mais tempo." },
+    application: { en: "Questions and follow-ups." },
     skills: ["speaking", "listening", "confidence"],
     minutes: 25,
-    opening: "Conversa se sustenta com perguntas. Você vai treinar follow-ups que mantêm o outro falando.",
+    opening: {
+      en: "Conversation survives on questions. You'll train follow-ups that keep the other person talking.",
+      pt: "Conversa se sustenta com perguntas: treine follow-ups que mantêm o outro falando.",
+    },
     warmUp: [
-      "Para cada resposta, crie um follow-up: \"I went to the beach.\" → ?",
-      "Pratique 5 perguntas abertas começando com How e What.",
+      { en: 'Create a follow-up for each answer: "I went to the beach." → ?' },
+      { en: "Practise 5 open questions starting with How and What." },
     ],
     input: {
-      context: "Dois vizinhos conversam no elevador.",
+      context: { en: "Two neighbours chat in the elevator." },
       dialogue: [
         { who: "Sam", line: "Long weekend, huh? Did you go anywhere?" },
         { who: "Rita", line: "We drove up to the mountains. It was freezing." },
@@ -194,9 +243,9 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       ],
     },
     notice: [
-      "\"Really? How cold was it?\" — reação + pergunta específica.",
-      "\"Worth it, though\" adiciona opinião sem mudar de assunto.",
-      "Perguntas fechadas matam a conversa; abertas prolongam.",
+      { en: '"Really? How cold was it?" — reaction + specific question.' },
+      { en: '"Worth it, though" adds an opinion without changing the subject.' },
+      { en: "Closed questions kill the conversation; open ones extend it." },
     ],
     chunks: [
       { en: "Did you go anywhere?", pt: "Você foi a algum lugar?" },
@@ -206,20 +255,40 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       { en: "How did that go?", pt: "E como foi isso?" },
     ],
     practice: [
-      { prompt: "\"I started a new job last month.\"", hint: "Reaja e faça 2 follow-ups." },
-      { prompt: "\"I don't really like cooking.\"", hint: "Mantenha a conversa viva sem julgar." },
-      { prompt: "Conte um fim de semana e termine com uma pergunta.", hint: "Devolva a bola." },
+      {
+        prompt: { en: '"I started a new job last month."' },
+        hint: { en: "React and ask 2 follow-up questions." },
+      },
+      {
+        prompt: { en: '"I don\'t really like cooking."' },
+        hint: { en: "Keep the conversation alive without judging." },
+      },
+      {
+        prompt: { en: "Tell me about your weekend and finish with a question." },
+        hint: { en: "Pass the ball back to your partner." },
+      },
     ],
     challenge: {
-      context: "Small talk com um colega novo antes da reunião.",
-      goal: "Sustente 6 turnos: reaja, pergunte e conte algo seu.",
+      context: { en: "Small talk with a new colleague before a meeting." },
+      goal: { en: "Sustain 6 turns: react, ask and share something about yourself." },
       seconds: 90,
     },
-    reflection: ["Você fez perguntas abertas?", "A conversa ficou equilibrada entre os dois?"],
+    reflection: [
+      { en: "Did you ask open questions?" },
+      { en: "Was the conversation balanced between both speakers?" },
+    ],
     checkpoint: [
-      { question: "Follow-up mais natural:", options: ["What was it like?", "What is it?", "How is like?"], answer: "What was it like?" },
-      { question: "\"Worth it, ___.\"", options: ["though", "although", "thought"], answer: "though" },
-      { question: "Pergunta aberta:", options: ["Did you like it?", "How did that go?", "Is it good?"], answer: "How did that go?" },
+      {
+        question: "Most natural follow-up:",
+        options: ["What was it like?", "What is it?", "How is like?"],
+        answer: "What was it like?",
+      },
+      { question: '"Worth it, ___."', options: ["though", "although", "thought"], answer: "though" },
+      {
+        question: "Open question:",
+        options: ["Did you like it?", "How did that go?", "Is it good?"],
+        answer: "How did that go?",
+      },
     ],
     passportBadge: "Conversation",
   },
@@ -228,17 +297,23 @@ export const FLUENCY_MODULES: FluencyModule[] = [
     order: 4,
     titleEn: "Storytelling",
     titlePt: "Contar histórias",
-    objective: "Contar experiências com começo, meio e fim.",
-    application: "Narrativa e opinião.",
+    objective: {
+      en: "Tell experiences with a beginning, middle and end.",
+      pt: "Contar experiências com começo, meio e fim.",
+    },
+    application: { en: "Narrative and opinion." },
     skills: ["speaking", "vocabulary"],
     minutes: 25,
-    opening: "Histórias organizam a fala. Com estrutura, você fala mais tempo sem travar.",
+    opening: {
+      en: "Stories organise your speech. With structure, you speak for longer without freezing.",
+      pt: "Histórias organizam a fala: com estrutura, você fala mais tempo sem travar.",
+    },
     warmUp: [
-      "Conte um fato de ontem em 3 frases: setup, evento, resultado.",
-      "Pratique os marcadores: first, then, at that point, in the end.",
+      { en: "Tell something that happened yesterday in 3 sentences: setup, event, result." },
+      { en: "Practise the markers: first, then, at that point, in the end." },
     ],
     input: {
-      context: "Um amigo conta um perrengue de viagem.",
+      context: { en: "A friend tells a travel disaster story." },
       dialogue: [
         { who: "Léo", line: "So, we got to the airport two hours early, right?" },
         { who: "Friend", line: "Okay…" },
@@ -248,9 +323,9 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       ],
     },
     notice: [
-      "\"So, …, right?\" abre a história e envolve o ouvinte.",
-      "\"At that point\" marca a virada.",
-      "\"In the end\" fecha o desfecho.",
+      { en: '"So, …, right?" opens the story and pulls the listener in.' },
+      { en: '"At that point" marks the turning point.' },
+      { en: '"In the end" closes the story.' },
     ],
     chunks: [
       { en: "So, long story short…", pt: "Resumindo a história…" },
@@ -260,20 +335,36 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       { en: "It turned out fine.", pt: "No fim deu tudo certo." },
     ],
     practice: [
-      { prompt: "Conte a última vez que você se atrasou.", hint: "Use first / then / in the end." },
-      { prompt: "Conte algo engraçado do trabalho.", hint: "Comece com \"So, …, right?\"." },
-      { prompt: "Dê sua opinião sobre a história que contou.", hint: "\"Looking back, I think…\"." },
+      {
+        prompt: { en: "Tell the story of the last time you were late." },
+        hint: { en: "Use first / then / in the end." },
+      },
+      {
+        prompt: { en: "Tell something funny that happened at work." },
+        hint: { en: 'Start with "So, …, right?".' },
+      },
+      {
+        prompt: { en: "Give your opinion about the story you just told." },
+        hint: { en: 'Use "Looking back, I think…".' },
+      },
     ],
     challenge: {
-      context: "Jantar com amigos internacionais.",
-      goal: "Conte uma história real de 90 segundos com abertura, virada e desfecho.",
+      context: { en: "Dinner with international friends." },
+      goal: { en: "Tell a real 90-second story with an opening, a turning point and an ending." },
       seconds: 90,
     },
-    reflection: ["A história teve estrutura clara?", "Você usou marcadores de tempo?"],
+    reflection: [
+      { en: "Did your story have a clear structure?" },
+      { en: "Did you use time markers?" },
+    ],
     checkpoint: [
-      { question: "\"___ the end, we landed at 2 a.m.\"", options: ["In", "On", "At"], answer: "In" },
-      { question: "Marcador de virada:", options: ["At that point", "By the way", "In case"], answer: "At that point" },
-      { question: "\"Long story ___.\"", options: ["short", "small", "quick"], answer: "short" },
+      { question: '"___ the end, we landed at 2 a.m."', options: ["In", "On", "At"], answer: "In" },
+      {
+        question: "Turning-point marker:",
+        options: ["At that point", "By the way", "In case"],
+        answer: "At that point",
+      },
+      { question: '"Long story ___."', options: ["short", "small", "quick"], answer: "short" },
     ],
     passportBadge: "Storytelling",
   },
@@ -282,17 +373,23 @@ export const FLUENCY_MODULES: FluencyModule[] = [
     order: 5,
     titleEn: "Listening in Real Life",
     titlePt: "Escuta na vida real",
-    objective: "Compreender fala natural em velocidade real.",
-    application: "Velocidade, contexto e sotaques.",
+    objective: {
+      en: "Understand natural speech at real speed.",
+      pt: "Compreender fala natural em velocidade real.",
+    },
+    application: { en: "Speed, context and accents." },
     skills: ["listening", "pronunciation"],
     minutes: 25,
-    opening: "Você vai treinar a escuta com fala conectada — quando as palavras se juntam.",
+    opening: {
+      en: "You'll train your ear for connected speech — when words blend into each other.",
+      pt: "Treine a escuta com fala conectada, quando as palavras se juntam.",
+    },
     warmUp: [
-      "Ouça e repita: \"What are you doing?\" → \"Whatcha doin'?\"",
-      "Ouça e repita: \"I'm going to call you\" → \"I'm gonna call ya\".",
+      { en: 'Listen and repeat: "What are you doing?" → "Whatcha doin\'?"' },
+      { en: 'Listen and repeat: "I\'m going to call you" → "I\'m gonna call ya".' },
     ],
     input: {
-      context: "Anúncio de embarque e conversa rápida com o atendente.",
+      context: { en: "A boarding announcement and a quick chat with the gate agent." },
       dialogue: [
         { who: "Announcement", line: "Ladies and gentlemen, we'll begin boarding in about ten minutes at gate twelve." },
         { who: "Agent", line: "Do you have any carry-on you'd like to check?" },
@@ -301,9 +398,9 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       ],
     },
     notice: [
-      "\"We'll begin\" soa como \"we'll-begin\" — sem pausa entre palavras.",
-      "\"I'm good\" significa \"não, obrigado\".",
-      "\"It is, yeah\" — confirmação curta, muito comum.",
+      { en: '"We\'ll begin" sounds like "we\'ll-begin" — no pause between the words.' },
+      { en: '"I\'m good" here means "no, thank you".', pt: 'Significa "não, obrigado".' },
+      { en: '"It is, yeah" — a short confirmation, very common.' },
     ],
     chunks: [
       { en: "I'm good, thanks.", pt: "Estou bem assim, obrigado." },
@@ -313,20 +410,36 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       { en: "Say that again, please?", pt: "Pode falar de novo, por favor?" },
     ],
     practice: [
-      { prompt: "Ouça o diálogo e resuma em inglês em 2 frases.", hint: "Não traduza: resuma." },
-      { prompt: "Peça repetição de 3 formas diferentes.", hint: "Use os chunks do módulo." },
-      { prompt: "Repita o anúncio imitando o ritmo.", hint: "Shadowing: fale junto com a IA." },
+      {
+        prompt: { en: "Listen to the dialogue and summarise it in English in 2 sentences." },
+        hint: { en: "Don't translate — summarise." },
+      },
+      {
+        prompt: { en: "Ask for repetition in 3 different ways." },
+        hint: { en: "Use the chunks from this module." },
+      },
+      {
+        prompt: { en: "Repeat the announcement imitating the rhythm." },
+        hint: { en: "Shadowing: speak along with the AI voice." },
+      },
     ],
     challenge: {
-      context: "Você não entendeu uma instrução em um aeroporto.",
-      goal: "Peça esclarecimento e confirme o que entendeu, em 45 segundos.",
+      context: { en: "You didn't understand an instruction at the airport." },
+      goal: { en: "Ask for clarification and confirm what you understood, in 45 seconds." },
       seconds: 45,
     },
-    reflection: ["Você entendeu o sentido geral sem traduzir?", "Quais sons se juntaram e confundiram?"],
+    reflection: [
+      { en: "Did you get the general meaning without translating?" },
+      { en: "Which sounds blended together and confused you?" },
+    ],
     checkpoint: [
-      { question: "\"I didn't ___ that.\"", options: ["catch", "hear of", "listen"], answer: "catch" },
-      { question: "\"I'm good, thanks\" significa:", options: ["Estou bem assim, obrigado", "Eu sou bom", "Está ótimo"], answer: "Estou bem assim, obrigado" },
-      { question: "\"Boarding starts ___.\"", options: ["shortly", "short", "shorter"], answer: "shortly" },
+      { question: '"I didn\'t ___ that."', options: ["catch", "hear of", "listen"], answer: "catch" },
+      {
+        question: '"I\'m good, thanks" means:',
+        options: ["No, thank you.", "I am a good person.", "It is great."],
+        answer: "No, thank you.",
+      },
+      { question: '"Boarding starts ___."', options: ["shortly", "short", "shorter"], answer: "shortly" },
     ],
     passportBadge: "Listening",
   },
@@ -335,17 +448,23 @@ export const FLUENCY_MODULES: FluencyModule[] = [
     order: 6,
     titleEn: "Confidence & Conversation",
     titlePt: "Confiança e conversa",
-    objective: "Manter a conversa mesmo diante de imprevistos.",
-    application: "Estratégias de contorno e ganho de tempo.",
+    objective: {
+      en: "Keep the conversation going when something goes wrong.",
+      pt: "Manter a conversa mesmo diante de imprevistos.",
+    },
+    application: { en: "Workaround strategies and buying time." },
     skills: ["speaking", "confidence"],
     minutes: 25,
-    opening: "Travar é normal. O que muda tudo é ter estratégias prontas para continuar falando.",
+    opening: {
+      en: "Freezing is normal. What changes everything is having ready-made strategies to keep speaking.",
+      pt: "Travar é normal: o que muda tudo é ter estratégias prontas para continuar falando.",
+    },
     warmUp: [
-      "Explique \"chaveiro\" sem saber a palavra em inglês.",
-      "Ganhe tempo com: \"Let me think for a second…\".",
+      { en: 'Explain "keychain" without using the word.' },
+      { en: 'Buy time with: "Let me think for a second…".' },
     ],
     input: {
-      context: "Reunião em que o aluno esquece uma palavra.",
+      context: { en: "A meeting where the speaker forgets a word." },
       dialogue: [
         { who: "Manager", line: "Could you walk me through the process?" },
         { who: "You", line: "Sure. First we collect the… sorry, what's the word… the feedback forms." },
@@ -354,9 +473,9 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       ],
     },
     notice: [
-      "\"Sorry, what's the word…\" é aceitável e natural.",
-      "\"Kind of like…\" permite explicar por aproximação.",
-      "Pausas preenchidas mantêm o turno de fala.",
+      { en: '"Sorry, what\'s the word…" is acceptable and natural.' },
+      { en: '"Kind of like…" lets you explain by approximation.' },
+      { en: "Filled pauses keep your speaking turn." },
     ],
     chunks: [
       { en: "Let me think for a second.", pt: "Deixa eu pensar um segundo." },
@@ -366,20 +485,36 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       { en: "Sorry, I lost my train of thought.", pt: "Desculpe, perdi o raciocínio." },
     ],
     practice: [
-      { prompt: "Explique \"tomada elétrica\" sem dizer 'socket'.", hint: "Use \"it's kind of like…\"." },
-      { prompt: "Responda uma pergunta difícil ganhando tempo.", hint: "Use 2 estratégias diferentes." },
-      { prompt: "Corrija-se no meio da frase e siga em frente.", hint: "\"What I mean is…\"." },
+      {
+        prompt: { en: 'Explain "power outlet" without saying the word "socket".' },
+        hint: { en: 'Use "it\'s kind of like…".' },
+      },
+      {
+        prompt: { en: "Answer a difficult question while buying time." },
+        hint: { en: "Use 2 different strategies." },
+      },
+      {
+        prompt: { en: "Correct yourself mid-sentence and move on." },
+        hint: { en: 'Use "What I mean is…".' },
+      },
     ],
     challenge: {
-      context: "Pergunta inesperada de um cliente sobre um tema que você não domina.",
-      goal: "Responda por 60 segundos sem travar, usando 2 estratégias de contorno.",
+      context: { en: "An unexpected client question about a topic you don't master." },
+      goal: { en: "Speak for 60 seconds without freezing, using 2 workaround strategies." },
       seconds: 60,
     },
-    reflection: ["Você travou e recuperou?", "Qual estratégia funcionou melhor?"],
+    reflection: [
+      { en: "Did you freeze and recover?" },
+      { en: "Which strategy worked best for you?" },
+    ],
     checkpoint: [
-      { question: "\"It's kind ___ like a review meeting.\"", options: ["of", "to", "as"], answer: "of" },
-      { question: "Ganhar tempo:", options: ["Let me think for a second.", "Wait me.", "I think second."], answer: "Let me think for a second." },
-      { question: "\"What I ___ is…\"", options: ["mean", "means", "meaning"], answer: "mean" },
+      { question: '"It\'s kind ___ like a review meeting."', options: ["of", "to", "as"], answer: "of" },
+      {
+        question: "Buying time:",
+        options: ["Let me think for a second.", "Wait me.", "I think second."],
+        answer: "Let me think for a second.",
+      },
+      { question: '"What I ___ is…"', options: ["mean", "means", "meaning"], answer: "mean" },
     ],
     passportBadge: "Confidence",
   },
@@ -388,14 +523,23 @@ export const FLUENCY_MODULES: FluencyModule[] = [
     order: 7,
     titleEn: "Real-World Fluency",
     titlePt: "Fluência no mundo real",
-    objective: "Integrar todas as habilidades em missões complexas.",
-    application: "Missões com múltiplas etapas.",
+    objective: {
+      en: "Combine every skill in complex real-life missions.",
+      pt: "Integrar todas as habilidades em missões complexas.",
+    },
+    application: { en: "Multi-step missions." },
     skills: ["listening", "speaking", "vocabulary", "confidence"],
     minutes: 30,
-    opening: "Agora tudo junto: ouvir, reagir, negociar e concluir uma tarefa real em inglês.",
-    warmUp: ["Revise 5 chunks favoritos dos módulos anteriores.", "Faça 1 minuto de fala livre sobre o seu dia."],
+    opening: {
+      en: "Now everything together: listen, react, negotiate and complete a real task in English.",
+      pt: "Agora tudo junto: ouvir, reagir, negociar e concluir uma tarefa real em inglês.",
+    },
+    warmUp: [
+      { en: "Review 5 favourite chunks from the previous modules." },
+      { en: "Speak freely about your day for 1 minute." },
+    ],
     input: {
-      context: "Você precisa resolver um problema com uma reserva de hotel por telefone.",
+      context: { en: "You need to solve a hotel booking problem over the phone." },
       dialogue: [
         { who: "Hotel", line: "Thanks for calling. How can I help you today?" },
         { who: "You", line: "Hi, I have a reservation for tonight, but I need to change the dates." },
@@ -405,9 +549,9 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       ],
     },
     notice: [
-      "Abra com contexto + pedido claro.",
-      "\"Would there be…\" soa mais polido que \"Is there…\".",
-      "Confirme detalhes numéricos repetindo em voz alta.",
+      { en: "Open with context + a clear request." },
+      { en: '"Would there be…" sounds more polite than "Is there…".' },
+      { en: "Confirm numbers by repeating them out loud." },
     ],
     chunks: [
       { en: "I'd like to change my reservation.", pt: "Eu gostaria de alterar minha reserva." },
@@ -417,20 +561,40 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       { en: "That should be all, thanks.", pt: "Acho que é isso, obrigado." },
     ],
     practice: [
-      { prompt: "Resolva um pedido errado em um restaurante.", hint: "Educado e objetivo." },
-      { prompt: "Negocie uma troca de horário de reunião.", hint: "Ofereça duas alternativas." },
-      { prompt: "Confirme detalhes de um contrato por telefone.", hint: "Use \"just to confirm\"." },
+      {
+        prompt: { en: "Solve a wrong order at a restaurant." },
+        hint: { en: "Polite and objective." },
+      },
+      {
+        prompt: { en: "Negotiate a new time for a meeting." },
+        hint: { en: "Offer two alternatives." },
+      },
+      {
+        prompt: { en: "Confirm contract details over the phone." },
+        hint: { en: 'Use "just to confirm".' },
+      },
     ],
     challenge: {
-      context: "Missão completa: remarcar um voo, confirmar bagagem e pedir comprovante por e-mail.",
-      goal: "Cumpra as 3 tarefas em uma única fala de até 2 minutos.",
+      context: { en: "Full mission: rebook a flight, confirm baggage and ask for an email receipt." },
+      goal: { en: "Complete the 3 tasks in a single turn of up to 2 minutes." },
       seconds: 120,
     },
-    reflection: ["Você concluiu todas as tarefas?", "O que faria diferente na próxima tentativa?"],
+    reflection: [
+      { en: "Did you complete all the tasks?" },
+      { en: "What would you do differently next time?" },
+    ],
     checkpoint: [
-      { question: "\"Would there ___ an extra charge?\"", options: ["be", "is", "has"], answer: "be" },
-      { question: "\"Just to ___, my flight leaves at 8.\"", options: ["confirm", "confirmation", "confirmed"], answer: "confirm" },
-      { question: "Pedido polido:", options: ["Send me the email.", "Could you send that in writing?", "You send writing."], answer: "Could you send that in writing?" },
+      { question: '"Would there ___ an extra charge?"', options: ["be", "is", "has"], answer: "be" },
+      {
+        question: '"Just to ___, my flight leaves at 8."',
+        options: ["confirm", "confirmation", "confirmed"],
+        answer: "confirm",
+      },
+      {
+        question: "Polite request:",
+        options: ["Send me the email.", "Could you send that in writing?", "You send writing."],
+        answer: "Could you send that in writing?",
+      },
     ],
     passportBadge: "Real-World Fluency",
   },
@@ -439,15 +603,23 @@ export const FLUENCY_MODULES: FluencyModule[] = [
     order: 8,
     titleEn: "Personal Fluency Path",
     titlePt: "Trilha pessoal de fluência",
-    objective: "Corrigir lacunas individuais com trilha adaptativa.",
-    application: "Prática dirigida pelas prioridades apontadas pela IA.",
+    objective: {
+      en: "Close your individual gaps with an adaptive path.",
+      pt: "Corrigir lacunas individuais com trilha adaptativa.",
+    },
+    application: { en: "Practice driven by the AI's priorities for you." },
     skills: ["listening", "speaking", "vocabulary", "pronunciation", "confidence"],
     minutes: 30,
-    opening:
-      "A IA analisa suas tentativas anteriores e monta a prática do que ainda trava. Cada rodada é diferente.",
-    warmUp: ["Releia o feedback do último módulo.", "Escolha 1 prioridade para esta sessão."],
+    opening: {
+      en: "The AI reviews your previous attempts and builds practice around what still blocks you. Every round is different.",
+      pt: "A IA analisa suas tentativas e monta a prática do que ainda trava. Cada rodada é diferente.",
+    },
+    warmUp: [
+      { en: "Read the feedback from your last module again." },
+      { en: "Choose 1 priority for this session." },
+    ],
     input: {
-      context: "Sessão de coaching: a IA devolve o retrato da sua fala e propõe o próximo passo.",
+      context: { en: "Coaching session: the AI describes your speech and proposes the next step." },
       dialogue: [
         { who: "Coach", line: "Your grammar is solid, but you pause a lot before verbs." },
         { who: "You", line: "Yeah, I translate first." },
@@ -456,8 +628,8 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       ],
     },
     notice: [
-      "Prioridade única por sessão gera mais progresso do que corrigir tudo.",
-      "Repetição espaçada consolida chunks.",
+      { en: "One priority per session produces more progress than fixing everything at once." },
+      { en: "Spaced repetition is what makes chunks stick." },
     ],
     chunks: [
       { en: "Let's do it.", pt: "Vamos nessa." },
@@ -467,20 +639,32 @@ export const FLUENCY_MODULES: FluencyModule[] = [
       { en: "I'm getting more comfortable with…", pt: "Estou ficando mais à vontade com…" },
     ],
     practice: [
-      { prompt: "Fale 60 segundos sobre sua prioridade atual.", hint: "Use frases curtas, sem pausa longa." },
-      { prompt: "Refaça o desafio do módulo em que teve a menor nota.", hint: "Compare com a tentativa anterior." },
-      { prompt: "Grave um resumo semanal do que evoluiu.", hint: "3 frases, sem roteiro." },
+      {
+        prompt: { en: "Speak for 60 seconds about your current priority." },
+        hint: { en: "Short sentences, no long pauses." },
+      },
+      {
+        prompt: { en: "Redo the challenge from the module with your lowest score." },
+        hint: { en: "Compare it with your previous attempt." },
+      },
+      {
+        prompt: { en: "Record a weekly summary of what improved." },
+        hint: { en: "3 sentences, no script." },
+      },
     ],
     challenge: {
-      context: "Avaliação de fluência integrada.",
-      goal: "Fale 2 minutos sobre um tema livre demonstrando as habilidades dos 7 módulos anteriores.",
+      context: { en: "Integrated fluency assessment." },
+      goal: { en: "Speak for 2 minutes on a free topic showing the skills from the previous 7 modules." },
       seconds: 120,
     },
-    reflection: ["Qual habilidade mais evoluiu?", "Qual é a próxima prioridade?"],
+    reflection: [
+      { en: "Which skill improved the most?" },
+      { en: "What is your next priority?" },
+    ],
     checkpoint: [
-      { question: "\"I'll ___ on that.\"", options: ["work", "works", "working"], answer: "work" },
-      { question: "\"One step ___ a time.\"", options: ["at", "in", "on"], answer: "at" },
-      { question: "\"That's my weak ___.\"", options: ["spot", "point", "side"], answer: "spot" },
+      { question: '"I\'ll ___ on that."', options: ["work", "works", "working"], answer: "work" },
+      { question: '"One step ___ a time."', options: ["at", "in", "on"], answer: "at" },
+      { question: '"That\'s my weak ___."', options: ["spot", "point", "side"], answer: "spot" },
     ],
     passportBadge: "Personal Path",
   },
@@ -497,21 +681,24 @@ export const DAILY_BLOCKS = [
     labelEn: "Listening",
     labelPt: "Escuta",
     minutes: 10,
-    goal: "Compreender input contextualizado",
+    goalEn: "Understand contextualised input",
+    goalPt: "Compreender input contextualizado",
   },
   {
     id: "speaking",
     labelEn: "Speaking",
     labelPt: "Fala",
     minutes: 10,
-    goal: "Produzir fala e responder prompts",
+    goalEn: "Produce speech and answer prompts",
+    goalPt: "Produzir fala e responder prompts",
   },
   {
     id: "vocabulary",
-    labelEn: "Vocabulary / Review",
+    labelEn: "Vocabulary & Review",
     labelPt: "Vocabulário e revisão",
     minutes: 5,
-    goal: "Ativar e consolidar repertório",
+    goalEn: "Activate and consolidate your repertoire",
+    goalPt: "Ativar e consolidar repertório",
   },
 ] as const;
 
