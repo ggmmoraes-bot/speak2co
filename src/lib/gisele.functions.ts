@@ -2,6 +2,9 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireFeature } from "@/lib/entitlement-middleware";
 import type { GiseleMemoryItem, StudentSnapshot } from "@/lib/gisele-context.server";
+import type { ChatPart } from "@/lib/chat.functions";
+
+export type GiseleMessageDTO = { id: string; role: string; parts: ChatPart[] };
 
 export const GISELE_FOCUSES = [
   "conversation",
@@ -142,7 +145,7 @@ export const getGiseleThreadMessages = createServerFn({ method: "GET" })
       .eq("user_id", context.userId)
       .eq("product", "gisele")
       .maybeSingle();
-    if (!thread) return [] as { id: string; role: string; parts: unknown[] }[];
+    if (!thread) return [] as GiseleMessageDTO[];
 
     const { data: rows, error } = await context.supabase
       .from("chat_messages")
@@ -154,8 +157,8 @@ export const getGiseleThreadMessages = createServerFn({ method: "GET" })
     return (rows ?? []).map((row) => ({
       id: String(row.id),
       role: row.role,
-      parts: Array.isArray(row.parts) ? (row.parts as unknown[]) : [{ type: "text", text: "" }],
-    }));
+      parts: (Array.isArray(row.parts) ? row.parts : [{ type: "text", text: "" }]) as ChatPart[],
+    })) as GiseleMessageDTO[];
   });
 
 /** Sessão da thread atual (foco + resumo). */
