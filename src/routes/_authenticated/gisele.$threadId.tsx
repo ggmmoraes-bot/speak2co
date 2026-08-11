@@ -83,12 +83,13 @@ function GiseleChat({
   const closeFn = useServerFn(closeGiseleSession);
   const promptRef = useRef<HTMLDivElement | null>(null);
   const label = FOCUS_LABEL[focus] ?? FOCUS_LABEL.conversation;
+  const { settings: voice } = useVoiceSettings();
 
   const transport = useMemo(
     () =>
       new DefaultChatTransport({
         api: "/api/gisele-chat",
-        body: { threadId },
+        body: { threadId, supportLanguage: voice.supportLanguage },
         fetch: async (input, init) => {
           const { data } = await supabase.auth.getSession();
           const token = data.session?.access_token;
@@ -97,7 +98,7 @@ function GiseleChat({
           return fetch(input, { ...init, headers });
         },
       }),
-    [threadId],
+    [threadId, voice.supportLanguage],
   );
 
   const { messages, sendMessage, status, error } = useChat({
@@ -119,7 +120,6 @@ function GiseleChat({
   const [pronOpen, setPronOpen] = useState(false);
   const [closing, setClosing] = useState(false);
   const recorderRef = useRef<MicRecorder | null>(null);
-  const { settings: voice } = useVoiceSettings();
 
   const messageText = (m: UIMessage) =>
     m.parts.map((p) => (p.type === "text" ? p.text : "")).join(" ").trim();
@@ -134,7 +134,7 @@ function GiseleChat({
     }
     try {
       setSpeakingId(m.id);
-      await speakText(text, { volume: voice.volume, rate: voice.rate });
+      await speakText(text, { voice: voice.voice, volume: voice.volume, rate: voice.rate });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível gerar o áudio.");
     } finally {
