@@ -112,8 +112,31 @@ const COMPARISON_ROWS: { feature: string; essential: CellValue; premium: CellVal
   { feature: "Ranking de fluência", essential: false, premium: true, signature: true },
   { feature: "Professor IA (chat)", essential: "Limitado", premium: true, signature: true },
   { feature: "GiseleAI ilimitada", essential: false, premium: false, signature: true },
+  { feature: "Voice Room com voz autorizada da fundadora", essential: false, premium: false, signature: true },
+  { feature: "Memória contextual e plano da mentora", essential: false, premium: false, signature: true },
+  { feature: "Relatórios de progresso escritos pela GiseleAI", essential: false, premium: false, signature: true },
+  { feature: "Missão do dia e recomendações personalizadas", essential: false, premium: false, signature: true },
   { feature: "Feedback personalizado", essential: false, premium: false, signature: true },
   { feature: "Conversação 24/7", essential: false, premium: false, signature: true },
+];
+
+const GISELE_SHOWCASE = [
+  {
+    titleEn: "Conversation with real feedback",
+    titlePt: "Conversas com feedback em 4 blocos: correção, vocabulário, pronúncia e próximo passo.",
+  },
+  {
+    titleEn: "Voice Room",
+    titlePt: "Fale e ouça em tempo real com a voz autorizada da fundadora e sotaque nativo em inglês.",
+  },
+  {
+    titleEn: "Contextual memory",
+    titlePt: "Ela lembra do seu nível, dos seus erros recorrentes e do seu progresso nos produtos Speak2.",
+  },
+  {
+    titleEn: "Daily mission & reports",
+    titlePt: "Missão do dia, recomendações e relatórios de evolução escritos por ela.",
+  },
 ];
 
 function cell(value: CellValue) {
