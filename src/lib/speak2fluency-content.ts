@@ -230,7 +230,7 @@ export const FLUENCY_MODULES: FluencyModule[] = [
     },
     warmUp: [
       { en: 'Create a follow-up for each answer: "I went to the beach." → ?' },
-      { en: "Practise 5 open questions starting with How and What." },
+      { en: "Practice 5 open questions starting with How and What." },
     ],
     input: {
       context: { en: "Two neighbours chat in the elevator." },
@@ -310,7 +310,7 @@ export const FLUENCY_MODULES: FluencyModule[] = [
     },
     warmUp: [
       { en: "Tell something that happened yesterday in 3 sentences: setup, event, result." },
-      { en: "Practise the markers: first, then, at that point, in the end." },
+      { en: "Practice the markers: first, then, at that point, in the end." },
     ],
     input: {
       context: { en: "A friend tells a travel disaster story." },

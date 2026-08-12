@@ -46,7 +46,7 @@ export const Route = createFileRoute("/_authenticated/gisele/configuracoes")({
 });
 
 const SAMPLE =
-  "Hi! I'm Gisele, your English mentor. Let's practise together — ready when you are.";
+  "Hi! I'm Gisele, your English mentor. Let's practice together — ready when you are.";
 
 function GiseleSettingsPage() {
   const { settings, update, reset } = useVoiceSettings();
