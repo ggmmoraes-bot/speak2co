@@ -100,6 +100,9 @@ type CellValue = boolean | string;
 
 const COMPARISON_ROWS: { feature: string; essential: CellValue; premium: CellValue; signature: CellValue }[] = [
   { feature: "Aulas guiadas", essential: true, premium: true, signature: true },
+  { feature: "Curso Beginner (A1–A2)", essential: true, premium: true, signature: true },
+  { feature: "Curso Intermediate (B1)", essential: true, premium: true, signature: true },
+  { feature: "Curso Upper-Intermediate (B2)", essential: false, premium: true, signature: true },
   { feature: "Exercícios diários", essential: true, premium: true, signature: true },
   { feature: "Quizzes de vocabulário e gramática", essential: true, premium: true, signature: true },
   { feature: "Plano de estudos personalizado", essential: true, premium: true, signature: true },
