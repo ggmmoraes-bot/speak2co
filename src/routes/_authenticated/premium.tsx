@@ -57,10 +57,10 @@ const TIERS: Tier[] = [
     description: "Perfeito para quem está construindo a base no inglês.",
     yearly: { key: "essential_yearly", price: 430.8 },
     perks: [
-      "Cursos Beginner e Intermediate",
-      "Plano de estudos completo",
-      "Exercícios diários e quizzes",
-      "Professor IA com limite diário",
+      "Curso Beginner (A1–A2) e Intermediate (B1) completos",
+      "Plano de estudos personalizado completo",
+      "Exercícios diários, quizzes e AI Pronunciation",
+      "AI Teacher — 20 minutos por dia",
     ],
     highlight: false,
   },
@@ -75,7 +75,7 @@ const TIERS: Tier[] = [
       "Curso Upper-Intermediate (B2)",
       "Speak2Hire, Speak2Travel e Speak2Fluency completos",
       "Certificados de evolução",
-      "Professor IA ilimitado",
+      "AI Teacher — uso ilimitado",
     ],
     highlight: true,
   },
@@ -88,9 +88,9 @@ const TIERS: Tier[] = [
     yearly: { key: "signature_yearly", price: 579.0 },
     perks: [
       "Tudo do Premium",
-      "GiseleAI ilimitada",
-      "Feedback personalizado",
-      "Conversação 24/7",
+      "GiseleAI by Speak2Co ilimitada",
+      "Voice Room com a voz autorizada da fundadora",
+      "Feedback e relatórios personalizados da mentora",
     ],
     highlight: false,
   },
@@ -116,14 +116,13 @@ const COMPARISON_ROWS: { feature: string; essential: CellValue; premium: CellVal
   { feature: "Role play de viagem com IA", essential: false, premium: true, signature: true },
   { feature: "Certificados de evolução", essential: false, premium: true, signature: true },
   { feature: "Ranking de fluência", essential: false, premium: true, signature: true },
-  { feature: "Professor IA (chat)", essential: "Limitado", premium: true, signature: true },
+  { feature: "AI Teacher (chat)", essential: "20 min/dia", premium: "Ilimitado", signature: "Ilimitado" },
+  { feature: "AI Pronunciation (feedback de pronúncia)", essential: true, premium: true, signature: true },
   { feature: "GiseleAI ilimitada", essential: false, premium: false, signature: true },
   { feature: "Voice Room com voz autorizada da fundadora", essential: false, premium: false, signature: true },
   { feature: "Memória contextual e plano da mentora", essential: false, premium: false, signature: true },
   { feature: "Relatórios de progresso escritos pela GiseleAI", essential: false, premium: false, signature: true },
   { feature: "Missão do dia e recomendações personalizadas", essential: false, premium: false, signature: true },
-  { feature: "Feedback personalizado", essential: false, premium: false, signature: true },
-  { feature: "Conversação 24/7", essential: false, premium: false, signature: true },
 ];
 
 const GISELE_SHOWCASE = [
@@ -305,6 +304,7 @@ function PremiumPage() {
             <li>• Teste de nivelamento CEFR</li>
             <li>• Amostra do plano de estudos</li>
             <li>• Exercícios diários limitados</li>
+            <li>• AI Teacher — 20 minutos por dia</li>
           </ul>
           <div className="mt-8">
             <Button className="w-full" variant="outline" disabled>
