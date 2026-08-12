@@ -18,7 +18,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Shimmer } from "@/components/ai-elements/shimmer";
-import giseleLogo from "@/assets/gisele-ai.png.asset.json";
+import giseleLogo from "@/assets/gisele-ai-art.png.asset.json";
 import { FOCUS_LABEL } from "@/lib/gisele-focus";
 import {
   completeReviewItem,
@@ -91,7 +91,7 @@ function GiseleHub() {
         <img
           src={giseleLogo.url}
           alt="GiseleAI by Speak2Co"
-          className="h-20 w-20 rounded-full object-cover ring-2 ring-gold/40"
+          className="w-40 rounded-2xl object-contain ring-1 ring-gold/40 sm:w-52"
         />
         <div className="space-y-1">
           <h1 className="text-3xl font-bold">

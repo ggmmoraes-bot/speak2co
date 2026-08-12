@@ -72,27 +72,37 @@ function Body({ item }: { item: EcosystemItem }) {
         aria-hidden
         className="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full bg-gold/10 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
       />
-      <span
-        className={`relative flex items-center justify-center overflow-hidden rounded-2xl border border-gold/40 bg-gradient-to-br from-gold/25 via-gold/5 to-primary/30 transition-transform duration-300 group-hover:scale-105 ${
-          compact ? "h-11 w-11" : "h-16 w-16"
-        }`}
-      >
-        {item.imageUrl ? (
+      {item.imageUrl ? (
+        <span className="relative block w-full overflow-hidden rounded-2xl border border-gold/40 bg-background/60 p-2">
           <img
             src={item.imageUrl}
-            alt={`${item.titleEn} logo`}
+            alt={`${item.titleEn} — Speak2Co`}
             loading="lazy"
-            className="h-full w-full object-cover"
+            className={`w-full rounded-xl object-contain transition-transform duration-300 group-hover:scale-[1.03] ${
+              compact ? "h-28" : "h-44"
+            }`}
           />
-        ) : (
+          {locked && (
+            <span className="badge-gold absolute top-3 right-3 flex items-center gap-1 rounded-full bg-background/85 px-2 py-1 text-[10px] font-bold tracking-widest text-gold uppercase backdrop-blur">
+              <Lock className="icon-gold h-3 w-3" /> Locked
+            </span>
+          )}
+        </span>
+      ) : (
+        <span
+          className={`relative flex items-center justify-center overflow-hidden rounded-2xl border border-gold/40 bg-gradient-to-br from-gold/25 via-gold/5 to-primary/30 transition-transform duration-300 group-hover:scale-105 ${
+            compact ? "h-11 w-11" : "h-16 w-16"
+          }`}
+        >
           <Icon className={`icon-gold ${compact ? "h-5 w-5" : "h-7 w-7"}`} />
-        )}
-        {locked && (
-          <span className="absolute inset-0 flex items-center justify-center bg-background/65">
-            <Lock className="icon-gold h-4 w-4" />
-          </span>
-        )}
-      </span>
+          {locked && (
+            <span className="absolute inset-0 flex items-center justify-center bg-background/65">
+              <Lock className="icon-gold h-4 w-4" />
+            </span>
+          )}
+        </span>
+      )}
+
 
       <h3 className={`mt-4 font-semibold text-foreground ${compact ? "text-sm" : "text-lg"}`}>
         <BrandText text={item.titleEn} />

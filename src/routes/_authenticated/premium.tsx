@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import giseleAiLogo from "@/assets/gisele-ai.png.asset.json";
+import giseleAiArt from "@/assets/gisele-ai-art.png.asset.json";
 import { BrandText } from "@/components/BrandText";
 import { Button } from "@/components/ui/button";
 import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
@@ -227,9 +227,9 @@ function PremiumPage() {
       <section className="mt-10 overflow-hidden rounded-3xl border border-accent/40 bg-gradient-to-br from-accent/15 via-card to-card p-6 md:p-8">
         <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
           <img
-            src={giseleAiLogo.url}
+            src={giseleAiArt.url}
             alt="GiseleAI by Speak2Co — mentora de inglês com IA"
-            className="h-28 w-28 shrink-0 rounded-full object-cover ring-2 ring-accent/50"
+            className="w-full max-w-sm shrink-0 rounded-2xl object-contain ring-1 ring-accent/40 md:w-72"
             loading="lazy"
           />
           <div className="flex-1 text-center md:text-left">
