@@ -63,15 +63,15 @@ export const Route = createFileRoute("/_authenticated/assinatura")({
 });
 
 const STATUS_META: Record<string, { label: string; tone: string; dot: string }> = {
-  authorized: { label: "Ativa", tone: "text-accent", dot: "🟢" },
-  active: { label: "Ativa", tone: "text-accent", dot: "🟢" },
-  trialing: { label: "Em período de teste", tone: "text-accent", dot: "🟢" },
-  pending: { label: "Pagamento pendente", tone: "text-muted-foreground", dot: "🟡" },
-  past_due: { label: "Pagamento pendente", tone: "text-muted-foreground", dot: "🟡" },
-  paused: { label: "Pausada", tone: "text-muted-foreground", dot: "⚪" },
-  cancelled: { label: "Cancelada", tone: "text-destructive", dot: "🔴" },
-  canceled: { label: "Cancelada", tone: "text-destructive", dot: "🔴" },
-  expired: { label: "Expirada", tone: "text-destructive", dot: "🔴" },
+  authorized: { label: "Ativa", tone: "text-accent", dot: "●" },
+  active: { label: "Ativa", tone: "text-accent", dot: "●" },
+  trialing: { label: "Em período de teste", tone: "text-accent", dot: "●" },
+  pending: { label: "Pagamento pendente", tone: "text-muted-foreground", dot: "●" },
+  past_due: { label: "Pagamento pendente", tone: "text-muted-foreground", dot: "●" },
+  paused: { label: "Pausada", tone: "text-muted-foreground", dot: "●" },
+  cancelled: { label: "Cancelada", tone: "text-destructive", dot: "●" },
+  canceled: { label: "Cancelada", tone: "text-destructive", dot: "●" },
+  expired: { label: "Expirada", tone: "text-destructive", dot: "●" },
 };
 
 const PROVIDER_LABEL: Record<string, string> = {
@@ -132,7 +132,7 @@ function AssinaturaPage() {
   const [confirmCancel, setConfirmCancel] = useState(false);
 
   const isPending = !simulation && isLoading;
-  const subscription = simulation ? simulation.subscription : (data?.subscription ?? null);
+  const rawSubscription = simulation ? simulation.subscription : (data?.subscription ?? null);
   const planKey: PlanKey = simulation
     ? simulation.isPremium
       ? "premium"
@@ -141,6 +141,9 @@ function AssinaturaPage() {
       ? data.plan
       : "free";
   const isPaid = planKey !== "free";
+  // Assinaturas antigas/expiradas não devem aparecer como contratação vigente.
+  const subscription =
+    isPaid || rawSubscription?.status === "pending" ? rawSubscription : null;
   const isPaddle = subscription?.provider === "paddle";
 
   const priceOf = (key: PlanKey) => {
@@ -158,7 +161,7 @@ function AssinaturaPage() {
   const status = STATUS_META[statusKey] ?? {
     label: subscription?.status ?? "Sem assinatura",
     tone: "text-muted-foreground",
-    dot: "⚪",
+    dot: "●",
   };
   const autoRenew = Boolean(subscription) && !subscription?.cancel_at_period_end;
 
@@ -255,7 +258,7 @@ function AssinaturaPage() {
       {/* PLANO ATUAL */}
       <section className="mt-8 rounded-3xl border border-accent/40 bg-gradient-to-br from-accent/10 via-card to-card p-6 md:p-8">
         <p className={`flex items-center gap-2 text-sm font-semibold ${status.tone}`}>
-          <span aria-hidden="true">{status.dot}</span>
+          <span aria-hidden="true">●</span>
           {isPending ? "Carregando..." : isPaid ? `Assinatura ${status.label.toLowerCase()}` : "Plano gratuito"}
         </p>
         <h2 className="mt-2 text-2xl font-bold text-foreground md:text-3xl">
@@ -265,14 +268,14 @@ function AssinaturaPage() {
           <PlanPrice total={isPaid ? total : null} />
         </div>
         <div className="mt-5 grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
-          <p>📅 Início: {formatDate(startIso) ?? "—"}</p>
-          <p>⏳ Acesso válido até: {formatDate(endIso) ?? "—"}</p>
+          <p>Início: {formatDate(startIso) ?? "—"}</p>
+          <p>Acesso válido até: {formatDate(endIso) ?? "—"}</p>
           <p>
-            🔁 Próxima renovação:{" "}
+            Próxima renovação:{" "}
             {autoRenew ? (formatDate(nextChargeIso) ?? "—") : "Renovação desligada"}
           </p>
           <p>
-            💳 Forma de pagamento:{" "}
+            Forma de pagamento:{" "}
             {subscription?.provider
               ? (PROVIDER_LABEL[subscription.provider] ?? subscription.provider)
               : "—"}
