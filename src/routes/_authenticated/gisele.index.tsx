@@ -10,6 +10,7 @@ import {
   Mic,
   Plane,
   RefreshCw,
+  Settings,
   Sparkles,
   SpellCheck,
   Target,
