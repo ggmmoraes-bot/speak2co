@@ -72,6 +72,7 @@ const TIERS: Tier[] = [
     yearly: { key: "premium_yearly", price: 479.0 },
     perks: [
       "Tudo do Essential",
+      "Curso Upper-Intermediate (B2)",
       "Speak2Hire, Speak2Travel e Speak2Fluency completos",
       "Certificados de evolução",
       "Professor IA ilimitado",
