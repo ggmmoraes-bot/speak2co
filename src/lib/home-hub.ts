@@ -28,6 +28,8 @@ import {
 import type { EcosystemItem } from "@/components/EcosystemCard";
 import { hasFeature, FEATURE_KEYS } from "@/lib/entitlements";
 import type { MyAccess } from "@/lib/entitlements.functions";
+import { BEGINNER_UNITS_TOTAL } from "@/lib/beginner-course";
+import { INTERMEDIATE_UNITS_TOTAL } from "@/lib/intermediate-course";
 import speak2coLogo from "@/assets/speak2co-logo.asset.json";
 import speak2hireLogo from "@/assets/speak2hire.asset.json";
 import speak2travelLogo from "@/assets/speak2travel.asset.json";
@@ -63,7 +65,7 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           id: "beginner",
           titleEn: "Beginner English Course",
           titlePt: "Curso iniciante (A1–A2)",
-          description: "20 lições com vocabulário, gramática, diálogos e AI Pronunciation.",
+          description: `${BEGINNER_UNITS_TOTAL} unidades com vocabulário, gramática, diálogos e AI Pronunciation.`,
           icon: BookOpen,
           to: "/curso-beginner",
           status: gate(access, FEATURE_KEYS.coursesBeginner),
@@ -73,7 +75,7 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           id: "intermediate",
           titleEn: "Intermediate English Course",
           titlePt: "Curso intermediário (B1)",
-          description: "20 lições para desenvolver fluência, com avaliação final e certificado.",
+          description: `${INTERMEDIATE_UNITS_TOTAL} unidades para desenvolver fluência, com avaliação final e certificado.`,
           icon: BookOpen,
           to: "/curso-intermediate",
           status: gate(access, FEATURE_KEYS.coursesIntermediate),
@@ -154,11 +156,12 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           id: "ai-teacher",
           titleEn: "AI Teacher",
           titlePt: "Professor de IA",
-          description: "Converse em inglês 24h e receba correções de gramática e pronúncia.",
+          description:
+            "Free e Essential: 20 minutos por dia · Premium e Signature: uso ilimitado.",
           icon: MessageSquare,
           to: "/professor",
           status: gate(access, FEATURE_KEYS.aiTeacher),
-          plans: ["Premium", "Signature"],
+          plans: ["Free", "Essential", "Premium", "Signature"],
         },
         {
           id: "ai-pron",
