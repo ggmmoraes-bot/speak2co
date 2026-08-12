@@ -16,6 +16,7 @@ import {
   getUpperUnit,
 } from "@/lib/upper-course";
 import { PART_LABEL, partChecks, type CourseUnit, type UnitPartKey } from "@/lib/curriculum/types";
+import { warmUpImageFor, warmUpNeedsImage } from "@/lib/curriculum/warmup-images";
 import { saveCourseProgress } from "@/lib/course-progress.functions";
 import { averageScore, type PronunciationAttempt } from "@/lib/pronunciation-grade";
 
@@ -105,6 +106,8 @@ function UnitPartPage({ unit, part }: { unit: CourseUnit; part: UnitPartKey }) {
       toast.error("Não foi possível salvar seu progresso.");
     }
   }
+
+  const warmUpImage = warmUpImageFor(unit.title);
 
   return (
     <main className="mx-auto w-full max-w-4xl flex-1 px-6 py-8">
