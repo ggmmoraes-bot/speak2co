@@ -108,27 +108,18 @@ export const LESSON_SECTIONS = [
 
 export type LessonSectionKey = (typeof LESSON_SECTIONS)[number]["key"];
 
-import { LESSONS_1_5 } from "./beginner-course-lessons-1";
-import { LESSONS_6_10 } from "./beginner-course-lessons-2";
-import { LESSONS_11_15 } from "./beginner-course-lessons-3";
-import { LESSONS_16_20 } from "./beginner-course-lessons-4";
+import { BEGINNER_UNITS, getBeginnerUnit } from "./curriculum/beginner-units";
+import type { CourseUnit } from "./curriculum/types";
 
-export const BEGINNER_LESSONS: BeginnerLesson[] = [
-  ...LESSONS_1_5,
-  ...LESSONS_6_10,
-  ...LESSONS_11_15,
-  ...LESSONS_16_20,
-];
+export { BEGINNER_UNITS, getBeginnerUnit };
 
-export function getBeginnerLesson(id: string) {
-  return BEGINNER_LESSONS.find((lesson) => lesson.id === id);
-}
+/** Total de unidades do currículo oficial. */
+export const BEGINNER_UNITS_TOTAL = BEGINNER_UNITS.length;
 
-/** Todas as frases da lição que valem prática de pronúncia com a IA. */
-export function lessonPhrases(lesson: BeginnerLesson): { en: string; pt: string }[] {
-  return [
-    ...lesson.vocabulary.map((v) => ({ en: v.example, pt: v.examplePt })),
-    ...lesson.expressions.map((e) => ({ en: e.en, pt: e.pt })),
-    ...lesson.dialogue.map((d) => ({ en: d.en, pt: d.pt })),
-  ];
+/** Cada unidade tem duas partes; o progresso é registrado por parte. */
+export const BEGINNER_PARTS_TOTAL = BEGINNER_UNITS.length * 2;
+
+/** Ids de progresso (uma entrada por parte). */
+export function beginnerPartIds(): string[] {
+  return BEGINNER_UNITS.flatMap((unit: CourseUnit) => [unit.discover.id, unit.communicate.id]);
 }

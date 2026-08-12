@@ -60,7 +60,6 @@ import { Route as AuthenticatedUpgradeEssentialRouteImport } from './routes/_aut
 import { Route as ApiVoicePronunciationRouteImport } from './routes/api/voice/pronunciation'
 import { Route as ApiVoiceSpeakRouteImport } from './routes/api/voice/speak'
 import { Route as ApiVoiceTranscribeRouteImport } from './routes/api/voice/transcribe'
-import { Route as AuthenticatedCursoBeginnerLicaoLessonIdRouteImport } from './routes/_authenticated/curso-beginner.licao.$lessonId'
 import { Route as AuthenticatedGiseleVoiceSessionThreadIdRouteImport } from './routes/_authenticated/gisele.voice-session.$threadId'
 import { Route as AuthenticatedSpeak2fluencyModuloModuleIdRouteImport } from './routes/_authenticated/speak2fluency.modulo.$moduleId'
 import { Route as AuthenticatedSpeak2hireMaterialMaterialIdRouteImport } from './routes/_authenticated/speak2hire.material.$materialId'
@@ -358,12 +357,6 @@ const ApiVoiceTranscribeRoute = ApiVoiceTranscribeRouteImport.update({
   path: '/api/voice/transcribe',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedCursoBeginnerLicaoLessonIdRoute =
-  AuthenticatedCursoBeginnerLicaoLessonIdRouteImport.update({
-    id: '/licao/$lessonId',
-    path: '/licao/$lessonId',
-    getParentRoute: () => AuthenticatedCursoBeginnerRoute,
-  } as any)
 const AuthenticatedGiseleVoiceSessionThreadIdRoute =
   AuthenticatedGiseleVoiceSessionThreadIdRouteImport.update({
     id: '/voice-session/$threadId',
@@ -482,7 +475,6 @@ export interface FileRoutesByFullPath {
   '/speak2fluency/': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
-  '/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
   '/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -539,7 +531,6 @@ export interface FileRoutesByTo {
   '/speak2fluency': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel': typeof AuthenticatedSpeak2travelIndexRoute
-  '/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
   '/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -605,7 +596,6 @@ export interface FileRoutesById {
   '/_authenticated/speak2fluency/': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/_authenticated/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
-  '/_authenticated/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
   '/_authenticated/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/_authenticated/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
   '/_authenticated/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -671,7 +661,6 @@ export interface FileRouteTypes {
     | '/speak2fluency/'
     | '/speak2hire/'
     | '/speak2travel/'
-    | '/curso-beginner/licao/$lessonId'
     | '/gisele/voice-session/$threadId'
     | '/speak2fluency/modulo/$moduleId'
     | '/speak2hire/material/$materialId'
@@ -728,7 +717,6 @@ export interface FileRouteTypes {
     | '/speak2fluency'
     | '/speak2hire'
     | '/speak2travel'
-    | '/curso-beginner/licao/$lessonId'
     | '/gisele/voice-session/$threadId'
     | '/speak2fluency/modulo/$moduleId'
     | '/speak2hire/material/$materialId'
@@ -793,7 +781,6 @@ export interface FileRouteTypes {
     | '/_authenticated/speak2fluency/'
     | '/_authenticated/speak2hire/'
     | '/_authenticated/speak2travel/'
-    | '/_authenticated/curso-beginner/licao/$lessonId'
     | '/_authenticated/gisele/voice-session/$threadId'
     | '/_authenticated/speak2fluency/modulo/$moduleId'
     | '/_authenticated/speak2hire/material/$materialId'
@@ -1181,13 +1168,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiVoiceTranscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/curso-beginner/licao/$lessonId': {
-      id: '/_authenticated/curso-beginner/licao/$lessonId'
-      path: '/licao/$lessonId'
-      fullPath: '/curso-beginner/licao/$lessonId'
-      preLoaderRoute: typeof AuthenticatedCursoBeginnerLicaoLessonIdRouteImport
-      parentRoute: typeof AuthenticatedCursoBeginnerRoute
-    }
     '/_authenticated/gisele/voice-session/$threadId': {
       id: '/_authenticated/gisele/voice-session/$threadId'
       path: '/voice-session/$threadId'
@@ -1271,7 +1251,6 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedCursoBeginnerRouteChildren {
   AuthenticatedCursoBeginnerAssessmentRoute: typeof AuthenticatedCursoBeginnerAssessmentRoute
   AuthenticatedCursoBeginnerIndexRoute: typeof AuthenticatedCursoBeginnerIndexRoute
-  AuthenticatedCursoBeginnerLicaoLessonIdRoute: typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
   AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute: typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
 }
 
@@ -1280,8 +1259,6 @@ const AuthenticatedCursoBeginnerRouteChildren: AuthenticatedCursoBeginnerRouteCh
     AuthenticatedCursoBeginnerAssessmentRoute:
       AuthenticatedCursoBeginnerAssessmentRoute,
     AuthenticatedCursoBeginnerIndexRoute: AuthenticatedCursoBeginnerIndexRoute,
-    AuthenticatedCursoBeginnerLicaoLessonIdRoute:
-      AuthenticatedCursoBeginnerLicaoLessonIdRoute,
     AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute:
       AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute,
   }
