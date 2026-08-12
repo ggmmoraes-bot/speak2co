@@ -157,6 +157,11 @@ function Painel() {
                   <Link to="/perfil">Meu perfil</Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full font-semibold">
+                  <Link to="/assinatura">
+                    <ShieldCheck className="mr-2 h-4 w-4 text-gold" /> Minha assinatura
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="rounded-full font-semibold">
                   <Link to="/premium">
                     <Sparkles className="mr-2 h-4 w-4 text-gold" /> Planos
                   </Link>

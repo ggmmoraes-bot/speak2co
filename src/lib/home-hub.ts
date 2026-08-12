@@ -4,6 +4,7 @@ import {
   Bot,
   Briefcase,
   Compass,
+  CreditCard,
   Flag,
   Globe,
   GraduationCap,
@@ -322,6 +323,16 @@ export function buildHomeSections(access: Access): HubSectionData[] {
       titleEn: "Support & Community",
       titlePt: "Suporte e comunidade",
       items: [
+        {
+          id: "my-subscription",
+          titleEn: "My Subscription",
+          titlePt: "Minha assinatura",
+          description:
+            "Veja seu plano, condições da contratação anual, termos, renovação, upgrade e histórico.",
+          icon: CreditCard,
+          to: "/assinatura",
+          status: "available",
+        },
         {
           id: "founder",
           titleEn: "Talk to the Founder",
