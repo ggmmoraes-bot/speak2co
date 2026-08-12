@@ -26,7 +26,7 @@ export const Route = createFileRoute("/_authenticated/admin")({
       {
         name: "description",
         content:
-          "Gerencie planos, preços, limites do Professor IA e a matriz de recursos liberados em cada assinatura da Speak2Co.",
+          "Gerencie planos, preços, limites do AI Teacher e a matriz de recursos liberados em cada assinatura da Speak2Co.",
       },
       { property: "og:title", content: "Painel administrativo — Speak2Co" },
       {
@@ -213,7 +213,7 @@ function AdminPage() {
           <p className="text-sm uppercase tracking-[0.3em] text-gold">Administração</p>
           <h1 className="mt-2 text-3xl font-bold text-foreground">Planos e permissões</h1>
           <p className="mt-2 max-w-2xl text-muted-foreground">
-            Crie novos planos, ajuste preços e limites do Professor IA e defina exatamente quais
+            Crie novos planos, ajuste preços e limites do AI Teacher e defina exatamente quais
             recursos cada assinatura libera — tudo sem mexer no código.
           </p>
         </div>

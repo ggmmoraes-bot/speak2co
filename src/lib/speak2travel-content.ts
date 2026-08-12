@@ -762,7 +762,7 @@ export const TRAVEL_RESOURCES: TravelResource[] = [
     title: "Pronunciation Lab",
     subtitle: "Áudios, shadowing e repetição",
     description:
-      "Ouça, repita e compare sua pronúncia com o modelo — integrado ao corretor de pronúncia do Professor de IA.",
+      "Ouça, repita e compare sua pronúncia com o modelo — integrado ao corretor de pronúncia do AI Teacher.",
     items: ["Áudios nativos", "Shadowing", "Repetição guiada"],
   },
   {

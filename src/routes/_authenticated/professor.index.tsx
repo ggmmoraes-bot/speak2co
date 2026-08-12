@@ -28,7 +28,7 @@ function ProfessorIndex() {
       <img src={logo.url} alt="Speak2Co" className="h-20 w-20 rounded-full" />
       <div className="space-y-2">
         <h1 className="flex items-center gap-2 text-2xl font-semibold text-gold">
-          <Sparkles className="h-6 w-6" /> Professor IA
+          <Sparkles className="h-6 w-6" /> AI Teacher
         </h1>
         <p className="max-w-md text-sm text-muted-foreground">
           Converse em inglês com seu professor particular de IA. Ele adapta ao seu nível,

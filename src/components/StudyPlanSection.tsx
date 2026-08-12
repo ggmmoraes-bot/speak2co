@@ -45,7 +45,7 @@ export function StudyPlanSection({
   const [preview, setPreview] = useState<RefinementPreview | null>(null);
   const [practiceWeek, setPracticeWeek] = useState<number | null>(null);
 
-  /** Abre o Professor IA já com a prática da semana indicada pelo plano. */
+  /** Abre o AI Teacher já com a prática da semana indicada pelo plano. */
   async function practiceWithAi(week: WeeklyFocus) {
     if (practiceWeek !== null) return;
     try {
@@ -301,7 +301,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
         </p>
       ) : mutation.isPending || isLoading ? (
         <p className="mt-4 text-sm text-muted-foreground">
-          Montando seu plano personalizado com o professor de IA…
+          Montando seu plano personalizado com o AI Teacher…
         </p>
       ) : plan ? (
         <div className="mt-6 grid gap-6">
