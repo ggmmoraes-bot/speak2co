@@ -306,14 +306,13 @@ function PremiumPage() {
               <h2 className="mt-4 text-xl font-semibold text-foreground">{tier.label}</h2>
               <p className="mt-1 text-sm text-muted-foreground">{tier.description}</p>
 
-              <p className="mt-5 text-4xl font-bold text-accent">{BRL(total)}</p>
-              <p className="text-sm font-medium text-foreground">por ano</p>
-              <p className="mt-1 text-sm text-muted-foreground">
-                ou em até 12x sem juros de {BRL(installmentOf(total))}
-              </p>
+              <div className="mt-5">
+                <PlanPrice total={total} />
+              </div>
               <p className="mt-3 text-xs text-muted-foreground">
-                Acesso por 12 meses · Renovação anual automática conforme os termos
+                Contratação anual · Renovação automática conforme os termos
               </p>
+
 
               <ul className="mt-6 flex-1 space-y-2 text-sm text-muted-foreground">
                 {tier.perks.map((perk) => (
