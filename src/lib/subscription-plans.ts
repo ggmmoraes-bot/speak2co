@@ -44,6 +44,7 @@ export const PLAN_BENEFITS: Record<PlanKey, string[]> = {
   ],
   premium: [
     "Tudo do Essential",
+    "Curso Upper-Intermediate (B2) — comunicação profissional e situações complexas",
     "Speak2Hire — simulador de entrevistas com IA",
     "Speak2Travel — 10 módulos e Trip Planner",
     "Speak2Fluency — 8 módulos e rotina diária de fluência",
