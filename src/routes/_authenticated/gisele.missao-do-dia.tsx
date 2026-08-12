@@ -113,7 +113,7 @@ function MissionPage() {
                     onClick={() => start(m.title, m.focus, `${m.context} ${m.objective}`)}
                     className="mt-auto w-fit rounded-full text-xs"
                   >
-                    Practise
+                    Practice
                   </Button>
                 </Card>
               ))}
