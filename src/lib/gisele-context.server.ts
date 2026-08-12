@@ -262,8 +262,8 @@ RITMO RECENTE:
 - Últimos 7 dias: ${s.activity.sessionsLast7Days} sessões e ${s.activity.minutesLast7Days} minutos | streak: ${s.activity.streakDays} dia(s)
 
 PROGRESSO REAL:
-- Curso Beginner: ${s.courses.beginnerDone}/20 lições concluídas
-- Curso Intermediate: ${s.courses.intermediateDone}/20 lições concluídas
+- Curso Beginner: ${s.courses.beginnerDone} partes concluídas
+- Curso Intermediate: ${s.courses.intermediateDone} partes concluídas
 - Speak2Fluency: ${s.fluency.completedModules}/8 módulos concluídos${fluencyDone ? ` (${fluencyDone})` : ""}${s.fluency.lastMissionDate ? ` | última missão diária: ${s.fluency.lastMissionDate}` : ""}
 - Speak2Travel: ${s.travel.completedTracks} trilhas concluídas
 - Speak2Hire: ${s.hire.sessions} entrevistas concluídas${s.hire.lastScore != null ? ` | última nota: ${s.hire.lastScore}` : ""}

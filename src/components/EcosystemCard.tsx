@@ -14,7 +14,7 @@ import {
 import { BrandText } from "@/components/BrandText";
 
 export type EcosystemStatus = "available" | "locked" | "soon";
-export type PlanName = "Essential" | "Premium" | "Signature";
+export type PlanName = "Free" | "Essential" | "Premium" | "Signature";
 
 export type EcosystemItem = {
   id: string;
