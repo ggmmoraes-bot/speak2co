@@ -2109,7 +2109,10 @@ export const UPPER_UNITS_31_40: CourseUnit[] = [
           "en": "Admittedly, implementing this will require significant commitment.",
           "pt": "É certo que implementar isso exigirá um compromisso significativo."
         },
-        "All things considered, this strategy promises enhanced employee resilience and growth.",
+        {
+          "en": "All things considered, this strategy promises enhanced employee resilience and growth.",
+          "pt": ""
+        },
         {
           "en": "All things considered, this strategy promises enhanced employee resilience and growth.",
           "pt": "Considerando tudo, esta estratégia promete maior resiliência e crescimento dos funcionários."
@@ -2478,22 +2481,18 @@ export const UPPER_UNITS_31_40: CourseUnit[] = [
           "pt": "Dra. Reed: Exatamente. O modelo tradicional, onde os festivais exibem sucessos de bilheteria já estabelecidos, está se tornando menos relevante. Isso levanta a questão de como cultivar novos talentos de forma eficaz."
         },
         {
-          "who": "Host",
           "en": "So, are you suggesting festivals should take a gamble on more experimental films?",
           "pt": "Então, você está sugerindo que os festivais deveriam arriscar em filmes mais experimentais?"
         },
         {
-          "who": "Dr. Reed",
           "en": "Absolutely. It's a calculated risk, but the data points to audiences craving more diverse narratives and unique aesthetics. Festivals have a golden opportunity to become incubators for creativity.",
           "pt": "Absolutamente. É um risco calculado, mas os dados apontam para o desejo do público por narrativas mais diversas e estéticas únicas. Os festivais têm uma oportunidade de ouro para se tornarem incubadoras de criatividade."
         },
         {
-          "who": "Host",
           "en": "That being said, some might argue that a festival's primary role is to ensure commercial viability and attract a large audience.",
           "pt": "Dito isso, alguns podem argumentar que o papel principal de um festival é garantir a viabilidade comercial e atrair um grande público."
         },
         {
-          "who": "Dr. Reed",
           "en": "It could be argued that, yes, but if they want to remain culturally significant, they must adapt. Ignoring emerging artists would be a huge missed opportunity.",
           "pt": "Pode-se argumentar isso, sim, mas se eles quiserem permanecer culturalmente significativos, devem se adaptar. Ignorar artistas emergentes seria uma grande oportunidade perdida."
         }
@@ -2781,7 +2780,10 @@ export const UPPER_UNITS_31_40: CourseUnit[] = [
             "en": "It could be argued that critique...",
             "pt": "Pode-se argumentar que a crítica..."
           },
-          "The data points to a correlation between..."
+          {
+            "en": "The data points to a correlation between...",
+            "pt": ""
+          }
         ],
         "check": [
           {
@@ -6457,7 +6459,10 @@ export const UPPER_UNITS_31_40: CourseUnit[] = [
           "en": "Let's align on these learnings for our next project.",
           "pt": "Vamos nos alinhar sobre esses aprendizados para nosso próximo projeto."
         },
-        "We're almost there with the action items for improvement."
+        {
+          "en": "We're almost there with the action items for improvement.",
+          "pt": ""
+        }
       ],
       "check": [
         {

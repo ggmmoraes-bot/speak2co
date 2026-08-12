@@ -6823,22 +6823,18 @@ export const UPPER_UNITS_11_20: CourseUnit[] = [
           "pt": "Sarah: Obrigada por me receber. 'Espaços Verdes' visa converter áreas urbanas não utilizadas em jardins produtivos. Nosso principal objetivo é promover a sustentabilidade e a segurança alimentar local. Acreditamos que, a menos que as comunidades se envolvam, esses projetos não florescerão verdadeiramente."
         },
         {
-          "who": "Interviewer",
           "en": "That's a fantastic idea. What are some of the challenges you face?",
           "pt": "É uma ideia fantástica. Quais são alguns dos desafios que vocês enfrentam?"
         },
         {
-          "who": "Sarah",
           "en": "Funding is always a challenge. Provided that we secure enough grants, we can expand our operations significantly. Also, educating people on how to grow their own food and reduce waste is key. We offer workshops in case people need practical guidance.",
           "pt": "O financiamento é sempre um desafio. Desde que garantamos subsídios suficientes, podemos expandir nossas operações significativamente. Além disso, educar as pessoas sobre como cultivar sua própria comida e reduzir o lixo é fundamental. Oferecemos workshops caso as pessoas precisem de orientação prática."
         },
         {
-          "who": "Interviewer",
           "en": "And what about the impact? Are you seeing tangible results?",
           "pt": "E quanto ao impacto? Vocês estão vendo resultados tangíveis?"
         },
         {
-          "who": "Sarah",
           "en": "Absolutely. As long as we continue to engage residents, we're seeing healthier diets, stronger community bonds, and a noticeable reduction in urban waste sent to landfills. The implications are significant for urban planning and resource management.",
           "pt": "Com certeza. Contanto que continuemos a envolver os moradores, estamos vendo dietas mais saudáveis, laços comunitários mais fortes e uma redução notável de resíduos urbanos enviados para aterros. As implicações são significativas para o planejamento urbano e a gestão de recursos."
         }

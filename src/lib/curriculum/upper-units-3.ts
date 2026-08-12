@@ -2258,8 +2258,7 @@ export const UPPER_UNITS_21_30: CourseUnit[] = [
         "ipa": "/trʌst/",
         "definition": "Firm belief in the reliability, truth, ability, or strength of someone or something.",
         "example": "Building trust within the team is essential for effective collaboration.",
-        "examplePt": "Construir confiança dentro da equipe é essencial para uma colaboração eficaz.",
-        "image": "https://dummyimage.com/100x100/000/fff&text=Trust"
+        "examplePt": "Construir confiança dentro da equipe é essencial para uma colaboração eficaz."
       },
       {
         "term": "communication",
@@ -2267,8 +2266,7 @@ export const UPPER_UNITS_21_30: CourseUnit[] = [
         "ipa": "/kəˌmjuːnɪˈkeɪʃn/",
         "definition": "The imparting or exchanging of information by speaking, writing, or using some other medium.",
         "example": "Poor communication often leads to misunderstandings and conflicts.",
-        "examplePt": "A má comunicação frequentemente leva a mal-entendidos e conflitos.",
-        "image": "https://dummyimage.com/100x100/000/fff&text=Communication"
+        "examplePt": "A má comunicação frequentemente leva a mal-entendidos e conflitos."
       },
       {
         "term": "conflict",
@@ -2276,8 +2274,7 @@ export const UPPER_UNITS_21_30: CourseUnit[] = [
         "ipa": "/ˈkɒnflɪkt/",
         "definition": "A serious disagreement or argument, typically a protracted one.",
         "example": "They managed to resolve the conflict by discussing their differences openly.",
-        "examplePt": "Eles conseguiram resolver o conflito discutindo suas diferenças abertamente.",
-        "image": "https://dummyimage.com/100x100/000/fff&text=Conflict"
+        "examplePt": "Eles conseguiram resolver o conflito discutindo suas diferenças abertamente."
       },
       {
         "term": "support",
@@ -2285,8 +2282,7 @@ export const UPPER_UNITS_21_30: CourseUnit[] = [
         "ipa": "/səˈpɔːrt/",
         "definition": "To give assistance to, especially financially; enable to continue.",
         "example": "Team members should always support each other's efforts.",
-        "examplePt": "Os membros da equipe devem sempre apoiar os esforços uns dos outros.",
-        "image": "https://dummyimage.com/100x100/000/fff&text=Support"
+        "examplePt": "Os membros da equipe devem sempre apoiar os esforços uns dos outros."
       },
       {
         "term": "commitment",
@@ -2294,8 +2290,7 @@ export const UPPER_UNITS_21_30: CourseUnit[] = [
         "ipa": "/kəˈmɪtmənt/",
         "definition": "The state or quality of being dedicated to a cause, activity, or person.",
         "example": "Her commitment to the project ensured its successful completion.",
-        "examplePt": "O seu compromisso com o projeto garantiu a sua conclusão bem-sucedida.",
-        "image": "https://dummyimage.com/100x100/000/fff&text=Commitment"
+        "examplePt": "O seu compromisso com o projeto garantiu a sua conclusão bem-sucedida."
       },
       {
         "term": "boundaries",
@@ -2303,8 +2298,7 @@ export const UPPER_UNITS_21_30: CourseUnit[] = [
         "ipa": "/ˈbaʊndəriz/",
         "definition": "A line which marks the limits of an area; a dividing line.",
         "example": "Setting clear boundaries helps prevent burnout and maintain respect.",
-        "examplePt": "Estabelecer limites claros ajuda a prevenir o esgotamento e a manter o respeito.",
-        "image": "https://dummyimage.com/100x100/000/fff&text=Boundaries"
+        "examplePt": "Estabelecer limites claros ajuda a prevenir o esgotamento e a manter o respeito."
       },
       {
         "term": "empathy",
@@ -2312,8 +2306,7 @@ export const UPPER_UNITS_21_30: CourseUnit[] = [
         "ipa": "/ˈɛmpəθi/",
         "definition": "The ability to understand and share the feelings of another.",
         "example": "A leader with empathy can better understand their team's challenges.",
-        "examplePt": "Um líder com empatia pode entender melhor os desafios de sua equipe.",
-        "image": "https://dummyimage.com/100x100/000/fff&text=Empathy"
+        "examplePt": "Um líder com empatia pode entender melhor os desafios de sua equipe."
       },
       {
         "term": "connection",
@@ -2321,8 +2314,7 @@ export const UPPER_UNITS_21_30: CourseUnit[] = [
         "ipa": "/kəˈnɛkʃn/",
         "definition": "A relationship in which a person, thing, or idea is linked or associated with something else.",
         "example": "Strong personal connections can improve team cohesion.",
-        "examplePt": "Fortes conexões pessoais podem melhorar a coesão da equipe.",
-        "image": "https://dummyimage.com/100x100/000/fff&text=Connection"
+        "examplePt": "Fortes conexões pessoais podem melhorar a coesão da equipe."
       },
       {
         "term": "compromise",
@@ -2330,8 +2322,7 @@ export const UPPER_UNITS_21_30: CourseUnit[] = [
         "ipa": "/ˈkɒmprəmaɪz/",
         "definition": "An agreement or a settlement of a dispute that is reached by each side making concessions.",
         "example": "Finding a compromise was essential for the project to move forward.",
-        "examplePt": "Encontrar um compromisso foi essencial para o projeto avançar.",
-        "image": "https://dummyimage.com/100x100/000/fff&text=Compromise"
+        "examplePt": "Encontrar um compromisso foi essencial para o projeto avançar."
       },
       {
         "term": "respect",
@@ -2339,8 +2330,7 @@ export const UPPER_UNITS_21_30: CourseUnit[] = [
         "ipa": "/rɪˈspɛkt/",
         "definition": "A feeling of deep admiration for someone or something elicited by their abilities, qualities, or achievements.",
         "example": "Mutual respect is the foundation of any healthy relationship.",
-        "examplePt": "O respeito mútuo é a base de qualquer relacionamento saudável.",
-        "image": "https://dummyimage.com/100x100/000/fff&text=Respect"
+        "examplePt": "O respeito mútuo é a base de qualquer relacionamento saudável."
       }
     ],
     "expressions": [
@@ -4568,10 +4558,6 @@ export const UPPER_UNITS_21_30: CourseUnit[] = [
         ]
       }
     ],
-    "pronunciationFocus": {
-      "en": "Consonant clusters: Focus on correct articulation of consonant clusters found in health and formal vocabulary, e.g., 'strength', 'symptoms', 'prescription'.",
-      "pt": "Grupos consonantais: Foco na articulação correta de grupos consonantais encontrados em vocabulário de saúde e formal, por exemplo, 'strength', 'symptoms', 'prescription'."
-    },
     "controlledPractice": [
       {
         "id": "cp-1",

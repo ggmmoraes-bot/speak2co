@@ -6815,7 +6815,6 @@ export const UPPER_UNITS_41_50: CourseUnit[] = [
           "pt": "Apresentador: Então, o que realmente importa é a adaptabilidade, não é?"
         },
         {
-          "who": "Guest",
           "en": "Precisely. And it's digital literacy that will be crucial. Understanding algorithms and data analysis, for instance.",
           "pt": "Convidado: Precisamente. E é a alfabetização digital que será crucial. Compreender algoritmos e análise de dados, por exemplo."
         },
