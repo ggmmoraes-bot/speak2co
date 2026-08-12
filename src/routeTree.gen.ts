@@ -72,6 +72,7 @@ import { Route as AuthenticatedSpeak2travelRevisaoModuleIdRouteImport } from './
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/public/webhooks/mercadopago'
 import { Route as AuthenticatedCursoBeginnerUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-beginner.unidade.$unitCode.$part'
+import { Route as AuthenticatedCursoIntermediateUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-intermediate.unidade.$unitCode.$part'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -430,6 +431,12 @@ const AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute =
     path: '/unidade/$unitCode/$part',
     getParentRoute: () => AuthenticatedCursoBeginnerRoute,
   } as any)
+const AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute =
+  AuthenticatedCursoIntermediateUnidadeUnitCodePartRouteImport.update({
+    id: '/unidade/$unitCode/$part',
+    path: '/unidade/$unitCode/$part',
+    getParentRoute: () => AuthenticatedCursoIntermediateRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -494,6 +501,7 @@ export interface FileRoutesByFullPath {
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
   '/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
+  '/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -551,6 +559,7 @@ export interface FileRoutesByTo {
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
   '/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
+  '/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -617,6 +626,7 @@ export interface FileRoutesById {
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
   '/_authenticated/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
+  '/_authenticated/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -683,6 +693,7 @@ export interface FileRouteTypes {
     | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
     | '/curso-beginner/unidade/$unitCode/$part'
+    | '/curso-intermediate/unidade/$unitCode/$part'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -740,6 +751,7 @@ export interface FileRouteTypes {
     | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
     | '/curso-beginner/unidade/$unitCode/$part'
+    | '/curso-intermediate/unidade/$unitCode/$part'
   id:
     | '__root__'
     | '/'
@@ -805,6 +817,7 @@ export interface FileRouteTypes {
     | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
     | '/_authenticated/curso-beginner/unidade/$unitCode/$part'
+    | '/_authenticated/curso-intermediate/unidade/$unitCode/$part'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1265,6 +1278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRouteImport
       parentRoute: typeof AuthenticatedCursoBeginnerRoute
     }
+    '/_authenticated/curso-intermediate/unidade/$unitCode/$part': {
+      id: '/_authenticated/curso-intermediate/unidade/$unitCode/$part'
+      path: '/unidade/$unitCode/$part'
+      fullPath: '/curso-intermediate/unidade/$unitCode/$part'
+      preLoaderRoute: typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRouteImport
+      parentRoute: typeof AuthenticatedCursoIntermediateRoute
+    }
   }
 }
 
@@ -1295,6 +1315,7 @@ interface AuthenticatedCursoIntermediateRouteChildren {
   AuthenticatedCursoIntermediateAssessmentRoute: typeof AuthenticatedCursoIntermediateAssessmentRoute
   AuthenticatedCursoIntermediateIndexRoute: typeof AuthenticatedCursoIntermediateIndexRoute
   AuthenticatedCursoIntermediateLicaoLessonIdRoute: typeof AuthenticatedCursoIntermediateLicaoLessonIdRoute
+  AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute: typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
 }
 
 const AuthenticatedCursoIntermediateRouteChildren: AuthenticatedCursoIntermediateRouteChildren =
@@ -1305,6 +1326,8 @@ const AuthenticatedCursoIntermediateRouteChildren: AuthenticatedCursoIntermediat
       AuthenticatedCursoIntermediateIndexRoute,
     AuthenticatedCursoIntermediateLicaoLessonIdRoute:
       AuthenticatedCursoIntermediateLicaoLessonIdRoute,
+    AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute:
+      AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute,
   }
 
 const AuthenticatedCursoIntermediateRouteWithChildren =
