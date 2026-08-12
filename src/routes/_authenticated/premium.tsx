@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
+import giseleAiLogo from "@/assets/gisele-ai.png.asset.json";
 import { BrandText } from "@/components/BrandText";
 import { Button } from "@/components/ui/button";
 import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
@@ -112,8 +113,31 @@ const COMPARISON_ROWS: { feature: string; essential: CellValue; premium: CellVal
   { feature: "Ranking de fluência", essential: false, premium: true, signature: true },
   { feature: "Professor IA (chat)", essential: "Limitado", premium: true, signature: true },
   { feature: "GiseleAI ilimitada", essential: false, premium: false, signature: true },
+  { feature: "Voice Room com voz autorizada da fundadora", essential: false, premium: false, signature: true },
+  { feature: "Memória contextual e plano da mentora", essential: false, premium: false, signature: true },
+  { feature: "Relatórios de progresso escritos pela GiseleAI", essential: false, premium: false, signature: true },
+  { feature: "Missão do dia e recomendações personalizadas", essential: false, premium: false, signature: true },
   { feature: "Feedback personalizado", essential: false, premium: false, signature: true },
   { feature: "Conversação 24/7", essential: false, premium: false, signature: true },
+];
+
+const GISELE_SHOWCASE = [
+  {
+    titleEn: "Conversation with real feedback",
+    titlePt: "Conversas com feedback em 4 blocos: correção, vocabulário, pronúncia e próximo passo.",
+  },
+  {
+    titleEn: "Voice Room",
+    titlePt: "Fale e ouça em tempo real com a voz autorizada da fundadora e sotaque nativo em inglês.",
+  },
+  {
+    titleEn: "Contextual memory",
+    titlePt: "Ela lembra do seu nível, dos seus erros recorrentes e do seu progresso nos produtos Speak2.",
+  },
+  {
+    titleEn: "Daily mission & reports",
+    titlePt: "Missão do dia, recomendações e relatórios de evolução escritos por ela.",
+  },
 ];
 
 function cell(value: CellValue) {
@@ -200,24 +224,55 @@ function PremiumPage() {
         </p>
       </header>
 
-      {currentTier === "premium" && (
-        <section className="mt-8 rounded-2xl border-2 border-accent/60 bg-accent/10 p-6 text-center">
-          <p className="text-lg font-bold text-foreground">
-            🔒 Unlock <BrandText text="GiseleAI" />
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Faça upgrade para o Signature e tenha GiseleAI ilimitada, feedback personalizado e
-            conversação 24/7 por 12 meses.
-          </p>
-          <Button
-            className="mt-4 rounded-full font-semibold"
-            disabled={paddle.loading}
-            onClick={() => startPaddle("signature_yearly")}
-          >
-            Fazer upgrade para Signature
-          </Button>
-        </section>
-      )}
+      <section className="mt-10 overflow-hidden rounded-3xl border border-accent/40 bg-gradient-to-br from-accent/15 via-card to-card p-6 md:p-8">
+        <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
+          <img
+            src={giseleAiLogo.url}
+            alt="GiseleAI by Speak2Co — mentora de inglês com IA"
+            className="h-28 w-28 shrink-0 rounded-full object-cover ring-2 ring-accent/50"
+            loading="lazy"
+          />
+          <div className="flex-1 text-center md:text-left">
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">Exclusivo Signature</p>
+            <h2 className="mt-2 text-2xl font-bold md:text-3xl">
+              <BrandText text="GiseleAI" /> <span className="text-foreground">by</span>{" "}
+              <BrandText text="Speak2Co" />
+            </h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              <span className="font-semibold text-foreground">
+                Your Personal English Mentor powered by AI.
+              </span>{" "}
+              A mentoria completa da Speak2Co: ela conhece o seu nível, o seu histórico e conduz a
+              sua evolução todos os dias.
+            </p>
+            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+              {GISELE_SHOWCASE.map((item) => (
+                <li
+                  key={item.titleEn}
+                  className="rounded-xl border border-border/60 bg-background/40 p-3 text-left"
+                >
+                  <p className="text-sm font-semibold text-accent">{item.titleEn}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{item.titlePt}</p>
+                </li>
+              ))}
+            </ul>
+            {currentTier === "signature" ? (
+              <p className="mt-5 text-sm font-semibold text-accent">
+                ✓ Incluída no seu plano Signature — acesse em "GiseleAI" no painel.
+              </p>
+            ) : (
+              <Button
+                className="mt-5 rounded-full font-semibold"
+                disabled={paddle.loading}
+                onClick={() => startPaddle("signature_yearly")}
+              >
+                🔒 Desbloquear GiseleAI com o Signature
+              </Button>
+            )}
+          </div>
+        </div>
+      </section>
+
 
       {!previewPlan && !isActive && showPending && (
         <div className="mt-8 rounded-xl border border-border bg-card p-4 text-center text-muted-foreground">
