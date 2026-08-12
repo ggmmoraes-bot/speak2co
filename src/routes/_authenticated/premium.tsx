@@ -365,7 +365,7 @@ function PremiumPage() {
                 ) : (
                   <>
                     <Button
-                      className="w-full"
+                      className="h-auto w-full whitespace-normal py-2 text-xs leading-tight"
                       variant={tier.highlight ? "default" : "outline"}
                       disabled={paddle.loading}
                       onClick={() => startPaddle(tier.yearly.key)}
@@ -373,7 +373,7 @@ function PremiumPage() {
                       {paddle.loading ? "Abrindo checkout..." : "Assinar com cartão (internacional)"}
                     </Button>
                     <Button
-                      className="w-full"
+                      className="h-auto w-full whitespace-normal py-2 text-xs leading-tight"
                       variant="ghost"
                       disabled={mutation.isPending}
                       onClick={() => mutation.mutate(tier.yearly.key)}
