@@ -57,6 +57,7 @@ import { Route as AuthenticatedSpeak2hireIndexRouteImport } from './routes/_auth
 import { Route as AuthenticatedSpeak2travelIndexRouteImport } from './routes/_authenticated/speak2travel.index'
 import { Route as AuthenticatedSpeak2travelTripPlannerRouteImport } from './routes/_authenticated/speak2travel.trip-planner'
 import { Route as AuthenticatedUpgradeEssentialRouteImport } from './routes/_authenticated/upgrade.essential'
+import { Route as AuthenticatedVocabularioIndexRouteImport } from './routes/_authenticated/vocabulario.index'
 import { Route as ApiVoicePronunciationRouteImport } from './routes/api/voice/pronunciation'
 import { Route as ApiVoiceSpeakRouteImport } from './routes/api/voice/speak'
 import { Route as ApiVoiceTranscribeRouteImport } from './routes/api/voice/transcribe'
@@ -342,6 +343,12 @@ const AuthenticatedUpgradeEssentialRoute =
     path: '/upgrade/essential',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedVocabularioIndexRoute =
+  AuthenticatedVocabularioIndexRouteImport.update({
+    id: '/vocabulario/',
+    path: '/vocabulario/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiVoicePronunciationRoute = ApiVoicePronunciationRouteImport.update({
   id: '/api/voice/pronunciation',
   path: '/api/voice/pronunciation',
@@ -475,6 +482,7 @@ export interface FileRoutesByFullPath {
   '/speak2fluency/': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
+  '/vocabulario/': typeof AuthenticatedVocabularioIndexRoute
   '/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -531,6 +539,7 @@ export interface FileRoutesByTo {
   '/speak2fluency': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel': typeof AuthenticatedSpeak2travelIndexRoute
+  '/vocabulario': typeof AuthenticatedVocabularioIndexRoute
   '/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -596,6 +605,7 @@ export interface FileRoutesById {
   '/_authenticated/speak2fluency/': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/_authenticated/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
+  '/_authenticated/vocabulario/': typeof AuthenticatedVocabularioIndexRoute
   '/_authenticated/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/_authenticated/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
   '/_authenticated/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -661,6 +671,7 @@ export interface FileRouteTypes {
     | '/speak2fluency/'
     | '/speak2hire/'
     | '/speak2travel/'
+    | '/vocabulario/'
     | '/gisele/voice-session/$threadId'
     | '/speak2fluency/modulo/$moduleId'
     | '/speak2hire/material/$materialId'
@@ -717,6 +728,7 @@ export interface FileRouteTypes {
     | '/speak2fluency'
     | '/speak2hire'
     | '/speak2travel'
+    | '/vocabulario'
     | '/gisele/voice-session/$threadId'
     | '/speak2fluency/modulo/$moduleId'
     | '/speak2hire/material/$materialId'
@@ -781,6 +793,7 @@ export interface FileRouteTypes {
     | '/_authenticated/speak2fluency/'
     | '/_authenticated/speak2hire/'
     | '/_authenticated/speak2travel/'
+    | '/_authenticated/vocabulario/'
     | '/_authenticated/gisele/voice-session/$threadId'
     | '/_authenticated/speak2fluency/modulo/$moduleId'
     | '/_authenticated/speak2hire/material/$materialId'
@@ -1147,6 +1160,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUpgradeEssentialRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/vocabulario/': {
+      id: '/_authenticated/vocabulario/'
+      path: '/vocabulario'
+      fullPath: '/vocabulario/'
+      preLoaderRoute: typeof AuthenticatedVocabularioIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/voice/pronunciation': {
       id: '/api/voice/pronunciation'
       path: '/api/voice/pronunciation'
@@ -1425,6 +1445,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSpeak2travelRoute: typeof AuthenticatedSpeak2travelRouteWithChildren
   AuthenticatedTesteDeNivelRoute: typeof AuthenticatedTesteDeNivelRoute
   AuthenticatedUpgradeEssentialRoute: typeof AuthenticatedUpgradeEssentialRoute
+  AuthenticatedVocabularioIndexRoute: typeof AuthenticatedVocabularioIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -1447,6 +1468,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSpeak2travelRoute: AuthenticatedSpeak2travelRouteWithChildren,
   AuthenticatedTesteDeNivelRoute: AuthenticatedTesteDeNivelRoute,
   AuthenticatedUpgradeEssentialRoute: AuthenticatedUpgradeEssentialRoute,
+  AuthenticatedVocabularioIndexRoute: AuthenticatedVocabularioIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
