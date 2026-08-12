@@ -16,6 +16,7 @@ import {
   getIntermediateUnit,
 } from "@/lib/intermediate-course";
 import { PART_LABEL, partChecks, type CourseUnit, type UnitPartKey } from "@/lib/curriculum/types";
+import { warmUpImageFor, warmUpNeedsImage } from "@/lib/curriculum/warmup-images";
 import { saveCourseProgress } from "@/lib/course-progress.functions";
 import { averageScore, type PronunciationAttempt } from "@/lib/pronunciation-grade";
 
