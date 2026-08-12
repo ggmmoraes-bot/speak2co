@@ -112,6 +112,12 @@ function GiseleHub() {
             </span>
           </div>
         </div>
+        <Link
+          to="/gisele/configuracoes"
+          className="ml-auto inline-flex items-center gap-2 rounded-full border border-gold/40 px-4 py-2 text-xs font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10"
+        >
+          <Settings className="h-4 w-4" /> Voice &amp; language
+        </Link>
       </header>
 
       <p className="rounded-lg border border-border/60 bg-secondary/40 px-4 py-2 text-xs text-muted-foreground">
