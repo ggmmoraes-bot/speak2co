@@ -150,6 +150,21 @@ function UnitPartPage({ unit, part }: { unit: CourseUnit; part: UnitPartKey }) {
         {part === "discover" ? (
           <>
             <Section title="Warm-up" subtitle="Aquecimento">
+              {warmUpNeedsImage(unit.discover.warmUp.prompt.en) && (
+                <figure className="overflow-hidden rounded-2xl border border-gold/30">
+                  <img
+                    src={warmUpImage.src}
+                    alt={warmUpImage.alt}
+                    width={1024}
+                    height={576}
+                    loading="lazy"
+                    className="w-full object-cover"
+                  />
+                  <figcaption className="px-3 py-2 text-xs text-muted-foreground">
+                    {warmUpImage.alt} · {warmUpImage.altPt}
+                  </figcaption>
+                </figure>
+              )}
               <BilingualLine
                 value={unit.discover.warmUp.prompt}
                 className="text-sm text-foreground/85"
@@ -158,6 +173,7 @@ function UnitPartPage({ unit, part }: { unit: CourseUnit; part: UnitPartKey }) {
                 <PhrasePractice key={p.en} en={p.en} pt={p.pt} onAttempt={onAttempt} />
               ))}
             </Section>
+
 
             <Section title="Context in Real Life" subtitle="Contexto em situação real">
               <BilingualLine
