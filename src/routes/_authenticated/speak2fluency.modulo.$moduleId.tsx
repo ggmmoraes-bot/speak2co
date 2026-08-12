@@ -12,6 +12,7 @@ import {
   getFluencyModule,
   type FluencyStepId,
 } from "@/lib/speak2fluency-content";
+import { getFluencyVocabulary } from "@/lib/speak2fluency-vocabulary";
 import {
   evaluateFluencyChallenge,
   getFluencyModuleProgress,
@@ -46,6 +47,7 @@ export const Route = createFileRoute("/_authenticated/speak2fluency/modulo/$modu
 function FluencyModulePage() {
   const { moduleId } = Route.useParams();
   const module = useMemo(() => getFluencyModule(moduleId), [moduleId]);
+  const vocabulary = useMemo(() => getFluencyVocabulary(moduleId), [moduleId]);
   if (!module) throw notFound();
 
   const loadProgress = useServerFn(getFluencyModuleProgress);
