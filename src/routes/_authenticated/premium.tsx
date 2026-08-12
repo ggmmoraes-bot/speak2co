@@ -12,6 +12,8 @@ import { usePaddleCheckout } from "@/hooks/usePaddleCheckout";
 import { usePreviewPlan } from "@/lib/entitlements";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
+import { PlanPrice } from "@/components/PlanPrice";
+import { PLAN_BENEFITS } from "@/lib/subscription-plans";
 
 export const Route = createFileRoute("/_authenticated/premium")({
   head: () => ({
@@ -388,9 +390,9 @@ function PremiumPage() {
                   {tier.label}
                 </span>
                 <span className="text-right text-xs font-medium text-muted-foreground">
-                  {BRL(yearlyPriceOf(tier))}/ano
-                  <br />
                   12x {BRL(installmentOf(yearlyPriceOf(tier)))}
+                  <br />
+                  Plano anual · total {BRL(yearlyPriceOf(tier))}
                 </span>
                 <span className="ml-auto text-muted-foreground transition group-open:rotate-180">
                   ▾
@@ -450,7 +452,7 @@ function PremiumPage() {
                 ))}
               </tr>
               <tr>
-                <td className="px-6 py-4 text-muted-foreground">Valor anual</td>
+                <td className="px-6 py-4 text-muted-foreground">Parcela mensal (plano anual)</td>
                 {TIERS.map((tier) => (
                   <td
                     key={tier.id}
@@ -458,15 +460,15 @@ function PremiumPage() {
                       tier.highlight ? "text-accent" : "text-foreground"
                     }`}
                   >
-                    {BRL(yearlyPriceOf(tier))}
+                    <span className="text-lg font-bold">12x {BRL(installmentOf(yearlyPriceOf(tier)))}</span>
                   </td>
                 ))}
               </tr>
               <tr>
-                <td className="px-6 py-4 text-muted-foreground">Parcelamento</td>
+                <td className="px-6 py-4 text-muted-foreground">Valor total da contratação</td>
                 {TIERS.map((tier) => (
                   <td key={tier.id} className="px-6 py-4 text-center text-muted-foreground">
-                    até 12x de {BRL(installmentOf(yearlyPriceOf(tier)))} sem juros
+                    {BRL(yearlyPriceOf(tier))} por 12 meses
                   </td>
                 ))}
               </tr>
