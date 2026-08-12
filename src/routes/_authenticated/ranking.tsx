@@ -12,12 +12,12 @@ export const Route = createFileRoute("/_authenticated/ranking")({
       {
         name: "description",
         content:
-          "Veja a classificação de fluência da Speak2Co com pontos do teste de nivelamento, das conversas com o Professor de IA e das simulações de entrevista.",
+          "Veja a classificação de fluência da Speak2Co com pontos do teste de nivelamento, das conversas com o AI Teacher e das simulações de entrevista.",
       },
       { property: "og:title", content: "Ranking de fluência | Speak2Co" },
       {
         property: "og:description",
-        content: "Sua pontuação de fluência somando teste, Professor de IA, entrevistas e exercícios.",
+        content: "Sua pontuação de fluência somando teste, AI Teacher, entrevistas e exercícios.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -90,7 +90,7 @@ function RankingPage() {
             <Link to="/teste-de-nivel">Fazer o teste</Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
-            <Link to="/professor">Praticar com o Professor IA</Link>
+            <Link to="/professor">Praticar com o AI Teacher</Link>
           </Button>
         </div>
 
@@ -109,7 +109,7 @@ function RankingPage() {
           {!isLoading && (data?.rows.length ?? 0) === 0 && (
             <p className="rounded-2xl border border-border bg-card/60 p-6 text-sm text-muted-foreground">
               Ainda não há pontuação registrada. Faça o teste de nivelamento ou converse com o
-              Professor de IA para entrar no ranking.
+              AI Teacher para entrar no ranking.
             </p>
           )}
 

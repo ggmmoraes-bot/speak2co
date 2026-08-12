@@ -33,7 +33,7 @@ function buildSystemPrompt(
 
   return `${SPEAK2CO_AI_SYSTEM_PROMPT}
 
-CONTEXTO DESTA EXPERIÊNCIA: você atua aqui como Professor IA da Speak2Co, conversando com o aluno ${name} para praticar inglês.
+CONTEXTO DESTA EXPERIÊNCIA: você atua aqui como AI Teacher da Speak2Co, conversando com o aluno ${name} para praticar inglês.
 
 Contexto do aluno:
 - Nível atual de inglês: ${level}
@@ -80,7 +80,7 @@ export const Route = createFileRoute("/api/chat")({
         const { checkFeatureAccess } = await import("@/lib/entitlements-access.server");
         const access = await checkFeatureAccess(supabase, userId, "ai_teacher");
         if (!access.allowed) {
-          return new Response("O Professor IA não está incluído no seu plano.", { status: 403 });
+          return new Response("O AI Teacher não está incluído no seu plano.", { status: 403 });
         }
         if (access.aiDailyMinutes != null && access.aiUsedSeconds >= access.aiDailyMinutes * 60) {
           return new Response(

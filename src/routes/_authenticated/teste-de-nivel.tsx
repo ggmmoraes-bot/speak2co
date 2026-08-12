@@ -183,7 +183,7 @@ function PlacementPage() {
                 <h2 className="text-lg font-semibold text-foreground">Faça seu teste de inglês</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Leva cerca de 10 minutos. Ao final, seu nível é salvo no perfil e usado para
-                  personalizar o plano de estudos, os exercícios diários e o Professor IA.
+                  personalizar o plano de estudos, os exercícios diários e o AI Teacher.
                 </p>
                 <div className="mt-4 grid gap-3 sm:grid-cols-3">
                   <InfoCard icon={<ListChecks className="h-4 w-4" />} label="20 questões" value="A1 → C1" />

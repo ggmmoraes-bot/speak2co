@@ -14,7 +14,7 @@ const TICK_SECONDS = 30;
 const IDLE_SECONDS = 180;
 
 /**
- * Libera o Professor IA conforme o plano e controla o limite diário de minutos
+ * Libera o AI Teacher conforme o plano e controla o limite diário de minutos
  * dos planos com uso restrito (o tempo é contado enquanto a tela fica aberta).
  */
 export function AiUsageGuard({ children }: { children: ReactNode }) {
@@ -78,8 +78,8 @@ export function AiUsageGuard({ children }: { children: ReactNode }) {
   if (!allowed) {
     return (
       <UpgradeScreen
-        title="Professor IA disponível nos planos pagos"
-        benefit="Converse em inglês com um professor de IA que corrige gramática, pronúncia e adapta tudo ao seu nível."
+        title="AI Teacher disponível nos planos pagos"
+        benefit="Converse em inglês com um AI Teacher que corrige gramática, pronúncia e adapta tudo ao seu nível."
         requiredPlan="Essential"
       />
     );
@@ -95,7 +95,7 @@ export function AiUsageGuard({ children }: { children: ReactNode }) {
           Você usou seus {access?.aiDailyMinutes} minutos de hoje
         </h1>
         <p className="mt-3 max-w-md text-muted-foreground">
-          Seu limite diário do Professor IA foi atingido. Ele é renovado amanhã — ou libere
+          Seu limite diário do AI Teacher foi atingido. Ele é renovado amanhã — ou libere
           conversas ilimitadas agora mesmo com o plano Premium.
         </p>
         <Button
@@ -115,7 +115,7 @@ export function AiUsageGuard({ children }: { children: ReactNode }) {
       {limited && (
         <div className="flex items-center justify-center gap-2 border-b border-border bg-gold/10 px-4 py-2 text-xs font-semibold text-gold">
           <Clock className="h-3.5 w-3.5" />
-          Restam {minutesLeft} min de Professor IA hoje
+          Restam {minutesLeft} min de AI Teacher hoje
           <Link to="/premium" className="underline underline-offset-2">
             liberar ilimitado
           </Link>

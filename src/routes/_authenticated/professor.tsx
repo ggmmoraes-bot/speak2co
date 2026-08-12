@@ -18,14 +18,14 @@ import {
 export const Route = createFileRoute("/_authenticated/professor")({
   head: () => ({
     meta: [
-      { title: "Professor IA — Speak2Co" },
+      { title: "AI Teacher — Speak2Co" },
       {
         name: "description",
         content:
-          "Pratique inglês com o Professor IA da Speak2Co: conversas personalizadas com correções de gramática e pronúncia.",
+          "Pratique inglês com o AI Teacher da Speak2Co: conversas personalizadas com correções de gramática e pronúncia.",
       },
-      { property: "og:title", content: "Professor IA — Speak2Co" },
-      { property: "og:description", content: "Converse em inglês com seu Professor IA pessoal." },
+      { property: "og:title", content: "AI Teacher — Speak2Co" },
+      { property: "og:description", content: "Converse em inglês com seu AI Teacher pessoal." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/_authenticated/professor")({
   component: () => (
     <FeatureGate
       feature="ai_teacher"
-      title="Professor IA é um recurso Premium"
+      title="AI Teacher é um recurso Premium"
       benefit="Converse em inglês 24h por dia com correções de gramática, vocabulário e pronúncia geradas por IA."
       requiredPlan="Premium"
     >
@@ -95,7 +95,7 @@ function ProfessorLayout() {
         <div className="flex items-center justify-between gap-2 p-4">
           <Link to="/painel" className="flex items-center gap-2">
             <img src={logo.url} alt="Speak2Co" className="h-9 w-9 rounded-full" />
-            <span className="text-sm font-semibold text-gold">Professor IA</span>
+            <span className="text-sm font-semibold text-gold">AI Teacher</span>
           </Link>
           <Link
             to="/painel"

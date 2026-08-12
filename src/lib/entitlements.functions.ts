@@ -125,7 +125,7 @@ export const getMyAccess = createServerFn({ method: "GET" })
     };
   });
 
-/** Registra consumo do Professor IA e devolve o saldo do dia. */
+/** Registra consumo do AI Teacher e devolve o saldo do dia. */
 export const consumeAiSeconds = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data) =>

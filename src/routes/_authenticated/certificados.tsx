@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_authenticated/certificados")({
       {
         name: "description",
         content:
-          "Emita certificados Speak2Co por nível CEFR, entrevistas do Speak2Hire, prática diária e conversação com o Professor IA.",
+          "Emita certificados Speak2Co por nível CEFR, entrevistas do Speak2Hire, prática diária e conversação com o AI Teacher.",
       },
       { property: "og:title", content: "Meus certificados — Speak2Co" },
       {

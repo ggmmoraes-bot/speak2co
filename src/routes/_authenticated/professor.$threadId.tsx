@@ -216,7 +216,7 @@ function ChatWindow({
         <ConversationContent className="mx-auto w-full max-w-3xl">
           {messages.length === 0 && (
             <ConversationEmptyState
-              title="Converse com seu Professor IA"
+              title="Converse com seu AI Teacher"
               description="Fale ou digite em inglês. Peça correções, ouça a resposta em voz nativa ou treine sua pronúncia."
             />
           )}

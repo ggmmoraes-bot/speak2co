@@ -86,7 +86,7 @@ const ROUTES: RouteItem[] = [
   },
   {
     path: "/professor",
-    title: "Professor IA",
+    title: "AI Teacher",
     description: "Conversas de prática de inglês em threads, com histórico salvo na nuvem.",
     status: "protected",
   },
@@ -129,7 +129,7 @@ const ROUTES: RouteItem[] = [
     path: "/ranking",
     title: "Ranking de fluência",
     description:
-      "Classificação entre alunos com pontos do teste de nivelamento, do Professor de IA, das entrevistas do Speak2Hire e dos exercícios diários.",
+      "Classificação entre alunos com pontos do teste de nivelamento, do AI Teacher, das entrevistas do Speak2Hire e dos exercícios diários.",
     status: "protected",
   },
   {

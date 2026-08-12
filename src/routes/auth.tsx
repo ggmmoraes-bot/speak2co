@@ -18,7 +18,7 @@ export const Route = createFileRoute("/auth")({
       {
         name: "description",
         content:
-          "Acesse a Speak2Co com e-mail, Google ou Apple e comece seu plano de inglês personalizado com professor de IA.",
+          "Acesse a Speak2Co com e-mail, Google ou Apple e comece seu plano de inglês personalizado com AI Teacher.",
       },
       { property: "og:title", content: "Entrar ou criar conta — Speak2Co" },
       {

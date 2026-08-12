@@ -81,7 +81,7 @@ export function DailyExercisesSection({ hasPlan }: { hasPlan: boolean }) {
         </p>
       ) : generation.isPending || isLoading ? (
         <p className="mt-4 text-sm text-muted-foreground">
-          Preparando seus exercícios com o professor de IA…
+          Preparando seus exercícios com o AI Teacher…
         </p>
       ) : current ? (
         <div className="mt-6 grid gap-4">

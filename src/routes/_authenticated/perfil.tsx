@@ -116,7 +116,7 @@ function PerfilPage() {
           Complete seu <span className="text-gold">perfil</span>
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Assim personalizamos seu plano de estudos e as práticas com o professor de IA.
+          Assim personalizamos seu plano de estudos e as práticas com o AI Teacher.
         </p>
 
         {(() => {

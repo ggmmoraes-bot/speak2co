@@ -155,7 +155,7 @@ export function buildHomeSections(access: Access): HubSectionData[] {
         {
           id: "ai-teacher",
           titleEn: "AI Teacher",
-          titlePt: "Professor de IA",
+          titlePt: "AI Teacher",
           description:
             "Free e Essential: 20 minutos por dia · Premium e Signature: uso ilimitado.",
           icon: MessageSquare,
