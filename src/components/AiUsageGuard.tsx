@@ -8,7 +8,10 @@ import { UpgradeScreen } from "@/components/FeatureGate";
 import { useAccess, hasFeature, aiMinutesLeft } from "@/lib/entitlements";
 import { consumeAiSeconds } from "@/lib/entitlements.functions";
 
-const TICK_SECONDS = 60;
+/** Envia o consumo a cada 30s; só conta o tempo realmente usado na tela. */
+const TICK_SECONDS = 30;
+/** Sem interação nesse intervalo, o cronômetro pausa (aluno ausente). */
+const IDLE_SECONDS = 180;
 
 /**
  * Libera o Professor IA conforme o plano e controla o limite diário de minutos
@@ -29,17 +32,40 @@ export function AiUsageGuard({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!shouldCount) return;
-    const id = window.setInterval(async () => {
-      if (document.hidden) return;
+    let pending = 0;
+    let lastActivity = Date.now();
+    const touch = () => {
+      lastActivity = Date.now();
+    };
+    const events = ["pointerdown", "keydown", "input", "scroll"] as const;
+    events.forEach((e) => window.addEventListener(e, touch, { passive: true }));
+
+    const flush = async () => {
+      if (pending < 1) return;
+      const seconds = Math.min(600, Math.round(pending));
+      pending = 0;
       try {
-        await consumeRef.current({ data: { seconds: TICK_SECONDS, featureKey: "ai_teacher" } });
+        await consumeRef.current({ data: { seconds, featureKey: "ai_teacher" } });
         await queryClient.invalidateQueries({ queryKey: ["my-access"] });
       } catch {
         /* silencioso: não interrompe a conversa */
       }
+    };
+
+    const id = window.setInterval(() => {
+      const idle = (Date.now() - lastActivity) / 1000 > IDLE_SECONDS;
+      if (document.hidden || idle) return;
+      pending += TICK_SECONDS;
+      void flush();
     }, TICK_SECONDS * 1000);
-    return () => window.clearInterval(id);
+
+    return () => {
+      window.clearInterval(id);
+      events.forEach((e) => window.removeEventListener(e, touch));
+      void flush();
+    };
   }, [shouldCount, queryClient]);
+
 
   if (isPending) {
     return (
