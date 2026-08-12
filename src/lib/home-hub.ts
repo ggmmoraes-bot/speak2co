@@ -87,7 +87,7 @@ export function buildHomeSections(access: Access): HubSectionData[] {
             "50 unidades B2: comunicação profissional, argumentação e situações complexas.",
           icon: GraduationCap,
           to: "/curso-upper",
-          status: "active",
+          status: gate(access, FEATURE_KEYS.coursesUpperIntermediate),
           plans: ["Premium", "Signature"],
         },
       ],
