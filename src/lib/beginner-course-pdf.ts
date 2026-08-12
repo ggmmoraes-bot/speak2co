@@ -14,7 +14,7 @@ const TEXT: [number, number, number] = [35, 35, 40];
 const MUTED: [number, number, number] = [110, 110, 118];
 
 const UNICODE_FONT = "DejaVuSans";
-const FONT_FILES: { style: "normal" | "bold" | "italic"; file: string }[] = [
+export const FONT_FILES: { style: "normal" | "bold" | "italic"; file: string }[] = [
   { style: "normal", file: "DejaVuSans.ttf" },
   { style: "bold", file: "DejaVuSans-Bold.ttf" },
   { style: "italic", file: "DejaVuSans-Oblique.ttf" },
@@ -24,7 +24,7 @@ const FONT_CDN = "https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/";
 let fontCache: Record<string, string> | null = null;
 
 /** Fontes padrão do jsPDF não têm glifos de IPA; carregamos uma fonte Unicode. */
-async function loadUnicodeFont(): Promise<Record<string, string> | null> {
+export async function loadUnicodeFont(): Promise<Record<string, string> | null> {
   if (fontCache) return fontCache;
   if (typeof window === "undefined") return null;
   try {
