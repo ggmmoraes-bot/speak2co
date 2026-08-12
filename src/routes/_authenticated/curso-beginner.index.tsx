@@ -13,6 +13,8 @@ import {
 } from "@/lib/beginner-assessment";
 import { Award, Lock } from "lucide-react";
 import { getCourseProgress } from "@/lib/course-progress.functions";
+import { AltHeading } from "@/components/AltHeading";
+import { BEGINNER_UNITS } from "@/lib/curriculum/beginner-units";
 
 export const Route = createFileRoute("/_authenticated/curso-beginner/")({
   head: () => {
@@ -117,6 +119,59 @@ function BeginnerCourseIndex() {
           </span>
         </div>
       </header>
+
+      {/* Nova grade oficial (30 unidades) — piloto visual com as Units 1–3 */}
+      <section className="mt-6 rounded-3xl border border-gold/40 bg-card/60 p-6">
+        <span className="text-xs font-semibold tracking-wide text-gold uppercase">
+          New curriculum · Nova grade oficial
+        </span>
+        <h2 className="mt-2 text-xl font-semibold">
+          <AltHeading text="Beginner English Course — 30 Units" />
+        </h2>
+        <p className="mt-1 text-sm text-muted-foreground italic">
+          Cada unidade tem Part 1 — Discover e Part 2 — Communicate, com pronúncia por IA e
+          checagem em todas as sessões. Piloto liberado: Units 1–3.
+        </p>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          {BEGINNER_UNITS.map((unit) => {
+            const discoverDone = Boolean(byLesson.get(unit.discover.id)?.completed);
+            const communicateDone = Boolean(byLesson.get(unit.communicate.id)?.completed);
+            return (
+              <div
+                key={unit.code}
+                className="rounded-2xl border border-border bg-background/40 p-4 transition hover:border-gold/60"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                    Unit {unit.number} · CEFR {unit.cefr}
+                  </span>
+                  {discoverDone && communicateDone && <CheckCircle2 className="h-4 w-4 text-gold" />}
+                </div>
+                <h3 className="mt-2 text-base font-semibold">
+                  <AltHeading text={unit.title} />
+                </h3>
+                <p className="text-xs text-muted-foreground italic">{unit.titlePt}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <Link
+                    to="/curso-beginner/unidade/$unitCode/$part"
+                    params={{ unitCode: unit.code, part: "discover" }}
+                    className="rounded-full border border-gold/50 px-3 py-1.5 text-xs font-semibold text-gold transition hover:bg-gold/10"
+                  >
+                    {discoverDone ? "✓ " : ""}Part 1 — Discover
+                  </Link>
+                  <Link
+                    to="/curso-beginner/unidade/$unitCode/$part"
+                    params={{ unitCode: unit.code, part: "communicate" }}
+                    className="rounded-full border border-border px-3 py-1.5 text-xs font-semibold text-foreground/80 transition hover:border-gold/60"
+                  >
+                    {communicateDone ? "✓ " : ""}Part 2 — Communicate
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
 
 
       <section className="mt-6 rounded-3xl border border-gold/40 bg-gold/5 p-6">

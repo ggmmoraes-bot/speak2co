@@ -71,6 +71,7 @@ import { Route as AuthenticatedSpeak2travelModuloModuleIdRouteImport } from './r
 import { Route as AuthenticatedSpeak2travelRevisaoModuleIdRouteImport } from './routes/_authenticated/speak2travel.revisao.$moduleId'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/public/webhooks/mercadopago'
+import { Route as AuthenticatedCursoBeginnerUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-beginner.unidade.$unitCode.$part'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -423,6 +424,12 @@ const ApiPublicWebhooksMercadopagoRoute =
     path: '/api/public/webhooks/mercadopago',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute =
+  AuthenticatedCursoBeginnerUnidadeUnitCodePartRouteImport.update({
+    id: '/unidade/$unitCode/$part',
+    path: '/unidade/$unitCode/$part',
+    getParentRoute: () => AuthenticatedCursoBeginnerRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -486,6 +493,7 @@ export interface FileRoutesByFullPath {
   '/speak2travel/revisao/$moduleId': typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
+  '/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -542,6 +550,7 @@ export interface FileRoutesByTo {
   '/speak2travel/revisao/$moduleId': typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
+  '/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -607,6 +616,7 @@ export interface FileRoutesById {
   '/_authenticated/speak2travel/revisao/$moduleId': typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
+  '/_authenticated/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -672,6 +682,7 @@ export interface FileRouteTypes {
     | '/speak2travel/revisao/$moduleId'
     | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
+    | '/curso-beginner/unidade/$unitCode/$part'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -728,6 +739,7 @@ export interface FileRouteTypes {
     | '/speak2travel/revisao/$moduleId'
     | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
+    | '/curso-beginner/unidade/$unitCode/$part'
   id:
     | '__root__'
     | '/'
@@ -792,6 +804,7 @@ export interface FileRouteTypes {
     | '/_authenticated/speak2travel/revisao/$moduleId'
     | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
+    | '/_authenticated/curso-beginner/unidade/$unitCode/$part'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1245,6 +1258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWebhooksMercadopagoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/curso-beginner/unidade/$unitCode/$part': {
+      id: '/_authenticated/curso-beginner/unidade/$unitCode/$part'
+      path: '/unidade/$unitCode/$part'
+      fullPath: '/curso-beginner/unidade/$unitCode/$part'
+      preLoaderRoute: typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRouteImport
+      parentRoute: typeof AuthenticatedCursoBeginnerRoute
+    }
   }
 }
 
@@ -1252,6 +1272,7 @@ interface AuthenticatedCursoBeginnerRouteChildren {
   AuthenticatedCursoBeginnerAssessmentRoute: typeof AuthenticatedCursoBeginnerAssessmentRoute
   AuthenticatedCursoBeginnerIndexRoute: typeof AuthenticatedCursoBeginnerIndexRoute
   AuthenticatedCursoBeginnerLicaoLessonIdRoute: typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
+  AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute: typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
 }
 
 const AuthenticatedCursoBeginnerRouteChildren: AuthenticatedCursoBeginnerRouteChildren =
@@ -1261,6 +1282,8 @@ const AuthenticatedCursoBeginnerRouteChildren: AuthenticatedCursoBeginnerRouteCh
     AuthenticatedCursoBeginnerIndexRoute: AuthenticatedCursoBeginnerIndexRoute,
     AuthenticatedCursoBeginnerLicaoLessonIdRoute:
       AuthenticatedCursoBeginnerLicaoLessonIdRoute,
+    AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute:
+      AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute,
   }
 
 const AuthenticatedCursoBeginnerRouteWithChildren =
