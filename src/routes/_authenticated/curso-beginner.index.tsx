@@ -13,6 +13,8 @@ import {
 } from "@/lib/beginner-assessment";
 import { Award, Lock } from "lucide-react";
 import { getCourseProgress } from "@/lib/course-progress.functions";
+import { AltHeading } from "@/components/AltHeading";
+import { BEGINNER_UNITS } from "@/lib/curriculum/beginner-units";
 
 export const Route = createFileRoute("/_authenticated/curso-beginner/")({
   head: () => {
