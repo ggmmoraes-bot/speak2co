@@ -13,6 +13,7 @@ export const FEATURE_KEYS = {
   aiTeacher: "ai_teacher",
   coursesBeginner: "courses_beginner",
   coursesIntermediate: "courses_intermediate",
+  coursesUpperIntermediate: "courses_upper_intermediate",
   premiumMaterials: "premium_materials",
   productLineTravel: "product_line_travel",
   productLineHire: "product_line_hire",
