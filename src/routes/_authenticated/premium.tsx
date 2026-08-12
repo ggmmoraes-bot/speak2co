@@ -13,7 +13,6 @@ import { usePreviewPlan } from "@/lib/entitlements";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
 import { PlanPrice } from "@/components/PlanPrice";
-import { PLAN_BENEFITS } from "@/lib/subscription-plans";
 
 export const Route = createFileRoute("/_authenticated/premium")({
   head: () => ({
@@ -285,7 +284,30 @@ function PremiumPage() {
         </div>
       )}
 
-      <section className="mt-10 grid gap-6 md:grid-cols-3">
+      <section className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <article className="flex flex-col rounded-2xl border border-border bg-card p-8 shadow-lg">
+          <span className="self-start rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
+            Para começar
+          </span>
+          <h2 className="mt-4 text-xl font-semibold text-foreground">Free</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Conheça a plataforma e descubra o seu nível de inglês.
+          </p>
+          <div className="mt-5">
+            <PlanPrice total={null} />
+          </div>
+          <p className="mt-3 text-xs text-muted-foreground">Sem contratação e sem renovação</p>
+          <ul className="mt-6 flex-1 space-y-2 text-sm text-muted-foreground">
+            <li>• Teste de nivelamento CEFR</li>
+            <li>• Amostra do plano de estudos</li>
+            <li>• Exercícios diários limitados</li>
+          </ul>
+          <div className="mt-8">
+            <Button className="w-full" variant="outline" disabled>
+              {currentTier ? "Plano de entrada" : "Seu plano atual"}
+            </Button>
+          </div>
+        </article>
         {TIERS.map((tier) => {
           const total = yearlyPriceOf(tier);
           const isCurrent = currentTier === tier.id;
