@@ -12,6 +12,7 @@ import {
   getFluencyModule,
   type FluencyStepId,
 } from "@/lib/speak2fluency-content";
+import { getFluencyVocabulary } from "@/lib/speak2fluency-vocabulary";
 import {
   evaluateFluencyChallenge,
   getFluencyModuleProgress,
@@ -46,6 +47,7 @@ export const Route = createFileRoute("/_authenticated/speak2fluency/modulo/$modu
 function FluencyModulePage() {
   const { moduleId } = Route.useParams();
   const module = useMemo(() => getFluencyModule(moduleId), [moduleId]);
+  const vocabulary = useMemo(() => getFluencyVocabulary(moduleId), [moduleId]);
   if (!module) throw notFound();
 
   const loadProgress = useServerFn(getFluencyModuleProgress);
@@ -235,6 +237,45 @@ function FluencyModulePage() {
               </div>
             ))}
           </div>
+
+          {vocabulary.length > 0 && (
+            <>
+              <h3 className="mt-8 text-sm font-semibold text-gold">
+                Module Vocabulary{" "}
+                <span className="text-muted-foreground">· Vocabulário do módulo</span>
+              </h3>
+              <p className="mt-1 text-xs text-muted-foreground italic">
+                Tradução, definição em inglês e um exemplo novo para você checar cada termo.
+              </p>
+              <div className="mt-3 space-y-3">
+                {vocabulary.map((item) => (
+                  <div
+                    key={item.term}
+                    className="rounded-xl border border-border bg-card/60 p-4"
+                  >
+                    <div className="flex flex-wrap items-baseline gap-x-2">
+                      <span className="text-sm font-semibold text-gold">{item.term}</span>
+                      <span className="text-xs text-muted-foreground italic">{item.pt}</span>
+                    </div>
+                    <p className="mt-2 text-sm text-foreground/80">
+                      <span className="text-xs tracking-widest text-muted-foreground uppercase">
+                        Definition
+                      </span>
+                      <span className="mt-0.5 block">{item.definition}</span>
+                    </p>
+                    <div className="mt-3 rounded-lg border border-border/70 bg-background/40 p-3">
+                      <span className="text-xs tracking-widest text-muted-foreground uppercase">
+                        Example
+                      </span>
+                      <div className="mt-1">
+                        <PhrasePractice en={item.example} pt={item.examplePt} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </Section>
 
         <Section title="Guided Practice" subtitle="Prática guiada" onDone={() => markStep("practice")}>
