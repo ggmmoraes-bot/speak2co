@@ -151,6 +151,21 @@ function UnitPartPage({ unit, part }: { unit: CourseUnit; part: UnitPartKey }) {
         {part === "discover" ? (
           <>
             <Section title="Warm-up" subtitle="Aquecimento">
+              {warmUpNeedsImage(unit.discover.warmUp.prompt.en) && (
+                <figure className="overflow-hidden rounded-2xl border border-gold/30">
+                  <img
+                    src={warmUpImageFor(unit.title).src}
+                    alt={warmUpImageFor(unit.title).alt}
+                    width={1024}
+                    height={576}
+                    loading="lazy"
+                    className="w-full object-cover"
+                  />
+                  <figcaption className="px-3 py-2 text-xs text-muted-foreground">
+                    {warmUpImageFor(unit.title).alt} · {warmUpImageFor(unit.title).altPt}
+                  </figcaption>
+                </figure>
+              )}
               <BilingualLine
                 value={unit.discover.warmUp.prompt}
                 className="text-sm text-foreground/85"
