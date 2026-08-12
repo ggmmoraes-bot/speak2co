@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import {
   Award,
+  BookMarked,
   BookOpen,
   CheckCircle2,
   Download,
@@ -132,6 +133,12 @@ function IntermediateCourseIndex() {
               <Download className="h-4 w-4" />
             )}
             Baixar curso completo em PDF
+          </Button>
+          <Button asChild variant="outline" className="gap-2">
+            <Link to="/vocabulario">
+              <BookMarked className="h-4 w-4" />
+              Vocabulário das unidades
+            </Link>
           </Button>
           <span className="text-xs text-muted-foreground">
             Arquivo único com as {INTERMEDIATE_UNITS_TOTAL} unidades, vocabulário, gramática,

@@ -200,7 +200,7 @@ function VocabularyPage() {
             key={unit.code}
             className="overflow-hidden rounded-3xl border border-border bg-card/60"
           >
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-navy/40 px-6 py-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-muted/30 px-6 py-4">
               <div>
                 <p className="text-xs font-semibold tracking-wide text-gold uppercase">
                   Unit {unit.number} · {unit.code}
