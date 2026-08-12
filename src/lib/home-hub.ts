@@ -84,9 +84,10 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           titleEn: "Upper Intermediate English Course",
           titlePt: "Curso avançado intermediário (B2)",
           description:
-            "Comunicação profissional e situações complexas. Incluído no plano Premium — em breve na plataforma.",
+            "50 unidades B2: comunicação profissional, argumentação e situações complexas.",
           icon: GraduationCap,
-          status: "soon",
+          to: "/curso-upper",
+          status: gate(access, FEATURE_KEYS.coursesUpperIntermediate),
           plans: ["Premium", "Signature"],
         },
       ],
