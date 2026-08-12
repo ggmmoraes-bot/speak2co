@@ -30,10 +30,10 @@ export const Route = createFileRoute("/_authenticated/curso-upper/assessment")({
       ],
     };
   },
-  component: IntermediateAssessmentPage,
+  component: UpperAssessmentPage,
 });
 
-function IntermediateAssessmentPage() {
+function UpperAssessmentPage() {
   const router = useRouter();
   const load = useServerFn(getCourseProgress);
   const save = useServerFn(saveCourseProgress);

@@ -34,9 +34,9 @@ import { getCourseProgress } from "@/lib/course-progress.functions";
 
 export const Route = createFileRoute("/_authenticated/curso-upper/")({
   head: () => {
-    const title = "Curso Upper-Intermediate — 40 unidades | Speak2Co";
+    const title = "Curso Upper-Intermediate — 50 unidades | Speak2Co";
     const description =
-      "Currículo oficial Intermediate (B1) do Método Speak2Co: 40 unidades com Part 1 — Discover e Part 2 — Communicate, checagem obrigatória e pronúncia com IA.";
+      "Currículo oficial Intermediate (B1) do Método Speak2Co: 50 unidades com Part 1 — Discover e Part 2 — Communicate, checagem obrigatória e pronúncia com IA.";
     return {
       meta: [
         { title },
