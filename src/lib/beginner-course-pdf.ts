@@ -1,11 +1,12 @@
 import { jsPDF } from "jspdf";
 import { drawPdfLogo, getLogoDataUrl, PDF_BRAND_MARGIN } from "@/lib/pdf-logo";
 import {
-  BEGINNER_LESSONS,
+  BEGINNER_UNITS,
   SPEAKING_LABEL,
   WRITTEN_LABEL,
   type BeginnerLesson,
 } from "@/lib/beginner-course";
+import { unitToPdfLesson } from "@/lib/curriculum/unit-pdf";
 
 const NAVY: [number, number, number] = [0, 26, 51];
 const GOLD: [number, number, number] = [193, 154, 60];
@@ -373,16 +374,18 @@ export async function renderCoursePdf(doc: jsPDF, options: CoursePdfOptions) {
 
 /**
  * PDF único e completo do Beginner English Course (Método Speak2Co):
- * capa, sumário e as 20 lições com todas as seções.
+ * capa, sumário e as 30 unidades (Discover + Communicate) com todas as seções.
  */
-export async function exportBeginnerCourseToPdf(lessons: BeginnerLesson[] = BEGINNER_LESSONS) {
+export async function exportBeginnerCourseToPdf(
+  lessons: BeginnerLesson[] = BEGINNER_UNITS.map(unitToPdfLesson),
+) {
   const doc = new jsPDF({ unit: "pt", format: "a4", orientation: "portrait" });
   await renderCoursePdf(doc, {
     lessons,
     courseTitle: "Beginner English Course",
     subtitle: "Método Speak2Co · Plano Essential",
     intro:
-      `${lessons.length} lições progressivas com warm-up, vocabulário com IPA, verbos, gramática por ` +
+      `${lessons.length} unidades progressivas com warm-up, vocabulário com IPA, verbos, gramática por ` +
       "exemplos, expressões, diálogos, laboratório de pronúncia, exercícios escritos e falados, quiz e revisão.",
   });
   doc.save("speak2co-beginner-english-course.pdf");

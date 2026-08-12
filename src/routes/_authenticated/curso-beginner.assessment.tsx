@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Award, CheckCircle2, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { BEGINNER_COURSE_ID, BEGINNER_LESSONS } from "@/lib/beginner-course";
+import { BEGINNER_COURSE_ID, BEGINNER_PARTS_TOTAL } from "@/lib/beginner-course";
 import {
   BEGINNER_ASSESSMENT,
   BEGINNER_ASSESSMENT_ID,
@@ -47,7 +47,7 @@ function BeginnerAssessmentPage() {
     (p) => p.completed && p.lessonId !== BEGINNER_ASSESSMENT_ID,
   ).length;
   const previous = rows.find((p) => p.lessonId === BEGINNER_ASSESSMENT_ID) ?? null;
-  const eligible = lessonsDone >= BEGINNER_LESSONS.length;
+  const eligible = lessonsDone >= BEGINNER_PARTS_TOTAL;
 
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -108,14 +108,14 @@ function BeginnerAssessmentPage() {
           Beginner English Course — Final Assessment
         </h1>
         <p className="mt-2 text-muted-foreground">
-          {BEGINNER_ASSESSMENT.length} questões cobrindo todas as lições. Nota mínima de{" "}
+          {BEGINNER_ASSESSMENT.length} questões cobrindo todas as unidades. Nota mínima de{" "}
           {BEGINNER_PASS_SCORE}% para aprovação. Ao ser aprovado com as{" "}
-          {BEGINNER_LESSONS.length} lições concluídas, o certificado é emitido automaticamente.
+          {BEGINNER_PARTS_TOTAL} partes concluídas, o certificado é emitido automaticamente.
         </p>
         <div className="mt-4 space-y-2">
           <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground">
-              {lessonsDone} de {BEGINNER_LESSONS.length} lições concluídas
+              {lessonsDone} de {BEGINNER_PARTS_TOTAL} partes concluídas
             </span>
             {previous?.quizScore != null && (
               <span className="font-semibold text-gold">
@@ -123,7 +123,7 @@ function BeginnerAssessmentPage() {
               </span>
             )}
           </div>
-          <Progress value={(lessonsDone / BEGINNER_LESSONS.length) * 100} />
+          <Progress value={(lessonsDone / BEGINNER_PARTS_TOTAL) * 100} />
         </div>
       </header>
 
@@ -132,7 +132,7 @@ function BeginnerAssessmentPage() {
           <Lock className="mx-auto h-6 w-6 text-muted-foreground" />
           <h2 className="mt-3 text-lg font-semibold text-foreground">Assessment bloqueado</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Conclua as {BEGINNER_LESSONS.length} lições do curso para liberar o assessment final.
+            Conclua as {BEGINNER_PARTS_TOTAL} partes do curso para liberar o assessment final.
           </p>
           <Button asChild className="mt-4 rounded-full">
             <Link to="/curso-beginner">Continuar o curso</Link>

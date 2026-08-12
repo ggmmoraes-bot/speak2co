@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { buildCertificates, type Certificate } from "./certificates.server";
 import { BEGINNER_ASSESSMENT_ID, BEGINNER_PASS_SCORE } from "./beginner-assessment";
-import { BEGINNER_COURSE_ID, BEGINNER_LESSONS } from "./beginner-course";
+import { BEGINNER_COURSE_ID, BEGINNER_PARTS_TOTAL } from "./beginner-course";
 import { INTERMEDIATE_COURSE_ID, INTERMEDIATE_PARTS_TOTAL } from "./intermediate-course";
 import { INTERMEDIATE_ASSESSMENT_ID, INTERMEDIATE_PASS_SCORE } from "./intermediate-assessment";
 
@@ -77,7 +77,7 @@ export const getCertificates = createServerFn({ method: "GET" })
         exercises: exercisesRes.data ?? [],
         chatMessages: chatRes.count ?? 0,
         beginnerLessonsCompleted: lessonsCompleted,
-        beginnerLessonsTotal: BEGINNER_LESSONS.length,
+        beginnerLessonsTotal: BEGINNER_PARTS_TOTAL,
         beginnerAssessmentScore: assessmentRow?.quiz_score ?? null,
         beginnerAssessmentAt: assessmentRow?.completed_at ?? assessmentRow?.updated_at ?? null,
         beginnerPassScore: BEGINNER_PASS_SCORE,
