@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Award, CheckCircle2, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { INTERMEDIATE_COURSE_ID, INTERMEDIATE_LESSONS } from "@/lib/intermediate-course";
+import { INTERMEDIATE_COURSE_ID, INTERMEDIATE_PARTS_TOTAL } from "@/lib/intermediate-course";
 import {
   INTERMEDIATE_ASSESSMENT,
   INTERMEDIATE_ASSESSMENT_ID,
@@ -47,7 +47,7 @@ function IntermediateAssessmentPage() {
     (p) => p.completed && p.lessonId !== INTERMEDIATE_ASSESSMENT_ID,
   ).length;
   const previous = rows.find((p) => p.lessonId === INTERMEDIATE_ASSESSMENT_ID) ?? null;
-  const eligible = lessonsDone >= INTERMEDIATE_LESSONS.length;
+  const eligible = lessonsDone >= INTERMEDIATE_PARTS_TOTAL;
 
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -110,14 +110,14 @@ function IntermediateAssessmentPage() {
           Intermediate English Course — Final Assessment
         </h1>
         <p className="mt-2 text-muted-foreground">
-          {INTERMEDIATE_ASSESSMENT.length} questões cobrindo todas as lições. Nota mínima de{" "}
+          {INTERMEDIATE_ASSESSMENT.length} questões cobrindo todas as unidades. Nota mínima de{" "}
           {INTERMEDIATE_PASS_SCORE}% para aprovação. Ao ser aprovado com as{" "}
-          {INTERMEDIATE_LESSONS.length} lições concluídas, o certificado é emitido automaticamente.
+          {INTERMEDIATE_PARTS_TOTAL} partes concluídas, o certificado é emitido automaticamente.
         </p>
         <div className="mt-4 space-y-2">
           <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground">
-              {lessonsDone} de {INTERMEDIATE_LESSONS.length} lições concluídas
+              {lessonsDone} de {INTERMEDIATE_PARTS_TOTAL} partes concluídas
             </span>
             {previous?.quizScore != null && (
               <span className="font-semibold text-gold">
@@ -125,7 +125,7 @@ function IntermediateAssessmentPage() {
               </span>
             )}
           </div>
-          <Progress value={(lessonsDone / INTERMEDIATE_LESSONS.length) * 100} />
+          <Progress value={(lessonsDone / INTERMEDIATE_PARTS_TOTAL) * 100} />
         </div>
       </header>
 
@@ -134,7 +134,7 @@ function IntermediateAssessmentPage() {
           <Lock className="mx-auto h-6 w-6 text-muted-foreground" />
           <h2 className="mt-3 text-lg font-semibold text-foreground">Assessment bloqueado</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Conclua as {INTERMEDIATE_LESSONS.length} lições do curso para liberar o assessment
+            Conclua as {INTERMEDIATE_PARTS_TOTAL} partes do curso para liberar o assessment
             final.
           </p>
           <Button asChild className="mt-4 rounded-full">

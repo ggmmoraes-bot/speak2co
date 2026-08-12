@@ -61,7 +61,6 @@ import { Route as ApiVoicePronunciationRouteImport } from './routes/api/voice/pr
 import { Route as ApiVoiceSpeakRouteImport } from './routes/api/voice/speak'
 import { Route as ApiVoiceTranscribeRouteImport } from './routes/api/voice/transcribe'
 import { Route as AuthenticatedCursoBeginnerLicaoLessonIdRouteImport } from './routes/_authenticated/curso-beginner.licao.$lessonId'
-import { Route as AuthenticatedCursoIntermediateLicaoLessonIdRouteImport } from './routes/_authenticated/curso-intermediate.licao.$lessonId'
 import { Route as AuthenticatedGiseleVoiceSessionThreadIdRouteImport } from './routes/_authenticated/gisele.voice-session.$threadId'
 import { Route as AuthenticatedSpeak2fluencyModuloModuleIdRouteImport } from './routes/_authenticated/speak2fluency.modulo.$moduleId'
 import { Route as AuthenticatedSpeak2hireMaterialMaterialIdRouteImport } from './routes/_authenticated/speak2hire.material.$materialId'
@@ -72,6 +71,7 @@ import { Route as AuthenticatedSpeak2travelRevisaoModuleIdRouteImport } from './
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/public/webhooks/mercadopago'
 import { Route as AuthenticatedCursoBeginnerUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-beginner.unidade.$unitCode.$part'
+import { Route as AuthenticatedCursoIntermediateUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-intermediate.unidade.$unitCode.$part'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -364,12 +364,6 @@ const AuthenticatedCursoBeginnerLicaoLessonIdRoute =
     path: '/licao/$lessonId',
     getParentRoute: () => AuthenticatedCursoBeginnerRoute,
   } as any)
-const AuthenticatedCursoIntermediateLicaoLessonIdRoute =
-  AuthenticatedCursoIntermediateLicaoLessonIdRouteImport.update({
-    id: '/licao/$lessonId',
-    path: '/licao/$lessonId',
-    getParentRoute: () => AuthenticatedCursoIntermediateRoute,
-  } as any)
 const AuthenticatedGiseleVoiceSessionThreadIdRoute =
   AuthenticatedGiseleVoiceSessionThreadIdRouteImport.update({
     id: '/voice-session/$threadId',
@@ -430,6 +424,12 @@ const AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute =
     path: '/unidade/$unitCode/$part',
     getParentRoute: () => AuthenticatedCursoBeginnerRoute,
   } as any)
+const AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute =
+  AuthenticatedCursoIntermediateUnidadeUnitCodePartRouteImport.update({
+    id: '/unidade/$unitCode/$part',
+    path: '/unidade/$unitCode/$part',
+    getParentRoute: () => AuthenticatedCursoIntermediateRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -483,7 +483,6 @@ export interface FileRoutesByFullPath {
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
   '/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
-  '/curso-intermediate/licao/$lessonId': typeof AuthenticatedCursoIntermediateLicaoLessonIdRoute
   '/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -494,6 +493,7 @@ export interface FileRoutesByFullPath {
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
   '/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
+  '/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -540,7 +540,6 @@ export interface FileRoutesByTo {
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel': typeof AuthenticatedSpeak2travelIndexRoute
   '/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
-  '/curso-intermediate/licao/$lessonId': typeof AuthenticatedCursoIntermediateLicaoLessonIdRoute
   '/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -551,6 +550,7 @@ export interface FileRoutesByTo {
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
   '/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
+  '/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -606,7 +606,6 @@ export interface FileRoutesById {
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/_authenticated/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
   '/_authenticated/curso-beginner/licao/$lessonId': typeof AuthenticatedCursoBeginnerLicaoLessonIdRoute
-  '/_authenticated/curso-intermediate/licao/$lessonId': typeof AuthenticatedCursoIntermediateLicaoLessonIdRoute
   '/_authenticated/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/_authenticated/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
   '/_authenticated/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -617,6 +616,7 @@ export interface FileRoutesById {
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
   '/_authenticated/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
+  '/_authenticated/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -672,7 +672,6 @@ export interface FileRouteTypes {
     | '/speak2hire/'
     | '/speak2travel/'
     | '/curso-beginner/licao/$lessonId'
-    | '/curso-intermediate/licao/$lessonId'
     | '/gisele/voice-session/$threadId'
     | '/speak2fluency/modulo/$moduleId'
     | '/speak2hire/material/$materialId'
@@ -683,6 +682,7 @@ export interface FileRouteTypes {
     | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
     | '/curso-beginner/unidade/$unitCode/$part'
+    | '/curso-intermediate/unidade/$unitCode/$part'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -729,7 +729,6 @@ export interface FileRouteTypes {
     | '/speak2hire'
     | '/speak2travel'
     | '/curso-beginner/licao/$lessonId'
-    | '/curso-intermediate/licao/$lessonId'
     | '/gisele/voice-session/$threadId'
     | '/speak2fluency/modulo/$moduleId'
     | '/speak2hire/material/$materialId'
@@ -740,6 +739,7 @@ export interface FileRouteTypes {
     | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
     | '/curso-beginner/unidade/$unitCode/$part'
+    | '/curso-intermediate/unidade/$unitCode/$part'
   id:
     | '__root__'
     | '/'
@@ -794,7 +794,6 @@ export interface FileRouteTypes {
     | '/_authenticated/speak2hire/'
     | '/_authenticated/speak2travel/'
     | '/_authenticated/curso-beginner/licao/$lessonId'
-    | '/_authenticated/curso-intermediate/licao/$lessonId'
     | '/_authenticated/gisele/voice-session/$threadId'
     | '/_authenticated/speak2fluency/modulo/$moduleId'
     | '/_authenticated/speak2hire/material/$materialId'
@@ -805,6 +804,7 @@ export interface FileRouteTypes {
     | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
     | '/_authenticated/curso-beginner/unidade/$unitCode/$part'
+    | '/_authenticated/curso-intermediate/unidade/$unitCode/$part'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1188,13 +1188,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCursoBeginnerLicaoLessonIdRouteImport
       parentRoute: typeof AuthenticatedCursoBeginnerRoute
     }
-    '/_authenticated/curso-intermediate/licao/$lessonId': {
-      id: '/_authenticated/curso-intermediate/licao/$lessonId'
-      path: '/licao/$lessonId'
-      fullPath: '/curso-intermediate/licao/$lessonId'
-      preLoaderRoute: typeof AuthenticatedCursoIntermediateLicaoLessonIdRouteImport
-      parentRoute: typeof AuthenticatedCursoIntermediateRoute
-    }
     '/_authenticated/gisele/voice-session/$threadId': {
       id: '/_authenticated/gisele/voice-session/$threadId'
       path: '/voice-session/$threadId'
@@ -1265,6 +1258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRouteImport
       parentRoute: typeof AuthenticatedCursoBeginnerRoute
     }
+    '/_authenticated/curso-intermediate/unidade/$unitCode/$part': {
+      id: '/_authenticated/curso-intermediate/unidade/$unitCode/$part'
+      path: '/unidade/$unitCode/$part'
+      fullPath: '/curso-intermediate/unidade/$unitCode/$part'
+      preLoaderRoute: typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRouteImport
+      parentRoute: typeof AuthenticatedCursoIntermediateRoute
+    }
   }
 }
 
@@ -1294,7 +1294,7 @@ const AuthenticatedCursoBeginnerRouteWithChildren =
 interface AuthenticatedCursoIntermediateRouteChildren {
   AuthenticatedCursoIntermediateAssessmentRoute: typeof AuthenticatedCursoIntermediateAssessmentRoute
   AuthenticatedCursoIntermediateIndexRoute: typeof AuthenticatedCursoIntermediateIndexRoute
-  AuthenticatedCursoIntermediateLicaoLessonIdRoute: typeof AuthenticatedCursoIntermediateLicaoLessonIdRoute
+  AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute: typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
 }
 
 const AuthenticatedCursoIntermediateRouteChildren: AuthenticatedCursoIntermediateRouteChildren =
@@ -1303,8 +1303,8 @@ const AuthenticatedCursoIntermediateRouteChildren: AuthenticatedCursoIntermediat
       AuthenticatedCursoIntermediateAssessmentRoute,
     AuthenticatedCursoIntermediateIndexRoute:
       AuthenticatedCursoIntermediateIndexRoute,
-    AuthenticatedCursoIntermediateLicaoLessonIdRoute:
-      AuthenticatedCursoIntermediateLicaoLessonIdRoute,
+    AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute:
+      AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute,
   }
 
 const AuthenticatedCursoIntermediateRouteWithChildren =

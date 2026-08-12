@@ -1,27 +1,22 @@
 /**
  * Speak2Co Method™ — Intermediate English Course (Essential plan).
- * 20 lições B1 → B2: comunicação real antes de regra, prática intensiva de fala,
- * repetição espaçada e checagem de pronúncia com IA em cada frase.
+ * Currículo oficial: 40 unidades B1, cada uma com Part 1 — Discover e
+ * Part 2 — Communicate (80 partes pedagógicas, identificadores estáveis).
  */
-import type { BeginnerLesson } from "./beginner-course";
-
-import { INTERMEDIATE_LESSONS_1_5 } from "./intermediate-course-lessons-1";
-import { INTERMEDIATE_LESSONS_6_10 } from "./intermediate-course-lessons-2";
-import { INTERMEDIATE_LESSONS_11_15 } from "./intermediate-course-lessons-3";
-import { INTERMEDIATE_LESSONS_16_20 } from "./intermediate-course-lessons-4";
-
-/** O Intermediate usa a mesma estrutura de lição do Beginner. */
-export type IntermediateLesson = BeginnerLesson;
+import { INTERMEDIATE_UNITS, getIntermediateUnit } from "./curriculum/intermediate-units";
+import type { CourseUnit } from "./curriculum/types";
 
 export const INTERMEDIATE_COURSE_ID = "intermediate";
 
-export const INTERMEDIATE_LESSONS: IntermediateLesson[] = [
-  ...INTERMEDIATE_LESSONS_1_5,
-  ...INTERMEDIATE_LESSONS_6_10,
-  ...INTERMEDIATE_LESSONS_11_15,
-  ...INTERMEDIATE_LESSONS_16_20,
-];
+export { INTERMEDIATE_UNITS, getIntermediateUnit };
 
-export function getIntermediateLesson(id: string) {
-  return INTERMEDIATE_LESSONS.find((lesson) => lesson.id === id);
+/** Total de unidades do currículo oficial. */
+export const INTERMEDIATE_UNITS_TOTAL = INTERMEDIATE_UNITS.length;
+
+/** Cada unidade tem duas partes; o progresso é registrado por parte. */
+export const INTERMEDIATE_PARTS_TOTAL = INTERMEDIATE_UNITS.length * 2;
+
+/** Ids de progresso (uma entrada por parte). */
+export function intermediatePartIds(): string[] {
+  return INTERMEDIATE_UNITS.flatMap((unit: CourseUnit) => [unit.discover.id, unit.communicate.id]);
 }

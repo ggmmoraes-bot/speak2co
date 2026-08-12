@@ -3,7 +3,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { buildCertificates, type Certificate } from "./certificates.server";
 import { BEGINNER_ASSESSMENT_ID, BEGINNER_PASS_SCORE } from "./beginner-assessment";
 import { BEGINNER_COURSE_ID, BEGINNER_LESSONS } from "./beginner-course";
-import { INTERMEDIATE_COURSE_ID, INTERMEDIATE_LESSONS } from "./intermediate-course";
+import { INTERMEDIATE_COURSE_ID, INTERMEDIATE_PARTS_TOTAL } from "./intermediate-course";
 import { INTERMEDIATE_ASSESSMENT_ID, INTERMEDIATE_PASS_SCORE } from "./intermediate-assessment";
 
 export type { Certificate };
@@ -82,7 +82,7 @@ export const getCertificates = createServerFn({ method: "GET" })
         beginnerAssessmentAt: assessmentRow?.completed_at ?? assessmentRow?.updated_at ?? null,
         beginnerPassScore: BEGINNER_PASS_SCORE,
         intermediateLessonsCompleted: intermediateDone,
-        intermediateLessonsTotal: INTERMEDIATE_LESSONS.length,
+        intermediateLessonsTotal: INTERMEDIATE_PARTS_TOTAL,
         intermediateAssessmentScore: intermediateAssessment?.quiz_score ?? null,
         intermediateAssessmentAt:
           intermediateAssessment?.completed_at ?? intermediateAssessment?.updated_at ?? null,

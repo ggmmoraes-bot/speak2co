@@ -1,5 +1,5 @@
 import type { QuizQuestion } from "@/lib/beginner-course";
-import { INTERMEDIATE_LESSONS } from "@/lib/intermediate-course";
+import { INTERMEDIATE_UNITS } from "@/lib/intermediate-course";
 
 /** Identificador usado em course_progress para guardar o assessment final. */
 export const INTERMEDIATE_ASSESSMENT_ID = "final-assessment";
@@ -10,12 +10,19 @@ export const INTERMEDIATE_PASS_SCORE = 70;
 export type AssessmentQuestion = QuizQuestion & { lessonNumber: number; lessonTitle: string };
 
 /**
- * Assessment final: uma questão de cada uma das 20 lições, em ordem,
- * garantindo cobertura de todo o conteúdo do curso.
+ * Assessment final: uma questão de cada uma das 40 unidades do currículo
+ * oficial, em ordem, garantindo cobertura de todo o conteúdo do curso.
  */
-export const INTERMEDIATE_ASSESSMENT: AssessmentQuestion[] = INTERMEDIATE_LESSONS.map(
-  (lesson, index) => {
-    const question = lesson.quiz[index % lesson.quiz.length] ?? lesson.quiz[0]!;
-    return { ...question, lessonNumber: lesson.number, lessonTitle: lesson.title };
+export const INTERMEDIATE_ASSESSMENT: AssessmentQuestion[] = INTERMEDIATE_UNITS.map(
+  (unit, index) => {
+    const pool = [...unit.discover.quickCheck, ...unit.discover.controlledPractice];
+    const question = pool[index % pool.length] ?? pool[0]!;
+    return {
+      question: question.prompt.en,
+      options: question.options,
+      answer: question.answer,
+      lessonNumber: unit.number,
+      lessonTitle: unit.title,
+    };
   },
 );
