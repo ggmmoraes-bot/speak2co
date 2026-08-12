@@ -4,6 +4,7 @@ import { assertFeatureAccess } from "@/lib/entitlements-access.server";
 const COURSE_FEATURE: Record<string, string> = {
   beginner: "courses_beginner",
   intermediate: "courses_intermediate",
+  upper: "courses_upper_intermediate",
 };
 
 /** Valida no servidor se o plano do aluno inclui o curso informado. */
