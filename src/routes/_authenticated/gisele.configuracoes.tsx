@@ -51,15 +51,20 @@ const SAMPLE =
 function GiseleSettingsPage() {
   const { settings, update, reset } = useVoiceSettings();
   const [testing, setTesting] = useState(false);
+  const [voiceTested, setVoiceTested] = useState(false);
   const queryClient = useQueryClient();
   const loadRemote = useServerFn(getVoiceSettings);
   const saveRemote = useServerFn(saveVoiceSettings);
+  const loadAccess = useServerFn(getMyAccess);
 
   const remote = useQuery({
     queryKey: ["gisele-voice-settings"],
     queryFn: () => loadRemote({}),
   });
+  const access = useQuery({ queryKey: ["my-access"], queryFn: () => loadAccess({}) });
   const brandConsent = remote.data?.consent_status === "granted";
+  const hasGiseleAccess = Boolean(access.data?.isAdmin || access.data?.features?.["gisele_ai"]);
+
 
   async function setBrandConsent(granted: boolean) {
     try {
