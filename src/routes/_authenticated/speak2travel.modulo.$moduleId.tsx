@@ -358,7 +358,11 @@ function TravelModule({ track }: { track: TravelTrack }) {
                 </Button>
               ) : (
                 <Button
-                  disabled={loading}
+                  disabled={loading || !hasAnswers}
+                  title={
+                    hasAnswers ? undefined : "Responda pelo menos uma situação antes de finalizar."
+                  }
+
                   className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                   onClick={handleFinish}
                 >
