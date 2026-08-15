@@ -5,7 +5,7 @@ import { assertFeatureAccess, checkFeatureAccess } from "@/lib/entitlements-acce
 type Client = SupabaseClient<Database>;
 
 /** Voz sintética autorizada da fundadora (gerada por IA). */
-export const BRAND_VOICE_ID = "m3m72XeqSLA8AEuQecN0";
+export const BRAND_VOICE_ID = "SNzYVXmQuMTz1nLfEfJE";
 
 export function isBrandVoiceId(voiceId: string | undefined | null) {
   return (voiceId ?? "").trim() === BRAND_VOICE_ID;

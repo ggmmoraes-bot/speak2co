@@ -50,7 +50,7 @@ export const Route = createFileRoute("/api/voice/speak")({
           const elevenKey =
             process.env["ELEVENLABS_TTS_API_KEY"] || process.env["ELEVENLABS_API_KEY"];
           if (!elevenKey) return new Response("Voz indisponível no momento", { status: 503 });
-          const elevenVoice = OPENAI_VOICES.includes(voice) ? "m3m72XeqSLA8AEuQecN0" : voice;
+          const elevenVoice = OPENAI_VOICES.includes(voice) ? "SNzYVXmQuMTz1nLfEfJE" : voice;
           const elevenRes = await fetch(
             `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(elevenVoice)}?output_format=mp3_44100_128`,
 
