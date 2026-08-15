@@ -27,6 +27,11 @@ type Input = {
   intermediateAssessmentScore: number | null;
   intermediateAssessmentAt: string | null;
   intermediatePassScore: number;
+  upperLessonsCompleted: number;
+  upperLessonsTotal: number;
+  upperAssessmentScore: number | null;
+  upperAssessmentAt: string | null;
+  upperPassScore: number;
 };
 
 function code(userId: string, id: string) {
@@ -157,6 +162,32 @@ export function buildCertificates(input: Input): Certificate[] {
               : null,
         issuedAt: lessonsOk && passed ? input.intermediateAssessmentAt : null,
         code: code(userId, "intermediate"),
+      } satisfies Certificate;
+    })(),
+    (() => {
+      const lessonsOk = input.upperLessonsCompleted >= input.upperLessonsTotal;
+      const score = input.upperAssessmentScore;
+      const passed = score != null && score >= input.upperPassScore;
+      const progress = clamp(
+        (input.upperLessonsCompleted / Math.max(1, input.upperLessonsTotal)) * 0.5 +
+          (passed ? 0.5 : score != null ? (score / 100) * 0.5 * 0.5 : 0),
+      );
+      return {
+        id: "upper",
+        title: "Certificado Upper Intermediate English Course",
+        subtitle: "Método Speak2Co · Nível B2",
+        description: `Conclua as ${input.upperLessonsTotal} lições do curso Upper Intermediate e seja aprovado no assessment final (mínimo ${input.upperPassScore}%).`,
+        unlocked: lessonsOk && passed,
+        progress,
+        goalLabel: `${input.upperLessonsTotal} lições + assessment final`,
+        detail:
+          score != null
+            ? `${input.upperLessonsCompleted}/${input.upperLessonsTotal} lições · assessment ${score}%`
+            : input.upperLessonsCompleted
+              ? `${input.upperLessonsCompleted}/${input.upperLessonsTotal} lições concluídas`
+              : null,
+        issuedAt: lessonsOk && passed ? input.upperAssessmentAt : null,
+        code: code(userId, "upper"),
       } satisfies Certificate;
     })(),
   ];
