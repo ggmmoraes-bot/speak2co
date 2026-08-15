@@ -80,6 +80,20 @@ function Index() {
             <Link to="/auth">Criar conta / Entrar</Link>
           </Button>
         </div>
+
+        <nav className="mt-12 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+          <Link to="/termos" className="hover:text-accent">
+            Termos de Uso
+          </Link>
+          <span aria-hidden="true">•</span>
+          <Link to="/reembolso" className="hover:text-accent">
+            Política de Reembolso
+          </Link>
+          <span aria-hidden="true">•</span>
+          <Link to="/privacidade" className="hover:text-accent">
+            Aviso de Privacidade
+          </Link>
+        </nav>
       </section>
     </main>
   );
