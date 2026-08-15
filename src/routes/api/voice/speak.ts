@@ -50,7 +50,13 @@ export const Route = createFileRoute("/api/voice/speak")({
           const elevenKey =
             process.env["ELEVENLABS_TTS_API_KEY"] || process.env["ELEVENLABS_API_KEY"];
           if (!elevenKey) return new Response("Voz indisponível no momento", { status: 503 });
-          const elevenVoice = OPENAI_VOICES.includes(voice) ? "SNzYVXmQuMTz1nLfEfJE" : voice;
+          // Voz oficial da fundadora. IDs antigos salvos no perfil são remapeados
+          // para a voz atual — nunca caímos em uma voz genérica.
+          const LEGACY_FOUNDER_VOICE_IDS = ["m3m72XeqSLA8AEuQecN0"];
+          const elevenVoice =
+            OPENAI_VOICES.includes(voice) || LEGACY_FOUNDER_VOICE_IDS.includes(voice)
+              ? "SNzYVXmQuMTz1nLfEfJE"
+              : voice;
           const elevenRes = await fetch(
             `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(elevenVoice)}?output_format=mp3_44100_128`,
 
@@ -62,9 +68,10 @@ export const Route = createFileRoute("/api/voice/speak")({
                 model_id: "eleven_multilingual_v2",
                 voice_settings: {
                   stability: 0.5,
-                  similarity_boost: 0.8,
-                  style: 0.3,
+                  similarity_boost: 0.85,
+                  style: 0.25,
                   use_speaker_boost: true,
+                  speed: 0.95,
                 },
               }),
             },
