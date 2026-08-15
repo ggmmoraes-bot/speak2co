@@ -4,6 +4,12 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 const envSchema = z.enum(["sandbox", "live"]);
 
+/**
+ * Resolve a chave legível do preço (ex.: `premium_yearly`) para o ID interno do
+ * provedor. O catálogo pode conter preços antigos com a mesma chave (histórico
+ * de reajuste), então usamos apenas preços ativos e escolhemos sempre o mais
+ * recente — que é o valor vigente na tabela de planos.
+ */
 export const resolvePaddlePrice = createServerFn({ method: "GET" })
   .inputValidator((data) =>
     z.object({ priceId: z.string().max(120), environment: envSchema }).parse(data),
@@ -12,12 +18,30 @@ export const resolvePaddlePrice = createServerFn({ method: "GET" })
     const { gatewayFetch } = await import("@/lib/paddle.server");
     const response = await gatewayFetch(
       data.environment,
-      `/prices?external_id=${encodeURIComponent(data.priceId)}`,
+      `/prices?external_id=${encodeURIComponent(data.priceId)}&status=active&per_page=100`,
     );
-    const result = (await response.json()) as { data?: Array<{ id: string }> };
-    if (!result.data?.length) throw new Error("Preço não encontrado no provedor de pagamentos.");
-    return result.data[0]!.id;
+    const result = (await response.json()) as {
+      data?: Array<{ id: string; status?: string; created_at?: string }>;
+    };
+    const active = (result.data ?? [])
+      .filter((price) => (price.status ?? "active") === "active")
+      .sort((a, b) => (b.created_at ?? "").localeCompare(a.created_at ?? ""));
+    if (!active.length) throw new Error("Preço não encontrado no provedor de pagamentos.");
+    return active[0]!.id;
   });
+
+/**
+ * Diz à interface quais formas de pagamento estão realmente operacionais.
+ * O Mercado Pago só é oferecido quando o segredo do webhook está configurado —
+ * sem ele o pagamento é aprovado mas o plano nunca é liberado.
+ */
+export const getPaymentOptions = createServerFn({ method: "GET" }).handler(async () => ({
+  mercadoPagoEnabled: Boolean(
+    process.env["MERCADOPAGO_ACCESS_TOKEN"] && process.env["MERCADOPAGO_WEBHOOK_SECRET"],
+  ),
+  cardEnabled: true,
+}));
+
 
 /** Abre o portal do cliente (cancelar, trocar cartão, ver faturas). */
 export const createPaddlePortalSession = createServerFn({ method: "POST" })
@@ -85,11 +109,16 @@ export const changePaddlePlan = createServerFn({ method: "POST" })
 
     const priceLookup = await gatewayFetch(
       env,
-      `/prices?external_id=${encodeURIComponent(data.priceId)}`,
+      `/prices?external_id=${encodeURIComponent(data.priceId)}&status=active&per_page=100`,
     );
-    const priceResult = (await priceLookup.json()) as { data?: Array<{ id: string }> };
-    const paddlePriceId = priceResult.data?.[0]?.id;
+    const priceResult = (await priceLookup.json()) as {
+      data?: Array<{ id: string; status?: string; created_at?: string }>;
+    };
+    const paddlePriceId = (priceResult.data ?? [])
+      .filter((price) => (price.status ?? "active") === "active")
+      .sort((a, b) => (b.created_at ?? "").localeCompare(a.created_at ?? ""))[0]?.id;
     if (!paddlePriceId) throw new Error("Plano não encontrado no provedor de pagamentos.");
+
 
     const paddle = getPaddleClient(env);
     await paddle.subscriptions.update(sub.paddle_subscription_id, {
@@ -122,5 +151,49 @@ export const cancelPaddleSubscription = createServerFn({ method: "POST" })
     await paddle.subscriptions.cancel(sub.paddle_subscription_id, {
       effectiveFrom: "next_billing_period",
     });
+    return { ok: true };
+  });
+
+/**
+ * Cancela a assinatura brasileira (Mercado Pago). O acesso permanece até o fim
+ * do período já pago — quem devolve o aluno ao Gratuito é a rotina de expiração.
+ */
+export const cancelMercadoPagoSubscription = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { data: sub } = await context.supabase
+      .from("subscriptions")
+      .select("id, preapproval_id")
+      .eq("user_id", context.userId)
+      .eq("provider", "mercadopago")
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (!sub?.preapproval_id) throw new Error("Nenhuma assinatura do Mercado Pago para cancelar.");
+
+    const { mpRequest } = await import("@/lib/mercadopago.server");
+    await mpRequest(`/preapproval/${encodeURIComponent(sub.preapproval_id)}`, {
+      method: "PUT",
+      body: { status: "cancelled" },
+    });
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    await supabaseAdmin
+      .from("subscriptions")
+      .update({ status: "cancelled", cancel_at_period_end: true, updated_at: new Date().toISOString() })
+      .eq("id", sub.id);
+
+    const { logSubscriptionEvent } = await import("@/lib/subscription-events.server");
+    await logSubscriptionEvent({
+      user_id: context.userId,
+      subscription_id: sub.id,
+      preapproval_id: sub.preapproval_id,
+      event_type: "subscription_cancelled",
+      status: "cancelled",
+      message: "Cancelamento solicitado pelo aluno na área Minha assinatura.",
+      raw: {},
+    });
+
     return { ok: true };
   });

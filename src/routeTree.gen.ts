@@ -13,11 +13,15 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ChecklistRouteImport } from './routes/checklist'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as ReembolsoRouteImport } from './routes/reembolso'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as TermosRouteImport } from './routes/termos'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authenticated/assinatura'
 import { Route as AuthenticatedCentralDeMensagensRouteImport } from './routes/_authenticated/central-de-mensagens'
 import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
+import { Route as AuthenticatedCheckoutSucessoRouteImport } from './routes/_authenticated/checkout-sucesso'
 import { Route as AuthenticatedCursoBeginnerRouteImport } from './routes/_authenticated/curso-beginner'
 import { Route as AuthenticatedCursoIntermediateRouteImport } from './routes/_authenticated/curso-intermediate'
 import { Route as AuthenticatedCursoUpperRouteImport } from './routes/_authenticated/curso-upper'
@@ -96,9 +100,24 @@ const ChecklistRoute = ChecklistRouteImport.update({
   path: '/checklist',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReembolsoRoute = ReembolsoRouteImport.update({
+  id: '/reembolso',
+  path: '/reembolso',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
@@ -121,6 +140,12 @@ const AuthenticatedCertificadosRoute =
   AuthenticatedCertificadosRouteImport.update({
     id: '/certificados',
     path: '/certificados',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCheckoutSucessoRoute =
+  AuthenticatedCheckoutSucessoRouteImport.update({
+    id: '/checkout-sucesso',
+    path: '/checkout-sucesso',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedCursoBeginnerRoute =
@@ -462,11 +487,15 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/privacidade': typeof PrivacidadeRoute
+  '/reembolso': typeof ReembolsoRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/termos': typeof TermosRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
+  '/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
   '/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
   '/curso-upper': typeof AuthenticatedCursoUpperRouteWithChildren
@@ -530,11 +559,15 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/privacidade': typeof PrivacidadeRoute
+  '/reembolso': typeof ReembolsoRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/termos': typeof TermosRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
+  '/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
   '/meu-plano': typeof AuthenticatedMeuPlanoRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
@@ -592,11 +625,15 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/privacidade': typeof PrivacidadeRoute
+  '/reembolso': typeof ReembolsoRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/termos': typeof TermosRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
   '/_authenticated/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
+  '/_authenticated/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
   '/_authenticated/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/_authenticated/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
   '/_authenticated/curso-upper': typeof AuthenticatedCursoUpperRouteWithChildren
@@ -662,11 +699,15 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/checklist'
+    | '/privacidade'
+    | '/reembolso'
     | '/reset-password'
+    | '/termos'
     | '/admin'
     | '/assinatura'
     | '/central-de-mensagens'
     | '/certificados'
+    | '/checkout-sucesso'
     | '/curso-beginner'
     | '/curso-intermediate'
     | '/curso-upper'
@@ -730,11 +771,15 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/checklist'
+    | '/privacidade'
+    | '/reembolso'
     | '/reset-password'
+    | '/termos'
     | '/admin'
     | '/assinatura'
     | '/central-de-mensagens'
     | '/certificados'
+    | '/checkout-sucesso'
     | '/meu-plano'
     | '/painel'
     | '/perfil'
@@ -791,11 +836,15 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/checklist'
+    | '/privacidade'
+    | '/reembolso'
     | '/reset-password'
+    | '/termos'
     | '/_authenticated/admin'
     | '/_authenticated/assinatura'
     | '/_authenticated/central-de-mensagens'
     | '/_authenticated/certificados'
+    | '/_authenticated/checkout-sucesso'
     | '/_authenticated/curso-beginner'
     | '/_authenticated/curso-intermediate'
     | '/_authenticated/curso-upper'
@@ -861,7 +910,10 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   ChecklistRoute: typeof ChecklistRoute
+  PrivacidadeRoute: typeof PrivacidadeRoute
+  ReembolsoRoute: typeof ReembolsoRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  TermosRoute: typeof TermosRoute
   ApiChatRoute: typeof ApiChatRoute
   ApiGiseleChatRoute: typeof ApiGiseleChatRoute
   ApiVoicePronunciationRoute: typeof ApiVoicePronunciationRoute
@@ -901,11 +953,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChecklistRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reembolso': {
+      id: '/reembolso'
+      path: '/reembolso'
+      fullPath: '/reembolso'
+      preLoaderRoute: typeof ReembolsoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reset-password': {
       id: '/reset-password'
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -934,6 +1007,13 @@ declare module '@tanstack/react-router' {
       path: '/certificados'
       fullPath: '/certificados'
       preLoaderRoute: typeof AuthenticatedCertificadosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/checkout-sucesso': {
+      id: '/_authenticated/checkout-sucesso'
+      path: '/checkout-sucesso'
+      fullPath: '/checkout-sucesso'
+      preLoaderRoute: typeof AuthenticatedCheckoutSucessoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/curso-beginner': {
@@ -1528,6 +1608,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedCentralDeMensagensRoute: typeof AuthenticatedCentralDeMensagensRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
+  AuthenticatedCheckoutSucessoRoute: typeof AuthenticatedCheckoutSucessoRoute
   AuthenticatedCursoBeginnerRoute: typeof AuthenticatedCursoBeginnerRouteWithChildren
   AuthenticatedCursoIntermediateRoute: typeof AuthenticatedCursoIntermediateRouteWithChildren
   AuthenticatedCursoUpperRoute: typeof AuthenticatedCursoUpperRouteWithChildren
@@ -1551,6 +1632,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
   AuthenticatedCentralDeMensagensRoute: AuthenticatedCentralDeMensagensRoute,
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
+  AuthenticatedCheckoutSucessoRoute: AuthenticatedCheckoutSucessoRoute,
   AuthenticatedCursoBeginnerRoute: AuthenticatedCursoBeginnerRouteWithChildren,
   AuthenticatedCursoIntermediateRoute:
     AuthenticatedCursoIntermediateRouteWithChildren,
@@ -1578,7 +1660,10 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   ChecklistRoute: ChecklistRoute,
+  PrivacidadeRoute: PrivacidadeRoute,
+  ReembolsoRoute: ReembolsoRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  TermosRoute: TermosRoute,
   ApiChatRoute: ApiChatRoute,
   ApiGiseleChatRoute: ApiGiseleChatRoute,
   ApiVoicePronunciationRoute: ApiVoicePronunciationRoute,

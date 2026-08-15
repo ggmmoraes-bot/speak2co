@@ -79,6 +79,19 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
           }
         }
 
+        // Rótulo legível do plano (ex.: "Premium Anual") para o aluno ver em
+        // Minha assinatura, em vez da chave técnica do preço.
+        const { data: planRow } = await supabaseAdmin
+          .from("plans")
+          .select("name")
+          .or(
+            `monthly_checkout_key.eq.${effectivePlanKey},yearly_checkout_key.eq.${effectivePlanKey}`,
+          )
+          .maybeSingle();
+        const planLabel = planRow?.name
+          ? `${planRow.name}${effectivePlanKey.endsWith("_yearly") ? " Anual" : ""}`
+          : effectivePlanKey;
+
         const { data: saved, error } = await supabaseAdmin
           .from("subscriptions")
           .upsert(
@@ -91,7 +104,8 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
               scheduled_plan_key: scheduledPlanKey,
               external_reference: productKey,
               status,
-              plan_label: effectivePlanKey,
+              plan_label: planLabel,
+
               amount,
               currency: item.price?.unitPrice?.currencyCode ?? "BRL",
               environment: env,

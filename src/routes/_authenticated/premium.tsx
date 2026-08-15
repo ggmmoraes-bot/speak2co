@@ -7,7 +7,7 @@ import { BrandText } from "@/components/BrandText";
 import { Button } from "@/components/ui/button";
 import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
 import { getPlanCatalog } from "@/lib/entitlements.functions";
-import { changePaddlePlan } from "@/lib/payments.functions";
+import { changePaddlePlan, getPaymentOptions } from "@/lib/payments.functions";
 import { usePaddleCheckout } from "@/hooks/usePaddleCheckout";
 import { usePreviewPlan } from "@/lib/entitlements";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
@@ -158,7 +158,16 @@ function PremiumPage() {
   const paddle = usePaddleCheckout();
   const fetchCatalog = useServerFn(getPlanCatalog);
   const changePlan = useServerFn(changePaddlePlan);
+  const fetchPaymentOptions = useServerFn(getPaymentOptions);
   const { data: catalog } = useQuery({ queryKey: ["plan-catalog"], queryFn: () => fetchCatalog() });
+  const { data: paymentOptions } = useQuery({
+    queryKey: ["payment-options"],
+    queryFn: () => fetchPaymentOptions(),
+  });
+  // O Mercado Pago só aparece quando o webhook está configurado — sem ele o
+  // pagamento é aprovado mas o plano nunca seria liberado.
+  const mercadoPagoEnabled = paymentOptions?.mercadoPagoEnabled === true;
+
 
   /** Preço anual vindo do banco, com fallback para o valor de tabela. */
   const yearlyPriceOf = (tier: Tier) => {
@@ -374,20 +383,23 @@ function PremiumPage() {
                       disabled={paddle.loading}
                       onClick={() => startPaddle(tier.yearly.key)}
                     >
-                      {paddle.loading ? "Abrindo checkout..." : "Assinar com cartão (internacional)"}
+                      {paddle.loading ? "Abrindo checkout..." : "Assinar com cartão"}
                     </Button>
-                    <Button
-                      className="h-auto w-full whitespace-normal py-2 text-xs leading-tight"
-                      variant="ghost"
-                      disabled={mutation.isPending}
-                      onClick={() => mutation.mutate(tier.yearly.key)}
-                    >
-                      {mutation.isPending
-                        ? "Abrindo checkout..."
-                        : "Assinar com Mercado Pago (Pix/boleto/cartão)"}
-                    </Button>
+                    {mercadoPagoEnabled ? (
+                      <Button
+                        className="h-auto w-full whitespace-normal py-2 text-xs leading-tight"
+                        variant="ghost"
+                        disabled={mutation.isPending}
+                        onClick={() => mutation.mutate(tier.yearly.key)}
+                      >
+                        {mutation.isPending
+                          ? "Abrindo checkout..."
+                          : "Assinar com Mercado Pago (Pix/boleto/cartão)"}
+                      </Button>
+                    ) : null}
                   </>
                 )}
+
               </div>
             </article>
           );

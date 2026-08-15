@@ -24,7 +24,7 @@ export function usePaddleCheckout() {
           displayMode: "overlay",
           variant: "one-page",
           allowLogout: false,
-          successUrl: `${window.location.origin}/painel?checkout=success`,
+          successUrl: `${window.location.origin}/checkout-sucesso`,
         },
       });
     } finally {
