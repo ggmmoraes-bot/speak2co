@@ -6,6 +6,8 @@ export const TRIP_SECTIONS = [
   { id: "localExpressions", titleEn: "Local Expressions / Words", titlePt: "Expressões locais" },
   { id: "atTheAirport", titleEn: "At the Airport", titlePt: "No aeroporto" },
   { id: "atTheDestination", titleEn: "At the Destination", titlePt: "No destino" },
+  { id: "shopping", titleEn: "Shopping", titlePt: "Compras" },
+  { id: "tourismSightseeing", titleEn: "Tourism & Sightseeing", titlePt: "Turismo e passeios" },
   { id: "emergencyPhrases", titleEn: "Emergency Phrases", titlePt: "Frases de emergência" },
   { id: "weather", titleEn: "Weather", titlePt: "Clima" },
   { id: "clothesToTake", titleEn: "Clothes to Take", titlePt: "O que levar" },
