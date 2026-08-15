@@ -1,51 +1,78 @@
 import { z } from "zod";
 
-export const tripPlanSchema = z.object({
-  destination: z.string(),
-  overview: z.string(),
-  weather: z.string(),
-  packing: z.array(z.string()),
-  vocabulary: z.array(z.object({ term: z.string(), meaning: z.string() })),
-  expressions: z.array(z.string()),
-  likelySituations: z.array(z.string()),
-  studyPlan: z.array(z.object({ day: z.string(), focus: z.string(), task: z.string() })),
-});
+/** Seções fixas do English Survival & Travel Plan. */
+export const TRIP_SECTIONS = [
+  { id: "essentialVocabulary", titleEn: "Essential Vocabulary", titlePt: "Vocabulário essencial" },
+  { id: "localExpressions", titleEn: "Local Expressions / Words", titlePt: "Expressões locais" },
+  { id: "atTheAirport", titleEn: "At the Airport", titlePt: "No aeroporto" },
+  { id: "atTheDestination", titleEn: "At the Destination", titlePt: "No destino" },
+  { id: "emergencyPhrases", titleEn: "Emergency Phrases", titlePt: "Frases de emergência" },
+  { id: "weather", titleEn: "Weather", titlePt: "Clima" },
+  { id: "clothesToTake", titleEn: "Clothes to Take", titlePt: "O que levar" },
+  { id: "typicalFood", titleEn: "Typical Food", titlePt: "Comidas típicas" },
+  { id: "atTheRestaurant", titleEn: "At the Restaurant", titlePt: "No restaurante" },
+] as const;
 
-export type TripPlan = z.infer<typeof tripPlanSchema>;
+export type TripSectionId = (typeof TRIP_SECTIONS)[number]["id"];
 
-/** Schema tolerante: o modelo às vezes devolve objetos onde pedimos texto. */
+export type TripItem = { en: string; pt: string };
+
+export type TripSection = {
+  id: TripSectionId;
+  titleEn: string;
+  titlePt: string;
+  intro: string;
+  items: TripItem[];
+};
+
+export type TripPlan = {
+  destination: string;
+  country: string;
+  tripDates: string;
+  overview: string;
+  sections: TripSection[];
+};
+
 const looseText = z.union([z.string(), z.number(), z.record(z.any())]);
 
-export const rawTripPlanSchema = z.object({
-  destination: z.string().optional(),
-  overview: looseText.optional(),
-  weather: looseText.optional(),
-  packing: z.array(looseText).optional(),
-  vocabulary: z
-    .array(
-      z.union([
-        z.string(),
-        z.object({ term: looseText.optional(), meaning: looseText.optional() }),
-      ]),
-    )
-    .optional(),
+const looseItem = z.union([
+  z.string(),
+  z.object({
+    en: looseText.optional(),
+    pt: looseText.optional(),
+    term: looseText.optional(),
+    meaning: looseText.optional(),
+    phrase: looseText.optional(),
+    translation: looseText.optional(),
+  }),
+]);
 
-  expressions: z.array(looseText).optional(),
-  likelySituations: z.array(looseText).optional(),
-  studyPlan: z
-    .array(
-      z.object({
-        day: looseText.optional(),
-        focus: looseText.optional(),
-        task: looseText.optional(),
-      }),
-    )
-    .optional(),
+const looseSection = z
+  .object({
+    intro: looseText.optional(),
+    items: z.array(looseItem).optional(),
+  })
+  .optional();
+
+export const rawTripPlanSchema = z.object({
+  englishSpeakingDestination: z.boolean().optional(),
+  country: looseText.optional(),
+  overview: looseText.optional(),
+  essentialVocabulary: looseSection,
+  localExpressions: looseSection,
+  atTheAirport: looseSection,
+  atTheDestination: looseSection,
+  emergencyPhrases: looseSection,
+  weather: looseSection,
+  clothesToTake: looseSection,
+  typicalFood: looseSection,
+  atTheRestaurant: looseSection,
 });
 
 export const tripPlanInputSchema = z.object({
   destination: z.string().min(2).max(80),
-  days: z.number().int().min(1).max(60),
+  startDate: z.string().min(4).max(30),
+  endDate: z.string().min(4).max(30),
 });
 
 function toText(value: unknown): string {
@@ -62,37 +89,39 @@ function toText(value: unknown): string {
   return "";
 }
 
+function normalizeItem(raw: unknown): TripItem {
+  if (typeof raw === "string") {
+    const match = raw.match(/^(.+?)\s*[—–|]\s*(.+)$/);
+    return match
+      ? { en: (match[1] ?? "").trim(), pt: (match[2] ?? "").trim() }
+      : { en: raw.trim(), pt: "" };
+  }
+  const obj = (raw ?? {}) as Record<string, unknown>;
+  const en = toText(obj["en"] ?? obj["term"] ?? obj["phrase"]);
+  const pt = toText(obj["pt"] ?? obj["meaning"] ?? obj["translation"]);
+  return { en, pt };
+}
+
 export function normalizeTripPlan(
   raw: z.infer<typeof rawTripPlanSchema>,
   destination: string,
+  tripDates: string,
 ): TripPlan {
-  const list = (items?: unknown[]) => (items ?? []).map(toText).filter(Boolean);
+  const source = raw as unknown as Record<string, { intro?: unknown; items?: unknown[] }>;
   return {
     destination,
+    country: toText(raw.country),
+    tripDates,
     overview: toText(raw.overview),
-    weather: toText(raw.weather),
-    packing: list(raw.packing),
-    vocabulary: (raw.vocabulary ?? [])
-      .map((v) => {
-        if (typeof v === "string") {
-          const match = v.match(/^(.+?)\s*[—–\-(:]\s*(.+?)\)?$/);
-          return match
-            ? { term: (match[1] ?? "").trim(), meaning: (match[2] ?? "").trim() }
-            : { term: v.trim(), meaning: "" };
-
-        }
-        return { term: toText(v.term), meaning: toText(v.meaning) };
-      })
-      .filter((v) => v.term),
-
-    expressions: list(raw.expressions),
-    likelySituations: list(raw.likelySituations),
-    studyPlan: (raw.studyPlan ?? [])
-      .map((s, index) => ({
-        day: toText(s.day) || `Dia ${index + 1}`,
-        focus: toText(s.focus),
-        task: toText(s.task),
-      }))
-      .filter((s) => s.focus || s.task),
+    sections: TRIP_SECTIONS.map((section) => {
+      const data = source[section.id] ?? {};
+      return {
+        id: section.id,
+        titleEn: section.titleEn,
+        titlePt: section.titlePt,
+        intro: toText(data.intro),
+        items: (data.items ?? []).map(normalizeItem).filter((item) => item.en),
+      };
+    }).filter((section) => section.items.length > 0 || section.intro),
   };
 }
