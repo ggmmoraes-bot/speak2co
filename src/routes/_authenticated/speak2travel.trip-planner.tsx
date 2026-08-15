@@ -15,8 +15,20 @@ import {
 import { speakText } from "@/lib/voice-client";
 import { generateTripPlan, type TripPlan } from "@/lib/trip-planner.functions";
 
+/** Vozes distintas para cada personagem do diálogo. */
+const TRAVELER_VOICE = "nova";
+const LOCAL_VOICE = "onyx";
+
 /** Botão de pronúncia da IA para um trecho em inglês. */
-function SpeakButton({ text, label = "Listen" }: { text: string; label?: string }) {
+function SpeakButton({
+  text,
+  label = "Listen",
+  voice,
+}: {
+  text: string;
+  label?: string;
+  voice?: string;
+}) {
   const [playing, setPlaying] = useState(false);
   return (
     <button
@@ -25,7 +37,7 @@ function SpeakButton({ text, label = "Listen" }: { text: string; label?: string 
       onClick={async () => {
         try {
           setPlaying(true);
-          await speakText(text);
+          await speakText(text, voice ? { voice, provider: "openai" } : {});
         } catch (e) {
           toast.error(e instanceof Error ? e.message : "Não foi possível tocar o áudio.");
         } finally {
@@ -42,6 +54,87 @@ function SpeakButton({ text, label = "Listen" }: { text: string; label?: string 
       )}
       {label}
     </button>
+  );
+}
+
+/** Diálogo final com duas vozes distintas (traveler x local). */
+function DialogueBlock({ dialogue }: { dialogue: NonNullable<TripPlan["dialogue"]> }) {
+  const [playingAll, setPlayingAll] = useState(false);
+
+  async function playAll() {
+    try {
+      setPlayingAll(true);
+      for (const line of dialogue.lines) {
+        await speakText(line.en, {
+          voice: line.speaker === "local" ? LOCAL_VOICE : TRAVELER_VOICE,
+          provider: "openai",
+        });
+      }
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Não foi possível tocar o diálogo.");
+    } finally {
+      setPlayingAll(false);
+    }
+  }
+
+  return (
+    <div>
+      <p className="text-sm font-semibold text-foreground">{dialogue.title}</p>
+      {dialogue.situation && (
+        <p className="mt-1 text-sm text-muted-foreground">{dialogue.situation}</p>
+      )}
+
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <Button
+          type="button"
+          size="sm"
+          onClick={playAll}
+          disabled={playingAll}
+          className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+        >
+          {playingAll ? (
+            <Loader2 className="mr-1 h-4 w-4 animate-spin" />
+          ) : (
+            <Volume2 className="mr-1 h-4 w-4" />
+          )}
+          {playingAll ? "Playing..." : "Play full dialogue"}
+        </Button>
+        <span className="text-[11px] text-muted-foreground">
+          Voice 1 — Traveler · Voice 2 — Local / Staff
+        </span>
+      </div>
+
+      <ul className="mt-4 grid gap-2">
+        {dialogue.lines.map((line, index) => {
+          const isLocal = line.speaker === "local";
+          return (
+            <li
+              key={`dialogue-${index}`}
+              className={`flex items-start justify-between gap-3 rounded-xl border px-3 py-2 text-sm ${
+                isLocal
+                  ? "border-border/60 bg-background/40"
+                  : "border-gold/40 bg-card/50"
+              }`}
+            >
+              <span className="min-w-0">
+                <span className="block text-[11px] tracking-widest text-muted-foreground uppercase">
+                  {isLocal ? "Local / Staff" : "Traveler"}
+                </span>
+                <span className="font-medium text-foreground">{line.en}</span>
+                {line.pt && (
+                  <span className="block text-xs text-muted-foreground">{line.pt}</span>
+                )}
+              </span>
+              <SpeakButton
+                text={line.en}
+                voice={isLocal ? LOCAL_VOICE : TRAVELER_VOICE}
+                label={isLocal ? "Voice 2" : "Voice 1"}
+              />
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
@@ -219,6 +312,27 @@ function TripPlannerPage() {
                   </AccordionContent>
                 </AccordionItem>
               ))}
+
+              {plan.dialogue && (
+                <AccordionItem
+                  value="real-life-dialogue"
+                  className="rounded-2xl border border-border bg-card/60 px-5 backdrop-blur"
+                >
+                  <AccordionTrigger className="text-left hover:no-underline">
+                    <span className="flex flex-col">
+                      <span className="text-sm font-semibold text-gold">
+                        Real-Life Travel Dialogue
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        Pratique a situação real — duas vozes diferentes
+                      </span>
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <DialogueBlock dialogue={plan.dialogue} />
+                  </AccordionContent>
+                </AccordionItem>
+              )}
             </Accordion>
           </section>
         )}

@@ -6,6 +6,8 @@ export const TRIP_SECTIONS = [
   { id: "localExpressions", titleEn: "Local Expressions / Words", titlePt: "Expressões locais" },
   { id: "atTheAirport", titleEn: "At the Airport", titlePt: "No aeroporto" },
   { id: "atTheDestination", titleEn: "At the Destination", titlePt: "No destino" },
+  { id: "shopping", titleEn: "Shopping", titlePt: "Compras" },
+  { id: "tourismSightseeing", titleEn: "Tourism & Sightseeing", titlePt: "Turismo e passeios" },
   { id: "emergencyPhrases", titleEn: "Emergency Phrases", titlePt: "Frases de emergência" },
   { id: "weather", titleEn: "Weather", titlePt: "Clima" },
   { id: "clothesToTake", titleEn: "Clothes to Take", titlePt: "O que levar" },
@@ -25,12 +27,21 @@ export type TripSection = {
   items: TripItem[];
 };
 
+export type TripDialogueLine = { speaker: "traveler" | "local"; en: string; pt: string };
+
+export type TripDialogue = {
+  title: string;
+  situation: string;
+  lines: TripDialogueLine[];
+};
+
 export type TripPlan = {
   destination: string;
   country: string;
   tripDates: string;
   overview: string;
   sections: TripSection[];
+  dialogue: TripDialogue | null;
 };
 
 const sectionSchema = z.object({
@@ -46,11 +57,24 @@ export const rawTripPlanSchema = z.object({
   localExpressions: sectionSchema,
   atTheAirport: sectionSchema,
   atTheDestination: sectionSchema,
+  shopping: sectionSchema,
+  tourismSightseeing: sectionSchema,
   emergencyPhrases: sectionSchema,
   weather: sectionSchema,
   clothesToTake: sectionSchema,
   typicalFood: sectionSchema,
   atTheRestaurant: sectionSchema,
+  realLifeDialogue: z.object({
+    title: z.string(),
+    situation: z.string(),
+    lines: z.array(
+      z.object({
+        speaker: z.enum(["traveler", "local"]),
+        en: z.string(),
+        pt: z.string(),
+      }),
+    ),
+  }),
 });
 
 export const tripPlanInputSchema = z.object({
@@ -105,5 +129,21 @@ export function normalizeTripPlan(
         items: (data.items ?? []).map(normalizeItem).filter((item) => item.en),
       };
     }).filter((section) => section.items.length > 0 || section.intro),
+    dialogue: (() => {
+      const d = raw.realLifeDialogue;
+      const lines = (d?.lines ?? [])
+        .map((line) => ({
+          speaker: line.speaker === "local" ? ("local" as const) : ("traveler" as const),
+          en: toText(line.en),
+          pt: toText(line.pt),
+        }))
+        .filter((line) => line.en);
+      if (lines.length === 0) return null;
+      return {
+        title: toText(d?.title) || "Real-Life Travel Dialogue",
+        situation: toText(d?.situation),
+        lines,
+      };
+    })(),
   };
 }
