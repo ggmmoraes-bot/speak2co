@@ -4,6 +4,12 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 const envSchema = z.enum(["sandbox", "live"]);
 
+/**
+ * Resolve a chave legível do preço (ex.: `premium_yearly`) para o ID interno do
+ * provedor. O catálogo pode conter preços antigos com a mesma chave (histórico
+ * de reajuste), então usamos apenas preços ativos e escolhemos sempre o mais
+ * recente — que é o valor vigente na tabela de planos.
+ */
 export const resolvePaddlePrice = createServerFn({ method: "GET" })
   .inputValidator((data) =>
     z.object({ priceId: z.string().max(120), environment: envSchema }).parse(data),
@@ -12,12 +18,30 @@ export const resolvePaddlePrice = createServerFn({ method: "GET" })
     const { gatewayFetch } = await import("@/lib/paddle.server");
     const response = await gatewayFetch(
       data.environment,
-      `/prices?external_id=${encodeURIComponent(data.priceId)}`,
+      `/prices?external_id=${encodeURIComponent(data.priceId)}&status=active&per_page=100`,
     );
-    const result = (await response.json()) as { data?: Array<{ id: string }> };
-    if (!result.data?.length) throw new Error("Preço não encontrado no provedor de pagamentos.");
-    return result.data[0]!.id;
+    const result = (await response.json()) as {
+      data?: Array<{ id: string; status?: string; created_at?: string }>;
+    };
+    const active = (result.data ?? [])
+      .filter((price) => (price.status ?? "active") === "active")
+      .sort((a, b) => (b.created_at ?? "").localeCompare(a.created_at ?? ""));
+    if (!active.length) throw new Error("Preço não encontrado no provedor de pagamentos.");
+    return active[0]!.id;
   });
+
+/**
+ * Diz à interface quais formas de pagamento estão realmente operacionais.
+ * O Mercado Pago só é oferecido quando o segredo do webhook está configurado —
+ * sem ele o pagamento é aprovado mas o plano nunca é liberado.
+ */
+export const getPaymentOptions = createServerFn({ method: "GET" }).handler(async () => ({
+  mercadoPagoEnabled: Boolean(
+    process.env["MERCADOPAGO_ACCESS_TOKEN"] && process.env["MERCADOPAGO_WEBHOOK_SECRET"],
+  ),
+  cardEnabled: true,
+}));
+
 
 /** Abre o portal do cliente (cancelar, trocar cartão, ver faturas). */
 export const createPaddlePortalSession = createServerFn({ method: "POST" })
