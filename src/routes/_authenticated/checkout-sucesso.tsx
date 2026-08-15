@@ -80,7 +80,7 @@ function CheckoutSuccessPage() {
               <Link to="/painel">Ir para o painel</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/assinatura">Ver minha assinatura</Link>
+              <Link to="/assinatura" search={{}}>Ver minha assinatura</Link>
             </Button>
           </div>
         </>
@@ -99,7 +99,7 @@ function CheckoutSuccessPage() {
           ) : null}
           <div className="mt-8 flex justify-center">
             <Button asChild variant="outline">
-              <Link to="/assinatura">Ver minha assinatura</Link>
+              <Link to="/assinatura" search={{}}>Ver minha assinatura</Link>
             </Button>
           </div>
         </>

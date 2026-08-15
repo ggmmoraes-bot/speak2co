@@ -18,6 +18,7 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authenticated/assinatura'
 import { Route as AuthenticatedCentralDeMensagensRouteImport } from './routes/_authenticated/central-de-mensagens'
 import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
+import { Route as AuthenticatedCheckoutSucessoRouteImport } from './routes/_authenticated/checkout-sucesso'
 import { Route as AuthenticatedCursoBeginnerRouteImport } from './routes/_authenticated/curso-beginner'
 import { Route as AuthenticatedCursoIntermediateRouteImport } from './routes/_authenticated/curso-intermediate'
 import { Route as AuthenticatedCursoUpperRouteImport } from './routes/_authenticated/curso-upper'
@@ -121,6 +122,12 @@ const AuthenticatedCertificadosRoute =
   AuthenticatedCertificadosRouteImport.update({
     id: '/certificados',
     path: '/certificados',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCheckoutSucessoRoute =
+  AuthenticatedCheckoutSucessoRouteImport.update({
+    id: '/checkout-sucesso',
+    path: '/checkout-sucesso',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedCursoBeginnerRoute =
@@ -467,6 +474,7 @@ export interface FileRoutesByFullPath {
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
+  '/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
   '/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
   '/curso-upper': typeof AuthenticatedCursoUpperRouteWithChildren
@@ -535,6 +543,7 @@ export interface FileRoutesByTo {
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
+  '/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
   '/meu-plano': typeof AuthenticatedMeuPlanoRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
@@ -597,6 +606,7 @@ export interface FileRoutesById {
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
   '/_authenticated/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
+  '/_authenticated/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
   '/_authenticated/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/_authenticated/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
   '/_authenticated/curso-upper': typeof AuthenticatedCursoUpperRouteWithChildren
@@ -667,6 +677,7 @@ export interface FileRouteTypes {
     | '/assinatura'
     | '/central-de-mensagens'
     | '/certificados'
+    | '/checkout-sucesso'
     | '/curso-beginner'
     | '/curso-intermediate'
     | '/curso-upper'
@@ -735,6 +746,7 @@ export interface FileRouteTypes {
     | '/assinatura'
     | '/central-de-mensagens'
     | '/certificados'
+    | '/checkout-sucesso'
     | '/meu-plano'
     | '/painel'
     | '/perfil'
@@ -796,6 +808,7 @@ export interface FileRouteTypes {
     | '/_authenticated/assinatura'
     | '/_authenticated/central-de-mensagens'
     | '/_authenticated/certificados'
+    | '/_authenticated/checkout-sucesso'
     | '/_authenticated/curso-beginner'
     | '/_authenticated/curso-intermediate'
     | '/_authenticated/curso-upper'
@@ -934,6 +947,13 @@ declare module '@tanstack/react-router' {
       path: '/certificados'
       fullPath: '/certificados'
       preLoaderRoute: typeof AuthenticatedCertificadosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/checkout-sucesso': {
+      id: '/_authenticated/checkout-sucesso'
+      path: '/checkout-sucesso'
+      fullPath: '/checkout-sucesso'
+      preLoaderRoute: typeof AuthenticatedCheckoutSucessoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/curso-beginner': {
@@ -1528,6 +1548,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedCentralDeMensagensRoute: typeof AuthenticatedCentralDeMensagensRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
+  AuthenticatedCheckoutSucessoRoute: typeof AuthenticatedCheckoutSucessoRoute
   AuthenticatedCursoBeginnerRoute: typeof AuthenticatedCursoBeginnerRouteWithChildren
   AuthenticatedCursoIntermediateRoute: typeof AuthenticatedCursoIntermediateRouteWithChildren
   AuthenticatedCursoUpperRoute: typeof AuthenticatedCursoUpperRouteWithChildren
@@ -1551,6 +1572,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
   AuthenticatedCentralDeMensagensRoute: AuthenticatedCentralDeMensagensRoute,
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
+  AuthenticatedCheckoutSucessoRoute: AuthenticatedCheckoutSucessoRoute,
   AuthenticatedCursoBeginnerRoute: AuthenticatedCursoBeginnerRouteWithChildren,
   AuthenticatedCursoIntermediateRoute:
     AuthenticatedCursoIntermediateRouteWithChildren,
