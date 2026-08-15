@@ -195,8 +195,9 @@ function AssinaturaPage() {
     onError: (error: Error) => toast.error(error.message),
   });
 
+  // O cancelamento vai para o provedor que efetivamente cobra esta assinatura.
   const cancelMutation = useMutation({
-    mutationFn: () => cancelSubscription(),
+    mutationFn: () => (isPaddle ? cancelSubscription() : cancelMercadoPago()),
     onSuccess: () => {
       setConfirmCancel(false);
       queryClient.invalidateQueries({ queryKey: ["subscription"] });
@@ -204,6 +205,7 @@ function AssinaturaPage() {
     },
     onError: (error: Error) => toast.error(error.message),
   });
+
 
   const changeMutation = useMutation({
     mutationFn: (key: PlanKey) => changePlan({ data: { priceId: PLAN_META[key].checkoutKey! } }),
