@@ -231,6 +231,27 @@ function TripPlannerPage() {
                   </AccordionContent>
                 </AccordionItem>
               ))}
+
+              {plan.dialogue && (
+                <AccordionItem
+                  value="real-life-dialogue"
+                  className="rounded-2xl border border-border bg-card/60 px-5 backdrop-blur"
+                >
+                  <AccordionTrigger className="text-left hover:no-underline">
+                    <span className="flex flex-col">
+                      <span className="text-sm font-semibold text-gold">
+                        Real-Life Travel Dialogue
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        Pratique a situação real — duas vozes diferentes
+                      </span>
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <DialogueBlock dialogue={plan.dialogue} />
+                  </AccordionContent>
+                </AccordionItem>
+              )}
             </Accordion>
           </section>
         )}
