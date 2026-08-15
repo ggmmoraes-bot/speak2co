@@ -158,7 +158,16 @@ function PremiumPage() {
   const paddle = usePaddleCheckout();
   const fetchCatalog = useServerFn(getPlanCatalog);
   const changePlan = useServerFn(changePaddlePlan);
+  const fetchPaymentOptions = useServerFn(getPaymentOptions);
   const { data: catalog } = useQuery({ queryKey: ["plan-catalog"], queryFn: () => fetchCatalog() });
+  const { data: paymentOptions } = useQuery({
+    queryKey: ["payment-options"],
+    queryFn: () => fetchPaymentOptions(),
+  });
+  // O Mercado Pago só aparece quando o webhook está configurado — sem ele o
+  // pagamento é aprovado mas o plano nunca seria liberado.
+  const mercadoPagoEnabled = paymentOptions?.mercadoPagoEnabled === true;
+
 
   /** Preço anual vindo do banco, com fallback para o valor de tabela. */
   const yearlyPriceOf = (tier: Tier) => {
