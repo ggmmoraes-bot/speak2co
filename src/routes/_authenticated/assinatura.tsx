@@ -18,7 +18,12 @@ import { AltHeading } from "@/components/AltHeading";
 import { PlanPrice } from "@/components/PlanPrice";
 import { getMySubscription } from "@/lib/subscriptions.functions";
 import { getPlanCatalog } from "@/lib/entitlements.functions";
-import { cancelPaddleSubscription, createPaddlePortalSession, changePaddlePlan } from "@/lib/payments.functions";
+import {
+  cancelPaddleSubscription,
+  cancelMercadoPagoSubscription,
+  createPaddlePortalSession,
+  changePaddlePlan,
+} from "@/lib/payments.functions";
 import { SubscriptionEventsSection } from "@/components/SubscriptionEventsSection";
 import {
   SIMULATION_MODES,
@@ -119,6 +124,7 @@ function AssinaturaPage() {
   const fetchCatalog = useServerFn(getPlanCatalog);
   const openPortal = useServerFn(createPaddlePortalSession);
   const cancelSubscription = useServerFn(cancelPaddleSubscription);
+  const cancelMercadoPago = useServerFn(cancelMercadoPagoSubscription);
   const changePlan = useServerFn(changePaddlePlan);
 
   const { data, isPending: isLoading } = useQuery({
