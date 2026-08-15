@@ -37,7 +37,8 @@ export const resolvePaddlePrice = createServerFn({ method: "GET" })
  */
 export const getPaymentOptions = createServerFn({ method: "GET" }).handler(async () => ({
   mercadoPagoEnabled: Boolean(
-    process.env["MERCADOPAGO_ACCESS_TOKEN"] && process.env["MERCADOPAGO_WEBHOOK_SECRET"],
+    process.env["MERCADOPAGO_ACCESS_TOKEN"] &&
+      (process.env["MERCADOPAGO_WEBHOOK_TOKEN"] || process.env["MERCADOPAGO_WEBHOOK_SECRET"]),
   ),
   cardEnabled: true,
 }));
