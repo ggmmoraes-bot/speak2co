@@ -109,11 +109,16 @@ export const changePaddlePlan = createServerFn({ method: "POST" })
 
     const priceLookup = await gatewayFetch(
       env,
-      `/prices?external_id=${encodeURIComponent(data.priceId)}`,
+      `/prices?external_id=${encodeURIComponent(data.priceId)}&status=active&per_page=100`,
     );
-    const priceResult = (await priceLookup.json()) as { data?: Array<{ id: string }> };
-    const paddlePriceId = priceResult.data?.[0]?.id;
+    const priceResult = (await priceLookup.json()) as {
+      data?: Array<{ id: string; status?: string; created_at?: string }>;
+    };
+    const paddlePriceId = (priceResult.data ?? [])
+      .filter((price) => (price.status ?? "active") === "active")
+      .sort((a, b) => (b.created_at ?? "").localeCompare(a.created_at ?? ""))[0]?.id;
     if (!paddlePriceId) throw new Error("Plano não encontrado no provedor de pagamentos.");
+
 
     const paddle = getPaddleClient(env);
     await paddle.subscriptions.update(sub.paddle_subscription_id, {
