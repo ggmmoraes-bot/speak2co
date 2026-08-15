@@ -15,8 +15,20 @@ import {
 import { speakText } from "@/lib/voice-client";
 import { generateTripPlan, type TripPlan } from "@/lib/trip-planner.functions";
 
+/** Vozes distintas para cada personagem do diálogo. */
+const TRAVELER_VOICE = "nova";
+const LOCAL_VOICE = "onyx";
+
 /** Botão de pronúncia da IA para um trecho em inglês. */
-function SpeakButton({ text, label = "Listen" }: { text: string; label?: string }) {
+function SpeakButton({
+  text,
+  label = "Listen",
+  voice,
+}: {
+  text: string;
+  label?: string;
+  voice?: string;
+}) {
   const [playing, setPlaying] = useState(false);
   return (
     <button
@@ -25,7 +37,7 @@ function SpeakButton({ text, label = "Listen" }: { text: string; label?: string 
       onClick={async () => {
         try {
           setPlaying(true);
-          await speakText(text);
+          await speakText(text, voice ? { voice, provider: "openai" } : {});
         } catch (e) {
           toast.error(e instanceof Error ? e.message : "Não foi possível tocar o áudio.");
         } finally {
