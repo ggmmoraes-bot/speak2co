@@ -153,3 +153,47 @@ export const cancelPaddleSubscription = createServerFn({ method: "POST" })
     });
     return { ok: true };
   });
+
+/**
+ * Cancela a assinatura brasileira (Mercado Pago). O acesso permanece até o fim
+ * do período já pago — quem devolve o aluno ao Gratuito é a rotina de expiração.
+ */
+export const cancelMercadoPagoSubscription = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { data: sub } = await context.supabase
+      .from("subscriptions")
+      .select("id, preapproval_id")
+      .eq("user_id", context.userId)
+      .eq("provider", "mercadopago")
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (!sub?.preapproval_id) throw new Error("Nenhuma assinatura do Mercado Pago para cancelar.");
+
+    const { mpRequest } = await import("@/lib/mercadopago.server");
+    await mpRequest(`/preapproval/${encodeURIComponent(sub.preapproval_id)}`, {
+      method: "PUT",
+      body: { status: "cancelled" },
+    });
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    await supabaseAdmin
+      .from("subscriptions")
+      .update({ status: "cancelled", cancel_at_period_end: true, updated_at: new Date().toISOString() })
+      .eq("id", sub.id);
+
+    const { logSubscriptionEvent } = await import("@/lib/subscription-events.server");
+    await logSubscriptionEvent({
+      user_id: context.userId,
+      subscription_id: sub.id,
+      preapproval_id: sub.preapproval_id,
+      event_type: "subscription_cancelled",
+      status: "cancelled",
+      message: "Cancelamento solicitado pelo aluno na área Minha assinatura.",
+      raw: {},
+    });
+
+    return { ok: true };
+  });
