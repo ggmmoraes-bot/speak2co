@@ -374,20 +374,23 @@ function PremiumPage() {
                       disabled={paddle.loading}
                       onClick={() => startPaddle(tier.yearly.key)}
                     >
-                      {paddle.loading ? "Abrindo checkout..." : "Assinar com cartão (internacional)"}
+                      {paddle.loading ? "Abrindo checkout..." : "Assinar com cartão"}
                     </Button>
-                    <Button
-                      className="h-auto w-full whitespace-normal py-2 text-xs leading-tight"
-                      variant="ghost"
-                      disabled={mutation.isPending}
-                      onClick={() => mutation.mutate(tier.yearly.key)}
-                    >
-                      {mutation.isPending
-                        ? "Abrindo checkout..."
-                        : "Assinar com Mercado Pago (Pix/boleto/cartão)"}
-                    </Button>
+                    {mercadoPagoEnabled ? (
+                      <Button
+                        className="h-auto w-full whitespace-normal py-2 text-xs leading-tight"
+                        variant="ghost"
+                        disabled={mutation.isPending}
+                        onClick={() => mutation.mutate(tier.yearly.key)}
+                      >
+                        {mutation.isPending
+                          ? "Abrindo checkout..."
+                          : "Assinar com Mercado Pago (Pix/boleto/cartão)"}
+                      </Button>
+                    ) : null}
                   </>
                 )}
+
               </div>
             </article>
           );
