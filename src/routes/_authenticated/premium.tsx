@@ -7,7 +7,7 @@ import { BrandText } from "@/components/BrandText";
 import { Button } from "@/components/ui/button";
 import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
 import { getPlanCatalog } from "@/lib/entitlements.functions";
-import { changePaddlePlan } from "@/lib/payments.functions";
+import { changePaddlePlan, getPaymentOptions } from "@/lib/payments.functions";
 import { usePaddleCheckout } from "@/hooks/usePaddleCheckout";
 import { usePreviewPlan } from "@/lib/entitlements";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
