@@ -51,6 +51,20 @@ export type Preapproval = {
   auto_recurring?: { transaction_amount?: number; currency_id?: string; frequency?: number; frequency_type?: string };
 };
 
+/**
+ * URL de notificação enviada na própria criação da assinatura.
+ * É assim que a API de Assinaturas (preapproval) do Mercado Pago registra o
+ * webhook hoje — o painel "Suas integrações → Webhooks" não cobre assinaturas.
+ * O token na query string permite validar a origem quando o Mercado Pago não
+ * envia a assinatura HMAC (caso das notificações por notification_url).
+ */
+export function notificationUrl() {
+  const SITE_URL = "https://speak2co.lovable.app";
+  const token = process.env["MERCADOPAGO_WEBHOOK_TOKEN"]?.trim();
+  const base = `${SITE_URL}/api/public/webhooks/mercadopago`;
+  return token ? `${base}?token=${encodeURIComponent(token)}` : base;
+}
+
 export async function createPreapproval(params: {
   planKey: PlanKey;
   payerEmail: string;
@@ -65,6 +79,7 @@ export async function createPreapproval(params: {
       external_reference: params.externalReference,
       payer_email: params.payerEmail,
       back_url: params.backUrl,
+      notification_url: notificationUrl(),
       auto_recurring: {
         frequency: plan.frequency,
         frequency_type: plan.frequency_type,
@@ -79,3 +94,35 @@ export async function createPreapproval(params: {
 export async function getPreapproval(id: string): Promise<Preapproval> {
   return mpRequest<Preapproval>(`/preapproval/${encodeURIComponent(id)}`);
 }
+
+export type AuthorizedPayment = {
+  id: number | string;
+  preapproval_id?: string;
+  status?: string;
+  payment?: { id?: number; status?: string; status_detail?: string };
+  transaction_amount?: number;
+  currency_id?: string;
+  next_retry_date?: string;
+  debit_date?: string;
+};
+
+/** Cobrança recorrente gerada por uma assinatura (tópico subscription_authorized_payment). */
+export async function getAuthorizedPayment(id: string): Promise<AuthorizedPayment> {
+  return mpRequest<AuthorizedPayment>(`/authorized_payments/${encodeURIComponent(id)}`);
+}
+
+export type MpPayment = {
+  id: number | string;
+  status?: string;
+  status_detail?: string;
+  transaction_amount?: number;
+  currency_id?: string;
+  external_reference?: string;
+  metadata?: Record<string, unknown> & { preapproval_id?: string };
+};
+
+/** Pagamento avulso/recorrente (tópico payment). */
+export async function getPayment(id: string): Promise<MpPayment> {
+  return mpRequest<MpPayment>(`/v1/payments/${encodeURIComponent(id)}`);
+}
+
