@@ -33,40 +33,24 @@ export type TripPlan = {
   sections: TripSection[];
 };
 
-const looseText = z.union([z.string(), z.number(), z.record(z.any())]);
-
-const looseItem = z.union([
-  z.string(),
-  z.object({
-    en: looseText.optional(),
-    pt: looseText.optional(),
-    term: looseText.optional(),
-    meaning: looseText.optional(),
-    phrase: looseText.optional(),
-    translation: looseText.optional(),
-  }),
-]);
-
-const looseSection = z
-  .object({
-    intro: looseText.optional(),
-    items: z.array(looseItem).optional(),
-  })
-  .optional();
+const sectionSchema = z.object({
+  intro: z.string(),
+  items: z.array(z.object({ en: z.string(), pt: z.string() })),
+});
 
 export const rawTripPlanSchema = z.object({
-  englishSpeakingDestination: z.boolean().optional(),
-  country: looseText.optional(),
-  overview: looseText.optional(),
-  essentialVocabulary: looseSection,
-  localExpressions: looseSection,
-  atTheAirport: looseSection,
-  atTheDestination: looseSection,
-  emergencyPhrases: looseSection,
-  weather: looseSection,
-  clothesToTake: looseSection,
-  typicalFood: looseSection,
-  atTheRestaurant: looseSection,
+  englishSpeakingDestination: z.boolean(),
+  country: z.string(),
+  overview: z.string(),
+  essentialVocabulary: sectionSchema,
+  localExpressions: sectionSchema,
+  atTheAirport: sectionSchema,
+  atTheDestination: sectionSchema,
+  emergencyPhrases: sectionSchema,
+  weather: sectionSchema,
+  clothesToTake: sectionSchema,
+  typicalFood: sectionSchema,
+  atTheRestaurant: sectionSchema,
 });
 
 export const tripPlanInputSchema = z.object({
@@ -97,9 +81,7 @@ function normalizeItem(raw: unknown): TripItem {
       : { en: raw.trim(), pt: "" };
   }
   const obj = (raw ?? {}) as Record<string, unknown>;
-  const en = toText(obj["en"] ?? obj["term"] ?? obj["phrase"]);
-  const pt = toText(obj["pt"] ?? obj["meaning"] ?? obj["translation"]);
-  return { en, pt };
+  return { en: toText(obj["en"]), pt: toText(obj["pt"]) };
 }
 
 export function normalizeTripPlan(
