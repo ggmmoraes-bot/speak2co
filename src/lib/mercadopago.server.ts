@@ -59,7 +59,7 @@ export type Preapproval = {
  * envia a assinatura HMAC (caso das notificações por notification_url).
  */
 export function notificationUrl() {
-  const { SITE_URL } = { SITE_URL: "https://speak2co.lovable.app" };
+  const SITE_URL = "https://speak2co.lovable.app";
   const token = process.env["MERCADOPAGO_WEBHOOK_TOKEN"]?.trim();
   const base = `${SITE_URL}/api/public/webhooks/mercadopago`;
   return token ? `${base}?token=${encodeURIComponent(token)}` : base;
