@@ -24,6 +24,7 @@ import {
   Trophy,
   Users,
   BookMarked,
+  UserRound,
 } from "lucide-react";
 import type { EcosystemItem } from "@/components/EcosystemCard";
 import { hasFeature, FEATURE_KEYS } from "@/lib/entitlements";
@@ -328,6 +329,16 @@ export function buildHomeSections(access: Access): HubSectionData[] {
       titleEn: "Support & Community",
       titlePt: "Suporte e comunidade",
       items: [
+        {
+          id: "my-profile",
+          titleEn: "My Profile",
+          titlePt: "Meu perfil",
+          description:
+            "Atualize seus dados, nível CEFR, objetivo de estudo e preferências da sua conta.",
+          icon: UserRound,
+          to: "/perfil",
+          status: "available",
+        },
         {
           id: "my-subscription",
           titleEn: "My Subscription",
