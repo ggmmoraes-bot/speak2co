@@ -439,6 +439,12 @@ function AssinaturaPage() {
               Acesse faturas, forma de pagamento e cancelamento. O cancelamento só acontece após a
               sua confirmação.
             </p>
+            {subscription?.status === "past_due" && (
+              <p className="mt-3 rounded-xl border border-border bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
+                Não conseguimos confirmar a última cobrança. Seu acesso continua liberado enquanto o
+                provedor tenta novamente — atualize a forma de pagamento para não perder o plano.
+              </p>
+            )}
             <div className="mt-4 flex flex-wrap gap-2">
               {isPaddle && !simulation && (
                 <Button
@@ -451,7 +457,7 @@ function AssinaturaPage() {
                   Faturas e pagamento
                 </Button>
               )}
-              {isPaid && isPaddle && !simulation && !subscription?.cancel_at_period_end && (
+              {isPaid && !simulation && !subscription?.cancel_at_period_end && (
                 <Button
                   variant="ghost"
                   size="sm"
@@ -467,7 +473,23 @@ function AssinaturaPage() {
                 </p>
               )}
             </div>
+            <p className="mt-4 text-xs text-muted-foreground">
+              Consulte os{" "}
+              <Link to="/termos" className="text-accent underline">
+                Termos de Uso
+              </Link>
+              , a{" "}
+              <Link to="/reembolso" className="text-accent underline">
+                Política de Reembolso
+              </Link>{" "}
+              e o{" "}
+              <Link to="/privacidade" className="text-accent underline">
+                Aviso de Privacidade
+              </Link>
+              .
+            </p>
           </div>
+
         </div>
       </section>
 
