@@ -133,7 +133,13 @@ function TravelModule({ track }: { track: TravelTrack }) {
     return () => clearTimeout(timer);
   }, [answers, index, started, feedback, save]);
 
+  const hasAnswers = Object.values(answers).some((a) => (a ?? "").trim().length > 0);
+
   async function handleFinish() {
+    if (!hasAnswers) {
+      toast.error("Responda pelo menos uma situação antes de finalizar.");
+      return;
+    }
     try {
       setLoading(true);
       const result = await evaluate({ data: { trackId: track.id, answers } });
@@ -352,7 +358,11 @@ function TravelModule({ track }: { track: TravelTrack }) {
                 </Button>
               ) : (
                 <Button
-                  disabled={loading}
+                  disabled={loading || !hasAnswers}
+                  title={
+                    hasAnswers ? undefined : "Responda pelo menos uma situação antes de finalizar."
+                  }
+
                   className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                   onClick={handleFinish}
                 >
