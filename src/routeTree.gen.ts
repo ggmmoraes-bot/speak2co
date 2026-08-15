@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ChecklistRouteImport } from './routes/checklist'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as TermosRouteImport } from './routes/termos'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authenticated/assinatura'
 import { Route as AuthenticatedCentralDeMensagensRouteImport } from './routes/_authenticated/central-de-mensagens'
@@ -100,6 +101,11 @@ const ChecklistRoute = ChecklistRouteImport.update({
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
@@ -470,6 +476,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/termos': typeof TermosRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
@@ -539,6 +546,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/termos': typeof TermosRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
@@ -602,6 +610,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/termos': typeof TermosRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
   '/_authenticated/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
@@ -673,6 +682,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/checklist'
     | '/reset-password'
+    | '/termos'
     | '/admin'
     | '/assinatura'
     | '/central-de-mensagens'
@@ -742,6 +752,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/checklist'
     | '/reset-password'
+    | '/termos'
     | '/admin'
     | '/assinatura'
     | '/central-de-mensagens'
@@ -804,6 +815,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/checklist'
     | '/reset-password'
+    | '/termos'
     | '/_authenticated/admin'
     | '/_authenticated/assinatura'
     | '/_authenticated/central-de-mensagens'
@@ -875,6 +887,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ChecklistRoute: typeof ChecklistRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  TermosRoute: typeof TermosRoute
   ApiChatRoute: typeof ApiChatRoute
   ApiGiseleChatRoute: typeof ApiGiseleChatRoute
   ApiVoicePronunciationRoute: typeof ApiVoicePronunciationRoute
@@ -919,6 +932,13 @@ declare module '@tanstack/react-router' {
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -1601,6 +1621,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ChecklistRoute: ChecklistRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  TermosRoute: TermosRoute,
   ApiChatRoute: ApiChatRoute,
   ApiGiseleChatRoute: ApiGiseleChatRoute,
   ApiVoicePronunciationRoute: ApiVoicePronunciationRoute,
