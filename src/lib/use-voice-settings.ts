@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { applyPlaybackSettings } from "@/lib/voice-client";
 
 /** Voz clonada da fundadora (ElevenLabs). */
-export const FOUNDER_VOICE_ID = "m3m72XeqSLA8AEuQecN0";
+export const FOUNDER_VOICE_ID = "SNzYVXmQuMTz1nLfEfJE";
 
 /** A voz autorizada da marca é sempre sintética (gerada por IA). */
 export function isBrandVoice(voiceId: string | undefined | null) {

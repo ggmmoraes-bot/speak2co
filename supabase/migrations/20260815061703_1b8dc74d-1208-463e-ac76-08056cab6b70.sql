@@ -1,0 +1,1 @@
+UPDATE public.ai_voice_settings SET voice_id = 'SNzYVXmQuMTz1nLfEfJE' WHERE voice_id = 'm3m72XeqSLA8AEuQecN0';
