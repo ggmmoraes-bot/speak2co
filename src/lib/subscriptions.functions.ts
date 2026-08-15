@@ -44,7 +44,7 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
       planKey: data.planKey,
       payerEmail: email,
       externalReference,
-      backUrl: `${data.origin}/premium`,
+      backUrl: `${data.origin}/checkout-sucesso`,
     });
 
     const plan = MP_PLANS[data.planKey];
