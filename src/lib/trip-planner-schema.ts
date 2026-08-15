@@ -129,5 +129,21 @@ export function normalizeTripPlan(
         items: (data.items ?? []).map(normalizeItem).filter((item) => item.en),
       };
     }).filter((section) => section.items.length > 0 || section.intro),
+    dialogue: (() => {
+      const d = raw.realLifeDialogue;
+      const lines = (d?.lines ?? [])
+        .map((line) => ({
+          speaker: line.speaker === "local" ? ("local" as const) : ("traveler" as const),
+          en: toText(line.en),
+          pt: toText(line.pt),
+        }))
+        .filter((line) => line.en);
+      if (lines.length === 0) return null;
+      return {
+        title: toText(d?.title) || "Real-Life Travel Dialogue",
+        situation: toText(d?.situation),
+        lines,
+      };
+    })(),
   };
 }
