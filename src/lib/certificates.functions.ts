@@ -5,6 +5,8 @@ import { BEGINNER_ASSESSMENT_ID, BEGINNER_PASS_SCORE } from "./beginner-assessme
 import { BEGINNER_COURSE_ID, BEGINNER_PARTS_TOTAL } from "./beginner-course";
 import { INTERMEDIATE_COURSE_ID, INTERMEDIATE_PARTS_TOTAL } from "./intermediate-course";
 import { INTERMEDIATE_ASSESSMENT_ID, INTERMEDIATE_PASS_SCORE } from "./intermediate-assessment";
+import { UPPER_COURSE_ID, UPPER_PARTS_TOTAL } from "./upper-course";
+import { UPPER_ASSESSMENT_ID, UPPER_PASS_SCORE } from "./upper-assessment";
 
 export type { Certificate };
 
@@ -22,6 +24,7 @@ export const getCertificates = createServerFn({ method: "GET" })
       chatRes,
       courseRes,
       intermediateRes,
+      upperRes,
     ] = await Promise.all([
       supabase.from("profiles").select("full_name, english_level").eq("id", userId).maybeSingle(),
       supabase
@@ -42,7 +45,25 @@ export const getCertificates = createServerFn({ method: "GET" })
         .select("lesson_id, completed, quiz_score, completed_at, updated_at")
         .eq("user_id", userId)
         .eq("course_id", INTERMEDIATE_COURSE_ID),
+      supabase
+        .from("course_progress")
+        .select("lesson_id, completed, quiz_score, completed_at, updated_at")
+        .eq("user_id", userId)
+        .eq("course_id", UPPER_COURSE_ID),
     ]);
+
+    const upperRows = (upperRes.data ?? []) as {
+      lesson_id: string;
+      completed: boolean;
+      quiz_score: number | null;
+      completed_at: string | null;
+      updated_at: string | null;
+    }[];
+    const upperAssessment =
+      upperRows.find((row) => row.lesson_id === UPPER_ASSESSMENT_ID) ?? null;
+    const upperDone = upperRows.filter(
+      (row) => row.completed && row.lesson_id !== UPPER_ASSESSMENT_ID,
+    ).length;
 
     const courseRows = (courseRes.data ?? []) as {
       lesson_id: string;
@@ -87,6 +108,11 @@ export const getCertificates = createServerFn({ method: "GET" })
         intermediateAssessmentAt:
           intermediateAssessment?.completed_at ?? intermediateAssessment?.updated_at ?? null,
         intermediatePassScore: INTERMEDIATE_PASS_SCORE,
+        upperLessonsCompleted: upperDone,
+        upperLessonsTotal: UPPER_PARTS_TOTAL,
+        upperAssessmentScore: upperAssessment?.quiz_score ?? null,
+        upperAssessmentAt: upperAssessment?.completed_at ?? upperAssessment?.updated_at ?? null,
+        upperPassScore: UPPER_PASS_SCORE,
       }),
     };
   });
