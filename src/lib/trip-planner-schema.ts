@@ -27,12 +27,21 @@ export type TripSection = {
   items: TripItem[];
 };
 
+export type TripDialogueLine = { speaker: "traveler" | "local"; en: string; pt: string };
+
+export type TripDialogue = {
+  title: string;
+  situation: string;
+  lines: TripDialogueLine[];
+};
+
 export type TripPlan = {
   destination: string;
   country: string;
   tripDates: string;
   overview: string;
   sections: TripSection[];
+  dialogue: TripDialogue | null;
 };
 
 const sectionSchema = z.object({
@@ -48,11 +57,24 @@ export const rawTripPlanSchema = z.object({
   localExpressions: sectionSchema,
   atTheAirport: sectionSchema,
   atTheDestination: sectionSchema,
+  shopping: sectionSchema,
+  tourismSightseeing: sectionSchema,
   emergencyPhrases: sectionSchema,
   weather: sectionSchema,
   clothesToTake: sectionSchema,
   typicalFood: sectionSchema,
   atTheRestaurant: sectionSchema,
+  realLifeDialogue: z.object({
+    title: z.string(),
+    situation: z.string(),
+    lines: z.array(
+      z.object({
+        speaker: z.enum(["traveler", "local"]),
+        en: z.string(),
+        pt: z.string(),
+      }),
+    ),
+  }),
 });
 
 export const tripPlanInputSchema = z.object({
