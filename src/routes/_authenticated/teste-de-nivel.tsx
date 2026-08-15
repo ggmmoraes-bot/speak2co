@@ -69,6 +69,82 @@ function formatDate(value: string) {
   });
 }
 
+const CEFR_LEVELS = [
+  {
+    code: "A1",
+    name: "Beginner",
+    description:
+      "Consegue compreender e utilizar expressões familiares e frases muito simples para necessidades básicas.",
+  },
+  {
+    code: "A2",
+    name: "Elementary",
+    description:
+      "Consegue compreender frases e expressões frequentes relacionadas a informações pessoais, rotina, compras, trabalho e situações do cotidiano.",
+  },
+  {
+    code: "B1",
+    name: "Intermediate",
+    description:
+      "Consegue compreender os pontos principais de textos e situações familiares e se comunicar em situações do dia a dia, viagens, trabalho e estudos.",
+  },
+  {
+    code: "B2",
+    name: "Upper Intermediate",
+    description:
+      "Consegue compreender ideias principais de textos mais complexos, comunicar-se com maior fluência e interagir com falantes de inglês com relativa naturalidade.",
+  },
+  {
+    code: "C1",
+    name: "Advanced",
+    description:
+      "Consegue compreender textos longos e complexos, expressar-se com fluência e utilizar o idioma de forma eficaz para fins sociais, acadêmicos e profissionais.",
+  },
+  {
+    code: "C2",
+    name: "Proficient",
+    description:
+      "Consegue compreender praticamente tudo o que ouve ou lê e expressar-se de maneira espontânea, precisa e altamente fluente.",
+  },
+];
+
+/** Explicação oficial do quadro CEFR, do A1 ao C2. */
+function CefrExplainer() {
+  return (
+    <section className="mt-10 rounded-2xl border border-gold/30 bg-card/50 p-6 backdrop-blur">
+      <p className="text-xs tracking-widest text-muted-foreground uppercase">Referência oficial</p>
+      <h2 className="mt-1 text-xl font-semibold">
+        <span className="text-foreground">CEFR</span>{" "}
+        <span className="text-gold">— Common European Framework of Reference for Languages</span>
+      </h2>
+      <p className="mt-2 text-sm text-muted-foreground">
+        O CEFR é o quadro europeu comum de referência para línguas. Ele organiza a proficiência em
+        seis níveis, do A1 ao C2, e é o padrão usado pela Speak2Co para definir seu nível e sua
+        trilha de estudos.
+      </p>
+
+      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {CEFR_LEVELS.map((level) => (
+          <article
+            key={level.code}
+            className="rounded-xl border border-border bg-background/40 p-4 transition hover:border-gold/50"
+          >
+            <div className="flex items-baseline gap-2">
+              <span className="badge-gold rounded-full px-2.5 py-0.5 text-xs font-semibold text-gold">
+                {level.code}
+              </span>
+              <span className="text-sm font-semibold text-foreground">{level.name}</span>
+            </div>
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+              {level.description}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function PlacementPage() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -173,6 +249,8 @@ function PlacementPage() {
             </p>
           </div>
         </header>
+
+        <CefrExplainer />
 
         {!activeTestId && (
           <section className="mt-10 rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
