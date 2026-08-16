@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { BookMarked, Check, X, RotateCcw, Search } from "lucide-react";
 import { AltHeading } from "@/components/AltHeading";
+import { FeatureGate } from "@/components/FeatureGate";
+import { FEATURE_KEYS } from "@/lib/entitlements";
 import {
   GENERAL_GRAMMAR,
   GENERAL_GRAMMAR_TOTAL,
@@ -203,7 +205,7 @@ function TopicCard({
   );
 }
 
-function GrammarPage() {
+function GrammarPageInner() {
   const [level, setLevel] = useState<string>("all");
   const [query, setQuery] = useState("");
   const [completed, setCompleted] = useState<string[]>([]);
@@ -291,5 +293,18 @@ function GrammarPage() {
         )}
       </div>
     </main>
+  );
+}
+
+function GrammarPage() {
+  return (
+    <FeatureGate
+      feature={FEATURE_KEYS.learningTools}
+      title="Grammar"
+      benefit="Estude gramática do Beginner ao Advanced com explicações bilíngues e exercícios."
+      requiredPlan="Essential"
+    >
+      <GrammarPageInner />
+    </FeatureGate>
   );
 }

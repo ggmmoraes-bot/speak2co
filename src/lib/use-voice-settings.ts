@@ -68,7 +68,7 @@ export type VoiceSettings = {
 
 const STORAGE_KEY = "speak2co:voice-settings";
 const DEFAULTS: VoiceSettings = {
-  autoSpeak: false,
+  autoSpeak: true,
   volume: 1,
   rate: 1,
   voice: "alloy",
@@ -94,7 +94,7 @@ function read(): VoiceSettings {
       ? (parsed.ttsProvider as TtsProvider)
       : DEFAULTS.ttsProvider;
     return {
-      autoSpeak: Boolean(parsed.autoSpeak),
+      autoSpeak: parsed.autoSpeak !== false,
       volume: Math.min(1, Math.max(0, Number(parsed.volume ?? 1))),
       rate: Math.min(2, Math.max(0.5, Number(parsed.rate ?? 1))),
       voice,

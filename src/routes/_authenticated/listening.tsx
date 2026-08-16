@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Headphones, Play, Square, Check, X, RotateCcw } from "lucide-react";
 import { AltHeading } from "@/components/AltHeading";
+import { FeatureGate } from "@/components/FeatureGate";
+import { FEATURE_KEYS } from "@/lib/entitlements";
 import {
   GENERAL_LISTENING,
   GENERAL_LISTENING_TOTAL,
@@ -28,14 +30,53 @@ export const Route = createFileRoute("/_authenticated/listening")({
   component: ListeningPracticePage,
 });
 
-function speakLines(lines: string[], onEnd: () => void) {
+/** Vozes em inglês disponíveis no navegador, priorizando vozes naturais. */
+function englishVoices(): SpeechSynthesisVoice[] {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return [];
+  const all = window.speechSynthesis.getVoices().filter((v) => v.lang.toLowerCase().startsWith("en"));
+  const score = (v: SpeechSynthesisVoice) =>
+    (/natural|neural|premium|enhanced|google/i.test(v.name) ? 2 : 0) +
+    (v.lang.toLowerCase() === "en-us" || v.lang.toLowerCase() === "en-gb" ? 1 : 0);
+  return [...all].sort((a, b) => score(b) - score(a));
+}
+
+const RATE_BY_LEVEL: Record<string, number> = {
+  Beginner: 0.85,
+  Intermediate: 0.95,
+  Advanced: 1,
+};
+
+/**
+ * Reproduz o diálogo de forma contínua, alternando automaticamente uma voz
+ * diferente para cada speaker (Speaker 1 / Speaker 2).
+ */
+function speakDialogue(
+  transcript: { speaker: string; line: string }[],
+  level: string,
+  onLine: (index: number) => void,
+  onEnd: () => void,
+) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
-  lines.forEach((line, index) => {
-    const utterance = new SpeechSynthesisUtterance(line);
-    utterance.lang = "en-US";
-    utterance.rate = 0.92;
-    if (index === lines.length - 1) utterance.onend = onEnd;
+
+  const voices = englishVoices();
+  const speakers = Array.from(new Set(transcript.map((t) => t.speaker)));
+  const voiceFor = (speaker: string) => {
+    if (voices.length === 0) return undefined;
+    const idx = speakers.indexOf(speaker);
+    return voices[idx % voices.length];
+  };
+
+  transcript.forEach((turn, index) => {
+    const utterance = new SpeechSynthesisUtterance(turn.line);
+    const voice = voiceFor(turn.speaker);
+    if (voice) utterance.voice = voice;
+    utterance.lang = voice?.lang ?? "en-US";
+    utterance.rate = RATE_BY_LEVEL[level] ?? 0.95;
+    // Vozes diferentes também no pitch, para distinguir os interlocutores.
+    utterance.pitch = speakers.indexOf(turn.speaker) % 2 === 0 ? 1.05 : 0.9;
+    utterance.onstart = () => onLine(index);
+    if (index === transcript.length - 1) utterance.onend = onEnd;
     window.speechSynthesis.speak(utterance);
   });
 }
@@ -50,6 +91,7 @@ function ActivityCard({
   onComplete: () => void;
 }) {
   const [playing, setPlaying] = useState(false);
+  const [activeLine, setActiveLine] = useState(-1);
   const [showTranscript, setShowTranscript] = useState(false);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [checked, setChecked] = useState(false);
@@ -84,12 +126,19 @@ function ActivityCard({
               if (playing) {
                 window.speechSynthesis.cancel();
                 setPlaying(false);
+                setActiveLine(-1);
                 return;
               }
               setPlaying(true);
-              speakLines(
-                activity.transcript.map((t) => t.line),
-                () => setPlaying(false),
+              setShowTranscript(true);
+              speakDialogue(
+                activity.transcript,
+                activity.level,
+                (i) => setActiveLine(i),
+                () => {
+                  setPlaying(false);
+                  setActiveLine(-1);
+                },
               );
             }}
             className="inline-flex items-center gap-2 rounded-full bg-gold px-4 py-2 text-xs font-semibold text-navy transition hover:opacity-90"
@@ -107,11 +156,28 @@ function ActivityCard({
 
         {showTranscript && (
           <ul className="space-y-2 rounded-2xl border border-border bg-muted/20 p-4">
-            {activity.transcript.map((t, i) => (
-              <li key={i} className="text-sm text-foreground/90">
-                <span className="font-semibold text-gold">{t.speaker}:</span> {t.line}
-              </li>
-            ))}
+            {activity.transcript.map((t, i) => {
+              const speakerIndex = Array.from(
+                new Set(activity.transcript.map((x) => x.speaker)),
+              ).indexOf(t.speaker);
+              return (
+                <li
+                  key={i}
+                  className={`rounded-xl px-3 py-2 text-sm transition ${
+                    activeLine === i
+                      ? "bg-gold/15 text-foreground"
+                      : "text-foreground/90"
+                  }`}
+                >
+                  <span
+                    className={`font-semibold ${speakerIndex % 2 === 0 ? "text-gold" : "text-foreground"}`}
+                  >
+                    {t.speaker} {speakerIndex % 2 === 0 ? "(Voice 1)" : "(Voice 2)"}:
+                  </span>{" "}
+                  {t.line}
+                </li>
+              );
+            })}
           </ul>
         )}
 
@@ -205,7 +271,7 @@ function ActivityCard({
   );
 }
 
-function ListeningPracticePage() {
+function ListeningPracticePageInner() {
   const [level, setLevel] = useState<string>("all");
   const [completed, setCompleted] = useState<string[]>([]);
 
@@ -273,5 +339,18 @@ function ListeningPracticePage() {
         ))}
       </div>
     </main>
+  );
+}
+
+function ListeningPracticePage() {
+  return (
+    <FeatureGate
+      feature={FEATURE_KEYS.learningTools}
+      title="Listening Practice"
+      benefit="Ouça diálogos com duas vozes, transcrição, vocabulário e perguntas de compreensão."
+      requiredPlan="Essential"
+    >
+      <ListeningPracticePageInner />
+    </FeatureGate>
   );
 }
