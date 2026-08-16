@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Headphones, Play, Square, Check, X, RotateCcw } from "lucide-react";
 import { AltHeading } from "@/components/AltHeading";
+import { FeatureGate } from "@/components/FeatureGate";
+import { FEATURE_KEYS } from "@/lib/entitlements";
 import {
   GENERAL_LISTENING,
   GENERAL_LISTENING_TOTAL,
@@ -269,7 +271,7 @@ function ActivityCard({
   );
 }
 
-function ListeningPracticePage() {
+function ListeningPracticePageInner() {
   const [level, setLevel] = useState<string>("all");
   const [completed, setCompleted] = useState<string[]>([]);
 
@@ -337,5 +339,18 @@ function ListeningPracticePage() {
         ))}
       </div>
     </main>
+  );
+}
+
+function ListeningPracticePage() {
+  return (
+    <FeatureGate
+      feature={FEATURE_KEYS.learningTools}
+      title="Listening Practice"
+      benefit="Ouça diálogos com duas vozes, transcrição, vocabulário e perguntas de compreensão."
+      requiredPlan="Essential"
+    >
+      <ListeningPracticePageInner />
+    </FeatureGate>
   );
 }
