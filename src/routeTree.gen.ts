@@ -26,6 +26,8 @@ import { Route as AuthenticatedCursoBeginnerRouteImport } from './routes/_authen
 import { Route as AuthenticatedCursoIntermediateRouteImport } from './routes/_authenticated/curso-intermediate'
 import { Route as AuthenticatedCursoUpperRouteImport } from './routes/_authenticated/curso-upper'
 import { Route as AuthenticatedGiseleRouteImport } from './routes/_authenticated/gisele'
+import { Route as AuthenticatedGramaticaRouteImport } from './routes/_authenticated/gramatica'
+import { Route as AuthenticatedListeningRouteImport } from './routes/_authenticated/listening'
 import { Route as AuthenticatedMeuPlanoRouteImport } from './routes/_authenticated/meu-plano'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
@@ -169,6 +171,16 @@ const AuthenticatedCursoUpperRoute = AuthenticatedCursoUpperRouteImport.update({
 const AuthenticatedGiseleRoute = AuthenticatedGiseleRouteImport.update({
   id: '/gisele',
   path: '/gisele',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedGramaticaRoute = AuthenticatedGramaticaRouteImport.update({
+  id: '/gramatica',
+  path: '/gramatica',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedListeningRoute = AuthenticatedListeningRouteImport.update({
+  id: '/listening',
+  path: '/listening',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedMeuPlanoRoute = AuthenticatedMeuPlanoRouteImport.update({
@@ -507,6 +519,8 @@ export interface FileRoutesByFullPath {
   '/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
   '/curso-upper': typeof AuthenticatedCursoUpperRouteWithChildren
   '/gisele': typeof AuthenticatedGiseleRouteWithChildren
+  '/gramatica': typeof AuthenticatedGramaticaRoute
+  '/listening': typeof AuthenticatedListeningRoute
   '/meu-plano': typeof AuthenticatedMeuPlanoRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
@@ -576,6 +590,8 @@ export interface FileRoutesByTo {
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
+  '/gramatica': typeof AuthenticatedGramaticaRoute
+  '/listening': typeof AuthenticatedListeningRoute
   '/meu-plano': typeof AuthenticatedMeuPlanoRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
@@ -647,6 +663,8 @@ export interface FileRoutesById {
   '/_authenticated/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
   '/_authenticated/curso-upper': typeof AuthenticatedCursoUpperRouteWithChildren
   '/_authenticated/gisele': typeof AuthenticatedGiseleRouteWithChildren
+  '/_authenticated/gramatica': typeof AuthenticatedGramaticaRoute
+  '/_authenticated/listening': typeof AuthenticatedListeningRoute
   '/_authenticated/meu-plano': typeof AuthenticatedMeuPlanoRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
@@ -722,6 +740,8 @@ export interface FileRouteTypes {
     | '/curso-intermediate'
     | '/curso-upper'
     | '/gisele'
+    | '/gramatica'
+    | '/listening'
     | '/meu-plano'
     | '/painel'
     | '/perfil'
@@ -791,6 +811,8 @@ export interface FileRouteTypes {
     | '/central-de-mensagens'
     | '/certificados'
     | '/checkout-sucesso'
+    | '/gramatica'
+    | '/listening'
     | '/meu-plano'
     | '/painel'
     | '/perfil'
@@ -861,6 +883,8 @@ export interface FileRouteTypes {
     | '/_authenticated/curso-intermediate'
     | '/_authenticated/curso-upper'
     | '/_authenticated/gisele'
+    | '/_authenticated/gramatica'
+    | '/_authenticated/listening'
     | '/_authenticated/meu-plano'
     | '/_authenticated/painel'
     | '/_authenticated/perfil'
@@ -1055,6 +1079,20 @@ declare module '@tanstack/react-router' {
       path: '/gisele'
       fullPath: '/gisele'
       preLoaderRoute: typeof AuthenticatedGiseleRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/gramatica': {
+      id: '/_authenticated/gramatica'
+      path: '/gramatica'
+      fullPath: '/gramatica'
+      preLoaderRoute: typeof AuthenticatedGramaticaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/listening': {
+      id: '/_authenticated/listening'
+      path: '/listening'
+      fullPath: '/listening'
+      preLoaderRoute: typeof AuthenticatedListeningRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/meu-plano': {
@@ -1633,6 +1671,8 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCursoIntermediateRoute: typeof AuthenticatedCursoIntermediateRouteWithChildren
   AuthenticatedCursoUpperRoute: typeof AuthenticatedCursoUpperRouteWithChildren
   AuthenticatedGiseleRoute: typeof AuthenticatedGiseleRouteWithChildren
+  AuthenticatedGramaticaRoute: typeof AuthenticatedGramaticaRoute
+  AuthenticatedListeningRoute: typeof AuthenticatedListeningRoute
   AuthenticatedMeuPlanoRoute: typeof AuthenticatedMeuPlanoRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
@@ -1659,6 +1699,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedCursoIntermediateRouteWithChildren,
   AuthenticatedCursoUpperRoute: AuthenticatedCursoUpperRouteWithChildren,
   AuthenticatedGiseleRoute: AuthenticatedGiseleRouteWithChildren,
+  AuthenticatedGramaticaRoute: AuthenticatedGramaticaRoute,
+  AuthenticatedListeningRoute: AuthenticatedListeningRoute,
   AuthenticatedMeuPlanoRoute: AuthenticatedMeuPlanoRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
