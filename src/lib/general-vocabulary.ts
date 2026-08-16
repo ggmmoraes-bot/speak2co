@@ -213,7 +213,7 @@ export const GENERAL_VOCABULARY: GeneralVocabCategory[] = [
       { term: "choose", ipa: "/tʃuːz/", pt: "escolher", definition: "To decide between options.", example: "You can choose any topic.", examplePt: "Você pode escolher qualquer tema." },
       { term: "explain", ipa: "/ɪkˈspleɪn/", pt: "explicar", definition: "To make something clear to someone.", example: "Could you explain that again?", examplePt: "Você poderia explicar de novo?" },
       { term: "remember", ipa: "/rɪˈmembər/", pt: "lembrar", definition: "To keep something in your mind.", example: "I can't remember his name.", examplePt: "Não consigo lembrar o nome dele." },
-      { term: "practise", ipa: "/ˈpræktɪs/", pt: "praticar", definition: "To do something repeatedly to improve.", example: "Practise speaking for ten minutes a day.", examplePt: "Pratique a fala por dez minutos por dia." },
+      { term: "practice", ipa: "/ˈpræktɪs/", pt: "praticar", definition: "To do something repeatedly to improve.", example: "Practice speaking for ten minutes a day.", examplePt: "Pratique a fala por dez minutos por dia." },
     ],
   },
   {

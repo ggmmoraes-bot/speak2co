@@ -64,7 +64,7 @@ function ScenarioCard({
               <Check className="h-3.5 w-3.5" /> Completed
             </span>
           )}
-          <span className="text-xs font-semibold text-gold">{open ? "Close" : "Practise"}</span>
+          <span className="text-xs font-semibold text-gold">{open ? "Close" : "Practice"}</span>
         </div>
       </button>
 
