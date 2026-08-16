@@ -34,11 +34,14 @@ import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedPremiumRouteImport } from './routes/_authenticated/premium'
 import { Route as AuthenticatedProfessorRouteImport } from './routes/_authenticated/professor'
 import { Route as AuthenticatedRankingRouteImport } from './routes/_authenticated/ranking'
+import { Route as AuthenticatedReadingRouteImport } from './routes/_authenticated/reading'
 import { Route as AuthenticatedSpeak2fluencyRouteImport } from './routes/_authenticated/speak2fluency'
 import { Route as AuthenticatedSpeak2hireRouteImport } from './routes/_authenticated/speak2hire'
 import { Route as AuthenticatedSpeak2travelRouteImport } from './routes/_authenticated/speak2travel'
+import { Route as AuthenticatedSpeakingRouteImport } from './routes/_authenticated/speaking'
 import { Route as AuthenticatedTesteDeNivelRouteImport } from './routes/_authenticated/teste-de-nivel'
 import { Route as AuthenticatedVocabularioIpaRouteImport } from './routes/_authenticated/vocabulario-ipa'
+import { Route as AuthenticatedWritingRouteImport } from './routes/_authenticated/writing'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiGiseleChatRouteImport } from './routes/api/gisele-chat'
 import { Route as AuthenticatedCursoBeginnerIndexRouteImport } from './routes/_authenticated/curso-beginner.index'
@@ -213,6 +216,11 @@ const AuthenticatedRankingRoute = AuthenticatedRankingRouteImport.update({
   path: '/ranking',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedReadingRoute = AuthenticatedReadingRouteImport.update({
+  id: '/reading',
+  path: '/reading',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedSpeak2fluencyRoute =
   AuthenticatedSpeak2fluencyRouteImport.update({
     id: '/speak2fluency',
@@ -230,6 +238,11 @@ const AuthenticatedSpeak2travelRoute =
     path: '/speak2travel',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSpeakingRoute = AuthenticatedSpeakingRouteImport.update({
+  id: '/speaking',
+  path: '/speaking',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedTesteDeNivelRoute =
   AuthenticatedTesteDeNivelRouteImport.update({
     id: '/teste-de-nivel',
@@ -242,6 +255,11 @@ const AuthenticatedVocabularioIpaRoute =
     path: '/vocabulario-ipa',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedWritingRoute = AuthenticatedWritingRouteImport.update({
+  id: '/writing',
+  path: '/writing',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
@@ -527,11 +545,14 @@ export interface FileRoutesByFullPath {
   '/premium': typeof AuthenticatedPremiumRoute
   '/professor': typeof AuthenticatedProfessorRouteWithChildren
   '/ranking': typeof AuthenticatedRankingRoute
+  '/reading': typeof AuthenticatedReadingRoute
   '/speak2fluency': typeof AuthenticatedSpeak2fluencyRouteWithChildren
   '/speak2hire': typeof AuthenticatedSpeak2hireRouteWithChildren
   '/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
+  '/speaking': typeof AuthenticatedSpeakingRoute
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/vocabulario-ipa': typeof AuthenticatedVocabularioIpaRoute
+  '/writing': typeof AuthenticatedWritingRoute
   '/api/chat': typeof ApiChatRoute
   '/api/gisele-chat': typeof ApiGiseleChatRoute
   '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
@@ -597,8 +618,11 @@ export interface FileRoutesByTo {
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
   '/ranking': typeof AuthenticatedRankingRoute
+  '/reading': typeof AuthenticatedReadingRoute
+  '/speaking': typeof AuthenticatedSpeakingRoute
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/vocabulario-ipa': typeof AuthenticatedVocabularioIpaRoute
+  '/writing': typeof AuthenticatedWritingRoute
   '/api/chat': typeof ApiChatRoute
   '/api/gisele-chat': typeof ApiGiseleChatRoute
   '/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
@@ -671,11 +695,14 @@ export interface FileRoutesById {
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
   '/_authenticated/professor': typeof AuthenticatedProfessorRouteWithChildren
   '/_authenticated/ranking': typeof AuthenticatedRankingRoute
+  '/_authenticated/reading': typeof AuthenticatedReadingRoute
   '/_authenticated/speak2fluency': typeof AuthenticatedSpeak2fluencyRouteWithChildren
   '/_authenticated/speak2hire': typeof AuthenticatedSpeak2hireRouteWithChildren
   '/_authenticated/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
+  '/_authenticated/speaking': typeof AuthenticatedSpeakingRoute
   '/_authenticated/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
   '/_authenticated/vocabulario-ipa': typeof AuthenticatedVocabularioIpaRoute
+  '/_authenticated/writing': typeof AuthenticatedWritingRoute
   '/api/chat': typeof ApiChatRoute
   '/api/gisele-chat': typeof ApiGiseleChatRoute
   '/_authenticated/curso-beginner/assessment': typeof AuthenticatedCursoBeginnerAssessmentRoute
@@ -748,11 +775,14 @@ export interface FileRouteTypes {
     | '/premium'
     | '/professor'
     | '/ranking'
+    | '/reading'
     | '/speak2fluency'
     | '/speak2hire'
     | '/speak2travel'
+    | '/speaking'
     | '/teste-de-nivel'
     | '/vocabulario-ipa'
+    | '/writing'
     | '/api/chat'
     | '/api/gisele-chat'
     | '/curso-beginner/assessment'
@@ -818,8 +848,11 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/premium'
     | '/ranking'
+    | '/reading'
+    | '/speaking'
     | '/teste-de-nivel'
     | '/vocabulario-ipa'
+    | '/writing'
     | '/api/chat'
     | '/api/gisele-chat'
     | '/curso-beginner/assessment'
@@ -891,11 +924,14 @@ export interface FileRouteTypes {
     | '/_authenticated/premium'
     | '/_authenticated/professor'
     | '/_authenticated/ranking'
+    | '/_authenticated/reading'
     | '/_authenticated/speak2fluency'
     | '/_authenticated/speak2hire'
     | '/_authenticated/speak2travel'
+    | '/_authenticated/speaking'
     | '/_authenticated/teste-de-nivel'
     | '/_authenticated/vocabulario-ipa'
+    | '/_authenticated/writing'
     | '/api/chat'
     | '/api/gisele-chat'
     | '/_authenticated/curso-beginner/assessment'
@@ -1137,6 +1173,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRankingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/reading': {
+      id: '/_authenticated/reading'
+      path: '/reading'
+      fullPath: '/reading'
+      preLoaderRoute: typeof AuthenticatedReadingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/speak2fluency': {
       id: '/_authenticated/speak2fluency'
       path: '/speak2fluency'
@@ -1158,6 +1201,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSpeak2travelRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/speaking': {
+      id: '/_authenticated/speaking'
+      path: '/speaking'
+      fullPath: '/speaking'
+      preLoaderRoute: typeof AuthenticatedSpeakingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/teste-de-nivel': {
       id: '/_authenticated/teste-de-nivel'
       path: '/teste-de-nivel'
@@ -1170,6 +1220,13 @@ declare module '@tanstack/react-router' {
       path: '/vocabulario-ipa'
       fullPath: '/vocabulario-ipa'
       preLoaderRoute: typeof AuthenticatedVocabularioIpaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/writing': {
+      id: '/_authenticated/writing'
+      path: '/writing'
+      fullPath: '/writing'
+      preLoaderRoute: typeof AuthenticatedWritingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/api/chat': {
@@ -1679,11 +1736,14 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
   AuthenticatedProfessorRoute: typeof AuthenticatedProfessorRouteWithChildren
   AuthenticatedRankingRoute: typeof AuthenticatedRankingRoute
+  AuthenticatedReadingRoute: typeof AuthenticatedReadingRoute
   AuthenticatedSpeak2fluencyRoute: typeof AuthenticatedSpeak2fluencyRouteWithChildren
   AuthenticatedSpeak2hireRoute: typeof AuthenticatedSpeak2hireRouteWithChildren
   AuthenticatedSpeak2travelRoute: typeof AuthenticatedSpeak2travelRouteWithChildren
+  AuthenticatedSpeakingRoute: typeof AuthenticatedSpeakingRoute
   AuthenticatedTesteDeNivelRoute: typeof AuthenticatedTesteDeNivelRoute
   AuthenticatedVocabularioIpaRoute: typeof AuthenticatedVocabularioIpaRoute
+  AuthenticatedWritingRoute: typeof AuthenticatedWritingRoute
   AuthenticatedUpgradeEssentialRoute: typeof AuthenticatedUpgradeEssentialRoute
   AuthenticatedVocabularioIndexRoute: typeof AuthenticatedVocabularioIndexRoute
 }
@@ -1707,11 +1767,14 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
   AuthenticatedProfessorRoute: AuthenticatedProfessorRouteWithChildren,
   AuthenticatedRankingRoute: AuthenticatedRankingRoute,
+  AuthenticatedReadingRoute: AuthenticatedReadingRoute,
   AuthenticatedSpeak2fluencyRoute: AuthenticatedSpeak2fluencyRouteWithChildren,
   AuthenticatedSpeak2hireRoute: AuthenticatedSpeak2hireRouteWithChildren,
   AuthenticatedSpeak2travelRoute: AuthenticatedSpeak2travelRouteWithChildren,
+  AuthenticatedSpeakingRoute: AuthenticatedSpeakingRoute,
   AuthenticatedTesteDeNivelRoute: AuthenticatedTesteDeNivelRoute,
   AuthenticatedVocabularioIpaRoute: AuthenticatedVocabularioIpaRoute,
+  AuthenticatedWritingRoute: AuthenticatedWritingRoute,
   AuthenticatedUpgradeEssentialRoute: AuthenticatedUpgradeEssentialRoute,
   AuthenticatedVocabularioIndexRoute: AuthenticatedVocabularioIndexRoute,
 }
