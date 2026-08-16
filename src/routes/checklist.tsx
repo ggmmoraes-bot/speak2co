@@ -126,13 +126,6 @@ const ROUTES: RouteItem[] = [
     status: "pending",
   },
   {
-    path: "/ranking",
-    title: "Ranking de fluência",
-    description:
-      "Classificação entre alunos com pontos do teste de nivelamento, do AI Teacher, das entrevistas do Speak2Hire e dos exercícios diários.",
-    status: "protected",
-  },
-  {
     path: "/certificados",
     title: "Certificados",
     description:

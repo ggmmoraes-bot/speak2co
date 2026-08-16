@@ -37,7 +37,6 @@ import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
 import { Route as AuthenticatedPremiumRouteImport } from './routes/_authenticated/premium'
 import { Route as AuthenticatedProfessorRouteImport } from './routes/_authenticated/professor'
-import { Route as AuthenticatedRankingRouteImport } from './routes/_authenticated/ranking'
 import { Route as AuthenticatedReadingRouteImport } from './routes/_authenticated/reading'
 import { Route as AuthenticatedSpeak2fluencyRouteImport } from './routes/_authenticated/speak2fluency'
 import { Route as AuthenticatedSpeak2hireRouteImport } from './routes/_authenticated/speak2hire'
@@ -233,11 +232,6 @@ const AuthenticatedPremiumRoute = AuthenticatedPremiumRouteImport.update({
 const AuthenticatedProfessorRoute = AuthenticatedProfessorRouteImport.update({
   id: '/professor',
   path: '/professor',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedRankingRoute = AuthenticatedRankingRouteImport.update({
-  id: '/ranking',
-  path: '/ranking',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedReadingRoute = AuthenticatedReadingRouteImport.update({
@@ -572,7 +566,6 @@ export interface FileRoutesByFullPath {
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
   '/professor': typeof AuthenticatedProfessorRouteWithChildren
-  '/ranking': typeof AuthenticatedRankingRoute
   '/reading': typeof AuthenticatedReadingRoute
   '/speak2fluency': typeof AuthenticatedSpeak2fluencyRouteWithChildren
   '/speak2hire': typeof AuthenticatedSpeak2hireRouteWithChildren
@@ -649,7 +642,6 @@ export interface FileRoutesByTo {
   '/painel': typeof AuthenticatedPainelRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/premium': typeof AuthenticatedPremiumRoute
-  '/ranking': typeof AuthenticatedRankingRoute
   '/reading': typeof AuthenticatedReadingRoute
   '/speaking': typeof AuthenticatedSpeakingRoute
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
@@ -730,7 +722,6 @@ export interface FileRoutesById {
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
   '/_authenticated/premium': typeof AuthenticatedPremiumRoute
   '/_authenticated/professor': typeof AuthenticatedProfessorRouteWithChildren
-  '/_authenticated/ranking': typeof AuthenticatedRankingRoute
   '/_authenticated/reading': typeof AuthenticatedReadingRoute
   '/_authenticated/speak2fluency': typeof AuthenticatedSpeak2fluencyRouteWithChildren
   '/_authenticated/speak2hire': typeof AuthenticatedSpeak2hireRouteWithChildren
@@ -814,7 +805,6 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/premium'
     | '/professor'
-    | '/ranking'
     | '/reading'
     | '/speak2fluency'
     | '/speak2hire'
@@ -891,7 +881,6 @@ export interface FileRouteTypes {
     | '/painel'
     | '/perfil'
     | '/premium'
-    | '/ranking'
     | '/reading'
     | '/speaking'
     | '/teste-de-nivel'
@@ -971,7 +960,6 @@ export interface FileRouteTypes {
     | '/_authenticated/perfil'
     | '/_authenticated/premium'
     | '/_authenticated/professor'
-    | '/_authenticated/ranking'
     | '/_authenticated/reading'
     | '/_authenticated/speak2fluency'
     | '/_authenticated/speak2hire'
@@ -1240,13 +1228,6 @@ declare module '@tanstack/react-router' {
       path: '/professor'
       fullPath: '/professor'
       preLoaderRoute: typeof AuthenticatedProfessorRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/ranking': {
-      id: '/_authenticated/ranking'
-      path: '/ranking'
-      fullPath: '/ranking'
-      preLoaderRoute: typeof AuthenticatedRankingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/reading': {
@@ -1815,7 +1796,6 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
   AuthenticatedProfessorRoute: typeof AuthenticatedProfessorRouteWithChildren
-  AuthenticatedRankingRoute: typeof AuthenticatedRankingRoute
   AuthenticatedReadingRoute: typeof AuthenticatedReadingRoute
   AuthenticatedSpeak2fluencyRoute: typeof AuthenticatedSpeak2fluencyRouteWithChildren
   AuthenticatedSpeak2hireRoute: typeof AuthenticatedSpeak2hireRouteWithChildren
@@ -1850,7 +1830,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
   AuthenticatedProfessorRoute: AuthenticatedProfessorRouteWithChildren,
-  AuthenticatedRankingRoute: AuthenticatedRankingRoute,
   AuthenticatedReadingRoute: AuthenticatedReadingRoute,
   AuthenticatedSpeak2fluencyRoute: AuthenticatedSpeak2fluencyRouteWithChildren,
   AuthenticatedSpeak2hireRoute: AuthenticatedSpeak2hireRouteWithChildren,
