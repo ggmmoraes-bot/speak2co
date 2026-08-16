@@ -28,14 +28,53 @@ export const Route = createFileRoute("/_authenticated/listening")({
   component: ListeningPracticePage,
 });
 
-function speakLines(lines: string[], onEnd: () => void) {
+/** Vozes em inglês disponíveis no navegador, priorizando vozes naturais. */
+function englishVoices(): SpeechSynthesisVoice[] {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return [];
+  const all = window.speechSynthesis.getVoices().filter((v) => v.lang.toLowerCase().startsWith("en"));
+  const score = (v: SpeechSynthesisVoice) =>
+    (/natural|neural|premium|enhanced|google/i.test(v.name) ? 2 : 0) +
+    (v.lang.toLowerCase() === "en-us" || v.lang.toLowerCase() === "en-gb" ? 1 : 0);
+  return [...all].sort((a, b) => score(b) - score(a));
+}
+
+const RATE_BY_LEVEL: Record<string, number> = {
+  Beginner: 0.85,
+  Intermediate: 0.95,
+  Advanced: 1,
+};
+
+/**
+ * Reproduz o diálogo de forma contínua, alternando automaticamente uma voz
+ * diferente para cada speaker (Speaker 1 / Speaker 2).
+ */
+function speakDialogue(
+  transcript: { speaker: string; line: string }[],
+  level: string,
+  onLine: (index: number) => void,
+  onEnd: () => void,
+) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
-  lines.forEach((line, index) => {
-    const utterance = new SpeechSynthesisUtterance(line);
-    utterance.lang = "en-US";
-    utterance.rate = 0.92;
-    if (index === lines.length - 1) utterance.onend = onEnd;
+
+  const voices = englishVoices();
+  const speakers = Array.from(new Set(transcript.map((t) => t.speaker)));
+  const voiceFor = (speaker: string) => {
+    if (voices.length === 0) return undefined;
+    const idx = speakers.indexOf(speaker);
+    return voices[idx % voices.length];
+  };
+
+  transcript.forEach((turn, index) => {
+    const utterance = new SpeechSynthesisUtterance(turn.line);
+    const voice = voiceFor(turn.speaker);
+    if (voice) utterance.voice = voice;
+    utterance.lang = voice?.lang ?? "en-US";
+    utterance.rate = RATE_BY_LEVEL[level] ?? 0.95;
+    // Vozes diferentes também no pitch, para distinguir os interlocutores.
+    utterance.pitch = speakers.indexOf(turn.speaker) % 2 === 0 ? 1.05 : 0.9;
+    utterance.onstart = () => onLine(index);
+    if (index === transcript.length - 1) utterance.onend = onEnd;
     window.speechSynthesis.speak(utterance);
   });
 }
