@@ -204,7 +204,7 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           icon: Headphones,
           to: "/listening",
           status: "available" as const,
-          plans: ["Premium", "Signature"],
+          plans: ["Free", "Essential", "Premium", "Signature"],
         },
         {
           id: "speaking",
@@ -221,11 +221,12 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           id: "grammar",
           titleEn: "Grammar",
           titlePt: "Gramática",
-          description: "Explicações objetivas e exercícios guiados por nível.",
+          description:
+            "Gramática geral do Beginner ao Advanced: explicação, exemplos e exercícios.",
           icon: BookMarked,
-          to: "/curso-beginner",
-          status: gate(access, FEATURE_KEYS.coursesBeginner),
-          plans: ["Essential", "Premium", "Signature"],
+          to: "/gramatica",
+          status: "available" as const,
+          plans: ["Free", "Essential", "Premium", "Signature"],
         },
         {
           id: "reading",
