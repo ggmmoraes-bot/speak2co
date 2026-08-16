@@ -199,11 +199,11 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           id: "listening",
           titleEn: "Listening Practice",
           titlePt: "Prática de escuta",
-          description: "Treine compreensão com áudios de situações reais.",
+          description:
+            "Biblioteca geral de listening: áudio, transcrição, vocabulário e perguntas por nível.",
           icon: Headphones,
-          to: "/speak2travel/material/$resourceId",
-          params: { resourceId: "survival-english" },
-          status: gate(access, FEATURE_KEYS.productLineTravel),
+          to: "/listening",
+          status: "available" as const,
           plans: ["Premium", "Signature"],
         },
         {
