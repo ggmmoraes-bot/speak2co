@@ -19,6 +19,7 @@ export const FEATURE_KEYS = {
   productLineHire: "product_line_hire",
   productLineFluency: "product_line_fluency",
   giseleAi: "gisele_ai",
+  learningTools: "learning_tools",
 } as const;
 
 export type FeatureKey = (typeof FEATURE_KEYS)[keyof typeof FEATURE_KEYS] | (string & {});
