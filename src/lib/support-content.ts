@@ -34,7 +34,7 @@ export const HELP_GUIDE: HelpArticle[] = [
   },
   {
     id: "ai",
-    title: "Practising with AI",
+    title: "Practicing with AI",
     titlePt: "Praticando com IA",
     steps: [
       "AI Teacher: conversa livre em inglês com correção. Free e Essential têm 20 minutos por dia.",
@@ -106,8 +106,18 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     group: "Product Lines",
+    q: "O que são os Product Lines da Speak2Co?",
+    a: "Os Product Lines são produtos e experiências especializadas da Speak2Co, desenvolvidos para diferentes objetivos de aprendizagem e situações reais de uso do inglês. Atualmente a plataforma conta com produtos como Speak2Hire, Speak2Travel, Speak2Fluency, Speak2Kids e Speak2Teens — e novos Product Lines serão acrescentados futuramente, ampliando continuamente as possibilidades de aprendizagem e prática.",
+  },
+  {
+    group: "Product Lines",
     q: "O que é Speak2Hire, Speak2Travel e Speak2Fluency?",
-    a: "São linhas de produto temáticas: entrevistas de emprego, inglês de viagem e fluência no dia a dia. Disponíveis a partir do plano Premium.",
+    a: "São Product Lines temáticas: entrevistas de emprego, inglês de viagem e fluência no dia a dia, disponíveis a partir do plano Premium. Elas fazem parte de uma linha de produtos em expansão, então outros Product Lines continuarão sendo adicionados à plataforma ao longo do tempo.",
+  },
+  {
+    group: "Product Lines",
+    q: "Novos Product Lines serão lançados?",
+    a: "Sim. A linha de produtos da Speak2Co está em expansão contínua: além dos produtos já disponíveis, novos Product Lines serão desenvolvidos e liberados na plataforma, sempre a partir das necessidades reais dos alunos.",
   },
   {
     group: "Product Lines",
