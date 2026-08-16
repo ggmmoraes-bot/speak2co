@@ -124,12 +124,19 @@ function ActivityCard({
               if (playing) {
                 window.speechSynthesis.cancel();
                 setPlaying(false);
+                setActiveLine(-1);
                 return;
               }
               setPlaying(true);
-              speakLines(
-                activity.transcript.map((t) => t.line),
-                () => setPlaying(false),
+              setShowTranscript(true);
+              speakDialogue(
+                activity.transcript,
+                activity.level,
+                (i) => setActiveLine(i),
+                () => {
+                  setPlaying(false);
+                  setActiveLine(-1);
+                },
               );
             }}
             className="inline-flex items-center gap-2 rounded-full bg-gold px-4 py-2 text-xs font-semibold text-navy transition hover:opacity-90"
