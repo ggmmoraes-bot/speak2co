@@ -745,8 +745,8 @@ export type TravelResource = {
 export const TRAVEL_RESOURCES: TravelResource[] = [
   {
     id: "travel-vocabulary",
-    title: "Travel Vocabulary",
-    subtitle: "500 palavras em contexto",
+    title: "Vocabulary with IPA",
+    subtitle: "Travel Vocabulary · palavras em contexto",
     description: "As palavras mais usadas em viagem, sempre apresentadas dentro de uma frase real.",
     items: ["Aeroporto", "Hotel", "Transporte", "Restaurante", "Compras", "Saúde"],
   },

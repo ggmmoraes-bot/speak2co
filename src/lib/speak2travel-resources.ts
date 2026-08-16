@@ -35,8 +35,8 @@ export type TravelResourceContent = {
 export const TRAVEL_RESOURCE_CONTENT: TravelResourceContent[] = [
   {
     id: "travel-vocabulary",
-    title: "Travel Vocabulary",
-    subtitle: "Palavras essenciais sempre dentro de uma frase real",
+    title: "Vocabulary with IPA",
+    subtitle: "Travel Vocabulary · palavras essenciais sempre dentro de uma frase real",
     description:
       "Vocabulário organizado pelas seis áreas que aparecem em toda viagem. Cada palavra vem com a frase em que ela realmente é usada — decore a frase, não a palavra solta.",
     howTo: [
