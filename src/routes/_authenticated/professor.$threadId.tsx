@@ -5,7 +5,7 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
-import { Mic, Square, Volume2, Volume1, VolumeX, Loader2, AudioLines, Gauge, Settings2 } from "lucide-react";
+import { Mic, Square, Volume2, Volume1, VolumeX, Loader2, Gauge, Settings2 } from "lucide-react";
 import {
   Conversation,
   ConversationContent,
@@ -21,7 +21,6 @@ import {
 } from "@/components/ai-elements/prompt-input";
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { Button } from "@/components/ui/button";
-import { PronunciationDialog } from "@/components/PronunciationDialog";
 import { MicRecorder } from "@/lib/audio-recorder";
 import { transcribeAudio, speakText, stopSpeaking } from "@/lib/voice-client";
 import { useVoiceSettings } from "@/lib/use-voice-settings";
@@ -116,7 +115,6 @@ function ChatWindow({
   const [speakingId, setSpeakingId] = useState<string | null>(null);
   const { settings: voice, update: updateVoice } = useVoiceSettings();
   const autoSpeak = voice.autoSpeak;
-  const [pronOpen, setPronOpen] = useState(false);
   const recorderRef = useRef<MicRecorder | null>(null);
   const lastSpokenRef = useRef<string | null>(null);
 
@@ -239,7 +237,7 @@ function ChatWindow({
                   <button
                     type="button"
                     onClick={() => playMessage(m)}
-                    aria-label="Ouvir a resposta"
+                    aria-label="Listen to the answer"
                     className="flex w-fit items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-gold"
                   >
                     {speakingId === m.id ? (
@@ -247,7 +245,7 @@ function ChatWindow({
                     ) : (
                       <Volume2 className="h-3.5 w-3.5" />
                     )}
-                    {speakingId === m.id ? "Tocando…" : "Ouvir"}
+                    {speakingId === m.id ? "Playing…" : "Listen"}
                   </button>
                 )}
               </MessageContent>
@@ -264,7 +262,7 @@ function ChatWindow({
 
           {error && (
             <p className="text-center text-sm text-destructive">
-              Não foi possível responder. Tente novamente.
+              Something went wrong. Please try again.
             </p>
           )}
         </ConversationContent>
@@ -276,15 +274,6 @@ function ChatWindow({
           <Button
             type="button"
             size="sm"
-            variant="ghost"
-            onClick={() => setPronOpen(true)}
-            className="gap-1 text-xs"
-          >
-            <AudioLines className="h-4 w-4" /> Checar pronúncia
-          </Button>
-          <Button
-            type="button"
-            size="sm"
             variant={autoSpeak ? "secondary" : "ghost"}
             onClick={() => {
               if (autoSpeak) stopSpeaking();
@@ -292,7 +281,7 @@ function ChatWindow({
             }}
             className="gap-1 text-xs"
           >
-            <Volume2 className="h-4 w-4" /> Voz automática {autoSpeak ? "ligada" : "desligada"}
+            <Volume2 className="h-4 w-4" /> Listening in Stack {autoSpeak ? "on" : "off"}
           </Button>
 
           <Popover>
@@ -318,7 +307,7 @@ function ChatWindow({
                   <span className="text-muted-foreground">{Math.round(voice.volume * 100)}%</span>
                 </div>
                 <Slider
-                  aria-label="Volume da voz"
+                  aria-label="Voice volume"
                   value={[voice.volume]}
                   min={0}
                   max={1}
@@ -330,12 +319,12 @@ function ChatWindow({
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs font-medium">
                   <span className="flex items-center gap-1">
-                    <Gauge className="h-4 w-4" /> Velocidade
+                    <Gauge className="h-4 w-4" /> Speed
                   </span>
                   <span className="text-muted-foreground">{voice.rate.toFixed(1)}x</span>
                 </div>
                 <Slider
-                  aria-label="Velocidade da voz"
+                  aria-label="Voice speed"
                   value={[voice.rate]}
                   min={0.5}
                   max={2}
@@ -359,8 +348,7 @@ function ChatWindow({
               </div>
 
               <p className="text-xs text-muted-foreground">
-                As preferências ficam salvas neste dispositivo e valem para o modo de voz
-                automática.
+                Your preferences are saved on this device and apply to Listening in Stack.
               </p>
             </PopoverContent>
           </Popover>
@@ -368,7 +356,7 @@ function ChatWindow({
 
         <PromptInput onSubmit={handleSubmit} className="mx-auto max-w-3xl">
           <PromptInputTextarea
-            placeholder={recording ? "Gravando… fale em inglês" : "Type or speak in English…"}
+            placeholder={recording ? "Recording… speak in English" : "Type or speak in English…"}
             disabled={isBusy || transcribing}
           />
           <PromptInputFooter className="justify-between">
@@ -387,14 +375,13 @@ function ChatWindow({
               ) : (
                 <Mic className="h-4 w-4" />
               )}
-              {transcribing ? "Transcrevendo…" : recording ? "Parar e enviar" : "Falar"}
+              {transcribing ? "Transcribing…" : recording ? "Stop and send" : "Speak"}
             </Button>
             <PromptInputSubmit status={status} onStop={stop} disabled={isBusy} />
           </PromptInputFooter>
         </PromptInput>
       </div>
 
-      <PronunciationDialog open={pronOpen} onOpenChange={setPronOpen} />
     </div>
   );
 
