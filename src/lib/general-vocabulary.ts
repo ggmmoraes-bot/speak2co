@@ -197,7 +197,7 @@ export const GENERAL_VOCABULARY: GeneralVocabCategory[] = [
     words: [
       { term: "weekend", ipa: "/ˈwiːkend/", pt: "fim de semana", definition: "Saturday and Sunday.", example: "What are your plans for the weekend?", examplePt: "Quais são seus planos para o fim de semana?" },
       { term: "schedule", ipa: "/ˈskedʒuːl/", pt: "agenda / cronograma", definition: "A plan of times for activities.", example: "My schedule is full this week.", examplePt: "Minha agenda está cheia esta semana." },
-      { term: "早/early", ipa: "/ˈɜːrli/", pt: "cedo", definition: "Before the usual or expected time.", example: "She arrived early for the interview.", examplePt: "Ela chegou cedo para a entrevista." },
+      { term: "early", ipa: "/ˈɜːrli/", pt: "cedo", definition: "Before the usual or expected time.", example: "She arrived early for the interview.", examplePt: "Ela chegou cedo para a entrevista." },
       { term: "deadline day", ipa: "/ˈdedlaɪn deɪ/", pt: "dia do prazo", definition: "The final day to complete something.", example: "Friday is deadline day.", examplePt: "Sexta é o dia do prazo." },
       { term: "fortnight", ipa: "/ˈfɔːrtnaɪt/", pt: "quinzena", definition: "A period of two weeks.", example: "We meet once a fortnight.", examplePt: "Nos encontramos uma vez por quinzena." },
       { term: "meanwhile", ipa: "/ˈmiːnwaɪl/", pt: "enquanto isso", definition: "At the same time as something else.", example: "Meanwhile, I'll prepare the slides.", examplePt: "Enquanto isso, vou preparar os slides." },
