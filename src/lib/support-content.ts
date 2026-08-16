@@ -34,7 +34,7 @@ export const HELP_GUIDE: HelpArticle[] = [
   },
   {
     id: "ai",
-    title: "Practising with AI",
+    title: "Practicing with AI",
     titlePt: "Praticando com IA",
     steps: [
       "AI Teacher: conversa livre em inglês com correção. Free e Essential têm 20 minutos por dia.",
