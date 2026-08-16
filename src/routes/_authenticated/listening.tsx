@@ -89,6 +89,7 @@ function ActivityCard({
   onComplete: () => void;
 }) {
   const [playing, setPlaying] = useState(false);
+  const [activeLine, setActiveLine] = useState(-1);
   const [showTranscript, setShowTranscript] = useState(false);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [checked, setChecked] = useState(false);
