@@ -154,11 +154,28 @@ function ActivityCard({
 
         {showTranscript && (
           <ul className="space-y-2 rounded-2xl border border-border bg-muted/20 p-4">
-            {activity.transcript.map((t, i) => (
-              <li key={i} className="text-sm text-foreground/90">
-                <span className="font-semibold text-gold">{t.speaker}:</span> {t.line}
-              </li>
-            ))}
+            {activity.transcript.map((t, i) => {
+              const speakerIndex = Array.from(
+                new Set(activity.transcript.map((x) => x.speaker)),
+              ).indexOf(t.speaker);
+              return (
+                <li
+                  key={i}
+                  className={`rounded-xl px-3 py-2 text-sm transition ${
+                    activeLine === i
+                      ? "bg-gold/15 text-foreground"
+                      : "text-foreground/90"
+                  }`}
+                >
+                  <span
+                    className={`font-semibold ${speakerIndex % 2 === 0 ? "text-gold" : "text-foreground"}`}
+                  >
+                    {t.speaker} {speakerIndex % 2 === 0 ? "(Voice 1)" : "(Voice 2)"}:
+                  </span>{" "}
+                  {t.line}
+                </li>
+              );
+            })}
           </ul>
         )}
 
