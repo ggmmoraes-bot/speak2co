@@ -188,12 +188,12 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           id: "vocabulary",
           titleEn: "Vocabulary with IPA",
           titlePt: "Vocabulário com IPA",
-          description: "Listas temáticas com transcrição fonética e áudio nativo.",
+          description:
+            "Banco geral de vocabulário do cotidiano com IPA, tradução, definição e áudio.",
           icon: SpellCheck,
-          to: "/speak2travel/material/$resourceId",
-          params: { resourceId: "travel-vocabulary" },
-          status: gate(access, FEATURE_KEYS.productLineTravel),
-          plans: ["Premium", "Signature"],
+          to: "/vocabulario-ipa",
+          status: "available" as const,
+          plans: ["Free", "Essential", "Premium", "Signature"],
         },
         {
           id: "listening",
