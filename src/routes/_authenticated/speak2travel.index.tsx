@@ -19,7 +19,6 @@ import {
   TRAVEL_TRACKS,
 } from "@/lib/speak2travel-content";
 import { listTravelProgress } from "@/lib/speak2travel-progress.functions";
-import { AskGiseleButton } from "@/components/AskGiseleButton";
 import { BrandText } from "@/components/BrandText";
 
 export const Route = createFileRoute("/_authenticated/speak2travel/")({
@@ -92,7 +91,6 @@ function Speak2TravelHub() {
             <p className="text-sm text-muted-foreground">
               Your passport to confidence. Anywhere in the world.
             </p>
-            <AskGiseleButton focus="travel" contextNote="O aluno está no Speak2Travel (inglês para viagens e situações reais no exterior)." className="mt-3" />
           </div>
         </header>
 
