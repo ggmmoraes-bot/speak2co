@@ -18,13 +18,17 @@ import { Route as ReembolsoRouteImport } from './routes/reembolso'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAjudaRouteImport } from './routes/_authenticated/ajuda'
 import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authenticated/assinatura'
 import { Route as AuthenticatedCentralDeMensagensRouteImport } from './routes/_authenticated/central-de-mensagens'
 import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
 import { Route as AuthenticatedCheckoutSucessoRouteImport } from './routes/_authenticated/checkout-sucesso'
+import { Route as AuthenticatedComunidadeRouteImport } from './routes/_authenticated/comunidade'
 import { Route as AuthenticatedCursoBeginnerRouteImport } from './routes/_authenticated/curso-beginner'
 import { Route as AuthenticatedCursoIntermediateRouteImport } from './routes/_authenticated/curso-intermediate'
 import { Route as AuthenticatedCursoUpperRouteImport } from './routes/_authenticated/curso-upper'
+import { Route as AuthenticatedFaqRouteImport } from './routes/_authenticated/faq'
+import { Route as AuthenticatedFlashcardsRouteImport } from './routes/_authenticated/flashcards'
 import { Route as AuthenticatedGiseleRouteImport } from './routes/_authenticated/gisele'
 import { Route as AuthenticatedGramaticaRouteImport } from './routes/_authenticated/gramatica'
 import { Route as AuthenticatedListeningRouteImport } from './routes/_authenticated/listening'
@@ -131,6 +135,11 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAjudaRoute = AuthenticatedAjudaRouteImport.update({
+  id: '/ajuda',
+  path: '/ajuda',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAssinaturaRoute = AuthenticatedAssinaturaRouteImport.update({
   id: '/assinatura',
   path: '/assinatura',
@@ -154,6 +163,11 @@ const AuthenticatedCheckoutSucessoRoute =
     path: '/checkout-sucesso',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedComunidadeRoute = AuthenticatedComunidadeRouteImport.update({
+  id: '/comunidade',
+  path: '/comunidade',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedCursoBeginnerRoute =
   AuthenticatedCursoBeginnerRouteImport.update({
     id: '/curso-beginner',
@@ -169,6 +183,16 @@ const AuthenticatedCursoIntermediateRoute =
 const AuthenticatedCursoUpperRoute = AuthenticatedCursoUpperRouteImport.update({
   id: '/curso-upper',
   path: '/curso-upper',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFaqRoute = AuthenticatedFaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFlashcardsRoute = AuthenticatedFlashcardsRouteImport.update({
+  id: '/flashcards',
+  path: '/flashcards',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedGiseleRoute = AuthenticatedGiseleRouteImport.update({
@@ -529,13 +553,17 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/termos': typeof TermosRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/ajuda': typeof AuthenticatedAjudaRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
+  '/comunidade': typeof AuthenticatedComunidadeRoute
   '/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
   '/curso-upper': typeof AuthenticatedCursoUpperRouteWithChildren
+  '/faq': typeof AuthenticatedFaqRoute
+  '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/gisele': typeof AuthenticatedGiseleRouteWithChildren
   '/gramatica': typeof AuthenticatedGramaticaRoute
   '/listening': typeof AuthenticatedListeningRoute
@@ -607,10 +635,14 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/termos': typeof TermosRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/ajuda': typeof AuthenticatedAjudaRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
+  '/comunidade': typeof AuthenticatedComunidadeRoute
+  '/faq': typeof AuthenticatedFaqRoute
+  '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/gramatica': typeof AuthenticatedGramaticaRoute
   '/listening': typeof AuthenticatedListeningRoute
   '/meu-plano': typeof AuthenticatedMeuPlanoRoute
@@ -679,13 +711,17 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/termos': typeof TermosRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/ajuda': typeof AuthenticatedAjudaRoute
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
   '/_authenticated/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
   '/_authenticated/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
+  '/_authenticated/comunidade': typeof AuthenticatedComunidadeRoute
   '/_authenticated/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/_authenticated/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
   '/_authenticated/curso-upper': typeof AuthenticatedCursoUpperRouteWithChildren
+  '/_authenticated/faq': typeof AuthenticatedFaqRoute
+  '/_authenticated/flashcards': typeof AuthenticatedFlashcardsRoute
   '/_authenticated/gisele': typeof AuthenticatedGiseleRouteWithChildren
   '/_authenticated/gramatica': typeof AuthenticatedGramaticaRoute
   '/_authenticated/listening': typeof AuthenticatedListeningRoute
@@ -759,13 +795,17 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/termos'
     | '/admin'
+    | '/ajuda'
     | '/assinatura'
     | '/central-de-mensagens'
     | '/certificados'
     | '/checkout-sucesso'
+    | '/comunidade'
     | '/curso-beginner'
     | '/curso-intermediate'
     | '/curso-upper'
+    | '/faq'
+    | '/flashcards'
     | '/gisele'
     | '/gramatica'
     | '/listening'
@@ -837,10 +877,14 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/termos'
     | '/admin'
+    | '/ajuda'
     | '/assinatura'
     | '/central-de-mensagens'
     | '/certificados'
     | '/checkout-sucesso'
+    | '/comunidade'
+    | '/faq'
+    | '/flashcards'
     | '/gramatica'
     | '/listening'
     | '/meu-plano'
@@ -908,13 +952,17 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/termos'
     | '/_authenticated/admin'
+    | '/_authenticated/ajuda'
     | '/_authenticated/assinatura'
     | '/_authenticated/central-de-mensagens'
     | '/_authenticated/certificados'
     | '/_authenticated/checkout-sucesso'
+    | '/_authenticated/comunidade'
     | '/_authenticated/curso-beginner'
     | '/_authenticated/curso-intermediate'
     | '/_authenticated/curso-upper'
+    | '/_authenticated/faq'
+    | '/_authenticated/flashcards'
     | '/_authenticated/gisele'
     | '/_authenticated/gramatica'
     | '/_authenticated/listening'
@@ -1061,6 +1109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/ajuda': {
+      id: '/_authenticated/ajuda'
+      path: '/ajuda'
+      fullPath: '/ajuda'
+      preLoaderRoute: typeof AuthenticatedAjudaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/assinatura': {
       id: '/_authenticated/assinatura'
       path: '/assinatura'
@@ -1089,6 +1144,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCheckoutSucessoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/comunidade': {
+      id: '/_authenticated/comunidade'
+      path: '/comunidade'
+      fullPath: '/comunidade'
+      preLoaderRoute: typeof AuthenticatedComunidadeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/curso-beginner': {
       id: '/_authenticated/curso-beginner'
       path: '/curso-beginner'
@@ -1108,6 +1170,20 @@ declare module '@tanstack/react-router' {
       path: '/curso-upper'
       fullPath: '/curso-upper'
       preLoaderRoute: typeof AuthenticatedCursoUpperRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/faq': {
+      id: '/_authenticated/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof AuthenticatedFaqRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/flashcards': {
+      id: '/_authenticated/flashcards'
+      path: '/flashcards'
+      fullPath: '/flashcards'
+      preLoaderRoute: typeof AuthenticatedFlashcardsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/gisele': {
@@ -1720,13 +1796,17 @@ const AuthenticatedSpeak2travelRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAjudaRoute: typeof AuthenticatedAjudaRoute
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedCentralDeMensagensRoute: typeof AuthenticatedCentralDeMensagensRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
   AuthenticatedCheckoutSucessoRoute: typeof AuthenticatedCheckoutSucessoRoute
+  AuthenticatedComunidadeRoute: typeof AuthenticatedComunidadeRoute
   AuthenticatedCursoBeginnerRoute: typeof AuthenticatedCursoBeginnerRouteWithChildren
   AuthenticatedCursoIntermediateRoute: typeof AuthenticatedCursoIntermediateRouteWithChildren
   AuthenticatedCursoUpperRoute: typeof AuthenticatedCursoUpperRouteWithChildren
+  AuthenticatedFaqRoute: typeof AuthenticatedFaqRoute
+  AuthenticatedFlashcardsRoute: typeof AuthenticatedFlashcardsRoute
   AuthenticatedGiseleRoute: typeof AuthenticatedGiseleRouteWithChildren
   AuthenticatedGramaticaRoute: typeof AuthenticatedGramaticaRoute
   AuthenticatedListeningRoute: typeof AuthenticatedListeningRoute
@@ -1750,14 +1830,18 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAjudaRoute: AuthenticatedAjudaRoute,
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
   AuthenticatedCentralDeMensagensRoute: AuthenticatedCentralDeMensagensRoute,
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
   AuthenticatedCheckoutSucessoRoute: AuthenticatedCheckoutSucessoRoute,
+  AuthenticatedComunidadeRoute: AuthenticatedComunidadeRoute,
   AuthenticatedCursoBeginnerRoute: AuthenticatedCursoBeginnerRouteWithChildren,
   AuthenticatedCursoIntermediateRoute:
     AuthenticatedCursoIntermediateRouteWithChildren,
   AuthenticatedCursoUpperRoute: AuthenticatedCursoUpperRouteWithChildren,
+  AuthenticatedFaqRoute: AuthenticatedFaqRoute,
+  AuthenticatedFlashcardsRoute: AuthenticatedFlashcardsRoute,
   AuthenticatedGiseleRoute: AuthenticatedGiseleRouteWithChildren,
   AuthenticatedGramaticaRoute: AuthenticatedGramaticaRoute,
   AuthenticatedListeningRoute: AuthenticatedListeningRoute,
