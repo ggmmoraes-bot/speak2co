@@ -115,7 +115,7 @@ const COMPARISON_ROWS: { feature: string; essential: CellValue; premium: CellVal
   { feature: "Simulador de entrevista com IA", essential: false, premium: true, signature: true },
   { feature: "Role play de viagem com IA", essential: false, premium: true, signature: true },
   { feature: "Certificados de evolução", essential: false, premium: true, signature: true },
-  { feature: "Ranking de fluência", essential: false, premium: true, signature: true },
+  { feature: "Learning Tools — Listening, Grammar, Speaking, Reading, Writing e Flashcards", essential: true, premium: true, signature: true },
   { feature: "AI Teacher (chat)", essential: "20 min/dia", premium: "Ilimitado", signature: "Ilimitado" },
   { feature: "AI Pronunciation (feedback de pronúncia)", essential: true, premium: true, signature: true },
   { feature: "GiseleAI ilimitada", essential: false, premium: false, signature: true },
