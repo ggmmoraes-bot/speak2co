@@ -212,6 +212,23 @@ function GiseleHub() {
         <Stat label="To review" value={review.length} />
       </section>
 
+      {/* Menu principal — tudo acontece dentro da GiseleAI */}
+      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {GISELE_MENU.map((item) => (
+          <Link
+            key={item.to}
+            to={item.to}
+            className="group flex flex-col gap-1 rounded-2xl border border-gold/20 bg-secondary/25 p-4 transition-colors hover:border-gold/50 hover:bg-secondary/50"
+          >
+            <item.icon className="h-5 w-5 icon-gold" />
+            <span className="text-sm font-semibold text-foreground">{item.en}</span>
+            <span className="text-xs italic text-muted-foreground">{item.pt}</span>
+          </Link>
+        ))}
+      </section>
+
+
+
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Conversation area */}
         <div className="space-y-6 lg:col-span-2">
