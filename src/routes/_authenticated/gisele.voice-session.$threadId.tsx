@@ -51,7 +51,9 @@ function VoiceSessionPage() {
   const [lastTranscript, setLastTranscript] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<SessionFeedbackDTO | null>(null);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
-  /** Conversa contínua: a Gisele pergunta, escuta e responde sem cliques. */
+  const [savedSessionId, setSavedSessionId] = useState<string | null>(null);
+  const [estimatedLevel, setEstimatedLevel] = useState<string | null>(null);
+
   const [continuous, setContinuous] = useState(true);
   const recorderRef = useRef<MicRecorder | null>(null);
   const spokenRef = useRef<string | null>(null);
