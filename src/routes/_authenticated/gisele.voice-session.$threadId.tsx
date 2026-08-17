@@ -11,6 +11,7 @@ import { MicRecorder } from "@/lib/audio-recorder";
 import { speakText, stopSpeaking, transcribeAudio } from "@/lib/voice-client";
 import { isBrandVoice, useVoiceSettings } from "@/lib/use-voice-settings";
 import { AiVoiceDisclosure } from "@/components/AiVoiceDisclosure";
+import { GiseleFeedbackCard } from "@/components/gisele/GiseleFeedbackCard";
 import { requestSessionFeedback, type SessionFeedbackDTO } from "@/lib/gisele-data.functions";
 import { AltHeading } from "@/components/AltHeading";
 
@@ -282,28 +283,7 @@ function VoiceSessionPage() {
         </Link>
       </div>
 
-      {feedback && (
-        <Card className="space-y-3 p-5">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-gold">What went well</p>
-            <p className="text-sm text-muted-foreground">{feedback.whatWentWell}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-gold">
-              Main point to improve
-            </p>
-            <p className="text-sm text-muted-foreground">{feedback.mainImprovement}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-gold">How to improve</p>
-            <p className="text-sm text-muted-foreground">{feedback.howToImprove}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-gold">Try again</p>
-            <p className="text-sm text-muted-foreground">{feedback.retryInvite}</p>
-          </div>
-        </Card>
-      )}
+      {feedback && <GiseleFeedbackCard feedback={feedback} />}
     </main>
   );
 }

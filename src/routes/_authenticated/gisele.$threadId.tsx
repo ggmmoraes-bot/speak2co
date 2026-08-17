@@ -27,6 +27,7 @@ import { transcribeAudio, speakText, stopSpeaking } from "@/lib/voice-client";
 import { useVoiceSettings } from "@/lib/use-voice-settings";
 import { supabase } from "@/integrations/supabase/client";
 import { FOCUS_LABEL } from "@/lib/gisele-focus";
+import { GiseleFeedbackCard } from "@/components/gisele/GiseleFeedbackCard";
 import { requestSessionFeedback, type SessionFeedbackDTO } from "@/lib/gisele-data.functions";
 import {
   closeGiseleSession,
@@ -281,13 +282,9 @@ function GiseleChat({
       )}
 
       {feedback && (
-        <div className="mx-auto mt-4 w-full max-w-3xl space-y-2 rounded-xl border border-gold/40 bg-gold/5 p-4 text-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide text-gold">Session feedback</p>
-          <p><span className="font-semibold text-foreground">1. What went well:</span> {feedback.whatWentWell}</p>
-          <p><span className="font-semibold text-foreground">2. Main point to improve:</span> {feedback.mainImprovement}</p>
-          <p><span className="font-semibold text-foreground">3. How to improve:</span> {feedback.howToImprove}</p>
-          <p><span className="font-semibold text-foreground">4. Try again:</span> {feedback.retryInvite}</p>
-          <div className="flex flex-wrap gap-2 pt-1">
+        <div className="mx-auto mt-4 w-full max-w-3xl space-y-3">
+          <GiseleFeedbackCard feedback={feedback} />
+          <div className="flex flex-wrap gap-2">
             <Button size="sm" variant="outline" onClick={retry} className="gap-1 rounded-full text-xs">
               <RotateCcw className="h-3.5 w-3.5" /> Try again
             </Button>
