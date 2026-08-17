@@ -79,7 +79,7 @@ export class MicRecorder {
       const data = e.inputBuffer.getChannelData(0);
       this.chunks.push(new Float32Array(data));
       let sum = 0;
-      for (let i = 0; i < data.length; i++) sum += data[i] * data[i];
+      for (let i = 0; i < data.length; i++) sum += (data[i] ?? 0) * (data[i] ?? 0);
       this.level = Math.sqrt(sum / data.length);
     };
     this.source.connect(this.processor);
