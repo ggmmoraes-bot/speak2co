@@ -38,12 +38,17 @@ const GISELE_NAV = [
   { to: "/gisele", label: "Overview" },
   { to: "/gisele/missao-do-dia", label: "Today" },
   { to: "/gisele/voice-room", label: "Voice Room" },
+  { to: "/gisele/real-life", label: "Real-Life" },
+  { to: "/gisele/como-dizer", label: "Say It" },
+  { to: "/gisele/minha-aula", label: "My Lesson" },
+  { to: "/gisele/pontos-fracos", label: "My Focus" },
   { to: "/gisele/meu-progresso", label: "Progress" },
   { to: "/gisele/feedback", label: "Feedback" },
   { to: "/gisele/meu-plano", label: "Goals" },
   { to: "/gisele/historico", label: "History" },
   { to: "/gisele/onboarding", label: "Profile" },
   { to: "/gisele/configuracoes", label: "Settings" },
+
 ] as const;
 
 function GiseleLayout() {

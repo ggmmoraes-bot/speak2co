@@ -204,15 +204,7 @@ export const getFeedbackList = createServerFn({ method: "GET" })
     return (data ?? []) as FeedbackItem[];
   });
 
-export type SessionFeedbackDTO = {
-  whatWentWell: string;
-  mainImprovement: string;
-  howToImprove: string;
-  retryInvite: string;
-  category: string;
-  priority: number;
-  recommendations: { type: string; content: string; priority: number }[];
-};
+export type SessionFeedbackDTO = import("@/lib/gisele-feedback-types").GiseleFeedback;
 
 /** Gera o feedback estruturado da sessão atual (4 blocos + recomendações). */
 export const requestSessionFeedback = createServerFn({ method: "POST" })

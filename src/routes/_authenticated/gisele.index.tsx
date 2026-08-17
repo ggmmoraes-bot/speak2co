@@ -8,6 +8,10 @@ import {
   Compass,
   Flame,
   GraduationCap,
+  Headphones,
+  PenLine,
+  Users,
+
   MessageSquare,
   Mic,
   Plane,
@@ -45,6 +49,19 @@ const FOCUS_ICON: Record<GiseleFocus, typeof Mic> = {
   grammar: SpellCheck,
   vocabulary: GraduationCap,
 };
+
+/** Menu principal da GiseleAI — todas as experiências vivem dentro dela. */
+const GISELE_MENU = [
+  { to: "/gisele/voice-room", icon: Mic, en: "Speak with GiseleAI", pt: "Falar com a GiseleAI" },
+  { to: "/gisele/listening", icon: Headphones, en: "Improve my listening", pt: "Melhorar minha compreensão" },
+  { to: "/gisele/writing", icon: PenLine, en: "Improve my writing", pt: "Melhorar minha escrita" },
+  { to: "/gisele/revisao", icon: RefreshCw, en: "Review what I learned", pt: "Revisar o que aprendi" },
+  { to: "/gisele/real-life", icon: Users, en: "Practice a real-life situation", pt: "Praticar situação real" },
+  { to: "/gisele/pontos-fracos", icon: Target, en: "Work on my weak points", pt: "Trabalhar pontos fracos" },
+  { to: "/gisele/desafio", icon: Flame, en: "Today's Challenge", pt: "O desafio de hoje" },
+  { to: "/gisele/como-dizer", icon: Sparkles, en: "Ask GiseleAI anything", pt: "Perguntar qualquer coisa" },
+] as const;
+
 
 /** Cartão premium padrão da GiseleAI (visual distinto do AI Teacher). */
 function GiseleCard({
@@ -211,6 +228,23 @@ function GiseleHub() {
         <Stat label="Corrections" value={stats.corrections} />
         <Stat label="To review" value={review.length} />
       </section>
+
+      {/* Menu principal — tudo acontece dentro da GiseleAI */}
+      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {GISELE_MENU.map((item) => (
+          <Link
+            key={item.to}
+            to={item.to}
+            className="group flex flex-col gap-1 rounded-2xl border border-gold/20 bg-secondary/25 p-4 transition-colors hover:border-gold/50 hover:bg-secondary/50"
+          >
+            <item.icon className="h-5 w-5 icon-gold" />
+            <span className="text-sm font-semibold text-foreground">{item.en}</span>
+            <span className="text-xs italic text-muted-foreground">{item.pt}</span>
+          </Link>
+        ))}
+      </section>
+
+
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Conversation area */}
