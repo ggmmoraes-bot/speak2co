@@ -269,7 +269,9 @@ function TravelModule({ track }: { track: TravelTrack }) {
                   className="rounded-2xl border border-border bg-card/60 p-5 backdrop-blur"
                 >
                   <p className="font-semibold text-foreground">{step.title}</p>
-                  <p className="mt-2 text-sm text-muted-foreground">{step.text}</p>
+                  <p className="text-xs text-muted-foreground italic">{step.titlePt}</p>
+                  <p className="mt-2 text-sm text-foreground/80">{step.text}</p>
+                  <p className="mt-1 text-xs text-muted-foreground italic">{step.textPt}</p>
                 </div>
               ))}
             </div>
@@ -280,13 +282,19 @@ function TravelModule({ track }: { track: TravelTrack }) {
               </h3>
               <ul className="mt-3 space-y-2">
                 {TRAVEL_BRIEFING.rules.map((rule) => (
-                  <li key={rule} className="flex gap-2 text-sm text-foreground/80">
+                  <li key={rule.en} className="flex gap-2 text-sm text-foreground/80">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                    {rule}
+                    <span>
+                      {rule.en}
+                      <span className="mt-0.5 block text-xs text-muted-foreground italic">
+                        {rule.pt}
+                      </span>
+                    </span>
                   </li>
                 ))}
               </ul>
             </div>
+
 
             <Button
               onClick={() => {
