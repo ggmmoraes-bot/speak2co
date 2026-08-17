@@ -137,7 +137,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
 
   async function handleFinish() {
     if (!hasAnswers) {
-      toast.error("Responda pelo menos uma situação antes de finalizar.");
+      toast.error("Answer at least one situation before finishing.");
       return;
     }
     try {
@@ -164,19 +164,19 @@ function TravelModule({ track }: { track: TravelTrack }) {
         <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
           <Button asChild variant="ghost" size="sm" className="-ml-2 rounded-full">
             <Link to="/speak2travel">
-              <ArrowLeft className="mr-1 h-4 w-4" /> Todos os módulos
+              <ArrowLeft className="mr-1 h-4 w-4" /> All modules
             </Link>
           </Button>
           <Button asChild variant="outline" size="sm" className="rounded-full">
             <Link to="/speak2travel/revisao/$moduleId" params={{ moduleId: track.id }}>
-              <BookOpen className="mr-1 h-4 w-4" /> Modo revisão
+              <BookOpen className="mr-1 h-4 w-4" /> Review mode
             </Link>
           </Button>
         </div>
 
         <header>
           <p className="text-xs tracking-widest text-muted-foreground uppercase">
-            Módulo {track.module} · Speak2Travel
+            Module {track.module} · Speak2Travel
           </p>
           <h1 className="mt-1 text-3xl font-semibold text-gold">{track.title}</h1>
           <p className="text-sm text-muted-foreground">{track.subtitle}</p>
@@ -184,12 +184,18 @@ function TravelModule({ track }: { track: TravelTrack }) {
         </header>
 
         {restoring && (
-          <p className="mt-10 text-sm text-muted-foreground">Carregando seu progresso...</p>
+          <p className="mt-10 text-sm text-muted-foreground">
+            Loading your progress...
+            <span className="mt-0.5 block text-xs italic">Carregando seu progresso...</span>
+          </p>
         )}
 
         {!restoring && resumed && (
           <div className="mt-8 rounded-2xl border border-gold/40 bg-card/60 p-4 text-sm text-foreground/80 backdrop-blur">
-            Retomamos de onde você parou{savedAt ? ` (salvo em ${formatSaved(savedAt)})` : ""}.
+            We picked up where you left off{savedAt ? ` (saved at ${formatSaved(savedAt)})` : ""}.
+            <span className="mt-0.5 block text-xs text-muted-foreground italic">
+              Retomamos de onde você parou.
+            </span>
           </div>
         )}
 
@@ -197,10 +203,10 @@ function TravelModule({ track }: { track: TravelTrack }) {
           <section className="mt-10 space-y-8">
             <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
               <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
-                <BookOpen className="h-5 w-5" /> Vocabulário essencial
+                <BookOpen className="h-5 w-5" /> Essential Vocabulary
               </h2>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Essential Vocabulary (ouça a IA e grave sua voz para receber feedback)
+              <p className="mt-1 text-xs text-muted-foreground italic">
+                Vocabulário essencial — listen to the AI and record your voice to get feedback.
               </p>
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 {(moduleContent
@@ -214,10 +220,10 @@ function TravelModule({ track }: { track: TravelTrack }) {
 
             <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
               <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
-                <Compass className="h-5 w-5" /> Expressões-chave
+                <Compass className="h-5 w-5" /> Key Expressions
               </h2>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Key Expressions (pronúncia com IA)
+              <p className="mt-1 text-xs text-muted-foreground italic">
+                Expressões-chave — pronúncia com IA.
               </p>
               <div className="mt-4 grid gap-3">
                 {moduleContent
@@ -233,7 +239,10 @@ function TravelModule({ track }: { track: TravelTrack }) {
             {moduleContent && (
               <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
                 <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
-                  <MessageSquare className="h-5 w-5" /> Diálogo-modelo
+                  <MessageSquare className="h-5 w-5" /> Model Dialogue
+                  <span className="text-xs font-normal text-muted-foreground italic">
+                    Diálogo-modelo
+                  </span>
                 </h2>
                 <div className="mt-4 space-y-3">
                   {moduleContent.dialogue.map((line, i) => (
@@ -241,7 +250,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
                   ))}
                 </div>
                 <h3 className="mt-6 flex items-center gap-2 text-xs tracking-widest text-muted-foreground uppercase">
-                  <Lightbulb className="h-4 w-4" /> Dicas de pronúncia
+                  <Lightbulb className="h-4 w-4" /> Pronunciation Tips
                 </h3>
                 <ul className="mt-3 space-y-2">
                   {moduleContent.pronunciation.map((tip) => (
@@ -267,7 +276,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
 
             <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
               <h3 className="flex items-center gap-2 text-xs tracking-widest text-muted-foreground uppercase">
-                <Lightbulb className="h-4 w-4" /> Regras da prática
+                <Lightbulb className="h-4 w-4" /> Practice Rules
               </h3>
               <ul className="mt-3 space-y-2">
                 {TRAVEL_BRIEFING.rules.map((rule) => (
@@ -288,8 +297,8 @@ function TravelModule({ track }: { track: TravelTrack }) {
             >
               <Play className="mr-1 h-4 w-4" />
               {Object.keys(answers).length > 0
-                ? "Continuar de onde parei"
-                : `Iniciar role play (${track.prompts.length} situações)`}
+                ? "Continue where I left off"
+                : `Start role play (${track.prompts.length} situations)`}
             </Button>
           </section>
         )}
@@ -297,7 +306,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
         {!restoring && started && !feedback && (
           <section className="mt-10 space-y-6">
             <p className="text-xs tracking-widest text-muted-foreground uppercase">
-              Situação {index + 1} de {track.prompts.length} · {prompt.seconds}s sugeridos
+              Situation {index + 1} of {track.prompts.length} · {prompt.seconds}s suggested
             </p>
 
             <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
@@ -346,7 +355,7 @@ function TravelModule({ track }: { track: TravelTrack }) {
                   className="rounded-full"
                   onClick={() => setIndex((i) => i - 1)}
                 >
-                  Anterior
+                  Previous
                 </Button>
               )}
               {!isLast ? (
@@ -354,20 +363,22 @@ function TravelModule({ track }: { track: TravelTrack }) {
                   className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                   onClick={() => setIndex((i) => i + 1)}
                 >
-                  Próxima situação
+                  Next situation
                 </Button>
               ) : (
                 <Button
                   disabled={loading || !hasAnswers}
                   title={
-                    hasAnswers ? undefined : "Responda pelo menos uma situação antes de finalizar."
+                    hasAnswers
+                      ? undefined
+                      : "Answer at least one situation before finishing."
                   }
 
                   className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                   onClick={handleFinish}
                 >
                   <Sparkles className="mr-1 h-4 w-4" />
-                  {loading ? "Avaliando..." : "Finalizar e receber feedback"}
+                  {loading ? "Checking..." : "Finish and get feedback"}
                 </Button>
               )}
             </div>
@@ -378,15 +389,15 @@ function TravelModule({ track }: { track: TravelTrack }) {
           <section className="mt-10 space-y-6">
             <div className="rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur">
               <p className="text-xs tracking-widest text-muted-foreground uppercase">
-                Sua pontuação
+Your score
               </p>
               <p className="mt-1 text-4xl font-semibold text-gold">{feedback.score}/100</p>
               <p className="mt-3 text-sm text-foreground/80">{feedback.summary}</p>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <FeedbackList title="Pontos fortes" items={feedback.highlights} />
-              <FeedbackList title="Prioridades" items={feedback.focus} />
+              <FeedbackList title="Strengths" items={feedback.highlights} />
+              <FeedbackList title="Priorities" items={feedback.focus} />
             </div>
 
             {feedback.items.map((item) => {
@@ -398,11 +409,11 @@ function TravelModule({ track }: { track: TravelTrack }) {
                 >
                   <p className="font-semibold text-gold">{source?.situation ?? item.promptId}</p>
                   <p className="mt-3 text-sm text-foreground/80">
-                    <span className="text-muted-foreground">Acertos: </span>
+                    <span className="text-muted-foreground">What worked: </span>
                     {item.strengths}
                   </p>
                   <p className="mt-2 text-sm text-foreground/80">
-                    <span className="text-muted-foreground">Melhorar: </span>
+                    <span className="text-muted-foreground">To improve: </span>
                     {item.improvements}
                   </p>
                   <p className="mt-3 rounded-xl border border-primary/30 p-3 text-sm text-foreground">
@@ -428,13 +439,13 @@ function TravelModule({ track }: { track: TravelTrack }) {
                   clearProgress({ data: { trackId: track.id } }).catch(() => undefined);
                 }}
               >
-                Refazer a prática
+                Restart practice
               </Button>
               <Button
                 asChild
                 className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
               >
-                <Link to="/speak2travel">Escolher próximo módulo</Link>
+                <Link to="/speak2travel">Choose next module</Link>
               </Button>
             </div>
           </section>
