@@ -552,6 +552,7 @@ export type Database = {
           created_at: string
           id: string
           needs_founder: boolean
+          notified_at: string | null
           role: string
           user_id: string
         }
@@ -561,6 +562,7 @@ export type Database = {
           created_at?: string
           id?: string
           needs_founder?: boolean
+          notified_at?: string | null
           role: string
           user_id: string
         }
@@ -570,6 +572,7 @@ export type Database = {
           created_at?: string
           id?: string
           needs_founder?: boolean
+          notified_at?: string | null
           role?: string
           user_id?: string
         }
@@ -874,6 +877,101 @@ export type Database = {
           updated_at?: string
           yearly_checkout_key?: string | null
           yearly_price?: number | null
+        }
+        Relationships: []
+      }
+      practice_meeting_signups: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          feedback: Json | null
+          id: string
+          meeting_id: string
+          reminded_15m: boolean
+          reminded_24h: boolean
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          feedback?: Json | null
+          id?: string
+          meeting_id: string
+          reminded_15m?: boolean
+          reminded_24h?: boolean
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          feedback?: Json | null
+          id?: string
+          meeting_id?: string
+          reminded_15m?: boolean
+          reminded_24h?: boolean
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "practice_meeting_signups_meeting_id_fkey"
+            columns: ["meeting_id"]
+            isOneToOne: false
+            referencedRelation: "practice_meetings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      practice_meetings: {
+        Row: {
+          capacity: number
+          created_at: string
+          description: string
+          duration_minutes: number
+          id: string
+          is_active: boolean
+          level: string
+          min_plan: string
+          starts_at: string
+          title: string
+          title_pt: string | null
+          topic: string
+          updated_at: string
+        }
+        Insert: {
+          capacity?: number
+          created_at?: string
+          description?: string
+          duration_minutes?: number
+          id?: string
+          is_active?: boolean
+          level?: string
+          min_plan?: string
+          starts_at: string
+          title: string
+          title_pt?: string | null
+          topic?: string
+          updated_at?: string
+        }
+        Update: {
+          capacity?: number
+          created_at?: string
+          description?: string
+          duration_minutes?: number
+          id?: string
+          is_active?: boolean
+          level?: string
+          min_plan?: string
+          starts_at?: string
+          title?: string
+          title_pt?: string | null
+          topic?: string
+          updated_at?: string
         }
         Relationships: []
       }
