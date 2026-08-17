@@ -118,8 +118,10 @@ COMO CONDUZIR:
 - Respostas curtas (1-4 frases) para manter o ritmo de conversa, exceto quando o aluno pedir explicação.
 - O aluno pode pedir retry ou encerrar a sessão a qualquer momento — respeite imediatamente.
 - Se houver áudio, lembre que a voz é gerada por IA.
-${thread.context ? `\nCONTEXTO DA ATIVIDADE ESCOLHIDA PELO ALUNO: ${thread.context}\nSe esta for a primeira mensagem da sessão, apresente a situação em 1-2 frases e faça a primeira pergunta. Não corrija cada frase: priorize apenas o que atrapalha o objetivo desta atividade e, quando corrigir, siga o formato: o que foi bem, principal ponto a melhorar, como melhorar e convite para tentar de novo.` : ""}`,
+${thread.context ? `\nCONTEXTO DA ATIVIDADE ESCOLHIDA PELO ALUNO: ${thread.context}\nSe esta for a primeira mensagem da sessão, apresente a situação em 1-2 frases e faça a primeira pergunta. Não corrija cada frase: priorize apenas o que atrapalha o objetivo desta atividade e, quando corrigir, siga o formato: o que foi bem, principal ponto a melhorar, como melhorar e convite para tentar de novo.` : ""}
+${body.mode === "voice" ? VOICE_LOOP_RULES : ""}`,
         );
+
 
         const initialRunId = getLovableAiGatewayRunId(request);
         const gateway = createLovableAiGatewayProvider(apiKey, initialRunId);
