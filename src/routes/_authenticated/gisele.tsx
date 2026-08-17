@@ -45,7 +45,7 @@ export const Route = createFileRoute("/_authenticated/gisele")({
 });
 
 const GISELE_NAV = [
-  { to: "/gisele/onboarding", label: "Onboarding" },
+  { to: "/gisele/onboarding", label: "My goal & level" },
   { to: "/gisele/missao-do-dia", label: "Mission of the day" },
   { to: "/gisele/voice-room", label: "Voice Room" },
   { to: "/gisele/meu-plano", label: "My plan" },

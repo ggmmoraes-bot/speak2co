@@ -1,19 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
 import { applyPlaybackSettings } from "@/lib/voice-client";
+import { GISELE_ELEVENLABS_VOICE_ID, isGiseleVoiceId } from "@/lib/gisele-voice-config";
 
-/** Voz clonada da fundadora (ElevenLabs). */
-export const FOUNDER_VOICE_ID = "SNzYVXmQuMTz1nLfEfJE";
+/** Voz oficial da GiseleAI — configuração interna (ver gisele-voice-config.ts). */
+export const FOUNDER_VOICE_ID = GISELE_ELEVENLABS_VOICE_ID;
 
-/** A voz autorizada da marca é sempre sintética (gerada por IA). */
+/** A voz da GiseleAI é sempre sintética (gerada por IA). */
 export function isBrandVoice(voiceId: string | undefined | null) {
-  return (voiceId ?? "") === FOUNDER_VOICE_ID;
+  return isGiseleVoiceId(voiceId);
 }
 
 export const AI_VOICES = [
   {
     id: FOUNDER_VOICE_ID,
-    label: "Gisele Moraes (Founder) · AI voice",
-    description: "Voz sintética autorizada da fundadora — gerada por IA, não é uma pessoa real",
+    label: "GiseleAI voice",
+    description: "Voz oficial da GiseleAI — gerada por IA, não é uma pessoa real",
   },
   { id: "alloy", label: "Alloy", description: "Neutra e equilibrada" },
   { id: "nova", label: "Nova", description: "Feminina, clara e acolhedora" },
@@ -51,7 +52,7 @@ export const STT_PROVIDERS: { id: SttProvider; label: string; description: strin
 export const TTS_PROVIDERS: { id: TtsProvider; label: string; description: string }[] = [
   { id: "auto", label: "Automatic", description: "Definido pela voz escolhida." },
   { id: "openai", label: "Standard voices", description: "Vozes neutras de estúdio." },
-  { id: "elevenlabs", label: "Cloned voice", description: "Voz clonada da fundadora." },
+  { id: "elevenlabs", label: "GiseleAI voice", description: "Voz oficial da GiseleAI." },
 ];
 
 export type VoiceSettings = {
@@ -62,8 +63,6 @@ export type VoiceSettings = {
   supportLanguage: SupportLanguage;
   sttProvider: SttProvider;
   ttsProvider: TtsProvider;
-  /** Consentimento explícito para gravar e enviar áudio. */
-  voiceConsent: boolean;
 };
 
 const STORAGE_KEY = "speak2co:voice-settings";
@@ -71,11 +70,10 @@ const DEFAULTS: VoiceSettings = {
   autoSpeak: true,
   volume: 1,
   rate: 1,
-  voice: "alloy",
+  voice: FOUNDER_VOICE_ID,
   supportLanguage: "bilingual",
   sttProvider: "auto",
   ttsProvider: "auto",
-  voiceConsent: false,
 };
 
 function read(): VoiceSettings {
@@ -101,7 +99,6 @@ function read(): VoiceSettings {
       supportLanguage,
       sttProvider,
       ttsProvider,
-      voiceConsent: Boolean(parsed.voiceConsent),
     };
   } catch {
     return DEFAULTS;

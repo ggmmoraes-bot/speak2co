@@ -25,7 +25,9 @@ import {
   completeReviewItem,
   createGiseleThread,
   getGiseleOverview,
+  getGiseleThreads,
   type GiseleFocus,
+  type GiseleThread,
 } from "@/lib/gisele.functions";
 
 export const Route = createFileRoute("/_authenticated/gisele/")({
@@ -47,10 +49,15 @@ function GiseleHub() {
   const fetchOverview = useServerFn(getGiseleOverview);
   const createFn = useServerFn(createGiseleThread);
   const completeFn = useServerFn(completeReviewItem);
+  const fetchThreads = useServerFn(getGiseleThreads);
 
   const { data, isPending } = useQuery({
     queryKey: ["gisele-overview"],
     queryFn: () => fetchOverview(),
+  });
+  const { data: threads, isPending: threadsPending } = useQuery<GiseleThread[]>({
+    queryKey: ["gisele-threads"],
+    queryFn: () => fetchThreads(),
   });
 
   async function startSession(focus: GiseleFocus, contextNote?: string) {
@@ -75,7 +82,7 @@ function GiseleHub() {
     }
   }
 
-  if (isPending || !data) {
+  if (isPending || threadsPending || !data) {
     return (
       <div className="flex flex-1 items-center justify-center p-12">
         <Shimmer>Preparando sua mentoria…</Shimmer>
@@ -84,6 +91,40 @@ function GiseleHub() {
   }
 
   const { snapshot, nextSteps, review, stats } = data;
+  const firstAccess = stats.sessions === 0 && (threads?.length ?? 0) === 0;
+
+  if (firstAccess) {
+    return (
+      <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col items-center justify-center gap-6 px-6 py-16 text-center">
+        <img
+          src={giseleLogo.url}
+          alt="GiseleAI by Speak2Co"
+          className="w-44 rounded-2xl object-contain ring-1 ring-gold/40"
+        />
+        <div className="space-y-3">
+          <h1 className="text-3xl font-bold">
+            Welcome to <BrandText text="GiseleAI" />
+          </h1>
+          <p className="text-lg text-foreground">
+            I&apos;m your personal English mentor. Let&apos;s start your journey.
+          </p>
+          <p className="text-sm italic text-muted-foreground">
+            Sou sua mentora pessoal de inglês. Vamos começar a sua jornada.
+          </p>
+        </div>
+        <Button
+          size="lg"
+          onClick={() => startSession("conversation")}
+          className="rounded-full bg-gold px-8 font-semibold text-primary-foreground hover:opacity-90"
+        >
+          <Sparkles className="mr-2 h-4 w-4" /> Start your first session
+        </Button>
+        <p className="text-xs text-muted-foreground">
+          As respostas e o áudio da GiseleAI são gerados por inteligência artificial.
+        </p>
+      </main>
+    );
+  }
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 space-y-10 px-6 py-10">
@@ -140,21 +181,13 @@ function GiseleHub() {
                 <p className="font-semibold text-foreground">{step.titleEn}</p>
                 <p className="text-xs italic text-muted-foreground">{step.titlePt}</p>
               </div>
-              {step.to ? (
-                <Button asChild size="sm" variant="outline" className="w-fit rounded-full">
-                  <Link to={step.to}>
-                    Open <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                  </Link>
-                </Button>
-              ) : (
-                <Button
-                  size="sm"
-                  onClick={() => startSession(step.focus ?? "conversation", step.titleEn)}
-                  className="w-fit rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
-                >
-                  Practice now
-                </Button>
-              )}
+              <Button
+                size="sm"
+                onClick={() => startSession(step.focus ?? "conversation", step.titleEn)}
+                className="w-fit rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+              >
+                Practice now
+              </Button>
             </Card>
           ))}
         </div>

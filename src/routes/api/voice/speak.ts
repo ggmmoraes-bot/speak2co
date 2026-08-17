@@ -45,17 +45,19 @@ export const Route = createFileRoute("/api/voice/speak")({
           const { checkBrandVoiceAccess } = await import("@/lib/brand-voice.server");
           const brand = await checkBrandVoiceAccess(auth.supabase, auth.userId);
           if (!brand.allowed) {
-            return new Response(brand.reason ?? "Voz não autorizada", { status: 403 });
+            return new Response(brand.reason ?? "Recurso indisponível no seu plano", { status: 403 });
           }
           const elevenKey =
             process.env["ELEVENLABS_TTS_API_KEY"] || process.env["ELEVENLABS_API_KEY"];
           if (!elevenKey) return new Response("Voz indisponível no momento", { status: 503 });
-          // Voz oficial da fundadora. IDs antigos salvos no perfil são remapeados
-          // para a voz atual — nunca caímos em uma voz genérica.
-          const LEGACY_FOUNDER_VOICE_IDS = ["m3m72XeqSLA8AEuQecN0"];
+          // Voz oficial da GiseleAI (configuração interna). IDs antigos salvos
+          // no perfil são remapeados para a voz atual.
+          const { GISELE_ELEVENLABS_VOICE_ID, isGiseleVoiceId } = await import(
+            "@/lib/gisele-voice-config"
+          );
           const elevenVoice =
-            OPENAI_VOICES.includes(voice) || LEGACY_FOUNDER_VOICE_IDS.includes(voice)
-              ? "SNzYVXmQuMTz1nLfEfJE"
+            OPENAI_VOICES.includes(voice) || isGiseleVoiceId(voice)
+              ? GISELE_ELEVENLABS_VOICE_ID
               : voice;
           const elevenRes = await fetch(
             `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(elevenVoice)}?output_format=mp3_44100_128`,

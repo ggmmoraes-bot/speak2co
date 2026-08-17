@@ -53,8 +53,7 @@ function VoiceRoomPage() {
       <AiVoiceDisclosure />
       {isBrandVoice(voice.voice) ? (
         <p className="text-[11px] text-muted-foreground">
-          Authorized brand voice active · Voz autorizada da marca ativa (síntese licenciada pela
-          Speak2Co).
+          GiseleAI voice active · Voz oficial da GiseleAI (áudio gerado por IA).
         </p>
       ) : null}
 
