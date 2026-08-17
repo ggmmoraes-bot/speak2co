@@ -37,13 +37,17 @@ function FounderAdminInbox() {
   const reply = useServerFn(replyAsFounder);
   const resolve = useServerFn(resolveFounderMessage);
   const queryClient = useQueryClient();
+  const isAdmin = useIsAdmin();
   const [onlyPending, setOnlyPending] = useState(true);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
 
   const { data: items = [], isPending, error } = useQuery({
     queryKey: ["founder-escalations", onlyPending],
     queryFn: () => fetchItems({ data: { onlyPending } }),
+    // O servidor também valida (403); aqui evitamos até a chamada para alunos.
+    enabled: isAdmin,
   });
+
 
   function refresh() {
     void queryClient.invalidateQueries({ queryKey: ["founder-escalations"] });
