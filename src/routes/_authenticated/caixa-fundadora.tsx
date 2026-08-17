@@ -86,7 +86,22 @@ function FounderAdminInbox() {
     );
   }
 
+  if (!isAdmin) {
+    return (
+      <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-16 text-center">
+        <AltHeading text="Área restrita" className="text-2xl" />
+        <p className="mt-3 text-sm text-muted-foreground">
+          Esta área é exclusiva da administração da Speak2Co.
+        </p>
+        <Button asChild className="mt-6">
+          <Link to="/painel">Voltar ao painel</Link>
+        </Button>
+      </main>
+    );
+  }
+
   return (
+
     <main className="mx-auto w-full max-w-3xl flex-1 space-y-6 px-6 py-10">
       <Link
         to="/painel"
