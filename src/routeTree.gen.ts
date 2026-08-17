@@ -66,6 +66,7 @@ import { Route as AuthenticatedGiseleMeuProgressoRouteImport } from './routes/_a
 import { Route as AuthenticatedGiseleMinhaAulaRouteImport } from './routes/_authenticated/gisele.minha-aula'
 import { Route as AuthenticatedGiseleMissaoDoDiaRouteImport } from './routes/_authenticated/gisele.missao-do-dia'
 import { Route as AuthenticatedGiseleOnboardingRouteImport } from './routes/_authenticated/gisele.onboarding'
+import { Route as AuthenticatedGiselePontosFracosRouteImport } from './routes/_authenticated/gisele.pontos-fracos'
 import { Route as AuthenticatedGiselePraticaRouteImport } from './routes/_authenticated/gisele.pratica'
 import { Route as AuthenticatedGiselePreferenciasRouteImport } from './routes/_authenticated/gisele.preferencias'
 import { Route as AuthenticatedGiselePrivacidadeRouteImport } from './routes/_authenticated/gisele.privacidade'
@@ -410,6 +411,12 @@ const AuthenticatedGiseleOnboardingRoute =
     path: '/onboarding',
     getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
+const AuthenticatedGiselePontosFracosRoute =
+  AuthenticatedGiselePontosFracosRouteImport.update({
+    id: '/pontos-fracos',
+    path: '/pontos-fracos',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
 const AuthenticatedGiselePraticaRoute =
   AuthenticatedGiselePraticaRouteImport.update({
     id: '/pratica',
@@ -647,6 +654,7 @@ export interface FileRoutesByFullPath {
   '/gisele/minha-aula': typeof AuthenticatedGiseleMinhaAulaRoute
   '/gisele/missao-do-dia': typeof AuthenticatedGiseleMissaoDoDiaRoute
   '/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
+  '/gisele/pontos-fracos': typeof AuthenticatedGiselePontosFracosRoute
   '/gisele/pratica': typeof AuthenticatedGiselePraticaRoute
   '/gisele/preferencias': typeof AuthenticatedGiselePreferenciasRoute
   '/gisele/privacidade': typeof AuthenticatedGiselePrivacidadeRoute
@@ -728,6 +736,7 @@ export interface FileRoutesByTo {
   '/gisele/minha-aula': typeof AuthenticatedGiseleMinhaAulaRoute
   '/gisele/missao-do-dia': typeof AuthenticatedGiseleMissaoDoDiaRoute
   '/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
+  '/gisele/pontos-fracos': typeof AuthenticatedGiselePontosFracosRoute
   '/gisele/pratica': typeof AuthenticatedGiselePraticaRoute
   '/gisele/preferencias': typeof AuthenticatedGiselePreferenciasRoute
   '/gisele/privacidade': typeof AuthenticatedGiselePrivacidadeRoute
@@ -819,6 +828,7 @@ export interface FileRoutesById {
   '/_authenticated/gisele/minha-aula': typeof AuthenticatedGiseleMinhaAulaRoute
   '/_authenticated/gisele/missao-do-dia': typeof AuthenticatedGiseleMissaoDoDiaRoute
   '/_authenticated/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
+  '/_authenticated/gisele/pontos-fracos': typeof AuthenticatedGiselePontosFracosRoute
   '/_authenticated/gisele/pratica': typeof AuthenticatedGiselePraticaRoute
   '/_authenticated/gisele/preferencias': typeof AuthenticatedGiselePreferenciasRoute
   '/_authenticated/gisele/privacidade': typeof AuthenticatedGiselePrivacidadeRoute
@@ -910,6 +920,7 @@ export interface FileRouteTypes {
     | '/gisele/minha-aula'
     | '/gisele/missao-do-dia'
     | '/gisele/onboarding'
+    | '/gisele/pontos-fracos'
     | '/gisele/pratica'
     | '/gisele/preferencias'
     | '/gisele/privacidade'
@@ -991,6 +1002,7 @@ export interface FileRouteTypes {
     | '/gisele/minha-aula'
     | '/gisele/missao-do-dia'
     | '/gisele/onboarding'
+    | '/gisele/pontos-fracos'
     | '/gisele/pratica'
     | '/gisele/preferencias'
     | '/gisele/privacidade'
@@ -1081,6 +1093,7 @@ export interface FileRouteTypes {
     | '/_authenticated/gisele/minha-aula'
     | '/_authenticated/gisele/missao-do-dia'
     | '/_authenticated/gisele/onboarding'
+    | '/_authenticated/gisele/pontos-fracos'
     | '/_authenticated/gisele/pratica'
     | '/_authenticated/gisele/preferencias'
     | '/_authenticated/gisele/privacidade'
@@ -1537,6 +1550,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGiseleOnboardingRouteImport
       parentRoute: typeof AuthenticatedGiseleRoute
     }
+    '/_authenticated/gisele/pontos-fracos': {
+      id: '/_authenticated/gisele/pontos-fracos'
+      path: '/pontos-fracos'
+      fullPath: '/gisele/pontos-fracos'
+      preLoaderRoute: typeof AuthenticatedGiselePontosFracosRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
     '/_authenticated/gisele/pratica': {
       id: '/_authenticated/gisele/pratica'
       path: '/pratica'
@@ -1831,6 +1851,7 @@ interface AuthenticatedGiseleRouteChildren {
   AuthenticatedGiseleMinhaAulaRoute: typeof AuthenticatedGiseleMinhaAulaRoute
   AuthenticatedGiseleMissaoDoDiaRoute: typeof AuthenticatedGiseleMissaoDoDiaRoute
   AuthenticatedGiseleOnboardingRoute: typeof AuthenticatedGiseleOnboardingRoute
+  AuthenticatedGiselePontosFracosRoute: typeof AuthenticatedGiselePontosFracosRoute
   AuthenticatedGiselePraticaRoute: typeof AuthenticatedGiselePraticaRoute
   AuthenticatedGiselePreferenciasRoute: typeof AuthenticatedGiselePreferenciasRoute
   AuthenticatedGiselePrivacidadeRoute: typeof AuthenticatedGiselePrivacidadeRoute
@@ -1856,6 +1877,7 @@ const AuthenticatedGiseleRouteChildren: AuthenticatedGiseleRouteChildren = {
   AuthenticatedGiseleMinhaAulaRoute: AuthenticatedGiseleMinhaAulaRoute,
   AuthenticatedGiseleMissaoDoDiaRoute: AuthenticatedGiseleMissaoDoDiaRoute,
   AuthenticatedGiseleOnboardingRoute: AuthenticatedGiseleOnboardingRoute,
+  AuthenticatedGiselePontosFracosRoute: AuthenticatedGiselePontosFracosRoute,
   AuthenticatedGiselePraticaRoute: AuthenticatedGiselePraticaRoute,
   AuthenticatedGiselePreferenciasRoute: AuthenticatedGiselePreferenciasRoute,
   AuthenticatedGiselePrivacidadeRoute: AuthenticatedGiselePrivacidadeRoute,
