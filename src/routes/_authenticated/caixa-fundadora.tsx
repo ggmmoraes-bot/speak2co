@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { AltHeading } from "@/components/AltHeading";
+import { useIsAdmin } from "@/lib/entitlements";
 import {
   listEscalatedMessages,
   replyAsFounder,
