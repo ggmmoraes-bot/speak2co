@@ -38,33 +38,58 @@ export type TravelTrack = {
 };
 
 export const TRAVEL_BRIEFING = {
-  title: "Briefing da trilha",
+  title: "Track briefing",
+  titlePt: "Briefing da trilha",
   intro:
+    "Speak2Travel trains the English you really use when travelling: from planning to coming back home. It's not about memorising sentences — it's about answering fast, clearly and confidently.",
+  introPt:
     "Speak2Travel treina o inglês que você realmente usa em viagem: do planejamento ao retorno para casa. Não é decorar frases — é responder rápido, com clareza e confiança.",
   steps: [
     {
-      title: "1. Leia a situação",
-      text: "Cada prática apresenta o contexto e a fala do interlocutor (agente, recepcionista, guia). Imagine-se ali.",
+      title: "1. Read the situation",
+      titlePt: "Leia a situação",
+      text: "Each practice shows the context and the other person's line (agent, receptionist, guide). Picture yourself there.",
+      textPt:
+        "Cada prática apresenta o contexto e a fala do interlocutor (agente, recepcionista, guia). Imagine-se ali.",
     },
     {
-      title: "2. Responda em inglês",
-      text: "Escreva sua resposta como se estivesse falando. Frases curtas e naturais valem mais que frases longas e traduzidas.",
+      title: "2. Answer in English",
+      titlePt: "Responda em inglês",
+      text: "Write your answer as if you were speaking. Short, natural sentences beat long, translated ones.",
+      textPt:
+        "Escreva sua resposta como se estivesse falando. Frases curtas e naturais valem mais que frases longas e traduzidas.",
     },
     {
-      title: "3. Use as expressões-chave",
-      text: "Cada situação traz expressões que soam nativas. Tente encaixar pelo menos uma em cada resposta.",
+      title: "3. Use the key expressions",
+      titlePt: "Use as expressões-chave",
+      text: "Every situation brings expressions that sound native. Try to fit at least one into each answer.",
+      textPt:
+        "Cada situação traz expressões que soam nativas. Tente encaixar pelo menos uma em cada resposta.",
     },
     {
-      title: "4. Receba o feedback da IA",
-      text: "Ao final, a IA avalia clareza, naturalidade e gramática, e devolve uma versão modelo da sua resposta em inglês.",
+      title: "4. Get AI feedback",
+      titlePt: "Receba o feedback da IA",
+      text: "At the end, the AI rates clarity, naturalness and grammar, and gives you a model version of your answer in English.",
+      textPt:
+        "Ao final, a IA avalia clareza, naturalidade e gramática, e devolve uma versão modelo da sua resposta em inglês.",
     },
   ],
   rules: [
-    "Responda em inglês, mesmo com erros — errar aqui é mais barato do que errar no balcão.",
-    "Cronômetro é referência, não prova: o objetivo é responder sem travar.",
-    "Prefira ser educado e direto: 'Could you...?', 'I'd like to...', 'Sorry, could you repeat that?'.",
+    {
+      en: "Answer in English, even with mistakes — a mistake here is cheaper than a mistake at the counter.",
+      pt: "Responda em inglês, mesmo com erros — errar aqui é mais barato do que errar no balcão.",
+    },
+    {
+      en: "The timer is a reference, not a test: the goal is to answer without freezing.",
+      pt: "Cronômetro é referência, não prova: o objetivo é responder sem travar.",
+    },
+    {
+      en: "Be polite and direct: 'Could you...?', 'I'd like to...', 'Sorry, could you repeat that?'.",
+      pt: "Prefira ser educado e direto: 'Could you...?', 'I'd like to...', 'Sorry, could you repeat that?'.",
+    },
   ],
 };
+
 
 export const TRAVEL_TOOLS = [
   "Vocabulary",
