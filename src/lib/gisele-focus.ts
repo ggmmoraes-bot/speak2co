@@ -17,13 +17,13 @@ export const FOCUS_LABEL: Record<GiseleFocus, { en: string; pt: string; prompt: 
     en: "Interview Prep",
     pt: "Preparação para entrevistas",
     prompt:
-      "Job interview preparation aligned with Speak2Hire: behavioural questions, STAR answers and professional vocabulary.",
+      "Job interview preparation: behavioural questions, STAR answers and professional vocabulary.",
   },
   travel: {
     en: "Travel Roleplay",
     pt: "Simulação de viagem",
     prompt:
-      "Travel roleplay aligned with Speak2Travel: airport, hotel, restaurant, transport and tourist situations.",
+      "Travel roleplay: airport, hotel, restaurant, transport and tourist situations.",
   },
   grammar: {
     en: "Grammar Clinic",
