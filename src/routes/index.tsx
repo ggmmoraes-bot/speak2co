@@ -77,9 +77,10 @@ function Index() {
             variant="outline"
             className="btn-gold-outline h-12 flex-1 rounded-full px-6 text-sm font-semibold text-foreground"
           >
-            <Link to="/auth">Criar conta / Entrar</Link>
+            <Link to="/planos">Ver planos e preços</Link>
           </Button>
         </div>
+
 
         <nav className="mt-12 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
           <Link to="/termos" className="hover:text-accent">

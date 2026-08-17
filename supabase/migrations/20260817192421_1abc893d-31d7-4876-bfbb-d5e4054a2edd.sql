@@ -1,0 +1,1 @@
+UPDATE public.features SET route = '/gisele' WHERE key = 'gisele_ai';

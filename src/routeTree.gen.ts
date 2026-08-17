@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ChecklistRouteImport } from './routes/checklist'
+import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as ReembolsoRouteImport } from './routes/reembolso'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
@@ -119,6 +120,11 @@ const AuthRoute = AuthRouteImport.update({
 const ChecklistRoute = ChecklistRouteImport.update({
   id: '/checklist',
   path: '/checklist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanosRoute = PlanosRouteImport.update({
+  id: '/planos',
+  path: '/planos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacidadeRoute = PrivacidadeRouteImport.update({
@@ -626,6 +632,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/planos': typeof PlanosRoute
   '/privacidade': typeof PrivacidadeRoute
   '/reembolso': typeof ReembolsoRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -719,6 +726,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/planos': typeof PlanosRoute
   '/privacidade': typeof PrivacidadeRoute
   '/reembolso': typeof ReembolsoRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -806,6 +814,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/planos': typeof PlanosRoute
   '/privacidade': typeof PrivacidadeRoute
   '/reembolso': typeof ReembolsoRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -901,6 +910,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/checklist'
+    | '/planos'
     | '/privacidade'
     | '/reembolso'
     | '/reset-password'
@@ -994,6 +1004,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/checklist'
+    | '/planos'
     | '/privacidade'
     | '/reembolso'
     | '/reset-password'
@@ -1080,6 +1091,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/checklist'
+    | '/planos'
     | '/privacidade'
     | '/reembolso'
     | '/reset-password'
@@ -1175,6 +1187,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   ChecklistRoute: typeof ChecklistRoute
+  PlanosRoute: typeof PlanosRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
   ReembolsoRoute: typeof ReembolsoRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -1216,6 +1229,13 @@ declare module '@tanstack/react-router' {
       path: '/checklist'
       fullPath: '/checklist'
       preLoaderRoute: typeof ChecklistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planos': {
+      id: '/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof PlanosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacidade': {
@@ -2141,6 +2161,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   ChecklistRoute: ChecklistRoute,
+  PlanosRoute: PlanosRoute,
   PrivacidadeRoute: PrivacidadeRoute,
   ReembolsoRoute: ReembolsoRoute,
   ResetPasswordRoute: ResetPasswordRoute,
