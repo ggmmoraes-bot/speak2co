@@ -241,11 +241,38 @@ function VoiceSessionPage() {
     sendMessage({ text: `Let me try that again: ${lastTranscript}` });
   }
 
+  /** Transcrição da sessão no formato salvo no histórico. */
+  const turns = useMemo(
+    () =>
+      messages
+        .map((m) => ({
+          role: (m.role === "user" ? "student" : "gisele") as "student" | "gisele",
+          text: textOf(m),
+          at: new Date().toISOString(),
+        }))
+        .filter((t) => t.text && !t.text.startsWith("[Session start]")),
+    [messages],
+  );
+
+  // Autosave: guarda a transcrição a cada turno concluído, para o histórico
+  // ficar completo mesmo se o aluno sair sem encerrar a sessão.
+  const savedCountRef = useRef(0);
+  useEffect(() => {
+    if (streaming || turns.length === 0 || turns.length === savedCountRef.current) return;
+    savedCountRef.current = turns.length;
+    void saveVoiceTranscript({ data: { threadId, turns } }).catch(() => {});
+  }, [streaming, turns, threadId]);
+
   async function getFeedback() {
     try {
       setFeedbackLoading(true);
+      // Arquiva a sessão completa: transcript + correções suaves + nível estimado.
+      const saved = await finalizeVoiceSession({ data: { threadId, turns } }).catch(() => null);
       const result = await requestSessionFeedback({ data: { threadId } });
       setFeedback(result);
+      setSavedSessionId(saved?.sessionId ?? null);
+      setEstimatedLevel(saved?.estimatedLevel ?? null);
+      toast.success("Session saved to your history.");
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível gerar o feedback.");
     } finally {
@@ -255,6 +282,7 @@ function VoiceSessionPage() {
 
   const busy = phase === "transcribing" || phase === "thinking";
   const label = PHASE_LABEL[phase];
+
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 space-y-6 px-6 py-10">
