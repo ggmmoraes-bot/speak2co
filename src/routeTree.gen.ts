@@ -20,6 +20,7 @@ import { Route as TermosRouteImport } from './routes/termos'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAjudaRouteImport } from './routes/_authenticated/ajuda'
 import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authenticated/assinatura'
+import { Route as AuthenticatedCaixaFundadoraRouteImport } from './routes/_authenticated/caixa-fundadora'
 import { Route as AuthenticatedCentralDeMensagensRouteImport } from './routes/_authenticated/central-de-mensagens'
 import { Route as AuthenticatedCertificadosRouteImport } from './routes/_authenticated/certificados'
 import { Route as AuthenticatedCheckoutSucessoRouteImport } from './routes/_authenticated/checkout-sucesso'
@@ -154,6 +155,12 @@ const AuthenticatedAssinaturaRoute = AuthenticatedAssinaturaRouteImport.update({
   path: '/assinatura',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCaixaFundadoraRoute =
+  AuthenticatedCaixaFundadoraRouteImport.update({
+    id: '/caixa-fundadora',
+    path: '/caixa-fundadora',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedCentralDeMensagensRoute =
   AuthenticatedCentralDeMensagensRouteImport.update({
     id: '/central-de-mensagens',
@@ -619,6 +626,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRoute
   '/ajuda': typeof AuthenticatedAjudaRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
+  '/caixa-fundadora': typeof AuthenticatedCaixaFundadoraRoute
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
@@ -710,6 +718,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AuthenticatedAdminRoute
   '/ajuda': typeof AuthenticatedAjudaRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
+  '/caixa-fundadora': typeof AuthenticatedCaixaFundadoraRoute
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
@@ -795,6 +804,7 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/ajuda': typeof AuthenticatedAjudaRoute
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
+  '/_authenticated/caixa-fundadora': typeof AuthenticatedCaixaFundadoraRoute
   '/_authenticated/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
   '/_authenticated/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
@@ -888,6 +898,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/ajuda'
     | '/assinatura'
+    | '/caixa-fundadora'
     | '/central-de-mensagens'
     | '/certificados'
     | '/checkout-sucesso'
@@ -979,6 +990,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/ajuda'
     | '/assinatura'
+    | '/caixa-fundadora'
     | '/central-de-mensagens'
     | '/certificados'
     | '/checkout-sucesso'
@@ -1063,6 +1075,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/ajuda'
     | '/_authenticated/assinatura'
+    | '/_authenticated/caixa-fundadora'
     | '/_authenticated/central-de-mensagens'
     | '/_authenticated/certificados'
     | '/_authenticated/checkout-sucesso'
@@ -1239,6 +1252,13 @@ declare module '@tanstack/react-router' {
       path: '/assinatura'
       fullPath: '/assinatura'
       preLoaderRoute: typeof AuthenticatedAssinaturaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/caixa-fundadora': {
+      id: '/_authenticated/caixa-fundadora'
+      path: '/caixa-fundadora'
+      fullPath: '/caixa-fundadora'
+      preLoaderRoute: typeof AuthenticatedCaixaFundadoraRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/central-de-mensagens': {
@@ -2013,6 +2033,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedAjudaRoute: typeof AuthenticatedAjudaRoute
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
+  AuthenticatedCaixaFundadoraRoute: typeof AuthenticatedCaixaFundadoraRoute
   AuthenticatedCentralDeMensagensRoute: typeof AuthenticatedCentralDeMensagensRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
   AuthenticatedCheckoutSucessoRoute: typeof AuthenticatedCheckoutSucessoRoute
@@ -2046,6 +2067,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedAjudaRoute: AuthenticatedAjudaRoute,
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
+  AuthenticatedCaixaFundadoraRoute: AuthenticatedCaixaFundadoraRoute,
   AuthenticatedCentralDeMensagensRoute: AuthenticatedCentralDeMensagensRoute,
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
   AuthenticatedCheckoutSucessoRoute: AuthenticatedCheckoutSucessoRoute,
