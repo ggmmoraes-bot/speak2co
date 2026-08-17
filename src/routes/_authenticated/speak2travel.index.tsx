@@ -94,7 +94,12 @@ function Speak2TravelHub() {
           </div>
         </header>
 
-        <p className="mt-6 max-w-2xl text-sm text-foreground/80">{TRAVEL_BRIEFING.intro}</p>
+        <p className="mt-6 max-w-2xl text-sm text-foreground/80">
+          {TRAVEL_BRIEFING.intro}
+          <span className="mt-1 block text-xs text-muted-foreground italic">
+            {TRAVEL_BRIEFING.introPt}
+          </span>
+        </p>
 
         <ul className="mt-5 flex flex-wrap gap-2">
           {TRAVEL_TOOLS.map((tool) => (
