@@ -9,7 +9,7 @@ import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions
 import { getPlanCatalog } from "@/lib/entitlements.functions";
 import { changePaddlePlan, getPaymentOptions } from "@/lib/payments.functions";
 import { usePaddleCheckout } from "@/hooks/usePaddleCheckout";
-import { usePreviewPlan } from "@/lib/entitlements";
+import { useAdminPreviewPlan } from "@/lib/entitlements";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
 import { PlanPrice } from "@/components/PlanPrice";
@@ -151,7 +151,7 @@ function cell(value: CellValue) {
 }
 
 function PremiumPage() {
-  const previewPlan = usePreviewPlan();
+  const previewPlan = useAdminPreviewPlan();
   const queryClient = useQueryClient();
   const fetchSubscription = useServerFn(getMySubscription);
   const checkout = useServerFn(startMercadoPagoCheckout);

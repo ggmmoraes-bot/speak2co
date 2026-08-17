@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { AltHeading } from "@/components/AltHeading";
+import { useIsAdmin } from "@/lib/entitlements";
 import {
   listEscalatedMessages,
   replyAsFounder,
@@ -37,13 +38,17 @@ function FounderAdminInbox() {
   const reply = useServerFn(replyAsFounder);
   const resolve = useServerFn(resolveFounderMessage);
   const queryClient = useQueryClient();
+  const isAdmin = useIsAdmin();
   const [onlyPending, setOnlyPending] = useState(true);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
 
   const { data: items = [], isPending, error } = useQuery({
     queryKey: ["founder-escalations", onlyPending],
     queryFn: () => fetchItems({ data: { onlyPending } }),
+    // O servidor também valida (403); aqui evitamos até a chamada para alunos.
+    enabled: isAdmin,
   });
+
 
   function refresh() {
     void queryClient.invalidateQueries({ queryKey: ["founder-escalations"] });
@@ -81,7 +86,22 @@ function FounderAdminInbox() {
     );
   }
 
+  if (!isAdmin) {
+    return (
+      <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-16 text-center">
+        <AltHeading text="Área restrita" className="text-2xl" />
+        <p className="mt-3 text-sm text-muted-foreground">
+          Esta área é exclusiva da administração da Speak2Co.
+        </p>
+        <Button asChild className="mt-6">
+          <Link to="/painel">Voltar ao painel</Link>
+        </Button>
+      </main>
+    );
+  }
+
   return (
+
     <main className="mx-auto w-full max-w-3xl flex-1 space-y-6 px-6 py-10">
       <Link
         to="/painel"

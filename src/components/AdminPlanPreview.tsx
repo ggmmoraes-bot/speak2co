@@ -1,5 +1,5 @@
 import { Eye, X } from "lucide-react";
-import { setPreviewPlan, usePreviewPlan } from "@/lib/entitlements";
+import { setPreviewPlan, useAdminPreviewPlan, useIsAdmin } from "@/lib/entitlements";
 
 const OPTIONS = [
   { key: "", label: "Admin (acesso total)" },
@@ -24,7 +24,7 @@ const LABELS: Record<string, string> = {
  */
 /** Barra global de saída — renderizada uma única vez no layout autenticado. */
 export function AdminPlanPreviewBar() {
-  const preview = usePreviewPlan();
+  const preview = useAdminPreviewPlan();
   if (!preview) return null;
   return (
       <div className="fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-3 rounded-full border border-gold/40 bg-background/95 px-4 py-2 text-xs shadow-lg backdrop-blur">
@@ -44,7 +44,11 @@ export function AdminPlanPreviewBar() {
 }
 
 export function AdminPlanPreview() {
-  const preview = usePreviewPlan();
+  const isAdmin = useIsAdmin();
+  const preview = useAdminPreviewPlan();
+
+  // Ferramenta interna: nunca renderiza para aluno, seja qual for o plano.
+  if (!isAdmin) return null;
 
   // Enquanto a pré-visualização está ativa, a barra global cuida da saída.
   if (preview) return null;

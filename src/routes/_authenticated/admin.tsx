@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { useAccess, usePreviewPlan } from "@/lib/entitlements";
+import { useAccess, useAdminPreviewPlan } from "@/lib/entitlements";
 import { UpgradeScreen } from "@/components/FeatureGate";
 import {
   requireAdminAccess,
@@ -78,7 +78,7 @@ function num(value: string) {
 
 function AdminPage() {
   const { data: access, isPending: accessPending } = useAccess();
-  const previewPlan = usePreviewPlan();
+  const previewPlan = useAdminPreviewPlan();
   const queryClient = useQueryClient();
 
   const checkAdmin = useServerFn(requireAdminAccess);
