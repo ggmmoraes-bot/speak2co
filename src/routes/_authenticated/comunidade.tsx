@@ -115,22 +115,10 @@ function CommunityPage() {
         </div>
       </section>
 
+      <PracticeMeetingsSection />
+
       <section className="mt-10">
-        <h2 className="flex items-center gap-2 text-xl font-semibold text-foreground">
-          <CalendarDays className="h-5 w-5 text-gold" /> Practice meetings
-        </h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          {PRACTICE_MEETINGS.map((m) => (
-            <article key={m.id} className="rounded-3xl border border-border bg-card/60 p-6">
-              <h3 className="text-base font-semibold text-foreground">
-                {m.title}{" "}
-                <span className="text-xs font-normal text-muted-foreground">({m.titlePt})</span>
-              </h3>
-              <p className="mt-1 text-xs font-semibold text-gold">{m.when}</p>
-              <p className="mt-2 text-sm text-muted-foreground">{m.description}</p>
-            </article>
-          ))}
-        </div>
+
         <p className="mt-4 text-xs text-muted-foreground">
           Os convites dos encontros são enviados na{" "}
           <Link to="/central-de-mensagens" className="link-gold font-semibold">
