@@ -19,11 +19,14 @@ export function PhrasePractice({
   en,
   pt,
   note,
+  index,
   onAttempt,
 }: {
   en: string;
   pt: string;
   note?: string | undefined;
+  /** Numeração sequencial do item dentro do material (1, 2, 3...). */
+  index?: number | undefined;
   onAttempt?: ((attempt: PronunciationAttempt) => void) | undefined;
 }) {
   const [playing, setPlaying] = useState(false);
@@ -84,7 +87,14 @@ export function PhrasePractice({
 
   return (
     <div className="rounded-2xl border border-border bg-card/60 p-4 backdrop-blur">
-      <p className="text-base font-medium text-foreground">{en}</p>
+      <p className="text-base font-medium text-foreground">
+        {typeof index === "number" && (
+          <span className="mr-2 text-xs font-bold text-gold tabular-nums">
+            {String(index).padStart(2, "0")}.
+          </span>
+        )}
+        {en}
+      </p>
       <p className="mt-1 text-sm text-muted-foreground">{pt}</p>
       {note && <p className="mt-2 text-xs text-gold">{note}</p>}
 

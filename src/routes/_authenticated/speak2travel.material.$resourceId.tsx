@@ -125,28 +125,39 @@ function MaterialPage() {
           </ol>
         </section>
 
-        {resource.groups.map((group) => (
-          <section key={group.id} className="mt-10">
-            <h2 className="text-lg font-semibold text-gold">{group.title}</h2>
-            {group.subtitle && (
-              <p className="text-xs tracking-wide text-muted-foreground uppercase">
-                {group.subtitle}
-              </p>
-            )}
-            {group.intro && <p className="mt-2 text-sm text-foreground/80">{group.intro}</p>}
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {group.items.map((item) => (
-                <PhrasePractice
-                  key={item.en}
-                  en={item.en}
-                  pt={item.pt}
-                  note={item.note}
-                  onAttempt={isLab ? handleAttempt : undefined}
-                />
-              ))}
-            </div>
-          </section>
-        ))}
+        {resource.groups.map((group, groupIndex) => {
+          const offset = resource.groups
+            .slice(0, groupIndex)
+            .reduce((sum, g) => sum + g.items.length, 0);
+          return (
+            <section key={group.id} className="mt-10">
+              <h2 className="text-lg font-semibold text-gold">
+                {group.title}{" "}
+                <span className="text-xs font-normal text-muted-foreground tabular-nums">
+                  ({offset + 1}–{offset + group.items.length} de {total})
+                </span>
+              </h2>
+              {group.subtitle && (
+                <p className="text-xs tracking-wide text-muted-foreground uppercase">
+                  {group.subtitle}
+                </p>
+              )}
+              {group.intro && <p className="mt-2 text-sm text-foreground/80">{group.intro}</p>}
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {group.items.map((item, i) => (
+                  <PhrasePractice
+                    key={item.en}
+                    en={item.en}
+                    pt={item.pt}
+                    note={item.note}
+                    index={offset + i + 1}
+                    onAttempt={isLab ? handleAttempt : undefined}
+                  />
+                ))}
+              </div>
+            </section>
+          );
+        })}
 
         <section className="mt-12">
           <h2 className="text-lg font-semibold text-gold">Outras seções</h2>
