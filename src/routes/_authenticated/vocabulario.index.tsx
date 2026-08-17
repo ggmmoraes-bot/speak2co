@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { AltHeading } from "@/components/AltHeading";
 import { BEGINNER_UNITS } from "@/lib/curriculum/beginner-units";
 import { INTERMEDIATE_UNITS } from "@/lib/curriculum/intermediate-units";
+import { UPPER_UNITS } from "@/lib/curriculum/upper-units";
 import type { CourseUnit } from "@/lib/curriculum/types";
 import { exportVocabularyToPdf } from "@/lib/vocabulary-pdf";
 
