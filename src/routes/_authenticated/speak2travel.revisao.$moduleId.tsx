@@ -78,9 +78,9 @@ function Review({ track }: { track: TravelTrack }) {
   const deck = useMemo(() => buildDeck(track, content), [track, content]);
 
   const tabs: { id: Mode; label: string }[] = [
-    { id: "cards", label: "Cartões" },
-    { id: "dialogo", label: "Diálogo & pronúncia" },
-    { id: "quiz", label: "Exercícios" },
+    { id: "cards", label: "Flashcards" },
+    { id: "dialogo", label: "Dialogue & pronunciation" },
+    { id: "quiz", label: "Exercises" },
   ];
 
   return (
@@ -88,19 +88,19 @@ function Review({ track }: { track: TravelTrack }) {
       <div className="mx-auto max-w-3xl px-6 py-12">
         <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2 rounded-full">
           <Link to="/speak2travel/modulo/$moduleId" params={{ moduleId: track.id }}>
-            <ArrowLeft className="mr-1 h-4 w-4" /> Voltar ao módulo
+            <ArrowLeft className="mr-1 h-4 w-4" /> Back to module
           </Link>
         </Button>
 
         <header>
           <p className="text-xs tracking-widest text-muted-foreground uppercase">
-            Revisão · Módulo {track.module}
+            Review · Module {track.module}
             {content ? ` · ${content.label}` : ""}
           </p>
           <h1 className="mt-1 text-3xl font-semibold text-gold">{track.title}</h1>
           <p className="text-sm text-muted-foreground">
-            {deck.length} cartões · {content?.quiz.length ?? 0} questões ·{" "}
-            {content?.dialogue.length ?? 0} falas do diálogo-modelo
+            {deck.length} flashcards · {content?.quiz.length ?? 0} questions ·{" "}
+            {content?.dialogue.length ?? 0} model dialogue lines
           </p>
         </header>
 
@@ -156,7 +156,7 @@ function Flashcards({
   return (
     <section className="mt-8 space-y-6">
       <p className="text-xs tracking-widest text-muted-foreground uppercase">
-        Cartão {index + 1} de {deck.length} · {known.length} marcados como sabidos
+        Card {index + 1} of {deck.length} · {known.length} marked as known
       </p>
 
       <button
@@ -169,20 +169,20 @@ function Flashcards({
           <p className="mt-4 text-base text-foreground/80">{card.back}</p>
         ) : (
           <p className="mt-4 text-xs tracking-widest text-muted-foreground uppercase">
-            Toque para ver o significado
+            Tap to see the meaning
           </p>
         )}
       </button>
 
       <div className="flex flex-wrap gap-3">
         <Button variant="outline" className="rounded-full" onClick={() => next(false)}>
-          <RefreshCw className="mr-1 h-4 w-4" /> Rever depois
+          <RefreshCw className="mr-1 h-4 w-4" /> Review later
         </Button>
         <Button
           className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
           onClick={() => next(true)}
         >
-          <Check className="mr-1 h-4 w-4" /> Já sei
+          <Check className="mr-1 h-4 w-4" /> I know it
         </Button>
         {index > 0 && (
           <Button
@@ -193,7 +193,7 @@ function Flashcards({
               setIndex((i) => i - 1);
             }}
           >
-            Anterior
+            Previous
           </Button>
         )}
         <Button
@@ -205,13 +205,13 @@ function Flashcards({
             setKnown([]);
           }}
         >
-          <RotateCcw className="mr-1 h-4 w-4" /> Recomeçar
+          <RotateCcw className="mr-1 h-4 w-4" /> Restart
         </Button>
       </div>
 
       <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
         <h2 className="text-xs tracking-widest text-muted-foreground uppercase">
-          Expressões-chave para repetir em voz alta
+          Key expressions to repeat out loud
         </h2>
         <ul className="mt-3 space-y-3">
           {(content?.expressions ?? []).map((e) => (
@@ -242,8 +242,8 @@ function DialogueSection({
   if (!content) {
     return (
       <section className="mt-8 rounded-2xl border border-border bg-card/60 p-6 text-sm text-foreground/80 backdrop-blur">
-        Este módulo ainda não tem diálogo-modelo. Use as frases-modelo do módulo{" "}
-        {track.title} para praticar em voz alta.
+        This module has no model dialogue yet. Use the model phrases from module{" "}
+        {track.title} to practice out loud.
       </section>
     );
   }
@@ -252,7 +252,7 @@ function DialogueSection({
     <section className="mt-8 space-y-6">
       <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
-          <MessageSquare className="h-5 w-5" /> Diálogo-modelo
+          <MessageSquare className="h-5 w-5" /> Model dialogue
         </h2>
         <ul className="mt-4 space-y-3">
           {content.dialogue.map((line, i) => (
@@ -266,7 +266,7 @@ function DialogueSection({
 
       <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-gold">
-          <Mic className="h-5 w-5" /> Dicas de pronúncia
+          <Mic className="h-5 w-5" /> Pronunciation tips
         </h2>
         <ul className="mt-4 space-y-2">
           {content.pronunciation.map((tip) => (
@@ -398,14 +398,14 @@ function VocabularyQuiz({
 
       {done && (
         <div className="rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur">
-          <p className="text-xs tracking-widest text-muted-foreground uppercase">Resultado</p>
+          <p className="text-xs tracking-widest text-muted-foreground uppercase">Result</p>
           <p className="mt-1 text-4xl font-semibold text-gold">
             {correct}/{questions.length}
           </p>
           <p className="mt-3 text-sm text-foreground/80">
             {correct === questions.length
-              ? "Vocabulário dominado. Hora de praticar o role play do módulo."
-              : "Revise os cartões das palavras que você errou e tente de novo."}
+              ? "Vocabulary mastered. Time to practice the module role play."
+              : "Review the cards you missed and try again."}
           </p>
         </div>
       )}
@@ -419,14 +419,14 @@ function VocabularyQuiz({
             setRound((r) => r + 1);
           }}
         >
-          <RotateCcw className="mr-1 h-4 w-4" /> Novo embaralhamento
+          <RotateCcw className="mr-1 h-4 w-4" /> Shuffle again
         </Button>
         <Button
           asChild
           className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
         >
           <Link to="/speak2travel/modulo/$moduleId" params={{ moduleId: track.id }}>
-            <Sparkles className="mr-1 h-4 w-4" /> Ir para o role play
+            <Sparkles className="mr-1 h-4 w-4" /> Go to role play
           </Link>
         </Button>
       </div>
