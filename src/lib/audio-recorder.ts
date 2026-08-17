@@ -62,6 +62,8 @@ export class MicRecorder {
   private source: MediaStreamAudioSourceNode | null = null;
   private chunks: Float32Array[] = [];
   private startedAt = 0;
+  /** Nível de energia (RMS) do último bloco capturado — usado para detectar silêncio. */
+  private level = 0;
 
   async start() {
     this.stream = await navigator.mediaDevices.getUserMedia({
@@ -72,13 +74,30 @@ export class MicRecorder {
     this.source = this.ctx.createMediaStreamSource(this.stream);
     this.processor = this.ctx.createScriptProcessor(4096, 1, 1);
     this.chunks = [];
+    this.level = 0;
     this.processor.onaudioprocess = (e) => {
-      this.chunks.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+      const data = e.inputBuffer.getChannelData(0);
+      this.chunks.push(new Float32Array(data));
+      let sum = 0;
+      for (let i = 0; i < data.length; i++) sum += (data[i] ?? 0) * (data[i] ?? 0);
+      this.level = Math.sqrt(sum / data.length);
     };
     this.source.connect(this.processor);
     this.processor.connect(this.ctx.destination);
     this.startedAt = Date.now();
   }
+
+  /** Energia atual do microfone (0 a ~1). Permite detectar fala e silêncio. */
+  getLevel(): number {
+    return this.level;
+  }
+
+  /** Duração aproximada da gravação em andamento, em ms. */
+  elapsedMs(): number {
+    return this.startedAt ? Date.now() - this.startedAt : 0;
+  }
+
+
 
   async stop(): Promise<Recording> {
     const sampleRate = this.ctx?.sampleRate ?? 48000;
