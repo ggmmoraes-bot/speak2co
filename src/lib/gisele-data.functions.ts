@@ -155,6 +155,8 @@ export type SessionHistoryItem = {
   minutes: number;
   score: number | null;
   corrections: number;
+  estimated_level: string | null;
+  turns: number;
   created_at: string;
 };
 
@@ -163,7 +165,9 @@ export const getSessionHistory = createServerFn({ method: "GET" })
   .handler(async ({ context }): Promise<SessionHistoryItem[]> => {
     const { data, error } = await context.supabase
       .from("gisele_sessions")
-      .select("id, thread_id, focus, session_type, summary, minutes, score, corrections, created_at")
+      .select(
+        "id, thread_id, focus, session_type, summary, minutes, score, corrections, estimated_level, transcript, created_at",
+      )
       .eq("user_id", context.userId)
       .order("created_at", { ascending: false })
       .limit(50);
@@ -177,9 +181,12 @@ export const getSessionHistory = createServerFn({ method: "GET" })
       minutes: s.minutes ?? 0,
       score: s.score,
       corrections: Array.isArray(s.corrections) ? s.corrections.length : 0,
+      estimated_level: s.estimated_level,
+      turns: Array.isArray(s.transcript) ? s.transcript.length : 0,
       created_at: s.created_at,
     }));
   });
+
 
 /* ------------------------------ Feedback ------------------------------- */
 
