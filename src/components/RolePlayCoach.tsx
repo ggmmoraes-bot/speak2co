@@ -116,11 +116,15 @@ export function RolePlayCoach({
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h3 className="text-xs tracking-widest text-muted-foreground uppercase">
-            Conversar com a IA nesta cena
+            Practice with AI in this scene
           </h3>
           <p className="mt-1 text-sm text-foreground/80">
-            Fale ou escreva em inglês e receba resposta no personagem, correção e dica de
-            pronúncia.
+            Speak or write in English and get an in-character reply, corrections and
+            pronunciation tips.
+            <span className="mt-0.5 block text-xs text-muted-foreground italic">
+              Fale ou escreva em inglês e receba resposta no personagem, correção e dica de
+              pronúncia.
+            </span>
           </p>
         </div>
         <Button
@@ -129,14 +133,14 @@ export function RolePlayCoach({
           className="rounded-full"
           onClick={() => void play(prompt.cue)}
         >
-          <Volume2 className="mr-1 h-4 w-4" /> Ouvir a fala inicial
+          <Volume2 className="mr-1 h-4 w-4" /> Listen to the opening line
         </Button>
       </div>
 
       <div className="mt-5 space-y-4">
         {turns.length === 0 && (
           <p className="text-sm text-muted-foreground">
-            Comece respondendo: “{prompt.cue}”
+            Start by answering: “{prompt.cue}”
           </p>
         )}
         {turns.map((turn) =>
@@ -163,19 +167,19 @@ export function RolePlayCoach({
                 <div className="space-y-2 rounded-xl border border-border p-4 text-sm">
                   <p className="text-foreground/80">
                     <span className="text-xs tracking-widest text-muted-foreground uppercase">
-                      Correção ·{" "}
+                      Correction ·{" "}
                     </span>
                     {turn.feedback.correction}
                   </p>
                   <p className="text-foreground/80">
                     <span className="text-xs tracking-widest text-muted-foreground uppercase">
-                      Pronúncia ·{" "}
+                      Pronunciation ·{" "}
                     </span>
                     {turn.feedback.pronunciation}
                   </p>
                   <p className="text-foreground/80">
                     <span className="text-xs tracking-widest text-muted-foreground uppercase">
-                      Próximo passo ·{" "}
+                      Next step ·{" "}
                     </span>
                     {turn.feedback.nextTip}
                   </p>
@@ -186,7 +190,7 @@ export function RolePlayCoach({
                       className="rounded-full px-0 text-gold"
                       onClick={() => onUseAnswer(turn.text)}
                     >
-                      Usar esta conversa na minha resposta
+                      Use this line in my answer
                     </Button>
                   )}
                 </div>
@@ -196,7 +200,7 @@ export function RolePlayCoach({
         )}
         {sending && (
           <p className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Loader2 className="h-4 w-4 animate-spin" /> A IA está respondendo...
+            <Loader2 className="h-4 w-4 animate-spin" /> AI is replying...
           </p>
         )}
       </div>
@@ -224,15 +228,15 @@ export function RolePlayCoach({
           >
             {recording ? (
               <>
-                <Square className="mr-1 h-4 w-4" /> Parar e enviar
+                <Square className="mr-1 h-4 w-4" /> Stop and send
               </>
             ) : transcribing ? (
               <>
-                <Loader2 className="mr-1 h-4 w-4 animate-spin" /> Transcrevendo...
+                <Loader2 className="mr-1 h-4 w-4 animate-spin" /> Transcribing...
               </>
             ) : (
               <>
-                <Mic className="mr-1 h-4 w-4" /> Falar
+                <Mic className="mr-1 h-4 w-4" /> Speak
               </>
             )}
           </Button>
@@ -241,7 +245,7 @@ export function RolePlayCoach({
             disabled={busy || !input.trim()}
             onClick={() => void send(input)}
           >
-            <Send className="mr-1 h-4 w-4" /> Enviar
+            <Send className="mr-1 h-4 w-4" /> Send
           </Button>
         </div>
       </div>

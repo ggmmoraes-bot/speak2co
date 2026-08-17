@@ -110,7 +110,7 @@ export function PhrasePractice({
           ) : (
             <Volume2 className="h-3.5 w-3.5" />
           )}
-          Ouvir a IA
+          Listen
         </button>
         <button
           type="button"
@@ -129,7 +129,7 @@ export function PhrasePractice({
           ) : (
             <Mic className="h-3.5 w-3.5" />
           )}
-          {busy ? "Avaliando…" : recording ? "Parar e avaliar" : "Falar e checar"}
+          {busy ? "Checking…" : recording ? "Stop & Check" : "Speak and Check"}
         </button>
         {result && (
           <button
@@ -137,7 +137,7 @@ export function PhrasePractice({
             onClick={() => setResult(null)}
             className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-xs text-muted-foreground hover:text-foreground"
           >
-            <RefreshCw className="h-3.5 w-3.5" /> Tentar de novo
+            <RefreshCw className="h-3.5 w-3.5" /> Try again
           </button>
         )}
       </div>
@@ -145,7 +145,7 @@ export function PhrasePractice({
       {result && (
         <div className="mt-3 space-y-2 rounded-xl border border-border p-3">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-semibold">Nota automática · tentativa {history.length}</span>
+            <span className="font-semibold">AI score · attempt {history.length}</span>
             <span className="flex items-center gap-2">
               <span
                 className={`rounded-full border px-2 py-0.5 text-[11px] font-bold ${GRADE_TONE_CLASS[gradePronunciation(result.score).tone]}`}
@@ -159,14 +159,14 @@ export function PhrasePractice({
           <Progress value={result.score} />
           <p className="text-xs text-muted-foreground">
             {gradePronunciation(result.score).label}
-            {history.length > 1 ? ` · tentativas: ${history.join("% · ")}%` : ""}
+            {history.length > 1 ? ` · attempts: ${history.join("% · ")}%` : ""}
           </p>
           <PronunciationDimensions result={result} />
           <SpeechComparison target={en} transcript={result.transcript} onPlayModel={playModel} />
           <p className="text-xs">{result.verdict}</p>
           {result.issues.length > 0 && (
             <p className="text-xs font-semibold text-foreground">
-              Erros comuns nesta tentativa ({result.issues.length})
+              Common issues in this attempt ({result.issues.length})
             </p>
           )}
           {result.issues.length > 0 && (

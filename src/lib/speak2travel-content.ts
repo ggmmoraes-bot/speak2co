@@ -6,6 +6,10 @@
 export type TravelPrompt = {
   id: string;
   situation: string;
+  /** Enunciado em inglês (exibido em destaque). */
+  situationEn?: string;
+  taskEn?: string;
+  tipEn?: string;
   /** Fala do interlocutor (em inglês). */
   cue: string;
   /** O que o aluno precisa fazer. */
@@ -98,6 +102,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
     prompts: [
       {
         id: "hotel-booking",
+        situationEn: "Hotel booking by phone",
+        taskEn: "Book a double room for three nights and ask if breakfast is included.",
+        tipEn: "State dates with 'from... to...' — it's the format the receptionist expects.",
         situation: "Reserva de hotel por telefone",
         cue: "Thank you for calling. How can I help you with your reservation?",
         task: "Reserve um quarto de casal por três noites e pergunte se o café da manhã está incluído.",
@@ -111,6 +118,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "buying-tickets",
+        situationEn: "Buying tickets online/by phone",
+        taskEn: "Choose the direct flight, ask the price, and if the ticket is refundable.",
+        tipEn: "'Direct flight' (no stop) and 'stopover' (connection) are the two words that resolve this conversation.",
         situation: "Comprando passagens no site/telefone",
         cue: "We have two options: a direct flight at 9 a.m. or one with a stopover at 2 p.m.",
         task: "Escolha o voo direto, pergunte o preço e se a passagem é reembolsável.",
@@ -124,6 +134,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "online-check-in",
+        situationEn: "Online check-in support",
+        taskEn: "Confirm the code, explain the error message, and ask for help choosing a seat.",
+        tipEn: "Describe the error with 'It says...' — that's how natives report screen messages.",
         situation: "Suporte do check-in online",
         cue: "It looks like your booking reference isn't going through. Could you confirm it?",
         task: "Confirme o código, explique o erro que aparece e peça ajuda para escolher o assento.",
@@ -160,6 +173,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
     prompts: [
       {
         id: "check-in",
+        situationEn: "Airline check-in counter",
+        taskEn: "Provide documents, state how many bags you're checking, and ask for an aisle seat.",
+        tipEn: "Don't translate 'despachar mala' literally — use 'check a bag'.",
         situation: "Balcão de check-in da companhia aérea",
         cue: "Good morning! May I have your passport and booking reference, please? Are you checking any bags today?",
         task: "Entregue os documentos, diga quantas malas vai despachar e peça um assento no corredor.",
@@ -173,6 +189,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "security",
+        situationEn: "Security X-ray",
+        taskEn: "Confirm what you're carrying and ask if you need to remove your shoes.",
+        tipEn: "Short, cooperative phrases work: no one expects a speech here.",
         situation: "Raio-X da segurança",
         cue: "Please remove your laptop and any liquids from your bag. Do you have anything in your pockets?",
         task: "Confirme o que está levando e pergunte se precisa tirar os sapatos.",
@@ -186,6 +205,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "boarding-problem",
+        situationEn: "Boarding gate — delayed flight",
+        taskEn: "Explain you have a connection and ask about your options.",
+        tipEn: "Start with the problem in one sentence, then make your request.",
         situation: "Portão de embarque — voo atrasado",
         cue: "I'm sorry, your flight has been delayed by three hours. Your connection may be affected.",
         task: "Explique que você tem uma conexão e pergunte quais são as opções.",
@@ -199,6 +221,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "lost-luggage",
+        situationEn: "Lost luggage desk",
+        taskEn: "Describe the suitcase, provide the tag number, and ask when it will arrive.",
+        tipEn: "Color + size + material are enough to describe the luggage.",
         situation: "Balcão de bagagem extraviada",
         cue: "I'm sorry to hear that. Can you describe your suitcase and give me your baggage tag number?",
         task: "Descreva a mala, informe o número da etiqueta e pergunte quando ela chega.",
@@ -235,6 +260,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
     prompts: [
       {
         id: "asking-service",
+        situationEn: "In-flight service",
+        taskEn: "Choose an option, ask for water, and inquire if you can get a blanket.",
+        tipEn: "'Could I have...?' is the standard polite request onboard.",
         situation: "Serviço de bordo",
         cue: "Would you like chicken or pasta? Anything to drink?",
         task: "Escolha uma opção, peça água e pergunte se pode ganhar um cobertor.",
@@ -248,6 +276,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "seat-change",
+        situationEn: "Changing seats",
+        taskEn: "Explain you want to sit near your travel companion and ask if there are free seats.",
+        tipEn: "Explain the reason before the request: it greatly increases the chance of a 'yes'.",
         situation: "Trocando de assento",
         cue: "I'm afraid the flight is quite full today. Is there a problem with your seat?",
         task: "Explique que quer sentar perto de quem viaja com você e pergunte se há assentos livres.",
@@ -261,6 +292,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "onboard-issue",
+        situationEn: "Feeling unwell during the flight",
+        taskEn: "Say you're not feeling well, ask for water, and inquire if there's motion sickness medicine.",
+        tipEn: "'I feel dizzy / nauseous' describes dizziness and nausea accurately.",
         situation: "Mal-estar durante o voo",
         cue: "Are you okay? You look pale. Do you need any assistance?",
         task: "Diga que não está se sentindo bem, peça água e pergunte se há remédio para enjoo.",
@@ -297,6 +331,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
     prompts: [
       {
         id: "immigration-basics",
+        situationEn: "Immigration line",
+        taskEn: "Answer objectively: purpose, duration, and accommodation address.",
+        tipEn: "At immigration, only answer what's asked — clarity shows confidence.",
         situation: "Fila da imigração",
         cue: "What's the purpose of your visit? How long are you staying, and where will you be staying?",
         task: "Responda objetivamente: motivo, duração e endereço da hospedagem.",
@@ -310,6 +347,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "immigration-followup",
+        situationEn: "Follow-up immigration questions",
+        taskEn: "Answer the three questions in short, direct sentences.",
+        tipEn: "Dates and professions: practice saying yours naturally, without thinking.",
         situation: "Perguntas de acompanhamento",
         cue: "Do you have a return ticket? Are you traveling alone? What do you do for a living?",
         task: "Responda as três perguntas em frases curtas e diretas.",
@@ -323,6 +363,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "customs",
+        situationEn: "Customs",
+        taskEn: "State you have nothing to declare and mention you're only carrying personal items.",
+        tipEn: "Never lie at customs: if you bring food, declare it — it's normal and resolved on the spot.",
         situation: "Alfândega",
         cue: "Do you have anything to declare? Any food, plants, or large amounts of cash?",
         task: "Diga que não tem nada a declarar e mencione que leva apenas itens pessoais.",
@@ -359,6 +402,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
     prompts: [
       {
         id: "hotel-check-in",
+        situationEn: "Hotel check-in",
+        taskEn: "Confirm the reservation under your name, ask for breakfast hours, and the Wi-Fi password.",
+        tipEn: "'Under + your name' is the natural way to say 'no nome de'.",
         situation: "Check-in no hotel",
         cue: "Good evening! Do you have a reservation with us?",
         task: "Confirme a reserva no seu nome, pergunte o horário do café e a senha do Wi-Fi.",
@@ -372,6 +418,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "room-problem",
+        situationEn: "Room problem",
+        taskEn: "Explain the air conditioning isn't working and ask for it to be fixed or the room to be changed.",
+        tipEn: "Complain about the problem, not the person: 'isn't working' resolves more than 'you didn't...'.",
         situation: "Problema no quarto",
         cue: "Front desk, how can I help you?",
         task: "Explique que o ar-condicionado não funciona e peça para resolverem ou trocarem o quarto.",
@@ -385,6 +434,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "room-service",
+        situationEn: "Room service",
+        taskEn: "Order a dish, ask how long it will take, and ask to charge it to your room.",
+        tipEn: "'Charge it to my room' avoids paying at the door.",
         situation: "Room service",
         cue: "Room service, what would you like to order tonight?",
         task: "Peça um prato, pergunte quanto tempo demora e peça para colocar na conta do quarto.",
@@ -398,6 +450,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "hotel-check-out",
+        situationEn: "Hotel check-out",
+        taskEn: "Ask for an explanation of an extra charge and if you can leave your bags at the reception.",
+        tipEn: "Question the bill calmly: 'Could you explain this charge?' is firm and polite.",
         situation: "Check-out",
         cue: "Here's your bill. Everything looks correct?",
         task: "Peça para explicarem uma cobrança extra e pergunte se pode deixar as malas na recepção.",
@@ -433,6 +488,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
     prompts: [
       {
         id: "taxi",
+        situationEn: "Taxi at the airport exit",
+        taskEn: "Provide the address, ask the approximate fare, and if they accept cards.",
+        tipEn: "Showing the address on screen + speaking the phrase is the combination that never fails.",
         situation: "Táxi na saída do aeroporto",
         cue: "Where to?",
         task: "Informe o endereço, pergunte o valor aproximado e se aceitam cartão.",
@@ -446,6 +504,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "subway",
+        situationEn: "Subway ticket office",
+        taskEn: "Ask for a day pass, which line goes downtown, and where to transfer.",
+        tipEn: "'Transfer' is the word for changing lines — 'change train' also works.",
         situation: "Bilheteria do metrô",
         cue: "Single ride or day pass?",
         task: "Peça um passe do dia, pergunte qual linha vai ao centro e onde trocar de linha.",
@@ -459,6 +520,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "car-rental",
+        situationEn: "Car rental agency",
+        taskEn: "Choose full coverage, confirm drop-off, and ask about the fuel policy.",
+        tipEn: "'Full coverage' and 'fuel policy' prevent 90% of problems upon return.",
         situation: "Locadora de carros",
         cue: "Do you want the basic insurance or full coverage? Are you returning the car here?",
         task: "Escolha a cobertura completa, confirme a devolução e pergunte sobre a política de combustível.",
@@ -495,6 +559,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
     prompts: [
       {
         id: "reservation",
+        situationEn: "Reservation by phone",
+        taskEn: "Reserve for two people at 8 PM and ask for a table near the window.",
+        tipEn: "Times in English: prefer '8 p.m.' over 'twenty o'clock' (it doesn't exist).",
         situation: "Reserva por telefone",
         cue: "Good afternoon! For how many people and what time?",
         task: "Reserve para duas pessoas às 20h e peça uma mesa perto da janela.",
@@ -508,6 +575,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "ordering",
+        situationEn: "Placing an order",
+        taskEn: "Order an appetizer and a main course, and ask if the dish contains nuts.",
+        tipEn: "'I'll have...' is the most natural way to order — more so than 'I want'.",
         situation: "Fazendo o pedido",
         cue: "Are you ready to order? Can I get you anything to start?",
         task: "Peça uma entrada e um prato principal, e pergunte se o prato leva castanhas.",
@@ -521,6 +591,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "the-bill",
+        situationEn: "Asking for the bill",
+        taskEn: "Ask for the bill, ask if service is included, and ask to split it.",
+        tipEn: "In the US, 'tip' is usually not included — asking is normal.",
         situation: "Pedindo a conta",
         cue: "How was everything? Anything else for you tonight?",
         task: "Peça a conta, pergunte se o serviço já está incluído e peça para dividir.",
@@ -556,6 +629,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
     prompts: [
       {
         id: "trying-on",
+        situationEn: "Clothing store",
+        taskEn: "Ask for another size, where the fitting room is, and if there's another color.",
+        tipEn: "Sizes: small / medium / large — never 'P, M, G'.",
         situation: "Loja de roupas",
         cue: "Hi there! Can I help you find anything?",
         task: "Peça outro tamanho, pergunte onde é o provador e se tem outra cor.",
@@ -569,6 +645,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "paying",
+        situationEn: "At the cashier",
+        taskEn: "Pay with a card, ask if there's a discount, and ask for the receipt.",
+        tipEn: "Keep the 'receipt': without it, exchanges are almost impossible.",
         situation: "No caixa",
         cue: "That'll be forty-five dollars. Cash or card?",
         task: "Pague com cartão, pergunte se há desconto e peça o recibo.",
@@ -582,6 +661,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "returning",
+        situationEn: "Returning an item",
+        taskEn: "Explain the size doesn't fit, show the receipt, and ask for an exchange or refund.",
+        tipEn: "'It doesn't fit' is different from 'I don't like it' — the first facilitates exchange.",
         situation: "Trocando um produto",
         cue: "Is there anything wrong with it? Do you have your receipt?",
         task: "Explique que o tamanho não serviu, mostre o recibo e peça troca ou reembolso.",
@@ -617,6 +699,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
     prompts: [
       {
         id: "tickets",
+        situationEn: "Museum ticket booth",
+        taskEn: "Buy two tickets, ask if there's a discount, and what time it closes.",
+        tipEn: "Prices and hours: practice listening to numbers — that's where most people get stuck.",
         situation: "Bilheteria do museu",
         cue: "Hi! How many tickets would you like?",
         task: "Compre dois ingressos, pergunte se há desconto e até que horas fica aberto.",
@@ -630,6 +715,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "guided-tour",
+        situationEn: "Guided tour",
+        taskEn: "Confirm you want to join this tour, ask its duration, and where the meeting point is.",
+        tipEn: "'How long does it take?' works for any duration — memorize it.",
         situation: "Excursão guiada",
         cue: "The next English tour starts in twenty minutes. Have you joined us before?",
         task: "Confirme que quer entrar nessa visita, pergunte a duração e onde é o ponto de encontro.",
@@ -643,6 +731,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "asking-directions",
+        situationEn: "Lost on the street",
+        taskEn: "Ask for directions to the landmark and if it's within walking distance.",
+        tipEn: "'How do I get to...?' is more efficient than 'Where is...?' because it asks for directions.",
         situation: "Perdido na rua",
         cue: "Sorry, are you looking for something?",
         task: "Peça direções para o ponto turístico e pergunte se dá para ir a pé.",
@@ -680,6 +771,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
     prompts: [
       {
         id: "pharmacy",
+        situationEn: "Pharmacy",
+        taskEn: "Explain the symptom, ask for a painkiller, and inquire about the dosage.",
+        tipEn: "Symptoms with 'I have a...' cover almost everything: headache, fever, cough.",
         situation: "Farmácia",
         cue: "Hi, how can I help you today?",
         task: "Explique o sintoma, peça um analgésico e pergunte a dosagem.",
@@ -693,6 +787,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "hospital",
+        situationEn: "Emergency room",
+        taskEn: "Describe the pain, state since when, and inform you have travel insurance.",
+        tipEn: "Pinpoint the pain with 'pain in my + body part' and state since when.",
         situation: "Pronto-socorro",
         cue: "What seems to be the problem? Do you have insurance?",
         task: "Descreva a dor, diga desde quando e informe que tem seguro viagem.",
@@ -706,6 +803,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "police",
+        situationEn: "Police station — passport theft",
+        taskEn: "Report the passport theft, state where and when it occurred, and ask for a police report.",
+        tipEn: "Without the 'police report' the embassy won't issue a new document — always ask for it.",
         situation: "Delegacia — roubo de passaporte",
         cue: "Okay, let's file a report. When and where did it happen?",
         task: "Registre o roubo do passaporte, diga onde e quando ocorreu e peça o boletim.",
@@ -719,6 +819,9 @@ export const TRAVEL_TRACKS: TravelTrack[] = [
       },
       {
         id: "blocked-card",
+        situationEn: "Bank — blocked card",
+        taskEn: "Confirm you're traveling, validate purchases, and ask to unblock the card.",
+        tipEn: "Notify the bank before traveling — and know how to say 'I'm traveling abroad'.",
         situation: "Banco — cartão bloqueado",
         cue: "For security reasons, we blocked your card. Can you confirm your recent transactions?",
         task: "Confirme que está viajando, valide as compras e peça para desbloquear.",

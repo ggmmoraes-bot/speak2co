@@ -47,10 +47,13 @@ export function TravelDrills({
         <div>
           <p className="flex items-center gap-2 font-semibold text-gold">
             <Dumbbell className="h-4 w-4" />
-            Exercícios personalizados
+            Personalized Practice
           </p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Vocabulário e gramática criados a partir das suas respostas neste módulo.
+            Vocabulary and grammar created from your answers in this module.
+            <span className="mt-0.5 block text-xs italic">
+              Vocabulário e gramática criados a partir das suas respostas neste módulo.
+            </span>
           </p>
         </div>
         <Button
@@ -63,7 +66,7 @@ export function TravelDrills({
           ) : (
             <RefreshCw className="mr-1 h-4 w-4" />
           )}
-          {data ? "Gerar novos" : "Gerar exercícios"}
+          {data ? "Generate new ones" : "Generate exercises"}
         </Button>
       </div>
 
@@ -75,7 +78,7 @@ export function TravelDrills({
             return (
               <div key={i} className="rounded-xl border border-border p-4">
                 <p className="text-xs tracking-widest text-muted-foreground uppercase">
-                  {drill.type === "grammar" ? "Gramática" : "Vocabulário"}
+                  {drill.type === "grammar" ? "Grammar" : "Vocabulary"}
                 </p>
                 <p className="mt-1 font-medium text-foreground">{drill.question}</p>
                 <div className="mt-3 grid gap-2">
@@ -117,8 +120,8 @@ export function TravelDrills({
           })}
           {answered > 0 && (
             <p className="text-sm text-muted-foreground">
-              Acertos: <span className="font-semibold text-gold">{correct}</span> de{" "}
-              {answered} respondidos ({data.drills.length} no total).
+              Correct: <span className="font-semibold text-gold">{correct}</span> of{" "}
+              {answered} answered ({data.drills.length} total).
             </p>
           )}
         </div>
