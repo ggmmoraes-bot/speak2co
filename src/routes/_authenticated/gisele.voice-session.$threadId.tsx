@@ -294,9 +294,14 @@ function VoiceSessionPage() {
         </div>
 
         <div className="text-center">
-          <p className="text-sm font-semibold text-foreground">{label.en}</p>
-          <p className="text-xs italic text-muted-foreground">{label.pt}</p>
+          <p className="text-sm font-semibold text-foreground">
+            {continuous && phase === "idle" ? "Your turn — just speak" : label.en}
+          </p>
+          <p className="text-xs italic text-muted-foreground">
+            {continuous && phase === "idle" ? "Sua vez — pode falar" : label.pt}
+          </p>
         </div>
+
 
         <p className="rounded-full border border-gold/30 bg-gold/5 px-3 py-1 text-[11px] text-muted-foreground">
           {continuous
