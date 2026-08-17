@@ -12,8 +12,14 @@ import { speakText, stopSpeaking, transcribeAudio } from "@/lib/voice-client";
 import { isBrandVoice, useVoiceSettings } from "@/lib/use-voice-settings";
 import { AiVoiceDisclosure } from "@/components/AiVoiceDisclosure";
 import { GiseleFeedbackCard } from "@/components/gisele/GiseleFeedbackCard";
-import { requestSessionFeedback, type SessionFeedbackDTO } from "@/lib/gisele-data.functions";
+import {
+  requestSessionFeedback,
+  saveVoiceTranscript,
+  finalizeVoiceSession,
+  type SessionFeedbackDTO,
+} from "@/lib/gisele-data.functions";
 import { AltHeading } from "@/components/AltHeading";
+
 
 export const Route = createFileRoute("/_authenticated/gisele/voice-session/$threadId")({
   component: VoiceSessionPage,
