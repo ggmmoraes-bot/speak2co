@@ -46,6 +46,19 @@ const FOCUS_ICON: Record<GiseleFocus, typeof Mic> = {
   vocabulary: GraduationCap,
 };
 
+/** Menu principal da GiseleAI — todas as experiências vivem dentro dela. */
+const GISELE_MENU = [
+  { to: "/gisele/voice-room", icon: Mic, en: "Speak with GiseleAI", pt: "Falar com a GiseleAI" },
+  { to: "/gisele/listening", icon: Headphones, en: "Improve my listening", pt: "Melhorar minha compreensão" },
+  { to: "/gisele/writing", icon: PenLine, en: "Improve my writing", pt: "Melhorar minha escrita" },
+  { to: "/gisele/revisao", icon: RefreshCw, en: "Review what I learned", pt: "Revisar o que aprendi" },
+  { to: "/gisele/real-life", icon: Users, en: "Practice a real-life situation", pt: "Praticar situação real" },
+  { to: "/gisele/pontos-fracos", icon: Target, en: "Work on my weak points", pt: "Trabalhar pontos fracos" },
+  { to: "/gisele/desafio", icon: Flame, en: "Today's Challenge", pt: "O desafio de hoje" },
+  { to: "/gisele/como-dizer", icon: Sparkles, en: "Ask GiseleAI anything", pt: "Perguntar qualquer coisa" },
+] as const;
+
+
 /** Cartão premium padrão da GiseleAI (visual distinto do AI Teacher). */
 function GiseleCard({
   title,
