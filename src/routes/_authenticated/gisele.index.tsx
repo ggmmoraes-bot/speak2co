@@ -8,6 +8,10 @@ import {
   Compass,
   Flame,
   GraduationCap,
+  Headphones,
+  PenLine,
+  Users,
+
   MessageSquare,
   Mic,
   Plane,
