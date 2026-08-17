@@ -7,25 +7,14 @@ import { withGiselePersona } from "@/lib/gisele-ai-persona";
 
 type Client = SupabaseClient<Database>;
 
-export const FeedbackSchema = z.object({
-  whatWentWell: z.string(),
-  mainImprovement: z.string(),
-  howToImprove: z.string(),
-  retryInvite: z.string(),
-  category: z.enum(["grammar", "vocabulary", "pronunciation", "fluency", "strategy"]),
-  priority: z.number().int().min(1).max(3),
-  recommendations: z
-    .array(
-      z.object({
-        type: z.enum(["practice", "lesson", "review", "mission"]),
-        content: z.string(),
-        priority: z.number().int().min(1).max(3),
-      }),
-    )
-    .max(3),
-});
+import {
+  FEEDBACK_PROMPT_RULES,
+  GiseleFeedbackSchema,
+  type GiseleFeedback,
+} from "@/lib/gisele-feedback-types";
 
-export type SessionFeedback = z.infer<typeof FeedbackSchema>;
+export const FeedbackSchema = GiseleFeedbackSchema;
+export type SessionFeedback = GiseleFeedback;
 
 /**
  * Gera o feedback da sessão no formato obrigatório da Gisele AI
@@ -76,15 +65,8 @@ export async function generateSessionFeedback(
   const result = streamText({
     model: gateway("google/gemini-3.6-flash"),
     system: withGiselePersona(
-      `Você vai gerar o FEEDBACK DA SESSÃO no formato obrigatório da Gisele AI.
-Contexto da atividade: ${thread.context ?? "conversa livre"}.
-Regras:
-- Não corrija frase por frase. Escolha apenas o que é relevante para o objetivo da atividade.
-- "whatWentWell": 1-2 frases concretas sobre o que o aluno fez bem (em inglês, com uma tradução curta entre parênteses se ajudar).
-- "mainImprovement": UM único ponto principal a melhorar.
-- "howToImprove": instrução prática com um exemplo corrigido.
-- "retryInvite": convite curto e motivador para tentar de novo a mesma situação.
-- "recommendations": até 3 próximos passos objetivos dentro da Speak2Co.`,
+      `${FEEDBACK_PROMPT_RULES}
+Contexto da atividade: ${thread.context ?? "conversa livre"}.`,
     ),
     prompt: `Transcrição da sessão:\n${transcript}`,
     output: Output.object({ schema: FeedbackSchema }),
@@ -100,7 +82,7 @@ Regras:
     const retry = streamText({
       model: gateway("google/gemini-3.6-flash"),
       system:
-        'Responda APENAS com um JSON válido, sem markdown, no formato {"whatWentWell":string,"mainImprovement":string,"howToImprove":string,"retryInvite":string,"category":"grammar"|"vocabulary"|"pronunciation"|"fluency"|"strategy","priority":1|2|3,"recommendations":[{"type":"practice"|"lesson"|"review"|"mission","content":string,"priority":1|2|3}]}',
+        'Responda APENAS com um JSON válido, sem markdown, no formato {"whatYouDidWell":string,"letsImprove":string,"pronunciation":string,"fluency":string,"grammar":string,"vocabulary":string,"naturalness":string,"nextStep":string,"category":"grammar"|"vocabulary"|"pronunciation"|"fluency"|"strategy","priority":1|2|3,"recommendations":[{"type":"practice"|"lesson"|"review"|"mission","content":string,"priority":1|2|3}]}',
       prompt: `Transcrição da sessão:\n${transcript}`,
     });
     const raw = (await retry.text).trim().replace(/^```(?:json)?|```$/g, "");
@@ -122,7 +104,7 @@ Regras:
     user_id: userId,
     session_id: session?.id ?? null,
     category: feedback.category,
-    observation: `✅ ${feedback.whatWentWell}\n🎯 ${feedback.mainImprovement}\n🛠️ ${feedback.howToImprove}`,
+    observation: `✅ ${feedback.whatYouDidWell}\n🎯 ${feedback.letsImprove}\n➡️ ${feedback.nextStep}`,
     priority: feedback.priority,
   });
 
