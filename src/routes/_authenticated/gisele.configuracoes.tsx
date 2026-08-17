@@ -1,10 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { Check, Circle, Loader2, Mic, RotateCcw, Volume2 } from "lucide-react";
-import { getMyAccess } from "@/lib/entitlements.functions";
+import { Loader2, RotateCcw, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
@@ -16,13 +13,9 @@ import {
   SUPPORT_LANGUAGES,
   TTS_PROVIDERS,
   useVoiceSettings,
-  isBrandVoice,
-  FOUNDER_VOICE_ID,
   type SupportLanguage,
 } from "@/lib/use-voice-settings";
 import { AiVoiceDisclosure } from "@/components/AiVoiceDisclosure";
-import { getVoiceSettings, saveVoiceSettings } from "@/lib/gisele-data.functions";
-
 
 export const Route = createFileRoute("/_authenticated/gisele/configuracoes")({
   head: () => ({
@@ -51,40 +44,6 @@ const SAMPLE =
 function GiseleSettingsPage() {
   const { settings, update, reset } = useVoiceSettings();
   const [testing, setTesting] = useState(false);
-  const [voiceTested, setVoiceTested] = useState(false);
-  const queryClient = useQueryClient();
-  const loadRemote = useServerFn(getVoiceSettings);
-  const saveRemote = useServerFn(saveVoiceSettings);
-  const loadAccess = useServerFn(getMyAccess);
-
-  const remote = useQuery({
-    queryKey: ["gisele-voice-settings"],
-    queryFn: () => loadRemote({}),
-  });
-  const access = useQuery({ queryKey: ["my-access"], queryFn: () => loadAccess({}) });
-  const brandConsent = remote.data?.consent_status === "granted";
-  const hasGiseleAccess = Boolean(access.data?.isAdmin || access.data?.features?.["gisele_ai"]);
-
-
-  async function setBrandConsent(granted: boolean) {
-    try {
-      await saveRemote({
-        data: {
-          consent_status: granted ? "granted" : "revoked",
-          ...(granted ? { provider: "elevenlabs" as const, voice_id: FOUNDER_VOICE_ID } : {}),
-        },
-      });
-      await queryClient.invalidateQueries({ queryKey: ["gisele-voice-settings"] });
-      if (!granted && isBrandVoice(settings.voice)) update({ voice: "alloy" });
-      toast.success(
-        granted
-          ? "Voz autorizada da marca ativada — a fala continua sendo gerada por IA."
-          : "Autorização revogada. Voltamos para as vozes de estúdio.",
-      );
-    } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Não foi possível salvar a autorização.");
-    }
-  }
 
   async function testVoice(voice?: string) {
     try {
@@ -97,81 +56,12 @@ function GiseleSettingsPage() {
         provider: settings.ttsProvider,
         scope: "gisele",
       });
-      setVoiceTested(true);
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível tocar o áudio.");
     } finally {
       setTesting(false);
     }
   }
-
-  const checklist: {
-    id: string;
-    labelEn: string;
-    labelPt: string;
-    done: boolean;
-    action?: { label: string; run: () => void };
-  }[] = [
-    {
-      id: "access",
-      labelEn: "GiseleAI access released",
-      labelPt: access.data?.isAdmin
-        ? "Acesso liberado (administrador)"
-        : hasGiseleAccess
-          ? "Acesso liberado pelo plano Signature"
-          : "Seu plano atual não inclui a GiseleAI",
-      done: hasGiseleAccess,
-    },
-    {
-      id: "brand-consent",
-      labelEn: "Authorized brand voice enabled",
-      labelPt: "Autorização da voz da marca (gerada por IA) registrada",
-      done: brandConsent,
-      ...(brandConsent
-        ? {}
-        : { action: { label: "Ativar", run: () => void setBrandConsent(true) } }),
-    },
-    {
-      id: "voice",
-      labelEn: "Founder voice selected",
-      labelPt: "Voz da fundadora escolhida como voz da GiseleAI",
-      done: isBrandVoice(settings.voice),
-      ...(isBrandVoice(settings.voice)
-        ? {}
-        : {
-            action: {
-              label: "Selecionar",
-              run: () => {
-                if (!brandConsent) {
-                  toast.error("Ative primeiro a autorização da voz da marca.");
-                  return;
-                }
-                update({ voice: FOUNDER_VOICE_ID, ttsProvider: "elevenlabs" });
-                toast.success("Voz da fundadora selecionada.");
-              },
-            },
-          }),
-    },
-    {
-      id: "mic",
-      labelEn: "Microphone consent granted",
-      labelPt: "Consentimento para gravar sua voz nas sessões",
-      done: settings.voiceConsent,
-      ...(settings.voiceConsent
-        ? {}
-        : { action: { label: "Autorizar", run: () => update({ voiceConsent: true }) } }),
-    },
-    {
-      id: "test",
-      labelEn: "Voice sample played",
-      labelPt: "Amostra de áudio testada com sucesso",
-      done: voiceTested,
-      ...(voiceTested ? {} : { action: { label: "Testar", run: () => void testVoice() } }),
-    },
-  ];
-
-  const readyCount = checklist.filter((i) => i.done).length;
-  const allReady = readyCount === checklist.length;
 
   return (
     <div className="mx-auto w-full max-w-3xl flex-1 space-y-8 overflow-y-auto p-6 md:p-10">
@@ -186,79 +76,6 @@ function GiseleSettingsPage() {
         </p>
       </header>
 
-      <section className="space-y-4 rounded-2xl border border-gold/40 bg-card/60 p-6 backdrop-blur">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <h2 className="text-sm font-semibold text-foreground">
-              Ready to test · <span className="text-gold">Pronto para testar</span>
-            </h2>
-            <p className="text-xs text-muted-foreground">
-              Complete os passos abaixo para ouvir a GiseleAI com a voz autorizada.
-            </p>
-          </div>
-          <span className="rounded-full border border-gold/40 px-3 py-1 text-xs font-semibold text-gold">
-            {readyCount}/{checklist.length}
-          </span>
-        </div>
-
-        <ul className="space-y-2">
-          {checklist.map((item) => (
-            <li
-              key={item.id}
-              className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 ${
-                item.done ? "border-gold/40 bg-secondary/60" : "border-border"
-              }`}
-            >
-              <div className="flex items-start gap-3">
-                {item.done ? (
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                ) : (
-                  <Circle className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-                )}
-                <span>
-                  <span className="block text-sm font-medium text-foreground">{item.labelEn}</span>
-                  <span className="block text-xs text-muted-foreground">{item.labelPt}</span>
-                </span>
-              </div>
-              {!item.done && item.action ? (
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="shrink-0 rounded-full text-xs"
-                  disabled={testing && item.id === "test"}
-                  onClick={item.action.run}
-                >
-                  {testing && item.id === "test" ? (
-                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                  ) : (
-                    item.action.label
-                  )}
-                </Button>
-              ) : null}
-            </li>
-          ))}
-        </ul>
-
-        {!hasGiseleAccess ? (
-          <Button asChild size="sm" className="rounded-full bg-gold text-primary-foreground">
-            <Link to="/premium">Conhecer o plano Signature</Link>
-          </Button>
-        ) : (
-          <Button
-            asChild
-            size="sm"
-            className="rounded-full bg-gold text-primary-foreground hover:opacity-90"
-            disabled={!allReady}
-          >
-            <Link to="/gisele/voice-room">
-              <Mic className="mr-2 h-4 w-4" />
-              {allReady ? "Abrir a Voice Room" : "Abrir mesmo assim"}
-            </Link>
-          </Button>
-        )}
-      </section>
-
-
       <section className="space-y-4 rounded-2xl border border-gold/30 bg-card/60 p-6 backdrop-blur">
         <div>
           <h2 className="text-sm font-semibold text-foreground">Voice · Voz</h2>
@@ -268,18 +85,11 @@ function GiseleSettingsPage() {
         <div className="grid gap-3 sm:grid-cols-2">
           {AI_VOICES.map((v) => {
             const active = settings.voice === v.id;
-            const locked = isBrandVoice(v.id) && !brandConsent;
             return (
               <button
                 key={v.id}
                 type="button"
                 onClick={() => {
-                  if (locked) {
-                    toast.error(
-                      "Ative a autorização da voz da marca (gerada por IA) mais abaixo para usá-la.",
-                    );
-                    return;
-                  }
                   update({ voice: v.id });
                   void testVoice(v.id);
                 }}
@@ -405,6 +215,7 @@ function GiseleSettingsPage() {
           })}
         </div>
       </section>
+
       <section className="space-y-4 rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
         <div>
           <h2 className="text-sm font-semibold text-foreground">Voice engines · Motores de voz</h2>
@@ -455,57 +266,9 @@ function GiseleSettingsPage() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <Label>Microphone consent · Consentimento de microfone</Label>
-            <p className="text-xs text-muted-foreground">
-              Autorizo gravar minha voz e enviá-la para transcrição durante as sessões.
-            </p>
-          </div>
-          <Switch
-            checked={settings.voiceConsent}
-            onCheckedChange={(checked) => update({ voiceConsent: checked })}
-          />
-        </div>
-      </section>
-
-
-      <section className="space-y-4 rounded-2xl border border-gold/30 bg-card/60 p-6 backdrop-blur">
-        <div>
-          <h2 className="text-sm font-semibold text-foreground">
-            Authorized brand voice · Voz autorizada da marca
-          </h2>
-          <p className="text-xs text-muted-foreground">
-            Opção configurável — não é o padrão. A voz da fundadora é reproduzida por síntese de IA
-            licenciada pela Speak2Co.
-          </p>
-        </div>
-
-        <AiVoiceDisclosure />
-
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <Label>Enable AI-generated brand voice · Ativar voz autorizada</Label>
-            <p className="text-xs text-muted-foreground">
-              Entendo que a voz é gerada por inteligência artificial e que não estou falando com uma
-              pessoa humana.
-            </p>
-          </div>
-          <Switch
-            checked={brandConsent}
-            disabled={remote.isLoading}
-            onCheckedChange={(checked) => void setBrandConsent(checked)}
-          />
-        </div>
-
         <p className="text-[11px] text-muted-foreground">
-          Authorization status · Status da autorização:{" "}
-          <span className="font-medium text-foreground">
-            {remote.data?.consent_status ?? "pending"}
-          </span>
-          {isBrandVoice(settings.voice) && brandConsent
-            ? " · voz autorizada ativa nesta conta"
-            : ""}
+          Nas sessões de voz o navegador pode pedir permissão de microfone — é o pedido padrão do
+          seu navegador para gravar o áudio da sua fala.
         </p>
       </section>
 
