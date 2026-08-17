@@ -33,16 +33,8 @@ async function structured<T>(schema: z.ZodType<T>, system: string, prompt: strin
 
 /* ------------------------------ Atividades ------------------------------ */
 
-export const ACTIVITY_KINDS = [
-  "listening",
-  "writing",
-  "review",
-  "reallife",
-  "weakness",
-  "challenge",
-  "practice",
-] as const;
-export type ActivityKind = (typeof ACTIVITY_KINDS)[number];
+export { ACTIVITY_KINDS, type ActivityKind } from "@/lib/gisele-activity-kinds";
+import type { ActivityKind } from "@/lib/gisele-activity-kinds";
 
 export const ActivitySchema = z.object({
   titleEn: z.string(),
@@ -89,7 +81,7 @@ NUNCA mencione ou recomende Speak2Travel, Speak2Hire, Speak2Fluency, Learning To
 export async function evaluateAnswer(
   supabase: Client,
   userId: string,
-  params: { activityTitle: string; question: string; answer: string; mode?: string },
+  params: { activityTitle: string; question: string; answer: string; mode?: string | undefined },
 ): Promise<GiseleFeedback> {
   const snapshot = await buildStudentSnapshot(supabase, userId);
   const feedback = await structured(
