@@ -55,6 +55,10 @@ export function setPreviewPlan(planKey: string | null) {
   window.dispatchEvent(new Event(PREVIEW_EVENT));
 }
 
+/**
+ * Estado bruto do seletor (localStorage). NÃO usar direto na interface:
+ * qualquer pessoa pode gravar essa chave no navegador. Use `useAdminPreviewPlan`.
+ */
 export function usePreviewPlan() {
   const [plan, setPlan] = useState<string | null>(null);
   useEffect(() => {
@@ -69,6 +73,33 @@ export function usePreviewPlan() {
   }, []);
   return plan;
 }
+
+/**
+ * Verdadeira role administrativa, confirmada pelo servidor (`has_role`).
+ * Plano de assinatura (inclusive Signature) NUNCA concede privilégio de admin.
+ * Também limpa o modo "Ver como" de quem não é administrador.
+ */
+export function useIsAdmin(): boolean {
+  const fetchAccess = useServerFn(getMyAccess);
+  const { data } = useQuery({
+    queryKey: ["my-access"],
+    queryFn: () => fetchAccess(),
+    staleTime: 60_000,
+  });
+  const isAdmin = data?.isAdmin === true;
+  useEffect(() => {
+    if (data && !isAdmin && getPreviewPlan()) setPreviewPlan(null);
+  }, [data, isAdmin]);
+  return isAdmin;
+}
+
+/** Plano em pré-visualização — só existe para administradores reais. */
+export function useAdminPreviewPlan(): string | null {
+  const isAdmin = useIsAdmin();
+  const preview = usePreviewPlan();
+  return isAdmin ? preview : null;
+}
+
 
 export function useAccess() {
   const fetchAccess = useServerFn(getMyAccess);
