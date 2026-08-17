@@ -104,10 +104,6 @@ function VoiceSessionPage() {
   }, [streaming, lastAssistant, voice.voice, voice.volume, voice.rate, voice.ttsProvider]);
 
   async function startRecording() {
-    if (!voice.voiceConsent) {
-      toast.error("Autorize o uso do microfone em Voice & language antes de começar.");
-      return;
-    }
     try {
       stopSpeaking();
       const recorder = new MicRecorder();
@@ -115,7 +111,7 @@ function VoiceSessionPage() {
       recorderRef.current = recorder;
       setPhase("recording");
     } catch {
-      toast.error("Não consegui acessar o microfone.");
+      toast.error("Não consegui acessar o microfone. Permita o acesso no navegador e tente de novo.");
       setPhase("idle");
     }
   }
@@ -171,8 +167,7 @@ function VoiceSessionPage() {
       <AiVoiceDisclosure />
       {isBrandVoice(voice.voice) ? (
         <p className="text-[11px] text-muted-foreground">
-          Authorized brand voice active · Voz autorizada da marca ativa (síntese licenciada pela
-          Speak2Co, com consentimento registrado nas configurações).
+          GiseleAI voice active · Voz oficial da GiseleAI (áudio gerado por IA).
         </p>
       ) : null}
 
