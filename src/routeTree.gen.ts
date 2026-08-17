@@ -56,16 +56,21 @@ import { Route as AuthenticatedCursoUpperAssessmentRouteImport } from './routes/
 import { Route as AuthenticatedGiseleIndexRouteImport } from './routes/_authenticated/gisele.index'
 import { Route as AuthenticatedGiseleThreadIdRouteImport } from './routes/_authenticated/gisele.$threadId'
 import { Route as AuthenticatedGiseleConfiguracoesRouteImport } from './routes/_authenticated/gisele.configuracoes'
+import { Route as AuthenticatedGiseleDesafioRouteImport } from './routes/_authenticated/gisele.desafio'
 import { Route as AuthenticatedGiseleFeedbackRouteImport } from './routes/_authenticated/gisele.feedback'
 import { Route as AuthenticatedGiseleHistoricoRouteImport } from './routes/_authenticated/gisele.historico'
+import { Route as AuthenticatedGiseleListeningRouteImport } from './routes/_authenticated/gisele.listening'
 import { Route as AuthenticatedGiseleMeuPlanoRouteImport } from './routes/_authenticated/gisele.meu-plano'
 import { Route as AuthenticatedGiseleMeuProgressoRouteImport } from './routes/_authenticated/gisele.meu-progresso'
 import { Route as AuthenticatedGiseleMissaoDoDiaRouteImport } from './routes/_authenticated/gisele.missao-do-dia'
 import { Route as AuthenticatedGiseleOnboardingRouteImport } from './routes/_authenticated/gisele.onboarding'
+import { Route as AuthenticatedGiselePraticaRouteImport } from './routes/_authenticated/gisele.pratica'
 import { Route as AuthenticatedGiselePreferenciasRouteImport } from './routes/_authenticated/gisele.preferencias'
 import { Route as AuthenticatedGiselePrivacidadeRouteImport } from './routes/_authenticated/gisele.privacidade'
 import { Route as AuthenticatedGiseleRecomendacoesRouteImport } from './routes/_authenticated/gisele.recomendacoes'
+import { Route as AuthenticatedGiseleRevisaoRouteImport } from './routes/_authenticated/gisele.revisao'
 import { Route as AuthenticatedGiseleVoiceRoomRouteImport } from './routes/_authenticated/gisele.voice-room'
+import { Route as AuthenticatedGiseleWritingRouteImport } from './routes/_authenticated/gisele.writing'
 import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authenticated/professor.index'
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2fluencyIndexRouteImport } from './routes/_authenticated/speak2fluency.index'
@@ -342,6 +347,12 @@ const AuthenticatedGiseleConfiguracoesRoute =
     path: '/configuracoes',
     getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
+const AuthenticatedGiseleDesafioRoute =
+  AuthenticatedGiseleDesafioRouteImport.update({
+    id: '/desafio',
+    path: '/desafio',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
 const AuthenticatedGiseleFeedbackRoute =
   AuthenticatedGiseleFeedbackRouteImport.update({
     id: '/feedback',
@@ -352,6 +363,12 @@ const AuthenticatedGiseleHistoricoRoute =
   AuthenticatedGiseleHistoricoRouteImport.update({
     id: '/historico',
     path: '/historico',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
+const AuthenticatedGiseleListeningRoute =
+  AuthenticatedGiseleListeningRouteImport.update({
+    id: '/listening',
+    path: '/listening',
     getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
 const AuthenticatedGiseleMeuPlanoRoute =
@@ -378,6 +395,12 @@ const AuthenticatedGiseleOnboardingRoute =
     path: '/onboarding',
     getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
+const AuthenticatedGiselePraticaRoute =
+  AuthenticatedGiselePraticaRouteImport.update({
+    id: '/pratica',
+    path: '/pratica',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
 const AuthenticatedGiselePreferenciasRoute =
   AuthenticatedGiselePreferenciasRouteImport.update({
     id: '/preferencias',
@@ -396,10 +419,22 @@ const AuthenticatedGiseleRecomendacoesRoute =
     path: '/recomendacoes',
     getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
+const AuthenticatedGiseleRevisaoRoute =
+  AuthenticatedGiseleRevisaoRouteImport.update({
+    id: '/revisao',
+    path: '/revisao',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
 const AuthenticatedGiseleVoiceRoomRoute =
   AuthenticatedGiseleVoiceRoomRouteImport.update({
     id: '/voice-room',
     path: '/voice-room',
+    getParentRoute: () => AuthenticatedGiseleRoute,
+  } as any)
+const AuthenticatedGiseleWritingRoute =
+  AuthenticatedGiseleWritingRouteImport.update({
+    id: '/writing',
+    path: '/writing',
     getParentRoute: () => AuthenticatedGiseleRoute,
   } as any)
 const AuthenticatedProfessorIndexRoute =
@@ -581,16 +616,21 @@ export interface FileRoutesByFullPath {
   '/curso-upper/assessment': typeof AuthenticatedCursoUpperAssessmentRoute
   '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
+  '/gisele/desafio': typeof AuthenticatedGiseleDesafioRoute
   '/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
   '/gisele/historico': typeof AuthenticatedGiseleHistoricoRoute
+  '/gisele/listening': typeof AuthenticatedGiseleListeningRoute
   '/gisele/meu-plano': typeof AuthenticatedGiseleMeuPlanoRoute
   '/gisele/meu-progresso': typeof AuthenticatedGiseleMeuProgressoRoute
   '/gisele/missao-do-dia': typeof AuthenticatedGiseleMissaoDoDiaRoute
   '/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
+  '/gisele/pratica': typeof AuthenticatedGiselePraticaRoute
   '/gisele/preferencias': typeof AuthenticatedGiselePreferenciasRoute
   '/gisele/privacidade': typeof AuthenticatedGiselePrivacidadeRoute
   '/gisele/recomendacoes': typeof AuthenticatedGiseleRecomendacoesRoute
+  '/gisele/revisao': typeof AuthenticatedGiseleRevisaoRoute
   '/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
+  '/gisele/writing': typeof AuthenticatedGiseleWritingRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -654,16 +694,21 @@ export interface FileRoutesByTo {
   '/curso-upper/assessment': typeof AuthenticatedCursoUpperAssessmentRoute
   '/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
+  '/gisele/desafio': typeof AuthenticatedGiseleDesafioRoute
   '/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
   '/gisele/historico': typeof AuthenticatedGiseleHistoricoRoute
+  '/gisele/listening': typeof AuthenticatedGiseleListeningRoute
   '/gisele/meu-plano': typeof AuthenticatedGiseleMeuPlanoRoute
   '/gisele/meu-progresso': typeof AuthenticatedGiseleMeuProgressoRoute
   '/gisele/missao-do-dia': typeof AuthenticatedGiseleMissaoDoDiaRoute
   '/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
+  '/gisele/pratica': typeof AuthenticatedGiselePraticaRoute
   '/gisele/preferencias': typeof AuthenticatedGiselePreferenciasRoute
   '/gisele/privacidade': typeof AuthenticatedGiselePrivacidadeRoute
   '/gisele/recomendacoes': typeof AuthenticatedGiseleRecomendacoesRoute
+  '/gisele/revisao': typeof AuthenticatedGiseleRevisaoRoute
   '/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
+  '/gisele/writing': typeof AuthenticatedGiseleWritingRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -737,16 +782,21 @@ export interface FileRoutesById {
   '/_authenticated/curso-upper/assessment': typeof AuthenticatedCursoUpperAssessmentRoute
   '/_authenticated/gisele/$threadId': typeof AuthenticatedGiseleThreadIdRoute
   '/_authenticated/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
+  '/_authenticated/gisele/desafio': typeof AuthenticatedGiseleDesafioRoute
   '/_authenticated/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
   '/_authenticated/gisele/historico': typeof AuthenticatedGiseleHistoricoRoute
+  '/_authenticated/gisele/listening': typeof AuthenticatedGiseleListeningRoute
   '/_authenticated/gisele/meu-plano': typeof AuthenticatedGiseleMeuPlanoRoute
   '/_authenticated/gisele/meu-progresso': typeof AuthenticatedGiseleMeuProgressoRoute
   '/_authenticated/gisele/missao-do-dia': typeof AuthenticatedGiseleMissaoDoDiaRoute
   '/_authenticated/gisele/onboarding': typeof AuthenticatedGiseleOnboardingRoute
+  '/_authenticated/gisele/pratica': typeof AuthenticatedGiselePraticaRoute
   '/_authenticated/gisele/preferencias': typeof AuthenticatedGiselePreferenciasRoute
   '/_authenticated/gisele/privacidade': typeof AuthenticatedGiselePrivacidadeRoute
   '/_authenticated/gisele/recomendacoes': typeof AuthenticatedGiseleRecomendacoesRoute
+  '/_authenticated/gisele/revisao': typeof AuthenticatedGiseleRevisaoRoute
   '/_authenticated/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
+  '/_authenticated/gisele/writing': typeof AuthenticatedGiseleWritingRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/_authenticated/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
@@ -820,16 +870,21 @@ export interface FileRouteTypes {
     | '/curso-upper/assessment'
     | '/gisele/$threadId'
     | '/gisele/configuracoes'
+    | '/gisele/desafio'
     | '/gisele/feedback'
     | '/gisele/historico'
+    | '/gisele/listening'
     | '/gisele/meu-plano'
     | '/gisele/meu-progresso'
     | '/gisele/missao-do-dia'
     | '/gisele/onboarding'
+    | '/gisele/pratica'
     | '/gisele/preferencias'
     | '/gisele/privacidade'
     | '/gisele/recomendacoes'
+    | '/gisele/revisao'
     | '/gisele/voice-room'
+    | '/gisele/writing'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -893,16 +948,21 @@ export interface FileRouteTypes {
     | '/curso-upper/assessment'
     | '/gisele/$threadId'
     | '/gisele/configuracoes'
+    | '/gisele/desafio'
     | '/gisele/feedback'
     | '/gisele/historico'
+    | '/gisele/listening'
     | '/gisele/meu-plano'
     | '/gisele/meu-progresso'
     | '/gisele/missao-do-dia'
     | '/gisele/onboarding'
+    | '/gisele/pratica'
     | '/gisele/preferencias'
     | '/gisele/privacidade'
     | '/gisele/recomendacoes'
+    | '/gisele/revisao'
     | '/gisele/voice-room'
+    | '/gisele/writing'
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
@@ -975,16 +1035,21 @@ export interface FileRouteTypes {
     | '/_authenticated/curso-upper/assessment'
     | '/_authenticated/gisele/$threadId'
     | '/_authenticated/gisele/configuracoes'
+    | '/_authenticated/gisele/desafio'
     | '/_authenticated/gisele/feedback'
     | '/_authenticated/gisele/historico'
+    | '/_authenticated/gisele/listening'
     | '/_authenticated/gisele/meu-plano'
     | '/_authenticated/gisele/meu-progresso'
     | '/_authenticated/gisele/missao-do-dia'
     | '/_authenticated/gisele/onboarding'
+    | '/_authenticated/gisele/pratica'
     | '/_authenticated/gisele/preferencias'
     | '/_authenticated/gisele/privacidade'
     | '/_authenticated/gisele/recomendacoes'
+    | '/_authenticated/gisele/revisao'
     | '/_authenticated/gisele/voice-room'
+    | '/_authenticated/gisele/writing'
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/speak2travel/trip-planner'
     | '/_authenticated/upgrade/essential'
@@ -1363,6 +1428,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGiseleConfiguracoesRouteImport
       parentRoute: typeof AuthenticatedGiseleRoute
     }
+    '/_authenticated/gisele/desafio': {
+      id: '/_authenticated/gisele/desafio'
+      path: '/desafio'
+      fullPath: '/gisele/desafio'
+      preLoaderRoute: typeof AuthenticatedGiseleDesafioRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
     '/_authenticated/gisele/feedback': {
       id: '/_authenticated/gisele/feedback'
       path: '/feedback'
@@ -1375,6 +1447,13 @@ declare module '@tanstack/react-router' {
       path: '/historico'
       fullPath: '/gisele/historico'
       preLoaderRoute: typeof AuthenticatedGiseleHistoricoRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
+    '/_authenticated/gisele/listening': {
+      id: '/_authenticated/gisele/listening'
+      path: '/listening'
+      fullPath: '/gisele/listening'
+      preLoaderRoute: typeof AuthenticatedGiseleListeningRouteImport
       parentRoute: typeof AuthenticatedGiseleRoute
     }
     '/_authenticated/gisele/meu-plano': {
@@ -1405,6 +1484,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGiseleOnboardingRouteImport
       parentRoute: typeof AuthenticatedGiseleRoute
     }
+    '/_authenticated/gisele/pratica': {
+      id: '/_authenticated/gisele/pratica'
+      path: '/pratica'
+      fullPath: '/gisele/pratica'
+      preLoaderRoute: typeof AuthenticatedGiselePraticaRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
     '/_authenticated/gisele/preferencias': {
       id: '/_authenticated/gisele/preferencias'
       path: '/preferencias'
@@ -1426,11 +1512,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGiseleRecomendacoesRouteImport
       parentRoute: typeof AuthenticatedGiseleRoute
     }
+    '/_authenticated/gisele/revisao': {
+      id: '/_authenticated/gisele/revisao'
+      path: '/revisao'
+      fullPath: '/gisele/revisao'
+      preLoaderRoute: typeof AuthenticatedGiseleRevisaoRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
     '/_authenticated/gisele/voice-room': {
       id: '/_authenticated/gisele/voice-room'
       path: '/voice-room'
       fullPath: '/gisele/voice-room'
       preLoaderRoute: typeof AuthenticatedGiseleVoiceRoomRouteImport
+      parentRoute: typeof AuthenticatedGiseleRoute
+    }
+    '/_authenticated/gisele/writing': {
+      id: '/_authenticated/gisele/writing'
+      path: '/writing'
+      fullPath: '/gisele/writing'
+      preLoaderRoute: typeof AuthenticatedGiseleWritingRouteImport
       parentRoute: typeof AuthenticatedGiseleRoute
     }
     '/_authenticated/professor/': {
@@ -1661,16 +1761,21 @@ const AuthenticatedCursoUpperRouteWithChildren =
 interface AuthenticatedGiseleRouteChildren {
   AuthenticatedGiseleThreadIdRoute: typeof AuthenticatedGiseleThreadIdRoute
   AuthenticatedGiseleConfiguracoesRoute: typeof AuthenticatedGiseleConfiguracoesRoute
+  AuthenticatedGiseleDesafioRoute: typeof AuthenticatedGiseleDesafioRoute
   AuthenticatedGiseleFeedbackRoute: typeof AuthenticatedGiseleFeedbackRoute
   AuthenticatedGiseleHistoricoRoute: typeof AuthenticatedGiseleHistoricoRoute
+  AuthenticatedGiseleListeningRoute: typeof AuthenticatedGiseleListeningRoute
   AuthenticatedGiseleMeuPlanoRoute: typeof AuthenticatedGiseleMeuPlanoRoute
   AuthenticatedGiseleMeuProgressoRoute: typeof AuthenticatedGiseleMeuProgressoRoute
   AuthenticatedGiseleMissaoDoDiaRoute: typeof AuthenticatedGiseleMissaoDoDiaRoute
   AuthenticatedGiseleOnboardingRoute: typeof AuthenticatedGiseleOnboardingRoute
+  AuthenticatedGiselePraticaRoute: typeof AuthenticatedGiselePraticaRoute
   AuthenticatedGiselePreferenciasRoute: typeof AuthenticatedGiselePreferenciasRoute
   AuthenticatedGiselePrivacidadeRoute: typeof AuthenticatedGiselePrivacidadeRoute
   AuthenticatedGiseleRecomendacoesRoute: typeof AuthenticatedGiseleRecomendacoesRoute
+  AuthenticatedGiseleRevisaoRoute: typeof AuthenticatedGiseleRevisaoRoute
   AuthenticatedGiseleVoiceRoomRoute: typeof AuthenticatedGiseleVoiceRoomRoute
+  AuthenticatedGiseleWritingRoute: typeof AuthenticatedGiseleWritingRoute
   AuthenticatedGiseleIndexRoute: typeof AuthenticatedGiseleIndexRoute
   AuthenticatedGiseleVoiceSessionThreadIdRoute: typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
 }
@@ -1678,16 +1783,21 @@ interface AuthenticatedGiseleRouteChildren {
 const AuthenticatedGiseleRouteChildren: AuthenticatedGiseleRouteChildren = {
   AuthenticatedGiseleThreadIdRoute: AuthenticatedGiseleThreadIdRoute,
   AuthenticatedGiseleConfiguracoesRoute: AuthenticatedGiseleConfiguracoesRoute,
+  AuthenticatedGiseleDesafioRoute: AuthenticatedGiseleDesafioRoute,
   AuthenticatedGiseleFeedbackRoute: AuthenticatedGiseleFeedbackRoute,
   AuthenticatedGiseleHistoricoRoute: AuthenticatedGiseleHistoricoRoute,
+  AuthenticatedGiseleListeningRoute: AuthenticatedGiseleListeningRoute,
   AuthenticatedGiseleMeuPlanoRoute: AuthenticatedGiseleMeuPlanoRoute,
   AuthenticatedGiseleMeuProgressoRoute: AuthenticatedGiseleMeuProgressoRoute,
   AuthenticatedGiseleMissaoDoDiaRoute: AuthenticatedGiseleMissaoDoDiaRoute,
   AuthenticatedGiseleOnboardingRoute: AuthenticatedGiseleOnboardingRoute,
+  AuthenticatedGiselePraticaRoute: AuthenticatedGiselePraticaRoute,
   AuthenticatedGiselePreferenciasRoute: AuthenticatedGiselePreferenciasRoute,
   AuthenticatedGiselePrivacidadeRoute: AuthenticatedGiselePrivacidadeRoute,
   AuthenticatedGiseleRecomendacoesRoute: AuthenticatedGiseleRecomendacoesRoute,
+  AuthenticatedGiseleRevisaoRoute: AuthenticatedGiseleRevisaoRoute,
   AuthenticatedGiseleVoiceRoomRoute: AuthenticatedGiseleVoiceRoomRoute,
+  AuthenticatedGiseleWritingRoute: AuthenticatedGiseleWritingRoute,
   AuthenticatedGiseleIndexRoute: AuthenticatedGiseleIndexRoute,
   AuthenticatedGiseleVoiceSessionThreadIdRoute:
     AuthenticatedGiseleVoiceSessionThreadIdRoute,
