@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Users, Trophy, CalendarDays, Share2, Check } from "lucide-react";
+import { Users, Trophy, Share2, Check } from "lucide-react";
 import { toast } from "sonner";
 import { AltHeading } from "@/components/AltHeading";
-import { COMMUNITY_CHALLENGES, PRACTICE_MEETINGS } from "@/lib/support-content";
+import { PracticeMeetingsSection } from "@/components/PracticeMeetingsSection";
+import { COMMUNITY_CHALLENGES } from "@/lib/support-content";
+
 
 export const Route = createFileRoute("/_authenticated/comunidade")({
   head: () => {
