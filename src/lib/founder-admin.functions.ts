@@ -89,8 +89,10 @@ export const listEscalatedMessages = createServerFn({ method: "GET" })
 export const countPendingFounderMessages = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }): Promise<{ pending: number }> => {
-    const { isAdmin } = await import("@/lib/admin-guard.server").then((m) => m.checkAdmin(context));
+    const { isAdminUser } = await import("@/lib/admin-guard.server");
+    const isAdmin = await isAdminUser(context.supabase as never, context.userId);
     if (!isAdmin) return { pending: 0 };
+
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { count, error } = await supabaseAdmin
       .from("founder_messages")
