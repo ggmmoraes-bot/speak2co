@@ -223,11 +223,13 @@ export const upsertPracticeMeeting = createServerFn({ method: "POST" })
     const { assertAdmin } = await import("@/lib/admin-guard.server");
     await assertAdmin(context as never);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const payload = {
-      ...data,
-      starts_at: new Date(data.starts_at).toISOString(),
-    };
+    const payload = Object.fromEntries(
+      Object.entries({ ...data, starts_at: new Date(data.starts_at).toISOString() }).filter(
+        ([, v]) => v !== undefined,
+      ),
+    ) as { title: string; starts_at: string };
     const { error } = await supabaseAdmin.from("practice_meetings").upsert(payload);
+
     if (error) throw new Error(error.message);
     return { ok: true as const };
   });
