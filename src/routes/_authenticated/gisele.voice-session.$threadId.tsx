@@ -440,7 +440,27 @@ function VoiceSessionPage() {
         </Link>
       </div>
 
+      {savedSessionId && (
+        <Card className="space-y-2 p-4">
+          <p className="text-sm font-semibold text-foreground">
+            Session saved to your history
+            {estimatedLevel ? ` · estimated level ${estimatedLevel}` : ""}
+          </p>
+          <p className="text-xs italic text-muted-foreground">
+            Transcrição, correções suaves e nível estimado ficam salvos para você revisar depois.
+          </p>
+          <Link
+            to="/gisele/historico/$sessionId"
+            params={{ sessionId: savedSessionId }}
+            className="text-sm font-semibold text-gold hover:underline"
+          >
+            Open full session review →
+          </Link>
+        </Card>
+      )}
+
       {feedback && <GiseleFeedbackCard feedback={feedback} />}
+
     </main>
   );
 }
