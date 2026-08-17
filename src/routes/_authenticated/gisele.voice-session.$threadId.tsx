@@ -298,23 +298,44 @@ function VoiceSessionPage() {
           <p className="text-xs italic text-muted-foreground">{label.pt}</p>
         </div>
 
+        <p className="rounded-full border border-gold/30 bg-gold/5 px-3 py-1 text-[11px] text-muted-foreground">
+          {continuous
+            ? "Continuous conversation is ON — just talk, I listen and reply."
+            : "Continuous conversation is OFF — tap the mic for each turn."}
+        </p>
+
         <div className="flex flex-wrap items-center justify-center gap-2">
+          {continuous ? (
+            <Button variant="outline" className="gap-2 rounded-full" onClick={stopLoop}>
+              <Square className="h-4 w-4" /> Pause conversation
+            </Button>
+          ) : (
+            <Button
+              onClick={resumeLoop}
+              disabled={busy}
+              className="gap-2 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+            >
+              <Mic className="h-4 w-4" /> Resume conversation
+            </Button>
+          )}
           {phase === "recording" ? (
             <Button
               onClick={stopRecording}
               className="gap-2 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
             >
-              <Square className="h-4 w-4" /> Stop and send
+              <Square className="h-4 w-4" /> Send now
             </Button>
           ) : (
             <Button
               onClick={startRecording}
-              disabled={busy}
-              className="gap-2 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+              disabled={busy || phase === "speaking"}
+              variant={continuous ? "outline" : "default"}
+              className={`gap-2 rounded-full ${continuous ? "" : "bg-gold font-semibold text-primary-foreground hover:opacity-90"}`}
             >
               <Mic className="h-4 w-4" /> Start speaking
             </Button>
           )}
+
           {phase === "speaking" && (
             <Button variant="outline" className="gap-2 rounded-full" onClick={() => { stopSpeaking(); setPhase("idle"); }}>
               <VolumeX className="h-4 w-4" /> Stop audio
