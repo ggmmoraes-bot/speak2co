@@ -19,11 +19,14 @@ export function PhrasePractice({
   en,
   pt,
   note,
+  index,
   onAttempt,
 }: {
   en: string;
   pt: string;
   note?: string | undefined;
+  /** Numeração sequencial do item dentro do material (1, 2, 3...). */
+  index?: number | undefined;
   onAttempt?: ((attempt: PronunciationAttempt) => void) | undefined;
 }) {
   const [playing, setPlaying] = useState(false);
