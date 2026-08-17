@@ -310,9 +310,23 @@ function TravelModule({ track }: { track: TravelTrack }) {
             </p>
 
             <div className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
-              <p className="text-sm font-semibold text-gold">{prompt.situation}</p>
+              <p className="text-sm font-semibold text-gold">
+                {prompt.situationEn ?? prompt.situation}
+                {prompt.situationEn && (
+                  <span className="mt-0.5 block text-xs font-normal text-muted-foreground italic">
+                    {prompt.situation}
+                  </span>
+                )}
+              </p>
               <p className="mt-3 text-base text-foreground">“{prompt.cue}”</p>
-              <p className="mt-4 text-sm text-muted-foreground">{prompt.task}</p>
+              <p className="mt-4 text-sm text-foreground/80">
+                {prompt.taskEn ?? prompt.task}
+                {prompt.taskEn && (
+                  <span className="mt-0.5 block text-xs text-muted-foreground italic">
+                    {prompt.task}
+                  </span>
+                )}
+              </p>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {prompt.keyPhrases.map((phrase) => (
                   <li
@@ -323,11 +337,19 @@ function TravelModule({ track }: { track: TravelTrack }) {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 flex gap-2 text-xs text-muted-foreground">
-                <Lightbulb className="h-4 w-4 shrink-0 text-primary" />
-                {prompt.tip}
+              <p className="mt-4 flex gap-2 text-sm text-foreground/80">
+                <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                <span>
+                  {prompt.tipEn ?? prompt.tip}
+                  {prompt.tipEn && (
+                    <span className="mt-0.5 block text-xs text-muted-foreground italic">
+                      {prompt.tip}
+                    </span>
+                  )}
+                </span>
               </p>
             </div>
+
 
             <Textarea
               value={answers[prompt.id] ?? ""}
