@@ -155,6 +155,8 @@ export type SessionHistoryItem = {
   minutes: number;
   score: number | null;
   corrections: number;
+  estimated_level: string | null;
+  turns: number;
   created_at: string;
 };
 
@@ -163,7 +165,9 @@ export const getSessionHistory = createServerFn({ method: "GET" })
   .handler(async ({ context }): Promise<SessionHistoryItem[]> => {
     const { data, error } = await context.supabase
       .from("gisele_sessions")
-      .select("id, thread_id, focus, session_type, summary, minutes, score, corrections, created_at")
+      .select(
+        "id, thread_id, focus, session_type, summary, minutes, score, corrections, estimated_level, transcript, created_at",
+      )
       .eq("user_id", context.userId)
       .order("created_at", { ascending: false })
       .limit(50);
@@ -177,9 +181,12 @@ export const getSessionHistory = createServerFn({ method: "GET" })
       minutes: s.minutes ?? 0,
       score: s.score,
       corrections: Array.isArray(s.corrections) ? s.corrections.length : 0,
+      estimated_level: s.estimated_level,
+      turns: Array.isArray(s.transcript) ? s.transcript.length : 0,
       created_at: s.created_at,
     }));
   });
+
 
 /* ------------------------------ Feedback ------------------------------- */
 
@@ -281,3 +288,80 @@ export const getGiseleReport = createServerFn({ method: "POST" })
     return generateProgressReport(context.supabase, context.userId);
   });
 
+
+/* --------------------- Histórico de sessões de voz --------------------- */
+
+export type VoiceTurn = { role: "student" | "gisele"; text: string; at: string };
+export type SoftCorrectionDTO = { original: string; better: string; why: string };
+
+const TurnSchema = z.object({
+  role: z.enum(["student", "gisele"]),
+  text: z.string().max(4000),
+  at: z.string(),
+});
+
+/** Autosave da transcrição a cada turno da conversa por voz. */
+export const saveVoiceTranscript = createServerFn({ method: "POST" })
+  .middleware([requireFeature("gisele_ai")])
+  .inputValidator((input: unknown) =>
+    z.object({ threadId: z.string().uuid(), turns: z.array(TurnSchema).max(400) }).parse(input),
+  )
+  .handler(async ({ context, data }) => {
+    const { saveVoiceTranscript: save } = await import("@/lib/gisele-voice-history.server");
+    return save(context.supabase, context.userId, data.threadId, data.turns);
+  });
+
+/** Encerra a sessão de voz gravando transcript, correções suaves e nível estimado. */
+export const finalizeVoiceSession = createServerFn({ method: "POST" })
+  .middleware([requireFeature("gisele_ai")])
+  .inputValidator((input: unknown) =>
+    z.object({ threadId: z.string().uuid(), turns: z.array(TurnSchema).max(400) }).parse(input),
+  )
+  .handler(async ({ context, data }) => {
+    const { finalizeVoiceSession: finalize } = await import("@/lib/gisele-voice-history.server");
+    return finalize(context.supabase, context.userId, data.threadId, data.turns);
+  });
+
+export type SessionDetail = {
+  id: string;
+  thread_id: string | null;
+  focus: string;
+  session_type: string;
+  summary: string | null;
+  minutes: number;
+  estimated_level: string | null;
+  transcript: VoiceTurn[];
+  soft_corrections: SoftCorrectionDTO[];
+  created_at: string;
+};
+
+/** Detalhe de uma sessão para revisão posterior. */
+export const getSessionDetail = createServerFn({ method: "GET" })
+  .middleware([requireFeature("gisele_ai")])
+  .inputValidator((input: unknown) => z.object({ sessionId: z.string().uuid() }).parse(input))
+  .handler(async ({ context, data }): Promise<SessionDetail | null> => {
+    const { data: s, error } = await context.supabase
+      .from("gisele_sessions")
+      .select(
+        "id, thread_id, focus, session_type, summary, minutes, estimated_level, transcript, soft_corrections, created_at",
+      )
+      .eq("id", data.sessionId)
+      .eq("user_id", context.userId)
+      .maybeSingle();
+    if (error) throw new Error(error.message);
+    if (!s) return null;
+    return {
+      id: s.id,
+      thread_id: s.thread_id,
+      focus: s.focus,
+      session_type: s.session_type,
+      summary: s.summary,
+      minutes: s.minutes ?? 0,
+      estimated_level: s.estimated_level,
+      transcript: (Array.isArray(s.transcript) ? s.transcript : []) as unknown as VoiceTurn[],
+      soft_corrections: (Array.isArray(s.soft_corrections)
+        ? s.soft_corrections
+        : []) as unknown as SoftCorrectionDTO[],
+      created_at: s.created_at,
+    };
+  });

@@ -612,42 +612,51 @@ export type Database = {
         Row: {
           corrections: Json
           created_at: string
+          estimated_level: string | null
           focus: string
           id: string
           minutes: number
           score: number | null
           session_date: string
           session_type: string
+          soft_corrections: Json
           summary: string | null
           thread_id: string | null
+          transcript: Json
           updated_at: string
           user_id: string
         }
         Insert: {
           corrections?: Json
           created_at?: string
+          estimated_level?: string | null
           focus?: string
           id?: string
           minutes?: number
           score?: number | null
           session_date?: string
           session_type?: string
+          soft_corrections?: Json
           summary?: string | null
           thread_id?: string | null
+          transcript?: Json
           updated_at?: string
           user_id: string
         }
         Update: {
           corrections?: Json
           created_at?: string
+          estimated_level?: string | null
           focus?: string
           id?: string
           minutes?: number
           score?: number | null
           session_date?: string
           session_type?: string
+          soft_corrections?: Json
           summary?: string | null
           thread_id?: string | null
+          transcript?: Json
           updated_at?: string
           user_id?: string
         }

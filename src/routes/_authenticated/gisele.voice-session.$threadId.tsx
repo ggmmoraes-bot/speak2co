@@ -12,8 +12,14 @@ import { speakText, stopSpeaking, transcribeAudio } from "@/lib/voice-client";
 import { isBrandVoice, useVoiceSettings } from "@/lib/use-voice-settings";
 import { AiVoiceDisclosure } from "@/components/AiVoiceDisclosure";
 import { GiseleFeedbackCard } from "@/components/gisele/GiseleFeedbackCard";
-import { requestSessionFeedback, type SessionFeedbackDTO } from "@/lib/gisele-data.functions";
+import {
+  requestSessionFeedback,
+  saveVoiceTranscript,
+  finalizeVoiceSession,
+  type SessionFeedbackDTO,
+} from "@/lib/gisele-data.functions";
 import { AltHeading } from "@/components/AltHeading";
+
 
 export const Route = createFileRoute("/_authenticated/gisele/voice-session/$threadId")({
   component: VoiceSessionPage,
@@ -45,8 +51,11 @@ function VoiceSessionPage() {
   const [lastTranscript, setLastTranscript] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<SessionFeedbackDTO | null>(null);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [savedSessionId, setSavedSessionId] = useState<string | null>(null);
+  const [estimatedLevel, setEstimatedLevel] = useState<string | null>(null);
   /** Conversa contínua: a Gisele pergunta, escuta e responde sem cliques. */
   const [continuous, setContinuous] = useState(true);
+
   const recorderRef = useRef<MicRecorder | null>(null);
   const spokenRef = useRef<string | null>(null);
   const watcherRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -235,11 +244,38 @@ function VoiceSessionPage() {
     sendMessage({ text: `Let me try that again: ${lastTranscript}` });
   }
 
+  /** Transcrição da sessão no formato salvo no histórico. */
+  const turns = useMemo(
+    () =>
+      messages
+        .map((m) => ({
+          role: (m.role === "user" ? "student" : "gisele") as "student" | "gisele",
+          text: textOf(m),
+          at: new Date().toISOString(),
+        }))
+        .filter((t) => t.text && !t.text.startsWith("[Session start]")),
+    [messages],
+  );
+
+  // Autosave: guarda a transcrição a cada turno concluído, para o histórico
+  // ficar completo mesmo se o aluno sair sem encerrar a sessão.
+  const savedCountRef = useRef(0);
+  useEffect(() => {
+    if (streaming || turns.length === 0 || turns.length === savedCountRef.current) return;
+    savedCountRef.current = turns.length;
+    void saveVoiceTranscript({ data: { threadId, turns } }).catch(() => {});
+  }, [streaming, turns, threadId]);
+
   async function getFeedback() {
     try {
       setFeedbackLoading(true);
+      // Arquiva a sessão completa: transcript + correções suaves + nível estimado.
+      const saved = await finalizeVoiceSession({ data: { threadId, turns } }).catch(() => null);
       const result = await requestSessionFeedback({ data: { threadId } });
       setFeedback(result);
+      setSavedSessionId(saved?.sessionId ?? null);
+      setEstimatedLevel(saved?.estimatedLevel ?? null);
+      toast.success("Session saved to your history.");
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível gerar o feedback.");
     } finally {
@@ -249,6 +285,7 @@ function VoiceSessionPage() {
 
   const busy = phase === "transcribing" || phase === "thinking";
   const label = PHASE_LABEL[phase];
+
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 space-y-6 px-6 py-10">
@@ -403,7 +440,27 @@ function VoiceSessionPage() {
         </Link>
       </div>
 
+      {savedSessionId && (
+        <Card className="space-y-2 p-4">
+          <p className="text-sm font-semibold text-foreground">
+            Session saved to your history
+            {estimatedLevel ? ` · estimated level ${estimatedLevel}` : ""}
+          </p>
+          <p className="text-xs italic text-muted-foreground">
+            Transcrição, correções suaves e nível estimado ficam salvos para você revisar depois.
+          </p>
+          <Link
+            to="/gisele/historico/$sessionId"
+            params={{ sessionId: savedSessionId }}
+            className="text-sm font-semibold text-gold hover:underline"
+          >
+            Open full session review →
+          </Link>
+        </Card>
+      )}
+
       {feedback && <GiseleFeedbackCard feedback={feedback} />}
+
     </main>
   );
 }

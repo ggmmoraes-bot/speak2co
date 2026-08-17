@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, Mic } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { FOCUS_LABEL } from "@/lib/gisele-focus";
@@ -41,25 +41,37 @@ function HistoryPage() {
           return (
             <Card
               key={s.id}
-              className={`space-y-2 p-4 ${s.thread_id ? "cursor-pointer transition-colors hover:border-gold/50" : ""}`}
+              className="cursor-pointer space-y-2 p-4 transition-colors hover:border-gold/50"
               onClick={() =>
-                s.thread_id
-                  ? navigate({ to: "/gisele/$threadId", params: { threadId: s.thread_id } })
-                  : undefined
+                navigate({ to: "/gisele/historico/$sessionId", params: { sessionId: s.id } })
               }
             >
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                  <MessageSquare className="h-4 w-4 text-gold" />
+                  {s.session_type === "voice" ? (
+                    <Mic className="h-4 w-4 text-gold" />
+                  ) : (
+                    <MessageSquare className="h-4 w-4 text-gold" />
+                  )}
                   {label.en}
+                  {s.estimated_level && (
+                    <span className="rounded-full border border-gold/40 bg-gold/10 px-2 py-0.5 text-[10px] font-semibold text-gold">
+                      {s.estimated_level}
+                    </span>
+                  )}
                 </span>
                 <span className="text-[11px] text-muted-foreground">
                   {new Date(s.created_at).toLocaleString("pt-BR")} · {s.minutes} min
+                  {s.turns > 0 ? ` · ${s.turns} turns` : ""}
                   {s.corrections > 0 ? ` · ${s.corrections} corrections` : ""}
                 </span>
               </div>
-              {s.summary && <p className="text-xs text-muted-foreground">{s.summary}</p>}
+              {s.summary && (
+                <p className="whitespace-pre-line text-xs text-muted-foreground">{s.summary}</p>
+              )}
+              <p className="text-[11px] font-semibold text-gold">Open full review →</p>
             </Card>
+
           );
         })}
       </div>
