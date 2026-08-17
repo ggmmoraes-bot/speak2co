@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, Mic } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { FOCUS_LABEL } from "@/lib/gisele-focus";
