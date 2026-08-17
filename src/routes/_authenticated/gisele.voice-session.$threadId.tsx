@@ -53,8 +53,9 @@ function VoiceSessionPage() {
   const [feedbackLoading, setFeedbackLoading] = useState(false);
   const [savedSessionId, setSavedSessionId] = useState<string | null>(null);
   const [estimatedLevel, setEstimatedLevel] = useState<string | null>(null);
-
+  /** Conversa contínua: a Gisele pergunta, escuta e responde sem cliques. */
   const [continuous, setContinuous] = useState(true);
+
   const recorderRef = useRef<MicRecorder | null>(null);
   const spokenRef = useRef<string | null>(null);
   const watcherRef = useRef<ReturnType<typeof setInterval> | null>(null);
