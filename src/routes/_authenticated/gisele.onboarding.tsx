@@ -67,8 +67,31 @@ function OnboardingPage() {
 
       <Card className="space-y-5 p-6">
         <div className="space-y-2">
+          <p className="text-sm font-semibold text-foreground">
+            My English Goal <span className="italic text-muted-foreground">/ Meu objetivo</span>
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {GISELE_GOALS.map((g) => (
+              <button
+                key={g.id}
+                type="button"
+                onClick={() => setObjective(g.en)}
+                className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${
+                  objective === g.en
+                    ? "border-gold bg-gold/15 text-gold"
+                    : "border-border text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {g.en}
+                <span className="ml-1 font-normal italic opacity-70">/ {g.pt}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-2">
           <label className="text-sm font-semibold text-foreground" htmlFor="objective">
-            Your goal <span className="italic text-muted-foreground">/ Seu objetivo</span>
+            Tell me more <span className="italic text-muted-foreground">/ Conte mais</span>
           </label>
           <Input
             id="objective"
@@ -77,6 +100,7 @@ function OnboardingPage() {
             placeholder="Ex.: Passar em entrevistas em inglês para vagas internacionais"
           />
         </div>
+
 
         <div className="space-y-2">
           <p className="text-sm font-semibold text-foreground">
