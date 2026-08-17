@@ -239,10 +239,10 @@ export async function listLearningNotes(
   userId: string,
 ): Promise<LearningNote[]> {
   const { data } = await supabase
-    .from("ai_memory")
+    .from("gisele_memory")
     .select("id, content, created_at")
     .eq("user_id", userId)
-    .eq("type", "note")
+    .eq("kind", "note")
     .order("created_at", { ascending: false })
     .limit(20);
   return (data ?? []) as LearningNote[];
@@ -267,8 +267,8 @@ Baseie-se apenas nos dados reais fornecidos. Nunca invente progresso, notas ou c
   );
 
   const { data } = await supabase
-    .from("ai_memory")
-    .insert({ user_id: userId, type: "note", content: note })
+    .from("gisele_memory")
+    .insert({ user_id: userId, kind: "note", content: note })
     .select("id, content, created_at")
     .maybeSingle();
 
