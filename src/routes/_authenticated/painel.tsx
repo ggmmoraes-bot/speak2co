@@ -48,9 +48,9 @@ function Painel() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [email, setEmail] = useState<string>("");
   const { data: access } = useAccess();
-  const previewPlan = usePreviewPlan();
-  // Ao pré-visualizar um plano, o acesso volta como aluno — mas o controle continua visível.
-  const isAdminAccount = access?.isAdmin === true || Boolean(previewPlan);
+  const previewPlan = useAdminPreviewPlan();
+  // Somente a role administrativa real (validada no servidor) libera as ferramentas internas.
+  const isAdminAccount = useIsAdmin();
 
   useEffect(() => {
     let active = true;
