@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { getAIProfile, saveAIProfile } from "@/lib/gisele-data.functions";
+import { GISELE_GOALS } from "@/lib/gisele-goals";
+
 import { AI_VOICES } from "@/lib/use-voice-settings";
 import { AltHeading } from "@/components/AltHeading";
 
