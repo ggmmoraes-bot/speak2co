@@ -45,6 +45,15 @@ const COURSES = {
     units: INTERMEDIATE_UNITS,
     to: "/curso-intermediate/unidade/$unitCode/$part" as const,
   },
+  upper: {
+    label: "Upper-Intermediate (B2)",
+    title: "Upper-Intermediate English Course",
+    subtitle: "Método Speak2Co · CEFR B2",
+    file: "speak2co-upper-intermediate-vocabulary.pdf",
+    units: UPPER_UNITS,
+    to: "/curso-upper/unidade/$unitCode/$part" as const,
+  },
+
 } satisfies Record<
   string,
   {
