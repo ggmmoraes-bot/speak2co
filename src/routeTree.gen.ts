@@ -86,6 +86,7 @@ import { Route as AuthenticatedVocabularioIndexRouteImport } from './routes/_aut
 import { Route as ApiVoicePronunciationRouteImport } from './routes/api/voice/pronunciation'
 import { Route as ApiVoiceSpeakRouteImport } from './routes/api/voice/speak'
 import { Route as ApiVoiceTranscribeRouteImport } from './routes/api/voice/transcribe'
+import { Route as AuthenticatedGiseleHistoricoSessionIdRouteImport } from './routes/_authenticated/gisele.historico.$sessionId'
 import { Route as AuthenticatedGiseleVoiceSessionThreadIdRouteImport } from './routes/_authenticated/gisele.voice-session.$threadId'
 import { Route as AuthenticatedSpeak2fluencyModuloModuleIdRouteImport } from './routes/_authenticated/speak2fluency.modulo.$moduleId'
 import { Route as AuthenticatedSpeak2hireMaterialMaterialIdRouteImport } from './routes/_authenticated/speak2hire.material.$materialId'
@@ -528,6 +529,12 @@ const ApiVoiceTranscribeRoute = ApiVoiceTranscribeRouteImport.update({
   path: '/api/voice/transcribe',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedGiseleHistoricoSessionIdRoute =
+  AuthenticatedGiseleHistoricoSessionIdRouteImport.update({
+    id: '/$sessionId',
+    path: '/$sessionId',
+    getParentRoute: () => AuthenticatedGiseleHistoricoRoute,
+  } as any)
 const AuthenticatedGiseleVoiceSessionThreadIdRoute =
   AuthenticatedGiseleVoiceSessionThreadIdRouteImport.update({
     id: '/voice-session/$threadId',
@@ -647,7 +654,7 @@ export interface FileRoutesByFullPath {
   '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/gisele/desafio': typeof AuthenticatedGiseleDesafioRoute
   '/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
-  '/gisele/historico': typeof AuthenticatedGiseleHistoricoRoute
+  '/gisele/historico': typeof AuthenticatedGiseleHistoricoRouteWithChildren
   '/gisele/listening': typeof AuthenticatedGiseleListeningRoute
   '/gisele/meu-plano': typeof AuthenticatedGiseleMeuPlanoRoute
   '/gisele/meu-progresso': typeof AuthenticatedGiseleMeuProgressoRoute
@@ -678,6 +685,7 @@ export interface FileRoutesByFullPath {
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
   '/vocabulario/': typeof AuthenticatedVocabularioIndexRoute
+  '/gisele/historico/$sessionId': typeof AuthenticatedGiseleHistoricoSessionIdRoute
   '/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -729,7 +737,7 @@ export interface FileRoutesByTo {
   '/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/gisele/desafio': typeof AuthenticatedGiseleDesafioRoute
   '/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
-  '/gisele/historico': typeof AuthenticatedGiseleHistoricoRoute
+  '/gisele/historico': typeof AuthenticatedGiseleHistoricoRouteWithChildren
   '/gisele/listening': typeof AuthenticatedGiseleListeningRoute
   '/gisele/meu-plano': typeof AuthenticatedGiseleMeuPlanoRoute
   '/gisele/meu-progresso': typeof AuthenticatedGiseleMeuProgressoRoute
@@ -760,6 +768,7 @@ export interface FileRoutesByTo {
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel': typeof AuthenticatedSpeak2travelIndexRoute
   '/vocabulario': typeof AuthenticatedVocabularioIndexRoute
+  '/gisele/historico/$sessionId': typeof AuthenticatedGiseleHistoricoSessionIdRoute
   '/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
   '/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -821,7 +830,7 @@ export interface FileRoutesById {
   '/_authenticated/gisele/configuracoes': typeof AuthenticatedGiseleConfiguracoesRoute
   '/_authenticated/gisele/desafio': typeof AuthenticatedGiseleDesafioRoute
   '/_authenticated/gisele/feedback': typeof AuthenticatedGiseleFeedbackRoute
-  '/_authenticated/gisele/historico': typeof AuthenticatedGiseleHistoricoRoute
+  '/_authenticated/gisele/historico': typeof AuthenticatedGiseleHistoricoRouteWithChildren
   '/_authenticated/gisele/listening': typeof AuthenticatedGiseleListeningRoute
   '/_authenticated/gisele/meu-plano': typeof AuthenticatedGiseleMeuPlanoRoute
   '/_authenticated/gisele/meu-progresso': typeof AuthenticatedGiseleMeuProgressoRoute
@@ -852,6 +861,7 @@ export interface FileRoutesById {
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/_authenticated/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
   '/_authenticated/vocabulario/': typeof AuthenticatedVocabularioIndexRoute
+  '/_authenticated/gisele/historico/$sessionId': typeof AuthenticatedGiseleHistoricoSessionIdRoute
   '/_authenticated/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/_authenticated/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
   '/_authenticated/speak2hire/material/$materialId': typeof AuthenticatedSpeak2hireMaterialMaterialIdRoute
@@ -944,6 +954,7 @@ export interface FileRouteTypes {
     | '/speak2hire/'
     | '/speak2travel/'
     | '/vocabulario/'
+    | '/gisele/historico/$sessionId'
     | '/gisele/voice-session/$threadId'
     | '/speak2fluency/modulo/$moduleId'
     | '/speak2hire/material/$materialId'
@@ -1026,6 +1037,7 @@ export interface FileRouteTypes {
     | '/speak2hire'
     | '/speak2travel'
     | '/vocabulario'
+    | '/gisele/historico/$sessionId'
     | '/gisele/voice-session/$threadId'
     | '/speak2fluency/modulo/$moduleId'
     | '/speak2hire/material/$materialId'
@@ -1117,6 +1129,7 @@ export interface FileRouteTypes {
     | '/_authenticated/speak2hire/'
     | '/_authenticated/speak2travel/'
     | '/_authenticated/vocabulario/'
+    | '/_authenticated/gisele/historico/$sessionId'
     | '/_authenticated/gisele/voice-session/$threadId'
     | '/_authenticated/speak2fluency/modulo/$moduleId'
     | '/_authenticated/speak2hire/material/$materialId'
@@ -1690,6 +1703,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiVoiceTranscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/gisele/historico/$sessionId': {
+      id: '/_authenticated/gisele/historico/$sessionId'
+      path: '/$sessionId'
+      fullPath: '/gisele/historico/$sessionId'
+      preLoaderRoute: typeof AuthenticatedGiseleHistoricoSessionIdRouteImport
+      parentRoute: typeof AuthenticatedGiseleHistoricoRoute
+    }
     '/_authenticated/gisele/voice-session/$threadId': {
       id: '/_authenticated/gisele/voice-session/$threadId'
       path: '/voice-session/$threadId'
@@ -1838,13 +1858,28 @@ const AuthenticatedCursoUpperRouteWithChildren =
     AuthenticatedCursoUpperRouteChildren,
   )
 
+interface AuthenticatedGiseleHistoricoRouteChildren {
+  AuthenticatedGiseleHistoricoSessionIdRoute: typeof AuthenticatedGiseleHistoricoSessionIdRoute
+}
+
+const AuthenticatedGiseleHistoricoRouteChildren: AuthenticatedGiseleHistoricoRouteChildren =
+  {
+    AuthenticatedGiseleHistoricoSessionIdRoute:
+      AuthenticatedGiseleHistoricoSessionIdRoute,
+  }
+
+const AuthenticatedGiseleHistoricoRouteWithChildren =
+  AuthenticatedGiseleHistoricoRoute._addFileChildren(
+    AuthenticatedGiseleHistoricoRouteChildren,
+  )
+
 interface AuthenticatedGiseleRouteChildren {
   AuthenticatedGiseleThreadIdRoute: typeof AuthenticatedGiseleThreadIdRoute
   AuthenticatedGiseleComoDizerRoute: typeof AuthenticatedGiseleComoDizerRoute
   AuthenticatedGiseleConfiguracoesRoute: typeof AuthenticatedGiseleConfiguracoesRoute
   AuthenticatedGiseleDesafioRoute: typeof AuthenticatedGiseleDesafioRoute
   AuthenticatedGiseleFeedbackRoute: typeof AuthenticatedGiseleFeedbackRoute
-  AuthenticatedGiseleHistoricoRoute: typeof AuthenticatedGiseleHistoricoRoute
+  AuthenticatedGiseleHistoricoRoute: typeof AuthenticatedGiseleHistoricoRouteWithChildren
   AuthenticatedGiseleListeningRoute: typeof AuthenticatedGiseleListeningRoute
   AuthenticatedGiseleMeuPlanoRoute: typeof AuthenticatedGiseleMeuPlanoRoute
   AuthenticatedGiseleMeuProgressoRoute: typeof AuthenticatedGiseleMeuProgressoRoute
@@ -1870,7 +1905,8 @@ const AuthenticatedGiseleRouteChildren: AuthenticatedGiseleRouteChildren = {
   AuthenticatedGiseleConfiguracoesRoute: AuthenticatedGiseleConfiguracoesRoute,
   AuthenticatedGiseleDesafioRoute: AuthenticatedGiseleDesafioRoute,
   AuthenticatedGiseleFeedbackRoute: AuthenticatedGiseleFeedbackRoute,
-  AuthenticatedGiseleHistoricoRoute: AuthenticatedGiseleHistoricoRoute,
+  AuthenticatedGiseleHistoricoRoute:
+    AuthenticatedGiseleHistoricoRouteWithChildren,
   AuthenticatedGiseleListeningRoute: AuthenticatedGiseleListeningRoute,
   AuthenticatedGiseleMeuPlanoRoute: AuthenticatedGiseleMeuPlanoRoute,
   AuthenticatedGiseleMeuProgressoRoute: AuthenticatedGiseleMeuProgressoRoute,
