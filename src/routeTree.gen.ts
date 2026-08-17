@@ -87,6 +87,7 @@ import { Route as AuthenticatedVocabularioIndexRouteImport } from './routes/_aut
 import { Route as ApiVoicePronunciationRouteImport } from './routes/api/voice/pronunciation'
 import { Route as ApiVoiceSpeakRouteImport } from './routes/api/voice/speak'
 import { Route as ApiVoiceTranscribeRouteImport } from './routes/api/voice/transcribe'
+import { Route as AuthenticatedComunidadeEncontroMeetingIdRouteImport } from './routes/_authenticated/comunidade.encontro.$meetingId'
 import { Route as AuthenticatedGiseleHistoricoSessionIdRouteImport } from './routes/_authenticated/gisele.historico.$sessionId'
 import { Route as AuthenticatedGiseleVoiceSessionThreadIdRouteImport } from './routes/_authenticated/gisele.voice-session.$threadId'
 import { Route as AuthenticatedSpeak2fluencyModuloModuleIdRouteImport } from './routes/_authenticated/speak2fluency.modulo.$moduleId'
@@ -536,6 +537,12 @@ const ApiVoiceTranscribeRoute = ApiVoiceTranscribeRouteImport.update({
   path: '/api/voice/transcribe',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedComunidadeEncontroMeetingIdRoute =
+  AuthenticatedComunidadeEncontroMeetingIdRouteImport.update({
+    id: '/encontro/$meetingId',
+    path: '/encontro/$meetingId',
+    getParentRoute: () => AuthenticatedComunidadeRoute,
+  } as any)
 const AuthenticatedGiseleHistoricoSessionIdRoute =
   AuthenticatedGiseleHistoricoSessionIdRouteImport.update({
     id: '/$sessionId',
@@ -630,7 +637,7 @@ export interface FileRoutesByFullPath {
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
-  '/comunidade': typeof AuthenticatedComunidadeRoute
+  '/comunidade': typeof AuthenticatedComunidadeRouteWithChildren
   '/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
   '/curso-upper': typeof AuthenticatedCursoUpperRouteWithChildren
@@ -693,6 +700,7 @@ export interface FileRoutesByFullPath {
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
   '/vocabulario/': typeof AuthenticatedVocabularioIndexRoute
+  '/comunidade/encontro/$meetingId': typeof AuthenticatedComunidadeEncontroMeetingIdRoute
   '/gisele/historico/$sessionId': typeof AuthenticatedGiseleHistoricoSessionIdRoute
   '/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
@@ -722,7 +730,7 @@ export interface FileRoutesByTo {
   '/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/certificados': typeof AuthenticatedCertificadosRoute
   '/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
-  '/comunidade': typeof AuthenticatedComunidadeRoute
+  '/comunidade': typeof AuthenticatedComunidadeRouteWithChildren
   '/faq': typeof AuthenticatedFaqRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/gramatica': typeof AuthenticatedGramaticaRoute
@@ -777,6 +785,7 @@ export interface FileRoutesByTo {
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
   '/speak2travel': typeof AuthenticatedSpeak2travelIndexRoute
   '/vocabulario': typeof AuthenticatedVocabularioIndexRoute
+  '/comunidade/encontro/$meetingId': typeof AuthenticatedComunidadeEncontroMeetingIdRoute
   '/gisele/historico/$sessionId': typeof AuthenticatedGiseleHistoricoSessionIdRoute
   '/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
@@ -808,7 +817,7 @@ export interface FileRoutesById {
   '/_authenticated/central-de-mensagens': typeof AuthenticatedCentralDeMensagensRoute
   '/_authenticated/certificados': typeof AuthenticatedCertificadosRoute
   '/_authenticated/checkout-sucesso': typeof AuthenticatedCheckoutSucessoRoute
-  '/_authenticated/comunidade': typeof AuthenticatedComunidadeRoute
+  '/_authenticated/comunidade': typeof AuthenticatedComunidadeRouteWithChildren
   '/_authenticated/curso-beginner': typeof AuthenticatedCursoBeginnerRouteWithChildren
   '/_authenticated/curso-intermediate': typeof AuthenticatedCursoIntermediateRouteWithChildren
   '/_authenticated/curso-upper': typeof AuthenticatedCursoUpperRouteWithChildren
@@ -871,6 +880,7 @@ export interface FileRoutesById {
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
   '/_authenticated/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
   '/_authenticated/vocabulario/': typeof AuthenticatedVocabularioIndexRoute
+  '/_authenticated/comunidade/encontro/$meetingId': typeof AuthenticatedComunidadeEncontroMeetingIdRoute
   '/_authenticated/gisele/historico/$sessionId': typeof AuthenticatedGiseleHistoricoSessionIdRoute
   '/_authenticated/gisele/voice-session/$threadId': typeof AuthenticatedGiseleVoiceSessionThreadIdRoute
   '/_authenticated/speak2fluency/modulo/$moduleId': typeof AuthenticatedSpeak2fluencyModuloModuleIdRoute
@@ -965,6 +975,7 @@ export interface FileRouteTypes {
     | '/speak2hire/'
     | '/speak2travel/'
     | '/vocabulario/'
+    | '/comunidade/encontro/$meetingId'
     | '/gisele/historico/$sessionId'
     | '/gisele/voice-session/$threadId'
     | '/speak2fluency/modulo/$moduleId'
@@ -1049,6 +1060,7 @@ export interface FileRouteTypes {
     | '/speak2hire'
     | '/speak2travel'
     | '/vocabulario'
+    | '/comunidade/encontro/$meetingId'
     | '/gisele/historico/$sessionId'
     | '/gisele/voice-session/$threadId'
     | '/speak2fluency/modulo/$moduleId'
@@ -1142,6 +1154,7 @@ export interface FileRouteTypes {
     | '/_authenticated/speak2hire/'
     | '/_authenticated/speak2travel/'
     | '/_authenticated/vocabulario/'
+    | '/_authenticated/comunidade/encontro/$meetingId'
     | '/_authenticated/gisele/historico/$sessionId'
     | '/_authenticated/gisele/voice-session/$threadId'
     | '/_authenticated/speak2fluency/modulo/$moduleId'
@@ -1723,6 +1736,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiVoiceTranscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/comunidade/encontro/$meetingId': {
+      id: '/_authenticated/comunidade/encontro/$meetingId'
+      path: '/encontro/$meetingId'
+      fullPath: '/comunidade/encontro/$meetingId'
+      preLoaderRoute: typeof AuthenticatedComunidadeEncontroMeetingIdRouteImport
+      parentRoute: typeof AuthenticatedComunidadeRoute
+    }
     '/_authenticated/gisele/historico/$sessionId': {
       id: '/_authenticated/gisele/historico/$sessionId'
       path: '/$sessionId'
@@ -1816,6 +1836,21 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AuthenticatedComunidadeRouteChildren {
+  AuthenticatedComunidadeEncontroMeetingIdRoute: typeof AuthenticatedComunidadeEncontroMeetingIdRoute
+}
+
+const AuthenticatedComunidadeRouteChildren: AuthenticatedComunidadeRouteChildren =
+  {
+    AuthenticatedComunidadeEncontroMeetingIdRoute:
+      AuthenticatedComunidadeEncontroMeetingIdRoute,
+  }
+
+const AuthenticatedComunidadeRouteWithChildren =
+  AuthenticatedComunidadeRoute._addFileChildren(
+    AuthenticatedComunidadeRouteChildren,
+  )
 
 interface AuthenticatedCursoBeginnerRouteChildren {
   AuthenticatedCursoBeginnerAssessmentRoute: typeof AuthenticatedCursoBeginnerAssessmentRoute
@@ -2037,7 +2072,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCentralDeMensagensRoute: typeof AuthenticatedCentralDeMensagensRoute
   AuthenticatedCertificadosRoute: typeof AuthenticatedCertificadosRoute
   AuthenticatedCheckoutSucessoRoute: typeof AuthenticatedCheckoutSucessoRoute
-  AuthenticatedComunidadeRoute: typeof AuthenticatedComunidadeRoute
+  AuthenticatedComunidadeRoute: typeof AuthenticatedComunidadeRouteWithChildren
   AuthenticatedCursoBeginnerRoute: typeof AuthenticatedCursoBeginnerRouteWithChildren
   AuthenticatedCursoIntermediateRoute: typeof AuthenticatedCursoIntermediateRouteWithChildren
   AuthenticatedCursoUpperRoute: typeof AuthenticatedCursoUpperRouteWithChildren
@@ -2071,7 +2106,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCentralDeMensagensRoute: AuthenticatedCentralDeMensagensRoute,
   AuthenticatedCertificadosRoute: AuthenticatedCertificadosRoute,
   AuthenticatedCheckoutSucessoRoute: AuthenticatedCheckoutSucessoRoute,
-  AuthenticatedComunidadeRoute: AuthenticatedComunidadeRoute,
+  AuthenticatedComunidadeRoute: AuthenticatedComunidadeRouteWithChildren,
   AuthenticatedCursoBeginnerRoute: AuthenticatedCursoBeginnerRouteWithChildren,
   AuthenticatedCursoIntermediateRoute:
     AuthenticatedCursoIntermediateRouteWithChildren,
