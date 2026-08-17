@@ -45,14 +45,24 @@ function VoiceSessionPage() {
   const [lastTranscript, setLastTranscript] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<SessionFeedbackDTO | null>(null);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
+  /** Conversa contínua: a Gisele pergunta, escuta e responde sem cliques. */
+  const [continuous, setContinuous] = useState(true);
   const recorderRef = useRef<MicRecorder | null>(null);
   const spokenRef = useRef<string | null>(null);
+  const watcherRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const continuousRef = useRef(true);
+  const openedRef = useRef(false);
+  const stoppingRef = useRef(false);
+
+  useEffect(() => {
+    continuousRef.current = continuous;
+  }, [continuous]);
 
   const transport = useMemo(
     () =>
       new DefaultChatTransport({
         api: "/api/gisele-chat",
-        body: { threadId, supportLanguage: voice.supportLanguage },
+        body: { threadId, supportLanguage: voice.supportLanguage, mode: "voice" },
         fetch: async (input, init) => {
           const { data } = await supabase.auth.getSession();
           const token = data.session?.access_token;
@@ -78,6 +88,15 @@ function VoiceSessionPage() {
     if (streaming) setPhase("thinking");
   }, [streaming]);
 
+  // Abertura automática: a Gisele começa a conversa com a primeira pergunta.
+  useEffect(() => {
+    if (openedRef.current || messages.length > 0) return;
+    openedRef.current = true;
+    sendMessage({
+      text: "[Session start] Begin our voice conversation: greet me briefly and ask me your first question.",
+    });
+  }, [messages.length, sendMessage]);
+
   // Assim que a resposta termina, gera e reproduz o áudio da Gisele.
   const lastAssistant = [...messages].reverse().find((m) => m.role === "assistant");
   useEffect(() => {
@@ -101,17 +120,68 @@ function VoiceSessionPage() {
           "Áudio indisponível agora — continuando por texto. Audio unavailable, switching to text.",
         );
       })
-      .finally(() => setPhase("idle"));
+      .finally(() => {
+        setPhase("idle");
+        // Loop contínuo: terminou de falar, volta a escutar o aluno.
+        if (continuousRef.current) void startRecording();
+      });
   }, [streaming, lastAssistant, voice.voice, voice.volume, voice.rate, voice.ttsProvider]);
 
+  // Encerra o loop ao sair da tela.
+  useEffect(
+    () => () => {
+      if (watcherRef.current) clearInterval(watcherRef.current);
+      recorderRef.current?.cancel();
+      stopSpeaking();
+    },
+    [],
+  );
+
+  function clearWatcher() {
+    if (watcherRef.current) clearInterval(watcherRef.current);
+    watcherRef.current = null;
+  }
+
+  /** Detecta fim de fala por silêncio para enviar a resposta automaticamente. */
+  function watchSilence() {
+    clearWatcher();
+    let spoke = false;
+    let silenceSince = 0;
+    watcherRef.current = setInterval(() => {
+      const recorder = recorderRef.current;
+      if (!recorder) return clearWatcher();
+      const level = recorder.getLevel();
+      const elapsed = recorder.elapsedMs();
+      if (level > 0.02) {
+        spoke = true;
+        silenceSince = 0;
+      } else if (spoke) {
+        if (!silenceSince) silenceSince = Date.now();
+        // ~1,6s de silêncio depois de falar = fim do turno.
+        if (Date.now() - silenceSince > 1600) void stopRecording();
+      } else if (elapsed > 15000) {
+        // Ninguém falou: encerra a escuta sem enviar nada.
+        clearWatcher();
+        recorderRef.current?.cancel();
+        recorderRef.current = null;
+        setPhase("idle");
+      }
+      // Turno muito longo: envia mesmo assim.
+      if (elapsed > 90000) void stopRecording();
+    }, 150);
+  }
+
   async function startRecording() {
+    if (recorderRef.current) return;
     try {
       stopSpeaking();
       const recorder = new MicRecorder();
       await recorder.start();
       recorderRef.current = recorder;
       setPhase("recording");
+      if (continuousRef.current) watchSilence();
     } catch {
+      setContinuous(false);
       toast.error("Não consegui acessar o microfone. Permita o acesso no navegador e tente de novo.");
       setPhase("idle");
     }
@@ -119,7 +189,9 @@ function VoiceSessionPage() {
 
   async function stopRecording() {
     const recorder = recorderRef.current;
-    if (!recorder) return;
+    if (!recorder || stoppingRef.current) return;
+    stoppingRef.current = true;
+    clearWatcher();
     recorderRef.current = null;
     setPhase("transcribing");
     try {
@@ -131,8 +203,30 @@ function VoiceSessionPage() {
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível transcrever.");
       setPhase("idle");
+      // No modo contínuo, volta a escutar em vez de travar a conversa.
+      if (continuousRef.current) setTimeout(() => void startRecording(), 600);
+    } finally {
+      stoppingRef.current = false;
     }
   }
+
+  /** Pausa o loop contínuo sem sair da sessão. */
+  function stopLoop() {
+    setContinuous(false);
+    continuousRef.current = false;
+    clearWatcher();
+    recorderRef.current?.cancel();
+    recorderRef.current = null;
+    stopSpeaking();
+    setPhase("idle");
+  }
+
+  function resumeLoop() {
+    setContinuous(true);
+    continuousRef.current = true;
+    void startRecording();
+  }
+
 
   function retry() {
     if (!lastTranscript) return;
