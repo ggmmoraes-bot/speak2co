@@ -137,7 +137,7 @@ function UpperCourseIndex() {
           <Button asChild variant="outline" className="gap-2">
             <Link to="/vocabulario">
               <BookMarked className="h-4 w-4" />
-              Vocabulário das unidades
+              Vocabulary Book
             </Link>
           </Button>
           <span className="text-xs text-muted-foreground">
