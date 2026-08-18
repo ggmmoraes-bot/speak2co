@@ -456,7 +456,7 @@ function AssinaturaPage() {
             )}
             {isPreference && renewalSoon && (
               <p className="mt-3 rounded-xl border border-accent/50 bg-accent/10 px-4 py-3 text-sm text-foreground">
-                Seu acesso termina em {formatDate(nextChargeIso)}. Renove agora para não perder o
+                Seu acesso termina em {formatDate(endIso)}. Renove agora para não perder o
                 plano — o parcelamento em até {INSTALLMENTS}x continua disponível.
               </p>
             )}
