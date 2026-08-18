@@ -57,7 +57,9 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
       planKey: data.planKey,
       payerEmail: email,
       externalReference,
-      backUrl: `${data.origin}/checkout-sucesso`,
+      // O Mercado Pago só aceita domínios públicos aprovados: usamos sempre a
+      // URL oficial da Speak2Co (a origem do navegador pode ser um preview).
+      backUrl: "https://speak2co.lovable.app/checkout-sucesso",
       amount: pricing.finalAmount,
     });
     const { data: created, error } = await supabaseAdmin
