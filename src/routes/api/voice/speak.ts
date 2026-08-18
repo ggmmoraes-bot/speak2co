@@ -106,6 +106,17 @@ export const Route = createFileRoute("/api/voice/speak")({
         if (!res.ok) {
           const detail = await res.text().catch(() => "");
           console.error("[voice/speak]", res.status, detail);
+          if (res.status === 402 || res.status === 403) {
+            return new Response(
+              "Créditos de IA esgotados — o áudio volta assim que os créditos forem adicionados.",
+              { status: res.status },
+            );
+          }
+          if (res.status === 429) {
+            return new Response("Muitas solicitações de áudio. Tente novamente em instantes.", {
+              status: 429,
+            });
+          }
           return new Response("Não foi possível gerar o áudio.", { status: res.status });
         }
 
