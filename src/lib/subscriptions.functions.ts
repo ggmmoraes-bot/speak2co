@@ -33,7 +33,7 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data) => planKeySchema.parse(data))
   .handler(async ({ data, context }) => {
-    const { createPreapproval, MP_PLANS } = await import("@/lib/mercadopago.server");
+    const { createPreference, MP_PLANS } = await import("@/lib/mercadopago.server");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
     const email = (context.claims as { email?: string } | null)?.email;
@@ -53,7 +53,9 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
     }
 
     const externalReference = `${context.userId}:${crypto.randomUUID()}`;
-    const preapproval = await createPreapproval({
+    // Cobrança anual avulsa: permite parcelar em até 12x no cartão. O desconto
+    // individual já está aplicado no valor enviado ao Mercado Pago.
+    const preference = await createPreference({
       planKey: data.planKey,
       payerEmail: email,
       externalReference,
@@ -62,21 +64,27 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
       backUrl: "https://speak2co.lovable.app/checkout-sucesso",
       amount: pricing.finalAmount,
     });
+
+    const periodEnd = new Date();
+    periodEnd.setFullYear(periodEnd.getFullYear() + 1);
+
     const { data: created, error } = await supabaseAdmin
       .from("subscriptions")
       .insert({
         user_id: context.userId,
-        provider: "mercadopago",
+        provider: "mercadopago_preference",
         environment: "live",
-        preapproval_id: preapproval.id,
         plan_key: data.planKey,
         external_reference: externalReference,
-        status: preapproval.status ?? "pending",
+        status: "pending",
         plan_label: plan.label,
         amount: pricing.finalAmount,
         currency: "BRL",
-        init_point: preapproval.init_point ?? null,
-        raw: JSON.parse(JSON.stringify({ preapproval, pricing })),
+        init_point: preference.init_point ?? null,
+        current_period_end: periodEnd.toISOString(),
+        // Sem débito automático: a renovação é feita por nova contratação.
+        cancel_at_period_end: true,
+        raw: JSON.parse(JSON.stringify({ preference, pricing })),
       })
       .select("id")
       .maybeSingle();
@@ -86,28 +94,28 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
     await logSubscriptionEvent({
       user_id: context.userId,
       subscription_id: created?.id ?? null,
-      preapproval_id: preapproval.id,
       event_type: "checkout_created",
-      status: preapproval.status ?? "pending",
+      status: "pending",
       amount: pricing.finalAmount,
       currency: "BRL",
       message: pricing.discountPercent
-        ? `Checkout criado para o plano ${plan.label} com ${pricing.discountPercent}% de desconto (R$ ${pricing.finalAmount.toFixed(2)}).`
-        : `Checkout criado para o plano ${plan.label}.`,
-      raw: JSON.parse(JSON.stringify({ preapproval, pricing })),
+        ? `Checkout criado para o plano ${plan.label} com ${pricing.discountPercent}% de desconto (R$ ${pricing.finalAmount.toFixed(2)}), parcelável em até 12x.`
+        : `Checkout criado para o plano ${plan.label}, parcelável em até 12x.`,
+      raw: JSON.parse(JSON.stringify({ preference, pricing })),
     });
 
     if (pricing.grantId) {
       await registerBenefitUsage(pricing.grantId, context.userId, {
         planKey: data.planKey,
-        preapproval_id: preapproval.id,
+        preference_id: preference.id,
         amount: pricing.finalAmount,
       }).catch(() => undefined);
     }
 
-    if (!preapproval.init_point) throw new Error("O Mercado Pago não retornou o link de pagamento.");
-    return { checkoutUrl: preapproval.init_point };
+    if (!preference.init_point) throw new Error("O Mercado Pago não retornou o link de pagamento.");
+    return { checkoutUrl: preference.init_point };
   });
+
 
 export const getMySubscriptionEvents = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
