@@ -299,8 +299,13 @@ function PremiumPage() {
             R$ {signaturePricing!.finalAmount.toFixed(2).replace(".", ",")} por ano
           </span>
           .
+          <span className="mt-1 block text-muted-foreground">
+            Em até 12x de R$ {(signaturePricing!.finalAmount / 12).toFixed(2).replace(".", ",")} sem
+            juros no cartão — o desconto é aplicado antes do parcelamento.
+          </span>
         </div>
       )}
+
 
       {!previewPlan && !isActive && showPending && (
         <div className="mt-8 rounded-xl border border-border bg-card p-4 text-center text-muted-foreground">
