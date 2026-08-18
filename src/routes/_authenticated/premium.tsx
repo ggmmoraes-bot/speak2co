@@ -463,9 +463,9 @@ function PremiumPage() {
                   {tier.label}
                 </span>
                 <span className="text-right text-xs font-medium text-muted-foreground">
-                  12x {BRL(installmentOf(yearlyPriceOf(tier)))}
+                  12x {BRL(installmentOf(chargedOf(tier)))} sem juros
                   <br />
-                  Plano anual · total {BRL(yearlyPriceOf(tier))}
+                  Plano anual · total {BRL(chargedOf(tier))}
                 </span>
                 <span className="ml-auto text-muted-foreground transition group-open:rotate-180">
                   ▾
@@ -482,7 +482,7 @@ function PremiumPage() {
             </details>
           ))}
           <p className="text-center text-xs text-muted-foreground">
-            Acesso por 12 meses · Renovação anual automática conforme os termos.
+            Acesso por 12 meses · à vista ou em até 12x sem juros · renovação por nova contratação avisada antes do vencimento.
           </p>
         </div>
 
@@ -533,7 +533,7 @@ function PremiumPage() {
                       tier.highlight ? "text-accent" : "text-foreground"
                     }`}
                   >
-                    <span className="text-lg font-bold">12x {BRL(installmentOf(yearlyPriceOf(tier)))}</span>
+                    <span className="text-lg font-bold">12x {BRL(installmentOf(chargedOf(tier)))} sem juros</span>
                   </td>
                 ))}
               </tr>
@@ -541,7 +541,7 @@ function PremiumPage() {
                 <td className="px-6 py-4 text-muted-foreground">Valor total da contratação</td>
                 {TIERS.map((tier) => (
                   <td key={tier.id} className="px-6 py-4 text-center text-muted-foreground">
-                    {BRL(yearlyPriceOf(tier))} por 12 meses
+                    {BRL(chargedOf(tier))} por 12 meses
                   </td>
                 ))}
               </tr>
@@ -549,7 +549,7 @@ function PremiumPage() {
           </table>
         </div>
         <p className="mt-4 hidden text-center text-xs text-muted-foreground md:block">
-          Acesso por 12 meses · Renovação anual automática conforme os termos.
+          Acesso por 12 meses · à vista ou em até 12x sem juros · renovação por nova contratação avisada antes do vencimento.
         </p>
       </section>
 
