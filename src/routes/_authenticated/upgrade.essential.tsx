@@ -1,11 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Check, Flag, History, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
+import { getMyCheckoutPricing } from "@/lib/benefits.functions";
+import { PlanPrice } from "@/components/PlanPrice";
+import { PLAN_META } from "@/lib/subscription-plans";
 
 type UpgradeFeature = "marcos" | "ajustes" | "historico";
 
@@ -58,6 +61,12 @@ export const Route = createFileRoute("/_authenticated/upgrade/essential")({
 function UpgradeEssentialPage() {
   const feature = Route.useSearch().feature as UpgradeFeature | undefined;
   const checkout = useServerFn(startMercadoPagoCheckout);
+  const fetchPricing = useServerFn(getMyCheckoutPricing);
+  const { data: pricingData } = useQuery({
+    queryKey: ["my-checkout-pricing"],
+    queryFn: () => fetchPricing(),
+  });
+  const pricing = pricingData?.pricing?.["essential_yearly"];
 
   const mutation = useMutation({
     mutationFn: () =>
