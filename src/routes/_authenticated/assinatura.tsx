@@ -172,6 +172,14 @@ function AssinaturaPage() {
     dot: "●",
   };
   const autoRenew = Boolean(subscription) && !subscription?.cancel_at_period_end;
+  // Contratação anual avulsa (parcelada em até 12x): não há débito automático.
+  const isPreference = subscription?.provider === "mercadopago_preference";
+  const renewalSoon = (() => {
+    if (!isPreference || !endIso) return false;
+    const diff = new Date(endIso).getTime() - Date.now();
+    return diff > 0 && diff <= 30 * 24 * 60 * 60 * 1000;
+  })();
+
 
   const terms = useMemo(
     () =>
