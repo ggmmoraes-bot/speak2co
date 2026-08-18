@@ -274,12 +274,17 @@ export const Route = createFileRoute("/api/public/webhooks/mercadopago")({
             return new Response("ok");
           }
 
-          // 3. Pagamento avulso vinculado a uma assinatura
+          // 3. Pagamento avulso: cobrança anual parcelada ou pagamento de assinatura
           if (topic.includes("payment")) {
             const { getPayment } = await import("@/lib/mercadopago.server");
             const payment = await getPayment(dataId);
+
+            // Cobrança anual parcelada (preference): casa pelo external_reference.
+            if (await syncPreferencePayment(payment)) return new Response("ok");
+
             const preapprovalId =
               (payment.metadata?.preapproval_id as string | undefined) ?? undefined;
+
             await logSubscriptionEvent({
               preapproval_id: preapprovalId ?? null,
               event_type: "webhook_received",
