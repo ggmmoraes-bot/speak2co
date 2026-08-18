@@ -97,7 +97,84 @@ async function syncPreapproval(preapprovalId: string, note: string) {
   }
 }
 
+/**
+ * Cobrança anual avulsa (Checkout Pro / preference, com parcelamento em 12x).
+ * A assinatura é encontrada pelo `external_reference` gravado na criação.
+ */
+async function syncPreferencePayment(payment: {
+  id: number | string;
+  status?: string;
+  status_detail?: string;
+  transaction_amount?: number;
+  currency_id?: string;
+  external_reference?: string;
+}) {
+  const reference = payment.external_reference?.trim();
+  if (!reference) return false;
+
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const { logSubscriptionEvent } = await import("@/lib/subscription-events.server");
+
+  const { data: existing } = await supabaseAdmin
+    .from("subscriptions")
+    .select("id, user_id, status, amount, currency, current_period_end")
+    .eq("external_reference", reference)
+    .maybeSingle();
+  if (!existing) return false;
+
+  const approved = payment.status === "approved";
+  const status = approved
+    ? "authorized"
+    : payment.status === "rejected" || payment.status === "cancelled"
+      ? "cancelled"
+      : "pending";
+
+  // O período de 12 meses passa a contar da aprovação do pagamento.
+  const periodEnd = new Date();
+  periodEnd.setFullYear(periodEnd.getFullYear() + 1);
+
+  await supabaseAdmin
+    .from("subscriptions")
+    .update({
+      status,
+      ...(approved ? { current_period_end: periodEnd.toISOString() } : {}),
+      raw: JSON.parse(JSON.stringify(payment)),
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", existing.id);
+
+  await logSubscriptionEvent({
+    user_id: existing.user_id,
+    subscription_id: existing.id,
+    event_type: approved ? "payment_approved" : "webhook_received",
+    status: payment.status ?? null,
+    amount: payment.transaction_amount ?? existing.amount ?? null,
+    currency: payment.currency_id ?? "BRL",
+    message: approved
+      ? "Pagamento anual aprovado — acesso liberado por 12 meses."
+      : `Pagamento ${payment.status ?? "desconhecido"} (${payment.status_detail ?? "sem detalhe"}).`,
+    raw: JSON.parse(JSON.stringify(payment)),
+  });
+
+  const { syncUserPlan } = await import("@/lib/plan-sync.server");
+  const plan = await syncUserPlan(existing.user_id);
+  await logSubscriptionEvent({
+    user_id: existing.user_id,
+    subscription_id: existing.id,
+    event_type: "plan_updated",
+    status,
+    message:
+      plan === "free"
+        ? "Plano do aluno voltou para Gratuito."
+        : `Plano ${plan} liberado para o aluno.`,
+    raw: { plan },
+  });
+
+  return true;
+}
+
 export const Route = createFileRoute("/api/public/webhooks/mercadopago")({
+
   server: {
     handlers: {
       // O Mercado Pago valida a URL com um GET antes de enviar notificações.
@@ -197,12 +274,17 @@ export const Route = createFileRoute("/api/public/webhooks/mercadopago")({
             return new Response("ok");
           }
 
-          // 3. Pagamento avulso vinculado a uma assinatura
+          // 3. Pagamento avulso: cobrança anual parcelada ou pagamento de assinatura
           if (topic.includes("payment")) {
             const { getPayment } = await import("@/lib/mercadopago.server");
             const payment = await getPayment(dataId);
+
+            // Cobrança anual parcelada (preference): casa pelo external_reference.
+            if (await syncPreferencePayment(payment)) return new Response("ok");
+
             const preapprovalId =
               (payment.metadata?.preapproval_id as string | undefined) ?? undefined;
+
             await logSubscriptionEvent({
               preapproval_id: preapprovalId ?? null,
               event_type: "webhook_received",

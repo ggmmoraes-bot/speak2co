@@ -299,8 +299,13 @@ function PremiumPage() {
             R$ {signaturePricing!.finalAmount.toFixed(2).replace(".", ",")} por ano
           </span>
           .
+          <span className="mt-1 block text-muted-foreground">
+            Em até 12x de R$ {(signaturePricing!.finalAmount / 12).toFixed(2).replace(".", ",")} sem
+            juros no cartão — o desconto é aplicado antes do parcelamento.
+          </span>
         </div>
       )}
+
 
       {!previewPlan && !isActive && showPending && (
         <div className="mt-8 rounded-xl border border-border bg-card p-4 text-center text-muted-foreground">
@@ -359,11 +364,15 @@ function PremiumPage() {
               <p className="mt-1 text-sm text-muted-foreground">{tier.description}</p>
 
               <div className="mt-5">
-                <PlanPrice total={total} />
+                <PlanPrice
+                  total={total}
+                  discountedTotal={pricingData?.pricing?.[tier.yearly.key]?.finalAmount ?? null}
+                />
               </div>
               <p className="mt-3 text-xs text-muted-foreground">
-                Contratação anual · Renovação automática conforme os termos
+                Contratação anual · Renovação por nova contratação avisada antes do vencimento
               </p>
+
 
 
               <ul className="mt-6 flex-1 space-y-2 text-sm text-muted-foreground">

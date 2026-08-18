@@ -94,9 +94,64 @@ export async function createPreapproval(params: {
   });
 }
 
+export type Preference = {
+  id: string;
+  init_point?: string;
+  sandbox_init_point?: string;
+  external_reference?: string;
+};
+
+/**
+ * Cobrança anual avulsa parcelada em até 12x no cartão (Checkout Pro).
+ * A API de Assinaturas (preapproval) não oferece parcelamento — por isso os
+ * planos anuais usam preference, com renovação avisada pela plataforma.
+ */
+export async function createPreference(params: {
+  planKey: PlanKey;
+  payerEmail: string;
+  externalReference: string;
+  backUrl: string;
+  /** Valor final já calculado no servidor (benefício individual aplicado). */
+  amount?: number;
+}): Promise<Preference> {
+  const plan = MP_PLANS[params.planKey];
+  const amount = params.amount ?? plan.amount;
+  return mpRequest<Preference>("/checkout/preferences", {
+    method: "POST",
+    body: {
+      items: [
+        {
+          id: params.planKey,
+          title: `Speak2Co ${plan.label}`,
+          description: "Acesso por 12 meses",
+          category_id: "learnings",
+          quantity: 1,
+          unit_price: amount,
+          currency_id: "BRL",
+        },
+      ],
+      payer: { email: params.payerEmail },
+      external_reference: params.externalReference,
+      back_urls: {
+        success: params.backUrl,
+        pending: params.backUrl,
+        failure: params.backUrl,
+      },
+      auto_return: "approved",
+      statement_descriptor: "SPEAK2CO",
+      payment_methods: {
+        installments: 12,
+        default_installments: 12,
+      },
+      notification_url: notificationUrl(),
+    },
+  });
+}
+
 export async function getPreapproval(id: string): Promise<Preapproval> {
   return mpRequest<Preapproval>(`/preapproval/${encodeURIComponent(id)}`);
 }
+
 
 export type AuthorizedPayment = {
   id: number | string;

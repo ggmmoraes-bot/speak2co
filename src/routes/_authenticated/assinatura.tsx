@@ -82,7 +82,9 @@ const STATUS_META: Record<string, { label: string; tone: string; dot: string }> 
 const PROVIDER_LABEL: Record<string, string> = {
   paddle: "Cartão internacional",
   mercadopago: "Mercado Pago (Pix, boleto ou cartão)",
+  mercadopago_preference: "Mercado Pago — anual em até 12x no cartão, Pix ou boleto",
 };
+
 
 function formatDate(value: string | null | undefined) {
   if (!value) return null;
@@ -170,6 +172,14 @@ function AssinaturaPage() {
     dot: "●",
   };
   const autoRenew = Boolean(subscription) && !subscription?.cancel_at_period_end;
+  // Contratação anual avulsa (parcelada em até 12x): não há débito automático.
+  const isPreference = subscription?.provider === "mercadopago_preference";
+  const renewalSoon = (() => {
+    if (!isPreference || !endIso) return false;
+    const diff = new Date(endIso).getTime() - Date.now();
+    return diff > 0 && diff <= 30 * 24 * 60 * 60 * 1000;
+  })();
+
 
   const terms = useMemo(
     () =>
@@ -411,23 +421,46 @@ function AssinaturaPage() {
 
           <div className="rounded-2xl border border-border bg-card p-5">
             <p className="font-semibold text-foreground">Renovação</p>
-            <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-              <li>
-                Renovação automática:{" "}
-                <span className="font-semibold text-foreground">
-                  {autoRenew ? "ativa" : "desligada"}
-                </span>
-              </li>
-              <li>Data prevista: {autoRenew ? (formatDate(nextChargeIso) ?? "—") : "—"}</li>
-              <li>Plano que será renovado: {autoRenew ? nameOf(planKey) : "—"}</li>
-              <li>
-                Valor previsto:{" "}
-                {autoRenew && total != null
-                  ? `${BRL(total)} (ou ${INSTALLMENTS}x de ${BRL(installmentOf(total))})`
-                  : "—"}
-              </li>
-              <li>Renovação por mais 12 meses, conforme os termos abaixo.</li>
-            </ul>
+            {isPreference ? (
+              <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                <li>
+                  Sem débito automático:{" "}
+                  <span className="font-semibold text-foreground">
+                    contratação anual paga em até {INSTALLMENTS}x
+                  </span>
+                </li>
+                <li>Acesso garantido até: {formatDate(endIso) ?? "—"}</li>
+                <li>
+                  Avisamos você antes do vencimento para renovar com uma nova contratação, sem
+                  cobrança surpresa.
+                </li>
+              </ul>
+            ) : (
+              <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                <li>
+                  Renovação automática:{" "}
+                  <span className="font-semibold text-foreground">
+                    {autoRenew ? "ativa" : "desligada"}
+                  </span>
+                </li>
+                <li>Data prevista: {autoRenew ? (formatDate(nextChargeIso) ?? "—") : "—"}</li>
+                <li>Plano que será renovado: {autoRenew ? nameOf(planKey) : "—"}</li>
+                <li>
+                  Valor previsto:{" "}
+                  {autoRenew && total != null
+                    ? `${BRL(total)} (ou ${INSTALLMENTS}x de ${BRL(installmentOf(total))})`
+                    : "—"}
+                </li>
+                <li>Renovação por mais 12 meses, conforme os termos abaixo.</li>
+              </ul>
+            )}
+            {isPreference && renewalSoon && (
+              <p className="mt-3 rounded-xl border border-accent/50 bg-accent/10 px-4 py-3 text-sm text-foreground">
+                Seu acesso termina em {formatDate(endIso)}. Renove agora para não perder o
+                plano — o parcelamento em até {INSTALLMENTS}x continua disponível.
+              </p>
+            )}
+
             {isPaddle && !simulation && (
               <Button
                 variant="outline"

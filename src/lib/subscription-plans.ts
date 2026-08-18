@@ -97,7 +97,8 @@ export function buildSubscriptionTerms(ctx: TermsContext): TermsSection[] {
       items: [
         `Forma de pagamento registrada: ${ctx.paymentMethod}.`,
         `Valor total da contratação: ${ctx.totalLabel}.`,
-        `Parcelamento disponível em até ${INSTALLMENTS}x de ${ctx.installmentLabel} sem juros no cartão.`,
+        `Parcelamento em até ${INSTALLMENTS}x de ${ctx.installmentLabel} sem juros no cartão, ou pagamento à vista por Pix ou boleto.`,
+        "Quando há desconto individual concedido pela Speak2Co, ele é aplicado sobre o valor total antes do parcelamento.",
         "A contratação é anual. O parcelamento é apenas a forma de pagamento do período de 12 meses e não caracteriza assinatura mensal.",
       ],
     },
@@ -106,11 +107,12 @@ export function buildSubscriptionTerms(ctx: TermsContext): TermsSection[] {
       items: [
         ctx.autoRenew
           ? "A renovação automática está ativa para o próximo período anual."
-          : "A renovação automática está desativada: o acesso permanece até o fim do período já contratado.",
-        `Próxima cobrança prevista: ${ctx.nextChargeLabel}.`,
+          : "Não há débito automático: a Speak2Co avisa antes do vencimento e a renovação é feita por uma nova contratação.",
+        `Fim do período contratado: ${ctx.nextChargeLabel}.`,
         "A renovação é feita pelo mesmo plano vigente, salvo alteração solicitada pelo aluno antes da data de renovação.",
       ],
     },
+
     {
       title: "Alteração de plano — upgrade",
       items: [
