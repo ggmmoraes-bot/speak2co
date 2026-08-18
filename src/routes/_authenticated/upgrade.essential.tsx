@@ -1,11 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Check, Flag, History, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
+import { getMyCheckoutPricing } from "@/lib/benefits.functions";
+import { PlanPrice } from "@/components/PlanPrice";
+import { PLAN_META } from "@/lib/subscription-plans";
 
 type UpgradeFeature = "marcos" | "ajustes" | "historico";
 
@@ -58,6 +61,12 @@ export const Route = createFileRoute("/_authenticated/upgrade/essential")({
 function UpgradeEssentialPage() {
   const feature = Route.useSearch().feature as UpgradeFeature | undefined;
   const checkout = useServerFn(startMercadoPagoCheckout);
+  const fetchPricing = useServerFn(getMyCheckoutPricing);
+  const { data: pricingData } = useQuery({
+    queryKey: ["my-checkout-pricing"],
+    queryFn: () => fetchPricing(),
+  });
+  const pricing = pricingData?.pricing?.["essential_yearly"];
 
   const mutation = useMutation({
     mutationFn: () =>
@@ -107,19 +116,22 @@ function UpgradeEssentialPage() {
       </div>
 
       <section className="mt-10 rounded-2xl border border-gold/40 bg-card/60 p-8 backdrop-blur">
-        <div className="text-center">
+        <div className="flex flex-col items-center text-center">
           <span className="rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold text-gold">
             Ideal para iniciantes
           </span>
-          <p className="mt-4 text-4xl font-bold text-gold">R$ 430,80</p>
-          <p className="text-sm font-medium text-foreground">por ano</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            ou em até 12x sem juros de R$ 35,90
-          </p>
+          <div className="mt-4">
+            <PlanPrice
+              total={PLAN_META.essential.yearlyPrice}
+              discountedTotal={pricing?.finalAmount ?? null}
+              align="center"
+            />
+          </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Acesso por 12 meses · Renovação anual automática conforme os termos
+            Acesso por 12 meses · renovação por nova contratação avisada antes do vencimento
           </p>
         </div>
+
 
 
         <ul className="mx-auto mt-6 grid max-w-md gap-2 text-sm text-muted-foreground">

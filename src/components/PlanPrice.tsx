@@ -31,11 +31,17 @@ export function PlanPrice({
 
   const hasDiscount = discountedTotal != null && discountedTotal > 0 && discountedTotal < total;
   const charged = hasDiscount ? discountedTotal! : total;
+  const percentOff = hasDiscount ? Math.round(((total - charged) / total) * 100) : 0;
 
   return (
     <div className={alignClass}>
       {hasDiscount && (
-        <p className="text-sm text-muted-foreground line-through">{BRL(total)}</p>
+        <p className="flex flex-wrap items-center gap-2 text-sm">
+          <span className="rounded-full bg-accent/15 px-2 py-0.5 text-xs font-semibold text-accent">
+            {percentOff}% OFF + até {INSTALLMENTS}x sem juros
+          </span>
+          <span className="text-muted-foreground line-through">{BRL(total)}</span>
+        </p>
       )}
       <p className={`font-bold text-accent ${compact ? "text-2xl" : "text-4xl"}`}>
         <span className="text-[0.6em] font-semibold">{INSTALLMENTS}x de </span>
@@ -46,6 +52,7 @@ export function PlanPrice({
         Valor total: {BRL(charged)} · em até {INSTALLMENTS}x sem juros no cartão ou à vista (Pix ou
         boleto)
       </p>
+
     </div>
   );
 }

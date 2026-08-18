@@ -171,8 +171,11 @@ function PremiumPage() {
     queryKey: ["my-checkout-pricing"],
     queryFn: () => fetchPricing(),
   });
-  const signaturePricing = pricingData?.pricing?.["signature_yearly"];
-  const hasSignatureBenefit = (signaturePricing?.discountPercent ?? 0) > 0;
+  /** Benefícios individuais ativos (desconto) em qualquer plano pago. */
+  const benefitPlans = (["essential_yearly", "premium_yearly", "signature_yearly"] as const)
+    .map((key) => ({ key, pricing: pricingData?.pricing?.[key] }))
+    .filter((entry) => (entry.pricing?.discountPercent ?? 0) > 0 && !entry.pricing?.courtesy);
+
 
 
   /** Preço anual vindo do banco, com fallback para o valor de tabela. */
@@ -181,6 +184,15 @@ function PremiumPage() {
     return value == null ? tier.yearly.price : Number(value);
   };
   const installmentOf = (total: number) => total / 12;
+  /** Valor efetivamente cobrado: aplica o benefício individual, quando houver. */
+  const chargedOf = (tier: Tier) => {
+    const pricing = pricingData?.pricing?.[tier.yearly.key];
+    const total = yearlyPriceOf(tier);
+    return pricing && pricing.finalAmount > 0 && pricing.finalAmount < total
+      ? pricing.finalAmount
+      : total;
+  };
+
 
   const levelOf = (tierId: string | null) =>
     (tierId ? catalog?.plans.find((p) => p.key === tierId)?.access_level : 0) ?? 0;
@@ -289,22 +301,30 @@ function PremiumPage() {
       </section>
 
 
-      {hasSignatureBenefit && !signaturePricing?.courtesy && (
-        <div className="mt-8 rounded-xl border border-accent/50 bg-accent/10 p-4 text-center text-sm">
-          Você tem um desconto exclusivo de {signaturePricing!.discountPercent}% no Signature:{" "}
-          <span className="text-muted-foreground line-through">
-            R$ {signaturePricing!.originalAmount.toFixed(2).replace(".", ",")}
-          </span>{" "}
-          <span className="font-semibold text-accent">
-            R$ {signaturePricing!.finalAmount.toFixed(2).replace(".", ",")} por ano
-          </span>
-          .
-          <span className="mt-1 block text-muted-foreground">
-            Em até 12x de R$ {(signaturePricing!.finalAmount / 12).toFixed(2).replace(".", ",")} sem
-            juros no cartão — o desconto é aplicado antes do parcelamento.
-          </span>
+      {benefitPlans.length > 0 && (
+        <div className="mt-8 space-y-2 rounded-xl border border-accent/50 bg-accent/10 p-4 text-center text-sm">
+          {benefitPlans.map(({ key, pricing }) => {
+            const label = TIERS.find((t) => t.yearly.key === key)?.label ?? key;
+            return (
+              <p key={key}>
+                <span className="font-semibold text-accent">
+                  {pricing!.discountPercent}% OFF + até 12x sem juros
+                </span>{" "}
+                no {label}:{" "}
+                <span className="text-muted-foreground line-through">
+                  {BRL(pricing!.originalAmount)}
+                </span>{" "}
+                <span className="font-semibold text-accent">{BRL(pricing!.finalAmount)} por ano</span>
+                <span className="mt-1 block text-muted-foreground">
+                  Em até 12x de {BRL(pricing!.finalAmount / 12)} sem juros no cartão — o desconto é
+                  aplicado antes do parcelamento.
+                </span>
+              </p>
+            );
+          })}
         </div>
       )}
+
 
 
       {!previewPlan && !isActive && showPending && (
@@ -443,9 +463,9 @@ function PremiumPage() {
                   {tier.label}
                 </span>
                 <span className="text-right text-xs font-medium text-muted-foreground">
-                  12x {BRL(installmentOf(yearlyPriceOf(tier)))}
+                  12x {BRL(installmentOf(chargedOf(tier)))} sem juros
                   <br />
-                  Plano anual · total {BRL(yearlyPriceOf(tier))}
+                  Plano anual · total {BRL(chargedOf(tier))}
                 </span>
                 <span className="ml-auto text-muted-foreground transition group-open:rotate-180">
                   ▾
@@ -462,7 +482,7 @@ function PremiumPage() {
             </details>
           ))}
           <p className="text-center text-xs text-muted-foreground">
-            Acesso por 12 meses · Renovação anual automática conforme os termos.
+            Acesso por 12 meses · à vista ou em até 12x sem juros · renovação por nova contratação avisada antes do vencimento.
           </p>
         </div>
 
@@ -513,7 +533,7 @@ function PremiumPage() {
                       tier.highlight ? "text-accent" : "text-foreground"
                     }`}
                   >
-                    <span className="text-lg font-bold">12x {BRL(installmentOf(yearlyPriceOf(tier)))}</span>
+                    <span className="text-lg font-bold">12x {BRL(installmentOf(chargedOf(tier)))} sem juros</span>
                   </td>
                 ))}
               </tr>
@@ -521,7 +541,7 @@ function PremiumPage() {
                 <td className="px-6 py-4 text-muted-foreground">Valor total da contratação</td>
                 {TIERS.map((tier) => (
                   <td key={tier.id} className="px-6 py-4 text-center text-muted-foreground">
-                    {BRL(yearlyPriceOf(tier))} por 12 meses
+                    {BRL(chargedOf(tier))} por 12 meses
                   </td>
                 ))}
               </tr>
@@ -529,7 +549,7 @@ function PremiumPage() {
           </table>
         </div>
         <p className="mt-4 hidden text-center text-xs text-muted-foreground md:block">
-          Acesso por 12 meses · Renovação anual automática conforme os termos.
+          Acesso por 12 meses · à vista ou em até 12x sem juros · renovação por nova contratação avisada antes do vencimento.
         </p>
       </section>
 
