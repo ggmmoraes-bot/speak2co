@@ -223,6 +223,15 @@ function AdminPage() {
         </Button>
       </header>
 
+      <nav className="mt-6 flex flex-wrap gap-2 text-sm">
+        <Button
+          onClick={() => scrollToBenefits()}
+          className="glow-gold rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+        >
+          Benefícios e Assinaturas Especiais
+        </Button>
+      </nav>
+
       {isPending && <p className="mt-8 text-sm text-muted-foreground">Carregando catálogo...</p>}
 
       <section className="mt-10 rounded-2xl border border-border bg-card p-6">

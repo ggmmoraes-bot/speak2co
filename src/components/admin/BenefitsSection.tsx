@@ -129,7 +129,10 @@ export function BenefitsSection() {
   const benefits = data?.benefits ?? [];
 
   return (
-    <section className="mt-10 rounded-2xl border border-border bg-card p-6">
+    <section
+      id="beneficios"
+      className="mt-10 scroll-mt-24 rounded-2xl border border-gold/40 bg-card p-6 target:ring-2 target:ring-gold/60"
+    >
       <h2 className="text-xl font-semibold text-foreground">Benefícios e Assinaturas Especiais</h2>
       <p className="mt-1 text-sm text-muted-foreground">
         Conceda o Signature como cortesia ou um desconto individual. O aluno continua sendo aluno —
