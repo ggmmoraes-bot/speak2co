@@ -82,7 +82,9 @@ const STATUS_META: Record<string, { label: string; tone: string; dot: string }> 
 const PROVIDER_LABEL: Record<string, string> = {
   paddle: "Cartão internacional",
   mercadopago: "Mercado Pago (Pix, boleto ou cartão)",
+  mercadopago_preference: "Mercado Pago — anual em até 12x no cartão, Pix ou boleto",
 };
+
 
 function formatDate(value: string | null | undefined) {
   if (!value) return null;
