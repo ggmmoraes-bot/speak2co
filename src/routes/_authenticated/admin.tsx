@@ -132,6 +132,14 @@ function AdminPage() {
     return map;
   }, [data]);
 
+  // Abrir /admin#beneficios leva direto à seção de Benefícios.
+  useEffect(() => {
+    if (typeof window === "undefined" || window.location.hash !== "#beneficios") return;
+    const timer = window.setTimeout(() => scrollToBenefits(), 250);
+    return () => window.clearTimeout(timer);
+  }, [data]);
+
+
   if (!previewPlan && (accessPending || gate.isPending)) {
     return <div className="p-12 text-center text-sm text-muted-foreground">Carregando...</div>;
   }
