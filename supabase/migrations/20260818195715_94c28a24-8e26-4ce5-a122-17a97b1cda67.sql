@@ -1,0 +1,3 @@
+update public.benefit_grants set status='revoked', updated_at=now() where id='933a7530-a428-4c3e-9f29-fdcc212629c1';
+update public.benefit_grants set usage_count=0, usage_limit=1, status='active', updated_at=now() where id='34adba27-3e51-47f8-bf1c-1c94e1848388';
+insert into public.benefit_grant_events (grant_id, action, payload) values ('34adba27-3e51-47f8-bf1c-1c94e1848388','reissued','{"note":"Desconto de 10% reemitido para nova contratacao","discount_percent":10}'::jsonb);
