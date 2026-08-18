@@ -164,6 +164,15 @@ function PremiumPage() {
   });
   void paymentOptions;
 
+  // Benefício individual (desconto/cortesia) resolvido no servidor.
+  const fetchPricing = useServerFn(getMyCheckoutPricing);
+  const { data: pricingData } = useQuery({
+    queryKey: ["my-checkout-pricing"],
+    queryFn: () => fetchPricing(),
+  });
+  const signaturePricing = pricingData?.pricing?.["signature_yearly"];
+  const hasSignatureBenefit = (signaturePricing?.discountPercent ?? 0) > 0;
+
 
   /** Preço anual vindo do banco, com fallback para o valor de tabela. */
   const yearlyPriceOf = (tier: Tier) => {
@@ -278,6 +287,19 @@ function PremiumPage() {
         </div>
       </section>
 
+
+      {hasSignatureBenefit && !signaturePricing?.courtesy && (
+        <div className="mt-8 rounded-xl border border-accent/50 bg-accent/10 p-4 text-center text-sm">
+          Você tem um desconto exclusivo de {signaturePricing!.discountPercent}% no Signature:{" "}
+          <span className="text-muted-foreground line-through">
+            R$ {signaturePricing!.originalAmount.toFixed(2).replace(".", ",")}
+          </span>{" "}
+          <span className="font-semibold text-accent">
+            R$ {signaturePricing!.finalAmount.toFixed(2).replace(".", ",")} por ano
+          </span>
+          .
+        </div>
+      )}
 
       {!previewPlan && !isActive && showPending && (
         <div className="mt-8 rounded-xl border border-border bg-card p-4 text-center text-muted-foreground">
