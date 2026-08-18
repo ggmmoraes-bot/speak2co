@@ -1,5 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+/** Rola até a seção de benefícios (usada pelo atalho e pelo link /admin#beneficios). */
+function scrollToBenefits() {
+  const el = document.getElementById("beneficios");
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (window.location.hash !== "#beneficios") {
+    window.history.replaceState(null, "", "#beneficios");
+  }
+}
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
