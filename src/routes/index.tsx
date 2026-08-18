@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logoIntro from "@/assets/speak2co-logo-intro.mp4.asset.json";
+import logoIntroWebm from "@/assets/speak2co-logo-intro.webm.asset.json";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { siteUrl } from "@/lib/site";
@@ -65,7 +66,6 @@ function Index() {
       <section className="relative z-10 flex w-full max-w-xl flex-col items-center text-center">
         <div className="logo-entrance aspect-square w-[min(76vw,42vh,420px)] overflow-hidden rounded-full drop-shadow-[0_24px_48px_color-mix(in_oklab,var(--gold)_30%,transparent)] sm:w-[min(58vw,48vh,460px)]">
           <video
-            src={logoIntro.url}
             className="h-full w-full object-contain"
             autoPlay
             muted
@@ -74,7 +74,10 @@ function Index() {
             aria-label="Animação da logomarca oficial Speak2Co"
             onEnded={() => setIntroDone(true)}
             onError={() => setIntroDone(true)}
-          />
+          >
+            <source src={logoIntroWebm.url} type="video/webm" />
+            <source src={logoIntro.url} type="video/mp4" />
+          </video>
         </div>
 
         <div
