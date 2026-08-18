@@ -83,3 +83,16 @@ export function rescueExercise(error: unknown): RescuedExercise | null {
     items,
   };
 }
+
+/** Extrai o status HTTP de um erro do gateway de IA (APICallError, fetch, etc.). */
+export function aiErrorStatus(error: unknown): number | null {
+  const candidate = error as { statusCode?: unknown; status?: unknown; message?: unknown } | null;
+  const raw = candidate?.statusCode ?? candidate?.status;
+  if (typeof raw === "number") return raw;
+  const message = typeof candidate?.message === "string" ? candidate.message : "";
+  const match = message.match(/\b(4\d\d|5\d\d)\b/);
+  if (match) return Number(match[1]);
+  if (/payment required|not enough credits/i.test(message)) return 402;
+  if (/too many requests|rate limit/i.test(message)) return 429;
+  return null;
+}
