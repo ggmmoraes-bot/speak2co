@@ -248,7 +248,7 @@ export function UnitPartLesson({
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-6 sm:px-6 sm:py-8">
       <Link
-        to={courseBase}
+        to={courseBase as "/"}
         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
       >
         <ArrowLeft className="h-4 w-4" /> Back to course · Voltar ao curso
@@ -275,14 +275,14 @@ export function UnitPartLesson({
             <div className="flex flex-wrap gap-2">
               {part === "discover" ? (
                 <Link
-                  to={partHref(unit.code, otherPart)}
+                  to={partHref(unit.code, otherPart) as "/"}
                   className="inline-flex items-center gap-2 rounded-full border border-gold/50 px-4 py-2 text-xs font-semibold text-gold transition hover:bg-gold/10"
                 >
                   Go to Part 2 — Communicate <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               ) : nextUnit ? (
                 <Link
-                  to={partHref(nextUnit.code, "discover")}
+                  to={partHref(nextUnit.code, "discover") as "/"}
                   className="inline-flex items-center gap-2 rounded-full border border-gold/50 px-4 py-2 text-xs font-semibold text-gold transition hover:bg-gold/10"
                 >
                   Next unit <ArrowRight className="h-3.5 w-3.5" />
