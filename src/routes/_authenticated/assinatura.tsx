@@ -429,7 +429,7 @@ function AssinaturaPage() {
                     contratação anual paga em até {INSTALLMENTS}x
                   </span>
                 </li>
-                <li>Acesso garantido até: {formatDate(nextChargeIso) ?? "—"}</li>
+                <li>Acesso garantido até: {formatDate(endIso) ?? "—"}</li>
                 <li>
                   Avisamos você antes do vencimento para renovar com uma nova contratação, sem
                   cobrança surpresa.
