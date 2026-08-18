@@ -510,9 +510,12 @@ function AssinaturaPage() {
               )}
               {subscription?.cancel_at_period_end && (
                 <p className="text-sm text-muted-foreground">
-                  Cancelamento agendado — acesso liberado até {formatDate(endIso) ?? "o fim do período"}.
+                  {isPreference
+                    ? `Contratação anual sem débito automático — acesso liberado até ${formatDate(endIso) ?? "o fim do período"}.`
+                    : `Cancelamento agendado — acesso liberado até ${formatDate(endIso) ?? "o fim do período"}.`}
                 </p>
               )}
+
             </div>
             <p className="mt-4 text-xs text-muted-foreground">
               Consulte os{" "}
