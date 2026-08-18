@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
-import logo from "@/assets/speak2co-logo.asset.json";
+import { useEffect, useState } from "react";
+import logoIntro from "@/assets/speak2co-logo-intro.mp4.asset.json";
+import logoIntroWebm from "@/assets/speak2co-logo-intro.webm.asset.json";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { siteUrl } from "@/lib/site";
@@ -29,6 +30,14 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const navigate = useNavigate();
+  const [introDone, setIntroDone] = useState(false);
+
+  // Garante a entrada da página mesmo se o autoplay for bloqueado ou o vídeo demorar.
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIntroDone(true), 8000);
+    return () => window.clearTimeout(timer);
+  }, []);
+
 
   useEffect(() => {
     let active = true;
@@ -56,13 +65,24 @@ function Index() {
 
       <section className="relative z-10 flex w-full max-w-xl flex-col items-center text-center">
         <div className="logo-entrance aspect-square w-[min(76vw,42vh,420px)] overflow-hidden rounded-full drop-shadow-[0_24px_48px_color-mix(in_oklab,var(--gold)_30%,transparent)] sm:w-[min(58vw,48vh,460px)]">
-          <img
-            src={logo.url}
-            alt="Logomarca oficial Speak2Co"
-            className="h-full w-full object-contain"
-          />
+          <video
+            className="h-full w-full scale-[1.35] object-cover"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            aria-label="Animação da logomarca oficial Speak2Co"
+            onEnded={() => setIntroDone(true)}
+            onError={() => setIntroDone(true)}
+          >
+            <source src={logoIntroWebm.url} type="video/webm" />
+            <source src={logoIntro.url} type="video/mp4" />
+          </video>
         </div>
 
+        <div
+          className={`flex w-full flex-col items-center transition-opacity duration-700 ${introDone ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        >
         <p className="mt-8 text-xs font-medium tracking-[0.32em] text-muted-foreground uppercase sm:text-sm">
           English for Every Opportunity.
         </p>
@@ -95,6 +115,7 @@ function Index() {
             Aviso de Privacidade
           </Link>
         </nav>
+        </div>
       </section>
     </main>
   );

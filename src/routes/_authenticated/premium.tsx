@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
 import { getPlanCatalog } from "@/lib/entitlements.functions";
 import { changePaddlePlan, getPaymentOptions } from "@/lib/payments.functions";
-import { usePaddleCheckout } from "@/hooks/usePaddleCheckout";
 import { useAdminPreviewPlan } from "@/lib/entitlements";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
@@ -155,7 +154,6 @@ function PremiumPage() {
   const queryClient = useQueryClient();
   const fetchSubscription = useServerFn(getMySubscription);
   const checkout = useServerFn(startMercadoPagoCheckout);
-  const paddle = usePaddleCheckout();
   const fetchCatalog = useServerFn(getPlanCatalog);
   const changePlan = useServerFn(changePaddlePlan);
   const fetchPaymentOptions = useServerFn(getPaymentOptions);
@@ -164,9 +162,7 @@ function PremiumPage() {
     queryKey: ["payment-options"],
     queryFn: () => fetchPaymentOptions(),
   });
-  // O Mercado Pago só aparece quando o webhook está configurado — sem ele o
-  // pagamento é aprovado mas o plano nunca seria liberado.
-  const mercadoPagoEnabled = paymentOptions?.mercadoPagoEnabled === true;
+  void paymentOptions;
 
 
   /** Preço anual vindo do banco, com fallback para o valor de tabela. */
@@ -192,10 +188,6 @@ function PremiumPage() {
     },
     onError: (error: Error) => toast.error(error.message),
   });
-
-  const startPaddle = (priceId: string) => {
-    paddle.openCheckout(priceId).catch((error: Error) => toast.error(error.message));
-  };
 
   const { data } = useQuery({
     queryKey: ["subscription"],
@@ -276,8 +268,8 @@ function PremiumPage() {
             ) : (
               <Button
                 className="mt-5 rounded-full font-semibold"
-                disabled={paddle.loading}
-                onClick={() => startPaddle("signature_yearly")}
+                disabled={mutation.isPending}
+                onClick={() => mutation.mutate("signature_yearly")}
               >
                 🔒 Desbloquear GiseleAI com o Signature
               </Button>
@@ -378,25 +370,16 @@ function PremiumPage() {
                 ) : (
                   <>
                     <Button
-                      className="h-auto w-full whitespace-normal py-2 text-xs leading-tight"
+                      className="h-auto w-full whitespace-normal py-2 text-sm leading-tight"
                       variant={tier.highlight ? "default" : "outline"}
-                      disabled={paddle.loading}
-                      onClick={() => startPaddle(tier.yearly.key)}
+                      disabled={mutation.isPending}
+                      onClick={() => mutation.mutate(tier.yearly.key)}
                     >
-                      {paddle.loading ? "Abrindo checkout..." : "Assinar com cartão"}
+                      {mutation.isPending ? "Abrindo checkout..." : "Assinar com Mercado Pago"}
                     </Button>
-                    {mercadoPagoEnabled ? (
-                      <Button
-                        className="h-auto w-full whitespace-normal py-2 text-xs leading-tight"
-                        variant="ghost"
-                        disabled={mutation.isPending}
-                        onClick={() => mutation.mutate(tier.yearly.key)}
-                      >
-                        {mutation.isPending
-                          ? "Abrindo checkout..."
-                          : "Assinar com Mercado Pago (Pix/boleto/cartão)"}
-                      </Button>
-                    ) : null}
+                    <p className="text-center text-xs text-muted-foreground">
+                      Pix, Boleto ou Cartão
+                    </p>
                   </>
                 )}
 
