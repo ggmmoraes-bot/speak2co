@@ -85,6 +85,7 @@ import { Route as AuthenticatedSpeak2travelIndexRouteImport } from './routes/_au
 import { Route as AuthenticatedSpeak2travelTripPlannerRouteImport } from './routes/_authenticated/speak2travel.trip-planner'
 import { Route as AuthenticatedUpgradeEssentialRouteImport } from './routes/_authenticated/upgrade.essential'
 import { Route as AuthenticatedVocabularioIndexRouteImport } from './routes/_authenticated/vocabulario.index'
+import { Route as ApiPublicMpDiagRouteImport } from './routes/api/public/mp-diag'
 import { Route as ApiVoicePronunciationRouteImport } from './routes/api/voice/pronunciation'
 import { Route as ApiVoiceSpeakRouteImport } from './routes/api/voice/speak'
 import { Route as ApiVoiceTranscribeRouteImport } from './routes/api/voice/transcribe'
@@ -528,6 +529,11 @@ const AuthenticatedVocabularioIndexRoute =
     path: '/vocabulario/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ApiPublicMpDiagRoute = ApiPublicMpDiagRouteImport.update({
+  id: '/api/public/mp-diag',
+  path: '/api/public/mp-diag',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiVoicePronunciationRoute = ApiVoicePronunciationRouteImport.update({
   id: '/api/voice/pronunciation',
   path: '/api/voice/pronunciation',
@@ -695,6 +701,7 @@ export interface FileRoutesByFullPath {
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
+  '/api/public/mp-diag': typeof ApiPublicMpDiagRoute
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
@@ -781,6 +788,7 @@ export interface FileRoutesByTo {
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
+  '/api/public/mp-diag': typeof ApiPublicMpDiagRoute
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
@@ -877,6 +885,7 @@ export interface FileRoutesById {
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
   '/_authenticated/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/_authenticated/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
+  '/api/public/mp-diag': typeof ApiPublicMpDiagRoute
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
   '/api/voice/speak': typeof ApiVoiceSpeakRoute
   '/api/voice/transcribe': typeof ApiVoiceTranscribeRoute
@@ -973,6 +982,7 @@ export interface FileRouteTypes {
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
+    | '/api/public/mp-diag'
     | '/api/voice/pronunciation'
     | '/api/voice/speak'
     | '/api/voice/transcribe'
@@ -1059,6 +1069,7 @@ export interface FileRouteTypes {
     | '/professor/$threadId'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
+    | '/api/public/mp-diag'
     | '/api/voice/pronunciation'
     | '/api/voice/speak'
     | '/api/voice/transcribe'
@@ -1154,6 +1165,7 @@ export interface FileRouteTypes {
     | '/_authenticated/professor/$threadId'
     | '/_authenticated/speak2travel/trip-planner'
     | '/_authenticated/upgrade/essential'
+    | '/api/public/mp-diag'
     | '/api/voice/pronunciation'
     | '/api/voice/speak'
     | '/api/voice/transcribe'
@@ -1194,6 +1206,7 @@ export interface RootRouteChildren {
   TermosRoute: typeof TermosRoute
   ApiChatRoute: typeof ApiChatRoute
   ApiGiseleChatRoute: typeof ApiGiseleChatRoute
+  ApiPublicMpDiagRoute: typeof ApiPublicMpDiagRoute
   ApiVoicePronunciationRoute: typeof ApiVoicePronunciationRoute
   ApiVoiceSpeakRoute: typeof ApiVoiceSpeakRoute
   ApiVoiceTranscribeRoute: typeof ApiVoiceTranscribeRoute
@@ -1735,6 +1748,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedVocabularioIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/mp-diag': {
+      id: '/api/public/mp-diag'
+      path: '/api/public/mp-diag'
+      fullPath: '/api/public/mp-diag'
+      preLoaderRoute: typeof ApiPublicMpDiagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/voice/pronunciation': {
       id: '/api/voice/pronunciation'
       path: '/api/voice/pronunciation'
@@ -2168,6 +2188,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermosRoute: TermosRoute,
   ApiChatRoute: ApiChatRoute,
   ApiGiseleChatRoute: ApiGiseleChatRoute,
+  ApiPublicMpDiagRoute: ApiPublicMpDiagRoute,
   ApiVoicePronunciationRoute: ApiVoicePronunciationRoute,
   ApiVoiceSpeakRoute: ApiVoiceSpeakRoute,
   ApiVoiceTranscribeRoute: ApiVoiceTranscribeRoute,
