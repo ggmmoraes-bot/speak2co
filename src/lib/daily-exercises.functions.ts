@@ -123,10 +123,12 @@ Chaves obrigatórias do JSON: title, instructions, items[].question, items[].opt
       });
       output = result.output;
     } catch (e) {
-      const message = e instanceof Error ? e.message : "";
-      if (message.includes("429")) throw new Error("Muitas solicitações. Tente novamente em instantes.");
-      if (message.includes("402")) throw new Error("Créditos de IA esgotados. Adicione créditos para continuar.");
-      const { rescueExercise } = await import("./daily-exercises.server");
+      const { rescueExercise, aiErrorStatus } = await import("./daily-exercises.server");
+      const status = aiErrorStatus(e);
+      if (status === 429) throw new Error("Muitas solicitações. Tente novamente em instantes.");
+      if (status === 402 || status === 403) {
+        throw new Error("Créditos de IA esgotados. Adicione créditos para continuar.");
+      }
       const rescued = rescueExercise(e);
       if (!rescued) {
         console.error("[daily-exercises] geração falhou", e);
