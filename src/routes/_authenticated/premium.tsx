@@ -171,8 +171,11 @@ function PremiumPage() {
     queryKey: ["my-checkout-pricing"],
     queryFn: () => fetchPricing(),
   });
-  const signaturePricing = pricingData?.pricing?.["signature_yearly"];
-  const hasSignatureBenefit = (signaturePricing?.discountPercent ?? 0) > 0;
+  /** Benefícios individuais ativos (desconto) em qualquer plano pago. */
+  const benefitPlans = (["essential_yearly", "premium_yearly", "signature_yearly"] as const)
+    .map((key) => ({ key, pricing: pricingData?.pricing?.[key] }))
+    .filter((entry) => (entry.pricing?.discountPercent ?? 0) > 0 && !entry.pricing?.courtesy);
+
 
 
   /** Preço anual vindo do banco, com fallback para o valor de tabela. */
