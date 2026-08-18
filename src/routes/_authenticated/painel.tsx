@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { ShieldCheck, Sparkles, Compass, Target } from "lucide-react";
+import { ShieldCheck, Sparkles, Compass, Target, Gift } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { BrandText } from "@/components/BrandText";
@@ -95,12 +95,20 @@ function Painel() {
           <div className="flex shrink-0 items-center gap-2">
             {isAdminAccount && <AdminPlanPreview />}
             {isAdminAccount && !previewPlan && (
-              <Button asChild variant="outline" className="rounded-full">
-                <Link to="/admin">
-                  <ShieldCheck className="h-4 w-4 text-gold" />
-                  <span className="ml-2 hidden sm:inline">Administração</span>
-                </Link>
-              </Button>
+              <>
+                <Button asChild variant="outline" className="rounded-full">
+                  <Link to="/admin">
+                    <ShieldCheck className="h-4 w-4 text-gold" />
+                    <span className="ml-2 hidden sm:inline">Administração</span>
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="rounded-full">
+                  <Link to="/admin" hash="beneficios">
+                    <Gift className="h-4 w-4 text-gold" />
+                    <span className="ml-2 hidden sm:inline">Benefícios</span>
+                  </Link>
+                </Button>
+              </>
             )}
             <Button variant="outline" onClick={handleSignOut} className="rounded-full">
               Sair

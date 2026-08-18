@@ -1,5 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+/** Rola até a seção de benefícios (usada pelo atalho e pelo link /admin#beneficios). */
+function scrollToBenefits() {
+  const el = document.getElementById("beneficios");
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (window.location.hash !== "#beneficios") {
+    window.history.replaceState(null, "", "#beneficios");
+  }
+}
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
@@ -122,6 +132,14 @@ function AdminPage() {
     return map;
   }, [data]);
 
+  // Abrir /admin#beneficios leva direto à seção de Benefícios.
+  useEffect(() => {
+    if (typeof window === "undefined" || window.location.hash !== "#beneficios") return;
+    const timer = window.setTimeout(() => scrollToBenefits(), 250);
+    return () => window.clearTimeout(timer);
+  }, [data]);
+
+
   if (!previewPlan && (accessPending || gate.isPending)) {
     return <div className="p-12 text-center text-sm text-muted-foreground">Carregando...</div>;
   }
@@ -222,6 +240,15 @@ function AdminPage() {
           <Link to="/painel">Voltar ao painel</Link>
         </Button>
       </header>
+
+      <nav className="mt-6 flex flex-wrap gap-2 text-sm">
+        <Button
+          onClick={() => scrollToBenefits()}
+          className="glow-gold rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
+        >
+          Benefícios e Assinaturas Especiais
+        </Button>
+      </nav>
 
       {isPending && <p className="mt-8 text-sm text-muted-foreground">Carregando catálogo...</p>}
 
