@@ -70,8 +70,11 @@ export async function createPreapproval(params: {
   payerEmail: string;
   externalReference: string;
   backUrl: string;
+  /** Valor final já calculado no servidor (benefício individual aplicado). */
+  amount?: number;
 }): Promise<Preapproval> {
   const plan = MP_PLANS[params.planKey];
+  const amount = params.amount ?? plan.amount;
   return mpRequest<Preapproval>("/preapproval", {
     method: "POST",
     body: {
@@ -83,7 +86,7 @@ export async function createPreapproval(params: {
       auto_recurring: {
         frequency: plan.frequency,
         frequency_type: plan.frequency_type,
-        transaction_amount: plan.amount,
+        transaction_amount: amount,
         currency_id: "BRL",
       },
       status: "pending",
