@@ -6,6 +6,7 @@ import giseleAiArt from "@/assets/gisele-ai-art.png.asset.json";
 import { BrandText } from "@/components/BrandText";
 import { Button } from "@/components/ui/button";
 import { getMySubscription, startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
+import { getMyCheckoutPricing } from "@/lib/benefits.functions";
 import { getPlanCatalog } from "@/lib/entitlements.functions";
 import { changePaddlePlan, getPaymentOptions } from "@/lib/payments.functions";
 import { useAdminPreviewPlan } from "@/lib/entitlements";
