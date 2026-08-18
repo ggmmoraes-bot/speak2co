@@ -24,7 +24,9 @@ export const Route = createFileRoute("/api/public/mp-diag")({
           status: "pending",
         };
         const variants: Array<{ name: string; body: Record<string, unknown> }> = [
-          { name: "sem notification_url", body: base },
+          { name: "email real", body: { ...base, payer_email: url.searchParams.get("email") ?? "teste.diag@example.com" } },
+          { name: "back_url preview", body: { ...base, back_url: "https://id-preview--bc89966c-9ddb-495f-99a3-366ec8187a94.lovable.app/checkout-sucesso" } },
+          { name: "external_reference com dois pontos", body: { ...base, external_reference: "8b2a0c1e-0000-4000-8000-000000000000:" + crypto.randomUUID() } },
           {
             name: "notification_url sem query",
             body: { ...base, notification_url: "https://speak2co.lovable.app/api/public/webhooks/mercadopago" },
