@@ -39,15 +39,27 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
     const email = (context.claims as { email?: string } | null)?.email;
     if (!email) throw new Error("Não foi possível identificar seu e-mail de cobrança.");
 
+    const plan = MP_PLANS[data.planKey];
+
+    // Preço final SEMPRE calculado no servidor a partir do usuário autenticado.
+    // O cliente não envia valores e não consegue influenciar o desconto.
+    const { resolveCheckoutPricing, registerBenefitUsage } = await import("@/lib/benefits.server");
+    const pricing = await resolveCheckoutPricing(context.userId, data.planKey, plan.amount);
+
+    if (pricing.courtesy) {
+      const { syncUserPlan } = await import("@/lib/plan-sync.server");
+      await syncUserPlan(context.userId).catch(() => undefined);
+      throw new Error("Seu plano já está liberado nesta conta — não é necessário pagamento.");
+    }
+
     const externalReference = `${context.userId}:${crypto.randomUUID()}`;
     const preapproval = await createPreapproval({
       planKey: data.planKey,
       payerEmail: email,
       externalReference,
       backUrl: `${data.origin}/checkout-sucesso`,
+      amount: pricing.finalAmount,
     });
-
-    const plan = MP_PLANS[data.planKey];
     const { data: created, error } = await supabaseAdmin
       .from("subscriptions")
       .insert({
@@ -59,10 +71,10 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
         external_reference: externalReference,
         status: preapproval.status ?? "pending",
         plan_label: plan.label,
-        amount: plan.amount,
+        amount: pricing.finalAmount,
         currency: "BRL",
         init_point: preapproval.init_point ?? null,
-        raw: JSON.parse(JSON.stringify(preapproval)),
+        raw: JSON.parse(JSON.stringify({ preapproval, pricing })),
       })
       .select("id")
       .maybeSingle();
@@ -75,11 +87,21 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
       preapproval_id: preapproval.id,
       event_type: "checkout_created",
       status: preapproval.status ?? "pending",
-      amount: plan.amount,
+      amount: pricing.finalAmount,
       currency: "BRL",
-      message: `Checkout criado para o plano ${plan.label}.`,
-      raw: JSON.parse(JSON.stringify(preapproval)),
+      message: pricing.discountPercent
+        ? `Checkout criado para o plano ${plan.label} com ${pricing.discountPercent}% de desconto (R$ ${pricing.finalAmount.toFixed(2)}).`
+        : `Checkout criado para o plano ${plan.label}.`,
+      raw: JSON.parse(JSON.stringify({ preapproval, pricing })),
     });
+
+    if (pricing.grantId) {
+      await registerBenefitUsage(pricing.grantId, context.userId, {
+        planKey: data.planKey,
+        preapproval_id: preapproval.id,
+        amount: pricing.finalAmount,
+      }).catch(() => undefined);
+    }
 
     if (!preapproval.init_point) throw new Error("O Mercado Pago não retornou o link de pagamento.");
     return { checkoutUrl: preapproval.init_point };

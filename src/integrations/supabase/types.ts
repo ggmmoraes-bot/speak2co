@@ -258,6 +258,98 @@ export type Database = {
         }
         Relationships: []
       }
+      benefit_grant_events: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          grant_id: string
+          id: string
+          payload: Json
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          grant_id: string
+          id?: string
+          payload?: Json
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          grant_id?: string
+          id?: string
+          payload?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "benefit_grant_events_grant_id_fkey"
+            columns: ["grant_id"]
+            isOneToOne: false
+            referencedRelation: "benefit_grants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      benefit_grants: {
+        Row: {
+          code: string | null
+          created_at: string
+          discount_percent: number
+          email_snapshot: string | null
+          ends_at: string | null
+          granted_by: string | null
+          id: string
+          kind: string
+          note: string | null
+          plan_key: string
+          starts_at: string
+          status: string
+          updated_at: string
+          usage_count: number
+          usage_limit: number | null
+          user_id: string
+        }
+        Insert: {
+          code?: string | null
+          created_at?: string
+          discount_percent?: number
+          email_snapshot?: string | null
+          ends_at?: string | null
+          granted_by?: string | null
+          id?: string
+          kind: string
+          note?: string | null
+          plan_key?: string
+          starts_at?: string
+          status?: string
+          updated_at?: string
+          usage_count?: number
+          usage_limit?: number | null
+          user_id: string
+        }
+        Update: {
+          code?: string | null
+          created_at?: string
+          discount_percent?: number
+          email_snapshot?: string | null
+          ends_at?: string | null
+          granted_by?: string | null
+          id?: string
+          kind?: string
+          note?: string | null
+          plan_key?: string
+          starts_at?: string
+          status?: string
+          updated_at?: string
+          usage_count?: number
+          usage_limit?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       chat_messages: {
         Row: {
           created_at: string
@@ -1273,6 +1365,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      active_courtesy_plan: { Args: { user_uuid: string }; Returns: string }
       current_plan_tier: { Args: { user_uuid: string }; Returns: string }
       fluency_leaderboard: {
         Args: { _limit?: number }

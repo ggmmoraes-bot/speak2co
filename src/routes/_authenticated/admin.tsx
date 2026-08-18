@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useAccess, useAdminPreviewPlan } from "@/lib/entitlements";
 import { UpgradeScreen } from "@/components/FeatureGate";
+import { BenefitsSection } from "@/components/admin/BenefitsSection";
 import {
   requireAdminAccess,
   getAdminCatalog,
@@ -427,6 +428,8 @@ function AdminPage() {
           </div>
         </div>
       </section>
+
+      <BenefitsSection />
 
       <section className="mt-10 rounded-2xl border border-border bg-card p-6">
         <h2 className="text-xl font-semibold text-foreground">Matriz de recursos</h2>
