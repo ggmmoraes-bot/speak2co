@@ -292,22 +292,30 @@ function PremiumPage() {
       </section>
 
 
-      {hasSignatureBenefit && !signaturePricing?.courtesy && (
-        <div className="mt-8 rounded-xl border border-accent/50 bg-accent/10 p-4 text-center text-sm">
-          Você tem um desconto exclusivo de {signaturePricing!.discountPercent}% no Signature:{" "}
-          <span className="text-muted-foreground line-through">
-            R$ {signaturePricing!.originalAmount.toFixed(2).replace(".", ",")}
-          </span>{" "}
-          <span className="font-semibold text-accent">
-            R$ {signaturePricing!.finalAmount.toFixed(2).replace(".", ",")} por ano
-          </span>
-          .
-          <span className="mt-1 block text-muted-foreground">
-            Em até 12x de R$ {(signaturePricing!.finalAmount / 12).toFixed(2).replace(".", ",")} sem
-            juros no cartão — o desconto é aplicado antes do parcelamento.
-          </span>
+      {benefitPlans.length > 0 && (
+        <div className="mt-8 space-y-2 rounded-xl border border-accent/50 bg-accent/10 p-4 text-center text-sm">
+          {benefitPlans.map(({ key, pricing }) => {
+            const label = TIERS.find((t) => t.yearly.key === key)?.label ?? key;
+            return (
+              <p key={key}>
+                <span className="font-semibold text-accent">
+                  {pricing!.discountPercent}% OFF + até 12x sem juros
+                </span>{" "}
+                no {label}:{" "}
+                <span className="text-muted-foreground line-through">
+                  {BRL(pricing!.originalAmount)}
+                </span>{" "}
+                <span className="font-semibold text-accent">{BRL(pricing!.finalAmount)} por ano</span>
+                <span className="mt-1 block text-muted-foreground">
+                  Em até 12x de {BRL(pricing!.finalAmount / 12)} sem juros no cartão — o desconto é
+                  aplicado antes do parcelamento.
+                </span>
+              </p>
+            );
+          })}
         </div>
       )}
+
 
 
       {!previewPlan && !isActive && showPending && (
