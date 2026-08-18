@@ -184,6 +184,15 @@ function PremiumPage() {
     return value == null ? tier.yearly.price : Number(value);
   };
   const installmentOf = (total: number) => total / 12;
+  /** Valor efetivamente cobrado: aplica o benefício individual, quando houver. */
+  const chargedOf = (tier: Tier) => {
+    const pricing = pricingData?.pricing?.[tier.yearly.key];
+    const total = yearlyPriceOf(tier);
+    return pricing && pricing.finalAmount > 0 && pricing.finalAmount < total
+      ? pricing.finalAmount
+      : total;
+  };
+
 
   const levelOf = (tierId: string | null) =>
     (tierId ? catalog?.plans.find((p) => p.key === tierId)?.access_level : 0) ?? 0;
