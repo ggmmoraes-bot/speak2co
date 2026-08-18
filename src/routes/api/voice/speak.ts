@@ -81,6 +81,12 @@ export const Route = createFileRoute("/api/voice/speak")({
           if (!elevenRes.ok) {
             const detail = await elevenRes.text().catch(() => "");
             console.error("[voice/speak:elevenlabs]", elevenRes.status, detail);
+            if (elevenRes.status === 401 || elevenRes.status === 402) {
+              return new Response(
+                "Créditos de voz esgotados — o áudio volta assim que os créditos forem adicionados.",
+                { status: 402 },
+              );
+            }
             return new Response("Não foi possível gerar o áudio.", { status: elevenRes.status });
           }
           return new Response(elevenRes.body, {
