@@ -66,7 +66,7 @@ function Index() {
       <section className="relative z-10 flex w-full max-w-xl flex-col items-center text-center">
         <div className="logo-entrance aspect-square w-[min(76vw,42vh,420px)] overflow-hidden rounded-full drop-shadow-[0_24px_48px_color-mix(in_oklab,var(--gold)_30%,transparent)] sm:w-[min(58vw,48vh,460px)]">
           <video
-            className="h-full w-full object-contain"
+            className="h-full w-full scale-[1.35] object-cover"
             autoPlay
             muted
             playsInline
