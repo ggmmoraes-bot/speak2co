@@ -79,7 +79,9 @@ export const listBenefits = createServerFn({ method: "GET" })
 
     const rows = (grants ?? []) as any[];
     const { data: profiles } = await supabase.from("profiles").select("id, full_name, plan");
-    const profileById = new Map((profiles ?? []).map((p: any) => [p.id, p]));
+    const profileById = new Map<string, { full_name: string | null; plan: string | null }>(
+      (profiles ?? []).map((p: any) => [p.id as string, { full_name: p.full_name, plan: p.plan }]),
+    );
 
     return {
       benefits: rows.map((g) => ({
