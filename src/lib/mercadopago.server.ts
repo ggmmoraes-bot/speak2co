@@ -79,6 +79,53 @@ export type Preference = {
   external_reference?: string;
 };
 
+/** Só aceitamos URLs públicas em HTTPS — o Mercado Pago rejeita o resto com 400. */
+function requireHttpsUrl(value: string, field: string) {
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error(`Pagamento indisponível: ${field} inválida.`);
+  }
+  if (url.protocol !== "https:" || !url.hostname.includes(".") || url.hostname === "localhost") {
+    throw new Error(`Pagamento indisponível: ${field} precisa ser uma URL pública em HTTPS.`);
+  }
+  return url.toString();
+}
+
+/** Texto seguro para os campos de conteúdo (title/description): sem controle, emoji ou tags. */
+export function sanitizeText(value: string, maxLength = 250) {
+  const clean = value
+    .normalize("NFKC")
+    .replace(/[\u0000-\u001f\u007f<>]/g, " ")
+    .replace(/[^\p{L}\p{N} .,:;!?()\-–—/&'+]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return clean.slice(0, maxLength);
+}
+
+/** external_reference: apenas caracteres seguros para uso como chave (uuid, ":", "-", "_"). */
+export function sanitizeExternalReference(value: string) {
+  const clean = value.replace(/[^A-Za-z0-9:_-]/g, "").slice(0, 250);
+  if (clean.length < 8) throw new Error("Pagamento indisponível: referência do pedido inválida.");
+  return clean;
+}
+
+function sanitizeEmail(value: string) {
+  const email = value.trim().toLowerCase();
+  if (!/^[^\s@<>]{1,64}@[^\s@<>.]+(\.[^\s@<>.]+)+$/.test(email) || email.length > 254) {
+    throw new Error("Pagamento indisponível: e-mail de cobrança inválido.");
+  }
+  return email;
+}
+
+function sanitizeAmount(value: number) {
+  if (!Number.isFinite(value) || value <= 0 || value > 100000) {
+    throw new Error("Pagamento indisponível: valor da assinatura inválido.");
+  }
+  return Math.round(value * 100) / 100;
+}
+
 /**
  * Cobrança anual avulsa parcelada em até 12x no cartão (Checkout Pro).
  * A API de Assinaturas (preapproval) não oferece parcelamento — por isso os
@@ -93,27 +140,34 @@ export async function createPreference(params: {
   amount?: number;
 }): Promise<Preference> {
   const plan = MP_PLANS[params.planKey];
-  const amount = params.amount ?? plan.amount;
+  if (!plan) throw new Error("Pagamento indisponível: plano desconhecido.");
+  const amount = sanitizeAmount(params.amount ?? plan.amount);
+  const backUrl = requireHttpsUrl(params.backUrl, "URL de retorno");
+  const notifyUrl = requireHttpsUrl(notificationUrl(), "URL de notificação");
+  const externalReference = sanitizeExternalReference(params.externalReference);
+  const payerEmail = sanitizeEmail(params.payerEmail);
+  const title = sanitizeText(`Speak2Co ${plan.label}`, 120) || "Speak2Co";
+
   return mpRequest<Preference>("/checkout/preferences", {
     method: "POST",
     body: {
       items: [
         {
           id: params.planKey,
-          title: `Speak2Co ${plan.label}`,
-          description: "Acesso por 12 meses",
+          title,
+          description: sanitizeText("Acesso por 12 meses", 120),
           category_id: "learnings",
           quantity: 1,
           unit_price: amount,
           currency_id: "BRL",
         },
       ],
-      payer: { email: params.payerEmail },
-      external_reference: params.externalReference,
+      payer: { email: payerEmail },
+      external_reference: externalReference,
       back_urls: {
-        success: params.backUrl,
-        pending: params.backUrl,
-        failure: params.backUrl,
+        success: backUrl,
+        pending: backUrl,
+        failure: backUrl,
       },
       auto_return: "approved",
       statement_descriptor: "SPEAK2CO",
@@ -121,10 +175,11 @@ export async function createPreference(params: {
         installments: 12,
         default_installments: 12,
       },
-      notification_url: notificationUrl(),
+      notification_url: notifyUrl,
     },
   });
 }
+
 
 export async function getPreapproval(id: string): Promise<Preapproval> {
   return mpRequest<Preapproval>(`/preapproval/${encodeURIComponent(id)}`);
