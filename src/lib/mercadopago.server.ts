@@ -65,34 +65,12 @@ export function notificationUrl() {
   return token ? `${base}?token=${encodeURIComponent(token)}` : base;
 }
 
-export async function createPreapproval(params: {
-  planKey: PlanKey;
-  payerEmail: string;
-  externalReference: string;
-  backUrl: string;
-  /** Valor final já calculado no servidor (benefício individual aplicado). */
-  amount?: number;
-}): Promise<Preapproval> {
-  const plan = MP_PLANS[params.planKey];
-  const amount = params.amount ?? plan.amount;
-  return mpRequest<Preapproval>("/preapproval", {
-    method: "POST",
-    body: {
-      reason: `Speak2Co ${plan.label}`,
-      external_reference: params.externalReference,
-      payer_email: params.payerEmail,
-      back_url: params.backUrl,
-      notification_url: notificationUrl(),
-      auto_recurring: {
-        frequency: plan.frequency,
-        frequency_type: plan.frequency_type,
-        transaction_amount: amount,
-        currency_id: "BRL",
-      },
-      status: "pending",
-    },
-  });
-}
+/**
+ * A criação de assinaturas (preapproval) foi descontinuada: os planos anuais
+ * usam Checkout Pro (preference) para permitir parcelamento em até 12x.
+ * As funções de leitura/cancelamento de preapproval seguem abaixo apenas para
+ * assinaturas antigas ainda ativas.
+ */
 
 export type Preference = {
   id: string;
