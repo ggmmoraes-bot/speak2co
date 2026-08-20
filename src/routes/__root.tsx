@@ -79,6 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "google-site-verification", content: "eyS_GJG6cWGX7qfzjLgnDvx-QyvfkRWHNA3KSOOhFko" },
       { title: "Speak2Co — English for Every Opportunity" },
       { name: "description", content: "A Speak2Co é uma plataforma criada para transformar o aprendizado do inglês em uma experiência prática, acessível e personalizada." },
       { name: "author", content: "Lovable" },
