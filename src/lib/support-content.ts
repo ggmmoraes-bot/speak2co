@@ -107,7 +107,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     group: "Product Lines",
     q: "O que são os Product Lines da Speak2Co?",
-    a: "Os Product Lines são produtos e experiências especializadas da Speak2Co, desenvolvidos para diferentes objetivos de aprendizagem e situações reais de uso do inglês. Atualmente a plataforma conta com produtos como Speak2Hire, Speak2Travel, Speak2Fluency, Speak2Kids e Speak2Teens — e novos Product Lines serão acrescentados futuramente, ampliando continuamente as possibilidades de aprendizagem e prática.",
+    a: "Os Product Lines são produtos e experiências especializadas da Speak2Co, desenvolvidos para diferentes objetivos de aprendizagem e situações reais de uso do inglês. Atualmente a plataforma conta com produtos como Speak2Hire, Speak2Travel, Speak2Fluency — além do Speak2Business e do Speak2Kids, que estão em Coming Soon e serão liberados a partir do plano Premium. Novos Product Lines serão acrescentados futuramente, ampliando continuamente as possibilidades de aprendizagem e prática.",
   },
   {
     group: "Product Lines",

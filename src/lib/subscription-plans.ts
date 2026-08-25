@@ -50,6 +50,7 @@ export const PLAN_BENEFITS: Record<PlanKey, string[]> = {
     "Speak2Hire — simulador de entrevistas com IA",
     "Speak2Travel — 10 módulos e Trip Planner",
     "Speak2Fluency — 8 módulos e rotina diária de fluência",
+    "Speak2Business e Speak2Kids — Coming Soon, inclusos a partir do Premium",
     "AI Teacher — uso ilimitado",
     "Feedback de IA em pronunciation, stress, intonation e fluency",
     "Ranking de fluência e certificados de evolução",
