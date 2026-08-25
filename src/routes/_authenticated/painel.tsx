@@ -129,8 +129,9 @@ function Painel() {
               </p>
               <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">
                 Welcome to <BrandText text="Speak2Co" />
-                {firstName ? <span className="text-gold">, {firstName}</span> : "!"}
+                {firstName ? <span className="text-gold">, {firstName}!</span> : "!"}
               </h1>
+
               <p className="mt-4 max-w-xl text-base text-muted-foreground sm:text-lg">
                 Everything you need to achieve your English goals in one place.
               </p>
