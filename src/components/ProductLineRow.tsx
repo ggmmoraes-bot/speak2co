@@ -159,9 +159,16 @@ export function ProductLineRow({
   items: ProductLineItem[];
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [atEnd, setAtEnd] = useState(false);
 
   const scrollBy = (dir: 1 | -1) => {
     trackRef.current?.scrollBy({ left: dir * 380, behavior: "smooth" });
+  };
+
+  const onScroll = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 24);
   };
 
   return (
@@ -190,13 +197,28 @@ export function ProductLineRow({
         </div>
       </div>
 
-      <div
-        ref={trackRef}
-        className="mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-1 pt-2 pb-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {items.map((item) => (
-          <PosterCard key={item.titleEn} {...item} />
-        ))}
+      <div className="relative">
+        <div
+          ref={trackRef}
+          onScroll={onScroll}
+          className="mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-1 pt-2 pr-10 pb-6 [-ms-overflow-style:none] [scrollbar-width:none] sm:pr-1 [&::-webkit-scrollbar]:hidden"
+        >
+          {items.map((item) => (
+            <PosterCard key={item.titleEn} {...item} />
+          ))}
+        </div>
+
+        {/* Indicador mobile: convite para deslizar e descobrir mais produtos */}
+        <div
+          aria-hidden
+          className={`pointer-events-none absolute inset-y-0 right-0 flex w-16 items-center justify-end bg-gradient-to-l from-background via-background/70 to-transparent pb-6 transition-opacity duration-300 sm:hidden ${
+            atEnd ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <span className="flex h-9 w-9 animate-pulse items-center justify-center rounded-full border border-gold/50 bg-background/80 text-gold shadow-[0_8px_24px_-12px_color-mix(in_oklab,var(--gold)_70%,transparent)] backdrop-blur">
+            <ChevronRight className="h-5 w-5" />
+          </span>
+        </div>
       </div>
     </section>
   );
