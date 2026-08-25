@@ -33,6 +33,8 @@ import speak2coLogo from "@/assets/speak2co-logo.asset.json";
 import speak2hireLogo from "@/assets/speak2hire.asset.json";
 import speak2travelLogo from "@/assets/speak2travel.asset.json";
 import speak2fluencyLogo from "@/assets/speak2fluency.png.asset.json";
+import speak2businessLogo from "@/assets/speak2business.png.asset.json";
+import speak2kidsLogo from "@/assets/speak2kids.png.asset.json";
 import giseleAiLogo from "@/assets/gisele-ai-art.png.asset.json";
 import founderPhoto from "@/assets/gisele-moraes.jpeg.asset.json";
 
@@ -130,6 +132,28 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           imageUrl: speak2fluencyLogo.url,
           to: "/speak2fluency",
           status: gate(access, FEATURE_KEYS.productLineFluency),
+          plans: ["Premium", "Signature"],
+        },
+        {
+          id: "business",
+          titleEn: "Speak2Business",
+          titlePt: "Inglês corporativo",
+          description:
+            "Reuniões, negociação, apresentações e liderança em inglês. Em breve na plataforma, a partir do plano Premium.",
+          icon: Briefcase,
+          imageUrl: speak2businessLogo.url,
+          status: "soon" as const,
+          plans: ["Premium", "Signature"],
+        },
+        {
+          id: "kids",
+          titleEn: "Speak2Kids",
+          titlePt: "Inglês para crianças",
+          description:
+            "Aprendizado lúdico e interativo para crianças. Em breve na plataforma, a partir do plano Premium.",
+          icon: Sparkles,
+          imageUrl: speak2kidsLogo.url,
+          status: "soon" as const,
           plans: ["Premium", "Signature"],
         },
       ],

@@ -4,6 +4,8 @@ import logo from "@/assets/speak2co-logo.asset.json";
 import fluencyArt from "@/assets/speak2fluency.png.asset.json";
 import hireArt from "@/assets/speak2hire.asset.json";
 import travelArt from "@/assets/speak2travel.asset.json";
+import businessArt from "@/assets/speak2business.png.asset.json";
+import kidsArt from "@/assets/speak2kids.png.asset.json";
 import { AltHeading } from "@/components/AltHeading";
 import { PlanPrice } from "@/components/PlanPrice";
 import { Button } from "@/components/ui/button";
@@ -13,7 +15,7 @@ import { siteUrl } from "@/lib/site";
 
 const TITLE = "Planos e preços — Speak2Co";
 const DESCRIPTION =
-  "Conheça os planos anuais da Speak2Co: cursos completos, AI Teacher, Speak2Hire, Speak2Travel, Speak2Fluency e GiseleAI. Comece grátis hoje.";
+  "Conheça os planos anuais da Speak2Co: cursos completos, AI Teacher, Speak2Hire, Speak2Travel, Speak2Fluency, Speak2Business, Speak2Kids e GiseleAI. Comece grátis hoje.";
 
 export const Route = createFileRoute("/planos")({
   head: () => ({
@@ -53,6 +55,18 @@ const PRODUCT_LINES = [
     title: "Speak2Fluency",
     art: fluencyArt.url,
     text: "Rotina diária de fluência com missões, simulações e feedback da IA.",
+  },
+  {
+    title: "Speak2Business",
+    art: businessArt.url,
+    text: "Inglês corporativo para reuniões, negociação e liderança. Acesso a partir do Premium.",
+    comingSoon: true,
+  },
+  {
+    title: "Speak2Kids",
+    art: kidsArt.url,
+    text: "Inglês lúdico para crianças, com atividades interativas. Acesso a partir do Premium.",
+    comingSoon: true,
   },
 ];
 
@@ -153,7 +167,12 @@ function PublicPlans() {
           </h2>
           <div className="grid gap-6 md:grid-cols-3">
             {PRODUCT_LINES.map((item) => (
-              <Card key={item.title} className="h-full border-border">
+              <Card key={item.title} className="relative h-full border-border">
+                {"comingSoon" in item && item.comingSoon ? (
+                  <span className="absolute top-3 right-3 rounded-full border border-gold/40 bg-background/85 px-3 py-1 text-[10px] font-bold tracking-widest text-gold uppercase backdrop-blur">
+                    Coming Soon
+                  </span>
+                ) : null}
                 <CardContent className="flex flex-col items-center gap-4 pt-6 text-center">
                   <img src={item.art} alt={`Logomarca ${item.title}`} className="h-24 w-auto object-contain" />
                   <p className="text-sm text-muted-foreground">{item.text}</p>
