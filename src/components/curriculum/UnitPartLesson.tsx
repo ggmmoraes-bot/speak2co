@@ -263,6 +263,8 @@ export function UnitPartLesson({
         </h1>
         <p className="text-sm text-muted-foreground italic">{unit.titlePt}</p>
         <p className="mt-2 text-sm font-semibold text-gold">{PART_LABEL[part].en}</p>
+        <EnterLiveLesson courseBase={courseBase} unitCode={unit.code} part={part} />
+
       </header>
 
       <div className="mt-5">
