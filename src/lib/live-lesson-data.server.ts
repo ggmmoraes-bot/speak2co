@@ -118,8 +118,11 @@ export async function persistLiveLessonProgress(
 
 /* --------------------------- Administração --------------------------- */
 
+const requireAdmin = (supabase: Client, userId: string) =>
+  assertAdmin({ supabase: supabase as unknown as Parameters<typeof assertAdmin>[0]["supabase"], userId });
+
 export async function listAllMedia(supabase: Client, userId: string): Promise<LiveLessonMedia[]> {
-  await assertAdmin({ supabase, userId });
+  await requireAdmin(supabase, userId);
   const { data } = await supabase
     .from("live_lesson_media")
     .select("*")
@@ -142,7 +145,7 @@ export async function saveMedia(
     caption: string | null;
   },
 ): Promise<LiveLessonMedia> {
-  await assertAdmin({ supabase, userId });
+  await requireAdmin(supabase, userId);
   const { data: row, error } = await supabase
     .from("live_lesson_media")
     .upsert(
@@ -164,7 +167,7 @@ export async function saveMedia(
 }
 
 export async function removeMedia(supabase: Client, userId: string, id: string): Promise<{ ok: true }> {
-  await assertAdmin({ supabase, userId });
+  await requireAdmin(supabase, userId);
   const { error } = await supabase.from("live_lesson_media").delete().eq("id", id);
   if (error) throw new Error("Não foi possível remover o vídeo.");
   return { ok: true };
