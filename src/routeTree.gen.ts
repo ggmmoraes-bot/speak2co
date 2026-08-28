@@ -102,6 +102,7 @@ import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/p
 import { Route as AuthenticatedCursoBeginnerUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-beginner.unidade.$unitCode.$part'
 import { Route as AuthenticatedCursoIntermediateUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-intermediate.unidade.$unitCode.$part'
 import { Route as AuthenticatedCursoUpperUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-upper.unidade.$unitCode.$part'
+import { Route as AuthenticatedLiveLessonCourseUnitCodePartRouteImport } from './routes/_authenticated/live-lesson.$course.$unitCode.$part'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -627,6 +628,12 @@ const AuthenticatedCursoUpperUnidadeUnitCodePartRoute =
     path: '/unidade/$unitCode/$part',
     getParentRoute: () => AuthenticatedCursoUpperRoute,
   } as any)
+const AuthenticatedLiveLessonCourseUnitCodePartRoute =
+  AuthenticatedLiveLessonCourseUnitCodePartRouteImport.update({
+    id: '/live-lesson/$course/$unitCode/$part',
+    path: '/live-lesson/$course/$unitCode/$part',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -721,6 +728,7 @@ export interface FileRoutesByFullPath {
   '/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
   '/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
   '/curso-upper/unidade/$unitCode/$part': typeof AuthenticatedCursoUpperUnidadeUnitCodePartRoute
+  '/live-lesson/$course/$unitCode/$part': typeof AuthenticatedLiveLessonCourseUnitCodePartRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -807,6 +815,7 @@ export interface FileRoutesByTo {
   '/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
   '/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
   '/curso-upper/unidade/$unitCode/$part': typeof AuthenticatedCursoUpperUnidadeUnitCodePartRoute
+  '/live-lesson/$course/$unitCode/$part': typeof AuthenticatedLiveLessonCourseUnitCodePartRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -903,6 +912,7 @@ export interface FileRoutesById {
   '/_authenticated/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
   '/_authenticated/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
   '/_authenticated/curso-upper/unidade/$unitCode/$part': typeof AuthenticatedCursoUpperUnidadeUnitCodePartRoute
+  '/_authenticated/live-lesson/$course/$unitCode/$part': typeof AuthenticatedLiveLessonCourseUnitCodePartRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -999,6 +1009,7 @@ export interface FileRouteTypes {
     | '/curso-beginner/unidade/$unitCode/$part'
     | '/curso-intermediate/unidade/$unitCode/$part'
     | '/curso-upper/unidade/$unitCode/$part'
+    | '/live-lesson/$course/$unitCode/$part'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1085,6 +1096,7 @@ export interface FileRouteTypes {
     | '/curso-beginner/unidade/$unitCode/$part'
     | '/curso-intermediate/unidade/$unitCode/$part'
     | '/curso-upper/unidade/$unitCode/$part'
+    | '/live-lesson/$course/$unitCode/$part'
   id:
     | '__root__'
     | '/'
@@ -1180,6 +1192,7 @@ export interface FileRouteTypes {
     | '/_authenticated/curso-beginner/unidade/$unitCode/$part'
     | '/_authenticated/curso-intermediate/unidade/$unitCode/$part'
     | '/_authenticated/curso-upper/unidade/$unitCode/$part'
+    | '/_authenticated/live-lesson/$course/$unitCode/$part'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1854,6 +1867,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCursoUpperUnidadeUnitCodePartRouteImport
       parentRoute: typeof AuthenticatedCursoUpperRoute
     }
+    '/_authenticated/live-lesson/$course/$unitCode/$part': {
+      id: '/_authenticated/live-lesson/$course/$unitCode/$part'
+      path: '/live-lesson/$course/$unitCode/$part'
+      fullPath: '/live-lesson/$course/$unitCode/$part'
+      preLoaderRoute: typeof AuthenticatedLiveLessonCourseUnitCodePartRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -2116,6 +2136,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedWritingRoute: typeof AuthenticatedWritingRoute
   AuthenticatedUpgradeEssentialRoute: typeof AuthenticatedUpgradeEssentialRoute
   AuthenticatedVocabularioIndexRoute: typeof AuthenticatedVocabularioIndexRoute
+  AuthenticatedLiveLessonCourseUnitCodePartRoute: typeof AuthenticatedLiveLessonCourseUnitCodePartRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -2151,6 +2172,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedWritingRoute: AuthenticatedWritingRoute,
   AuthenticatedUpgradeEssentialRoute: AuthenticatedUpgradeEssentialRoute,
   AuthenticatedVocabularioIndexRoute: AuthenticatedVocabularioIndexRoute,
+  AuthenticatedLiveLessonCourseUnitCodePartRoute:
+    AuthenticatedLiveLessonCourseUnitCodePartRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
