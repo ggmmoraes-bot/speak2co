@@ -19,6 +19,7 @@ import { Route as ReembolsoRouteImport } from './routes/reembolso'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAdminLiveLessonRouteImport } from './routes/_authenticated/admin-live-lesson'
 import { Route as AuthenticatedAjudaRouteImport } from './routes/_authenticated/ajuda'
 import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authenticated/assinatura'
 import { Route as AuthenticatedCaixaFundadoraRouteImport } from './routes/_authenticated/caixa-fundadora'
@@ -153,6 +154,12 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminLiveLessonRoute =
+  AuthenticatedAdminLiveLessonRouteImport.update({
+    id: '/admin-live-lesson',
+    path: '/admin-live-lesson',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAjudaRoute = AuthenticatedAjudaRouteImport.update({
   id: '/ajuda',
   path: '/ajuda',
@@ -645,6 +652,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/termos': typeof TermosRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/admin-live-lesson': typeof AuthenticatedAdminLiveLessonRoute
   '/ajuda': typeof AuthenticatedAjudaRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/caixa-fundadora': typeof AuthenticatedCaixaFundadoraRoute
@@ -740,6 +748,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/termos': typeof TermosRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/admin-live-lesson': typeof AuthenticatedAdminLiveLessonRoute
   '/ajuda': typeof AuthenticatedAjudaRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/caixa-fundadora': typeof AuthenticatedCaixaFundadoraRoute
@@ -829,6 +838,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/termos': typeof TermosRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/admin-live-lesson': typeof AuthenticatedAdminLiveLessonRoute
   '/_authenticated/ajuda': typeof AuthenticatedAjudaRoute
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
   '/_authenticated/caixa-fundadora': typeof AuthenticatedCaixaFundadoraRoute
@@ -926,6 +936,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/termos'
     | '/admin'
+    | '/admin-live-lesson'
     | '/ajuda'
     | '/assinatura'
     | '/caixa-fundadora'
@@ -1021,6 +1032,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/termos'
     | '/admin'
+    | '/admin-live-lesson'
     | '/ajuda'
     | '/assinatura'
     | '/caixa-fundadora'
@@ -1109,6 +1121,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/termos'
     | '/_authenticated/admin'
+    | '/_authenticated/admin-live-lesson'
     | '/_authenticated/ajuda'
     | '/_authenticated/assinatura'
     | '/_authenticated/caixa-fundadora'
@@ -1284,6 +1297,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin-live-lesson': {
+      id: '/_authenticated/admin-live-lesson'
+      path: '/admin-live-lesson'
+      fullPath: '/admin-live-lesson'
+      preLoaderRoute: typeof AuthenticatedAdminLiveLessonRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/ajuda': {
@@ -2106,6 +2126,7 @@ const AuthenticatedSpeak2travelRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAdminLiveLessonRoute: typeof AuthenticatedAdminLiveLessonRoute
   AuthenticatedAjudaRoute: typeof AuthenticatedAjudaRoute
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedCaixaFundadoraRoute: typeof AuthenticatedCaixaFundadoraRoute
@@ -2141,6 +2162,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAdminLiveLessonRoute: AuthenticatedAdminLiveLessonRoute,
   AuthenticatedAjudaRoute: AuthenticatedAjudaRoute,
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
   AuthenticatedCaixaFundadoraRoute: AuthenticatedCaixaFundadoraRoute,

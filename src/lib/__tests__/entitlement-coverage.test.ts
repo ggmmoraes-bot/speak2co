@@ -15,6 +15,7 @@ const GUARDED_MODULES: { file: string; feature: string }[] = [
   { file: "src/lib/trip-planner.functions.ts", feature: "product_line_travel" },
   { file: "src/lib/speak2hire.functions.ts", feature: "product_line_hire" },
   { file: "src/lib/pronunciation-drills.functions.ts", feature: "pronunciation_checker" },
+  { file: "src/lib/live-lesson.functions.ts", feature: "gisele_ai" },
 ];
 
 describe("cobertura de requireFeature nas server functions pagas", () => {
