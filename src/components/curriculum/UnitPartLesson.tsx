@@ -9,6 +9,8 @@ import { AltHeading } from "@/components/AltHeading";
 import { CheckQuiz } from "@/components/curriculum/CheckQuiz";
 import { DialoguePlayer } from "@/components/curriculum/DialoguePlayer";
 import { LessonPlayer, type LessonStep } from "@/components/curriculum/LessonPlayer";
+import { EnterLiveLesson } from "@/components/live-lesson/EnterLiveLesson";
+
 import { partStepTitles } from "@/lib/curriculum/lesson-steps";
 import { warmUpImageFor, warmUpNeedsImage } from "@/lib/curriculum/warmup-images";
 import { PART_LABEL, partChecks, type CourseUnit, type UnitPartKey } from "@/lib/curriculum/types";
