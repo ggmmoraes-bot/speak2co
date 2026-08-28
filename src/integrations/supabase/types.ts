@@ -816,6 +816,138 @@ export type Database = {
         }
         Relationships: []
       }
+      live_lesson_media: {
+        Row: {
+          caption: string | null
+          course_id: string
+          created_at: string
+          id: string
+          part: string
+          poster_url: string | null
+          stage: string
+          unit_code: string
+          updated_at: string
+          video_url: string
+        }
+        Insert: {
+          caption?: string | null
+          course_id: string
+          created_at?: string
+          id?: string
+          part: string
+          poster_url?: string | null
+          stage: string
+          unit_code: string
+          updated_at?: string
+          video_url: string
+        }
+        Update: {
+          caption?: string | null
+          course_id?: string
+          created_at?: string
+          id?: string
+          part?: string
+          poster_url?: string | null
+          stage?: string
+          unit_code?: string
+          updated_at?: string
+          video_url?: string
+        }
+        Relationships: []
+      }
+      live_lesson_progress: {
+        Row: {
+          challenge_result: Json | null
+          completed: boolean
+          completed_at: string | null
+          confidence: number | null
+          course_id: string
+          created_at: string
+          fluency_note: string | null
+          grammar_practiced: string[]
+          id: string
+          part: string
+          pronunciation_score: number | null
+          speaking_attempts: number
+          stages_done: string[]
+          summary: Json | null
+          unit_code: string
+          updated_at: string
+          user_id: string
+          vocabulary_practiced: string[]
+        }
+        Insert: {
+          challenge_result?: Json | null
+          completed?: boolean
+          completed_at?: string | null
+          confidence?: number | null
+          course_id: string
+          created_at?: string
+          fluency_note?: string | null
+          grammar_practiced?: string[]
+          id?: string
+          part: string
+          pronunciation_score?: number | null
+          speaking_attempts?: number
+          stages_done?: string[]
+          summary?: Json | null
+          unit_code: string
+          updated_at?: string
+          user_id: string
+          vocabulary_practiced?: string[]
+        }
+        Update: {
+          challenge_result?: Json | null
+          completed?: boolean
+          completed_at?: string | null
+          confidence?: number | null
+          course_id?: string
+          created_at?: string
+          fluency_note?: string | null
+          grammar_practiced?: string[]
+          id?: string
+          part?: string
+          pronunciation_score?: number | null
+          speaking_attempts?: number
+          stages_done?: string[]
+          summary?: Json | null
+          unit_code?: string
+          updated_at?: string
+          user_id?: string
+          vocabulary_practiced?: string[]
+        }
+        Relationships: []
+      }
+      live_lesson_script_cache: {
+        Row: {
+          cache_key: string
+          course_id: string
+          created_at: string
+          id: string
+          part: string
+          script: Json
+          unit_code: string
+        }
+        Insert: {
+          cache_key: string
+          course_id: string
+          created_at?: string
+          id?: string
+          part: string
+          script: Json
+          unit_code: string
+        }
+        Update: {
+          cache_key?: string
+          course_id?: string
+          created_at?: string
+          id?: string
+          part?: string
+          script?: Json
+          unit_code?: string
+        }
+        Relationships: []
+      }
       placement_tests: {
         Row: {
           answers: Json

@@ -19,6 +19,7 @@ import { Route as ReembolsoRouteImport } from './routes/reembolso'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAdminLiveLessonRouteImport } from './routes/_authenticated/admin-live-lesson'
 import { Route as AuthenticatedAjudaRouteImport } from './routes/_authenticated/ajuda'
 import { Route as AuthenticatedAssinaturaRouteImport } from './routes/_authenticated/assinatura'
 import { Route as AuthenticatedCaixaFundadoraRouteImport } from './routes/_authenticated/caixa-fundadora'
@@ -102,6 +103,7 @@ import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/p
 import { Route as AuthenticatedCursoBeginnerUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-beginner.unidade.$unitCode.$part'
 import { Route as AuthenticatedCursoIntermediateUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-intermediate.unidade.$unitCode.$part'
 import { Route as AuthenticatedCursoUpperUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-upper.unidade.$unitCode.$part'
+import { Route as AuthenticatedLiveLessonCourseUnitCodePartRouteImport } from './routes/_authenticated/live-lesson.$course.$unitCode.$part'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -152,6 +154,12 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminLiveLessonRoute =
+  AuthenticatedAdminLiveLessonRouteImport.update({
+    id: '/admin-live-lesson',
+    path: '/admin-live-lesson',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAjudaRoute = AuthenticatedAjudaRouteImport.update({
   id: '/ajuda',
   path: '/ajuda',
@@ -627,6 +635,12 @@ const AuthenticatedCursoUpperUnidadeUnitCodePartRoute =
     path: '/unidade/$unitCode/$part',
     getParentRoute: () => AuthenticatedCursoUpperRoute,
   } as any)
+const AuthenticatedLiveLessonCourseUnitCodePartRoute =
+  AuthenticatedLiveLessonCourseUnitCodePartRouteImport.update({
+    id: '/live-lesson/$course/$unitCode/$part',
+    path: '/live-lesson/$course/$unitCode/$part',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -638,6 +652,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/termos': typeof TermosRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/admin-live-lesson': typeof AuthenticatedAdminLiveLessonRoute
   '/ajuda': typeof AuthenticatedAjudaRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/caixa-fundadora': typeof AuthenticatedCaixaFundadoraRoute
@@ -721,6 +736,7 @@ export interface FileRoutesByFullPath {
   '/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
   '/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
   '/curso-upper/unidade/$unitCode/$part': typeof AuthenticatedCursoUpperUnidadeUnitCodePartRoute
+  '/live-lesson/$course/$unitCode/$part': typeof AuthenticatedLiveLessonCourseUnitCodePartRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -732,6 +748,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/termos': typeof TermosRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/admin-live-lesson': typeof AuthenticatedAdminLiveLessonRoute
   '/ajuda': typeof AuthenticatedAjudaRoute
   '/assinatura': typeof AuthenticatedAssinaturaRoute
   '/caixa-fundadora': typeof AuthenticatedCaixaFundadoraRoute
@@ -807,6 +824,7 @@ export interface FileRoutesByTo {
   '/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
   '/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
   '/curso-upper/unidade/$unitCode/$part': typeof AuthenticatedCursoUpperUnidadeUnitCodePartRoute
+  '/live-lesson/$course/$unitCode/$part': typeof AuthenticatedLiveLessonCourseUnitCodePartRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -820,6 +838,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/termos': typeof TermosRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/admin-live-lesson': typeof AuthenticatedAdminLiveLessonRoute
   '/_authenticated/ajuda': typeof AuthenticatedAjudaRoute
   '/_authenticated/assinatura': typeof AuthenticatedAssinaturaRoute
   '/_authenticated/caixa-fundadora': typeof AuthenticatedCaixaFundadoraRoute
@@ -903,6 +922,7 @@ export interface FileRoutesById {
   '/_authenticated/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
   '/_authenticated/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
   '/_authenticated/curso-upper/unidade/$unitCode/$part': typeof AuthenticatedCursoUpperUnidadeUnitCodePartRoute
+  '/_authenticated/live-lesson/$course/$unitCode/$part': typeof AuthenticatedLiveLessonCourseUnitCodePartRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -916,6 +936,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/termos'
     | '/admin'
+    | '/admin-live-lesson'
     | '/ajuda'
     | '/assinatura'
     | '/caixa-fundadora'
@@ -999,6 +1020,7 @@ export interface FileRouteTypes {
     | '/curso-beginner/unidade/$unitCode/$part'
     | '/curso-intermediate/unidade/$unitCode/$part'
     | '/curso-upper/unidade/$unitCode/$part'
+    | '/live-lesson/$course/$unitCode/$part'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1010,6 +1032,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/termos'
     | '/admin'
+    | '/admin-live-lesson'
     | '/ajuda'
     | '/assinatura'
     | '/caixa-fundadora'
@@ -1085,6 +1108,7 @@ export interface FileRouteTypes {
     | '/curso-beginner/unidade/$unitCode/$part'
     | '/curso-intermediate/unidade/$unitCode/$part'
     | '/curso-upper/unidade/$unitCode/$part'
+    | '/live-lesson/$course/$unitCode/$part'
   id:
     | '__root__'
     | '/'
@@ -1097,6 +1121,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/termos'
     | '/_authenticated/admin'
+    | '/_authenticated/admin-live-lesson'
     | '/_authenticated/ajuda'
     | '/_authenticated/assinatura'
     | '/_authenticated/caixa-fundadora'
@@ -1180,6 +1205,7 @@ export interface FileRouteTypes {
     | '/_authenticated/curso-beginner/unidade/$unitCode/$part'
     | '/_authenticated/curso-intermediate/unidade/$unitCode/$part'
     | '/_authenticated/curso-upper/unidade/$unitCode/$part'
+    | '/_authenticated/live-lesson/$course/$unitCode/$part'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1271,6 +1297,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin-live-lesson': {
+      id: '/_authenticated/admin-live-lesson'
+      path: '/admin-live-lesson'
+      fullPath: '/admin-live-lesson'
+      preLoaderRoute: typeof AuthenticatedAdminLiveLessonRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/ajuda': {
@@ -1854,6 +1887,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCursoUpperUnidadeUnitCodePartRouteImport
       parentRoute: typeof AuthenticatedCursoUpperRoute
     }
+    '/_authenticated/live-lesson/$course/$unitCode/$part': {
+      id: '/_authenticated/live-lesson/$course/$unitCode/$part'
+      path: '/live-lesson/$course/$unitCode/$part'
+      fullPath: '/live-lesson/$course/$unitCode/$part'
+      preLoaderRoute: typeof AuthenticatedLiveLessonCourseUnitCodePartRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -2086,6 +2126,7 @@ const AuthenticatedSpeak2travelRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAdminLiveLessonRoute: typeof AuthenticatedAdminLiveLessonRoute
   AuthenticatedAjudaRoute: typeof AuthenticatedAjudaRoute
   AuthenticatedAssinaturaRoute: typeof AuthenticatedAssinaturaRoute
   AuthenticatedCaixaFundadoraRoute: typeof AuthenticatedCaixaFundadoraRoute
@@ -2116,10 +2157,12 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedWritingRoute: typeof AuthenticatedWritingRoute
   AuthenticatedUpgradeEssentialRoute: typeof AuthenticatedUpgradeEssentialRoute
   AuthenticatedVocabularioIndexRoute: typeof AuthenticatedVocabularioIndexRoute
+  AuthenticatedLiveLessonCourseUnitCodePartRoute: typeof AuthenticatedLiveLessonCourseUnitCodePartRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAdminLiveLessonRoute: AuthenticatedAdminLiveLessonRoute,
   AuthenticatedAjudaRoute: AuthenticatedAjudaRoute,
   AuthenticatedAssinaturaRoute: AuthenticatedAssinaturaRoute,
   AuthenticatedCaixaFundadoraRoute: AuthenticatedCaixaFundadoraRoute,
@@ -2151,6 +2194,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedWritingRoute: AuthenticatedWritingRoute,
   AuthenticatedUpgradeEssentialRoute: AuthenticatedUpgradeEssentialRoute,
   AuthenticatedVocabularioIndexRoute: AuthenticatedVocabularioIndexRoute,
+  AuthenticatedLiveLessonCourseUnitCodePartRoute:
+    AuthenticatedLiveLessonCourseUnitCodePartRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

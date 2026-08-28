@@ -9,6 +9,8 @@ import { AltHeading } from "@/components/AltHeading";
 import { CheckQuiz } from "@/components/curriculum/CheckQuiz";
 import { DialoguePlayer } from "@/components/curriculum/DialoguePlayer";
 import { LessonPlayer, type LessonStep } from "@/components/curriculum/LessonPlayer";
+import { EnterLiveLesson } from "@/components/live-lesson/EnterLiveLesson";
+
 import { partStepTitles } from "@/lib/curriculum/lesson-steps";
 import { warmUpImageFor, warmUpNeedsImage } from "@/lib/curriculum/warmup-images";
 import { PART_LABEL, partChecks, type CourseUnit, type UnitPartKey } from "@/lib/curriculum/types";
@@ -263,6 +265,8 @@ export function UnitPartLesson({
         </h1>
         <p className="text-sm text-muted-foreground italic">{unit.titlePt}</p>
         <p className="mt-2 text-sm font-semibold text-gold">{PART_LABEL[part].en}</p>
+        <EnterLiveLesson courseBase={courseBase} unitCode={unit.code} part={part} />
+
       </header>
 
       <div className="mt-5">
