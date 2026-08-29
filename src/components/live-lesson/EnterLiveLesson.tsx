@@ -1,5 +1,15 @@
-import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Lock, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { hasFeature, useAccess } from "@/lib/entitlements";
 import type { UnitPartKey } from "@/lib/curriculum/types";
 import type { CourseLevel } from "@/lib/live-lesson/script";
@@ -12,9 +22,9 @@ export const COURSE_LEVEL_BY_BASE: Record<string, CourseLevel> = {
 };
 
 /**
- * Entrada para a aula ao vivo com a Gisele (exclusiva do Signature).
- * Nos demais planos exibe cadeado com convite ao upgrade — sem alterar
- * o conteúdo da aula tradicional.
+ * Entrada para a Guided Lesson with Gisele (exclusiva do Signature).
+ * O botão fica sempre visível; nos demais planos o clique abre o convite
+ * de upgrade em vez de iniciar a aula.
  */
 export function EnterLiveLesson({
   courseBase,
@@ -26,31 +36,50 @@ export function EnterLiveLesson({
   part: UnitPartKey;
 }) {
   const { data: access } = useAccess();
+  const navigate = useNavigate();
+  const [upgradeOpen, setUpgradeOpen] = useState(false);
   const course = COURSE_LEVEL_BY_BASE[courseBase];
   if (!course) return null;
 
   const unlocked = hasFeature(access, "gisele_ai");
   const href = `/live-lesson/${course}/${unitCode}/${part}`;
 
-  if (!unlocked) {
-    return (
-      <Link
-        to="/premium"
-        className="mt-3 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-secondary/40 px-4 py-2 text-xs font-semibold text-muted-foreground transition hover:text-foreground"
-      >
-        <Lock className="h-3.5 w-3.5 text-gold" />
-        Guided Lesson with Gisele — Signature
-      </Link>
-    );
-  }
-
   return (
-    <Link
-      to={href as "/"}
-      className="btn-gold mt-3 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold"
-    >
-      <Sparkles className="h-3.5 w-3.5" />
-      Start Guided Lesson
-    </Link>
+    <div className="mt-3 flex flex-col items-start gap-1">
+      <button
+        type="button"
+        onClick={() => {
+          if (unlocked) void navigate({ to: href as "/" });
+          else setUpgradeOpen(true);
+        }}
+        className="btn-gold inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold"
+      >
+        <Sparkles className="h-3.5 w-3.5" />
+        Start Guided Lesson
+      </button>
+      <p className="text-[11px] text-muted-foreground">Guided by Gisele. Enhanced by AI.</p>
+
+      <Dialog open={upgradeOpen} onOpenChange={setUpgradeOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Lock className="h-4 w-4 text-gold" />
+              Guided Lesson — Signature only
+            </DialogTitle>
+            <DialogDescription>
+              Guided Lesson with Gisele is exclusive to the Signature Plan. Upgrade to study with
+              Gisele's guided experience, enhanced by AI.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button asChild className="btn-gold rounded-full font-semibold">
+              <Link to="/premium">
+                <Sparkles className="mr-2 h-4 w-4" /> Upgrade to Signature
+              </Link>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 }

@@ -57,6 +57,7 @@ export const PLAN_BENEFITS: Record<PlanKey, string[]> = {
   ],
   signature: [
     "Tudo do Premium",
+    "Guided Lesson — exclusivo do Signature",
     "GiseleAI by Speak2Co ilimitada",
     "Voice Room com a voz autorizada da fundadora",
     "Memória contextual, missão do dia e recomendações",
