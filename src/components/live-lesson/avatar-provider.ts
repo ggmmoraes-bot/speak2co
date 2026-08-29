@@ -32,5 +32,6 @@ export function resolveAvatar(media: LiveLessonMedia[], stage: LiveStageKey): Av
   if (hasVideo(match)) {
     return { kind: "video", videoUrl: match.videoUrl, posterUrl: match.posterUrl, caption: match.caption };
   }
-  return { kind: "portrait", posterUrl: match?.posterUrl?.trim() || GISELE_PORTRAIT };
+  const poster = match?.posterUrl?.trim();
+  return { kind: "portrait", posterUrl: poster || GISELE_PORTRAIT };
 }
