@@ -258,9 +258,15 @@ function swapSubject(s: string, newSubject: string): string | null {
     if (subjectPronoun(out[1]) === newSubject) return null;
     const neg = /n't$/i.test(out[0]!);
     if (neg && newSubject === "I") return null;
-    // Sujeito pode ser "determinante(s) + substantivo" (ex.: "this my name").
+    // Sujeito: pronome (1 palavra) ou "determinante + substantivo" em frase curta.
+    const first = out[1]!.toLowerCase();
+    const isPronoun = PRONOUNS.includes(first) || first === "it";
     let span = 1;
-    while (DETERMINERS.has(out[span]!.toLowerCase()) && out[span + 1]) span += 1;
+    if (!isPronoun) {
+      if (DETERMINERS.has(first) && out.length <= 4) span = 2;
+      else if (!DETERMINERS.has(first) && /^[A-Z]/.test(out[1]!)) span = 1;
+      else return null;
+    }
     const agreed = agree(out[0]!.replace(/n't$/i, ""), newSubject);
     out[0] = neg ? (agreed === "am" ? "aren't" : `${agreed}n't`) : agreed;
     out.splice(1, span, newSubject);
@@ -319,7 +325,7 @@ function unitSentences(unit: CourseUnit): Candidate[] {
     if (oneClause && auxIndex(body) >= 0) simple.push({ en, pt });
     else other.push({ en, pt });
   }
-  return [...simple, ...other];
+  return simple.length > 0 ? simple : other;
 }
 
 const KIND_CYCLE: DrillKind[] = [
