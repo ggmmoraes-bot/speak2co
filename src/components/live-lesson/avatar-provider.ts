@@ -17,7 +17,7 @@ export type AvatarSource =
 
 export const GISELE_PORTRAIT = giseleArt.url;
 
-const hasVideo = (m: LiveLessonMedia | undefined): m is LiveLessonMedia => Boolean(m?.videoUrl?.trim());
+
 
 export function resolveAvatar(media: LiveLessonMedia[], stage: LiveStageKey): AvatarSource {
   const lessonScoped = media.filter((m) => m.unitCode !== ANY);
@@ -29,7 +29,7 @@ export function resolveAvatar(media: LiveLessonMedia[], stage: LiveStageKey): Av
     globals.find((m) => m.stage === stage) ??
     globals.find((m) => m.stage === ANY);
 
-  if (hasVideo(match)) {
+  if (match && match.videoUrl.trim()) {
     return { kind: "video", videoUrl: match.videoUrl, posterUrl: match.posterUrl, caption: match.caption };
   }
   const poster = match?.posterUrl?.trim();
