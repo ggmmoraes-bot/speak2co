@@ -30,3 +30,8 @@ export function isUnitPart(value: string): value is UnitPartKey {
 export function findUnit(course: CourseLevel, unitCode: string): CourseUnit | undefined {
   return UNITS[course].find((u) => u.code === unitCode.toUpperCase());
 }
+
+/** Lista as unidades de um curso (usada no seletor de preview do admin). */
+export function listUnits(course: CourseLevel): CourseUnit[] {
+  return UNITS[course];
+}
