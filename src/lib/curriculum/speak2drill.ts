@@ -406,7 +406,7 @@ export function buildUnitDrills(unit: CourseUnit): DrillItem[] {
       const from = terms.find((t) => swapTerm(base, t, t)) ?? "";
       const to = terms[(i + 1) % Math.max(1, terms.length)] ?? "";
       const answer = from && to ? swapTerm(base, from, to) : null;
-      d1 = answer ? { level: 1, cue: to, answer } : { level: 1, cue: "say it again", answer: base };
+      d1 = answer ? { level: 1, cue: to, answer } : { level: 1, cue: "repeat the sentence", answer: base };
     }
     drills.push(d1);
 
@@ -427,7 +427,7 @@ export function buildUnitDrills(unit: CourseUnit): DrillItem[] {
         if (answer) d2 = { level: 2, cue: subject, answer };
       }
     }
-    drills.push(d2 ?? { level: 2, cue: "say it again", answer: d1.answer });
+    drills.push(d2 ?? { level: 2, cue: "repeat the sentence", answer: d1.answer });
 
 
     // Drill 3 — mudança mais desafiadora: muda o tipo de frase.
@@ -450,7 +450,7 @@ export function buildUnitDrills(unit: CourseUnit): DrillItem[] {
         break;
       }
     }
-    drills.push(d3 ?? { level: 3, cue: "say it again", answer: previous });
+    drills.push(d3 ?? { level: 3, cue: "repeat the sentence", answer: previous });
 
     items.push({
       id: `${unit.code}-DRILL-${String(i + 1).padStart(2, "0")}`,
