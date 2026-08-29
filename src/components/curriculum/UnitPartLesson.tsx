@@ -10,6 +10,7 @@ import { CheckQuiz } from "@/components/curriculum/CheckQuiz";
 import { DialoguePlayer } from "@/components/curriculum/DialoguePlayer";
 import { LessonPlayer, type LessonStep } from "@/components/curriculum/LessonPlayer";
 import { EnterLiveLesson } from "@/components/live-lesson/EnterLiveLesson";
+import { Speak2Drill } from "@/components/curriculum/Speak2Drill";
 
 import { partStepTitles } from "@/lib/curriculum/lesson-steps";
 import { warmUpImageFor, warmUpNeedsImage } from "@/lib/curriculum/warmup-images";
@@ -207,6 +208,7 @@ export function UnitPartLesson({
         </>
       );
     }
+    if (key === "speak2drill") return <Speak2Drill unit={unit} />;
     if (key === "challenge")
       return (
         <>
