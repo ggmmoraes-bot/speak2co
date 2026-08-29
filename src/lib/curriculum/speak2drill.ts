@@ -87,7 +87,7 @@ function parse(s: string): { body: string[]; mark: string } {
 const join = (body: string[], mark: string) => `${capitalize(body.join(" ").trim())}${mark}`;
 
 const isQuestion = (s: string) => clean(s).endsWith("?");
-const isNegative = (s: string) => /\b(not|n't|never)\b/i.test(s);
+const isNegative = (s: string) => /(\bnot\b|n't|\bnever\b)/i.test(s);
 
 /** Índice da primeira palavra auxiliar da frase. */
 function auxIndex(body: string[]): number {
@@ -118,13 +118,29 @@ function toNegative(s: string): string | null {
   return join(out, mark);
 }
 
+const COMMON_FIRST = new Set([
+  "i","you","he","she","it","we","they","my","your","his","her","our","their","the","a","an",
+  "this","that","these","those","there","people","students","everyone",
+]);
+
+/** Deixa a primeira palavra em minúscula quando não for nome próprio. */
+function uncapFirst(word: string): string {
+  if (word === "I") return word;
+  return COMMON_FIRST.has(word.toLowerCase()) ? word.toLowerCase() : word;
+}
+
 function toQuestion(s: string): string | null {
   if (isQuestion(s)) return null;
   const { body } = parse(s);
   const idx = auxIndex(body);
   if (idx <= 0 || idx > 2) return null;
   const out = [...body];
-  const aux = out.splice(idx, 1)[0]!;
+  let aux = out.splice(idx, 1)[0]!;
+  if ((out[idx] ?? "").toLowerCase() === "not") {
+    out.splice(idx, 1);
+    aux = aux.toLowerCase() === "am" ? "aren't" : `${aux.toLowerCase()}n't`;
+  }
+  out[0] = uncapFirst(out[0] ?? "");
   return `${capitalize(aux)} ${out.join(" ")}?`;
 }
 
@@ -198,17 +214,38 @@ function agree(aux: string, subject: string): string {
   return a; // modais não mudam
 }
 
+const SINGULAR_ONLY = ["I", "you", "he", "she"];
+const PLURAL_ONLY = ["you", "we", "they"];
+
+/** Sujeitos compatíveis com o complemento (singular "a/an" x plural). */
+export function subjectOptions(sentence: string): string[] {
+  if (/\b(an?|my|his|her)\s+\w+/i.test(sentence) && !/\b(are|were|have)\b/i.test(sentence))
+    return SINGULAR_ONLY;
+  if (/\b(are|were)\b/i.test(sentence) && /\b\w+s\b/.test(sentence)) return PLURAL_ONLY;
+  return PRONOUNS;
+}
+
 /** Troca o sujeito da frase, ajustando o auxiliar (concordância). */
 function swapSubject(s: string, newSubject: string): string | null {
   const { body, mark } = parse(s);
   const idx = auxIndex(body);
   if (idx < 0) return null;
   const out = [...body];
+  if (classify(s) === "short answer") {
+    const aux = out[idx]!.toLowerCase();
+    const negative = isNegative(s);
+    const agreed = agree(aux.replace(/n't$/, ""), newSubject);
+    if (subjectPronoun(out[1]) === newSubject) return null;
+    return negative
+      ? `No, ${newSubject} ${agreed === "am" ? "am not" : `${agreed}n't`}.`
+      : `Yes, ${newSubject} ${agreed}.`;
+  }
   if (isQuestion(s) && idx === 0) {
     if (!out[1]) return null;
     if (subjectPronoun(out[1]) === newSubject) return null;
     out[0] = agree(out[0]!, newSubject);
     out[1] = newSubject;
+    out[0] = out[0]!;
     return `${capitalize(out[0]!)} ${out.slice(1).join(" ")}${mark}`;
   }
   if (idx === 0) return null;
