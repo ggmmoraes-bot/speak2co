@@ -32,11 +32,11 @@ export function LiveLessonPreviewPicker() {
   return (
     <section id="live-lesson-preview" className="mt-6 rounded-2xl border border-border bg-card p-6">
       <h2 className="text-xl font-semibold text-foreground">
-        <span className="text-foreground">Live Lesson</span>{" "}
+        <span className="text-foreground">Guided Lesson</span>{" "}
         <span className="text-gold">— preview</span>
       </h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        Escolha o curso, a unidade e a etapa para abrir a tela da Live Lesson em modo preview.
+        Escolha o curso, a unidade e a etapa para abrir a tela da Guided Lesson with Gisele em modo preview.
       </p>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-3">
@@ -104,7 +104,7 @@ export function LiveLessonPreviewPicker() {
             params={{ course, unitCode: currentUnit, part }}
           >
             <PlayCircle className="mr-2 h-4 w-4" />
-            Abrir Live Lesson
+            Abrir Guided Lesson
           </Link>
         </Button>
         <Button asChild variant="outline" className="rounded-full font-semibold">
