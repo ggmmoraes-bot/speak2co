@@ -300,8 +300,9 @@ export function UnitPartLesson({
 
       {part === "communicate" && (
         <section
+          id="speak2drill"
           aria-label="Speak2Drill speaking practice"
-          className="mt-8 rounded-3xl border-2 border-gold/50 bg-gradient-to-b from-gold/10 to-transparent p-5 sm:p-6"
+          className="mt-8 scroll-mt-20 rounded-3xl border-2 border-gold/50 bg-gradient-to-b from-gold/10 to-transparent p-5 sm:p-6"
         >
           <span className="inline-flex items-center gap-2 rounded-full bg-gold/15 px-3 py-1 text-[11px] font-semibold tracking-wide text-gold uppercase">
             <Mic className="h-3.5 w-3.5" /> Speaking Practice Session
