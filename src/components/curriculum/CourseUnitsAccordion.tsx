@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { CheckCircle2, ChevronDown, Search, X } from "lucide-react";
+import { CheckCircle2, ChevronDown, Mic, Search, X } from "lucide-react";
 import { partStepTitles } from "@/lib/curriculum/lesson-steps";
 import { PART_LABEL, type CourseUnit, type UnitPartKey } from "@/lib/curriculum/types";
 
