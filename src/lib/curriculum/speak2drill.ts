@@ -169,6 +169,7 @@ function toNegativeQuestion(s: string): string | null {
 
 function subjectPronoun(word: string | undefined): string {
   if (!word) return "it";
+  if (word.toLowerCase() === "there") return "there";
   const w = word.replace(/[^A-Za-z']/g, "");
   if (w === "I") return "I";
   const lower = w.toLowerCase();
@@ -221,6 +222,7 @@ const HAVE: Record<string, string> = {
 function agree(auxRaw: string, subject: string): string {
   const a = auxRaw.toLowerCase().replace(/n't$/, "");
   const s = subject === "I" ? "I" : subject.toLowerCase();
+  if (s === "there") return a;
   if (["am", "is", "are"].includes(a)) return BE[s] ?? a;
   if (["do", "does"].includes(a)) return DO[s] ?? a;
   if (["have", "has"].includes(a)) return HAVE[s] ?? a;
@@ -249,6 +251,9 @@ function swapSubject(s: string, newSubject: string): string | null {
   const idx = auxIndex(body);
   if (idx < 0) return null;
   if (WH.has((body[0] ?? "").toLowerCase())) return null;
+  // Estruturas existenciais ("There is / There are") não trocam de sujeito.
+  if ((body[0] ?? "").toLowerCase() === "there" || (body[1] ?? "").toLowerCase() === "there")
+    return null;
   const out = [...body];
   if (classify(s) === "short answer") {
     const aux = out[idx]!.toLowerCase();
