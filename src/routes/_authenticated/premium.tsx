@@ -89,6 +89,7 @@ const TIERS: Tier[] = [
     yearly: { key: "signature_yearly", price: 579.0 },
     perks: [
       "Tudo do Premium",
+      "Guided Lesson — exclusivo do Signature",
       "GiseleAI by Speak2Co ilimitada",
       "Voice Room com a voz autorizada da fundadora",
       "Feedback e relatórios personalizados da mentora",
@@ -121,6 +122,7 @@ const COMPARISON_ROWS: { feature: string; essential: CellValue; premium: CellVal
   { feature: "Learning Tools — Listening, Grammar, Speaking, Reading, Writing e Flashcards", essential: true, premium: true, signature: true },
   { feature: "AI Teacher (chat)", essential: "20 min/dia", premium: "Ilimitado", signature: "Ilimitado" },
   { feature: "AI Pronunciation (feedback de pronúncia)", essential: true, premium: true, signature: true },
+  { feature: "Guided Lesson", essential: false, premium: false, signature: true },
   { feature: "GiseleAI ilimitada", essential: false, premium: false, signature: true },
   { feature: "Voice Room com voz autorizada da fundadora", essential: false, premium: false, signature: true },
   { feature: "Memória contextual e plano da mentora", essential: false, premium: false, signature: true },
