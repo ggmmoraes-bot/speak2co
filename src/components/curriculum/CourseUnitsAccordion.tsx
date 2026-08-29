@@ -75,13 +75,14 @@ export function CourseUnitsAccordion({
                 : "border-border bg-card/40 text-muted-foreground hover:border-gold/40 hover:text-foreground")
             }
           >
-            {f === "all" ? "Todas" : f === "done" ? "Concluídas" : "Pendentes"}
+            {f === "all" ? "All" : f === "done" ? "Completed" : "Pending"}
           </button>
         ))}
         <span className="text-xs text-muted-foreground">
-          {filtered.length} de {units.length} unidades
+          {filtered.length} of {units.length} units
         </span>
       </div>
+
 
       <ul className="mt-4 space-y-2">
         {filtered.map((unit) => {
