@@ -115,38 +115,63 @@ export function CourseUnitsAccordion({
 
               {expanded && (
                 <div className="space-y-4 border-t border-border px-4 py-4">
-                  {(["discover", "communicate"] as UnitPartKey[]).map((part) => {
-                    const partId = part === "discover" ? unit.discover.id : unit.communicate.id;
-                    const steps = partStepTitles(unit, part);
-                    return (
-                      <div key={part}>
-                        <p className="flex items-center gap-2 text-xs font-semibold text-gold">
-                          {PART_LABEL[part].en}
-                          {isDone(partId) && <CheckCircle2 className="h-3.5 w-3.5" />}
-                        </p>
-                        <ol className="mt-2 space-y-1">
-                          {steps.map((step, i) => (
-                            <li key={step.key}>
-                              <Link
-                                to={`${courseBase}/unidade/${unit.code}/${part}` as "/"}
-                                hash={`step${i + 1}`}
-                                className="flex items-center justify-between gap-3 rounded-xl border border-border/60 bg-background/40 px-3 py-2 text-sm transition hover:border-gold/60"
-                              >
-                                <span className="text-foreground/90">
-                                  Lesson {i + 1} — {step.title.en}
-                                </span>
-                                <span className="text-[11px] text-muted-foreground italic">
-                                  {step.title.pt}
-                                </span>
-                              </Link>
-                            </li>
-                          ))}
-                        </ol>
-                      </div>
-                    );
-                  })}
+                  {(() => {
+                    let lessonNumber = 0;
+                    return (["discover", "communicate"] as UnitPartKey[]).map((part, partIndex) => {
+                      const partId = part === "discover" ? unit.discover.id : unit.communicate.id;
+                      const steps = partStepTitles(unit, part);
+                      return (
+                        <div key={part}>
+                          <p className="flex items-center gap-2 text-xs font-semibold tracking-wide text-gold uppercase">
+                            Part {partIndex + 1} — {PART_LABEL[part].en}
+                            {isDone(partId) && <CheckCircle2 className="h-3.5 w-3.5" />}
+                          </p>
+                          <ol className="mt-2 space-y-1">
+                            {steps.map((step, i) => {
+                              lessonNumber += 1;
+                              return (
+                                <li key={step.key}>
+                                  <Link
+                                    to={`${courseBase}/unidade/${unit.code}/${part}` as "/"}
+                                    hash={`step${i + 1}`}
+                                    className="flex items-center justify-between gap-3 rounded-xl border border-border/60 bg-background/40 px-3 py-2 text-sm transition hover:border-gold/60"
+                                  >
+                                    <span className="text-foreground/90">
+                                      Lesson {lessonNumber} — {step.title.en}
+                                    </span>
+                                    <span className="text-[11px] text-muted-foreground italic">
+                                      {step.title.pt}
+                                    </span>
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                          </ol>
+                        </div>
+                      );
+                    });
+                  })()}
+
+                  <div className="rounded-2xl border-2 border-gold/50 bg-gradient-to-b from-gold/10 to-transparent p-4">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-gold/15 px-3 py-1 text-[10px] font-semibold tracking-wide text-gold uppercase">
+                      <Mic className="h-3 w-3" /> Speaking Practice Session
+                    </span>
+                    <h3 className="mt-2 text-base font-bold text-foreground">Speak2Drill</h3>
+                    <p className="mt-1 text-xs text-foreground/85">
+                      Final speaking practice for this unit — rebuild each phrase out loud three
+                      times using only what you studied here.
+                    </p>
+                    <Link
+                      to={`${courseBase}/unidade/${unit.code}/communicate` as "/"}
+                      hash="speak2drill"
+                      className="btn-gold mt-3 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold"
+                    >
+                      <Mic className="h-3.5 w-3.5" /> Start Speak2Drill
+                    </Link>
+                  </div>
                 </div>
               )}
+
             </li>
           );
         })}
