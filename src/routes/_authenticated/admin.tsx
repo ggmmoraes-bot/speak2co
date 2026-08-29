@@ -251,11 +251,25 @@ function AdminPage() {
         <Button asChild variant="outline" className="rounded-full font-semibold">
           <Link to="/admin-live-lesson">Vídeos da Live Lesson</Link>
         </Button>
+        <Button
+          variant="outline"
+          className="rounded-full font-semibold"
+          onClick={() =>
+            document
+              .getElementById("live-lesson-preview")
+              ?.scrollIntoView({ behavior: "smooth", block: "start" })
+          }
+        >
+          Preview da Live Lesson
+        </Button>
       </nav>
       <p className="mt-2 text-xs text-muted-foreground">
         Vídeos da Live Lesson: cadastre um vídeo global reutilizável, o vídeo de uma aula inteira ou
         de uma etapa específica — sem vídeo, a aula usa o retrato oficial + voz clonada da Gisele.
       </p>
+
+      <LiveLessonPreviewPicker />
+
 
 
       {isPending && <p className="mt-8 text-sm text-muted-foreground">Carregando catálogo...</p>}
