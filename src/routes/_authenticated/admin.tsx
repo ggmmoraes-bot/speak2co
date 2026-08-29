@@ -241,14 +241,22 @@ function AdminPage() {
         </Button>
       </header>
 
-      <nav className="mt-6 flex flex-wrap gap-2 text-sm">
+      <nav className="mt-6 flex flex-wrap items-center gap-2 text-sm">
         <Button
           onClick={() => scrollToBenefits()}
           className="glow-gold rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
         >
           Benefícios e Assinaturas Especiais
         </Button>
+        <Button asChild variant="outline" className="rounded-full font-semibold">
+          <Link to="/admin-live-lesson">Vídeos da Live Lesson</Link>
+        </Button>
       </nav>
+      <p className="mt-2 text-xs text-muted-foreground">
+        Vídeos da Live Lesson: cadastre um vídeo global reutilizável, o vídeo de uma aula inteira ou
+        de uma etapa específica — sem vídeo, a aula usa o retrato oficial + voz clonada da Gisele.
+      </p>
+
 
       {isPending && <p className="mt-8 text-sm text-muted-foreground">Carregando catálogo...</p>}
 
