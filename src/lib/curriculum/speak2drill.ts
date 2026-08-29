@@ -72,6 +72,8 @@ const AUX = new Set([
 
 const PRONOUNS = ["I", "you", "he", "she", "we", "they"];
 
+const WH = new Set(["what", "where", "when", "who", "why", "how", "which", "whose"]);
+
 const clean = (s: string) => s.replace(/\s+/g, " ").trim();
 const capitalize = (s: string) => (s ? s[0]!.toUpperCase() + s.slice(1) : s);
 
@@ -93,7 +95,9 @@ const isNegative = (s: string) => /(\bnot\b|n't|\bnever\b)/i.test(s);
 function auxIndex(body: string[]): number {
   for (let i = 0; i < body.length; i += 1) {
     const w = body[i]!.toLowerCase().replace(/n't$/, "");
-    if (AUX.has(w) || (body[i]!.toLowerCase() === "aren't" && true)) return i;
+    // "have to / has to" é semi-modal: não serve para inversão simples.
+    if (["have", "has", "had"].includes(w) && (body[i + 1] ?? "").toLowerCase() === "to") return -1;
+    if (AUX.has(w)) return i;
   }
   return -1;
 }
@@ -243,6 +247,7 @@ function swapSubject(s: string, newSubject: string): string | null {
   const { body, mark } = parse(s);
   const idx = auxIndex(body);
   if (idx < 0) return null;
+  if (WH.has((body[0] ?? "").toLowerCase())) return null;
   const out = [...body];
   if (classify(s) === "short answer") {
     const aux = out[idx]!.toLowerCase();
@@ -322,7 +327,8 @@ function unitSentences(unit: CourseUnit): Candidate[] {
     // Uma oração só: sem pontuação interna e com auxiliar transformável.
     const oneClause = !/[.,;:!?]/.test(en.slice(0, -1)) && !/\b(and|but|because)\b/i.test(en);
     const { body } = parse(en);
-    if (oneClause && auxIndex(body) >= 0) simple.push({ en, pt });
+    const wh = WH.has((body[0] ?? "").toLowerCase());
+    if (oneClause && !wh && auxIndex(body) >= 0) simple.push({ en, pt });
     else other.push({ en, pt });
   }
   return simple.length > 0 ? simple : other;
