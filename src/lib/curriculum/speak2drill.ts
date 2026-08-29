@@ -25,13 +25,20 @@ export type Drill = {
   answer: string;
 };
 
+export type DrillKind =
+  | "affirmative"
+  | "negative"
+  | "question"
+  | "short answer"
+  | "negative question";
+
 export type DrillItem = {
   id: string;
   /** Frase-base completa (em inglês). */
   base: string;
   /** Tradução da frase de origem, quando disponível. */
   basePt: string;
-  kind: "affirmative" | "negative" | "question" | "short answer" | "negative question";
+  kind: DrillKind;
   drills: Drill[];
 };
 
@@ -66,41 +73,31 @@ const AUX = new Set([
 const PRONOUNS = ["I", "you", "he", "she", "we", "they"];
 
 const clean = (s: string) => s.replace(/\s+/g, " ").trim();
-
-const words = (s: string) => clean(s).split(" ");
-
-const strip = (w: string) => w.replace(/[.,!?;:]+$/g, "");
-
-const endMark = (s: string) => (/[.!?]$/.test(clean(s)) ? clean(s).slice(-1) : ".");
-
 const capitalize = (s: string) => (s ? s[0]!.toUpperCase() + s.slice(1) : s);
 
-const lowerFirst = (s: string) => {
-  const w = words(s);
-  const first = w[0] ?? "";
-  if (first === "I") return s;
-  if (/^[A-Z][a-z]+$/.test(first) && !PRONOUNS.includes(first.toLowerCase())) return s; // nome próprio
-  return s;
-};
-
-function isQuestion(s: string) {
-  return clean(s).endsWith("?");
+/** Separa a frase em palavras + pontuação final. */
+function parse(s: string): { body: string[]; mark: string } {
+  const c = clean(s);
+  const m = /[.!?]$/.exec(c);
+  const mark = m ? m[0] : ".";
+  const core = m ? c.slice(0, -1) : c;
+  return { body: clean(core).split(" "), mark };
 }
 
-function isNegative(s: string) {
-  return /\b(not|n't|never|no)\b/i.test(s);
-}
+const join = (body: string[], mark: string) => `${capitalize(body.join(" ").trim())}${mark}`;
 
-/** Índice da primeira palavra auxiliar da frase (ignorando pontuação). */
-function auxIndex(s: string): number {
-  const w = words(s);
-  for (let i = 0; i < w.length; i += 1) {
-    if (AUX.has(strip(w[i]!).toLowerCase())) return i;
+const isQuestion = (s: string) => clean(s).endsWith("?");
+const isNegative = (s: string) => /\b(not|n't|never)\b/i.test(s);
+
+/** Índice da primeira palavra auxiliar da frase. */
+function auxIndex(body: string[]): number {
+  for (let i = 0; i < body.length; i += 1) {
+    if (AUX.has(body[i]!.toLowerCase())) return i;
   }
   return -1;
 }
 
-function classify(s: string): DrillItem["kind"] {
+export function classify(s: string): DrillKind {
   const c = clean(s);
   if (/^(yes|no),/i.test(c)) return "short answer";
   if (isQuestion(c)) return isNegative(c) ? "negative question" : "question";
@@ -113,52 +110,54 @@ function classify(s: string): DrillItem["kind"] {
 
 function toNegative(s: string): string | null {
   if (isNegative(s)) return null;
-  const w = words(s);
-  const idx = auxIndex(s);
-  if (idx < 0 || idx > 3) return null;
-  const mark = endMark(s);
-  const body = w.map((x) => strip(x));
-  body.splice(idx + 1, 0, "not");
-  return capitalize(body.join(" ")) + mark;
+  const { body, mark } = parse(s);
+  const idx = auxIndex(body);
+  if (idx < 0 || idx > 2) return null;
+  const out = [...body];
+  out.splice(idx + 1, 0, "not");
+  return join(out, mark);
 }
 
 function toQuestion(s: string): string | null {
   if (isQuestion(s)) return null;
-  const idx = auxIndex(s);
-  if (idx <= 0 || idx > 3) return null;
-  const body = words(s).map((x) => strip(x));
-  const aux = body.splice(idx, 1)[0]!;
-  const subject = body.slice(0, idx).join(" ");
-  const rest = body.slice(idx).join(" ");
-  const subj = subject === "I" ? "I" : lowerFirst(subject);
-  return `${capitalize(aux)} ${subj}${rest ? ` ${rest}` : ""}?`;
+  const { body } = parse(s);
+  const idx = auxIndex(body);
+  if (idx <= 0 || idx > 2) return null;
+  const out = [...body];
+  const aux = out.splice(idx, 1)[0]!;
+  return `${capitalize(aux)} ${out.join(" ")}?`;
 }
 
 function toNegativeQuestion(s: string): string | null {
   const q = isQuestion(s) ? clean(s) : toQuestion(s);
   if (!q || isNegative(q)) return null;
-  const body = words(q).map((x) => strip(x));
+  const { body } = parse(q);
   const aux = body[0]!;
-  const rest = body.slice(1);
   const contracted = aux.toLowerCase() === "am" ? "Aren't" : `${capitalize(aux)}n't`;
-  return `${contracted} ${rest.join(" ")}?`;
+  return `${contracted} ${body.slice(1).join(" ")}?`;
+}
+
+function subjectPronoun(word: string | undefined): string {
+  if (!word) return "it";
+  const w = word.replace(/[^A-Za-z']/g, "");
+  if (w === "I") return "I";
+  const lower = w.toLowerCase();
+  if (PRONOUNS.includes(lower) || lower === "it") return lower;
+  return "it";
 }
 
 function toShortAnswer(s: string): string | null {
-  const idx = auxIndex(s);
+  const { body } = parse(s);
+  const idx = auxIndex(body);
   if (idx < 0) return null;
-  const body = words(s).map((x) => strip(x));
-  const aux = strip(body[idx]!).toLowerCase();
-  let subject = isQuestion(s) ? (body[idx + 1] ?? "") : (body[0] ?? "");
-  if (!subject) return null;
-  if (subject === "I") subject = "I";
-  else subject = subject.toLowerCase();
-  if (!PRONOUNS.includes(subject) && subject !== "it") subject = "it";
+  const aux = body[idx]!.toLowerCase();
+  const subject = subjectPronoun(isQuestion(s) ? body[idx + 1] : body[0]);
+  const agreed = agree(aux, subject);
   if (isNegative(s)) {
-    const neg = aux === "am" ? "am not" : `${aux}n't`;
+    const neg = agreed === "am" ? "am not" : `${agreed}n't`;
     return `No, ${subject} ${neg}.`;
   }
-  return `Yes, ${subject} ${aux}.`;
+  return `Yes, ${subject} ${agreed}.`;
 }
 
 const BE: Record<string, string> = {
@@ -201,31 +200,29 @@ function agree(aux: string, subject: string): string {
 
 /** Troca o sujeito da frase, ajustando o auxiliar (concordância). */
 function swapSubject(s: string, newSubject: string): string | null {
-  const body = words(s).map((x) => strip(x));
-  const mark = endMark(s);
-  const idx = auxIndex(s);
+  const { body, mark } = parse(s);
+  const idx = auxIndex(body);
   if (idx < 0) return null;
+  const out = [...body];
   if (isQuestion(s) && idx === 0) {
-    const subjPos = 1;
-    if (!body[subjPos]) return null;
-    body[0] = agree(body[0]!, newSubject);
-    body[subjPos] = newSubject;
-    return `${capitalize(body[0]!)} ${body.slice(1).join(" ")}${mark}`;
+    if (!out[1]) return null;
+    if (subjectPronoun(out[1]) === newSubject) return null;
+    out[0] = agree(out[0]!, newSubject);
+    out[1] = newSubject;
+    return `${capitalize(out[0]!)} ${out.slice(1).join(" ")}${mark}`;
   }
   if (idx === 0) return null;
-  const subject = body.slice(0, idx).join(" ");
-  if (!subject) return null;
-  body.splice(0, idx, newSubject);
-  const newIdx = 1;
-  body[newIdx] = agree(body[newIdx]!, newSubject);
-  return capitalize(body.join(" ")) + mark;
+  if (subjectPronoun(out[0]) === newSubject && idx === 1) return null;
+  const rest = out.slice(idx);
+  rest[0] = agree(rest[0]!, newSubject);
+  return join([newSubject, ...rest], mark);
 }
 
 /** Substitui um termo do vocabulário da unidade por outro termo da unidade. */
 function swapTerm(s: string, from: string, to: string): string | null {
   const re = new RegExp(`\\b${from.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i");
   if (!re.test(s)) return null;
-  return clean(s.replace(re, to));
+  return capitalize(clean(s.replace(re, to)));
 }
 
 /* ------------------------------------------------------------------ */
@@ -250,20 +247,27 @@ function unitSentences(unit: CourseUnit): Candidate[] {
     ...c.review,
   ];
   const seen = new Set<string>();
-  const out: Candidate[] = [];
+  const simple: Candidate[] = [];
+  const other: Candidate[] = [];
   for (const item of list) {
     const en = clean(item.en ?? "");
-    const size = words(en).length;
-    if (!en || size < 3 || size > 16) continue;
+    if (!en) continue;
     const key = en.toLowerCase();
     if (seen.has(key)) continue;
     seen.add(key);
-    out.push({ en, pt: clean(item.pt ?? "") });
+    const size = en.split(" ").length;
+    if (size < 3 || size > 12) continue;
+    const pt = clean(item.pt ?? "");
+    // Uma oração só: sem pontuação interna e com auxiliar transformável.
+    const oneClause = !/[.,;:!?]/.test(en.slice(0, -1)) && !/\b(and|but|because)\b/i.test(en);
+    const { body } = parse(en);
+    if (oneClause && auxIndex(body) >= 0) simple.push({ en, pt });
+    else other.push({ en, pt });
   }
-  return out;
+  return [...simple, ...other];
 }
 
-const KIND_CYCLE: DrillItem["kind"][] = [
+const KIND_CYCLE: DrillKind[] = [
   "affirmative",
   "affirmative",
   "negative",
@@ -276,90 +280,98 @@ const KIND_CYCLE: DrillItem["kind"][] = [
   "short answer",
 ];
 
-function shapeTo(sentence: string, kind: DrillItem["kind"]): string {
+function shapeTo(sentence: string, kind: DrillKind): string | null {
+  const current = classify(sentence);
+  if (current === kind) return clean(sentence);
   switch (kind) {
     case "negative":
-      return toNegative(sentence) ?? sentence;
+      return toNegative(sentence);
     case "question":
-      return toQuestion(sentence) ?? sentence;
+      return toQuestion(sentence);
     case "short answer":
-      return toShortAnswer(sentence) ?? sentence;
+      return toShortAnswer(sentence);
     case "negative question":
-      return toNegativeQuestion(sentence) ?? sentence;
+      return toNegativeQuestion(sentence);
     default:
-      return clean(sentence);
+      return current === "affirmative" ? clean(sentence) : null;
   }
-}
-
-function fallbackDrill(level: DrillLevel, base: string, cue: string): Drill {
-  return { level, cue, answer: clean(base) };
 }
 
 /** Gera os 20 exercícios do Speak2Drill de uma unidade. */
 export function buildUnitDrills(unit: CourseUnit): DrillItem[] {
   const pool = unitSentences(unit);
-  const terms = unit.discover.vocabulary.map((v) => v.term);
+  const terms = unit.discover.vocabulary.map((v) => v.term).filter(Boolean);
   const items: DrillItem[] = [];
   if (pool.length === 0) return items;
 
   for (let i = 0; i < SPEAK2DRILL_TOTAL; i += 1) {
-    const source = pool[i % pool.length]!;
     const targetKind = KIND_CYCLE[i % KIND_CYCLE.length]!;
-    const base = shapeTo(source.en, targetKind);
+    // Escolhe a frase de origem que aceita o tipo pedido.
+    let source = pool[i % pool.length]!;
+    let base = shapeTo(source.en, targetKind);
+    for (let k = 1; k < pool.length && !base; k += 1) {
+      source = pool[(i + k) % pool.length]!;
+      base = shapeTo(source.en, targetKind);
+    }
+    if (!base) {
+      source = pool[i % pool.length]!;
+      base = clean(source.en);
+    }
     const kind = classify(base);
     const drills: Drill[] = [];
 
     // Drill 1 — substituição simples: troca de um termo do vocabulário.
     let d1: Drill | null = null;
     for (let t = 0; t < terms.length && !d1; t += 1) {
-      const from = terms[(i + t) % terms.length]!;
-      const to = terms[(i + t + 1) % terms.length]!;
+      const from = terms[t]!;
+      const to = terms[(t + 1 + i) % terms.length]!;
       if (from.toLowerCase() === to.toLowerCase()) continue;
       const answer = swapTerm(base, from, to);
       if (answer) d1 = { level: 1, cue: to, answer };
     }
     if (!d1) {
-      const cue = terms[i % Math.max(1, terms.length)] ?? "again";
-      const alt = pool[(i + 1) % pool.length]!;
-      d1 = fallbackDrill(1, alt.en, cue);
+      // Sem termo do vocabulário na frase: substitui o sujeito (palavra simples).
+      const subject = PRONOUNS[(i + 1) % PRONOUNS.length]!;
+      const answer = swapSubject(base, subject);
+      d1 = answer
+        ? { level: 1, cue: subject, answer }
+        : { level: 1, cue: "same sentence", answer: base };
     }
     drills.push(d1);
 
     // Drill 2 — substituição intermediária: troca de sujeito com concordância.
-    const subject = PRONOUNS[(i + 2) % PRONOUNS.length]!;
-    const swapped = swapSubject(drills[0]!.answer, subject) ?? swapSubject(base, subject);
+    const subject2 = PRONOUNS[(i + 3) % PRONOUNS.length]!;
+    const swapped =
+      swapSubject(d1.answer, subject2) ??
+      swapSubject(base, subject2) ??
+      swapTerm(d1.answer, terms[i % Math.max(1, terms.length)] ?? "", terms[0] ?? "");
     drills.push(
       swapped
-        ? { level: 2, cue: subject, answer: swapped }
-        : fallbackDrill(2, drills[0]!.answer, subject),
+        ? { level: 2, cue: subject2, answer: swapped }
+        : { level: 2, cue: subject2, answer: d1.answer },
     );
 
     // Drill 3 — mudança mais desafiadora: muda o tipo de frase.
     const previous = drills[1]!.answer;
-    const nextKind: DrillItem["kind"] =
+    const order: DrillKind[] =
       kind === "affirmative"
-        ? "negative"
+        ? ["negative", "question", "negative question"]
         : kind === "negative"
-          ? "question"
+          ? ["question", "short answer", "affirmative"]
           : kind === "question"
-            ? "short answer"
+            ? ["short answer", "negative question", "negative"]
             : kind === "short answer"
-              ? "negative"
-              : "question";
-    const cue3 =
-      nextKind === "negative"
-        ? "negative form"
-        : nextKind === "question"
-          ? "question form"
-          : nextKind === "short answer"
-            ? "short answer"
-            : "negative question";
-    const answer3 = shapeTo(previous, nextKind);
-    drills.push({
-      level: 3,
-      cue: cue3,
-      answer: answer3 === clean(previous) ? (toNegativeQuestion(previous) ?? answer3) : answer3,
-    });
+              ? ["negative", "question", "affirmative"]
+              : ["short answer", "question", "negative"];
+    let d3: Drill | null = null;
+    for (const nextKind of order) {
+      const answer = shapeTo(previous, nextKind);
+      if (answer && answer !== clean(previous)) {
+        d3 = { level: 3, cue: `${nextKind} form`, answer };
+        break;
+      }
+    }
+    drills.push(d3 ?? { level: 3, cue: "say it again", answer: previous });
 
     items.push({
       id: `${unit.code}-DRILL-${String(i + 1).padStart(2, "0")}`,
