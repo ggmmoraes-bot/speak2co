@@ -3,7 +3,7 @@ import { z } from "zod";
 import { requireFeature } from "@/lib/entitlement-middleware";
 import type { GiseleFeedback } from "@/lib/gisele-feedback-types";
 import type { LiveLessonScript } from "@/lib/live-lesson/script";
-import { COURSE_LEVELS, LIVE_PARTS, type LiveLessonMedia, type LiveLessonProgress } from "@/lib/live-lesson/shared";
+import { ANY, COURSE_LEVELS, LIVE_PARTS, type LiveLessonMedia, type LiveLessonProgress } from "@/lib/live-lesson/shared";
 
 const target = z.object({
   course: z.enum(COURSE_LEVELS),
@@ -72,10 +72,16 @@ export const listLiveLessonMedia = createServerFn({ method: "POST" })
 export const upsertLiveLessonMedia = createServerFn({ method: "POST" })
   .middleware([requireFeature("gisele_ai")])
   .inputValidator((input: unknown) =>
-    target
-      .extend({
-        stage: z.string().min(3).max(30),
-        videoUrl: z.string().url().max(600),
+    z
+      .object({
+        course: z.enum(COURSE_LEVELS),
+        // "*" = vídeo global reutilizável em qualquer aula
+        unitCode: z.union([z.literal(ANY), z.string().min(3).max(60)]),
+        part: z.union([z.literal(ANY), z.enum(LIVE_PARTS)]),
+        // "*" = vale para todas as etapas da aula
+        stage: z.union([z.literal(ANY), z.string().min(3).max(30)]),
+        // vazio = etapa em modo retrato + voz clonada (upload é opcional)
+        videoUrl: z.union([z.literal(""), z.string().url().max(600)]),
         posterUrl: z.string().url().max(600).nullable(),
         caption: z.string().max(300).nullable(),
       })

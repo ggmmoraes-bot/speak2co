@@ -1,11 +1,15 @@
 import giseleArt from "@/assets/gisele-ai-art.png.asset.json";
-import type { LiveLessonMedia } from "@/lib/live-lesson/shared";
+import { ANY, type LiveLessonMedia } from "@/lib/live-lesson/shared";
 import type { LiveStageKey } from "@/lib/live-lesson/script";
 
 /**
- * Adaptador de avatar: hoje resolve os vídeos reais gravados pela Gisele
- * (cadastrados na administração). Quando não há vídeo para o estágio, cai no
- * retrato oficial + voz clonada — sem quebrar a aula.
+ * Adaptador híbrido de avatar da instrutora.
+ *
+ * Ordem de prioridade:
+ * 1. vídeo específico da etapa daquela aula;
+ * 2. vídeo da aula inteira (stage = "*");
+ * 3. vídeo global reutilizável (ex.: Global Gisele Intro / Closing);
+ * 4. retrato oficial + voz clonada + roteiro gerado (sempre funciona).
  */
 export type AvatarSource =
   | { kind: "video"; videoUrl: string; posterUrl: string | null; caption: string | null }
@@ -13,10 +17,21 @@ export type AvatarSource =
 
 export const GISELE_PORTRAIT = giseleArt.url;
 
+
+
 export function resolveAvatar(media: LiveLessonMedia[], stage: LiveStageKey): AvatarSource {
-  const match = media.find((m) => m.stage === stage);
-  if (match) {
+  const lessonScoped = media.filter((m) => m.unitCode !== ANY);
+  const globals = media.filter((m) => m.unitCode === ANY);
+
+  const match =
+    lessonScoped.find((m) => m.stage === stage) ??
+    lessonScoped.find((m) => m.stage === ANY) ??
+    globals.find((m) => m.stage === stage) ??
+    globals.find((m) => m.stage === ANY);
+
+  if (match && match.videoUrl.trim()) {
     return { kind: "video", videoUrl: match.videoUrl, posterUrl: match.posterUrl, caption: match.caption };
   }
-  return { kind: "portrait", posterUrl: GISELE_PORTRAIT };
+  const poster = match?.posterUrl?.trim();
+  return { kind: "portrait", posterUrl: poster || GISELE_PORTRAIT };
 }

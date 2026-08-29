@@ -5,7 +5,7 @@ import type { UnitPartKey } from "@/lib/curriculum/types";
 import { getLiveLessonScript } from "@/lib/live-lesson.server";
 import type { CourseLevel, LiveLessonScript } from "@/lib/live-lesson/script";
 import { findUnit } from "@/lib/live-lesson/units";
-import type { LiveLessonMedia, LiveLessonProgress } from "@/lib/live-lesson/shared";
+import { ANY, type LiveLessonMedia, type LiveLessonProgress } from "@/lib/live-lesson/shared";
 
 type Client = SupabaseClient<Database>;
 type MediaRow = Database["public"]["Tables"]["live_lesson_media"]["Row"];
@@ -37,9 +37,9 @@ export async function loadLiveLesson(
     supabase
       .from("live_lesson_media")
       .select("*")
-      .eq("course_id", course)
-      .eq("unit_code", unit.code)
-      .eq("part", part),
+      .or(
+        `and(course_id.eq.${course},unit_code.eq.${unit.code},part.eq.${part}),unit_code.eq.${ANY}`,
+      ),
     supabase
       .from("live_lesson_progress")
       .select("stages_done, speaking_attempts, pronunciation_score, confidence, completed")
@@ -138,23 +138,25 @@ export async function saveMedia(
   data: {
     course: CourseLevel;
     unitCode: string;
-    part: UnitPartKey;
+    part: UnitPartKey | typeof ANY;
     stage: string;
+    /** Opcional: vazio mantém a etapa em modo retrato + voz clonada. */
     videoUrl: string;
     posterUrl: string | null;
     caption: string | null;
   },
 ): Promise<LiveLessonMedia> {
   await requireAdmin(supabase, userId);
+  const isGlobal = data.unitCode === ANY;
   const { data: row, error } = await supabase
     .from("live_lesson_media")
     .upsert(
       {
-        course_id: data.course,
-        unit_code: data.unitCode.toUpperCase(),
-        part: data.part,
+        course_id: isGlobal ? ANY : data.course,
+        unit_code: isGlobal ? ANY : data.unitCode.toUpperCase(),
+        part: isGlobal ? ANY : data.part,
         stage: data.stage,
-        video_url: data.videoUrl,
+        video_url: data.videoUrl.trim(),
         poster_url: data.posterUrl,
         caption: data.caption,
       },
