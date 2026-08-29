@@ -213,8 +213,8 @@ const HAVE: Record<string, string> = {
   they: "have",
 };
 
-function agree(aux: string, subject: string): string {
-  const a = aux.toLowerCase();
+function agree(auxRaw: string, subject: string): string {
+  const a = auxRaw.toLowerCase().replace(/n't$/, "");
   const s = subject === "I" ? "I" : subject.toLowerCase();
   if (["am", "is", "are"].includes(a)) return BE[s] ?? a;
   if (["do", "does"].includes(a)) return DO[s] ?? a;
@@ -256,9 +256,13 @@ function swapSubject(s: string, newSubject: string): string | null {
   if (isQuestion(s) && idx === 0) {
     if (!out[1]) return null;
     if (subjectPronoun(out[1]) === newSubject) return null;
-    // Sujeito pode ser "determinante + substantivo" (ex.: "my name").
-    const span = DETERMINERS.has(out[1]!.toLowerCase()) && out[2] ? 2 : 1;
-    out[0] = agree(out[0]!, newSubject);
+    const neg = /n't$/i.test(out[0]!);
+    if (neg && newSubject === "I") return null;
+    // Sujeito pode ser "determinante(s) + substantivo" (ex.: "this my name").
+    let span = 1;
+    while (DETERMINERS.has(out[span]!.toLowerCase()) && out[span + 1]) span += 1;
+    const agreed = agree(out[0]!.replace(/n't$/i, ""), newSubject);
+    out[0] = neg ? (agreed === "am" ? "aren't" : `${agreed}n't`) : agreed;
     out.splice(1, span, newSubject);
     return `${capitalize(out[0]!)} ${out.slice(1).join(" ")}${mark}`;
   }
