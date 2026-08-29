@@ -89,6 +89,7 @@ const TIERS: Tier[] = [
     yearly: { key: "signature_yearly", price: 579.0 },
     perks: [
       "Tudo do Premium",
+      "Guided Lesson — exclusivo do Signature",
       "GiseleAI by Speak2Co ilimitada",
       "Voice Room com a voz autorizada da fundadora",
       "Feedback e relatórios personalizados da mentora",
