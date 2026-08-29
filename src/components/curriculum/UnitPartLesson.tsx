@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Mic } from "lucide-react";
 import { toast } from "sonner";
 import { BilingualLine } from "@/components/BilingualLine";
 import { PhrasePractice } from "@/components/PhrasePractice";
@@ -208,7 +208,6 @@ export function UnitPartLesson({
         </>
       );
     }
-    if (key === "speak2drill") return <Speak2Drill unit={unit} />;
     if (key === "challenge")
       return (
         <>
@@ -298,6 +297,32 @@ export function UnitPartLesson({
           }
         />
       </div>
+
+      {part === "communicate" && (
+        <section
+          aria-label="Speak2Drill speaking practice"
+          className="mt-8 rounded-3xl border-2 border-gold/50 bg-gradient-to-b from-gold/10 to-transparent p-5 sm:p-6"
+        >
+          <span className="inline-flex items-center gap-2 rounded-full bg-gold/15 px-3 py-1 text-[11px] font-semibold tracking-wide text-gold uppercase">
+            <Mic className="h-3.5 w-3.5" /> Speaking Practice Session
+          </span>
+          <h2 className="mt-3 text-xl font-bold sm:text-2xl">
+            <AltHeading text="Speak2Drill" />
+          </h2>
+          <p className="mt-2 text-sm text-foreground/85">
+            You have finished Discover and Communicate. Now you enter a speaking practice
+            session: say each phrase from this unit out loud and rebuild it three times,
+            following the drills. This is practice, not a new lesson.
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground italic">
+            Sessão de prática oral: repita cada frase da unidade três vezes, seguindo os drills.
+            Ao final, você vê seu progresso.
+          </p>
+          <div className="mt-5">
+            <Speak2Drill unit={unit} />
+          </div>
+        </section>
+      )}
     </main>
   );
 }

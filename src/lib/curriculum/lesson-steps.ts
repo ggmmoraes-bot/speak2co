@@ -40,6 +40,5 @@ export function partStepTitles(unit: CourseUnit, part: UnitPartKey): LessonStepM
     ...c.activities.map((a) => ({ key: `act:${a.id}`, title: a.title })),
     { key: "challenge", title: c.challenge.title },
     { key: "wrapup", title: { en: "Lesson Review", pt: "Resumo da unidade" } },
-    { key: "speak2drill", title: { en: "Speak2Drill", pt: "Speak2Drill — fluência por substituição" } },
   ];
 }
