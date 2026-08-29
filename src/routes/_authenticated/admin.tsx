@@ -20,6 +20,7 @@ import { Switch } from "@/components/ui/switch";
 import { useAccess, useAdminPreviewPlan } from "@/lib/entitlements";
 import { UpgradeScreen } from "@/components/FeatureGate";
 import { BenefitsSection } from "@/components/admin/BenefitsSection";
+import { LiveLessonPreviewPicker } from "@/components/admin/LiveLessonPreviewPicker";
 import {
   requireAdminAccess,
   getAdminCatalog,
