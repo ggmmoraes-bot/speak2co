@@ -110,6 +110,14 @@ export function classify(s: string): DrillKind {
 
 function toNegative(s: string): string | null {
   if (isNegative(s)) return null;
+  if (classify(s) === "short answer") {
+    const { body } = parse(s);
+    const idx = auxIndex(body);
+    if (idx < 0) return null;
+    const subject = subjectPronoun(body[1]);
+    const agreed = agree(body[idx]!, subject);
+    return `No, ${subject} ${agreed === "am" ? "am not" : `${agreed}n't`}.`;
+  }
   const { body, mark } = parse(s);
   const idx = auxIndex(body);
   if (idx < 0 || idx > 2) return null;
@@ -214,6 +222,10 @@ function agree(aux: string, subject: string): string {
   return a; // modais não mudam
 }
 
+const DETERMINERS = new Set([
+  "my","your","his","her","its","our","their","the","a","an","this","that","these","those",
+]);
+
 const SINGULAR_ONLY = ["I", "you", "he", "she"];
 const PLURAL_ONLY = ["you", "we", "they"];
 
@@ -243,9 +255,10 @@ function swapSubject(s: string, newSubject: string): string | null {
   if (isQuestion(s) && idx === 0) {
     if (!out[1]) return null;
     if (subjectPronoun(out[1]) === newSubject) return null;
+    // Sujeito pode ser "determinante + substantivo" (ex.: "my name").
+    const span = DETERMINERS.has(out[1]!.toLowerCase()) && out[2] ? 2 : 1;
     out[0] = agree(out[0]!, newSubject);
-    out[1] = newSubject;
-    out[0] = out[0]!;
+    out.splice(1, span, newSubject);
     return `${capitalize(out[0]!)} ${out.slice(1).join(" ")}${mark}`;
   }
   if (idx === 0) return null;
