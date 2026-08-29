@@ -92,7 +92,8 @@ const isNegative = (s: string) => /(\bnot\b|n't|\bnever\b)/i.test(s);
 /** Índice da primeira palavra auxiliar da frase. */
 function auxIndex(body: string[]): number {
   for (let i = 0; i < body.length; i += 1) {
-    if (AUX.has(body[i]!.toLowerCase())) return i;
+    const w = body[i]!.toLowerCase().replace(/n't$/, "");
+    if (AUX.has(w) || (body[i]!.toLowerCase() === "aren't" && true)) return i;
   }
   return -1;
 }
