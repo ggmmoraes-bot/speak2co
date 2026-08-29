@@ -139,6 +139,7 @@ const COMMON_FIRST = new Set([
 /** Deixa a primeira palavra em minúscula quando não for nome próprio. */
 function uncapFirst(word: string): string {
   if (word === "I") return word;
+  if (/ing$/i.test(word)) return word.toLowerCase();
   return COMMON_FIRST.has(word.toLowerCase()) ? word.toLowerCase() : word;
 }
 
@@ -269,7 +270,7 @@ function swapSubject(s: string, newSubject: string): string | null {
     let span = 1;
     if (!isPronoun) {
       if (DETERMINERS.has(first) && out.length <= 4) span = 2;
-      else if (!DETERMINERS.has(first) && /^[A-Z]/.test(out[1]!)) span = 1;
+      else if (out.length <= 3) span = 1;
       else return null;
     }
     const agreed = agree(out[0]!.replace(/n't$/i, ""), newSubject);
@@ -328,7 +329,8 @@ function unitSentences(unit: CourseUnit): Candidate[] {
     const oneClause = !/[.,;:!?]/.test(en.slice(0, -1)) && !/\b(and|but|because)\b/i.test(en);
     const { body } = parse(en);
     const wh = WH.has((body[0] ?? "").toLowerCase());
-    if (oneClause && !wh && auxIndex(body) >= 0) simple.push({ en, pt });
+    const idxAux = auxIndex(body);
+    if (oneClause && !wh && idxAux >= 0 && idxAux <= 2) simple.push({ en, pt });
     else other.push({ en, pt });
   }
   return simple.length > 0 ? simple : other;
