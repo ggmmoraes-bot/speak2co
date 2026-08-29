@@ -26,9 +26,9 @@ import {
 export const Route = createFileRoute("/_authenticated/admin-live-lesson")({
   head: () => ({
     meta: [
-      { title: "Vídeos da Live Lesson — Speak2Co" },
+      { title: "Vídeos da Guided Lesson — Speak2Co" },
       { name: "description", content: "Cadastro opcional dos vídeos da instrutora usados nas aulas ao vivo." },
-      { property: "og:title", content: "Vídeos da Live Lesson — Speak2Co" },
+      { property: "og:title", content: "Vídeos da Guided Lesson — Speak2Co" },
       {
         property: "og:description",
         content: "Cadastro opcional dos vídeos da instrutora usados nas aulas ao vivo.",
@@ -131,7 +131,7 @@ function AdminLiveLessonMedia() {
       </Link>
 
       <header>
-        <h1 className="text-2xl font-bold text-foreground">Vídeos da Live Lesson</h1>
+        <h1 className="text-2xl font-bold text-foreground">Vídeos da Guided Lesson</h1>
         <p className="text-sm text-muted-foreground">
           O upload de vídeo é <strong>opcional</strong>. Sem vídeo, a aula roda normalmente com o retrato oficial da
           Gisele, a voz clonada aprovada e o roteiro gerado a partir do conteúdo oficial da unidade. Você pode ir

@@ -164,7 +164,7 @@ export function LiveLesson({
   if (error || !data || !script) {
     return (
       <div className="p-16 text-center text-sm text-muted-foreground">
-        Não foi possível abrir a aula ao vivo agora. Tente novamente em instantes.
+        Não foi possível abrir a Guided Lesson agora. Tente novamente em instantes.
       </div>
     );
   }
@@ -175,7 +175,7 @@ export function LiveLesson({
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 space-y-5 px-6 py-8">
       <header className="space-y-1">
-        <p className="text-xs uppercase tracking-wide text-gold">Live Lesson with Gisele</p>
+        <p className="text-xs uppercase tracking-wide text-gold">Guided Lesson with Gisele</p>
         <h1 className="text-2xl font-bold text-foreground">
           Unit {unit.number}: {unit.title}
         </h1>

@@ -12,10 +12,10 @@ export const Route = createFileRoute("/_authenticated/live-lesson/$course/$unitC
     return { course: params.course, unit, part: params.part };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Live Lesson indisponível — Speak2Co" }] };
+    if (!loaderData) return { meta: [{ title: "Guided Lesson with Gisele indisponível — Speak2Co" }] };
     const { unit, part } = loaderData;
-    const title = `Live Lesson · Unit ${unit.number} — ${unit.title} | Speak2Co`;
-    const description = `Aula ao vivo com a Gisele sobre ${unit.title} (${PART_LABEL[part].en}).`;
+    const title = `Guided Lesson with Gisele · Unit ${unit.number} — ${unit.title} | Speak2Co`;
+    const description = `Aula guiada pessoalmente pela Gisele, com apoio de IA, sobre ${unit.title} (${PART_LABEL[part].en}).`;
     return {
       meta: [
         { title },
@@ -32,8 +32,8 @@ export const Route = createFileRoute("/_authenticated/live-lesson/$course/$unitC
     return (
       <FeatureGate
         feature="gisele_ai"
-        title="Live Lesson com a Gisele"
-        benefit="Assista à aula conduzida pessoalmente pela Gisele, com prática de fala, feedback estruturado e desafio final — sobre o mesmo conteúdo do seu curso."
+        title="Guided Lesson with Gisele"
+        benefit="Aula guiada pessoalmente pela Gisele, com apoio de IA: prática de fala, feedback estruturado e desafio final — sobre o mesmo conteúdo do seu curso."
         requiredPlan="Signature"
       >
         <LiveLesson key={`${course}-${unit.code}-${part}`} course={course} unit={unit} part={part} />

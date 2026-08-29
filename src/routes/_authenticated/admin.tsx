@@ -250,7 +250,7 @@ function AdminPage() {
           Benefícios e Assinaturas Especiais
         </Button>
         <Button asChild variant="outline" className="rounded-full font-semibold">
-          <Link to="/admin-live-lesson">Vídeos da Live Lesson</Link>
+          <Link to="/admin-live-lesson">Vídeos da Guided Lesson</Link>
         </Button>
         <Button
           variant="outline"
@@ -261,11 +261,11 @@ function AdminPage() {
               ?.scrollIntoView({ behavior: "smooth", block: "start" })
           }
         >
-          Preview da Live Lesson
+          Preview da Guided Lesson
         </Button>
       </nav>
       <p className="mt-2 text-xs text-muted-foreground">
-        Vídeos da Live Lesson: cadastre um vídeo global reutilizável, o vídeo de uma aula inteira ou
+        Vídeos da Guided Lesson: cadastre um vídeo global reutilizável, o vídeo de uma aula inteira ou
         de uma etapa específica — sem vídeo, a aula usa o retrato oficial + voz clonada da Gisele.
       </p>
 

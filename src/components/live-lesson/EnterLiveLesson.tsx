@@ -39,7 +39,7 @@ export function EnterLiveLesson({
         className="mt-3 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-secondary/40 px-4 py-2 text-xs font-semibold text-muted-foreground transition hover:text-foreground"
       >
         <Lock className="h-3.5 w-3.5 text-gold" />
-        Live Lesson — Signature
+        Guided Lesson with Gisele — Signature
       </Link>
     );
   }
@@ -50,7 +50,7 @@ export function EnterLiveLesson({
       className="btn-gold mt-3 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold"
     >
       <Sparkles className="h-3.5 w-3.5" />
-      Enter Live Lesson
+      Start Guided Lesson
     </Link>
   );
 }
