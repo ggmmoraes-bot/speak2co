@@ -357,36 +357,41 @@ export function buildUnitDrills(unit: CourseUnit): DrillItem[] {
     const kind = classify(base);
     const drills: Drill[] = [];
 
-    // Drill 1 — substituição simples: troca de um termo do vocabulário.
+    // Drill 1 — substituição simples: troca de sujeito (concordância).
+    const options = subjectOptions(base);
     let d1: Drill | null = null;
-    for (let t = 0; t < terms.length && !d1; t += 1) {
-      const from = terms[t]!;
-      const to = terms[(t + 1 + i) % terms.length]!;
-      if (from.toLowerCase() === to.toLowerCase()) continue;
-      const answer = swapTerm(base, from, to);
-      if (answer) d1 = { level: 1, cue: to, answer };
+    for (let k = 0; k < options.length && !d1; k += 1) {
+      const subject = options[(i + k) % options.length]!;
+      const answer = swapSubject(base, subject);
+      if (answer) d1 = { level: 1, cue: subject, answer };
     }
     if (!d1) {
-      // Sem termo do vocabulário na frase: substitui o sujeito (palavra simples).
-      const subject = PRONOUNS[(i + 1) % PRONOUNS.length]!;
-      const answer = swapSubject(base, subject);
-      d1 = answer
-        ? { level: 1, cue: subject, answer }
-        : { level: 1, cue: "same sentence", answer: base };
+      const from = terms.find((t) => swapTerm(base, t, t)) ?? "";
+      const to = terms[(i + 1) % Math.max(1, terms.length)] ?? "";
+      const answer = from && to ? swapTerm(base, from, to) : null;
+      d1 = answer ? { level: 1, cue: to, answer } : { level: 1, cue: "say it again", answer: base };
     }
     drills.push(d1);
 
-    // Drill 2 — substituição intermediária: troca de sujeito com concordância.
-    const subject2 = PRONOUNS[(i + 3) % PRONOUNS.length]!;
-    const swapped =
-      swapSubject(d1.answer, subject2) ??
-      swapSubject(base, subject2) ??
-      swapTerm(d1.answer, terms[i % Math.max(1, terms.length)] ?? "", terms[0] ?? "");
-    drills.push(
-      swapped
-        ? { level: 2, cue: subject2, answer: swapped }
-        : { level: 2, cue: subject2, answer: d1.answer },
-    );
+    // Drill 2 — substituição intermediária: troca de palavra do vocabulário.
+    let d2: Drill | null = null;
+    for (let t = 0; t < terms.length && !d2; t += 1) {
+      const from = terms[t]!;
+      const to = terms[(t + 1 + i) % terms.length]!;
+      if (from.toLowerCase() === to.toLowerCase()) continue;
+      const answer = swapTerm(d1.answer, from, to);
+      if (answer) d2 = { level: 2, cue: to, answer };
+    }
+    if (!d2) {
+      const opts2 = subjectOptions(d1.answer).filter((p) => p !== d1!.cue);
+      for (let k = 0; k < opts2.length && !d2; k += 1) {
+        const subject = opts2[(i + k) % opts2.length]!;
+        const answer = swapSubject(d1.answer, subject);
+        if (answer) d2 = { level: 2, cue: subject, answer };
+      }
+    }
+    drills.push(d2 ?? { level: 2, cue: "say it again", answer: d1.answer });
+
 
     // Drill 3 — mudança mais desafiadora: muda o tipo de frase.
     const previous = drills[1]!.answer;
