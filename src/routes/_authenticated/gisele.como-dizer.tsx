@@ -5,6 +5,7 @@ import { Loader2, Sparkles, Wand2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { ListenToGiseleButton } from "@/components/gisele/ListenToGiseleButton";
 import {
   giseleCorrectMe,
   giseleRephrase,
