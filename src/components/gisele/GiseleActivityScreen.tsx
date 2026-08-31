@@ -62,21 +62,6 @@ export function GiseleActivityScreen({
     }
   }
 
-  async function listen() {
-    const text = activity?.spokenText || activity?.prompts.join(" ") || activity?.instructionsEn;
-    if (!text) return;
-    try {
-      await speakText(text, {
-        voice: voice.voice,
-        provider: voice.ttsProvider,
-        rate: voice.rate,
-        volume: voice.volume,
-        scope: "gisele",
-      });
-    } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Não foi possível reproduzir o áudio.");
-    }
-  }
 
   async function toggleRecording() {
     if (recorder) {
