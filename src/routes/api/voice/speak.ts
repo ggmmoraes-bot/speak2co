@@ -58,9 +58,7 @@ export const Route = createFileRoute("/api/voice/speak")({
           if (!elevenKey) return new Response("Voz indisponível no momento", { status: 503 });
           // Voz oficial da GiseleAI (configuração interna). IDs antigos salvos
           // no perfil são remapeados para a voz atual.
-          const { GISELE_ELEVENLABS_VOICE_ID, isGiseleVoiceId } = await import(
-            "@/lib/gisele-voice-config"
-          );
+          const { isGiseleVoiceId } = await import("@/lib/gisele-voice-config");
           const elevenVoice =
             OPENAI_VOICES.includes(voice) || isGiseleVoiceId(voice)
               ? GISELE_ELEVENLABS_VOICE_ID
