@@ -260,26 +260,13 @@ function GiseleSettingsPage() {
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1">
           <Label>Text-to-speech · Síntese de voz</Label>
-          <div className="grid gap-2 sm:grid-cols-3">
-            {TTS_PROVIDERS.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => update({ ttsProvider: p.id })}
-                className={`rounded-xl border px-4 py-3 text-left text-xs transition-colors ${
-                  settings.ttsProvider === p.id
-                    ? "border-gold bg-secondary text-foreground"
-                    : "border-border text-muted-foreground hover:border-gold/50 hover:text-foreground"
-                }`}
-              >
-                <span className="block text-sm font-medium">{p.label}</span>
-                {p.description}
-              </button>
-            ))}
-          </div>
+          <p className="text-xs text-muted-foreground">
+            Sempre a voz oficial da GiseleAI — não é possível trocar.
+          </p>
         </div>
+
 
         <p className="text-[11px] text-muted-foreground">
           Nas sessões de voz o navegador pode pedir permissão de microfone — é o pedido padrão do
