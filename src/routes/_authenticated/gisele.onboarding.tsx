@@ -28,14 +28,14 @@ function OnboardingPage() {
 
   const [objective, setObjective] = useState("");
   const [level, setLevel] = useState("B1");
-  const [voice, setVoice] = useState<string>(AI_VOICES[0].id);
+  const voice = AI_VOICES[0].id;
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (!data) return;
     setObjective(data.objective ?? "");
     setLevel(data.level ?? "B1");
-    setVoice(data.preferred_voice ?? AI_VOICES[0].id);
+
   }, [data]);
 
   async function save() {
@@ -128,26 +128,14 @@ function OnboardingPage() {
 
         <div className="space-y-2">
           <p className="text-sm font-semibold text-foreground">
-            Preferred voice <span className="italic text-muted-foreground">/ Voz preferida</span>
+            Official voice <span className="italic text-muted-foreground">/ Voz oficial</span>
           </p>
-          <div className="grid gap-2 sm:grid-cols-2">
-            {AI_VOICES.map((v) => (
-              <button
-                key={v.id}
-                type="button"
-                onClick={() => setVoice(v.id)}
-                className={`rounded-lg border px-3 py-2 text-left text-xs transition-colors ${
-                  voice === v.id
-                    ? "border-gold bg-gold/10 text-foreground"
-                    : "border-border text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                <span className="block font-semibold">{v.label}</span>
-                {v.description}
-              </button>
-            ))}
+          <div className="rounded-lg border border-gold bg-gold/10 px-3 py-2 text-xs text-foreground">
+            <span className="block font-semibold">🎙️ {AI_VOICES[0].label}</span>
+            {AI_VOICES[0].description}.
           </div>
         </div>
+
 
         <Button
           onClick={save}

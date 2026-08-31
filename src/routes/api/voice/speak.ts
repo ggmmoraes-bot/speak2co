@@ -22,16 +22,22 @@ export const Route = createFileRoute("/api/voice/speak")({
         const text = (body.text ?? "").trim().slice(0, MAX_CHARS);
         if (!text) return new Response("Texto obrigatório", { status: 400 });
 
-        const voice = body.voice || "alloy";
         const OPENAI_VOICES = ["alloy", "nova", "shimmer", "fable", "echo", "onyx"];
-        const provider = body.provider === "openai" || body.provider === "elevenlabs"
-          ? body.provider
-          : OPENAI_VOICES.includes(voice)
-            ? "openai"
-            : "elevenlabs";
+        const isGiseleScope = body.scope === "gisele";
+        // A Gisele AI tem UMA única identidade vocal oficial — nenhuma outra
+        // voz pode ser usada, mesmo que o cliente peça.
+        const { GISELE_ELEVENLABS_VOICE_ID } = await import("@/lib/gisele-voice-config");
+        const voice = isGiseleScope ? GISELE_ELEVENLABS_VOICE_ID : body.voice || "alloy";
+        const provider = isGiseleScope
+          ? "elevenlabs"
+          : body.provider === "openai" || body.provider === "elevenlabs"
+            ? body.provider
+            : OPENAI_VOICES.includes(voice)
+              ? "openai"
+              : "elevenlabs";
 
         // Escopo completo da Gisele AI (Signature) — checagem real de plano.
-        if (body.scope === "gisele") {
+        if (isGiseleScope) {
           const { assertGiseleScope } = await import("@/lib/brand-voice.server");
           try {
             await assertGiseleScope(auth.supabase, auth.userId);
@@ -52,9 +58,7 @@ export const Route = createFileRoute("/api/voice/speak")({
           if (!elevenKey) return new Response("Voz indisponível no momento", { status: 503 });
           // Voz oficial da GiseleAI (configuração interna). IDs antigos salvos
           // no perfil são remapeados para a voz atual.
-          const { GISELE_ELEVENLABS_VOICE_ID, isGiseleVoiceId } = await import(
-            "@/lib/gisele-voice-config"
-          );
+          const { isGiseleVoiceId } = await import("@/lib/gisele-voice-config");
           const elevenVoice =
             OPENAI_VOICES.includes(voice) || isGiseleVoiceId(voice)
               ? GISELE_ELEVENLABS_VOICE_ID

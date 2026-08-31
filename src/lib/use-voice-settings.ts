@@ -10,19 +10,27 @@ export function isBrandVoice(voiceId: string | undefined | null) {
   return isGiseleVoiceId(voiceId);
 }
 
+/**
+ * A GiseleAI tem UMA única identidade vocal oficial.
+ * Nenhuma outra voz pode ser oferecida ou selecionada pelo aluno.
+ */
 export const AI_VOICES = [
   {
     id: FOUNDER_VOICE_ID,
     label: "GiseleAI voice",
     description: "Voz oficial da GiseleAI — gerada por IA, não é uma pessoa real",
   },
-  { id: "alloy", label: "Alloy", description: "Neutra e equilibrada" },
-  { id: "nova", label: "Nova", description: "Feminina, clara e acolhedora" },
-  { id: "shimmer", label: "Shimmer", description: "Feminina, suave" },
-  { id: "fable", label: "Fable", description: "Expressiva, sotaque britânico" },
-  { id: "echo", label: "Echo", description: "Masculina, calma" },
-  { id: "onyx", label: "Onyx", description: "Masculina, grave" },
 ] as const;
+
+/** Estilos de fala — mesma voz oficial, apenas entrega diferente. */
+export const GISELE_VOICE_STYLES = [
+  { id: "natural", label: "Natural", description: "Ritmo equilibrado do dia a dia." },
+  { id: "warm", label: "Acolhedora", description: "Tom mais próximo e encorajador." },
+  { id: "professional", label: "Profissional", description: "Clareza executiva e firme." },
+  { id: "didactic", label: "Didática", description: "Mais devagar, ideal para repetir." },
+] as const;
+
+export type GiseleVoiceStyle = (typeof GISELE_VOICE_STYLES)[number]["id"];
 
 export type SupportLanguage = "en" | "bilingual" | "pt";
 
@@ -49,9 +57,8 @@ export const STT_PROVIDERS: { id: SttProvider; label: string; description: strin
   { id: "openai", label: "OpenAI transcribe", description: "Alta precisão para inglês." },
 ];
 
+/** A voz da GiseleAI é sempre a oficial — não há escolha de motor de TTS. */
 export const TTS_PROVIDERS: { id: TtsProvider; label: string; description: string }[] = [
-  { id: "auto", label: "Automatic", description: "Definido pela voz escolhida." },
-  { id: "openai", label: "Standard voices", description: "Vozes neutras de estúdio." },
   { id: "elevenlabs", label: "GiseleAI voice", description: "Voz oficial da GiseleAI." },
 ];
 
@@ -60,6 +67,7 @@ export type VoiceSettings = {
   volume: number; // 0 a 1
   rate: number; // 0.5 a 2
   voice: string;
+  voiceStyle: GiseleVoiceStyle;
   supportLanguage: SupportLanguage;
   sttProvider: SttProvider;
   ttsProvider: TtsProvider;
@@ -71,9 +79,10 @@ const DEFAULTS: VoiceSettings = {
   volume: 1,
   rate: 1,
   voice: FOUNDER_VOICE_ID,
+  voiceStyle: "natural",
   supportLanguage: "bilingual",
   sttProvider: "auto",
-  ttsProvider: "auto",
+  ttsProvider: "elevenlabs",
 };
 
 function read(): VoiceSettings {
@@ -81,24 +90,25 @@ function read(): VoiceSettings {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return DEFAULTS;
     const parsed = JSON.parse(raw) as Partial<VoiceSettings>;
-    const voice = AI_VOICES.some((v) => v.id === parsed.voice) ? parsed.voice! : DEFAULTS.voice;
     const supportLanguage = SUPPORT_LANGUAGES.some((l) => l.id === parsed.supportLanguage)
       ? (parsed.supportLanguage as SupportLanguage)
       : DEFAULTS.supportLanguage;
     const sttProvider = STT_PROVIDERS.some((p) => p.id === parsed.sttProvider)
       ? (parsed.sttProvider as SttProvider)
       : DEFAULTS.sttProvider;
-    const ttsProvider = TTS_PROVIDERS.some((p) => p.id === parsed.ttsProvider)
-      ? (parsed.ttsProvider as TtsProvider)
-      : DEFAULTS.ttsProvider;
+    const voiceStyle = GISELE_VOICE_STYLES.some((s) => s.id === parsed.voiceStyle)
+      ? (parsed.voiceStyle as GiseleVoiceStyle)
+      : DEFAULTS.voiceStyle;
     return {
       autoSpeak: parsed.autoSpeak !== false,
       volume: Math.min(1, Math.max(0, Number(parsed.volume ?? 1))),
       rate: Math.min(2, Math.max(0.5, Number(parsed.rate ?? 1))),
-      voice,
+      // Migração automática: qualquer voz antiga salva vira a voz oficial.
+      voice: FOUNDER_VOICE_ID,
+      voiceStyle,
       supportLanguage,
       sttProvider,
-      ttsProvider,
+      ttsProvider: "elevenlabs",
     };
   } catch {
     return DEFAULTS;
@@ -116,7 +126,13 @@ export function useVoiceSettings() {
 
   const update = useCallback((patch: Partial<VoiceSettings>) => {
     setSettings((prev) => {
-      const next = { ...prev, ...patch };
+      // A identidade vocal é fixa: nenhuma outra voz pode ser gravada.
+      const next: VoiceSettings = {
+        ...prev,
+        ...patch,
+        voice: FOUNDER_VOICE_ID,
+        ttsProvider: "elevenlabs",
+      };
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
       } catch {

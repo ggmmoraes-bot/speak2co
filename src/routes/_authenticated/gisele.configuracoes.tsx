@@ -9,9 +9,9 @@ import { Label } from "@/components/ui/label";
 import { speakText, stopSpeaking } from "@/lib/voice-client";
 import {
   AI_VOICES,
+  GISELE_VOICE_STYLES,
   STT_PROVIDERS,
   SUPPORT_LANGUAGES,
-  TTS_PROVIDERS,
   useVoiceSettings,
   type SupportLanguage,
 } from "@/lib/use-voice-settings";
@@ -79,34 +79,49 @@ function GiseleSettingsPage() {
       <section className="space-y-4 rounded-2xl border border-gold/30 bg-card/60 p-6 backdrop-blur">
         <div>
           <h2 className="text-sm font-semibold text-foreground">Voice · Voz</h2>
-          <p className="text-xs text-muted-foreground">Toque para ouvir uma amostra.</p>
+          <p className="text-xs text-muted-foreground">Esta é a voz oficial da Gisele AI.</p>
         </div>
         <AiVoiceDisclosure />
-        <div className="grid gap-3 sm:grid-cols-2">
-          {AI_VOICES.map((v) => {
-            const active = settings.voice === v.id;
-            return (
+        <div className="flex items-center justify-between gap-3 rounded-xl border border-gold bg-secondary px-4 py-3 text-left">
+          <span>
+            <span className="block text-sm font-medium text-foreground">
+              🎙️ {AI_VOICES[0].label}
+            </span>
+            <span className="block text-xs text-muted-foreground">{AI_VOICES[0].description}.</span>
+          </span>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="shrink-0 rounded-full"
+            disabled={testing}
+            onClick={() => void testVoice()}
+          >
+            <Volume2 className="mr-2 h-4 w-4 text-gold" /> Listen
+          </Button>
+        </div>
+        <div className="space-y-2">
+          <Label>Speaking style · Estilo de fala</Label>
+          <p className="text-xs text-muted-foreground">
+            A mesma voz oficial — muda apenas a entrega.
+          </p>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {GISELE_VOICE_STYLES.map((s) => (
               <button
-                key={v.id}
+                key={s.id}
                 type="button"
-                onClick={() => {
-                  update({ voice: v.id });
-                  void testVoice(v.id);
-                }}
-                className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left transition-colors ${
-                  active
+                onClick={() => update({ voiceStyle: s.id })}
+                className={`rounded-xl border px-4 py-3 text-left text-xs transition-colors ${
+                  settings.voiceStyle === s.id
                     ? "border-gold bg-secondary text-foreground"
                     : "border-border text-muted-foreground hover:border-gold/50 hover:text-foreground"
                 }`}
               >
-                <span>
-                  <span className="block text-sm font-medium">{v.label}</span>
-                  <span className="block text-xs text-muted-foreground">{v.description}</span>
-                </span>
-                <Volume2 className={`h-4 w-4 shrink-0 ${active ? "text-gold" : ""}`} />
+                <span className="block text-sm font-medium">{s.label}</span>
+                {s.description}
               </button>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </section>
 
@@ -245,26 +260,13 @@ function GiseleSettingsPage() {
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1">
           <Label>Text-to-speech · Síntese de voz</Label>
-          <div className="grid gap-2 sm:grid-cols-3">
-            {TTS_PROVIDERS.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => update({ ttsProvider: p.id })}
-                className={`rounded-xl border px-4 py-3 text-left text-xs transition-colors ${
-                  settings.ttsProvider === p.id
-                    ? "border-gold bg-secondary text-foreground"
-                    : "border-border text-muted-foreground hover:border-gold/50 hover:text-foreground"
-                }`}
-              >
-                <span className="block text-sm font-medium">{p.label}</span>
-                {p.description}
-              </button>
-            ))}
-          </div>
+          <p className="text-xs text-muted-foreground">
+            Sempre a voz oficial da GiseleAI — não é possível trocar.
+          </p>
         </div>
+
 
         <p className="text-[11px] text-muted-foreground">
           Nas sessões de voz o navegador pode pedir permissão de microfone — é o pedido padrão do
