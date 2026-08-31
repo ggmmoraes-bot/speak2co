@@ -2,7 +2,7 @@ import { BrandText } from "@/components/BrandText";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { FeatureGate } from "@/components/FeatureGate";
-import giseleLogo from "@/assets/gisele-ai.png.asset.json";
+import giseleAvatar from "@/assets/giseleai-avatar.jpg.asset.json";
 
 export const Route = createFileRoute("/_authenticated/gisele")({
   head: () => ({
@@ -68,8 +68,8 @@ function GiseleLayout() {
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-5">
           <div className="flex items-center gap-4">
             <img
-              src={giseleLogo.url}
-              alt="GiseleAI by Speak2Co"
+              src={giseleAvatar.url}
+              alt="GiseleAI by speak2co — AI English Coach"
               className="h-12 w-12 rounded-full object-cover ring-1 ring-gold/50"
             />
             <div className="min-w-0">
