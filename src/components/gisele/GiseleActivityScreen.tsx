@@ -163,11 +163,13 @@ export function GiseleActivityScreen({
             </ul>
           )}
 
-          <div className="flex flex-wrap gap-2">
-            <Button size="sm" variant="outline" onClick={listen} className="gap-1 rounded-full text-xs">
-              <Play className="h-3.5 w-3.5" /> Listen to GiseleAI
-            </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <ListenToGiseleButton
+              size="sm"
+              text={activity.spokenText || activity.prompts.join(" ") || activity.instructionsEn}
+            />
             <Button size="sm" variant="ghost" onClick={generate} className="gap-1 rounded-full text-xs">
+
               <RefreshCw className="h-3.5 w-3.5" /> New activity
             </Button>
           </div>
