@@ -126,7 +126,13 @@ export function useVoiceSettings() {
 
   const update = useCallback((patch: Partial<VoiceSettings>) => {
     setSettings((prev) => {
-      const next = { ...prev, ...patch };
+      // A identidade vocal é fixa: nenhuma outra voz pode ser gravada.
+      const next: VoiceSettings = {
+        ...prev,
+        ...patch,
+        voice: FOUNDER_VOICE_ID,
+        ttsProvider: "elevenlabs",
+      };
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
       } catch {
