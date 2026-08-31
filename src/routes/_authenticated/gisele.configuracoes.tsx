@@ -9,9 +9,9 @@ import { Label } from "@/components/ui/label";
 import { speakText, stopSpeaking } from "@/lib/voice-client";
 import {
   AI_VOICES,
+  GISELE_VOICE_STYLES,
   STT_PROVIDERS,
   SUPPORT_LANGUAGES,
-  TTS_PROVIDERS,
   useVoiceSettings,
   type SupportLanguage,
 } from "@/lib/use-voice-settings";
