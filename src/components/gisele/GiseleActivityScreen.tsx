@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, Mic, Play, RefreshCw, Send, Square } from "lucide-react";
+import { Loader2, Mic, RefreshCw, Send, Square } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { GiseleFeedbackCard } from "@/components/gisele/GiseleFeedbackCard";
 import { ListenToGiseleButton } from "@/components/gisele/ListenToGiseleButton";
 import { MicRecorder } from "@/lib/audio-recorder";
-import { speakText, transcribeAudio } from "@/lib/voice-client";
+import { transcribeAudio } from "@/lib/voice-client";
 import { useVoiceSettings } from "@/lib/use-voice-settings";
 import type { ActivityKind } from "@/lib/gisele-activity-kinds";
 import {
