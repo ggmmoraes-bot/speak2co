@@ -118,7 +118,7 @@ function HowWouldGiseleSayIt() {
             <>
               <Line label="You said" value={correction.youSaid} />
               <Line label="A more natural way" value={correction.betterWay} />
-              <Line label="Why" value={correction.why} />
+              <Line label="Why" value={correction.why} speak={false} />
             </>
           ) : (
             <p className="text-sm text-foreground">{correction.why}</p>
