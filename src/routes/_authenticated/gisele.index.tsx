@@ -193,6 +193,7 @@ function GiseleHub() {
             src={giseleBrand.url}
             alt="GiseleAI by speak2co — AI English Coach"
             className="w-40 rounded-2xl object-contain ring-1 ring-gold/40"
+            loading="lazy"
           />
           <div className="space-y-2">
             <h1 className="text-3xl font-bold">
