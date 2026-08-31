@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, Mic, Play, RefreshCw, Send, Square } from "lucide-react";
+import { Loader2, Mic, RefreshCw, Send, Square } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { GiseleFeedbackCard } from "@/components/gisele/GiseleFeedbackCard";
+import { ListenToGiseleButton } from "@/components/gisele/ListenToGiseleButton";
 import { MicRecorder } from "@/lib/audio-recorder";
-import { speakText, transcribeAudio } from "@/lib/voice-client";
-import { useVoiceSettings } from "@/lib/use-voice-settings";
+import { transcribeAudio } from "@/lib/voice-client";
 import type { ActivityKind } from "@/lib/gisele-activity-kinds";
 import {
   evaluateGiseleAnswer,
@@ -38,7 +38,6 @@ export function GiseleActivityScreen({
 }) {
   const generateFn = useServerFn(generateGiseleActivity);
   const evaluateFn = useServerFn(evaluateGiseleAnswer);
-  const { settings: voice } = useVoiceSettings();
 
   const [activity, setActivity] = useState<GiseleActivity | null>(null);
   const [answer, setAnswer] = useState("");
@@ -61,21 +60,6 @@ export function GiseleActivityScreen({
     }
   }
 
-  async function listen() {
-    const text = activity?.spokenText || activity?.prompts.join(" ") || activity?.instructionsEn;
-    if (!text) return;
-    try {
-      await speakText(text, {
-        voice: voice.voice,
-        provider: voice.ttsProvider,
-        rate: voice.rate,
-        volume: voice.volume,
-        scope: "gisele",
-      });
-    } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Não foi possível reproduzir o áudio.");
-    }
-  }
 
   async function toggleRecording() {
     if (recorder) {
@@ -163,11 +147,13 @@ export function GiseleActivityScreen({
             </ul>
           )}
 
-          <div className="flex flex-wrap gap-2">
-            <Button size="sm" variant="outline" onClick={listen} className="gap-1 rounded-full text-xs">
-              <Play className="h-3.5 w-3.5" /> Listen to GiseleAI
-            </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <ListenToGiseleButton
+              size="sm"
+              text={activity.spokenText || activity.prompts.join(" ") || activity.instructionsEn}
+            />
             <Button size="sm" variant="ghost" onClick={generate} className="gap-1 rounded-full text-xs">
+
               <RefreshCw className="h-3.5 w-3.5" /> New activity
             </Button>
           </div>

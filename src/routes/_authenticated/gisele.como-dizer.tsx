@@ -5,6 +5,7 @@ import { Loader2, Sparkles, Wand2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { ListenToGiseleButton } from "@/components/gisele/ListenToGiseleButton";
 import {
   giseleCorrectMe,
   giseleRephrase,
@@ -16,12 +17,21 @@ export const Route = createFileRoute("/_authenticated/gisele/como-dizer")({
   component: HowWouldGiseleSayIt,
 });
 
-function Line({ label, value }: { label: string; value: string | null }) {
+function Line({
+  label,
+  value,
+  speak = true,
+}: {
+  label: string;
+  value: string | null;
+  speak?: boolean;
+}) {
   if (!value) return null;
   return (
-    <div className="rounded-xl border border-border/60 bg-background/40 p-3">
+    <div className="space-y-3 rounded-xl border border-gold/25 bg-background/50 p-4">
       <p className="text-xs font-semibold uppercase tracking-wide text-gold">{label}</p>
-      <p className="text-sm text-foreground">{value}</p>
+      <p className="text-base leading-relaxed text-foreground">{value}</p>
+      {speak && <ListenToGiseleButton text={value} size="sm" />}
     </div>
   );
 }
@@ -108,7 +118,7 @@ function HowWouldGiseleSayIt() {
             <>
               <Line label="You said" value={correction.youSaid} />
               <Line label="A more natural way" value={correction.betterWay} />
-              <Line label="Why" value={correction.why} />
+              <Line label="Why" value={correction.why} speak={false} />
             </>
           ) : (
             <p className="text-sm text-foreground">{correction.why}</p>
