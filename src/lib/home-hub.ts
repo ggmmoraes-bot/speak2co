@@ -35,7 +35,7 @@ import speak2travelLogo from "@/assets/speak2travel.asset.json";
 import speak2fluencyLogo from "@/assets/speak2fluency.png.asset.json";
 import speak2businessLogo from "@/assets/speak2business.png.asset.json";
 import speak2kidsLogo from "@/assets/speak2kids.png.asset.json";
-import giseleAiLogo from "@/assets/gisele-ai-art.png.asset.json";
+import giseleAiLogo from "@/assets/giseleai-brand.jpg.asset.json";
 import founderPhoto from "@/assets/gisele-moraes.jpeg.asset.json";
 
 type Access = MyAccess | undefined;

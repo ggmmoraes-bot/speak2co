@@ -26,7 +26,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Shimmer } from "@/components/ai-elements/shimmer";
-import giseleLogo from "@/assets/gisele-ai-art.png.asset.json";
+import giseleBrand from "@/assets/giseleai-brand.jpg.asset.json";
 import { FOCUS_LABEL } from "@/lib/gisele-focus";
 import {
   completeReviewItem,
@@ -157,8 +157,8 @@ function GiseleHub() {
     return (
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col items-center justify-center gap-6 px-6 py-16 text-center">
         <img
-          src={giseleLogo.url}
-          alt="GiseleAI by Speak2Co"
+          src={giseleBrand.url}
+          alt="GiseleAI by speak2co — AI English Coach"
           className="w-44 rounded-2xl object-contain ring-1 ring-gold/40"
         />
         <div className="space-y-3">
@@ -190,9 +190,10 @@ function GiseleHub() {
       <section className="relative overflow-hidden rounded-3xl border border-gold/25 bg-secondary/20 p-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-center">
           <img
-            src={giseleLogo.url}
-            alt="GiseleAI by Speak2Co"
+            src={giseleBrand.url}
+            alt="GiseleAI by speak2co — AI English Coach"
             className="w-40 rounded-2xl object-contain ring-1 ring-gold/40"
+            loading="lazy"
           />
           <div className="space-y-2">
             <h1 className="text-3xl font-bold">

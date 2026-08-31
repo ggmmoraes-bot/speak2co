@@ -1,4 +1,4 @@
-import giseleArt from "@/assets/gisele-ai-art.png.asset.json";
+import giseleArt from "@/assets/giseleai-avatar.jpg.asset.json";
 import { ANY, type LiveLessonMedia } from "@/lib/live-lesson/shared";
 import type { LiveStageKey } from "@/lib/live-lesson/script";
 
