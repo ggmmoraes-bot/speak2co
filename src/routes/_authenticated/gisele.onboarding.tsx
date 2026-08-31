@@ -28,14 +28,14 @@ function OnboardingPage() {
 
   const [objective, setObjective] = useState("");
   const [level, setLevel] = useState("B1");
-  const [voice, setVoice] = useState<string>(AI_VOICES[0].id);
+  const voice = AI_VOICES[0].id;
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (!data) return;
     setObjective(data.objective ?? "");
     setLevel(data.level ?? "B1");
-    setVoice(data.preferred_voice ?? AI_VOICES[0].id);
+
   }, [data]);
 
   async function save() {
