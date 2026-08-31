@@ -8,7 +8,6 @@ import { GiseleFeedbackCard } from "@/components/gisele/GiseleFeedbackCard";
 import { ListenToGiseleButton } from "@/components/gisele/ListenToGiseleButton";
 import { MicRecorder } from "@/lib/audio-recorder";
 import { transcribeAudio } from "@/lib/voice-client";
-import { useVoiceSettings } from "@/lib/use-voice-settings";
 import type { ActivityKind } from "@/lib/gisele-activity-kinds";
 import {
   evaluateGiseleAnswer,
@@ -39,7 +38,6 @@ export function GiseleActivityScreen({
 }) {
   const generateFn = useServerFn(generateGiseleActivity);
   const evaluateFn = useServerFn(evaluateGiseleAnswer);
-  const { settings: voice } = useVoiceSettings();
 
   const [activity, setActivity] = useState<GiseleActivity | null>(null);
   const [answer, setAnswer] = useState("");
