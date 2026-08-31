@@ -1,3 +1,4 @@
+import { GISELE_ELEVENLABS_VOICE_ID } from "@/lib/gisele-voice-config";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireFeature } from "@/lib/entitlement-middleware";
@@ -25,7 +26,8 @@ export const getAIProfile = createServerFn({ method: "GET" })
       objective: data.objective,
       level: data.level,
       preferences: (data.preferences ?? {}) as Record<string, string | number | boolean | null>,
-      preferred_voice: data.preferred_voice,
+      // Voz oficial única da GiseleAI — valores antigos são migrados na leitura.
+      preferred_voice: GISELE_ELEVENLABS_VOICE_ID,
       onboarding_completed: data.onboarding_completed,
     };
   });
@@ -51,7 +53,9 @@ export const saveAIProfile = createServerFn({ method: "POST" })
         ...(data.level !== undefined ? { level: data.level } : {}),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ...(data.preferences !== undefined ? { preferences: data.preferences as any } : {}),
-        ...(data.preferred_voice !== undefined ? { preferred_voice: data.preferred_voice } : {}),
+        ...(data.preferred_voice !== undefined
+          ? { preferred_voice: GISELE_ELEVENLABS_VOICE_ID }
+          : {}),
         ...(data.onboarding_completed !== undefined
           ? { onboarding_completed: data.onboarding_completed }
           : {}),
@@ -82,7 +86,12 @@ export const getVoiceSettings = createServerFn({ method: "GET" })
       .select("provider, voice_id, consent_status, support_language, rate, volume, auto_speak")
       .eq("user_id", context.userId)
       .maybeSingle();
-    return (data as RemoteVoiceSettings | null) ?? null;
+    if (!data) return null;
+    return {
+      ...(data as RemoteVoiceSettings),
+      provider: "elevenlabs",
+      voice_id: GISELE_ELEVENLABS_VOICE_ID,
+    };
   });
 
 export const saveVoiceSettings = createServerFn({ method: "POST" })
@@ -104,7 +113,13 @@ export const saveVoiceSettings = createServerFn({ method: "POST" })
     const { error } = await context.supabase
       .from("ai_voice_settings")
       .upsert(
-        { user_id: context.userId, ...JSON.parse(JSON.stringify(data)) },
+        {
+          user_id: context.userId,
+          ...JSON.parse(JSON.stringify(data)),
+          // Identidade vocal fixa da GiseleAI.
+          provider: "elevenlabs",
+          voice_id: GISELE_ELEVENLABS_VOICE_ID,
+        },
         { onConflict: "user_id" },
       );
     if (error) throw new Error(error.message);
