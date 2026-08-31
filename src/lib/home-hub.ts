@@ -304,11 +304,18 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           status: "available",
           plans: ["Free", "Essential", "Premium", "Signature"],
         },
+      ],
+    },
+    {
+      id: "journey",
+      titleEn: "Journey",
+      titlePt: "Sua jornada de aprendizagem",
+      items: [
         {
           id: "study-path",
           titleEn: "Study Path",
           titlePt: "Plano de estudos",
-          description: "Available on Free · Sua trilha personalizada semana a semana.",
+          description: "Veja e acompanhe sua trilha personalizada de aprendizagem.",
           icon: Compass,
           to: "/meu-plano",
           status: "available",
@@ -317,8 +324,8 @@ export function buildHomeSections(access: Access): HubSectionData[] {
         {
           id: "placement",
           titleEn: "Study Goals",
-          titlePt: "Teste de nível e metas",
-          description: "Available on Free · Descubra seu nível CEFR e defina seu objetivo.",
+          titlePt: "Metas de estudo",
+          description: "Defina seus objetivos de inglês e acompanhe seu progresso.",
           icon: Target,
           to: "/teste-de-nivel",
           status: "available",
@@ -328,7 +335,7 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           id: "milestones",
           titleEn: "Milestones",
           titlePt: "Marcos de evolução",
-          description: "Available on Free · Conquistas previstas na sua trilha de estudos.",
+          description: "Visualize suas conquistas e os próximos marcos da sua jornada.",
           icon: Flag,
           to: "/meu-plano",
           status: "available",
@@ -336,6 +343,7 @@ export function buildHomeSections(access: Access): HubSectionData[] {
         },
       ],
     },
+
     {
       id: "support",
       titleEn: "Support & Community",
