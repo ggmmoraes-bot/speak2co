@@ -61,7 +61,19 @@ function AuthPage() {
     const { error } = await supabase.auth.signInWithPassword(parsed.data);
     setLoading(false);
     if (error) {
-      toast.error("Não foi possível entrar. Verifique e-mail e senha.");
+      const msg = error.message.toLowerCase();
+      if (msg.includes("not confirmed")) {
+        toast.error("Sua conta ainda não foi confirmada. Enviamos um novo link para o seu e-mail.");
+        void supabase.auth.resend({
+          type: "signup",
+          email: parsed.data.email,
+          options: { emailRedirectTo: window.location.origin },
+        });
+        return;
+      }
+      toast.error(
+        "E-mail ou senha incorretos. Se você já tem conta, use 'Esqueci minha senha' para criar uma nova senha.",
+      );
       return;
     }
     navigate({ to: "/painel", replace: true });
@@ -85,17 +97,39 @@ function AuthPage() {
         data: { full_name: parsed.data.full_name },
       },
     });
-    setLoading(false);
     if (error) {
+      setLoading(false);
+      if (error.message.toLowerCase().includes("already registered")) {
+        toast.error("Você já tem uma conta com esse e-mail. Use a aba 'Entrar'.");
+        return;
+      }
       toast.error(error.message);
       return;
     }
+    // E-mail já cadastrado: o Supabase devolve um usuário sem identidades.
+    if (data.user && (data.user.identities?.length ?? 0) === 0) {
+      setLoading(false);
+      toast.error("Você já tem uma conta com esse e-mail. Use a aba 'Entrar'.");
+      return;
+    }
     if (data.session) {
+      setLoading(false);
+      navigate({ to: "/painel", replace: true });
+      return;
+    }
+    // Com confirmação automática ativa, entramos direto após o cadastro.
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email: parsed.data.email,
+      password: parsed.data.password,
+    });
+    setLoading(false);
+    if (!signInError) {
       navigate({ to: "/painel", replace: true });
       return;
     }
     setSent(true);
   }
+
 
   async function handleForgotPassword() {
     const parsed = emailSchema.safeParse(email);
