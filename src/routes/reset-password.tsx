@@ -59,7 +59,23 @@ function ResetPasswordPage() {
     const { error } = await supabase.auth.updateUser({ password: parsed.data });
     setLoading(false);
     if (error) {
-      toast.error("Não foi possível redefinir a senha. Solicite um novo link.");
+      const msg = error.message.toLowerCase();
+      if (msg.includes("different from the old password") || msg.includes("same_password")) {
+        toast.error("A nova senha precisa ser diferente da senha atual. Escolha outra senha.");
+      } else if (msg.includes("should be at least") || msg.includes("weak")) {
+        toast.error("Senha muito fraca. Use ao menos 6 caracteres, com letras e números.");
+      } else if (
+        msg.includes("session") ||
+        msg.includes("expired") ||
+        msg.includes("token") ||
+        msg.includes("not found")
+      ) {
+        toast.error(
+          "Este link de redefinição expirou ou já foi usado. Peça um novo link em 'Esqueci minha senha'.",
+        );
+      } else {
+        toast.error(error.message);
+      }
       return;
     }
     toast.success("Senha atualizada com sucesso!");

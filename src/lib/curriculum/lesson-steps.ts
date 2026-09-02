@@ -42,3 +42,69 @@ export function partStepTitles(unit: CourseUnit, part: UnitPartKey): LessonStepM
     { key: "wrapup", title: { en: "Lesson Review", pt: "Resumo da unidade" } },
   ];
 }
+
+/**
+ * Estrutura mostrada ao aluno na lista da unidade: 6 aulas por unidade.
+ * Part 1 — Discover: Lessons 1–5. Part 2 — Communicate: Lesson 6 (Lesson Review).
+ * Cada aula aponta para a etapa inicial correspondente dentro do LessonPlayer.
+ */
+export type UnitLessonEntry = {
+  key: string;
+  number: number;
+  title: Bi;
+  /** Índice (1-based) da etapa dentro do LessonPlayer daquela parte. */
+  stepIndex: number;
+};
+
+export function partLessonEntries(unit: CourseUnit, part: UnitPartKey): UnitLessonEntry[] {
+  const steps = partStepTitles(unit, part);
+  const indexOf = (key: string) => Math.max(1, steps.findIndex((s) => s.key === key) + 1);
+
+  if (part === "discover") {
+    const inputTitle = steps.find((s) => s.key === "input")?.title ?? {
+      en: "Listening",
+      pt: "Escuta",
+    };
+    return [
+      {
+        key: "warmup",
+        number: 1,
+        title: { en: "Warm-up & Conversation in Context", pt: "Aquecimento e conversa em contexto" },
+        stepIndex: indexOf("warmup"),
+      },
+      {
+        key: "vocabulary",
+        number: 2,
+        title: { en: "Vocabulary", pt: "Vocabulário" },
+        stepIndex: indexOf("vocabulary"),
+      },
+      {
+        key: "expressions",
+        number: 3,
+        title: { en: "Expressions & Grammar in Use", pt: "Expressões e gramática em uso" },
+        stepIndex: indexOf("expressions"),
+      },
+      {
+        key: "practice",
+        number: 4,
+        title: { en: "Controlled Practice", pt: "Prática controlada" },
+        stepIndex: indexOf("practice"),
+      },
+      {
+        key: "input",
+        number: 5,
+        title: { en: `${inputTitle.en} & Quick Check`, pt: `${inputTitle.pt} e checagem rápida` },
+        stepIndex: indexOf("input"),
+      },
+    ];
+  }
+
+  return [
+    {
+      key: "communicate",
+      number: 6,
+      title: { en: "Lesson Review", pt: "Resumo da unidade" },
+      stepIndex: 1,
+    },
+  ];
+}

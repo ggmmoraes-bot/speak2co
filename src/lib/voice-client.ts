@@ -55,7 +55,21 @@ export type SpeakOptions = {
   provider?: string;
   /** Escopo de permissão verificado no servidor (ex.: "gisele"). */
   scope?: string;
+  /** Estilo de fala da GiseleAI: natural | warm | professional | didactic. */
+  style?: string;
 };
+
+/** Estilo de fala salvo pelo aluno nas configurações da GiseleAI. */
+function savedVoiceStyle(): string | undefined {
+  try {
+    const raw = localStorage.getItem("speak2co:voice-settings");
+    if (!raw) return undefined;
+    const parsed = JSON.parse(raw) as { voiceStyle?: string };
+    return parsed.voiceStyle ?? undefined;
+  } catch {
+    return undefined;
+  }
+}
 
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, Number.isFinite(value) ? value : min));
@@ -67,7 +81,8 @@ export async function speakText(text: string, options: SpeakOptions | string = {
   const provider = opts.provider ?? "auto";
   const volume = clamp(opts.volume ?? 1, 0, 1);
   const rate = clamp(opts.rate ?? 1, 0.5, 2);
-  const key = `${provider}:${voice}:${opts.scope ?? ""}:${text}`;
+  const style = opts.style ?? savedVoiceStyle() ?? "natural";
+  const key = `${provider}:${voice}:${style}:${opts.scope ?? ""}:${text}`;
   let url = audioCache.get(key);
   if (!url) {
     const headers = await authHeaders();
@@ -75,7 +90,7 @@ export async function speakText(text: string, options: SpeakOptions | string = {
     const res = await fetch("/api/voice/speak", {
       method: "POST",
       headers,
-      body: JSON.stringify({ text, voice, provider, scope: opts.scope }),
+      body: JSON.stringify({ text, voice, provider, scope: opts.scope, style }),
     });
     if (!res.ok) throw new Error((await res.text()) || "Não foi possível gerar o áudio.");
     url = URL.createObjectURL(await res.blob());

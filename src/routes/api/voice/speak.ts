@@ -3,6 +3,47 @@ import { verifyChatRequest } from "@/lib/chat-auth.server";
 
 const MAX_CHARS = 3000;
 
+/**
+ * Estilos de fala da GiseleAI — mesma voz oficial, entregas diferentes.
+ * (natural, warm/acolhedora, professional, didactic/didática)
+ */
+function styleSettings(style?: string) {
+  switch (style) {
+    case "warm":
+      return {
+        stability: 0.4,
+        similarity_boost: 0.85,
+        style: 0.45,
+        use_speaker_boost: true,
+        speed: 0.95,
+      };
+    case "professional":
+      return {
+        stability: 0.7,
+        similarity_boost: 0.85,
+        style: 0.15,
+        use_speaker_boost: true,
+        speed: 1.0,
+      };
+    case "didactic":
+      return {
+        stability: 0.75,
+        similarity_boost: 0.85,
+        style: 0.1,
+        use_speaker_boost: true,
+        speed: 0.8,
+      };
+    default:
+      return {
+        stability: 0.5,
+        similarity_boost: 0.85,
+        style: 0.25,
+        use_speaker_boost: true,
+        speed: 0.95,
+      };
+  }
+}
+
 export const Route = createFileRoute("/api/voice/speak")({
   server: {
     handlers: {
@@ -18,6 +59,7 @@ export const Route = createFileRoute("/api/voice/speak")({
           voice?: string;
           provider?: string;
           scope?: string;
+          style?: string;
         };
         const text = (body.text ?? "").trim().slice(0, MAX_CHARS);
         if (!text) return new Response("Texto obrigatório", { status: 400 });
@@ -72,13 +114,7 @@ export const Route = createFileRoute("/api/voice/speak")({
               body: JSON.stringify({
                 text,
                 model_id: "eleven_multilingual_v2",
-                voice_settings: {
-                  stability: 0.5,
-                  similarity_boost: 0.85,
-                  style: 0.25,
-                  use_speaker_boost: true,
-                  speed: 0.95,
-                },
+                voice_settings: styleSettings(body.style),
               }),
             },
           );

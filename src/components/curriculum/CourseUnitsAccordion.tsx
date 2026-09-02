@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { CheckCircle2, ChevronDown, Mic, Search, X } from "lucide-react";
-import { partStepTitles } from "@/lib/curriculum/lesson-steps";
+import { partLessonEntries } from "@/lib/curriculum/lesson-steps";
 import { PART_LABEL, type CourseUnit, type UnitPartKey } from "@/lib/curriculum/types";
 
 export type UnitProgressLookup = (lessonId: string) => boolean;
@@ -115,42 +115,36 @@ export function CourseUnitsAccordion({
 
               {expanded && (
                 <div className="space-y-4 border-t border-border px-4 py-4">
-                  {(() => {
-                    let lessonNumber = 0;
-                    return (["discover", "communicate"] as UnitPartKey[]).map((part, partIndex) => {
-                      const partId = part === "discover" ? unit.discover.id : unit.communicate.id;
-                      const steps = partStepTitles(unit, part);
-                      return (
-                        <div key={part}>
-                          <p className="flex items-center gap-2 text-xs font-semibold tracking-wide text-gold uppercase">
-                            Part {partIndex + 1} — {PART_LABEL[part].en}
-                            {isDone(partId) && <CheckCircle2 className="h-3.5 w-3.5" />}
-                          </p>
-                          <ol className="mt-2 space-y-1">
-                            {steps.map((step, i) => {
-                              lessonNumber += 1;
-                              return (
-                                <li key={step.key}>
-                                  <Link
-                                    to={`${courseBase}/unidade/${unit.code}/${part}` as "/"}
-                                    hash={`step${i + 1}`}
-                                    className="flex items-center justify-between gap-3 rounded-xl border border-border/60 bg-background/40 px-3 py-2 text-sm transition hover:border-gold/60"
-                                  >
-                                    <span className="text-foreground/90">
-                                      Lesson {lessonNumber} — {step.title.en}
-                                    </span>
-                                    <span className="text-[11px] text-muted-foreground italic">
-                                      {step.title.pt}
-                                    </span>
-                                  </Link>
-                                </li>
-                              );
-                            })}
-                          </ol>
-                        </div>
-                      );
-                    });
-                  })()}
+                  {(["discover", "communicate"] as UnitPartKey[]).map((part, partIndex) => {
+                    const partId = part === "discover" ? unit.discover.id : unit.communicate.id;
+                    const lessons = partLessonEntries(unit, part);
+                    return (
+                      <div key={part}>
+                        <p className="flex items-center gap-2 text-xs font-semibold tracking-wide text-gold uppercase">
+                          Part {partIndex + 1} — {PART_LABEL[part].en}
+                          {isDone(partId) && <CheckCircle2 className="h-3.5 w-3.5" />}
+                        </p>
+                        <ol className="mt-2 space-y-1">
+                          {lessons.map((lesson) => (
+                            <li key={lesson.key}>
+                              <Link
+                                to={`${courseBase}/unidade/${unit.code}/${part}` as "/"}
+                                hash={`step${lesson.stepIndex}`}
+                                className="flex items-center justify-between gap-3 rounded-xl border border-border/60 bg-background/40 px-3 py-2 text-sm transition hover:border-gold/60"
+                              >
+                                <span className="text-foreground/90">
+                                  Lesson {lesson.number} — {lesson.title.en}
+                                </span>
+                                <span className="text-[11px] text-muted-foreground italic">
+                                  {lesson.title.pt}
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    );
+                  })}
 
                   <div className="rounded-2xl border-2 border-gold/50 bg-gradient-to-b from-gold/10 to-transparent p-4">
                     <span className="inline-flex items-center gap-2 rounded-full bg-gold/15 px-3 py-1 text-[10px] font-semibold tracking-wide text-gold uppercase">
