@@ -1,32 +1,28 @@
-/**
- * Imagens de apoio do Warm-up — Unidades 27–30 (bloco final "Ahead").
- * Reaproveita imagens temáticas genéricas já existentes no projeto
- * (nenhum arquivo binário novo foi adicionado nesta etapa).
- */
-import travel from "@/assets/warmup/travel.jpg";
-import business from "@/assets/warmup/business.jpg";
-import social from "@/assets/warmup/social.jpg";
-import general from "@/assets/warmup/general.jpg";
+/** Imagens de apoio do Warm-up — Unidades 27 a 30 (Beginner, bloco final "Ahead"). */
+import u27 from "@/assets/warmup/beginner-u27-plans-ahead.jpg";
+import u28 from "@/assets/warmup/beginner-u28-decisions.jpg";
+import u29 from "@/assets/warmup/beginner-u29-connecting.jpg";
+import u30 from "@/assets/warmup/beginner-u30-final.jpg";
 
 export const WARMUP_27_30: Record<string, { src: string; alt: string; altPt: string }> = {
   "BEGINNER-U27": {
-    src: travel,
-    alt: "A person organizing a trip with a suitcase and a map, planning ahead.",
-    altPt: "Uma pessoa organizando uma viagem com uma mala e um mapa, planejando o futuro.",
+    src: u27,
+    alt: "A person planning a trip with a suitcase, a calendar and a map",
+    altPt: "Uma pessoa planejando uma viagem com mala, calendário e mapa",
   },
   "BEGINNER-U28": {
-    src: business,
-    alt: "A person deciding between two products in a shop.",
-    altPt: "Uma pessoa decidindo entre dois produtos em uma loja.",
+    src: u28,
+    alt: "A person deciding between two products in a shop",
+    altPt: "Uma pessoa decidindo entre dois produtos em uma loja",
   },
   "BEGINNER-U29": {
-    src: general,
-    alt: "A person presenting ideas to a small group, connecting sentences.",
-    altPt: "Uma pessoa apresentando ideias para um pequeno grupo, conectando frases.",
+    src: u29,
+    alt: "A person presenting ideas to a small group in a bright room",
+    altPt: "Uma pessoa apresentando ideias para um pequeno grupo em uma sala clara",
   },
   "BEGINNER-U30": {
-    src: social,
-    alt: "A group of friends celebrating the end of a course together.",
-    altPt: "Um grupo de amigos comemorando juntos o fim de um curso.",
+    src: u30,
+    alt: "A group of friends celebrating the end of a course together",
+    altPt: "Um grupo de amigos comemorando juntos o fim de um curso",
   },
 };

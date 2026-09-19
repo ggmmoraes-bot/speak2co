@@ -1,38 +1,34 @@
-/**
- * Imagens de Warm-up das Unidades 17–21 (Beginner, Bloco D).
- * Reaproveita imagens temáticas já existentes em src/assets/warmup, coerentes
- * com o conceito de imagem de cada unidade (sem texto, cena fotográfica).
- */
-import hobbies from "@/assets/warmup/hobbies.jpg";
-import workplace from "@/assets/warmup/workplace.jpg";
-import social from "@/assets/warmup/social.jpg";
-import general from "@/assets/warmup/general.jpg";
-import travel from "@/assets/warmup/travel.jpg";
+/** Imagens de apoio do Warm-up — Unidades 17 a 21 (Beginner, A1). */
+import u17 from "@/assets/warmup/beginner-u17-i-like.jpg";
+import u18 from "@/assets/warmup/beginner-u18-i-want-i-need.jpg";
+import u19 from "@/assets/warmup/beginner-u19-describing-people.jpg";
+import u20 from "@/assets/warmup/beginner-u20-weather-seasons.jpg";
+import u21 from "@/assets/warmup/beginner-u21-checkpoint-my-world.jpg";
 
 export const WARMUP_17_21: Record<string, { src: string; alt: string; altPt: string }> = {
   "BEGINNER-U17": {
-    src: hobbies,
-    alt: "Friends choosing between watching a movie, playing soccer and reading a book",
-    altPt: "Amigos escolhendo entre assistir a um filme, jogar futebol e ler um livro",
+    src: u17,
+    alt: "Friends at home enjoying different hobbies: reading, listening to music and painting",
+    altPt: "Amigos em casa curtindo hobbies diferentes: ler, ouvir música e pintar",
   },
   "BEGINNER-U18": {
-    src: workplace,
-    alt: "A person asking for help at a coworking front desk",
-    altPt: "Uma pessoa pedindo ajuda na recepção de um coworking",
+    src: u18,
+    alt: "A woman asking for help at a reception desk while the attendant listens",
+    altPt: "Uma mulher pedindo ajuda na recepção enquanto a atendente escuta",
   },
   "BEGINNER-U19": {
-    src: social,
-    alt: "A diverse group of people meeting at an airport",
-    altPt: "Um grupo diverso de pessoas se encontrando em um aeroporto",
+    src: u19,
+    alt: "A diverse group of adults of different ages standing together and smiling",
+    altPt: "Um grupo diverso de adultos de idades diferentes juntos, sorrindo",
   },
   "BEGINNER-U20": {
-    src: travel,
-    alt: "Two people talking at a bus stop on a sunny day",
-    altPt: "Duas pessoas conversando em um ponto de ônibus em um dia ensolarado",
+    src: u20,
+    alt: "The same street in four seasons: blossom, summer sun, autumn leaves and snow",
+    altPt: "A mesma rua nas quatro estações: flores, sol de verão, folhas de outono e neve",
   },
   "BEGINNER-U21": {
-    src: general,
-    alt: "A mosaic of everyday places and people from daily life",
-    altPt: "Um mosaico de lugares e pessoas do dia a dia",
+    src: u21,
+    alt: "A group of adults sitting in a circle having a friendly conversation",
+    altPt: "Um grupo de adultos sentados em círculo conversando de forma descontraída",
   },
 };
