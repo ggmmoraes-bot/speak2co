@@ -1622,1841 +1622,654 @@ export const BEGINNER_UNITS_4_10: CourseUnit[] = [
     },
   },
   {
-    "code": "BEGINNER-U09",
-    "number": 9,
-    "title": "Unit 9 — City Places — Question words",
-    "titlePt": "Unidade 9 — Lugares da Cidade — Perguntas",
-    "cefr": "A1",
-    "objective": {
-      "en": "To teach city places and question words (what, where, when, who, why, how) + object pronouns (me, him, her, us, them) in a contextualized way.",
-      "pt": "Ensinar lugares da cidade e palavras interrogativas (what, where, when, who, why, how) + pronomes objeto (me, him, her, us, them) de forma contextualizada."
+    code: "BEGINNER-U09",
+    number: 9,
+    title: "Do You...? — Ask real questions",
+    titlePt: "Você...? — Fazer perguntas de verdade",
+    cefr: "A1",
+    objective: {
+      en: "Ask and answer present simple questions with do and does, using short answers.",
+      pt: "Fazer e responder perguntas no present simple com do e does, usando respostas curtas.",
     },
-    "communicationGoal": {
-      "en": "Students will be able to use 'thanking' and city places vocabulary to communicate in real situations.",
-      "pt": "O aluno será capaz de usar 'agradecimentos' e o vocabulário de lugares da cidade para se comunicar em situações reais."
+    communicationGoal: {
+      en: "You can run a short interview with five questions and react to the answers.",
+      pt: "Você consegue conduzir uma mini-entrevista com cinco perguntas e reagir às respostas.",
     },
-    "prerequisites": {
-      "en": "Structure: Adverbs of frequency (always, usually, often, sometimes, never) and their position in the sentence. Vocabulary: Free Time.",
-      "pt": "Estrutura: Advérbios de frequência (always, usually, often, sometimes, never) e sua posição na frase. Vocabulário: Tempo Livre."
+    prerequisites: {
+      en: "Unit 8 — the negative with don't and doesn't.",
+      pt: "Unidade 8 — a negativa com don't e doesn't.",
     },
-    "newContent": {
-      "en": "Grammar: Question words (what, where, when, who, why, how) + object pronouns (me, him, her, us, them). Vocabulary: City Places (10 lexical items). Expressions: Thanking.",
-      "pt": "Gramática: Palavras interrogativas (what, where, when, who, why, how) + pronomes objeto (me, him, her, us, them). Vocabulário: Lugares da Cidade (10 itens lexicais). Expressões: Agradecimentos."
+    newContent: {
+      en: "Grammar: questions with do / does and short answers. Vocabulary: free-time verbs. Expressions: reacting in a conversation.",
+      pt: "Gramática: perguntas com do / does e respostas curtas. Vocabulário: verbos de tempo livre. Expressões: reagir na conversa.",
     },
-    "reviewContent": {
-      "en": "Spiral review: There is / There are for existence, singular and plural (Unit 4).",
-      "pt": "Revisão em espiral: There is / There are para existência, singular e plural (Unidade 4)."
+    reviewContent: {
+      en: "Review from Units 5–8: affirmative, third person -s and negative forms.",
+      pt: "Revisão das Unidades 5–8: afirmativa, -s da terceira pessoa e formas negativas.",
     },
-    "discover": {
-      "id": "BEGINNER-U09-DISCOVER",
-      "warmUp": {
-        "prompt": {
-          "en": "Look at the pictures. What places do you know in your city?",
-          "pt": "Olhe as imagens. Quais lugares você conhece na sua cidade?"
+    discover: {
+      id: "BEGINNER-U09-DISCOVER",
+      warmUp: {
+        prompt: {
+          en: "Look at the picture. Two people are talking. What questions do you think they ask?",
+          pt: "Observe a imagem. Duas pessoas conversam. Que perguntas você acha que elas fazem?",
         },
-        "phrases": [
-          {
-            "en": "This is a bank.",
-            "pt": "Este é um banco."
-          },
-          {
-            "en": "This is a park.",
-            "pt": "Este é um parque."
-          },
-          {
-            "en": "Do you go to the supermarket?",
-            "pt": "Você vai ao supermercado?"
-          }
-        ]
-      },
-      "context": {
-        "situation": {
-          "en": "Sarah is new in the city. She needs help finding some places.",
-          "pt": "Sarah é nova na cidade. Ela precisa de ajuda para encontrar alguns lugares."
-        },
-        "dialogue": [
-          {
-            "who": "Sarah",
-            "en": "Excuse me, where is the nearest supermarket?",
-            "pt": "Com licença, onde é o supermercado mais próximo?"
-          },
-          {
-            "who": "Man",
-            "en": "It's on Main Street, next to the bank.",
-            "pt": "É na Rua Principal, ao lado do banco."
-          },
-          {
-            "who": "Sarah",
-            "en": "Thank you very much!",
-            "pt": "Muito obrigada!"
-          },
-          {
-            "who": "Man",
-            "en": "You're welcome.",
-            "pt": "De nada."
-          },
-          {
-            "who": "Sarah",
-            "en": "And is there a pharmacy near here?",
-            "pt": "E tem uma farmácia por perto?"
-          },
-          {
-            "who": "Woman",
-            "en": "Yes, there is one across from the hospital. I can show you.",
-            "pt": "Sim, tem uma em frente ao hospital. Eu posso te mostrar."
-          },
-          {
-            "who": "Sarah",
-            "en": "Oh, that's very kind of you. Thanks for your help!",
-            "pt": "Ah, que gentileza. Obrigada pela sua ajuda!"
-          },
-          {
-            "who": "Woman",
-            "en": "No problem! Let's go.",
-            "pt": "Sem problemas! Vamos lá."
-          }
-        ]
-      },
-      "vocabulary": [
-        {
-          "term": "bank",
-          "pt": "banco",
-          "ipa": "/bæŋk/",
-          "definition": "A financial institution where people can save or borrow money.",
-          "example": "I need to go to the bank to withdraw money.",
-          "examplePt": "Eu preciso ir ao banco para sacar dinheiro."
-        },
-        {
-          "term": "hospital",
-          "pt": "hospital",
-          "ipa": "/ˈhɒspɪtl/",
-          "definition": "A place where sick or injured people are given medical care.",
-          "example": "The hospital is open 24 hours a day.",
-          "examplePt": "O hospital está aberto 24 horas por dia."
-        },
-        {
-          "term": "supermarket",
-          "pt": "supermercado",
-          "ipa": "/ˈsuːpərmɑːrkɪt/",
-          "definition": "A large self-service store selling food and household goods.",
-          "example": "Let's buy groceries at the supermarket.",
-          "examplePt": "Vamos comprar mantimentos no supermercado."
-        },
-        {
-          "term": "pharmacy",
-          "pt": "farmácia",
-          "ipa": "/ˈfɑːrməsi/",
-          "definition": "A store where medicines are prepared and sold.",
-          "example": "I need to go to the pharmacy for some medicine.",
-          "examplePt": "Preciso ir à farmácia para comprar remédios."
-        },
-        {
-          "term": "restaurant",
-          "pt": "restaurante",
-          "ipa": "/ˈrɛstərɑːnt/",
-          "definition": "A place where people go to eat meals that are cooked and served there.",
-          "example": "This restaurant has delicious Italian food.",
-          "examplePt": "Este restaurante tem comida italiana deliciosa."
-        },
-        {
-          "term": "park",
-          "pt": "parque",
-          "ipa": "/pɑːrk/",
-          "definition": "A large public green area in a city or town, used for recreation.",
-          "example": "We often walk in the park on weekends.",
-          "examplePt": "Nós frequentemente caminhamos no parque nos fins de semana."
-        },
-        {
-          "term": "museum",
-          "pt": "museu",
-          "ipa": "/mjuːˈziːəm/",
-          "definition": "A building where collections of historical, scientific, or artistic objects are exhibited.",
-          "example": "The art museum is very popular.",
-          "examplePt": "O museu de arte é muito popular."
-        },
-        {
-          "term": "station",
-          "pt": "estação",
-          "ipa": "/ˈsteɪʃn/",
-          "definition": "A place where trains or buses stop for passengers.",
-          "example": "The train station is downtown.",
-          "examplePt": "A estação de trem fica no centro da cidade."
-        },
-        {
-          "term": "airport",
-          "pt": "aeroporto",
-          "ipa": "/ˈɛərˌpɔːrt/",
-          "definition": "A place where aircraft regularly take off and land.",
-          "example": "My flight departs from the airport at 8 AM.",
-          "examplePt": "Meu voo parte do aeroporto às 8h."
-        },
-        {
-          "term": "library",
-          "pt": "biblioteca",
-          "ipa": "/ˈlaɪbrəri/",
-          "definition": "A building or room containing collections of books, periodicals, and sometimes films and recorded music for use or borrowing by the public.",
-          "example": "I borrow books from the library every month.",
-          "examplePt": "Eu pego livros emprestados da biblioteca todo mês."
-        }
-      ],
-      "expressions": [
-        {
-          "en": "Thank you very much.",
-          "pt": "Muito obrigado(a)."
-        },
-        {
-          "en": "Thanks for your help.",
-          "pt": "Obrigado(a) pela sua ajuda."
-        },
-        {
-          "en": "I really appreciate it.",
-          "pt": "Eu realmente agradeço."
-        },
-        {
-          "en": "You're welcome.",
-          "pt": "De nada."
-        },
-        {
-          "en": "No problem.",
-          "pt": "Sem problemas."
-        }
-      ],
-      "grammar": [
-        {
-          "title": {
-            "en": "Question Words",
-            "pt": "Palavras Interrogativas"
-          },
-          "examples": [
-            {
-              "en": "Where do you live?",
-              "pt": "Onde você mora?"
-            },
-            {
-              "en": "What is your name?",
-              "pt": "Qual é o seu nome?"
-            },
-            {
-              "en": "When is the meeting?",
-              "pt": "Quando é a reunião?"
-            },
-            {
-              "en": "Who is she?",
-              "pt": "Quem é ela?"
-            },
-            {
-              "en": "Why are you here?",
-              "pt": "Por que você está aqui?"
-            },
-            {
-              "en": "How do you go to work?",
-              "pt": "Como você vai para o trabalho?"
-            }
-          ],
-          "rule": {
-            "en": "We use question words (What, Where, When, Who, Why, How) to ask for specific information. They usually come at the beginning of a question.",
-            "pt": "Usamos palavras interrogativas (What, Where, When, Who, Why, How) para pedir informações específicas. Elas geralmente vêm no início de uma pergunta."
-          },
-          "mistakes": [
-            {
-              "en": "Incorrect order: You live where? (Correct: Where do you live?)",
-              "pt": "Ordem incorreta: You live where? (Correto: Where do you live?)"
-            },
-            {
-              "en": "Forgetting 'do'/'does' with simple present: Where you work? (Correct: Where do you work?)",
-              "pt": "Esquecer 'do'/'does' com o simple present: Where you work? (Correto: Where do you work?)"
-            }
-          ]
-        },
-        {
-          "title": {
-            "en": "Object Pronouns",
-            "pt": "Pronomes Objeto"
-          },
-          "examples": [
-            {
-              "en": "Can you help me, please?",
-              "pt": "Você pode me ajudar, por favor?"
-            },
-            {
-              "en": "I saw him at the park.",
-              "pt": "Eu o vi no parque."
-            },
-            {
-              "en": "She called us yesterday.",
-              "pt": "Ela nos ligou ontem."
-            }
-          ],
-          "rule": {
-            "en": "Object pronouns (me, him, her, us, them, it, you) are used after a verb or a preposition. They replace object nouns.",
-            "pt": "Os pronomes objeto (me, him, her, us, them, it, you) são usados após um verbo ou uma preposição. Eles substituem substantivos objetos."
-          },
-          "mistakes": [
-            {
-              "en": "Using subject pronoun instead of object pronoun: Can you help I? (Correct: Can you help me?)",
-              "pt": "Usar pronome sujeito em vez de pronome objeto: Can you help I? (Correto: Can you help me?)"
-            },
-            {
-              "en": "Incorrect pronoun for gender/number: I saw she. (Correct: I saw her.)",
-              "pt": "Pronome incorreto para gênero/número: I saw she. (Correto: I saw her.)"
-            }
-          ]
-        }
-      ],
-      "controlledPractice": [
-        {
-          "id": "b9d-cp-1",
-          "prompt": {
-            "en": "Choose the correct question word: _______ is your favorite place in the city?",
-            "pt": "Escolha a palavra interrogativa correta: _______ é o seu lugar favorito na cidade?"
-          },
-          "options": [
-            "Who",
-            "What",
-            "When",
-            "Where"
-          ],
-          "answer": "What",
-          "explanation": {
-            "en": "'What' is used to ask about things or actions.",
-            "pt": "'What' é usado para perguntar sobre coisas ou ações."
-          }
-        },
-        {
-          "id": "b9d-cp-2",
-          "prompt": {
-            "en": "Choose the correct object pronoun: Can you give the map to _______ (he)?",
-            "pt": "Escolha o pronome objeto correto: Você pode dar o mapa para _______ (ele)?"
-          },
-          "options": [
-            "he",
-            "his",
-            "him",
-            "her"
-          ],
-          "answer": "him",
-          "explanation": {
-            "en": "'Him' is the object pronoun for 'he'.",
-            "pt": "'Him' é o pronome objeto para 'he'."
-          }
-        },
-        {
-          "id": "b9d-cp-3",
-          "prompt": {
-            "en": "Complete the sentence: _______ do you go to the supermarket? (Reason)",
-            "pt": "Complete a frase: _______ você vai ao supermercado? (Motivo)"
-          },
-          "options": [
-            "When",
-            "Where",
-            "Why",
-            "How"
-          ],
-          "answer": "Why",
-          "explanation": {
-            "en": "'Why' asks for a reason.",
-            "pt": "'Why' pergunta por um motivo."
-          }
-        },
-        {
-          "id": "b9d-cp-4",
-          "prompt": {
-            "en": "Rewrite the sentence with an object pronoun: 'I like Sarah.'",
-            "pt": "Reescreva a frase com um pronome objeto: 'Eu gosto da Sarah.'"
-          },
-          "options": [
-            "I like she.",
-            "I like her.",
-            "I like you.",
-            "I like them."
-          ],
-          "answer": "I like her.",
-          "explanation": {
-            "en": "'Her' is the object pronoun for a female person.",
-            "pt": "'Her' é o pronome objeto para uma pessoa feminina."
-          }
-        }
-      ],
-      "input": {
-        "kind": "reading",
-        "title": {
-          "en": "A Busy Day in the City",
-          "pt": "Um Dia Agitado na Cidade"
-        },
-        "lines": [
-          {
-            "en": "My name is Leo. Today is a busy day for me. First, I go to the bank to deposit some money. The bank is near my house.",
-            "pt": "Meu nome é Leo. Hoje é um dia agitado para mim. Primeiro, eu vou ao banco depositar dinheiro. O banco é perto da minha casa."
-          },
-          {
-            "en": "Then, I go to the supermarket to buy food. I need bread and milk. After the supermarket, I walk to the park. I meet my friend, Ana, there.",
-            "pt": "Depois, eu vou ao supermercado comprar comida. Eu preciso de pão e leite. Depois do supermercado, eu caminho até o parque. Eu encontro minha amiga, Ana, lá."
-          },
-          {
-            "en": "We talk for an hour. She tells me about a new museum. It sounds interesting! Later, I go to the pharmacy for a small headache. It's across from the train station.",
-            "pt": "Nós conversamos por uma hora. Ela me fala sobre um novo museu. Parece interessante! Mais tarde, eu vou à farmácia para uma pequena dor de cabeça. É em frente à estação de trem."
-          },
-          {
-            "en": "Finally, I plan to have dinner at a new restaurant with my family. They usually like new places. What a day!",
-            "pt": "Finalmente, eu planejo jantar em um novo restaurante com minha família. Eles geralmente gostam de lugares novos. Que dia!"
-          }
+        phrases: [
+          { en: "Do you live near here?", pt: "Você mora perto daqui?" },
+          { en: "Does he work with you?", pt: "Ele trabalha com você?" },
+          { en: "Yes, I do. No, he doesn't.", pt: "Sim. Não, ele não." },
         ],
-        "questions": [
-          {
-            "id": "b9d-in-1",
-            "prompt": {
-              "en": "Where does Leo go first?",
-              "pt": "Onde Leo vai primeiro?"
-            },
-            "options": [
-              "To the supermarket.",
-              "To the bank.",
-              "To the park.",
-              "To the pharmacy."
-            ],
-            "answer": "To the bank.",
-            "explanation": {
-              "en": "The text says: 'First, I go to the bank'.",
-              "pt": "O texto diz: 'Primeiro, eu vou ao banco'."
-            }
-          },
-          {
-            "id": "b9d-in-2",
-            "prompt": {
-              "en": "Who does Leo meet at the park?",
-              "pt": "Quem Leo encontra no parque?"
-            },
-            "options": [
-              "His family.",
-              "Ana.",
-              "His boss.",
-              "Nobody."
-            ],
-            "answer": "Ana.",
-            "explanation": {
-              "en": "The text says: 'I meet my friend, Ana, there.'",
-              "pt": "O texto diz: 'Eu encontro minha amiga, Ana, lá.'"
-            }
-          },
-          {
-            "id": "b9d-in-3",
-            "prompt": {
-              "en": "What does Leo need from the pharmacy?",
-              "pt": "O que Leo precisa da farmácia?"
-            },
-            "options": [
-              "Food.",
-              "Books.",
-              "Medicine for a headache.",
-              "Money."
-            ],
-            "answer": "Medicine for a headache.",
-            "explanation": {
-              "en": "The text says: 'I go to the pharmacy for a small headache.'",
-              "pt": "O texto diz: 'Eu vou à farmácia para uma pequena dor de cabeça.'"
-            }
-          }
-        ]
       },
-      "quickCheck": [
+      context: {
+        situation: {
+          en: "Ivan interviews Bruno for the coworking newsletter.",
+          pt: "Ivan entrevista Bruno para o boletim do coworking.",
+        },
+        dialogue: [
+          { who: "Ivan", en: "Do you work here every day?", pt: "Você trabalha aqui todo dia?" },
+          { who: "Bruno", en: "No, I don't. I work here three days a week.", pt: "Não. Eu trabalho aqui três dias por semana." },
+          { who: "Ivan", en: "Do you like the morning shift?", pt: "Você gosta do turno da manhã?" },
+          { who: "Bruno", en: "Yes, I do. It is quiet and I study before work.", pt: "Sim, gosto. É tranquilo e eu estudo antes do trabalho." },
+          { who: "Ivan", en: "Really? Me too. And does Helena study with you?", pt: "Sério? Eu também. E a Helena estuda com você?" },
+          { who: "Bruno", en: "No, she doesn't. She studies at home in the evening.", pt: "Não, ela não. Ela estuda em casa à noite." },
+        ],
+      },
+      vocabulary: [
+        { term: "interview", pt: "entrevista", ipa: "/ˈɪntərvjuː/", definition: "A conversation with questions and answers.", example: "We have a short interview today.", examplePt: "Temos uma entrevista curta hoje." },
+        { term: "question", pt: "pergunta", ipa: "/ˈkwestʃən/", definition: "Something you ask to get information.", example: "Can I ask a question?", examplePt: "Posso fazer uma pergunta?" },
+        { term: "answer", pt: "resposta", ipa: "/ˈænsər/", definition: "What you say after a question.", example: "Your answer is clear.", examplePt: "Sua resposta está clara." },
+        { term: "enjoy", pt: "curtir, apreciar", ipa: "/ɪnˈdʒɔɪ/", definition: "To like doing something.", example: "Do you enjoy your job?", examplePt: "Você gosta do seu trabalho?" },
+        { term: "practice", pt: "praticar", ipa: "/ˈpræktɪs/", definition: "To do something again to get better.", example: "I practice English every day.", examplePt: "Eu pratico inglês todo dia." },
+        { term: "listen to", pt: "ouvir", ipa: "/ˈlɪsn tuː/", definition: "To pay attention to a sound.", example: "She listens to podcasts.", examplePt: "Ela ouve podcasts." },
+        { term: "play", pt: "jogar, tocar", ipa: "/pleɪ/", definition: "To take part in a game or play music.", example: "Do you play football?", examplePt: "Você joga futebol?" },
+        { term: "hobby", pt: "hobby, passatempo", ipa: "/ˈhɑːbi/", definition: "An activity you do for pleasure.", example: "Cooking is my hobby.", examplePt: "Cozinhar é meu hobby." },
+        { term: "often", pt: "com frequência", ipa: "/ˈɔːfn/", definition: "Many times.", example: "Do you often travel?", examplePt: "Você viaja com frequência?" },
+        { term: "really", pt: "sério, mesmo", ipa: "/ˈriːəli/", definition: "Used to show interest or surprise.", example: "Really? That is great.", examplePt: "Sério? Que ótimo." },
+      ],
+      expressions: [
+        { en: "Do you like it here?", pt: "Você gosta daqui?" },
+        { en: "Yes, I do. / No, I don't.", pt: "Sim. / Não." },
+        { en: "Really? Me too.", pt: "Sério? Eu também." },
+        { en: "Can I ask you a question?", pt: "Posso te fazer uma pergunta?" },
+      ],
+      grammar: [
         {
-          "id": "b9d-qc-1",
-          "prompt": {
-            "en": "Which word asks about a place?",
-            "pt": "Qual palavra pergunta sobre um lugar?"
-          },
-          "options": [
-            "What",
-            "Who",
-            "Where",
-            "When"
+          title: { en: "Questions with do and does", pt: "Perguntas com do e does" },
+          examples: [
+            { en: "Do you work here every day?", pt: "Você trabalha aqui todo dia?" },
+            { en: "Does she study in the evening?", pt: "Ela estuda à noite?" },
+            { en: "Where do they live?", pt: "Onde eles moram?" },
           ],
-          "answer": "Where",
-          "explanation": {
-            "en": "'Where' asks about location.",
-            "pt": "'Where' pergunta sobre localização."
-          }
+          rule: {
+            en: "Start with Do (I, you, we, they) or Does (he, she, it) + subject + base verb. With a question word, put it first: Where do you work?",
+            pt: "Comece com Do (I, you, we, they) ou Does (he, she, it) + sujeito + verbo base. Com palavra interrogativa, ela vem primeiro: Where do you work?",
+          },
+          mistakes: [
+            { en: "Does she works here? → Does she work here?", pt: "Depois de does, o verbo fica na forma base." },
+            { en: "You like coffee? → Do you like coffee?", pt: "A pergunta precisa de do." },
+          ],
         },
         {
-          "id": "b9d-qc-2",
-          "prompt": {
-            "en": "Choose the correct object pronoun: My friends visit ______ often. (I)",
-            "pt": "Escolha o pronome objeto correto: Meus amigos visitam ______ frequentemente. (Eu)"
-          },
-          "options": [
-            "I",
-            "me",
-            "my",
-            "them"
+          title: { en: "Short answers", pt: "Respostas curtas" },
+          examples: [
+            { en: "Yes, I do.", pt: "Sim." },
+            { en: "No, she doesn't.", pt: "Não, ela não." },
+            { en: "Yes, they do.", pt: "Sim, eles sim." },
           ],
-          "answer": "me",
-          "explanation": {
-            "en": "'Me' is the object pronoun for 'I'.",
-            "pt": "'Me' é o pronome objeto para 'I'."
-          }
+          rule: {
+            en: "Answer with Yes / No + subject + do, does, don't or doesn't. Do not repeat the main verb: Yes, I do (not Yes, I do work).",
+            pt: "Responda com Yes / No + sujeito + do, does, don't ou doesn't. Não repita o verbo principal: Yes, I do (e não Yes, I do work).",
+          },
+          mistakes: [
+            { en: "Yes, I like. → Yes, I do.", pt: "A resposta curta usa o auxiliar." },
+            { en: "No, she don't. → No, she doesn't.", pt: "Terceira pessoa usa doesn't." },
+          ],
+        },
+      ],
+      controlledPractice: [
+        {
+          id: "b9d-cp1",
+          prompt: { en: "Complete: ___ you live near here?", pt: "Complete: ___ you live near here?" },
+          options: ["Do", "Does", "Are"],
+          answer: "Do",
+          explanation: { en: "you + Do.", pt: "you + Do." },
         },
         {
-          "id": "b9d-qc-3",
-          "prompt": {
-            "en": "Which of these is a place to see art?",
-            "pt": "Qual destes é um lugar para ver arte?"
-          },
-          "options": [
-            "Supermarket",
-            "Hospital",
-            "Museum",
-            "Bank"
-          ],
-          "answer": "Museum",
-          "explanation": {
-            "en": "A museum often displays art.",
-            "pt": "Um museu frequentemente exibe arte."
-          }
+          id: "b9d-cp2",
+          prompt: { en: "Complete: ___ she work on Mondays?", pt: "Complete: ___ she work on Mondays?" },
+          options: ["Do", "Does", "Is"],
+          answer: "Does",
+          explanation: { en: "she + Does.", pt: "she + Does." },
         },
         {
-          "id": "b9d-qc-4",
-          "prompt": {
-            "en": "Complete the thanking expression: Thanks for ______ help.",
-            "pt": "Complete a expressão de agradecimento: Obrigado pela ______ ajuda."
+          id: "b9d-cp3",
+          prompt: { en: "Choose the correct question.", pt: "Escolha a pergunta correta." },
+          options: ["Does he studies English?", "Does he study English?", "Do he study English?"],
+          answer: "Does he study English?",
+          explanation: { en: "Does + subject + base verb.", pt: "Does + sujeito + verbo base." },
+        },
+        {
+          id: "b9d-cp4",
+          prompt: { en: "Answer: Do you practice every day?", pt: "Responda: Do you practice every day?" },
+          options: ["Yes, I do.", "Yes, I practice do.", "Yes, I am."],
+          answer: "Yes, I do.",
+          explanation: { en: "Short answer with do.", pt: "Resposta curta com do." },
+        },
+        {
+          id: "b9d-cp5",
+          prompt: { en: "Complete: Where ___ they work?", pt: "Complete: Where ___ they work?" },
+          options: ["does", "do", "are"],
+          answer: "do",
+          explanation: { en: "they + do.", pt: "they + do." },
+        },
+      ],
+      input: {
+        kind: "listening",
+        title: { en: "Listening — A short interview", pt: "Listening — Uma entrevista curta" },
+        lines: [
+          { en: "Do you listen to podcasts in English? Yes, I do, usually on the bus.", pt: "Você ouve podcasts em inglês? Sim, geralmente no ônibus." },
+          { en: "Does your brother play football? No, he doesn't. He plays the guitar.", pt: "Seu irmão joga futebol? Não. Ele toca violão." },
+          { en: "Where do you practice speaking? I practice at the coworking with my colleagues.", pt: "Onde você pratica conversação? Eu pratico no coworking com meus colegas." },
+        ],
+        questions: [
+          {
+            id: "b9d-r1",
+            prompt: { en: "When does the person listen to podcasts?", pt: "Quando a pessoa ouve podcasts?" },
+            options: ["on the bus", "at night", "at the gym"],
+            answer: "on the bus",
+            explanation: { en: "usually on the bus.", pt: "usually on the bus." },
           },
-          "options": [
-            "me",
-            "you",
-            "your",
-            "us"
-          ],
-          "answer": "your",
-          "explanation": {
-            "en": "'Your' is a possessive adjective.",
-            "pt": "'Your' é um adjetivo possessivo."
-          }
-        }
-      ]
+          {
+            id: "b9d-r2",
+            prompt: { en: "What does the brother do?", pt: "O que o irmão faz?" },
+            options: ["he plays the guitar", "he plays football", "he studies English"],
+            answer: "he plays the guitar",
+            explanation: { en: "He plays the guitar.", pt: "He plays the guitar." },
+          },
+          {
+            id: "b9d-r3",
+            prompt: { en: "Where does the person practice speaking?", pt: "Onde a pessoa pratica conversação?" },
+            options: ["at the coworking", "at home", "at school"],
+            answer: "at the coworking",
+            explanation: { en: "I practice at the coworking.", pt: "I practice at the coworking." },
+          },
+        ],
+      },
+      quickCheck: [
+        {
+          id: "b9d-qc1",
+          prompt: { en: "Choose the correct short answer to 'Does she cook?'", pt: "Escolha a resposta curta correta para 'Does she cook?'" },
+          options: ["Yes, she does.", "Yes, she do.", "Yes, she cooks does."],
+          answer: "Yes, she does.",
+          explanation: { en: "she + does.", pt: "she + does." },
+        },
+        {
+          id: "b9d-qc2",
+          prompt: { en: "Complete: ___ they travel in July?", pt: "Complete: ___ they travel in July?" },
+          options: ["Does", "Do", "Are"],
+          answer: "Do",
+          explanation: { en: "they + Do.", pt: "they + Do." },
+        },
+        {
+          id: "b9d-qc3",
+          prompt: { en: "Which reaction shows interest?", pt: "Qual reação mostra interesse?" },
+          options: ["Really? Me too.", "I don't know.", "Nothing."],
+          answer: "Really? Me too.",
+          explanation: { en: "It keeps the conversation going.", pt: "Mantém a conversa viva." },
+        },
+        {
+          id: "b9d-qc4",
+          prompt: { en: "A hobby is:", pt: "Um hobby é:" },
+          options: ["an activity you do for pleasure", "a place of work", "a kind of question"],
+          answer: "an activity you do for pleasure",
+          explanation: { en: "hobby = free-time activity.", pt: "hobby = atividade de lazer." },
+        },
+      ],
     },
-    "communicate": {
-      "id": "BEGINNER-U09-COMMUNICATE",
-      "review": [
-        {
-          "en": "Remember the new city places: bank, hospital, supermarket, pharmacy, restaurant, park, museum, station, airport, library.",
-          "pt": "Lembre-se dos novos lugares da cidade: banco, hospital, supermercado, farmácia, restaurante, parque, museu, estação, aeroporto, biblioteca."
-        },
-        {
-          "en": "Recall question words: What, Where, When, Who, Why, How.",
-          "pt": "Recorde as palavras interrogativas: What, Where, When, Who, Why, How."
-        },
-        {
-          "en": "Remember object pronouns: me, him, her, us, them, it, you.",
-          "pt": "Lembre-se dos pronomes objeto: me, him, her, us, them, it, you."
-        },
-        {
-          "en": "Practice thanking expressions: Thank you very much, Thanks for your help, I really appreciate it.",
-          "pt": "Pratique as expressões de agradecimento: Thank you very much, Thanks for your help, I really appreciate it."
-        }
+    communicate: {
+      id: "BEGINNER-U09-COMMUNICATE",
+      review: [
+        { en: "Do + I / you / we / they + base verb?", pt: "Do + I / you / we / they + verbo base?" },
+        { en: "Does + he / she / it + base verb?", pt: "Does + he / she / it + verbo base?" },
+        { en: "Short answers: Yes, I do. / No, she doesn't.", pt: "Respostas curtas: Yes, I do. / No, she doesn't." },
       ],
-      "activities": [
+      activities: [
         {
-          "id": "b9c-act-1",
-          "title": {
-            "en": "Describe Your City",
-            "pt": "Descreva Sua Cidade"
+          id: "b9c-a1",
+          title: { en: "Five questions", pt: "Cinco perguntas" },
+          instruction: {
+            en: "Ask five questions about work, study and free time, using do and does.",
+            pt: "Faça cinco perguntas sobre trabalho, estudo e tempo livre, usando do e does.",
           },
-          "instruction": {
-            "en": "Describe three places in your city. Say what they are and where they are located. Use 'There is' / 'There are' to describe existence.",
-            "pt": "Descreva três lugares na sua cidade. Diga o que são e onde estão localizados. Use 'There is' / 'There are' para descrever existência."
-          },
-          "phrases": [
-            {
-              "en": "There is a big park near my house.",
-              "pt": "Há um grande parque perto da minha casa."
-            },
-            {
-              "en": "There are many restaurants downtown.",
-              "pt": "Há muitos restaurantes no centro."
-            },
-            {
-              "en": "The museum is on the main street.",
-              "pt": "O museu fica na rua principal."
-            }
+          phrases: [
+            { en: "Do you work near your home?", pt: "Você trabalha perto de casa?" },
+            { en: "Does your best friend study English too?", pt: "Seu melhor amigo também estuda inglês?" },
           ],
-          "check": [
+          check: [
             {
-              "id": "b9c-act1-1",
-              "prompt": {
-                "en": "Which sentence describes a city place?",
-                "pt": "Qual frase descreve um lugar da cidade?"
-              },
-              "options": [
-                "I like to sleep.",
-                "There is a small library in my neighborhood.",
-                "He plays soccer.",
-                "She eats an apple."
-              ],
-              "answer": "There is a small library in my neighborhood.",
-              "explanation": {
-                "en": "A library is a city place.",
-                "pt": "Uma biblioteca é um lugar da cidade."
-              }
+              id: "b9c-a1q1",
+              prompt: { en: "Complete: ___ your sister live here?", pt: "Complete: ___ your sister live here?" },
+              options: ["Do", "Does", "Is"],
+              answer: "Does",
+              explanation: { en: "Third person + Does.", pt: "Terceira pessoa + Does." },
             },
-            {
-              "id": "b9c-act1-2",
-              "prompt": {
-                "en": "Which option uses 'there is' correctly for a singular place?",
-                "pt": "Qual opção usa 'there is' corretamente para um lugar singular?"
-              },
-              "options": [
-                "There are a hospital.",
-                "There is a bank.",
-                "There is two parks.",
-                "There are pharmacy."
-              ],
-              "answer": "There is a bank.",
-              "explanation": {
-                "en": "'There is' is used for singular nouns.",
-                "pt": "'There is' é usado para substantivos singulares."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b9c-act-2",
-          "title": {
-            "en": "Give Your Opinion on City Services",
-            "pt": "Dê Sua Opinião Sobre Serviços da Cidade"
+          id: "b9c-a2",
+          title: { en: "Short answers only", pt: "Só respostas curtas" },
+          instruction: {
+            en: "Answer questions with short answers and then add one piece of information.",
+            pt: "Responda às perguntas com respostas curtas e depois acrescente uma informação.",
           },
-          "instruction": {
-            "en": "Talk about one city place you like and one you don't like. Say why.",
-            "pt": "Fale sobre um lugar da cidade que você gosta e um que você não gosta. Diga o porquê."
-          },
-          "phrases": [
-            {
-              "en": "I like the park because it's green and quiet.",
-              "pt": "Eu gosto do parque porque é verde e tranquilo."
-            },
-            {
-              "en": "I don't like the hospital. It's often busy.",
-              "pt": "Eu não gosto do hospital. Geralmente é movimentado."
-            },
-            {
-              "en": "The restaurant 'Bella Pizza' is excellent. I recommend it to you.",
-              "pt": "O restaurante 'Bella Pizza' é excelente. Eu o recomendo a você."
-            }
+          phrases: [
+            { en: "Yes, I do. I practice every morning.", pt: "Sim. Eu pratico toda manhã." },
+            { en: "No, he doesn't. He works at the weekend.", pt: "Não, ele não. Ele trabalha no fim de semana." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b9c-act2-1",
-              "prompt": {
-                "en": "Which sentence expresses a positive opinion?",
-                "pt": "Qual frase expressa uma opinião positiva?"
-              },
-              "options": [
-                "The supermarket is very bad.",
-                "I hate the station.",
-                "The library is my favorite place.",
-                "The bank is too far."
-              ],
-              "answer": "The library is my favorite place.",
-              "explanation": {
-                "en": "'My favorite place' shows a positive opinion.",
-                "pt": "'Meu lugar favorito' mostra uma opinião positiva."
-              }
+              id: "b9c-a2q1",
+              prompt: { en: "Answer: Does he drive to work?", pt: "Responda: Does he drive to work?" },
+              options: ["No, he don't.", "No, he doesn't.", "No, he not."],
+              answer: "No, he doesn't.",
+              explanation: { en: "he + doesn't.", pt: "he + doesn't." },
             },
-            {
-              "id": "b9c-act2-2",
-              "prompt": {
-                "en": "Choose the best object pronoun: This park is beautiful. I visit ______ every week.",
-                "pt": "Escolha o melhor pronome objeto: Este parque é lindo. Eu visito ______ toda semana."
-              },
-              "options": [
-                "it",
-                "them",
-                "him",
-                "her"
-              ],
-              "answer": "it",
-              "explanation": {
-                "en": "'It' is used for singular non-human nouns like 'park'.",
-                "pt": "'It' é usado para substantivos singulares não humanos como 'parque'."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b9c-act-3",
-          "title": {
-            "en": "Writing Tasks: Directions",
-            "pt": "Tarefas de Escrita: Direções"
+          id: "b9c-a3",
+          title: { en: "React and continue", pt: "Reaja e continue" },
+          instruction: {
+            en: "Listen to an answer, react with Really? or Me too, and ask one more question.",
+            pt: "Ouça uma resposta, reaja com Really? ou Me too e faça mais uma pergunta.",
           },
-          "instruction": {
-            "en": "Write 3 sentences telling someone how to get to a city place from a starting point (e.g., 'from here').",
-            "pt": "Escreva 3 frases dizendo a alguém como chegar a um lugar da cidade a partir de um ponto de partida (ex: 'daqui')."
-          },
-          "phrases": [
-            {
-              "en": "From here, go straight. The supermarket is on the left.",
-              "pt": "Daqui, vá reto. O supermercado fica à esquerda."
-            },
-            {
-              "en": "Turn right at the hospital. The park is behind it.",
-              "pt": "Vire à direita no hospital. O parque fica atrás dele."
-            },
-            {
-              "en": "The museum is far from us. Take a bus.",
-              "pt": "O museu está longe de nós. Pegue um ônibus."
-            }
+          phrases: [
+            { en: "Really? Do you listen to podcasts too?", pt: "Sério? Você também ouve podcasts?" },
+            { en: "Me too. Where do you practice?", pt: "Eu também. Onde você pratica?" },
           ],
-          "check": [
+          check: [
             {
-              "id": "b9c-act3-1",
-              "prompt": {
-                "en": "Which sentence gives a direction to a place?",
-                "pt": "Qual frase dá uma direção para um lugar?"
-              },
-              "options": [
-                "I like pizza.",
-                "The bank is next to the pharmacy.",
-                "She reads a book.",
-                "He is happy today."
-              ],
-              "answer": "The bank is next to the pharmacy.",
-              "explanation": {
-                "en": "This sentence describes a location relative to another, which is part of giving directions.",
-                "pt": "Esta frase descreve uma localização relativa a outra, o que faz parte de dar direções."
-              }
+              id: "b9c-a3q1",
+              prompt: { en: "Choose the natural follow-up question.", pt: "Escolha a pergunta de continuidade natural." },
+              options: ["Where do you study?", "Where you study?", "Where does you study?"],
+              answer: "Where do you study?",
+              explanation: { en: "Question word + do + you + base verb.", pt: "Palavra interrogativa + do + you + verbo base." },
             },
-            {
-              "id": "b9c-act3-2",
-              "prompt": {
-                "en": "Choose the correct object pronoun: This is a gift for _______ (you).",
-                "pt": "Escolha o pronome objeto correto: Este é um presente para _______ (você)."
-              },
-              "options": [
-                "you",
-                "your",
-                "yours",
-                "yourself"
-              ],
-              "answer": "you",
-              "explanation": {
-                "en": "'You' is the object pronoun for 'you'.",
-                "pt": "'You' é o pronome objeto para 'you'."
-              }
-            }
-          ]
+          ],
         },
-        {
-          "id": "b9c-act-4",
-          "title": {
-            "en": "Reading Comprehension: Tourist Information",
-            "pt": "Compreensão de Leitura: Informações Turísticas"
-          },
-          "instruction": {
-            "en": "Read the short text about a city and answer the questions.",
-            "pt": "Leia o texto curto sobre uma cidade e responda às perguntas."
-          },
-          "phrases": [
-            {
-              "en": "Welcome to River City! Our city has a beautiful park, 'Green Park,' perfect for families. There is also a famous 'History Museum' open from 9 AM to 5 PM. If you need medicine, find a pharmacy on Central Avenue. Hungry? Many restaurants are near the river.",
-              "pt": "Bem-vindo à River City! Nossa cidade tem um lindo parque, 'Green Park', perfeito para famílias. Há também um famoso 'Museu de História' aberto das 9h às 17h. Se você precisar de remédios, encontre uma farmácia na Avenida Central. Com fome? Muitos restaurantes ficam perto do rio."
-            }
-          ],
-          "check": [
-            {
-              "id": "b9c-act4-1",
-              "prompt": {
-                "en": "What is the name of the park?",
-                "pt": "Qual é o nome do parque?"
-              },
-              "options": [
-                "Central Park",
-                "River Park",
-                "Green Park",
-                "City Park"
-              ],
-              "answer": "Green Park",
-              "explanation": {
-                "en": "The text mentions 'Green Park'.",
-                "pt": "O texto menciona 'Green Park'."
-              }
-            },
-            {
-              "id": "b9c-act4-2",
-              "prompt": {
-                "en": "Where can you find a pharmacy?",
-                "pt": "Onde você pode encontrar uma farmácia?"
-              },
-              "options": [
-                "Near the river.",
-                "On Central Avenue.",
-                "Next to the museum.",
-                "Inside the park."
-              ],
-              "answer": "On Central Avenue.",
-              "explanation": {
-                "en": "The text says: 'find a pharmacy on Central Avenue'.",
-                "pt": "O texto diz: 'encontre uma farmácia na Avenida Central'."
-              }
-            }
-          ]
-        },
-        {
-          "id": "b9c-act-5",
-          "title": {
-            "en": "Answer the Questions: Daily Routines",
-            "pt": "Responda às Perguntas: Rotinas Diárias"
-          },
-          "instruction": {
-            "en": "Answer the questions about your daily routine and city places you visit.",
-            "pt": "Responda às perguntas sobre sua rotina diária e os lugares da cidade que você visita."
-          },
-          "phrases": [
-            {
-              "en": "Where do you usually go on Saturdays?",
-              "pt": "Onde você geralmente vai aos sábados?"
-            },
-            {
-              "en": "When do you go to the supermarket?",
-              "pt": "Quando você vai ao supermercado?"
-            },
-            {
-              "en": "Who do you go to the park with?",
-              "pt": "Com quem você vai ao parque?"
-            }
-          ],
-          "check": [
-            {
-              "id": "b9c-act5-1",
-              "prompt": {
-                "en": "Which question asks about a time?",
-                "pt": "Qual pergunta pergunta sobre um horário?"
-              },
-              "options": [
-                "Where is the bank?",
-                "Who is your friend?",
-                "When do you study?",
-                "What is your job?"
-              ],
-              "answer": "When do you study?",
-              "explanation": {
-                "en": "'When' asks about time.",
-                "pt": "'When' pergunta sobre tempo."
-              }
-            },
-            {
-              "id": "b9c-act5-2",
-              "prompt": {
-                "en": "Which of these is NOT a city place?",
-                "pt": "Qual destes NÃO é um lugar da cidade?"
-              },
-              "options": [
-                "Airport",
-                "Pharmacy",
-                "Bedroom",
-                "Restaurant"
-              ],
-              "answer": "Bedroom",
-              "explanation": {
-                "en": "A bedroom is a room in a house, not a public city place.",
-                "pt": "Um quarto é um cômodo de uma casa, não um lugar público da cidade."
-              }
-            }
-          ]
-        }
       ],
-      "challenge": {
-        "id": "b9c-challenge-1",
-        "title": {
-          "en": "Help a Tourist",
-          "pt": "Ajude um Turista"
+      challenge: {
+        id: "b9c-challenge",
+        title: { en: "Communication Challenge — Mini interview", pt: "Desafio de comunicação — Mini-entrevista" },
+        instruction: {
+          en: "Run a five-question interview: ask, listen, react and ask again. Use do, does and short answers.",
+          pt: "Conduza uma entrevista de cinco perguntas: pergunte, ouça, reaja e pergunte de novo. Use do, does e respostas curtas.",
         },
-        "instruction": {
-          "en": "Imagine a tourist asks you for directions to two places in your city and asks about opening hours. Respond and thank them for asking.",
-          "pt": "Imagine que um turista lhe pede direções para dois lugares na sua cidade e pergunta sobre horários de funcionamento. Responda e agradeça por perguntar."
-        },
-        "phrases": [
-          {
-            "en": "Excuse me, where is the museum?",
-            "pt": "Com licença, onde é o museu?"
-          },
-          {
-            "en": "What time does the library open?",
-            "pt": "Que horas a biblioteca abre?"
-          },
-          {
-            "en": "Can you show me the way to the park?",
-            "pt": "Você pode me mostrar o caminho para o parque?"
-          },
-          {
-            "en": "Thank you very much for your help!",
-            "pt": "Muito obrigado(a) pela sua ajuda!"
-          }
+        phrases: [
+          { en: "Do you work or study in the morning?", pt: "Você trabalha ou estuda de manhã?" },
+          { en: "Does your family live in the same city?", pt: "Sua família mora na mesma cidade?" },
+          { en: "Really? What do you do at the weekend?", pt: "Sério? O que você faz no fim de semana?" },
+          { en: "No, I don't. I practice English at home.", pt: "Não. Eu pratico inglês em casa." },
         ],
-        "check": [
+        check: [
           {
-            "id": "b9c-ch-1",
-            "prompt": {
-              "en": "A tourist asks: 'Where is the nearest hospital?' How do you reply using an object pronoun?",
-              "pt": "Um turista pergunta: 'Onde é o hospital mais próximo?' Como você responde usando um pronome objeto?"
-            },
-            "options": [
-              "I can show you.",
-              "I can show your.",
-              "I can show to you.",
-              "I can show yours."
-            ],
-            "answer": "I can show you.",
-            "explanation": {
-              "en": "'You' is the correct object pronoun to refer to the tourist.",
-              "pt": "'You' é o pronome objeto correto para se referir ao turista."
-            }
+            id: "b9c-ch1",
+            prompt: { en: "Which question has NO mistake?", pt: "Qual pergunta NÃO tem erro?" },
+            options: ["Does she likes music?", "Do she like music?", "Does she like music?"],
+            answer: "Does she like music?",
+            explanation: { en: "Does + subject + base verb.", pt: "Does + sujeito + verbo base." },
           },
           {
-            "id": "b9c-ch-2",
-            "prompt": {
-              "en": "A tourist thanks you: 'Thanks for your help!' What is a good response?",
-              "pt": "Um turista te agradece: 'Obrigado(a) pela sua ajuda!' Qual é uma boa resposta?"
-            },
-            "options": [
-              "Yes, help.",
-              "I appreciate.",
-              "You're welcome.",
-              "Go away."
-            ],
-            "answer": "You're welcome.",
-            "explanation": {
-              "en": "'You're welcome' is a common and polite response to 'Thank you'.",
-              "pt": "'You're welcome' é uma resposta comum e educada para 'Obrigado(a)'."
-            }
-          }
-        ]
+            id: "b9c-ch2",
+            prompt: { en: "Complete the short answer: 'Do they travel a lot?' — 'Yes, ___.'", pt: "Complete a resposta curta: 'Do they travel a lot?' — 'Yes, ___.'" },
+            options: ["they do", "they does", "they travel"],
+            answer: "they do",
+            explanation: { en: "they + do.", pt: "they + do." },
+          },
+        ],
       },
-      "lessonReview": {
-        "summary": {
-          "en": "In this unit, we learned new city places like bank, hospital, and museum. We also studied question words (what, where, when, who, why, how) and object pronouns (me, him, her, us, them). Finally, we practiced thanking expressions to communicate effectively.",
-          "pt": "Nesta unidade, aprendemos novos lugares da cidade como banco, hospital e museu. Também estudamos palavras interrogativas (what, where, when, who, why, how) e pronomes objeto (me, him, her, us, them). Finalmente, praticamos expressões de agradecimento para nos comunicarmos de forma eficaz."
+      lessonReview: {
+        summary: {
+          en: "You asked and answered present simple questions and kept a short conversation going.",
+          pt: "Você fez e respondeu perguntas no present simple e manteve uma conversa curta.",
         },
-        "canDo": [
-          {
-            "en": "I can name 10 city places.",
-            "pt": "Consigo nomear 10 lugares da cidade."
-          },
-          {
-            "en": "I can ask questions using 'what,' 'where,' and 'when.'",
-            "pt": "Consigo fazer perguntas usando 'what,' 'where,' e 'when.'"
-          },
-          {
-            "en": "I can use object pronouns like 'me' and 'him.'",
-            "pt": "Consigo usar pronomes objeto como 'me' e 'him.'"
-          },
-          {
-            "en": "I can thank people and respond politely.",
-            "pt": "Consigo agradecer às pessoas e responder educadamente."
-          }
+        canDo: [
+          { en: "I can ask questions with do and does.", pt: "Consigo fazer perguntas com do e does." },
+          { en: "I can give short answers.", pt: "Consigo dar respostas curtas." },
+          { en: "I can react and ask one more question.", pt: "Consigo reagir e fazer mais uma pergunta." },
         ],
-        "next": {
-          "en": "In the next unit, we will learn about family members and possessive adjectives.",
-          "pt": "Na próxima unidade, aprenderemos sobre membros da família e adjetivos possessivos."
-        }
-      }
-    }
+        next: {
+          en: "Next: say how often you do things, with always, usually and never.",
+          pt: "Próximo: dizer com que frequência você faz as coisas, com always, usually e never.",
+        },
+      },
+    },
   },
   {
-    "code": "BEGINNER-U10",
-    "number": 10,
-    "title": "Activities Now – Prepositions of time and place",
-    "titlePt": "Atividades Agora – Preposições de tempo e lugar",
-    "cefr": "A1",
-    "objective": {
-      "en": "To teach 'activities now' and 'prepositions of time and place' (at, in, on, next to, between) in a contextualized way.",
-      "pt": "Ensinar 'atividades agora' e 'preposições de tempo e lugar' (at, in, on, next to, between) de forma contextualizada."
+    code: "BEGINNER-U10",
+    number: 10,
+    title: "How Often? — Talk about frequency",
+    titlePt: "Com que frequência? — Falar de frequência",
+    cefr: "A1",
+    objective: {
+      en: "Use frequency adverbs and frequency expressions to say how often you and other people do things.",
+      pt: "Usar advérbios e expressões de frequência para dizer com que frequência você e outras pessoas fazem as coisas.",
     },
-    "communicationGoal": {
-      "en": "Students will be able to use 'directions' and 'activities now' vocabulary to communicate in real-life situations.",
-      "pt": "O aluno será capaz de usar 'directions' e o vocabulário de 'activities now' para se comunicar em situações reais."
+    communicationGoal: {
+      en: "You can compare four habits: yours and someone else's.",
+      pt: "Você consegue comparar quatro hábitos: os seus e os de outra pessoa.",
     },
-    "prerequisites": {
-      "en": "Structure: Question words (what, where, when, who, why, how) + object pronouns (me, him, her, us, them). Vocabulary: City Places.",
-      "pt": "Estrutura: Question words (what, where, when, who, why, how) + object pronouns (me, him, her, us, them). Vocabulário: City Places."
+    prerequisites: {
+      en: "Unit 9 — questions with do and does.",
+      pt: "Unidade 9 — perguntas com do e does.",
     },
-    "newContent": {
-      "en": "Grammar: Prepositions of time and place (at, in, on, next to, between). Vocabulary: Activities Now (10 lexical items). Expressions: Directions.",
-      "pt": "Grammar: Preposições de tempo e lugar (at, in, on, next to, between). Vocabulário: Activities Now (10 itens lexicais). Expressões: Directions."
+    newContent: {
+      en: "Grammar: position of frequency adverbs. Vocabulary: frequency expressions. Expressions: How often do you...?",
+      pt: "Gramática: posição dos advérbios de frequência. Vocabulário: expressões de frequência. Expressões: How often do you...?",
     },
-    "reviewContent": {
-      "en": "Spiral review: Have / Has for possession and family relationships (Unit 5).",
-      "pt": "Revisão em espiral: Have / Has para posse e relações familiares (Unidade 5)."
+    reviewContent: {
+      en: "Spaced review of Unit 7: days, times and prepositions at / on / in.",
+      pt: "Revisão espaçada da Unidade 7: dias, horários e preposições at / on / in.",
     },
-    "discover": {
-      "id": "BEGINNER-U10-DISCOVER",
-      "warmUp": {
-        "prompt": {
-          "en": "Look at the pictures. What are these people doing now? Do you do these things?",
-          "pt": "Observe as imagens. O que estas pessoas estão fazendo agora? Você faz estas coisas?"
+    discover: {
+      id: "BEGINNER-U10-DISCOVER",
+      warmUp: {
+        prompt: {
+          en: "Look at the picture. It is a weekly plan. How often does this person do each activity?",
+          pt: "Observe a imagem. É um plano semanal. Com que frequência essa pessoa faz cada atividade?",
         },
-        "phrases": [
-          {
-            "en": "She is cooking.",
-            "pt": "Ela está cozinhando."
-          },
-          {
-            "en": "He is studying.",
-            "pt": "Ele está estudando."
-          },
-          {
-            "en": "They are shopping.",
-            "pt": "Eles estão fazendo compras."
-          }
-        ]
-      },
-      "context": {
-        "situation": {
-          "en": "Anna is new in town. She is asking for directions to find some places.",
-          "pt": "Anna é nova na cidade. Ela está pedindo direções para encontrar alguns lugares."
-        },
-        "dialogue": [
-          {
-            "who": "Anna",
-            "en": "Excuse me, where is the bank?",
-            "pt": "Com licença, onde fica o banco?"
-          },
-          {
-            "who": "Man",
-            "en": "The bank? It's on Main Street, next to the pharmacy.",
-            "pt": "O banco? É na Main Street, ao lado da farmácia."
-          },
-          {
-            "who": "Anna",
-            "en": "And the library? Is it far?",
-            "pt": "E a biblioteca? É longe?"
-          },
-          {
-            "who": "Man",
-            "en": "No, it's not far. Go straight, then turn left at the corner. It's between the café and the bookstore.",
-            "pt": "Não, não é longe. Vá reto, depois vire à esquerda na esquina. É entre o café e a livraria."
-          },
-          {
-            "who": "Anna",
-            "en": "Thank you!",
-            "pt": "Obrigado!"
-          },
-          {
-            "who": "Man",
-            "en": "You're welcome. Have a good day!",
-            "pt": "De nada. Tenha um bom dia!"
-          }
-        ]
-      },
-      "vocabulary": [
-        {
-          "term": "cooking",
-          "pt": "cozinhando",
-          "ipa": "/ˈkʊkɪŋ/",
-          "definition": "preparing food for eating, usually by heating it.",
-          "example": "My mom is cooking dinner now.",
-          "examplePt": "Minha mãe está cozinhando o jantar agora."
-        },
-        {
-          "term": "studying",
-          "pt": "estudando",
-          "ipa": "/ˈstʌdiɪŋ/",
-          "definition": "devoting time and attention to acquiring knowledge, especially from books.",
-          "example": "I am studying English at the library.",
-          "examplePt": "Estou estudando inglês na biblioteca."
-        },
-        {
-          "term": "working",
-          "pt": "trabalhando",
-          "ipa": "/ˈwɜːrkɪŋ/",
-          "definition": "doing a job or task, especially for money.",
-          "example": "He is working from home today.",
-          "examplePt": "Ele está trabalhando de casa hoje."
-        },
-        {
-          "term": "traveling",
-          "pt": "viajando",
-          "ipa": "/ˈtrævəlɪŋ/",
-          "definition": "going from one place to another, especially over a long distance.",
-          "example": "They are traveling to Brazil next month.",
-          "examplePt": "Eles estão viajando para o Brasil no próximo mês."
-        },
-        {
-          "term": "shopping",
-          "pt": "fazendo compras",
-          "ipa": "/ˈʃɒpɪŋ/",
-          "definition": "the activity of buying things from shops.",
-          "example": "We are shopping for new clothes.",
-          "examplePt": "Estamos comprando roupas novas."
-        },
-        {
-          "term": "exercising",
-          "pt": "se exercitando",
-          "ipa": "/ˈɛksərsaɪzɪŋ/",
-          "definition": "engaging in physical activity to improve health or fitness.",
-          "example": "She is exercising at the gym every morning.",
-          "examplePt": "Ela está se exercitando na academia todas as manhãs."
-        },
-        {
-          "term": "cleaning",
-          "pt": "limpando",
-          "ipa": "/ˈkliːnɪŋ/",
-          "definition": "making something free of dirt, marks, or stains.",
-          "example": "He is cleaning his room right now.",
-          "examplePt": "Ele está limpando o quarto dele agora."
-        },
-        {
-          "term": "driving",
-          "pt": "dirigindo",
-          "ipa": "/ˈdraɪvɪŋ/",
-          "definition": "operating and controlling a car or other vehicle.",
-          "example": "My father is driving to work.",
-          "examplePt": "Meu pai está dirigindo para o trabalho."
-        },
-        {
-          "term": "waiting",
-          "pt": "esperando",
-          "ipa": "/ˈweɪtɪŋ/",
-          "definition": "staying in one place until an expected event happens or someone arrives.",
-          "example": "We are waiting for the bus.",
-          "examplePt": "Estamos esperando o ônibus."
-        },
-        {
-          "term": "meeting",
-          "pt": "encontrando/reunindo",
-          "ipa": "/ˈmiːtɪŋ/",
-          "definition": "coming together with another person or people, or having a formal discussion.",
-          "example": "They are meeting at the cafe.",
-          "examplePt": "Eles estão se encontrando no café."
-        }
-      ],
-      "expressions": [
-        {
-          "en": "Excuse me, where is the bank?",
-          "pt": "Com licença, onde fica o banco?"
-        },
-        {
-          "en": "Turn left at the corner.",
-          "pt": "Vire à esquerda na esquina."
-        },
-        {
-          "en": "It's next to the pharmacy.",
-          "pt": "É ao lado da farmácia."
-        },
-        {
-          "en": "Go straight.",
-          "pt": "Vá reto."
-        },
-        {
-          "en": "Turn right.",
-          "pt": "Vire à direita."
-        },
-        {
-          "en": "It's on Main Street.",
-          "pt": "É na Main Street."
-        }
-      ],
-      "grammar": [
-        {
-          "title": {
-            "en": "Prepositions of Place",
-            "pt": "Preposições de Lugar"
-          },
-          "examples": [
-            {
-              "en": "The bank is next to the pharmacy.",
-              "pt": "O banco é ao lado da farmácia."
-            },
-            {
-              "en": "The library is between the café and the bookstore.",
-              "pt": "A biblioteca é entre o café e a livraria."
-            },
-            {
-              "en": "The book is on the table.",
-              "pt": "O livro está em cima da mesa."
-            }
-          ],
-          "rule": {
-            "en": "We use prepositions like 'at', 'in', 'on', 'next to', 'between' to describe where things are. 'At' for specific points/addresses, 'in' for enclosed spaces/cities/countries, 'on' for surfaces/streets/floors. 'Next to' means beside. 'Between' means in the middle of two things.",
-            "pt": "Usamos preposições como 'at', 'in', 'on', 'next to', 'between' para descrever onde as coisas estão. 'At' para pontos/endereços específicos, 'in' para espaços fechados/cidades/países, 'on' para superfícies/ruas/andares. 'Next to' significa ao lado. 'Between' significa no meio de duas coisas."
-          },
-          "mistakes": [
-            {
-              "en": "Incorrect: The keys are in the table. Correct: The keys are on the table.",
-              "pt": "Incorreto: The keys are in the table. Correto: The keys are on the table."
-            },
-            {
-              "en": "Incorrect: I live on São Paulo. Correct: I live in São Paulo.",
-              "pt": "Incorreto: I live on São Paulo. Correto: I live in São Paulo."
-            }
-          ]
-        },
-        {
-          "title": {
-            "en": "Prepositions of Time",
-            "pt": "Preposições de Tempo"
-          },
-          "examples": [
-            {
-              "en": "I have class on Mondays at 6 p.m.",
-              "pt": "Eu tenho aula às segundas-feiras às 18h."
-            },
-            {
-              "en": "The store closes at 9 o'clock.",
-              "pt": "A loja fecha às 9 horas."
-            },
-            {
-              "en": "My birthday is in August.",
-              "pt": "Meu aniversário é em agosto."
-            }
-          ],
-          "rule": {
-            "en": "We use 'at' for specific times (at 3 p.m.). We use 'on' for days of the week (on Monday) and specific dates (on July 4th). We use 'in' for months (in August), seasons (in summer), and years (in 2023).",
-            "pt": "Usamos 'at' para horários específicos (at 3 p.m.). Usamos 'on' para dias da semana (on Monday) e datas específicas (on July 4th). Usamos 'in' para meses (in August), estações (in summer) e anos (in 2023)."
-          },
-          "mistakes": [
-            {
-              "en": "Incorrect: I wake up on 7 a.m. Correct: I wake up at 7 a.m.",
-              "pt": "Incorreto: I wake up on 7 a.m. Correto: I wake up at 7 a.m."
-            },
-            {
-              "en": "Incorrect: We meet in Friday. Correct: We meet on Friday.",
-              "pt": "Incorreto: We meet in Friday. Correto: We meet on Friday."
-            }
-          ]
-        }
-      ],
-      "controlledPractice": [
-        {
-          "id": "b10d-cp1",
-          "prompt": {
-            "en": "Choose the correct preposition: The book is _____ the shelf.",
-            "pt": "Escolha a preposição correta: O livro está _____ a prateleira."
-          },
-          "options": [
-            "at",
-            "in",
-            "on"
-          ],
-          "answer": "on",
-          "explanation": {
-            "en": "'On' is used for surfaces.",
-            "pt": "'On' é usado para superfícies."
-          }
-        },
-        {
-          "id": "b10d-cp2",
-          "prompt": {
-            "en": "Complete the sentence: My house is _____ the park and the school.",
-            "pt": "Complete a frase: Minha casa é _____ o parque e a escola."
-          },
-          "options": [
-            "next to",
-            "in",
-            "between"
-          ],
-          "answer": "between",
-          "explanation": {
-            "en": "'Between' is used for two specific points.",
-            "pt": "'Between' é usado para dois pontos específicos."
-          }
-        },
-        {
-          "id": "b10d-cp3",
-          "prompt": {
-            "en": "Which sentence is correct? A: She is traveling on May. B: She is traveling in May.",
-            "pt": "Qual frase está correta? A: Ela está viajando on May. B: Ela está viajando in May."
-          },
-          "options": [
-            "A",
-            "B"
-          ],
-          "answer": "B",
-          "explanation": {
-            "en": "'In' is used for months.",
-            "pt": "'In' é usado para meses."
-          }
-        },
-        {
-          "id": "b10d-cp4",
-          "prompt": {
-            "en": "Fill in the blank: The meeting is _____ 3 p.m. _____ Tuesday.",
-            "pt": "Preencha a lacuna: A reunião é _____ 3 p.m. _____ terça-feira."
-          },
-          "options": [
-            "at / on",
-            "on / at",
-            "in / on"
-          ],
-          "answer": "at / on",
-          "explanation": {
-            "en": "'At' for specific time, 'on' for day of the week.",
-            "pt": "'At' para horário específico, 'on' para dia da semana."
-          }
-        }
-      ],
-      "input": {
-        "kind": "listening",
-        "title": {
-          "en": "Finding the Supermarket",
-          "pt": "Encontrando o Supermercado"
-        },
-        "lines": [
-          {
-            "en": "Excuse me, where is the supermarket?",
-            "pt": "Com licença, onde fica o supermercado?"
-          },
-          {
-            "en": "Go straight for two blocks. Then, turn right at the traffic light.",
-            "pt": "Vá reto por dois quarteirões. Depois, vire à direita no semáforo."
-          },
-          {
-            "en": "Right at the traffic light, okay.",
-            "pt": "À direita no semáforo, ok."
-          },
-          {
-            "en": "Yes. It's next to the bakery, on Green Street.",
-            "pt": "Sim. É ao lado da padaria, na Green Street."
-          },
-          {
-            "en": "Thank you! I am shopping for food now.",
-            "pt": "Obrigado! Estou comprando comida agora."
-          }
+        phrases: [
+          { en: "I always start the week with a plan.", pt: "Eu sempre começo a semana com um plano." },
+          { en: "She studies twice a week.", pt: "Ela estuda duas vezes por semana." },
+          { en: "We never work on Sunday.", pt: "Nós nunca trabalhamos no domingo." },
         ],
-        "questions": [
-          {
-            "id": "b10d-lq1",
-            "prompt": {
-              "en": "What is the person looking for?",
-              "pt": "O que a pessoa está procurando?"
-            },
-            "options": [
-              "A bank",
-              "A supermarket",
-              "A bakery"
-            ],
-            "answer": "A supermarket",
-            "explanation": {
-              "en": "The person asks, 'where is the supermarket?'",
-              "pt": "A pessoa pergunta, 'onde fica o supermercado?'"
-            }
-          },
-          {
-            "id": "b10d-lq2",
-            "prompt": {
-              "en": "What should the person do after two blocks?",
-              "pt": "O que a pessoa deve fazer depois de dois quarteirões?"
-            },
-            "options": [
-              "Turn left",
-              "Go straight",
-              "Turn right"
-            ],
-            "answer": "Turn right",
-            "explanation": {
-              "en": "The directions are 'turn right at the traffic light'.",
-              "pt": "As direções são 'vire à direita no semáforo'."
-            }
-          },
-          {
-            "id": "b10d-lq3",
-            "prompt": {
-              "en": "Where is the supermarket located?",
-              "pt": "Onde o supermercado está localizado?"
-            },
-            "options": [
-              "Next to the post office",
-              "Next to the bakery",
-              "Between the bakery and the bank"
-            ],
-            "answer": "Next to the bakery",
-            "explanation": {
-              "en": "It's next to the bakery.",
-              "pt": "É ao lado da padaria."
-            }
-          }
-        ]
       },
-      "quickCheck": [
+      context: {
+        situation: {
+          en: "Helena and Bruno compare their study habits after a busy week.",
+          pt: "Helena e Bruno comparam seus hábitos de estudo depois de uma semana corrida.",
+        },
+        dialogue: [
+          { who: "Helena", en: "How often do you practice speaking?", pt: "Com que frequência você pratica conversação?" },
+          { who: "Bruno", en: "Three times a week. I usually practice before work.", pt: "Três vezes por semana. Eu geralmente pratico antes do trabalho." },
+          { who: "Helena", en: "I always practice in the evening, but I sometimes skip Friday.", pt: "Eu sempre pratico à noite, mas às vezes pulo a sexta." },
+          { who: "Bruno", en: "Do you ever study at the weekend?", pt: "Você chega a estudar no fim de semana?" },
+          { who: "Helena", en: "Rarely. I hardly ever open the book on Sunday.", pt: "Raramente. Quase nunca abro o livro no domingo." },
+        ],
+      },
+      vocabulary: [
+        { term: "always", pt: "sempre", ipa: "/ˈɔːlweɪz/", definition: "Every time, one hundred per cent.", example: "I always drink water.", examplePt: "Eu sempre bebo água." },
+        { term: "usually", pt: "geralmente", ipa: "/ˈjuːʒuəli/", definition: "Most of the time.", example: "She usually walks to work.", examplePt: "Ela geralmente vai a pé para o trabalho." },
+        { term: "often", pt: "frequentemente", ipa: "/ˈɔːfn/", definition: "Many times, but not always.", example: "We often meet on Friday.", examplePt: "Nós nos encontramos com frequência na sexta." },
+        { term: "sometimes", pt: "às vezes", ipa: "/ˈsʌmtaɪmz/", definition: "On some occasions.", example: "He sometimes cooks dinner.", examplePt: "Ele às vezes faz o jantar." },
+        { term: "rarely", pt: "raramente", ipa: "/ˈrerli/", definition: "Almost never.", example: "They rarely travel in winter.", examplePt: "Eles raramente viajam no inverno." },
+        { term: "never", pt: "nunca", ipa: "/ˈnevər/", definition: "Not at any time.", example: "I never smoke.", examplePt: "Eu nunca fumo." },
+        { term: "once a week", pt: "uma vez por semana", ipa: "/wʌns ə wiːk/", definition: "One time in each week.", example: "She calls her mother once a week.", examplePt: "Ela liga para a mãe uma vez por semana." },
+        { term: "twice a month", pt: "duas vezes por mês", ipa: "/twaɪs ə mʌnθ/", definition: "Two times in each month.", example: "We meet twice a month.", examplePt: "Nós nos encontramos duas vezes por mês." },
+        { term: "every day", pt: "todo dia", ipa: "/ˈevri deɪ/", definition: "Each day with no exception.", example: "I practice every day.", examplePt: "Eu pratico todo dia." },
+        { term: "hardly ever", pt: "quase nunca", ipa: "/ˈhɑːrdli ˈevər/", definition: "Almost never.", example: "He hardly ever watches TV.", examplePt: "Ele quase nunca assiste TV." },
+      ],
+      expressions: [
+        { en: "How often do you study?", pt: "Com que frequência você estuda?" },
+        { en: "Three times a week.", pt: "Três vezes por semana." },
+        { en: "I usually do, but not today.", pt: "Eu geralmente faço, mas hoje não." },
+        { en: "Me too. / Me neither.", pt: "Eu também. / Eu também não." },
+      ],
+      grammar: [
         {
-          "id": "b10d-qc1",
-          "prompt": {
-            "en": "I am _____ now. (activity)",
-            "pt": "Eu estou _____ agora. (atividade)"
-          },
-          "options": [
-            "cooking",
-            "cook",
-            "to cook"
+          title: { en: "Where to put the frequency adverb", pt: "Onde colocar o advérbio de frequência" },
+          examples: [
+            { en: "I always practice in the morning.", pt: "Eu sempre pratico de manhã." },
+            { en: "She never works at the weekend.", pt: "Ela nunca trabalha no fim de semana." },
+            { en: "He is usually busy on Monday.", pt: "Ele geralmente está ocupado na segunda." },
           ],
-          "answer": "cooking",
-          "explanation": {
-            "en": "We use '-ing' for activities happening now.",
-            "pt": "Usamos '-ing' para atividades acontecendo agora."
-          }
+          rule: {
+            en: "Put always, usually, often, sometimes, rarely and never before the main verb, but after the verb to be: I never work / I am never late.",
+            pt: "Coloque always, usually, often, sometimes, rarely e never antes do verbo principal, mas depois do verbo to be: I never work / I am never late.",
+          },
+          mistakes: [
+            { en: "I practice always in the morning. → I always practice in the morning.", pt: "O advérbio vem antes do verbo principal." },
+            { en: "She never is late. → She is never late.", pt: "Com to be, o advérbio vem depois." },
+          ],
         },
         {
-          "id": "b10d-qc2",
-          "prompt": {
-            "en": "The keys are _____ the box.",
-            "pt": "As chaves estão _____ a caixa."
-          },
-          "options": [
-            "on",
-            "at",
-            "in"
+          title: { en: "How often? and frequency expressions", pt: "How often? e expressões de frequência" },
+          examples: [
+            { en: "How often do you travel?", pt: "Com que frequência você viaja?" },
+            { en: "Twice a year.", pt: "Duas vezes por ano." },
+            { en: "We meet three times a month.", pt: "Nós nos encontramos três vezes por mês." },
           ],
-          "answer": "in",
-          "explanation": {
-            "en": "'In' is used for enclosed spaces.",
-            "pt": "'In' é usado para espaços fechados."
-          }
+          rule: {
+            en: "Ask with How often + do / does + subject + base verb. Answer with once, twice or a number + times + a week / a month / a year. These expressions go at the end of the sentence.",
+            pt: "Pergunte com How often + do / does + sujeito + verbo base. Responda com once, twice ou um número + times + a week / a month / a year. Essas expressões vêm no fim da frase.",
+          },
+          mistakes: [
+            { en: "Two times a week I go. → I go twice a week.", pt: "Prefira twice e deixe a expressão no fim." },
+            { en: "How often you study? → How often do you study?", pt: "A pergunta precisa de do." },
+          ],
+        },
+      ],
+      controlledPractice: [
+        {
+          id: "b10d-cp1",
+          prompt: { en: "Choose the correct order.", pt: "Escolha a ordem correta." },
+          options: ["I always study at night.", "I study always at night.", "Always I study at night."],
+          answer: "I always study at night.",
+          explanation: { en: "Adverb before the main verb.", pt: "Advérbio antes do verbo principal." },
         },
         {
-          "id": "b10d-qc3",
-          "prompt": {
-            "en": "Turn _____ at the corner.",
-            "pt": "Vire _____ na esquina."
-          },
-          "options": [
-            "straight",
-            "left",
-            "front"
-          ],
-          "answer": "left",
-          "explanation": {
-            "en": "'Turn left' is a common direction.",
-            "pt": "'Turn left' é uma direção comum."
-          }
+          id: "b10d-cp2",
+          prompt: { en: "Choose the correct sentence with to be.", pt: "Escolha a frase correta com to be." },
+          options: ["He never is late.", "He is never late.", "He is late never."],
+          answer: "He is never late.",
+          explanation: { en: "After to be.", pt: "Depois do to be." },
         },
         {
-          "id": "b10d-qc4",
-          "prompt": {
-            "en": "What are you doing _____ the weekend?",
-            "pt": "O que você está fazendo _____ o fim de semana?"
+          id: "b10d-cp3",
+          prompt: { en: "Complete: How often ___ she practice?", pt: "Complete: How often ___ she practice?" },
+          options: ["do", "does", "is"],
+          answer: "does",
+          explanation: { en: "she + does.", pt: "she + does." },
+        },
+        {
+          id: "b10d-cp4",
+          prompt: { en: "Two times a week is:", pt: "Duas vezes por semana é:" },
+          options: ["once a week", "twice a week", "every day"],
+          answer: "twice a week",
+          explanation: { en: "twice = two times.", pt: "twice = duas vezes." },
+        },
+        {
+          id: "b10d-cp5",
+          prompt: { en: "Which adverb means 'almost never'?", pt: "Qual advérbio significa 'quase nunca'?" },
+          options: ["usually", "rarely", "often"],
+          answer: "rarely",
+          explanation: { en: "rarely = almost never.", pt: "rarely = quase nunca." },
+        },
+      ],
+      input: {
+        kind: "listening",
+        title: { en: "Listening — How often do they do it?", pt: "Listening — Com que frequência eles fazem?" },
+        lines: [
+          { en: "I always have breakfast at home, but I sometimes eat lunch at the office.", pt: "Eu sempre tomo café da manhã em casa, mas às vezes almoço no escritório." },
+          { en: "Helena practices speaking three times a week and she never studies on Sunday.", pt: "Helena pratica conversação três vezes por semana e nunca estuda no domingo." },
+          { en: "Bruno hardly ever watches TV, but he listens to podcasts every day.", pt: "Bruno quase nunca assiste TV, mas ouve podcasts todo dia." },
+        ],
+        questions: [
+          {
+            id: "b10d-r1",
+            prompt: { en: "How often does the first person eat lunch at the office?", pt: "Com que frequência a primeira pessoa almoça no escritório?" },
+            options: ["sometimes", "always", "never"],
+            answer: "sometimes",
+            explanation: { en: "I sometimes eat lunch at the office.", pt: "I sometimes eat lunch at the office." },
           },
-          "options": [
-            "at",
-            "on",
-            "in"
-          ],
-          "answer": "on",
-          "explanation": {
-            "en": "'On' is used with 'the weekend' in American English.",
-            "pt": "'On' é usado com 'the weekend' no inglês americano."
-          }
-        }
-      ]
+          {
+            id: "b10d-r2",
+            prompt: { en: "How often does Helena practice speaking?", pt: "Com que frequência Helena pratica conversação?" },
+            options: ["three times a week", "once a month", "every day"],
+            answer: "three times a week",
+            explanation: { en: "three times a week.", pt: "three times a week." },
+          },
+          {
+            id: "b10d-r3",
+            prompt: { en: "What does Bruno do every day?", pt: "O que Bruno faz todo dia?" },
+            options: ["he listens to podcasts", "he watches TV", "he studies at night"],
+            answer: "he listens to podcasts",
+            explanation: { en: "he listens to podcasts every day.", pt: "he listens to podcasts every day." },
+          },
+        ],
+      },
+      quickCheck: [
+        {
+          id: "b10d-qc1",
+          prompt: { en: "Choose the correct sentence.", pt: "Escolha a frase correta." },
+          options: ["She usually is tired.", "She is usually tired.", "Usually she is tired always."],
+          answer: "She is usually tired.",
+          explanation: { en: "After to be.", pt: "Depois do to be." },
+        },
+        {
+          id: "b10d-qc2",
+          prompt: { en: "Complete: We meet ___ a month.", pt: "Complete: We meet ___ a month." },
+          options: ["twice", "two", "second"],
+          answer: "twice",
+          explanation: { en: "twice a month.", pt: "twice a month." },
+        },
+        {
+          id: "b10d-qc3",
+          prompt: { en: "Which question asks about frequency?", pt: "Qual pergunta é sobre frequência?" },
+          options: ["How often do you travel?", "Where do you travel?", "When is your trip?"],
+          answer: "How often do you travel?",
+          explanation: { en: "How often asks about frequency.", pt: "How often pergunta a frequência." },
+        },
+        {
+          id: "b10d-qc4",
+          prompt: { en: "Order from more to less: always, never, sometimes.", pt: "Ordene de mais para menos: always, never, sometimes." },
+          options: ["always, sometimes, never", "never, always, sometimes", "sometimes, never, always"],
+          answer: "always, sometimes, never",
+          explanation: { en: "100% → 50% → 0%.", pt: "100% → 50% → 0%." },
+        },
+      ],
     },
-    "communicate": {
-      "id": "BEGINNER-U10-COMMUNICATE",
-      "review": [
-        {
-          "en": "Remember prepositions of time and place: at, in, on, next to, between.",
-          "pt": "Lembre-se das preposições de tempo e lugar: at, in, on, next to, between."
-        },
-        {
-          "en": "Remember vocabulary for 'activities now': cooking, studying, working, traveling, shopping, exercising, cleaning, driving, waiting, meeting.",
-          "pt": "Lembre-se do vocabulário para 'atividades agora': cooking, studying, working, traveling, shopping, exercising, cleaning, driving, waiting, meeting."
-        },
-        {
-          "en": "Practice asking and giving directions.",
-          "pt": "Pratique pedir e dar direções."
-        }
+    communicate: {
+      id: "BEGINNER-U10-COMMUNICATE",
+      review: [
+        { en: "Adverb before the main verb, after to be.", pt: "Advérbio antes do verbo principal, depois do to be." },
+        { en: "once / twice / three times a week.", pt: "once / twice / three times a week." },
+        { en: "Question: How often do you...?", pt: "Pergunta: How often do you...?" },
       ],
-      "activities": [
+      activities: [
         {
-          "id": "b10c-a1",
-          "title": {
-            "en": "Short Speaking Tasks: What are they doing?",
-            "pt": "Tarefas Curtas de Fala: O que eles estão fazendo?"
+          id: "b10c-a1",
+          title: { en: "My week in frequency", pt: "Minha semana em frequência" },
+          instruction: {
+            en: "Say six sentences about your week, using a different frequency adverb in each one.",
+            pt: "Diga seis frases sobre sua semana, usando um advérbio de frequência diferente em cada uma.",
           },
-          "instruction": {
-            "en": "Look at the pictures and describe what each person is doing now. Use the 'activities now' vocabulary.",
-            "pt": "Observe as imagens e descreva o que cada pessoa está fazendo agora. Use o vocabulário de 'activities now'."
-          },
-          "phrases": [
-            {
-              "en": "He is driving to work.",
-              "pt": "Ele está dirigindo para o trabalho."
-            },
-            {
-              "en": "She is cleaning the house.",
-              "pt": "Ela está limpando a casa."
-            },
-            {
-              "en": "They are exercising at the park.",
-              "pt": "Eles estão se exercitando no parque."
-            }
+          phrases: [
+            { en: "I always check my schedule on Monday.", pt: "Eu sempre confiro minha agenda na segunda." },
+            { en: "I rarely work after eight in the evening.", pt: "Eu raramente trabalho depois das oito da noite." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b10c-a1-c1",
-              "prompt": {
-                "en": "Describe the picture: A woman with a shopping bag.",
-                "pt": "Descreva a imagem: Uma mulher com uma sacola de compras."
-              },
-              "options": [
-                "She is cooking.",
-                "She is shopping.",
-                "She is studying."
-              ],
-              "answer": "She is shopping.",
-              "explanation": {
-                "en": "The picture shows someone shopping.",
-                "pt": "A imagem mostra alguém fazendo compras."
-              }
+              id: "b10c-a1q1",
+              prompt: { en: "Complete: I ___ study before breakfast.", pt: "Complete: I ___ study before breakfast." },
+              options: ["study never", "never study", "never am study"],
+              answer: "never study",
+              explanation: { en: "Adverb before the verb.", pt: "Advérbio antes do verbo." },
             },
-            {
-              "id": "b10c-a1-c2",
-              "prompt": {
-                "en": "Describe the picture: A man looking at a map.",
-                "pt": "Descreva a imagem: Um homem olhando para um mapa."
-              },
-              "options": [
-                "He is working.",
-                "He is traveling.",
-                "He is cooking."
-              ],
-              "answer": "He is traveling.",
-              "explanation": {
-                "en": "Looking at a map often indicates traveling.",
-                "pt": "Olhar um mapa muitas vezes indica viajando."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b10c-a2",
-          "title": {
-            "en": "Listening Tasks: Where is the place?",
-            "pt": "Tarefas de Escuta: Onde é o lugar?"
+          id: "b10c-a2",
+          title: { en: "How often do you...?", pt: "Com que frequência você...?" },
+          instruction: {
+            en: "Ask four How often questions and answer with a frequency expression.",
+            pt: "Faça quatro perguntas com How often e responda com uma expressão de frequência.",
           },
-          "instruction": {
-            "en": "Listen to the audio. A person is asking for directions. Identify the place they are looking for and its location.",
-            "pt": "Ouça o áudio. Uma pessoa está pedindo direções. Identifique o lugar que ela está procurando e sua localização."
-          },
-          "phrases": [
-            {
-              "en": "The park is between the school and the library.",
-              "pt": "O parque fica entre a escola e a biblioteca."
-            },
-            {
-              "en": "The cafe is on the corner, next to the bank.",
-              "pt": "O café fica na esquina, ao lado do banco."
-            },
-            {
-              "en": "The cinema is on Baker Street.",
-              "pt": "O cinema fica na Baker Street."
-            }
+          phrases: [
+            { en: "How often do you speak English at work?", pt: "Com que frequência você fala inglês no trabalho?" },
+            { en: "Twice a week, usually in meetings.", pt: "Duas vezes por semana, geralmente em reuniões." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b10c-a2-c1",
-              "prompt": {
-                "en": "The person is looking for the Post Office. Where is it?",
-                "pt": "A pessoa está procurando o Correio. Onde fica?"
-              },
-              "options": [
-                "On Main Street",
-                "Next to the cafe",
-                "Between the park and the bank"
-              ],
-              "answer": "Next to the cafe",
-              "explanation": {
-                "en": "The audio states it's 'next to the cafe'.",
-                "pt": "O áudio diz que é 'ao lado do café'."
-              }
+              id: "b10c-a2q1",
+              prompt: { en: "Complete: How often ___ he travel?", pt: "Complete: How often ___ he travel?" },
+              options: ["do", "does", "is"],
+              answer: "does",
+              explanation: { en: "he + does.", pt: "he + does." },
             },
-            {
-              "id": "b10c-a2-c2",
-              "prompt": {
-                "en": "The person asks for the gym. What street is it on?",
-                "pt": "A pessoa pergunta pela academia. Em qual rua fica?"
-              },
-              "options": [
-                "First Avenue",
-                "Oak Street",
-                "Green Street"
-              ],
-              "answer": "Oak Street",
-              "explanation": {
-                "en": "The audio specifies 'on Oak Street'.",
-                "pt": "O áudio especifica 'na Oak Street'."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b10c-a3",
-          "title": {
-            "en": "Real-life Communication Activity: Asking for Directions",
-            "pt": "Atividade de Comunicação Real: Pedindo Direções"
+          id: "b10c-a3",
+          title: { en: "Compare two routines", pt: "Compare duas rotinas" },
+          instruction: {
+            en: "Compare your habits with another person's habits, using but and frequency words.",
+            pt: "Compare seus hábitos com os de outra pessoa, usando but e palavras de frequência.",
           },
-          "instruction": {
-            "en": "Work with a partner. Role-play: One person asks for directions to a place (e.g., pharmacy, hospital, restaurant), and the other person gives directions using prepositions of place and expressions. Use a map if possible.",
-            "pt": "Trabalhe com um parceiro. Role-play: Uma pessoa pede direções para um lugar (ex: farmácia, hospital, restaurante), e a outra pessoa dá as direções usando preposições de lugar e expressões. Use um mapa se possível."
-          },
-          "phrases": [
-            {
-              "en": "Excuse me, where is the nearest hospital?",
-              "pt": "Com licença, onde fica o hospital mais próximo?"
-            },
-            {
-              "en": "Go straight for three blocks. Turn right.",
-              "pt": "Vá reto por três quarteirões. Vire à direita."
-            },
-            {
-              "en": "It's on the left, across from the police station.",
-              "pt": "É à esquerda, em frente à delegacia."
-            }
+          phrases: [
+            { en: "I always practice in the morning, but she usually practices at night.", pt: "Eu sempre pratico de manhã, mas ela geralmente pratica à noite." },
+            { en: "We both hardly ever study at the weekend.", pt: "Nós dois quase nunca estudamos no fim de semana." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b10c-a3-c1",
-              "prompt": {
-                "en": "You want to go to the park. What do you say?",
-                "pt": "Você quer ir ao parque. O que você diz?"
-              },
-              "options": [
-                "Where is the park?",
-                "The park is here.",
-                "I am at the park."
+              id: "b10c-a3q1",
+              prompt: { en: "Choose the correct comparison.", pt: "Escolha a comparação correta." },
+              options: [
+                "I often cook, but he never cooks.",
+                "I cook often, but he cooks never.",
+                "Often I cook, but never he cook.",
               ],
-              "answer": "Where is the park?",
-              "explanation": {
-                "en": "This is how you ask for a location.",
-                "pt": "É assim que você pergunta por uma localização."
-              }
+              answer: "I often cook, but he never cooks.",
+              explanation: { en: "Adverb before the verb, third person with -s.", pt: "Advérbio antes do verbo, terceira pessoa com -s." },
             },
-            {
-              "id": "b10c-a3-c2",
-              "prompt": {
-                "en": "Someone asks for the bank. It's across the street. What do you say?",
-                "pt": "Alguém pergunta pelo banco. Ele fica do outro lado da rua. O que você diz?"
-              },
-              "options": [
-                "It's between the hospital.",
-                "It's on the bank.",
-                "It's across the street."
-              ],
-              "answer": "It's across the street.",
-              "explanation": {
-                "en": "'Across the street' is a common direction.",
-                "pt": "'Across the street' é uma direção comum."
-              }
-            }
-          ]
+          ],
         },
-        {
-          "id": "b10c-a4",
-          "title": {
-            "en": "Make Questions: About daily activities",
-            "pt": "Faça Perguntas: Sobre atividades diárias"
-          },
-          "instruction": {
-            "en": "Look at the sentences. Transform them into questions asking what someone is doing now.",
-            "pt": "Observe as frases. Transforme-as em perguntas perguntando o que alguém está fazendo agora."
-          },
-          "phrases": [
-            {
-              "en": "She is cleaning.",
-              "pt": "Ela está limpando."
-            },
-            {
-              "en": "He is studying.",
-              "pt": "Ele está estudando."
-            },
-            {
-              "en": "They are shopping.",
-              "pt": "Eles estão fazendo compras."
-            }
-          ],
-          "check": [
-            {
-              "id": "b10c-a4-c1",
-              "prompt": {
-                "en": "Make a question: 'You are working.'",
-                "pt": "Faça uma pergunta: 'Você está trabalhando.'"
-              },
-              "options": [
-                "Are you working?",
-                "You are working?",
-                "Working you?"
-              ],
-              "answer": "Are you working?",
-              "explanation": {
-                "en": "The structure for 'is/are + subject + -ing' is for questions.",
-                "pt": "A estrutura 'is/are + sujeito + -ing' é para perguntas."
-              }
-            },
-            {
-              "id": "b10c-a4-c2",
-              "prompt": {
-                "en": "Make a question: 'He is driving.'",
-                "pt": "Faça uma pergunta: 'Ele está dirigindo.'"
-              },
-              "options": [
-                "Is he driving?",
-                "He is driving?",
-                "Driving he?"
-              ],
-              "answer": "Is he driving?",
-              "explanation": {
-                "en": "The structure for 'is/are + subject + -ing' is for questions.",
-                "pt": "A estrutura 'is/are + sujeito + -ing' é para perguntas."
-              }
-            }
-          ]
-        },
-        {
-          "id": "b10c-a5",
-          "title": {
-            "en": "Build Sentences: Using prepositions and activities",
-            "pt": "Construa Frases: Usando preposições e atividades"
-          },
-          "instruction": {
-            "en": "Combine the elements to build complete sentences using 'activities now' and prepositions of time/place.",
-            "pt": "Combine os elementos para construir frases completas usando 'activities now' e preposições de tempo/lugar."
-          },
-          "phrases": [
-            {
-              "en": "My sister / working / at / home",
-              "pt": "Minha irmã / trabalhando / em / casa"
-            },
-            {
-              "en": "We / meeting / on / Friday / at / the cafe",
-              "pt": "Nós / encontrando / na / sexta-feira / no / café"
-            },
-            {
-              "en": "The children / playing / in / the park / now",
-              "pt": "As crianças / brincando / no / parque / agora"
-            }
-          ],
-          "check": [
-            {
-              "id": "b10c-a5-c1",
-              "prompt": {
-                "en": "Build a sentence: 'I / studying / in / my room'",
-                "pt": "Construa uma frase: 'Eu / estudando / no / meu quarto'"
-              },
-              "options": [
-                "I am studying in my room.",
-                "I studying in my room.",
-                "Studying in my room I am."
-              ],
-              "answer": "I am studying in my room.",
-              "explanation": {
-                "en": "Remember 'am' with 'I' for present continuous.",
-                "pt": "Lembre-se de 'am' com 'I' para o presente contínuo."
-              }
-            },
-            {
-              "id": "b10c-a5-c2",
-              "prompt": {
-                "en": "Build a sentence: 'The restaurant / next to / the cinema'",
-                "pt": "Construa uma frase: 'O restaurante / ao lado / do cinema'"
-              },
-              "options": [
-                "The restaurant is next to the cinema.",
-                "The restaurant next to the cinema.",
-                "Next to the cinema the restaurant is."
-              ],
-              "answer": "The restaurant is next to the cinema.",
-              "explanation": {
-                "en": "Use 'is' to connect the subject and prepositional phrase.",
-                "pt": "Use 'is' para conectar o sujeito e a frase preposicional."
-              }
-            }
-          ]
-        }
       ],
-      "challenge": {
-        "id": "b10c-challenge",
-        "title": {
-          "en": "My Day in the City",
-          "pt": "Meu Dia na Cidade"
+      challenge: {
+        id: "b10c-challenge",
+        title: { en: "Communication Challenge — Four habits compared", pt: "Desafio de comunicação — Quatro hábitos comparados" },
+        instruction: {
+          en: "Compare four habits of yours with someone else's, using frequency adverbs and expressions.",
+          pt: "Compare quatro hábitos seus com os de outra pessoa, usando advérbios e expressões de frequência.",
         },
-        "instruction": {
-          "en": "Imagine you are spending a day in a new city. Describe your activities using 'activities now' vocabulary and tell where these activities are happening, using prepositions of place and directions. For example: 'I am shopping at the mall, which is next to the park. Then I am meeting my friend at the cafe on Elm Street.'",
-          "pt": "Imagine que você está passando um dia em uma nova cidade. Descreva suas atividades usando o vocabulário de 'activities now' e diga onde estas atividades estão acontecendo, usando preposições de lugar e direções. Por exemplo: 'Estou fazendo compras no shopping, que fica ao lado do parque. Depois, estou encontrando meu amigo no café na Elm Street.'"
-        },
-        "phrases": [
-          {
-            "en": "I am traveling to the museum now. It's on Central Avenue.",
-            "pt": "Estou viajando para o museu agora. Fica na Central Avenue."
-          },
-          {
-            "en": "After that, I am having lunch at the restaurant between the bank and the bookstore.",
-            "pt": "Depois disso, estou almoçando no restaurante entre o banco e a livraria."
-          },
-          {
-            "en": "In the evening, I am exercising at the gym next to the hotel.",
-            "pt": "À noite, estou me exercitando na academia ao lado do hotel."
-          }
+        phrases: [
+          { en: "I always wake up early, but my brother usually wakes up at nine.", pt: "Eu sempre acordo cedo, mas meu irmão geralmente acorda às nove." },
+          { en: "She studies twice a week and I study every day.", pt: "Ela estuda duas vezes por semana e eu estudo todo dia." },
+          { en: "We rarely travel in winter, but they often travel in July.", pt: "Nós raramente viajamos no inverno, mas eles viajam com frequência em julho." },
+          { en: "He hardly ever cooks, and I never order food at night.", pt: "Ele quase nunca cozinha, e eu nunca peço comida à noite." },
         ],
-        "check": [
+        check: [
           {
-            "id": "b10c-ch-c1",
-            "prompt": {
-              "en": "Imagine you are going to the post office. Where is it?",
-              "pt": "Imagine que você está indo ao correio. Onde fica?"
-            },
-            "options": [
-              "It's in the table.",
-              "It's on the table.",
-              "It's next to the library."
-            ],
-            "answer": "It's next to the library.",
-            "explanation": {
-              "en": "This is a plausible location for a post office.",
-              "pt": "Esta é uma localização plausível para um correio."
-            }
+            id: "b10c-ch1",
+            prompt: { en: "Which sentence has NO mistake?", pt: "Qual frase NÃO tem erro?" },
+            options: ["He never is at home.", "She always is busy.", "They are always on time."],
+            answer: "They are always on time.",
+            explanation: { en: "With to be, the adverb comes after.", pt: "Com to be, o advérbio vem depois." },
           },
           {
-            "id": "b10c-ch-c2",
-            "prompt": {
-              "en": "What are you doing at 8 p.m. at home?",
-              "pt": "O que você está fazendo às 20h em casa?"
-            },
-            "options": [
-              "I am cooking dinner.",
-              "I am cooking on dinner.",
-              "I am cooking in dinner."
-            ],
-            "answer": "I am cooking dinner.",
-            "explanation": {
-              "en": "You 'cook dinner', not 'on dinner' or 'in dinner'.",
-              "pt": "Você 'cook dinner', não 'on dinner' ou 'in dinner'."
-            }
-          }
-        ]
+            id: "b10c-ch2",
+            prompt: { en: "Answer: How often do you practice English?", pt: "Responda: How often do you practice English?" },
+            options: ["In the office.", "Three times a week.", "Because I like it."],
+            answer: "Three times a week.",
+            explanation: { en: "The question asks about frequency.", pt: "A pergunta é sobre frequência." },
+          },
+        ],
       },
-      "lessonReview": {
-        "summary": {
-          "en": "In this unit, we learned about 'activities now' and how to use prepositions of time and place (at, in, on, next to, between). We also practiced asking for and giving directions.",
-          "pt": "Nesta unidade, aprendemos sobre 'activities now' e como usar preposições de tempo e lugar (at, in, on, next to, between). Também praticamos pedir e dar direções."
+      lessonReview: {
+        summary: {
+          en: "You said how often you do things and compared your habits with someone else's.",
+          pt: "Você disse com que frequência faz as coisas e comparou seus hábitos com os de outra pessoa.",
         },
-        "canDo": [
-          {
-            "en": "I can talk about activities happening now (e.g., 'I am studying').",
-            "pt": "Eu consigo falar sobre atividades acontecendo agora (ex: 'Estou estudando')."
-          },
-          {
-            "en": "I can use 'at', 'in', 'on', 'next to', and 'between' for places.",
-            "pt": "Eu consigo usar 'at', 'in', 'on', 'next to' e 'between' para lugares."
-          },
-          {
-            "en": "I can use 'at', 'in', and 'on' for time.",
-            "pt": "Eu consigo usar 'at', 'in' e 'on' para tempo."
-          },
-          {
-            "en": "I can ask for and give simple directions (e.g., 'Turn left at the corner').",
-            "pt": "Eu consigo pedir e dar direções simples (ex: 'Vire à esquerda na esquina')."
-          }
+        canDo: [
+          { en: "I can use six frequency adverbs correctly.", pt: "Consigo usar seis advérbios de frequência corretamente." },
+          { en: "I can ask and answer How often questions.", pt: "Consigo perguntar e responder com How often." },
+          { en: "I can compare two routines.", pt: "Consigo comparar duas rotinas." },
         ],
-        "next": {
-          "en": "In the next unit, we will learn about daily routines and frequency adverbs.",
-          "pt": "Na próxima unidade, aprenderemos sobre rotinas diárias e advérbios de frequência."
-        }
-      }
-    }
+        next: {
+          en: "Next: a checkpoint to put Units 1–10 together in one conversation.",
+          pt: "Próximo: um checkpoint para juntar as Unidades 1–10 em uma conversa.",
+        },
+      },
+    },
   }
 ];
