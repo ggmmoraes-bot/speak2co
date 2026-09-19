@@ -13,7 +13,7 @@ import { EnterLiveLesson } from "@/components/live-lesson/EnterLiveLesson";
 import { Speak2Drill } from "@/components/curriculum/Speak2Drill";
 
 import { partStepTitles } from "@/lib/curriculum/lesson-steps";
-import { warmUpImageFor, warmUpNeedsImage } from "@/lib/curriculum/warmup-images";
+import { warmUpImageFor, warmUpImageForUnit, warmUpNeedsImage } from "@/lib/curriculum/warmup-images";
 import { PART_LABEL, partChecks, type CourseUnit, type UnitPartKey } from "@/lib/curriculum/types";
 import { saveCourseProgress } from "@/lib/course-progress.functions";
 import { averageScore, type PronunciationAttempt } from "@/lib/pronunciation-grade";
