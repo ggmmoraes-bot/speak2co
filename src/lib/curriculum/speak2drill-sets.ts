@@ -41,9 +41,20 @@ export type AuthoredDrill = {
 
 export type DrillSet = Record<DrillGroupKey, AuthoredDrill[]>;
 
-const AUTHORED: Record<string, DrillSet> = {
-  "BEGINNER-U01": BEGINNER_U01_DRILLS,
-};
+const BATCHES: Record<string, DrillSet>[] = [D0205, D0610, D1115, D1620, D2125, D2630].map(
+  (mod) => mod as unknown as Record<string, DrillSet>,
+);
+
+const AUTHORED: Record<string, DrillSet> = (() => {
+  const map: Record<string, DrillSet> = { "BEGINNER-U01": BEGINNER_U01_DRILLS };
+  for (const mod of BATCHES) {
+    for (const [name, set] of Object.entries(mod)) {
+      const m = /^BEGINNER_U(\d{2})_DRILLS$/.exec(name);
+      if (m) map[`BEGINNER-U${m[1]}`] = set;
+    }
+  }
+  return map;
+})();
 
 /**
  * Mostra apenas o drill proposto, sem a fórmula "Change X to Y":
