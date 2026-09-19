@@ -61,12 +61,15 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --color-gold: var(--gold);
   --color-gold-deep: var(--gold-deep);
+  --color-gold-ink: var(--gold-ink);
 }
 
 :root {
   --radius: 0.75rem;
   --gold: oklch(0.82 0.15 87);
   --gold-deep: oklch(0.72 0.12 78);
+  /* Texto sobre botões dourados: preto, para contraste forte. */
+  --gold-ink: oklch(0.14 0 0);
   --background: oklch(0.16 0.06 265);
   --foreground: oklch(0.97 0.01 90);
   --card: oklch(0.21 0.06 265);
