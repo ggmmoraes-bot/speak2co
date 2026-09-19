@@ -1,8 +1,9 @@
 /**
- * Imagens de apoio do Warm-up (Upper-Intermediate B2).
- * Várias unidades pedem "Look at the images..." — aqui a imagem correspondente
- * ao tema da unidade é resolvida para ser exibida na própria aula.
+ * Imagens de apoio do Warm-up.
+ * Duas resoluções: por código de unidade (imagem própria daquela lição, novo
+ * currículo Speak2Co) e, como apoio, por tema do título da unidade.
  */
+import beginnerU01 from "@/assets/warmup/beginner-u01-first-contact.jpg";
 import business from "@/assets/warmup/business.jpg";
 import globalIssues from "@/assets/warmup/global-issues.jpg";
 import psychology from "@/assets/warmup/psychology.jpg";
