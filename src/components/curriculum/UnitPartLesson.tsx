@@ -13,7 +13,7 @@ import { EnterLiveLesson } from "@/components/live-lesson/EnterLiveLesson";
 import { Speak2Drill } from "@/components/curriculum/Speak2Drill";
 
 import { partStepTitles } from "@/lib/curriculum/lesson-steps";
-import { warmUpImageFor, warmUpNeedsImage } from "@/lib/curriculum/warmup-images";
+import { warmUpImageFor, warmUpImageForUnit, warmUpNeedsImage } from "@/lib/curriculum/warmup-images";
 import { PART_LABEL, partChecks, type CourseUnit, type UnitPartKey } from "@/lib/curriculum/types";
 import { saveCourseProgress } from "@/lib/course-progress.functions";
 import { averageScore, type PronunciationAttempt } from "@/lib/pronunciation-grade";
@@ -81,14 +81,17 @@ export function UnitPartLesson({
     if (part === "discover") {
       const d = unit.discover;
       switch (key) {
-        case "warmup":
+        case "warmup": {
+          const warmUpImage =
+            warmUpImageForUnit(unit.code) ??
+            (warmUpNeedsImage(d.warmUp.prompt.en) ? warmUpImageFor(unit.title) : undefined);
           return (
             <>
-              {warmUpNeedsImage(d.warmUp.prompt.en) && (
+              {warmUpImage && (
                 <figure className="overflow-hidden rounded-2xl border border-gold/30">
                   <img
-                    src={warmUpImageFor(unit.title).src}
-                    alt={warmUpImageFor(unit.title).alt}
+                    src={warmUpImage.src}
+                    alt={warmUpImage.alt}
                     width={1024}
                     height={576}
                     loading="lazy"
@@ -101,7 +104,8 @@ export function UnitPartLesson({
                 <PhrasePractice key={p.en} en={p.en} pt={p.pt} onAttempt={onAttempt} />
               ))}
             </>
-          );
+           );
+        }
         case "context":
           return (
             <>

@@ -1,8 +1,9 @@
 /**
- * Imagens de apoio do Warm-up (Upper-Intermediate B2).
- * Várias unidades pedem "Look at the images..." — aqui a imagem correspondente
- * ao tema da unidade é resolvida para ser exibida na própria aula.
+ * Imagens de apoio do Warm-up.
+ * Duas resoluções: por código de unidade (imagem própria daquela lição, novo
+ * currículo Speak2Co) e, como apoio, por tema do título da unidade.
  */
+import beginnerU01 from "@/assets/warmup/beginner-u01-first-contact.jpg";
 import business from "@/assets/warmup/business.jpg";
 import globalIssues from "@/assets/warmup/global-issues.jpg";
 import psychology from "@/assets/warmup/psychology.jpg";
@@ -159,4 +160,17 @@ export function warmUpNeedsImage(prompt: string): boolean {
 /** Imagem correspondente ao tema da unidade. */
 export function warmUpImageFor(unitTitle: string): WarmUpImage {
   return THEMES.find((t) => t.match.test(unitTitle))?.image ?? FALLBACK;
+}
+
+/** Imagem própria de uma lição do novo currículo Speak2Co (por código da unidade). */
+const UNIT_IMAGES: Record<string, WarmUpImage> = {
+  "BEGINNER-U01": {
+    src: beginnerU01,
+    alt: "Three colleagues meeting for the first time in a bright coworking lobby",
+    altPt: "Três colegas se conhecendo no saguão claro de um coworking",
+  },
+};
+
+export function warmUpImageForUnit(unitCode: string): WarmUpImage | undefined {
+  return UNIT_IMAGES[unitCode.toUpperCase()];
 }
