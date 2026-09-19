@@ -104,7 +104,8 @@ export function UnitPartLesson({
                 <PhrasePractice key={p.en} en={p.en} pt={p.pt} onAttempt={onAttempt} />
               ))}
             </>
-          );
+           );
+        }
         case "context":
           return (
             <>
