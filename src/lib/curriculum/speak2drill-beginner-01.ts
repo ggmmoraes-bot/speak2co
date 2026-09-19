@@ -1,0 +1,78 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Unit 1 (First Contact — Say who you are).
+ * Conteúdo autoral Speak2Co, construído apenas com o que a unidade ensina:
+ * to be no afirmativo/negativo/interrogativo, formas contraídas, vocabulário
+ * de informação pessoal e as expressões de primeiro contato.
+ */
+export const BEGINNER_U01_DRILLS: DrillSet = {
+  verbs: [
+    { id: "b1dr-v01", base: "I am a photographer.", basePt: "Eu sou fotógrafo.", instruction: 'Change "I" to "She".', answer: "She is a photographer." },
+    { id: "b1dr-v02", base: "He is an architect.", basePt: "Ele é arquiteto.", instruction: 'Change "He" to "They" and use the plural.', answer: "They are architects." },
+    { id: "b1dr-v03", base: "We are on the second floor.", basePt: "Nós estamos no segundo andar.", instruction: 'Change "We" to "Ivan".', answer: "Ivan is on the second floor." },
+    { id: "b1dr-v04", base: "You are welcome here.", basePt: "Você é bem-vindo aqui.", instruction: 'Change "You" to "They".', answer: "They are welcome here." },
+    { id: "b1dr-v05", base: "She is my colleague.", basePt: "Ela é minha colega.", instruction: "Make the sentence negative.", answer: "She isn't my colleague." },
+    { id: "b1dr-v06", base: "I am new here.", basePt: "Eu sou novo aqui.", instruction: 'Make a question with "you".', answer: "Are you new here?" },
+    { id: "b1dr-v07", base: "They are architects.", basePt: "Eles são arquitetos.", instruction: "Make the sentence negative.", answer: "They aren't architects." },
+    { id: "b1dr-v08", base: "Helena is from Porto Alegre.", basePt: "A Helena é de Porto Alegre.", instruction: 'Change "Helena" to "Helena and Ivan".', answer: "Helena and Ivan are from Porto Alegre." },
+    { id: "b1dr-v09", base: "I am from Salvador.", basePt: "Eu sou de Salvador.", instruction: 'Change "I" to "We".', answer: "We are from Salvador." },
+    { id: "b1dr-v10", base: "Bruno is a photographer.", basePt: "O Bruno é fotógrafo.", instruction: 'Say the same sentence with the short form of "is".', answer: "Bruno's a photographer." },
+    { id: "b1dr-v11", base: "We are colleagues.", basePt: "Nós somos colegas.", instruction: 'Change "We" to "You and Ivan".', answer: "You and Ivan are colleagues." },
+    { id: "b1dr-v12", base: "It is on the second floor.", basePt: "É no segundo andar.", instruction: "Make a question.", answer: "Is it on the second floor?" },
+    { id: "b1dr-v13", base: "I am Bruno.", basePt: "Eu sou o Bruno.", instruction: "Use the short form.", answer: "I'm Bruno." },
+    { id: "b1dr-v14", base: "You are on my team.", basePt: "Você está na minha equipe.", instruction: 'Change "You" to "He".', answer: "He is on my team." },
+    { id: "b1dr-v15", base: "They are my colleagues.", basePt: "Eles são meus colegas.", instruction: 'Change "They" to "She" and use the singular.', answer: "She is my colleague." },
+  ],
+  vocabulary: [
+    { id: "b1dr-n01", base: "My name is Bruno.", basePt: "Meu nome é Bruno.", instruction: 'Change "name" to "surname".', answer: "My surname is Bruno." },
+    { id: "b1dr-n02", base: "My age is thirty-one.", basePt: "Minha idade é trinta e um.", instruction: 'Change "age" to "city" and "thirty-one" to "Salvador".', answer: "My city is Salvador." },
+    { id: "b1dr-n03", base: "My country is Brazil.", basePt: "Meu país é o Brasil.", instruction: 'Change "country" to "city" and "Brazil" to "Recife".', answer: "My city is Recife." },
+    { id: "b1dr-n04", base: "She is my colleague.", basePt: "Ela é minha colega.", instruction: 'Say the same idea with "team": she works with you.', answer: "She is on my team." },
+    { id: "b1dr-n05", base: "We are a small team.", basePt: "Nós somos uma equipe pequena.", instruction: 'Change "small" to "new".', answer: "We are a new team." },
+    { id: "b1dr-n06", base: "The office is on the second floor.", basePt: "O escritório é no segundo andar.", instruction: 'Change "second" to "first".', answer: "The office is on the first floor." },
+    { id: "b1dr-n07", base: "You are welcome here.", basePt: "Você é bem-vindo aqui.", instruction: 'Change "here" to "on our floor".', answer: "You are welcome on our floor." },
+    { id: "b1dr-n08", base: "My job is photography.", basePt: "Meu trabalho é fotografia.", instruction: 'Change "photography" to "architecture".', answer: "My job is architecture." },
+    { id: "b1dr-n09", base: "Helena is my colleague.", basePt: "A Helena é minha colega.", instruction: 'Change "Helena" to "Ivan".', answer: "Ivan is my colleague." },
+    { id: "b1dr-n10", base: "My surname is short.", basePt: "Meu sobrenome é curto.", instruction: 'Change "surname" to "name".', answer: "My name is short." },
+    { id: "b1dr-n11", base: "Ivan is on my team.", basePt: "O Ivan está na minha equipe.", instruction: 'Change "team" to "floor".', answer: "Ivan is on my floor." },
+    { id: "b1dr-n12", base: "My city is Salvador.", basePt: "Minha cidade é Salvador.", instruction: 'Change "My" to "Her".', answer: "Her city is Salvador." },
+    { id: "b1dr-n13", base: "Our team is on the second floor.", basePt: "Nossa equipe está no segundo andar.", instruction: 'Change "team" to "colleagues" and use the plural verb.', answer: "Our colleagues are on the second floor." },
+    { id: "b1dr-n14", base: "My age is thirty.", basePt: "Minha idade é trinta.", instruction: 'Change "thirty" to "forty".', answer: "My age is forty." },
+    { id: "b1dr-n15", base: "This is my colleague.", basePt: "Este é meu colega.", instruction: 'Change "colleague" to "team".', answer: "This is my team." },
+  ],
+  expressions: [
+    { id: "b1dr-e01", base: "Good morning, Helena!", basePt: "Bom dia, Helena!", instruction: 'Change "Helena" to "everyone".', answer: "Good morning, everyone!" },
+    { id: "b1dr-e02", base: "Nice to meet you.", basePt: "Prazer em conhecer você.", instruction: 'Answer the same greeting: add "too".', answer: "Nice to meet you too." },
+    { id: "b1dr-e03", base: "I am new here.", basePt: "Eu sou novo aqui.", instruction: 'Change "I" to "She".', answer: "She is new here." },
+    { id: "b1dr-e04", base: "This is my colleague.", basePt: "Este é meu colega.", instruction: 'Change "my" to "our".', answer: "This is our colleague." },
+    { id: "b1dr-e05", base: "Good morning! I am Bruno.", basePt: "Bom dia! Eu sou o Bruno.", instruction: "Introduce Helena instead of yourself.", answer: "Good morning! This is Helena." },
+    { id: "b1dr-e06", base: "Welcome, Bruno!", basePt: "Bem-vindo, Bruno!", instruction: 'Change "Bruno" to "Ivan".', answer: "Welcome, Ivan!" },
+    { id: "b1dr-e07", base: "You are welcome here.", basePt: "Você é bem-vindo aqui.", instruction: 'Change "You" to "They".', answer: "They are welcome here." },
+    { id: "b1dr-e08", base: "I am new here.", basePt: "Eu sou novo aqui.", instruction: "Make the sentence negative.", answer: "I am not new here." },
+    { id: "b1dr-e09", base: "This is my colleague, Ivan.", basePt: "Este é meu colega, o Ivan.", instruction: 'Change "colleague" to "partner".', answer: "This is my partner, Ivan." },
+    { id: "b1dr-e10", base: "Nice to meet you, Helena.", basePt: "Prazer em conhecer você, Helena.", instruction: 'Change "Helena" to "Ivan".', answer: "Nice to meet you, Ivan." },
+    { id: "b1dr-e11", base: "Good morning! I am new here.", basePt: "Bom dia! Eu sou novo aqui.", instruction: "Answer this person: welcome them and say you are Helena.", answer: "Welcome! I am Helena." },
+    { id: "b1dr-e12", base: "I am Bruno. I am new here.", basePt: "Eu sou o Bruno. Sou novo aqui.", instruction: 'Change "I" to "He" in both sentences.', answer: "He is Bruno. He is new here." },
+    { id: "b1dr-e13", base: "Nice to meet you.", basePt: "Prazer em conhecer você.", instruction: "You are meeting two people. Add “both”.", answer: "Nice to meet you both." },
+    { id: "b1dr-e14", base: "Good morning, team!", basePt: "Bom dia, equipe!", instruction: 'Change "team" to "colleagues".', answer: "Good morning, colleagues!" },
+    { id: "b1dr-e15", base: "This is my colleague.", basePt: "Este é meu colega.", instruction: 'Change "This is" to "She is".', answer: "She is my colleague." },
+  ],
+  grammar: [
+    { id: "b1dr-g01", base: "I am a photographer.", basePt: "Eu sou fotógrafo.", instruction: "Make the sentence negative.", answer: "I am not a photographer." },
+    { id: "b1dr-g02", base: "She is my colleague.", basePt: "Ela é minha colega.", instruction: "Make a question.", answer: "Is she my colleague?" },
+    { id: "b1dr-g03", base: "Are you new here?", basePt: "Você é novo aqui?", instruction: "Answer yes with a short answer.", answer: "Yes, I am." },
+    { id: "b1dr-g04", base: "Is he an architect?", basePt: "Ele é arquiteto?", instruction: "Answer no with a short answer.", answer: "No, he isn't." },
+    { id: "b1dr-g05", base: "They are on the second floor.", basePt: "Eles estão no segundo andar.", instruction: "Make it negative with the short form.", answer: "They aren't on the second floor." },
+    { id: "b1dr-g06", base: "We are architects.", basePt: "Nós somos arquitetos.", instruction: "Make a question.", answer: "Are we architects?" },
+    { id: "b1dr-g07", base: "He is my partner.", basePt: "Ele é meu sócio.", instruction: "Use the short form.", answer: "He's my partner." },
+    { id: "b1dr-g08", base: "You are on the second floor.", basePt: "Você está no segundo andar.", instruction: "Make the sentence negative.", answer: "You aren't on the second floor." },
+    { id: "b1dr-g09", base: "I am from Salvador.", basePt: "Eu sou de Salvador.", instruction: 'Make a question with "you".', answer: "Are you from Salvador?" },
+    { id: "b1dr-g10", base: "Helena is an architect.", basePt: "A Helena é arquiteta.", instruction: 'Change the subject to "Helena and Ivan" and use the plural.', answer: "Helena and Ivan are architects." },
+    { id: "b1dr-g11", base: "My name is Bruno.", basePt: "Meu nome é Bruno.", instruction: 'Make a question with "your".', answer: "Is your name Bruno?" },
+    { id: "b1dr-g12", base: "They aren't colleagues.", basePt: "Eles não são colegas.", instruction: "Make the sentence affirmative.", answer: "They are colleagues." },
+    { id: "b1dr-g13", base: "She's from Porto Alegre.", basePt: "Ela é de Porto Alegre.", instruction: "Say the full form, without the contraction.", answer: "She is from Porto Alegre." },
+    { id: "b1dr-g14", base: "Is Bruno a photographer?", basePt: "O Bruno é fotógrafo?", instruction: "Answer yes with a short answer.", answer: "Yes, he is." },
+    { id: "b1dr-g15", base: "We are a small team.", basePt: "Nós somos uma equipe pequena.", instruction: "Make a question.", answer: "Are we a small team?" },
+  ],
+};

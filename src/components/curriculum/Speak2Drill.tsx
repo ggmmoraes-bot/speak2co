@@ -1,26 +1,26 @@
 import { useMemo, useRef, useState } from "react";
-import { Check, Loader2, Mic, RotateCcw, Square, Volume2, X } from "lucide-react";
+import { Loader2, Mic, RotateCcw, Square, Volume2 } from "lucide-react";
 import { toast } from "sonner";
 import { AltHeading } from "@/components/AltHeading";
 import { MicRecorder } from "@/lib/audio-recorder";
 import { checkPronunciation, speakText } from "@/lib/voice-client";
 import {
-  buildUnitDrills,
-  SPEAK2DRILL_TOTAL,
-  type DrillItem,
-} from "@/lib/curriculum/speak2drill";
+  DRILL_GROUPS,
+  flattenSet,
+  getDrillSet,
+  type DrillGroupKey,
+} from "@/lib/curriculum/speak2drill-sets";
 import type { CourseUnit } from "@/lib/curriculum/types";
 
 /**
- * Speak2Drill — fluência por substituição estruturada, gerada automaticamente
- * a partir do conteúdo da própria unidade (Part 2 — Communicate).
+ * Speak2Drill — consolidação oral da unidade.
+ * O aluno vê a frase-base (sempre visível), a instrução de transformação,
+ * fala e recebe correção da IA. Sem contagem de exercícios na tela.
  */
 export function Speak2Drill({ unit }: { unit: CourseUnit }) {
-  const items = useMemo(() => buildUnitDrills(unit), [unit]);
+  const queue = useMemo(() => flattenSet(getDrillSet(unit)), [unit]);
   const [started, setStarted] = useState(false);
   const [index, setIndex] = useState(0);
-  // 0 = frase completa · 1..3 = drills · 4 = respostas
-  const [stage, setStage] = useState(0);
   const [hits, setHits] = useState(0);
   const [tries, setTries] = useState(0);
   const [done, setDone] = useState(false);
@@ -29,7 +29,7 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
   const [feedback, setFeedback] = useState<{ score: number; transcript: string } | null>(null);
   const recorderRef = useRef<MicRecorder | null>(null);
 
-  const item: DrillItem | undefined = items[index];
+  const current = queue[index];
 
   async function play(text: string) {
     try {
@@ -70,29 +70,17 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
     }
   }
 
-  function selfReport(correct: boolean) {
-    setTries((t) => t + 1);
-    if (correct) setHits((h) => h + 1);
-    advance();
-  }
-
-  function advance() {
+  function next() {
     setFeedback(null);
-    if (stage < 4) {
-      setStage(stage + 1);
-      return;
-    }
-    if (index + 1 >= items.length) {
+    if (index + 1 >= queue.length) {
       setDone(true);
       return;
     }
     setIndex(index + 1);
-    setStage(0);
   }
 
   function restart() {
     setIndex(0);
-    setStage(0);
     setHits(0);
     setTries(0);
     setDone(false);
@@ -100,7 +88,7 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
     setStarted(true);
   }
 
-  if (items.length === 0) return null;
+  if (queue.length === 0) return null;
 
   if (!started) {
     return (
@@ -109,11 +97,18 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
           <AltHeading text="Speak2Drill" />
         </h3>
         <p className="mt-1 text-sm text-foreground/85">
-          Structured substitution drills built only from this unit&apos;s vocabulary, verbs,
-          expressions, grammar and dialogue.
+          Practice what you learned. Speak it. Get feedback. Improve it.
+        </p>
+        <p className="mt-1 text-xs font-semibold tracking-wide text-gold uppercase">
+          Listen → Change → Speak → Check
+        </p>
+        <p className="mt-2 text-sm text-foreground/80">
+          Use the sentence on the screen as your starting point. Follow the drill instruction,
+          change what is requested, and say the complete sentence aloud. Then click Speak &amp;
+          Check to get AI feedback.
         </p>
         <p className="mt-0.5 text-xs text-muted-foreground italic">
-          Treino de fluência por substituição, usando somente o conteúdo desta unidade.
+          Consolidação oral da unidade: leia a frase-base, faça a mudança pedida e fale em voz alta.
         </p>
         <button
           type="button"
@@ -122,9 +117,6 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
         >
           Start Speak2Drill
         </button>
-        <p className="mt-2 text-xs text-muted-foreground">
-          {SPEAK2DRILL_TOTAL} base sentences · 3 drills each
-        </p>
       </div>
     );
   }
@@ -134,13 +126,11 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
     return (
       <div className="rounded-2xl border border-gold/40 bg-gold/5 p-6 text-center">
         <h3 className="text-lg font-semibold">
-          <AltHeading text="Completed!" />
+          <AltHeading text="Session complete!" />
         </h3>
-        <p className="mt-1 text-sm text-muted-foreground italic">Concluído</p>
+        <p className="mt-1 text-sm text-muted-foreground italic">Sessão concluída</p>
         <p className="mt-4 text-3xl font-bold text-gold">{pct}%</p>
-        <p className="text-xs text-muted-foreground">
-          Accuracy · {hits} of {tries} responses
-        </p>
+        <p className="text-xs text-muted-foreground">Accuracy on your spoken answers</p>
         <button
           type="button"
           onClick={restart}
@@ -152,159 +142,115 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
     );
   }
 
-  if (!item) return null;
-  const currentDrill = stage >= 1 && stage <= 3 ? item.drills[stage - 1] : undefined;
+  if (!current) return null;
+  const { group, drill } = current;
+  const groupIndex = DRILL_GROUPS.findIndex((g) => g.key === group);
+  const nextGroup = DRILL_GROUPS[groupIndex + 1];
+  const success = feedback ? feedback.score >= 70 : false;
 
   return (
     <div className="rounded-2xl border border-gold/30 bg-background/40 p-5">
-      <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold tracking-wide text-gold uppercase">
-          Exercise {index + 1} of {items.length}
-        </span>
-        <span className="text-xs text-muted-foreground capitalize">{item.kind}</span>
+      {/* Grupos — apenas o foco atual, sem contagem de exercícios */}
+      <div className="flex flex-wrap items-center gap-1.5">
+        {DRILL_GROUPS.map((g) => (
+          <span
+            key={g.key}
+            className={
+              g.key === group
+                ? "rounded-full bg-gold px-3 py-1 text-[11px] font-bold tracking-wide text-navy uppercase"
+                : "rounded-full border border-border/70 px-3 py-1 text-[11px] font-semibold tracking-wide text-muted-foreground uppercase"
+            }
+          >
+            {g.label}
+          </span>
+        ))}
       </div>
-      <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border/60">
-        <div
-          className="h-full rounded-full bg-gold transition-all"
-          style={{ width: `${((index + (stage + 1) / 5) / items.length) * 100}%` }}
-        />
+      <p className="mt-2 text-[11px] tracking-wide text-muted-foreground uppercase">
+        Current focus:{" "}
+        <span className="font-semibold text-gold">{DRILL_GROUPS[groupIndex]?.label}</span>
+        {nextGroup && <span className="normal-case"> · Next: {nextGroup.label}</span>}
+      </p>
+
+      {/* Frase-base sempre visível */}
+      <div className="mt-4 rounded-xl border border-border/70 bg-background/60 p-4">
+        <p className="text-[11px] font-semibold tracking-wide text-gold uppercase">Base sentence</p>
+        <p className="mt-1 text-lg font-semibold text-foreground">{drill.base}</p>
+        {drill.basePt && <p className="text-xs text-muted-foreground italic">{drill.basePt}</p>}
+        <button
+          type="button"
+          onClick={() => play(drill.base)}
+          className="mt-3 inline-flex items-center gap-2 rounded-full border border-gold/50 px-4 py-2 text-xs font-semibold text-gold transition hover:bg-gold/10"
+        >
+          <Volume2 className="h-4 w-4" /> Listen
+        </button>
       </div>
 
-      {stage === 0 && (
-        <div className="mt-5 space-y-3">
-          <p className="text-xs font-semibold text-gold">Listen and repeat</p>
-          <p className="text-lg font-semibold text-foreground">{item.base}</p>
-          {item.basePt && <p className="text-xs text-muted-foreground italic">{item.basePt}</p>}
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => play(item.base)}
-              className="inline-flex items-center gap-2 rounded-full border border-gold/50 px-4 py-2 text-xs font-semibold text-gold transition hover:bg-gold/10"
-            >
-              <Volume2 className="h-4 w-4" /> Play audio
-            </button>
-            <button
-              type="button"
-              onClick={() => toggleRecording(item.base)}
-              disabled={busy}
-              className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold transition hover:bg-muted/40"
-            >
-              {busy ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : recording ? (
-                <Square className="h-4 w-4 text-destructive" />
-              ) : (
-                <Mic className="h-4 w-4" />
-              )}
-              {recording ? "Stop" : "Repeat and check"}
-            </button>
-            <button
-              type="button"
-              onClick={advance}
-              className="inline-flex items-center gap-2 rounded-full bg-gold px-4 py-2 text-xs font-semibold text-navy transition hover:bg-gold/90"
-            >
-              Start drills
-            </button>
-          </div>
-          {feedback && (
-            <p className="text-xs text-muted-foreground">
-              Score {feedback.score}% · You said: “{feedback.transcript}”
-            </p>
+      {/* Instrução do drill */}
+      <div className="mt-3 rounded-xl border border-gold/40 bg-gold/10 p-4">
+        <p className="text-[11px] font-semibold tracking-wide text-gold uppercase">Drill</p>
+        <p className="mt-1 text-base font-semibold text-foreground">{drill.instruction}</p>
+      </div>
+
+      <div className="mt-3 flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={() => toggleRecording(drill.answer)}
+          disabled={busy}
+          className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-5 py-2 text-sm font-semibold text-navy transition hover:bg-gold/90 disabled:opacity-60"
+        >
+          {busy ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : recording ? (
+            <Square className="h-4 w-4" />
+          ) : (
+            <Mic className="h-4 w-4" />
           )}
-        </div>
-      )}
+          {recording ? "Stop & Check" : "Speak & Check"}
+        </button>
+        {feedback && !success && (
+          <button
+            type="button"
+            onClick={() => setFeedback(null)}
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border px-5 py-2 text-sm font-semibold transition hover:bg-muted/40"
+          >
+            Try Again
+          </button>
+        )}
+        <button
+          type="button"
+          onClick={next}
+          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-gold/50 px-5 py-2 text-sm font-semibold text-gold transition hover:bg-gold/10"
+        >
+          Next
+        </button>
+      </div>
 
-      {currentDrill && (
-        <div className="mt-5 space-y-3">
-          <p className="text-xs font-semibold text-gold">
-            Drill {currentDrill.level} of 3 · Rebuild the full sentence
+      {feedback && (
+        <div className="mt-3 rounded-xl border border-border/70 bg-background/60 p-4">
+          <p className="text-[11px] font-semibold tracking-wide text-gold uppercase">AI feedback</p>
+          <p className="mt-1 text-sm font-semibold text-foreground">
+            {success
+              ? "Great! Your sentence is correct."
+              : feedback.score >= 45
+                ? "Almost there. Check the words in the drill and say the full sentence again."
+                : "Try again. Say the complete sentence with the change requested."}
           </p>
-          <p className="text-xs text-muted-foreground italic">
-            Reconstrua a frase inteira em voz alta com esta substituição.
-          </p>
-          <p className="rounded-xl border border-gold/40 bg-gold/10 px-4 py-3 text-center text-xl font-bold text-gold">
-            {currentDrill.cue}
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => toggleRecording(currentDrill.answer)}
-              disabled={busy}
-              className="inline-flex items-center gap-2 rounded-full border border-gold/50 px-4 py-2 text-xs font-semibold text-gold transition hover:bg-gold/10"
-            >
-              {busy ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : recording ? (
-                <Square className="h-4 w-4 text-destructive" />
-              ) : (
-                <Mic className="h-4 w-4" />
-              )}
-              {recording ? "Stop and check" : "Speak and check"}
-            </button>
-            <button
-              type="button"
-              onClick={() => selfReport(true)}
-              className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold transition hover:bg-muted/40"
-            >
-              <Check className="h-4 w-4 text-gold" /> I got it
-            </button>
-            <button
-              type="button"
-              onClick={() => selfReport(false)}
-              className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold transition hover:bg-muted/40"
-            >
-              <X className="h-4 w-4 text-destructive" /> I missed it
-            </button>
-          </div>
-          {feedback && (
-            <div className="space-y-2">
-              <p className="text-xs text-muted-foreground">
-                Score {feedback.score}% · You said: “{feedback.transcript}”
+          <p className="mt-1 text-xs text-muted-foreground">You said: “{feedback.transcript}”</p>
+          {!success && (
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <p className="text-xs text-foreground/80">
+                Expected: <span className="font-semibold">{drill.answer}</span>
               </p>
               <button
                 type="button"
-                onClick={advance}
-                className="inline-flex items-center gap-2 rounded-full bg-gold px-4 py-2 text-xs font-semibold text-navy transition hover:bg-gold/90"
-              >
-                Next
-              </button>
-            </div>
-          )}
-        </div>
-      )}
-
-      {stage === 4 && (
-        <div className="mt-5 space-y-3">
-          <p className="text-xs font-semibold text-gold">Correct answers · Listen to each version</p>
-          {[
-            { label: "Base sentence", text: item.base },
-            ...item.drills.map((d) => ({ label: `Drill ${d.level} · ${d.cue}`, text: d.answer })),
-          ].map((row) => (
-            <div
-              key={`${row.label}-${row.text}`}
-              className="flex items-start justify-between gap-3 rounded-xl border border-border/70 bg-background/60 p-3"
-            >
-              <div>
-                <p className="text-[11px] font-semibold text-gold uppercase">{row.label}</p>
-                <p className="text-sm text-foreground">{row.text}</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => play(row.text)}
-                aria-label={`Play ${row.label}`}
-                className="shrink-0 rounded-full border border-gold/50 p-2 text-gold transition hover:bg-gold/10"
+                onClick={() => play(drill.answer)}
+                aria-label="Replay the correct sentence"
+                className="rounded-full border border-gold/50 p-2 text-gold transition hover:bg-gold/10"
               >
                 <Volume2 className="h-4 w-4" />
               </button>
             </div>
-          ))}
-          <button
-            type="button"
-            onClick={advance}
-            className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2 text-sm font-semibold text-navy transition hover:bg-gold/90"
-          >
-            {index + 1 >= items.length ? "Finish" : "Next exercise"}
-          </button>
+          )}
         </div>
       )}
     </div>
