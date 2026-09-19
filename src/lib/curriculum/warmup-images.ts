@@ -4,6 +4,10 @@
  * currículo Speak2Co) e, como apoio, por tema do título da unidade.
  */
 import beginnerU01 from "@/assets/warmup/beginner-u01-first-contact.jpg";
+import beginnerU02 from "@/assets/warmup/beginner-u02-people-around-me.jpg";
+import beginnerU03 from "@/assets/warmup/beginner-u03-things-i-carry.jpg";
+import beginnerU04 from "@/assets/warmup/beginner-u04-numbers.jpg";
+import beginnerU05 from "@/assets/warmup/beginner-u05-my-day-begins.jpg";
 import business from "@/assets/warmup/business.jpg";
 import globalIssues from "@/assets/warmup/global-issues.jpg";
 import psychology from "@/assets/warmup/psychology.jpg";
