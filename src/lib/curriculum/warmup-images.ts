@@ -14,6 +14,10 @@ import beginnerU08 from "@/assets/warmup/beginner-u08-i-dont-he-doesnt.jpg";
 import beginnerU09 from "@/assets/warmup/beginner-u09-do-you.jpg";
 import beginnerU10 from "@/assets/warmup/beginner-u10-how-often.jpg";
 import beginnerU11 from "@/assets/warmup/beginner-u11-checkpoint.jpg";
+import { WARMUP_12_16 } from "./warmup-images-12-16";
+import { WARMUP_17_21 } from "./warmup-images-17-21";
+import { WARMUP_22_26 } from "./warmup-images-22-26";
+import { WARMUP_27_30 } from "./warmup-images-27-30";
 import business from "@/assets/warmup/business.jpg";
 import globalIssues from "@/assets/warmup/global-issues.jpg";
 import psychology from "@/assets/warmup/psychology.jpg";
@@ -229,6 +233,10 @@ const UNIT_IMAGES: Record<string, WarmUpImage> = {
     alt: "Three colleagues talking together at the end of the week in a bright coworking space",
     altPt: "Três colegas conversando no fim da semana em um coworking iluminado",
   },
+  ...WARMUP_12_16,
+  ...WARMUP_17_21,
+  ...WARMUP_22_26,
+  ...WARMUP_27_30,
 };
 
 export function warmUpImageForUnit(unitCode: string): WarmUpImage | undefined {
