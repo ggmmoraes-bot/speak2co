@@ -189,7 +189,7 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
             key={g.key}
             className={
               g.key === group
-                ? "rounded-full bg-gold px-3 py-1 text-[11px] font-bold tracking-wide text-navy uppercase"
+                ? "rounded-full bg-gold px-3 py-1 text-[11px] font-bold tracking-wide text-gold-ink uppercase"
                 : "rounded-full border border-border/70 px-3 py-1 text-[11px] font-semibold tracking-wide text-muted-foreground uppercase"
             }
           >
@@ -220,7 +220,9 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
       {/* Instrução do drill */}
       <div className="mt-3 rounded-xl border border-gold/40 bg-gold/10 p-4">
         <p className="text-[11px] font-semibold tracking-wide text-gold uppercase">Drill</p>
-        <p className="mt-1 text-base font-semibold text-foreground">{drill.instruction}</p>
+        <p className="mt-1 text-base font-semibold text-foreground">
+          {drillCue(drill.instruction)}
+        </p>
       </div>
 
       <div className="mt-3 flex flex-wrap gap-2">
@@ -228,7 +230,7 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
           type="button"
           onClick={() => toggleRecording(drill.answer)}
           disabled={busy}
-          className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-5 py-2 text-sm font-semibold text-navy transition hover:bg-gold/90 disabled:opacity-60"
+          className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-5 py-2 text-sm font-semibold text-gold-ink transition hover:bg-gold/90 disabled:opacity-60"
         >
           {busy ? (
             <Loader2 className="h-4 w-4 animate-spin" />
