@@ -653,2605 +653,973 @@ export const BEGINNER_UNITS_4_10: CourseUnit[] = [
     },
   },
   {
-    "code": "BEGINNER-U06",
-    "number": 6,
-    "title": "Daily Routine — Simple Present",
-    "titlePt": "Rotina Diária — Simple Present",
-    "cefr": "A1",
-    "objective": {
-      "en": "Teach daily routine vocabulary and the Simple Present (affirmative) for habits and routines, with third-person -s, in a contextualized way.",
-      "pt": "Ensinar o vocabulário de rotina diária e o Simple Present (afirmativo) para hábitos e rotinas, com a forma -s para terceira pessoa, de forma contextualizada."
+    code: "BEGINNER-U06",
+    number: 6,
+    title: "He Works, She Studies — Talk about other people",
+    titlePt: "Ele trabalha, ela estuda — Falar de outras pessoas",
+    cefr: "A1",
+    objective: {
+      en: "Use the present simple in the third person (he, she, it) with the final -s to talk about other people's routines and jobs.",
+      pt: "Usar o present simple na terceira pessoa (he, she, it) com o -s final para falar da rotina e do trabalho de outras pessoas.",
     },
-    "communicationGoal": {
-      "en": "Students will be able to use 'offering help' expressions and daily routine vocabulary to communicate in real situations.",
-      "pt": "O aluno será capaz de usar 'oferecer ajuda' e o vocabulário de daily routine para se comunicar em situações reais."
+    communicationGoal: {
+      en: "You can present a colleague or a family member: who the person is, what the person does and when.",
+      pt: "Você consegue apresentar um colega ou familiar: quem é, o que faz e quando faz.",
     },
-    "prerequisites": {
-      "en": "Structure: Have / Has for possession and family relationships. Vocabulary: Possessions.",
-      "pt": "Estrutura: Have / Has para posse e relações familiares. Vocabulário: Posses."
+    prerequisites: {
+      en: "Unit 5 — present simple with I, you, we and they.",
+      pt: "Unidade 5 — present simple com I, you, we e they.",
     },
-    "newContent": {
-      "en": "Grammar: Simple Present (affirmative) for habits and routines, with third-person -s. | Vocabulary: Daily Routine (10 lexical items) | Expressions: Offering Help",
-      "pt": "Gramática: Simple Present (afirmativo) para hábitos e rotinas, com a forma -s para terceira pessoa. | Vocabulário: Rotina Diária (10 itens lexicais) | Expressões: Oferecer Ajuda"
+    newContent: {
+      en: "Grammar: present simple third person (-s / -es / irregular). Vocabulary: jobs and workplaces. Expressions: introducing a third person.",
+      pt: "Gramática: present simple na terceira pessoa (-s / -es / irregular). Vocabulário: profissões e locais de trabalho. Expressões: apresentar uma terceira pessoa.",
     },
-    "reviewContent": {
-      "en": "Spiral review: Subject pronouns (I, you, he, she, it, we, they) + verb to be (am/is/are) in affirmative sentences (Unit 1).",
-      "pt": "Revisão em espiral: Pronomes pessoais (I, you, he, she, it, we, they) + verb to be (am/is/are) em frases afirmativas (Unidade 1)."
+    reviewContent: {
+      en: "Sequence review of Units 1–5: to be, possessives, plurals, numbers and routine verbs.",
+      pt: "Revisão do bloco das Unidades 1–5: to be, possessivos, plurais, números e verbos de rotina.",
     },
-    "discover": {
-      "id": "BEGINNER-U06-DISCOVER",
-      "warmUp": {
-        "prompt": {
-          "en": "Look at the pictures. What do you do every day?",
-          "pt": "Olhe as imagens. O que você faz todos os dias?"
+    discover: {
+      id: "BEGINNER-U06-DISCOVER",
+      warmUp: {
+        prompt: {
+          en: "Look at the picture. Three people are working. What does each person do?",
+          pt: "Observe a imagem. Três pessoas estão trabalhando. O que cada uma faz?",
         },
-        "phrases": [
-          {
-            "en": "I sleep.",
-            "pt": "Eu durmo."
-          },
-          {
-            "en": "I eat.",
-            "pt": "Eu como."
-          },
-          {
-            "en": "I work.",
-            "pt": "Eu trabalho."
-          }
-        ]
-      },
-      "context": {
-        "situation": {
-          "en": "Maria is busy preparing for work. Her friend, Alex, offers help.",
-          "pt": "Maria está ocupada se preparando para o trabalho. Seu amigo, Alex, oferece ajuda."
-        },
-        "dialogue": [
-          {
-            "who": "Maria",
-            "en": "Oh, it's 7 a.m.! I wake up late today. I need to take a shower and then have breakfast. And I have to go to work!",
-            "pt": "Ah, são 7 da manhã! Acordei tarde hoje. Preciso tomar banho e depois tomar café. E tenho que ir para o trabalho!"
-          },
-          {
-            "who": "Alex",
-            "en": "Wow, you are busy. Can I help you?",
-            "pt": "Uau, você está ocupada. Posso te ajudar?"
-          },
-          {
-            "who": "Maria",
-            "en": "Yes, please! My bag is over there.",
-            "pt": "Sim, por favor! Minha bolsa está ali."
-          },
-          {
-            "who": "Alex",
-            "en": "Do you need anything else?",
-            "pt": "Você precisa de mais alguma coisa?"
-          },
-          {
-            "who": "Maria",
-            "en": "No, thank you. I usually wake up at 6 a.m. I always have breakfast at home.",
-            "pt": "Não, obrigada. Eu geralmente acordo às 6 da manhã. Eu sempre tomo café da manhã em casa."
-          },
-          {
-            "who": "Alex",
-            "en": "I understand. Let me help you with that bag.",
-            "pt": "Eu entendo. Deixe-me ajudar com aquela bolsa."
-          }
-        ]
-      },
-      "vocabulary": [
-        {
-          "term": "wake up",
-          "pt": "acordar",
-          "ipa": "/weɪk ʌp/",
-          "definition": "To stop sleeping.",
-          "example": "I wake up at 6 a.m. every day.",
-          "examplePt": "Eu acordo às 6 da manhã todos os dias."
-        },
-        {
-          "term": "get up",
-          "pt": "levantar-se",
-          "ipa": "/ɡɛt ʌp/",
-          "definition": "To rise from bed after sleeping.",
-          "example": "He gets up at 7:30 a.m.",
-          "examplePt": "Ele se levanta às 7:30 da manhã."
-        },
-        {
-          "term": "have breakfast",
-          "pt": "tomar café da manhã",
-          "ipa": "/hæv ˈbrɛkfəst/",
-          "definition": "To eat the first meal of the day.",
-          "example": "We have breakfast together on Sundays.",
-          "examplePt": "Nós tomamos café da manhã juntos aos domingos."
-        },
-        {
-          "term": "go to work",
-          "pt": "ir para o trabalho",
-          "ipa": "/ɡoʊ tə wɜːrk/",
-          "definition": "To travel to the place where you are employed.",
-          "example": "She goes to work by bus.",
-          "examplePt": "Ela vai para o trabalho de ônibus."
-        },
-        {
-          "term": "have lunch",
-          "pt": "almoçar",
-          "ipa": "/hæv lʌntʃ/",
-          "definition": "To eat the midday meal.",
-          "example": "They have lunch at 1 p.m.",
-          "examplePt": "Eles almoçam à 1 da tarde."
-        },
-        {
-          "term": "come home",
-          "pt": "voltar para casa",
-          "ipa": "/kʌm hoʊm/",
-          "definition": "To return to one's house.",
-          "example": "I come home after work.",
-          "examplePt": "Eu volto para casa depois do trabalho."
-        },
-        {
-          "term": "have dinner",
-          "pt": "jantar",
-          "ipa": "/hæv ˈdɪnər/",
-          "definition": "To eat the evening meal.",
-          "example": "He has dinner with his family.",
-          "examplePt": "Ele janta com a família dele."
-        },
-        {
-          "term": "go to bed",
-          "pt": "ir para a cama",
-          "ipa": "/ɡoʊ tə bɛd/",
-          "definition": "To lie down in bed to sleep.",
-          "example": "She goes to bed at 10 p.m.",
-          "examplePt": "Ela vai para a cama às 10 da noite."
-        },
-        {
-          "term": "take a shower",
-          "pt": "tomar banho (de chuveiro)",
-          "ipa": "/teɪk ə ˈʃaʊər/",
-          "definition": "To wash oneself under a shower.",
-          "example": "We take a shower in the morning.",
-          "examplePt": "Nós tomamos banho pela manhã."
-        },
-        {
-          "term": "brush teeth",
-          "pt": "escovar os dentes",
-          "ipa": "/brʌʃ tiːθ/",
-          "definition": "To clean one's teeth with a brush.",
-          "example": "I brush my teeth after breakfast.",
-          "examplePt": "Eu escovo meus dentes depois do café da manhã."
-        }
-      ],
-      "expressions": [
-        {
-          "en": "Can I help you?",
-          "pt": "Posso te ajudar?"
-        },
-        {
-          "en": "Do you need anything?",
-          "pt": "Você precisa de alguma coisa?"
-        },
-        {
-          "en": "Let me help you with that.",
-          "pt": "Deixe-me te ajudar com isso."
-        }
-      ],
-      "grammar": [
-        {
-          "title": {
-            "en": "Simple Present (Affirmative) for Habits and Routines",
-            "pt": "Simple Present (Afirmativo) para Hábitos e Rotinas"
-          },
-          "examples": [
-            {
-              "en": "I wake up at 7 a.m.",
-              "pt": "Eu acordo às 7 da manhã."
-            },
-            {
-              "en": "You have breakfast every day.",
-              "pt": "Você toma café da manhã todos os dias."
-            },
-            {
-              "en": "We go to bed late.",
-              "pt": "Nós vamos para a cama tarde."
-            }
-          ],
-          "rule": {
-            "en": "Use the Simple Present to talk about things you do regularly, habits, or routines. For I, You, We, They, the verb stays the same. For He, She, It, add -s to the verb.",
-            "pt": "Use o Simple Present para falar sobre coisas que você faz regularmente, hábitos ou rotinas. Para I, You, We, They, o verbo permanece o mesmo. Para He, She, It, adicione -s ao verbo."
-          },
-          "mistakes": [
-            {
-              "en": "Incorrect: He go to work. Correct: He goes to work.",
-              "pt": "Incorreto: Ele ir para o trabalho. Correto: Ele vai para o trabalho."
-            },
-            {
-              "en": "Incorrect: She have lunch. Correct: She has lunch.",
-              "pt": "Incorreto: Ela ter almoço. Correto: Ela almoça."
-            }
-          ]
-        },
-        {
-          "title": {
-            "en": "Third-person singular (-s form)",
-            "pt": "Terceira pessoa do singular (forma -s)"
-          },
-          "examples": [
-            {
-              "en": "He works in an office.",
-              "pt": "Ele trabalha em um escritório."
-            },
-            {
-              "en": "She brushes her teeth.",
-              "pt": "Ela escova os dentes dela."
-            },
-            {
-              "en": "It eats a lot.",
-              "pt": "Ele/Ela (animal/coisa) come muito."
-            }
-          ],
-          "rule": {
-            "en": "For verbs ending in -s, -sh, -ch, -x, -z, and -o, add -es (e.g., wash > washes, go > goes). For other verbs, add -s (e.g., eat > eats). For verbs ending in a consonant + y, change y to i and add -es (e.g., study > studies).",
-            "pt": "Para verbos terminados em -s, -sh, -ch, -x, -z, e -o, adicione -es (ex: wash > washes, go > goes). Para outros verbos, adicione -s (ex: eat > eats). Para verbos terminados em consoante + y, mude y para i e adicione -es (ex: study > studies)."
-          },
-          "mistakes": [
-            {
-              "en": "Incorrect: He go to bed early. Correct: He goes to bed early.",
-              "pt": "Incorreto: Ele ir para a cama cedo. Correto: Ele vai para a cama cedo."
-            },
-            {
-              "en": "Incorrect: She wash her face. Correct: She washes her face.",
-              "pt": "Incorreto: Ela lavar o rosto dela. Correto: Ela lava o rosto dela."
-            }
-          ]
-        }
-      ],
-      "controlledPractice": [
-        {
-          "id": "b6d-cp-1",
-          "prompt": {
-            "en": "Choose the correct verb form: I ___ up at 6 AM.",
-            "pt": "Escolha a forma verbal correta: Eu ___ às 6 da manhã."
-          },
-          "options": [
-            "wake",
-            "wakes",
-            "waking"
-          ],
-          "answer": "wake",
-          "explanation": {
-            "en": "For 'I', the verb does not change.",
-            "pt": "Para 'I', o verbo não muda."
-          }
-        },
-        {
-          "id": "b6d-cp-2",
-          "prompt": {
-            "en": "Choose the correct verb form: She ___ breakfast.",
-            "pt": "Escolha a forma verbal correta: Ela ___ café da manhã."
-          },
-          "options": [
-            "have",
-            "has",
-            "having"
-          ],
-          "answer": "has",
-          "explanation": {
-            "en": "For 'She', 'have' changes to 'has'.",
-            "pt": "Para 'She', 'have' muda para 'has'."
-          }
-        },
-        {
-          "id": "b6d-cp-3",
-          "prompt": {
-            "en": "Complete the sentence: He ___ to work by car.",
-            "pt": "Complete a frase: Ele ___ para o trabalho de carro."
-          },
-          "options": [
-            "go",
-            "goes",
-            "going"
-          ],
-          "answer": "goes",
-          "explanation": {
-            "en": "For 'He', 'go' changes to 'goes'.",
-            "pt": "Para 'He', 'go' muda para 'goes'."
-          }
-        },
-        {
-          "id": "b6d-cp-4",
-          "prompt": {
-            "en": "What do you say to offer help? ___ you need anything?",
-            "pt": "O que você diz para oferecer ajuda? ___ você precisa de alguma coisa?"
-          },
-          "options": [
-            "Can",
-            "Do",
-            "Are"
-          ],
-          "answer": "Do",
-          "explanation": {
-            "en": "'Do you need anything?' is a common expression for offering help.",
-            "pt": "'Do you need anything?' é uma expressão comum para oferecer ajuda."
-          }
-        }
-      ],
-      "input": {
-        "kind": "reading",
-        "title": {
-          "en": "A Busy Day",
-          "pt": "Um Dia Agitado"
-        },
-        "lines": [
-          {
-            "en": "Hi, I'm Leo. I have a busy daily routine. I wake up at 5:30 a.m. every day. Then I take a shower and brush my teeth. At 6:30 a.m., I have breakfast. After breakfast, I go to work. I work in an office. I have lunch at 12:30 p.m. with my co-workers. I come home at 6 p.m. My wife, Ana, has dinner ready. We have dinner and talk about our day. At 10 p.m., I go to bed. Ana also goes to bed around 10 p.m. She wakes up at 6 a.m. She loves her routine too.",
-            "pt": "Oi, eu sou o Leo. Eu tenho uma rotina diária agitada. Eu acordo às 5:30 da manhã todos os dias. Depois eu tomo banho e escovo meus dentes. Às 6:30 da manhã, eu tomo café da manhã. Depois do café, eu vou para o trabalho. Eu trabalho em um escritório. Eu almoço às 12:30 da tarde com meus colegas de trabalho. Eu volto para casa às 6 da tarde. Minha esposa, Ana, tem o jantar pronto. Nós jantamos e conversamos sobre nosso dia. Às 10 da noite, eu vou para a cama. Ana também vai para a cama por volta das 10 da noite. Ela acorda às 6 da manhã. Ela também adora a rotina dela."
-          }
+        phrases: [
+          { en: "She studies in the morning.", pt: "Ela estuda de manhã." },
+          { en: "He works in a coffee shop.", pt: "Ele trabalha em uma cafeteria." },
+          { en: "She teaches English online.", pt: "Ela ensina inglês online." },
         ],
-        "questions": [
-          {
-            "id": "b6d-in-1",
-            "prompt": {
-              "en": "What time does Leo wake up?",
-              "pt": "A que horas o Leo acorda?"
-            },
-            "options": [
-              "6 a.m.",
-              "5:30 a.m.",
-              "7 a.m."
-            ],
-            "answer": "5:30 a.m.",
-            "explanation": {
-              "en": "The text says 'I wake up at 5:30 a.m. every day.'",
-              "pt": "O texto diz 'Eu acordo às 5:30 da manhã todos os dias.'"
-            }
-          },
-          {
-            "id": "b6d-in-2",
-            "prompt": {
-              "en": "When does Leo have lunch?",
-              "pt": "Quando o Leo almoça?"
-            },
-            "options": [
-              "At 12:30 p.m.",
-              "At 1 p.m.",
-              "At 6 p.m."
-            ],
-            "answer": "At 12:30 p.m.",
-            "explanation": {
-              "en": "The text says 'I have lunch at 12:30 p.m.'",
-              "pt": "O texto diz 'Eu almoço às 12:30 da tarde.'"
-            }
-          },
-          {
-            "id": "b6d-in-3",
-            "prompt": {
-              "en": "What does Ana do in the morning?",
-              "pt": "O que Ana faz pela manhã?"
-            },
-            "options": [
-              "She goes to bed.",
-              "She has dinner.",
-              "She wakes up at 6 a.m."
-            ],
-            "answer": "She wakes up at 6 a.m.",
-            "explanation": {
-              "en": "The text states 'She wakes up at 6 a.m.'",
-              "pt": "O texto afirma 'Ela acorda às 6 da manhã.'"
-            }
-          }
-        ]
       },
-      "quickCheck": [
+      context: {
+        situation: {
+          en: "Ivan asks Bruno about the new people at the coworking space.",
+          pt: "Ivan pergunta a Bruno sobre as pessoas novas no coworking.",
+        },
+        dialogue: [
+          { who: "Ivan", en: "Who is the woman at table four?", pt: "Quem é a mulher da mesa quatro?" },
+          { who: "Bruno", en: "That is Helena. She works for a small design studio.", pt: "Aquela é a Helena. Ela trabalha para um pequeno estúdio de design." },
+          { who: "Ivan", en: "And what does she do exactly?", pt: "E o que exatamente ela faz?" },
+          { who: "Bruno", en: "She designs websites. She also studies English every evening.", pt: "Ela cria sites. Ela também estuda inglês toda noite." },
+          { who: "Ivan", en: "My sister studies English too. She watches videos before bed.", pt: "Minha irmã também estuda inglês. Ela assiste vídeos antes de dormir." },
+        ],
+      },
+      vocabulary: [
+        { term: "designer", pt: "designer", ipa: "/dɪˈzaɪnər/", definition: "A person who creates images, products or websites.", example: "She is a designer.", examplePt: "Ela é designer." },
+        { term: "teacher", pt: "professor(a)", ipa: "/ˈtiːtʃər/", definition: "A person who teaches a subject.", example: "He is a teacher at a language school.", examplePt: "Ele é professor em uma escola de idiomas." },
+        { term: "nurse", pt: "enfermeiro(a)", ipa: "/nɜːrs/", definition: "A person who takes care of patients.", example: "My cousin is a nurse.", examplePt: "Meu primo é enfermeiro." },
+        { term: "driver", pt: "motorista", ipa: "/ˈdraɪvər/", definition: "A person who drives a car or a bus.", example: "He works as a driver.", examplePt: "Ele trabalha como motorista." },
+        { term: "study", pt: "estudar", ipa: "/ˈstʌdi/", definition: "To learn something with attention.", example: "She studies every evening.", examplePt: "Ela estuda toda noite." },
+        { term: "teach", pt: "ensinar", ipa: "/tiːtʃ/", definition: "To help other people learn.", example: "He teaches two classes a day.", examplePt: "Ele dá duas aulas por dia." },
+        { term: "watch", pt: "assistir", ipa: "/wɑːtʃ/", definition: "To look at something for a period of time.", example: "She watches short videos.", examplePt: "Ela assiste vídeos curtos." },
+        { term: "finish", pt: "terminar", ipa: "/ˈfɪnɪʃ/", definition: "To end an activity.", example: "He finishes work at six.", examplePt: "Ele termina o trabalho às seis." },
+        { term: "office", pt: "escritório", ipa: "/ˈɔːfɪs/", definition: "A place where people work at desks.", example: "She works in a small office.", examplePt: "Ela trabalha em um escritório pequeno." },
+        { term: "shift", pt: "turno", ipa: "/ʃɪft/", definition: "The period of the day when a person works.", example: "His shift starts at two.", examplePt: "O turno dele começa às duas." },
+      ],
+      expressions: [
+        { en: "This is Helena. She works with me.", pt: "Esta é a Helena. Ela trabalha comigo." },
+        { en: "He is the one who opens the office.", pt: "Ele é quem abre o escritório." },
+        { en: "What does she do?", pt: "O que ela faz?" },
+        { en: "She works as a designer.", pt: "Ela trabalha como designer." },
+      ],
+      grammar: [
         {
-          "id": "b6d-qc-1",
-          "prompt": {
-            "en": "Fill in the blank: My mom ___ coffee every morning.",
-            "pt": "Preencha a lacuna: Minha mãe ___ café todas as manhãs."
-          },
-          "options": [
-            "drink",
-            "drinks",
-            "drinking"
+          title: { en: "Third person: he / she / it + verb + -s", pt: "Terceira pessoa: he / she / it + verbo + -s" },
+          examples: [
+            { en: "He works in a coffee shop.", pt: "Ele trabalha em uma cafeteria." },
+            { en: "She finishes work at six.", pt: "Ela termina o trabalho às seis." },
+            { en: "It starts at nine.", pt: "Começa às nove." },
           ],
-          "answer": "drinks",
-          "explanation": {
-            "en": "'My mom' is 'she', so we use 'drinks'.",
-            "pt": "'My mom' é 'she', então usamos 'drinks'."
-          }
+          rule: {
+            en: "With he, she and it, add -s to the verb: work → works, start → starts. This -s only exists in the third person.",
+            pt: "Com he, she e it, acrescente -s ao verbo: work → works, start → starts. Esse -s existe só na terceira pessoa.",
+          },
+          mistakes: [
+            { en: "She work in an office. → She works in an office.", pt: "Falta o -s da terceira pessoa." },
+            { en: "He is works at two. → He works at two.", pt: "Não use to be junto do verbo principal." },
+          ],
         },
         {
-          "id": "b6d-qc-2",
-          "prompt": {
-            "en": "Choose the correct expression: Your hands are full. ___ help you with that?",
-            "pt": "Escolha a expressão correta: Suas mãos estão cheias. ___ te ajudar com isso?"
-          },
-          "options": [
-            "Do I",
-            "Let me",
-            "Are you"
+          title: { en: "Spelling: -s, -es and special verbs", pt: "Escrita: -s, -es e verbos especiais" },
+          examples: [
+            { en: "She watches videos in the evening.", pt: "Ela assiste vídeos à noite." },
+            { en: "He teaches English online.", pt: "Ele ensina inglês online." },
+            { en: "She studies before work.", pt: "Ela estuda antes do trabalho." },
           ],
-          "answer": "Let me",
-          "explanation": {
-            "en": "'Let me help you with that' is a common way to offer help.",
-            "pt": "'Let me help you with that' é uma forma comum de oferecer ajuda."
-          }
+          rule: {
+            en: "Verbs ending in -ch, -sh, -ss, -x or -o take -es (watch → watches, go → goes). Consonant + y becomes -ies (study → studies). Have becomes has.",
+            pt: "Verbos terminados em -ch, -sh, -ss, -x ou -o recebem -es (watch → watches, go → goes). Consoante + y vira -ies (study → studies). Have vira has.",
+          },
+          mistakes: [
+            { en: "She studys English. → She studies English.", pt: "Consoante + y vira -ies." },
+            { en: "He have two jobs. → He has two jobs.", pt: "Na terceira pessoa, have vira has." },
+          ],
+        },
+      ],
+      controlledPractice: [
+        {
+          id: "b6d-cp1",
+          prompt: { en: "Complete: She ___ in a small office.", pt: "Complete: She ___ in a small office." },
+          options: ["work", "works", "working"],
+          answer: "works",
+          explanation: { en: "she + verb + -s.", pt: "she + verbo + -s." },
         },
         {
-          "id": "b6d-qc-3",
-          "prompt": {
-            "en": "What time does he go to bed?",
-            "pt": "A que horas ele vai para a cama?"
-          },
-          "options": [
-            "He goes to bed at 10 p.m.",
-            "He go to bed at 10 p.m.",
-            "He goes to bed 10 p.m."
-          ],
-          "answer": "He goes to bed at 10 p.m.",
-          "explanation": {
-            "en": "For 'He', we use 'goes'. 'At' is needed before the time.",
-            "pt": "Para 'He', usamos 'goes'. 'At' é necessário antes da hora."
-          }
+          id: "b6d-cp2",
+          prompt: { en: "Complete: He ___ English at a language school.", pt: "Complete: He ___ English at a language school." },
+          options: ["teachs", "teaches", "teach"],
+          answer: "teaches",
+          explanation: { en: "Verbs in -ch take -es.", pt: "Verbos em -ch recebem -es." },
         },
         {
-          "id": "b6d-qc-4",
-          "prompt": {
-            "en": "Which sentence is correct?",
-            "pt": "Qual frase está correta?"
+          id: "b6d-cp3",
+          prompt: { en: "Complete: My sister ___ every evening.", pt: "Complete: My sister ___ every evening." },
+          options: ["studys", "studies", "study"],
+          answer: "studies",
+          explanation: { en: "Consonant + y → -ies.", pt: "Consoante + y → -ies." },
+        },
+        {
+          id: "b6d-cp4",
+          prompt: { en: "Complete: Ivan ___ two jobs.", pt: "Complete: Ivan ___ two jobs." },
+          options: ["have", "has", "haves"],
+          answer: "has",
+          explanation: { en: "have → has in the third person.", pt: "have → has na terceira pessoa." },
+        },
+        {
+          id: "b6d-cp5",
+          prompt: { en: "Which question asks about a job?", pt: "Qual pergunta é sobre a profissão?" },
+          options: ["What does she do?", "Where is she from?", "How old is she?"],
+          answer: "What does she do?",
+          explanation: { en: "What does she do? asks about the job.", pt: "What does she do? pergunta a profissão." },
+        },
+      ],
+      input: {
+        kind: "listening",
+        title: { en: "Listening — Three people, three routines", pt: "Listening — Três pessoas, três rotinas" },
+        lines: [
+          { en: "Helena designs websites and she studies English in the evening.", pt: "Helena cria sites e estuda inglês à noite." },
+          { en: "Bruno works in a coffee shop and his shift starts at two.", pt: "Bruno trabalha em uma cafeteria e o turno dele começa às duas." },
+          { en: "Ivan's sister is a nurse and she finishes work at eight.", pt: "A irmã do Ivan é enfermeira e termina o trabalho às oito." },
+        ],
+        questions: [
+          {
+            id: "b6d-r1",
+            prompt: { en: "What does Helena do in the evening?", pt: "O que Helena faz à noite?" },
+            options: ["she studies English", "she drives a bus", "she teaches design"],
+            answer: "she studies English",
+            explanation: { en: "she studies English in the evening.", pt: "she studies English in the evening." },
           },
-          "options": [
-            "She brush her teeth.",
-            "She brushes her teeth.",
-            "She is brush her teeth."
-          ],
-          "answer": "She brushes her teeth.",
-          "explanation": {
-            "en": "For 'She', the verb 'brush' becomes 'brushes'.",
-            "pt": "Para 'She', o verbo 'brush' se torna 'brushes'."
-          }
-        }
-      ]
+          {
+            id: "b6d-r2",
+            prompt: { en: "When does Bruno's shift start?", pt: "Quando começa o turno de Bruno?" },
+            options: ["at two", "at eight", "at six"],
+            answer: "at two",
+            explanation: { en: "his shift starts at two.", pt: "his shift starts at two." },
+          },
+          {
+            id: "b6d-r3",
+            prompt: { en: "What is Ivan's sister's job?", pt: "Qual é a profissão da irmã do Ivan?" },
+            options: ["nurse", "driver", "designer"],
+            answer: "nurse",
+            explanation: { en: "she is a nurse.", pt: "she is a nurse." },
+          },
+        ],
+      },
+      quickCheck: [
+        {
+          id: "b6d-qc1",
+          prompt: { en: "Choose the correct sentence.", pt: "Escolha a frase correta." },
+          options: ["He finish at six.", "He finishes at six.", "He is finish at six."],
+          answer: "He finishes at six.",
+          explanation: { en: "he + verb + -es.", pt: "he + verbo + -es." },
+        },
+        {
+          id: "b6d-qc2",
+          prompt: { en: "Complete: She ___ short videos before bed.", pt: "Complete: She ___ short videos before bed." },
+          options: ["watch", "watches", "watchs"],
+          answer: "watches",
+          explanation: { en: "watch → watches.", pt: "watch → watches." },
+        },
+        {
+          id: "b6d-qc3",
+          prompt: { en: "Which sentence presents a third person?", pt: "Qual frase apresenta uma terceira pessoa?" },
+          options: ["This is Helena. She works with me.", "I am Helena and works here.", "She am my colleague."],
+          answer: "This is Helena. She works with me.",
+          explanation: { en: "This is + name, then she + verb + -s.", pt: "This is + nome, depois she + verbo + -s." },
+        },
+        {
+          id: "b6d-qc4",
+          prompt: { en: "Where does a driver work?", pt: "Onde trabalha um motorista?" },
+          options: ["in a car or a bus", "in a hospital", "in a design studio"],
+          answer: "in a car or a bus",
+          explanation: { en: "A driver drives a car or a bus.", pt: "Um motorista dirige carro ou ônibus." },
+        },
+      ],
     },
-    "communicate": {
-      "id": "BEGINNER-U06-COMMUNICATE",
-      "review": [
-        {
-          "en": "Remember the new vocabulary for daily routine: wake up, get up, have breakfast, go to work, have lunch, come home, have dinner, go to bed, take a shower, brush teeth.",
-          "pt": "Lembre-se do novo vocabulário de rotina diária: wake up, get up, have breakfast, go to work, have lunch, come home, have dinner, go to bed, take a shower, brush teeth."
-        },
-        {
-          "en": "Remember the Simple Present (affirmative) for habits and routines, especially adding -s for He/She/It.",
-          "pt": "Lembre-se do Simple Present (afirmativo) para hábitos e rotinas, especialmente adicionando -s para He/She/It."
-        },
-        {
-          "en": "Review expressions for offering help: Can I help you? Do you need anything? Let me help you with that.",
-          "pt": "Revise as expressões para oferecer ajuda: Can I help you? Do you need anything? Let me help you with that."
-        }
+    communicate: {
+      id: "BEGINNER-U06-COMMUNICATE",
+      review: [
+        { en: "Third person: he / she / it + verb + -s.", pt: "Terceira pessoa: he / she / it + verbo + -s." },
+        { en: "Spelling: watches, teaches, studies, goes, has.", pt: "Escrita: watches, teaches, studies, goes, has." },
+        { en: "Question about jobs: What does she do?", pt: "Pergunta sobre profissão: What does she do?" },
       ],
-      "activities": [
+      activities: [
         {
-          "id": "b6c-act-1",
-          "title": {
-            "en": "Real-life Communication Activity: My Routine",
-            "pt": "Atividade de Comunicação Real: Minha Rotina"
+          id: "b6c-a1",
+          title: { en: "Present a colleague", pt: "Apresente um colega" },
+          instruction: {
+            en: "Introduce someone you work or study with. Say the name, the job and one routine action.",
+            pt: "Apresente alguém com quem você trabalha ou estuda. Diga o nome, a profissão e uma ação da rotina.",
           },
-          "instruction": {
-            "en": "Talk about your daily routine using the new vocabulary. Say what time you do each activity. Example: 'I wake up at 7 a.m. I have breakfast at 7:30 a.m.'",
-            "pt": "Fale sobre sua rotina diária usando o novo vocabulário. Diga a que horas você faz cada atividade. Exemplo: 'Eu acordo às 7 da manhã. Eu tomo café da manhã às 7:30 da manhã.'"
-          },
-          "phrases": [
-            {
-              "en": "I wake up at...",
-              "pt": "Eu acordo às..."
-            },
-            {
-              "en": "I take a shower at...",
-              "pt": "Eu tomo banho às..."
-            },
-            {
-              "en": "I go to work at...",
-              "pt": "Eu vou para o trabalho às..."
-            }
+          phrases: [
+            { en: "This is Helena. She works as a designer.", pt: "Esta é a Helena. Ela trabalha como designer." },
+            { en: "She starts work at nine and finishes at six.", pt: "Ela começa a trabalhar às nove e termina às seis." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b6c-act-1-check-1",
-              "prompt": {
-                "en": "What do you do first in the morning?",
-                "pt": "O que você faz primeiro pela manhã?"
-              },
-              "options": [
-                "I have dinner.",
-                "I wake up.",
-                "I go to bed."
-              ],
-              "answer": "I wake up.",
-              "explanation": {
-                "en": "Waking up is usually the first thing you do.",
-                "pt": "Acordar é geralmente a primeira coisa que você faz."
-              }
+              id: "b6c-a1q1",
+              prompt: { en: "Complete: He ___ as a driver.", pt: "Complete: He ___ as a driver." },
+              options: ["work", "works", "is work"],
+              answer: "works",
+              explanation: { en: "he + works.", pt: "he + works." },
             },
-            {
-              "id": "b6c-act-1-check-2",
-              "prompt": {
-                "en": "How do you say 'ir para a cama' in English?",
-                "pt": "Como se diz 'ir para a cama' em inglês?"
-              },
-              "options": [
-                "go to work",
-                "go to bed",
-                "go home"
-              ],
-              "answer": "go to bed",
-              "explanation": {
-                "en": "'Go to bed' means 'ir para a cama'.",
-                "pt": "'Go to bed' significa 'ir para a cama'."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b6c-act-2",
-          "title": {
-            "en": "Make Questions: About Their Day",
-            "pt": "Faça Perguntas: Sobre o Dia Deles"
+          id: "b6c-a2",
+          title: { en: "Someone in my family", pt: "Alguém da minha família" },
+          instruction: {
+            en: "Describe one person in your family: job, place of work and a daily habit.",
+            pt: "Descreva uma pessoa da sua família: profissão, local de trabalho e um hábito diário.",
           },
-          "instruction": {
-            "en": "Formulate questions about someone's daily routine using 'Do you...?' or 'Does he/she...?'. Example: 'Do you brush your teeth every morning?'",
-            "pt": "Formule perguntas sobre a rotina diária de alguém usando 'Do you...?' ou 'Does he/she...?'. Exemplo: 'Você escova os dentes todas as manhãs?'"
-          },
-          "phrases": [
-            {
-              "en": "___ you wake up early?",
-              "pt": "___ você acorda cedo?"
-            },
-            {
-              "en": "___ she have lunch at work?",
-              "pt": "___ ela almoça no trabalho?"
-            },
-            {
-              "en": "___ he take a shower at night?",
-              "pt": "___ ele toma banho à noite?"
-            }
+          phrases: [
+            { en: "My mother is a teacher and she teaches two classes a day.", pt: "Minha mãe é professora e dá duas aulas por dia." },
+            { en: "My brother has a long shift and he finishes late.", pt: "Meu irmão tem um turno longo e termina tarde." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b6c-act-2-check-1",
-              "prompt": {
-                "en": "What is the correct question for 'She goes to work by bus'?",
-                "pt": "Qual é a pergunta correta para 'Ela vai para o trabalho de ônibus'?"
-              },
-              "options": [
-                "Does she go to work by bus?",
-                "Do she go to work by bus?",
-                "Is she go to work by bus?"
-              ],
-              "answer": "Does she go to work by bus?",
-              "explanation": {
-                "en": "For 'she', use 'Does'. The main verb 'go' returns to its base form.",
-                "pt": "Para 'she', use 'Does'. O verbo principal 'go' volta à sua forma base."
-              }
+              id: "b6c-a2q1",
+              prompt: { en: "Complete: My father ___ a small office.", pt: "Complete: My father ___ a small office." },
+              options: ["have", "has", "haves"],
+              answer: "has",
+              explanation: { en: "have → has.", pt: "have → has." },
             },
-            {
-              "id": "b6c-act-2-check-2",
-              "prompt": {
-                "en": "How do you ask about 'you have dinner'?",
-                "pt": "Como você pergunta sobre 'você janta'?"
-              },
-              "options": [
-                "Does you have dinner?",
-                "Do you have dinner?",
-                "You have dinner?"
-              ],
-              "answer": "Do you have dinner?",
-              "explanation": {
-                "en": "For 'you', use 'Do' to form a question.",
-                "pt": "Para 'you', use 'Do' para formar uma pergunta."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b6c-act-3",
-          "title": {
-            "en": "Build Sentences: Create Routine Statements",
-            "pt": "Construa Frases: Crie Declarações de Rotina"
+          id: "b6c-a3",
+          title: { en: "From I to she", pt: "De I para she" },
+          instruction: {
+            en: "Say a sentence about your routine and then say the same sentence about another person.",
+            pt: "Diga uma frase sobre a sua rotina e depois repita a mesma frase sobre outra pessoa.",
           },
-          "instruction": {
-            "en": "Combine subject pronouns, daily routine verbs, and time expressions to create complete sentences. Example: 'I usually have breakfast at 7 a.m.'",
-            "pt": "Combine pronomes pessoais, verbos de rotina diária e expressões de tempo para criar frases completas. Exemplo: 'Eu geralmente tomo café da manhã às 7 da manhã.'"
-          },
-          "phrases": [
-            {
-              "en": "He / brush teeth / every morning",
-              "pt": "Ele / escovar os dentes / todas as manhãs"
-            },
-            {
-              "en": "We / have dinner / at 8 p.m.",
-              "pt": "Nós / jantar / às 8 da noite"
-            },
-            {
-              "en": "She / go to bed / late",
-              "pt": "Ela / ir para a cama / tarde"
-            }
+          phrases: [
+            { en: "I study English in the evening. She studies English in the evening.", pt: "Eu estudo inglês à noite. Ela estuda inglês à noite." },
+            { en: "I watch videos every day. He watches videos every day.", pt: "Eu assisto vídeos todo dia. Ele assiste vídeos todo dia." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b6c-act-3-check-1",
-              "prompt": {
-                "en": "Combine: 'He / go to work / early'",
-                "pt": "Combine: 'Ele / ir para o trabalho / cedo'"
-              },
-              "options": [
-                "He go to work early.",
-                "He goes to work early.",
-                "He is go to work early."
-              ],
-              "answer": "He goes to work early.",
-              "explanation": {
-                "en": "For 'He', 'go' becomes 'goes'.",
-                "pt": "Para 'He', 'go' vira 'goes'."
-              }
+              id: "b6c-a3q1",
+              prompt: { en: "Change to 'she': I go to the office at eight.", pt: "Mude para 'she': I go to the office at eight." },
+              options: ["She go to the office at eight.", "She goes to the office at eight.", "She gos to the office at eight."],
+              answer: "She goes to the office at eight.",
+              explanation: { en: "go → goes.", pt: "go → goes." },
             },
-            {
-              "id": "b6c-act-3-check-2",
-              "prompt": {
-                "en": "Combine: 'They / have lunch / at noon'",
-                "pt": "Combine: 'Eles / almoçar / ao meio-dia'"
-              },
-              "options": [
-                "They has lunch at noon.",
-                "They have lunch at noon.",
-                "They is have lunch at noon."
-              ],
-              "answer": "They have lunch at noon.",
-              "explanation": {
-                "en": "For 'They', 'have' remains 'have'.",
-                "pt": "Para 'They', 'have' permanece 'have'."
-              }
-            }
-          ]
+          ],
         },
-        {
-          "id": "b6c-act-4",
-          "title": {
-            "en": "Role-play: Offering and Accepting Help",
-            "pt": "Role-play: Oferecendo e Aceitando Ajuda"
-          },
-          "instruction": {
-            "en": "Work with a partner. One person describes a busy situation (e.g., 'I need to prepare dinner and also clean the house!'). The other person offers help using the new expressions. Then switch roles.",
-            "pt": "Trabalhe com um parceiro. Uma pessoa descreve uma situação agitada (ex: 'Preciso preparar o jantar e também limpar a casa!'). A outra pessoa oferece ajuda usando as novas expressões. Depois troquem os papéis."
-          },
-          "phrases": [
-            {
-              "en": "I have so much to do!",
-              "pt": "Eu tenho tanta coisa para fazer!"
-            },
-            {
-              "en": "Can I help you with that?",
-              "pt": "Posso te ajudar com isso?"
-            },
-            {
-              "en": "Yes, please!",
-              "pt": "Sim, por favor!"
-            }
-          ],
-          "check": [
-            {
-              "id": "b6c-act-4-check-1",
-              "prompt": {
-                "en": "Someone is struggling with heavy bags. What can you say?",
-                "pt": "Alguém está com dificuldade com sacolas pesadas. O que você pode dizer?"
-              },
-              "options": [
-                "What are you doing?",
-                "Let me help you with that.",
-                "You need help?"
-              ],
-              "answer": "Let me help you with that.",
-              "explanation": {
-                "en": "'Let me help you with that' is a polite way to offer help.",
-                "pt": "'Let me help you with that' é uma forma educada de oferecer ajuda."
-              }
-            },
-            {
-              "id": "b6c-act-4-check-2",
-              "prompt": {
-                "en": "Your friend looks tired and busy. What question can you ask?",
-                "pt": "Seu amigo parece cansado e ocupado. Que pergunta você pode fazer?"
-              },
-              "options": [
-                "Are you good?",
-                "Do you need anything?",
-                "Why are you busy?"
-              ],
-              "answer": "Do you need anything?",
-              "explanation": {
-                "en": "'Do you need anything?' is a polite question to offer help.",
-                "pt": "'Do you need anything?' é uma pergunta educada para oferecer ajuda."
-              }
-            }
-          ]
-        },
-        {
-          "id": "b6c-act-5",
-          "title": {
-            "en": "Talk to Your Partner: Compare Routines",
-            "pt": "Fale com Seu Parceiro: Compare Rotinas"
-          },
-          "instruction": {
-            "en": "Interview your partner about their daily routine. Ask and answer questions. Then, tell the class about your partner's routine. Example: 'Pedro wakes up at 8 a.m. He has breakfast at home.'",
-            "pt": "Entreviste seu parceiro sobre a rotina diária dele. Façam perguntas e respostas. Depois, conte à turma sobre a rotina do seu parceiro. Exemplo: 'Pedro acorda às 8 da manhã. Ele toma café da manhã em casa.'"
-          },
-          "phrases": [
-            {
-              "en": "Do you wake up early?",
-              "pt": "Você acorda cedo?"
-            },
-            {
-              "en": "What time does he/she go to work?",
-              "pt": "A que horas ele/ela vai para o trabalho?"
-            },
-            {
-              "en": "My partner brushes his/her teeth before bed.",
-              "pt": "Meu parceiro(a) escova os dentes antes de dormir."
-            }
-          ],
-          "check": [
-            {
-              "id": "b6c-act-5-check-1",
-              "prompt": {
-                "en": "To ask your partner about their lunch time, you say:",
-                "pt": "Para perguntar ao seu parceiro sobre a hora do almoço dele, você diz:"
-              },
-              "options": [
-                "What time you have lunch?",
-                "What time do you have lunch?",
-                "What time is your lunch?"
-              ],
-              "answer": "What time do you have lunch?",
-              "explanation": {
-                "en": "We use 'do you' for questions in the Simple Present.",
-                "pt": "Usamos 'do you' para perguntas no Simple Present."
-              }
-            },
-            {
-              "id": "b6c-act-5-check-2",
-              "prompt": {
-                "en": "Your partner says: 'I go to bed at 10 p.m.' How do you tell this to the class?",
-                "pt": "Seu parceiro diz: 'Eu vou para a cama às 22h.' Como você conta isso para a turma?"
-              },
-              "options": [
-                "He goes to bed at 10 p.m.",
-                "He go to bed at 10 p.m.",
-                "He is going to bed at 10 p.m."
-              ],
-              "answer": "He goes to bed at 10 p.m.",
-              "explanation": {
-                "en": "For 'He', the verb 'go' becomes 'goes'.",
-                "pt": "Para 'He', o verbo 'go' se torna 'goes'."
-              }
-            }
-          ]
-        }
       ],
-      "challenge": {
-        "id": "b6c-challenge",
-        "title": {
-          "en": "Planning a Week - Daily Routines & Help",
-          "pt": "Planejando uma Semana - Rotinas Diárias e Ajuda"
+      challenge: {
+        id: "b6c-challenge",
+        title: { en: "Communication Challenge — Three people I know", pt: "Desafio de comunicação — Três pessoas que conheço" },
+        instruction: {
+          en: "Describe three people in six sentences: job, workplace and one routine action for each one.",
+          pt: "Descreva três pessoas em seis frases: profissão, local de trabalho e uma ação de rotina para cada uma.",
         },
-        "instruction": {
-          "en": "In pairs, plan a busy day for an imaginary friend who needs help. Describe their routine and then practice offering help when they are 'too busy'. Example: 'Sarah wakes up early, then she has breakfast and takes a shower. She goes to work at 8 a.m. Oh no, she needs to prepare lunch! Can I help her?'",
-          "pt": "Em duplas, planejem um dia agitado para um amigo imaginário que precisa de ajuda. Descrevam a rotina dele e, em seguida, pratiquem oferecer ajuda quando ele estiver 'muito ocupado'. Exemplo: 'Sarah acorda cedo, depois ela toma café da manhã e toma banho. Ela vai para o trabalho às 8 da manhã. Ah não, ela precisa preparar o almoço! Posso ajudá-la?'"
-        },
-        "phrases": [
-          {
-            "en": "My friend 'Leo' has a busy morning routine.",
-            "pt": "Meu amigo 'Leo' tem uma rotina matinal agitada."
-          },
-          {
-            "en": "He usually wakes up at 6 a.m., takes a shower, and then has breakfast.",
-            "pt": "Ele geralmente acorda às 6 da manhã, toma banho e depois toma café da manhã."
-          },
-          {
-            "en": "He needs to go to work, but his car doesn't start! Can I help him?",
-            "pt": "Ele precisa ir para o trabalho, mas o carro dele não liga! Posso ajudá-lo?"
-          }
+        phrases: [
+          { en: "Helena works in a design studio and she starts at nine.", pt: "Helena trabalha em um estúdio de design e começa às nove." },
+          { en: "Bruno works in a coffee shop and his shift finishes at ten.", pt: "Bruno trabalha em uma cafeteria e o turno dele termina às dez." },
+          { en: "My cousin is a nurse and she watches the news after work.", pt: "Minha prima é enfermeira e assiste às notícias depois do trabalho." },
+          { en: "He teaches English and he has classes every morning.", pt: "Ele ensina inglês e tem aulas toda manhã." },
         ],
-        "check": [
+        check: [
           {
-            "id": "b6c-chal-check-1",
-            "prompt": {
-              "en": "Your friend says, 'I need to clean the house and cook dinner.' What is a good way to offer help?",
-              "pt": "Seu amigo diz: 'Preciso limpar a casa e cozinhar o jantar.' Qual é uma boa maneira de oferecer ajuda?"
-            },
-            "options": [
-              "Are you busy?",
-              "Can I help you with dinner?",
-              "Why do you need to do that?"
-            ],
-            "answer": "Can I help you with dinner?",
-            "explanation": {
-              "en": "'Can I help you with dinner?' is a specific and helpful offer.",
-              "pt": "Posso te ajudar com o jantar?' é uma oferta específica e útil."
-            }
+            id: "b6c-ch1",
+            prompt: { en: "Which sentence has NO mistake?", pt: "Qual frase NÃO tem erro?" },
+            options: ["She teach English.", "He studys at night.", "She watches videos every day."],
+            answer: "She watches videos every day.",
+            explanation: { en: "watch → watches.", pt: "watch → watches." },
           },
           {
-            "id": "b6c-chal-check-2",
-            "prompt": {
-              "en": "Someone is rushing to get ready. You see them looking for keys. What can you say?",
-              "pt": "Alguém está com pressa para se arrumar. Você os vê procurando chaves. O que você pode dizer?"
-            },
-            "options": [
-              "Where are your keys?",
-              "Do you need anything?",
-              "You are late."
-            ],
-            "answer": "Do you need anything?",
-            "explanation": {
-              "en": "'Do you need anything?' is a general offer of help, appropriate here.",
-              "pt": "'Você precisa de alguma coisa?' é uma oferta geral de ajuda, apropriada aqui."
-            }
-          }
-        ]
+            id: "b6c-ch2",
+            prompt: { en: "Answer: What does he do?", pt: "Responda: What does he do?" },
+            options: ["He is from Brazil.", "He works as a driver.", "He is twenty."],
+            answer: "He works as a driver.",
+            explanation: { en: "The question asks about the job.", pt: "A pergunta é sobre a profissão." },
+          },
+        ],
       },
-      "lessonReview": {
-        "summary": {
-          "en": "In this unit, you learned about daily routines and how to talk about them using the Simple Present, including the -s form for 'he', 'she', and 'it'. You also practiced offering help in different situations.",
-          "pt": "Nesta unidade, você aprendeu sobre rotinas diárias e como falar sobre elas usando o Simple Present, incluindo a forma -s para 'he', 'she' e 'it'. Você também praticou oferecer ajuda em diferentes situações."
+      lessonReview: {
+        summary: {
+          en: "You talked about other people's jobs and routines using the third person -s.",
+          pt: "Você falou do trabalho e da rotina de outras pessoas usando o -s da terceira pessoa.",
         },
-        "canDo": [
-          {
-            "en": "Describe my own daily routine and someone else's daily routine.",
-            "pt": "Descrever minha própria rotina diária e a rotina diária de outra pessoa."
-          },
-          {
-            "en": "Use verbs in the Simple Present (affirmative) correctly, including the -s for third person singular.",
-            "pt": "Usar verbos no Simple Present (afirmativo) corretamente, incluindo o -s para a terceira pessoa do singular."
-          },
-          {
-            "en": "Offer help using 'Can I help you?', 'Do you need anything?', and 'Let me help you with that.'",
-            "pt": "Oferecer ajuda usando 'Can I help you?', 'Do you need anything?' e 'Let me help you with that.'"
-          }
+        canDo: [
+          { en: "I can say what another person does.", pt: "Consigo dizer o que outra pessoa faz." },
+          { en: "I can use works, studies, teaches and has correctly.", pt: "Consigo usar works, studies, teaches e has corretamente." },
+          { en: "I can introduce a colleague or a family member.", pt: "Consigo apresentar um colega ou familiar." },
         ],
-        "next": {
-          "en": "In the next unit, we will continue with the Simple Present and learn how to form negative sentences and questions about daily routines.",
-          "pt": "Na próxima unidade, continuaremos com o Simple Present e aprenderemos como formar frases negativas e perguntas sobre rotinas diárias."
-        }
-      }
-    }
+        next: {
+          en: "Next: clock times, days and months to arrange meetings.",
+          pt: "Próximo: horas, dias e meses para marcar encontros.",
+        },
+      },
+    },
   },
   {
-    "code": "BEGINNER-U07",
-    "number": 7,
-    "title": "School Work - Simple Present",
-    "titlePt": "Trabalho Escolar - Presente Simples",
-    "cefr": "A1",
-    "objective": {
-      "en": "To teach 'school work' vocabulary and Simple Present negative (don't/doesn't) and interrogative (do/does) forms in a contextualized way.",
-      "pt": "Ensinar o vocabulário de 'school work' e as formas negativa (don't/doesn't) e interrogativa (do/does) do Simple Present de forma contextualizada."
+    code: "BEGINNER-U07",
+    number: 7,
+    title: "Clock and Calendar — Say when",
+    titlePt: "Relógio e calendário — Dizer quando",
+    cefr: "A1",
+    objective: {
+      en: "Tell the time, name days and months, and use the prepositions at, on and in to say when something happens.",
+      pt: "Dizer as horas, nomear dias e meses e usar as preposições at, on e in para dizer quando algo acontece.",
     },
-    "communicationGoal": {
-      "en": "The student will be able to use 'accept refuse' expressions and 'school work' vocabulary to communicate in real situations.",
-      "pt": "O aluno será capaz de usar as expressões de 'accept refuse' e o vocabulário de 'school work' para se comunicar em situações reais."
+    communicationGoal: {
+      en: "You can arrange two appointments, saying the day and the exact time.",
+      pt: "Você consegue marcar dois compromissos, dizendo o dia e o horário exato.",
     },
-    "prerequisites": {
-      "en": "Simple Present (affirmative) for habits and routines, with third-person -s. Daily Routine vocabulary.",
-      "pt": "Simple Present (afirmativo) para hábitos e rotinas, com -s na terceira pessoa. Vocabulário de Daily Routine."
+    prerequisites: {
+      en: "Unit 6 — third person of the present simple, to talk about other people's schedules.",
+      pt: "Unidade 6 — terceira pessoa do present simple, para falar da agenda de outras pessoas.",
     },
-    "newContent": {
-      "en": "Grammar: Simple Present — negative (don't/doesn't) and interrogative (do/does) forms. | Vocabulary: School Work (10 lexical items) | Expressions: Accept Refuse.",
-      "pt": "Gramática: Simple Present — formas negativa (don't/doesn't) e interrogativa (do/does). | Vocabulário: School Work (10 itens lexicais) | Expressões: Accept Refuse."
+    newContent: {
+      en: "Grammar: prepositions of time at / on / in. Vocabulary: clock times, days of the week, months. Expressions: arranging a meeting.",
+      pt: "Gramática: preposições de tempo at / on / in. Vocabulário: horas, dias da semana, meses. Expressões: marcar um encontro.",
     },
-    "reviewContent": {
-      "en": "Spiral review: Verb to be — negative and interrogative forms, plus possessive adjectives (my, your, his, her) (Unit 2).",
-      "pt": "Revisão em espiral: Verb to be — formas negativa e interrogativa, mais adjetivos possessivos (my, your, his, her) (Unidade 2)."
+    reviewContent: {
+      en: "Review from Units 4–6: numbers, routine verbs and the third person -s.",
+      pt: "Revisão das Unidades 4–6: números, verbos de rotina e o -s da terceira pessoa.",
     },
-    "discover": {
-      "id": "BEGINNER-U07-DISCOVER",
-      "warmUp": {
-        "prompt": {
-          "en": "Look at the pictures. What do you see? Discuss what people do at school or work.",
-          "pt": "Olhe as imagens. O que você vê? Discuta o que as pessoas fazem na escola ou no trabalho."
+    discover: {
+      id: "BEGINNER-U07-DISCOVER",
+      warmUp: {
+        prompt: {
+          en: "Look at the picture. There is a clock and a calendar. What time is it and what day is today?",
+          pt: "Observe a imagem. Há um relógio e um calendário. Que horas são e que dia é hoje?",
         },
-        "phrases": [
-          {
-            "en": "Is this a school or an office?",
-            "pt": "Isto é uma escola ou um escritório?"
-          },
-          {
-            "en": "What do students do?",
-            "pt": "O que os alunos fazem?"
-          },
-          {
-            "en": "What does a teacher do?",
-            "pt": "O que um professor faz?"
-          }
-        ]
-      },
-      "context": {
-        "situation": {
-          "en": "Leo is a student. He is talking to his friend, Maya, about school work.",
-          "pt": "Leo é um estudante. Ele está conversando com sua amiga, Maya, sobre trabalho escolar."
-        },
-        "dialogue": [
-          {
-            "who": "Leo",
-            "en": "Hi, Maya! Do you have a lot of homework today?",
-            "pt": "Oi, Maya! Você tem muito dever de casa hoje?"
-          },
-          {
-            "who": "Maya",
-            "en": "Yes, I do! My teacher gives a lot of homework. I don't like it.",
-            "pt": "Sim, eu tenho! Minha professora dá muito dever de casa. Eu não gosto."
-          },
-          {
-            "who": "Leo",
-            "en": "Oh, I see. Does your boss give you many deadlines for your job?",
-            "pt": "Ah, entendi. Sua chefe te dá muitos prazos no seu trabalho?"
-          },
-          {
-            "who": "Maya",
-            "en": "Sometimes. But I manage my schedule well. Do you want to study together later?",
-            "pt": "Às vezes. Mas eu gerencio bem minha agenda. Quer estudar juntos mais tarde?"
-          },
-          {
-            "who": "Leo",
-            "en": "Yes, sure! I'd love to! My schedule is free.",
-            "pt": "Sim, claro! Eu adoraria! Minha agenda está livre."
-          }
-        ]
-      },
-      "vocabulary": [
-        {
-          "term": "classroom",
-          "pt": "sala de aula",
-          "ipa": "/ˈklæs.ruːm/",
-          "definition": "A room where students have lessons.",
-          "example": "The teacher writes on the board in the classroom.",
-          "examplePt": "O professor escreve no quadro na sala de aula."
-        },
-        {
-          "term": "teacher",
-          "pt": "professor(a)",
-          "ipa": "/ˈtiː.tʃər/",
-          "definition": "A person who teaches students, especially in a school.",
-          "example": "My English teacher is very kind.",
-          "examplePt": "Minha professora de inglês é muito gentil."
-        },
-        {
-          "term": "student",
-          "pt": "estudante, aluno(a)",
-          "ipa": "/ˈstuː.dənt/",
-          "definition": "A person who is studying at a school or college.",
-          "example": "I am a student at a university.",
-          "examplePt": "Eu sou um estudante em uma universidade."
-        },
-        {
-          "term": "homework",
-          "pt": "dever de casa",
-          "ipa": "/ˈhoʊm.wɜːrk/",
-          "definition": "Work that a student is given to do at home.",
-          "example": "I do my homework every evening.",
-          "examplePt": "Eu faço meu dever de casa todas as noites."
-        },
-        {
-          "term": "office",
-          "pt": "escritório",
-          "ipa": "/ˈɑː.fɪs/",
-          "definition": "A room or building where people work, usually at desks.",
-          "example": "My father works in an office.",
-          "examplePt": "Meu pai trabalha em um escritório."
-        },
-        {
-          "term": "meeting",
-          "pt": "reunião",
-          "ipa": "/ˈmiː.tɪŋ/",
-          "definition": "A planned occasion when people come together to discuss something.",
-          "example": "We have a meeting every Monday.",
-          "examplePt": "Temos uma reunião toda segunda-feira."
-        },
-        {
-          "term": "colleague",
-          "pt": "colega de trabalho",
-          "ipa": "/ˈkɑː.liːɡ/",
-          "definition": "A person you work with.",
-          "example": "My colleague helps me with my tasks.",
-          "examplePt": "Meu colega me ajuda com minhas tarefas."
-        },
-        {
-          "term": "boss",
-          "pt": "chefe",
-          "ipa": "/bɑːs/",
-          "definition": "The person who is in charge of an organization or department.",
-          "example": "My boss is a very busy person.",
-          "examplePt": "Meu chefe é uma pessoa muito ocupada."
-        },
-        {
-          "term": "deadline",
-          "pt": "prazo",
-          "ipa": "/ˈded.laɪn/",
-          "definition": "A time or date by which a particular task must be completed.",
-          "example": "I need to finish this report before the deadline.",
-          "examplePt": "Preciso terminar este relatório antes do prazo."
-        },
-        {
-          "term": "schedule",
-          "pt": "agenda, cronograma",
-          "ipa": "/ˈskedʒ.uːl/",
-          "definition": "A plan that lists all the work you have to do and when you must do it.",
-          "example": "My schedule is very full this week.",
-          "examplePt": "Minha agenda está muito cheia esta semana."
-        }
-      ],
-      "expressions": [
-        {
-          "en": "Yes, sure!",
-          "pt": "Sim, claro!"
-        },
-        {
-          "en": "No, thank you.",
-          "pt": "Não, obrigado(a)."
-        },
-        {
-          "en": "I'd love to, but I can't.",
-          "pt": "Eu adoraria, mas não posso."
-        }
-      ],
-      "grammar": [
-        {
-          "title": {
-            "en": "Simple Present — Negative Form",
-            "pt": "Simple Present — Forma Negativa"
-          },
-          "examples": [
-            {
-              "en": "I don't work on Sundays.",
-              "pt": "Eu não trabalho aos domingos."
-            },
-            {
-              "en": "She doesn't like coffee.",
-              "pt": "Ela não gosta de café."
-            },
-            {
-              "en": "They don't have a meeting today.",
-              "pt": "Eles não têm uma reunião hoje."
-            }
-          ],
-          "rule": {
-            "en": "Use 'do not' (don't) for I, You, We, They. Use 'does not' (doesn't) for He, She, It. The main verb stays in the base form.",
-            "pt": "Use 'do not' (don't) para I, You, We, They. Use 'does not' (doesn't) para He, She, It. O verbo principal permanece na forma base."
-          },
-          "mistakes": [
-            {
-              "en": "He doesn't likes coffee. (Incorrect 'likes')",
-              "pt": "He doesn't likes coffee. (Uso incorreto de 'likes')"
-            },
-            {
-              "en": "I not like homework. (Missing 'do')",
-              "pt": "I not like homework. (Faltando 'do')"
-            }
-          ]
-        },
-        {
-          "title": {
-            "en": "Simple Present — Interrogative Form",
-            "pt": "Simple Present — Forma Interrogativa"
-          },
-          "examples": [
-            {
-              "en": "Do you work on Saturdays?",
-              "pt": "Você trabalha aos sábados?"
-            },
-            {
-              "en": "Does he study English?",
-              "pt": "Ele estuda inglês?"
-            },
-            {
-              "en": "Do they have a deadline?",
-              "pt": "Eles têm um prazo?"
-            }
-          ],
-          "rule": {
-            "en": "Use 'Do' before I, You, We, They. Use 'Does' before He, She, It. The main verb stays in the base form.",
-            "pt": "Use 'Do' antes de I, You, We, They. Use 'Does' antes de He, She, It. O verbo principal permanece na forma base."
-          },
-          "mistakes": [
-            {
-              "en": "Does she works in an office? (Incorrect 'works')",
-              "pt": "Does she works in an office? (Uso incorreto de 'works')"
-            },
-            {
-              "en": "You like school? (Missing 'Do')",
-              "pt": "You like school? (Faltando 'Do')"
-            }
-          ]
-        }
-      ],
-      "controlledPractice": [
-        {
-          "id": "b7d-cp1",
-          "prompt": {
-            "en": "Choose the correct negative form: She _____ homework.",
-            "pt": "Escolha a forma negativa correta: Ela _____ dever de casa."
-          },
-          "options": [
-            "don't do",
-            "doesn't do",
-            "not do",
-            "don't doing"
-          ],
-          "answer": "doesn't do",
-          "explanation": {
-            "en": "For 'she', we use 'doesn't' followed by the base form of the verb.",
-            "pt": "Para 'she', usamos 'doesn't' seguido da forma base do verbo."
-          }
-        },
-        {
-          "id": "b7d-cp2",
-          "prompt": {
-            "en": "Choose the correct interrogative form: _____ you have a meeting?",
-            "pt": "Escolha a forma interrogativa correta: _____ você tem uma reunião?"
-          },
-          "options": [
-            "Does",
-            "Is",
-            "Do",
-            "Are"
-          ],
-          "answer": "Do",
-          "explanation": {
-            "en": "For 'you', we use 'Do' to form a question in the Simple Present.",
-            "pt": "Para 'you', usamos 'Do' para formar uma pergunta no Simple Present."
-          }
-        },
-        {
-          "id": "b7d-cp3",
-          "prompt": {
-            "en": "Complete the sentence: My colleague _____ work on weekends. (negative)",
-            "pt": "Complete a frase: Meu colega _____ trabalhar nos fins de semana. (negativo)"
-          },
-          "options": [
-            "don't",
-            "doesn't",
-            "not",
-            "do not"
-          ],
-          "answer": "doesn't",
-          "explanation": {
-            "en": "'My colleague' is like 'he/she', so we use 'doesn't'.",
-            "pt": "'My colleague' é como 'he/she', então usamos 'doesn't'."
-          }
-        },
-        {
-          "id": "b7d-cp4",
-          "prompt": {
-            "en": "Form a question: (they / study / in the classroom)",
-            "pt": "Forme uma pergunta: (eles / estudar / na sala de aula)"
-          },
-          "options": [
-            "Do they study in the classroom?",
-            "Does they study in the classroom?",
-            "Are they study in the classroom?",
-            "They study in the classroom?"
-          ],
-          "answer": "Do they study in the classroom?",
-          "explanation": {
-            "en": "For 'they', use 'Do' at the beginning of the question.",
-            "pt": "Para 'they', use 'Do' no início da pergunta."
-          }
-        }
-      ],
-      "input": {
-        "kind": "reading",
-        "title": {
-          "en": "A Busy Day",
-          "pt": "Um Dia Agitado"
-        },
-        "lines": [
-          {
-            "en": "I am Anna. I am a student and I also work part-time. In the morning, I go to my classroom. My teacher always gives us homework. I don't like a lot of homework, but I always do it. My friend, Leo, doesn't like homework either.",
-            "pt": "Eu sou a Anna. Sou estudante e também trabalho em meio período. Pela manhã, vou para minha sala de aula. Minha professora sempre nos dá dever de casa. Eu não gosto de muito dever de casa, mas sempre faço. Meu amigo, Leo, também não gosta de dever de casa."
-          },
-          {
-            "en": "In the afternoon, I work in an office. My boss is very strict. She gives me many deadlines. My colleagues and I have a meeting every Tuesday. It's a busy schedule! Do you have a busy schedule too?",
-            "pt": "À tarde, trabalho em um escritório. Minha chefe é muito rigorosa. Ela me dá muitos prazos. Meus colegas e eu temos uma reunião toda terça-feira. É uma agenda cheia! Você também tem uma agenda cheia?"
-          }
+        phrases: [
+          { en: "It is half past nine.", pt: "São nove e meia." },
+          { en: "Today is Tuesday.", pt: "Hoje é terça-feira." },
+          { en: "My meeting is on Friday at three.", pt: "Minha reunião é na sexta às três." },
         ],
-        "questions": [
-          {
-            "id": "b7d-iq1",
-            "prompt": {
-              "en": "Does Anna like a lot of homework?",
-              "pt": "Anna gosta de muito dever de casa?"
-            },
-            "options": [
-              "Yes, she does.",
-              "No, she doesn't.",
-              "Yes, she is.",
-              "No, she isn't."
-            ],
-            "answer": "No, she doesn't.",
-            "explanation": {
-              "en": "The text says: 'I don't like a lot of homework'.",
-              "pt": "O texto diz: 'Eu não gosto de muito dever de casa'."
-            }
-          },
-          {
-            "id": "b7d-iq2",
-            "prompt": {
-              "en": "When do Anna and her colleagues have a meeting?",
-              "pt": "Quando Anna e seus colegas têm uma reunião?"
-            },
-            "options": [
-              "Every Monday",
-              "Every Wednesday",
-              "Every Tuesday",
-              "Every Friday"
-            ],
-            "answer": "Every Tuesday",
-            "explanation": {
-              "en": "The text states: 'My colleagues and I have a meeting every Tuesday.'",
-              "pt": "O texto afirma: 'Meus colegas e eu temos uma reunião toda terça-feira.'"
-            }
-          },
-          {
-            "id": "b7d-iq3",
-            "prompt": {
-              "en": "Is Anna only a student?",
-              "pt": "Anna é apenas uma estudante?"
-            },
-            "options": [
-              "Yes, she is.",
-              "No, she isn't.",
-              "Yes, she does.",
-              "No, she doesn't."
-            ],
-            "answer": "No, she isn't.",
-            "explanation": {
-              "en": "The text says: 'I am a student and I also work part-time.'",
-              "pt": "O texto diz: 'Eu sou estudante e também trabalho em meio período'."
-            }
-          }
-        ]
       },
-      "quickCheck": [
+      context: {
+        situation: {
+          en: "Helena and Ivan try to find a free time for a short meeting.",
+          pt: "Helena e Ivan tentam encontrar um horário livre para uma reunião curta.",
+        },
+        dialogue: [
+          { who: "Helena", en: "Ivan, are you free on Wednesday morning?", pt: "Ivan, você está livre na quarta de manhã?" },
+          { who: "Ivan", en: "Not really. I have a class at ten.", pt: "Na verdade, não. Eu tenho uma aula às dez." },
+          { who: "Helena", en: "What about Thursday at two thirty?", pt: "Que tal quinta às duas e meia?" },
+          { who: "Ivan", en: "Thursday is perfect. Let's meet at two thirty in the small room.", pt: "Quinta é perfeito. Vamos nos encontrar às duas e meia na sala pequena." },
+          { who: "Helena", en: "Great. I always finish my report in the afternoon, so it works.", pt: "Ótimo. Eu sempre termino meu relatório à tarde, então dá certo." },
+        ],
+      },
+      vocabulary: [
+        { term: "o'clock", pt: "em ponto", ipa: "/əˈklɑːk/", definition: "Used for an exact hour with no minutes.", example: "It is five o'clock.", examplePt: "São cinco em ponto." },
+        { term: "half past", pt: "e meia", ipa: "/hæf pæst/", definition: "Thirty minutes after the hour.", example: "It is half past six.", examplePt: "São seis e meia." },
+        { term: "quarter to", pt: "quinze para", ipa: "/ˈkwɔːrtər tuː/", definition: "Fifteen minutes before the hour.", example: "It is quarter to nine.", examplePt: "São quinze para as nove." },
+        { term: "Monday", pt: "segunda-feira", ipa: "/ˈmʌndeɪ/", definition: "The first working day of the week.", example: "I study on Monday.", examplePt: "Eu estudo na segunda-feira." },
+        { term: "weekend", pt: "fim de semana", ipa: "/ˈwiːkend/", definition: "Saturday and Sunday.", example: "She rests at the weekend.", examplePt: "Ela descansa no fim de semana." },
+        { term: "month", pt: "mês", ipa: "/mʌnθ/", definition: "One of the twelve parts of a year.", example: "March is a busy month.", examplePt: "Março é um mês corrido." },
+        { term: "appointment", pt: "compromisso", ipa: "/əˈpɔɪntmənt/", definition: "A meeting arranged for a certain time.", example: "I have an appointment at four.", examplePt: "Eu tenho um compromisso às quatro." },
+        { term: "free", pt: "livre", ipa: "/friː/", definition: "With no work or plan at that moment.", example: "Are you free on Friday?", examplePt: "Você está livre na sexta?" },
+        { term: "busy", pt: "ocupado(a)", ipa: "/ˈbɪzi/", definition: "With a lot to do.", example: "He is busy in the morning.", examplePt: "Ele está ocupado de manhã." },
+        { term: "schedule", pt: "agenda", ipa: "/ˈskedʒuːl/", definition: "The plan of your times and activities.", example: "My schedule is full today.", examplePt: "Minha agenda está cheia hoje." },
+      ],
+      expressions: [
+        { en: "What time is it?", pt: "Que horas são?" },
+        { en: "Are you free on Thursday?", pt: "Você está livre na quinta?" },
+        { en: "Let's meet at two thirty.", pt: "Vamos nos encontrar às duas e meia." },
+        { en: "That works for me.", pt: "Isso funciona para mim." },
+      ],
+      grammar: [
         {
-          "id": "b7d-qc1",
-          "prompt": {
-            "en": "My brother _____ work on Sundays. (negative)",
-            "pt": "Meu irmão _____ trabalhar aos domingos. (negativo)"
-          },
-          "options": [
-            "don't",
-            "doesn't",
-            "not",
-            "do not"
+          title: { en: "at / on / in for time", pt: "at / on / in para tempo" },
+          examples: [
+            { en: "The class starts at ten.", pt: "A aula começa às dez." },
+            { en: "We meet on Thursday.", pt: "Nós nos encontramos na quinta." },
+            { en: "She travels in July.", pt: "Ela viaja em julho." },
           ],
-          "answer": "doesn't",
-          "explanation": {
-            "en": "'My brother' is third person singular, so we use 'doesn't'.",
-            "pt": "'My brother' é terceira pessoa do singular, então usamos 'doesn't'."
-          }
+          rule: {
+            en: "Use at + clock time (at six), on + day or date (on Monday), in + month, year or part of the day (in May, in the morning).",
+            pt: "Use at + hora (at six), on + dia ou data (on Monday), in + mês, ano ou parte do dia (in May, in the morning).",
+          },
+          mistakes: [
+            { en: "We meet in Monday. → We meet on Monday.", pt: "Dia da semana usa on." },
+            { en: "The class starts on ten. → The class starts at ten.", pt: "Hora exata usa at." },
+          ],
         },
         {
-          "id": "b7d-qc2",
-          "prompt": {
-            "en": "_____ your teacher give a lot of homework?",
-            "pt": "_____ seu professor(a) dá muito dever de casa?"
-          },
-          "options": [
-            "Do",
-            "Does",
-            "Is",
-            "Are"
+          title: { en: "Telling the time", pt: "Dizendo as horas" },
+          examples: [
+            { en: "It is seven o'clock.", pt: "São sete em ponto." },
+            { en: "It is half past eight.", pt: "São oito e meia." },
+            { en: "It is quarter to five.", pt: "São quinze para as cinco." },
           ],
-          "answer": "Does",
-          "explanation": {
-            "en": "'Your teacher' is third person singular, so we use 'Does'.",
-            "pt": "'Your teacher' é terceira pessoa do singular, então usamos 'Does'."
-          }
+          rule: {
+            en: "Start with It is. Use o'clock for exact hours, half past for thirty minutes, quarter past and quarter to for fifteen minutes. You can also say the numbers: seven thirty.",
+            pt: "Comece com It is. Use o'clock para hora cheia, half past para trinta minutos, quarter past e quarter to para quinze minutos. Também é possível dizer os números: seven thirty.",
+          },
+          mistakes: [
+            { en: "It is the five hours. → It is five o'clock.", pt: "Não se usa 'hours' para dizer horas." },
+            { en: "Is half past two. → It is half past two.", pt: "A frase precisa de It." },
+          ],
+        },
+      ],
+      controlledPractice: [
+        {
+          id: "b7d-cp1",
+          prompt: { en: "Complete: The meeting is ___ Friday.", pt: "Complete: The meeting is ___ Friday." },
+          options: ["at", "on", "in"],
+          answer: "on",
+          explanation: { en: "Days of the week take on.", pt: "Dias da semana usam on." },
         },
         {
-          "id": "b7d-qc3",
-          "prompt": {
-            "en": "Choose the correct phrase: (invitation)",
-            "pt": "Escolha a frase correta: (convite)"
-          },
-          "options": [
-            "No, thanks you.",
-            "I'd love to, but I can't.",
-            "Yes, I can't.",
-            "No, sure!"
-          ],
-          "answer": "I'd love to, but I can't.",
-          "explanation": {
-            "en": "This is a common expression to politely refuse an invitation.",
-            "pt": "Esta é uma expressão comum para recusar um convite educadamente."
-          }
+          id: "b7d-cp2",
+          prompt: { en: "Complete: She travels ___ September.", pt: "Complete: She travels ___ September." },
+          options: ["on", "in", "at"],
+          answer: "in",
+          explanation: { en: "Months take in.", pt: "Meses usam in." },
         },
         {
-          "id": "b7d-qc4",
-          "prompt": {
-            "en": "What is 'homework' in Portuguese?",
-            "pt": "O que significa 'homework' em português?"
+          id: "b7d-cp3",
+          prompt: { en: "How do you say 8:30?", pt: "Como se diz 8:30?" },
+          options: ["half past eight", "quarter to eight", "eight o'clock"],
+          answer: "half past eight",
+          explanation: { en: "30 minutes = half past.", pt: "30 minutos = half past." },
+        },
+        {
+          id: "b7d-cp4",
+          prompt: { en: "How do you say 4:45?", pt: "Como se diz 4:45?" },
+          options: ["quarter past four", "quarter to five", "half past four"],
+          answer: "quarter to five",
+          explanation: { en: "15 minutes before five.", pt: "15 minutos para as cinco." },
+        },
+        {
+          id: "b7d-cp5",
+          prompt: { en: "Complete: He is busy ___ the morning.", pt: "Complete: He is busy ___ the morning." },
+          options: ["in", "at", "on"],
+          answer: "in",
+          explanation: { en: "in the morning / afternoon / evening.", pt: "in the morning / afternoon / evening." },
+        },
+      ],
+      input: {
+        kind: "listening",
+        title: { en: "Listening — A week of appointments", pt: "Listening — Uma semana de compromissos" },
+        lines: [
+          { en: "I have an English class on Monday at seven in the evening.", pt: "Eu tenho aula de inglês na segunda às sete da noite." },
+          { en: "Helena is busy on Wednesday, but she is free on Thursday afternoon.", pt: "Helena está ocupada na quarta, mas está livre na quinta à tarde." },
+          { en: "We meet at quarter past three and we finish at four.", pt: "Nós nos encontramos às três e quinze e terminamos às quatro." },
+        ],
+        questions: [
+          {
+            id: "b7d-r1",
+            prompt: { en: "When is the English class?", pt: "Quando é a aula de inglês?" },
+            options: ["on Monday at seven", "on Thursday at three", "on Wednesday at four"],
+            answer: "on Monday at seven",
+            explanation: { en: "on Monday at seven in the evening.", pt: "on Monday at seven in the evening." },
           },
-          "options": [
-            "Reunião",
-            "Prazo",
-            "Dever de casa",
-            "Escritório"
-          ],
-          "answer": "Dever de casa",
-          "explanation": {
-            "en": "'Homework' means 'dever de casa'.",
-            "pt": "'Homework' significa 'dever de casa'."
-          }
-        }
-      ]
+          {
+            id: "b7d-r2",
+            prompt: { en: "When is Helena free?", pt: "Quando Helena está livre?" },
+            options: ["Wednesday morning", "Thursday afternoon", "Monday evening"],
+            answer: "Thursday afternoon",
+            explanation: { en: "she is free on Thursday afternoon.", pt: "she is free on Thursday afternoon." },
+          },
+          {
+            id: "b7d-r3",
+            prompt: { en: "What time does the meeting start?", pt: "Que horas começa a reunião?" },
+            options: ["at quarter past three", "at half past three", "at four"],
+            answer: "at quarter past three",
+            explanation: { en: "We meet at quarter past three.", pt: "We meet at quarter past three." },
+          },
+        ],
+      },
+      quickCheck: [
+        {
+          id: "b7d-qc1",
+          prompt: { en: "Choose the correct sentence.", pt: "Escolha a frase correta." },
+          options: ["My class is in Tuesday.", "My class is on Tuesday.", "My class is at Tuesday."],
+          answer: "My class is on Tuesday.",
+          explanation: { en: "on + day.", pt: "on + dia." },
+        },
+        {
+          id: "b7d-qc2",
+          prompt: { en: "Complete: It ___ half past ten.", pt: "Complete: It ___ half past ten." },
+          options: ["is", "are", "has"],
+          answer: "is",
+          explanation: { en: "It is + time.", pt: "It is + hora." },
+        },
+        {
+          id: "b7d-qc3",
+          prompt: { en: "Which answer accepts an invitation?", pt: "Qual resposta aceita um convite?" },
+          options: ["That works for me.", "What time is it?", "I am busy all day."],
+          answer: "That works for me.",
+          explanation: { en: "It confirms the time.", pt: "Confirma o horário." },
+        },
+        {
+          id: "b7d-qc4",
+          prompt: { en: "Saturday and Sunday are the:", pt: "Sábado e domingo são o:" },
+          options: ["weekend", "month", "schedule"],
+          answer: "weekend",
+          explanation: { en: "weekend = Saturday + Sunday.", pt: "weekend = sábado + domingo." },
+        },
+      ],
     },
-    "communicate": {
-      "id": "BEGINNER-U07-COMMUNICATE",
-      "review": [
-        {
-          "en": "Remember the negative and interrogative forms of Simple Present with 'do/does'.",
-          "pt": "Lembre-se das formas negativa e interrogativa do Simple Present com 'do/does'."
-        },
-        {
-          "en": "Recall vocabulary related to school and work.",
-          "pt": "Recorde o vocabulário relacionado à escola e ao trabalho."
-        },
-        {
-          "en": "Practice accepting and refusing invitations.",
-          "pt": "Pratique aceitar e recusar convites."
-        }
+    communicate: {
+      id: "BEGINNER-U07-COMMUNICATE",
+      review: [
+        { en: "at + clock time · on + day · in + month or part of the day.", pt: "at + hora · on + dia · in + mês ou parte do dia." },
+        { en: "It is five o'clock / half past six / quarter to nine.", pt: "It is five o'clock / half past six / quarter to nine." },
+        { en: "Arranging: Are you free...? Let's meet at...", pt: "Marcar: Are you free...? Let's meet at..." },
       ],
-      "activities": [
+      activities: [
         {
-          "id": "b7c-act1",
-          "title": {
-            "en": "Complete the Conversation",
-            "pt": "Complete a Conversa"
+          id: "b7c-a1",
+          title: { en: "Read the clock", pt: "Leia o relógio" },
+          instruction: {
+            en: "Say five different times out loud, using o'clock, half past and quarter to.",
+            pt: "Diga cinco horários diferentes em voz alta, usando o'clock, half past e quarter to.",
           },
-          "instruction": {
-            "en": "Complete the dialogues using the correct form of the verb or the correct expression.",
-            "pt": "Complete os diálogos usando a forma correta do verbo ou a expressão correta."
-          },
-          "phrases": [
-            {
-              "en": "A: Do you work in an office? B: No, I _____. I work from home.",
-              "pt": "A: Você trabalha em um escritório? B: Não, eu _____. Eu trabalho em casa."
-            },
-            {
-              "en": "A: My boss gives many deadlines. B: _____ she give you a lot of work?",
-              "pt": "A: Minha chefe dá muitos prazos. B: _____ ela te dá muito trabalho?"
-            },
-            {
-              "en": "A: Do you want to study together? B: _____, but I can't. I have homework.",
-              "pt": "A: Você quer estudar juntos? B: _____, mas não posso. Eu tenho dever de casa."
-            }
+          phrases: [
+            { en: "It is quarter past seven.", pt: "São sete e quinze." },
+            { en: "It is quarter to eleven.", pt: "São quinze para as onze." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b7c-act1-q1",
-              "prompt": {
-                "en": "Complete: A: Do you work in an office? B: No, I _____. I work from home.",
-                "pt": "Complete: A: Você trabalha em um escritório? B: Não, eu _____. Eu trabalho em casa."
-              },
-              "options": [
-                "don't",
-                "doesn't",
-                "am not",
-                "not"
-              ],
-              "answer": "don't",
-              "explanation": {
-                "en": "Use 'don't' for 'I' in negative short answers.",
-                "pt": "Use 'don't' para 'I' em respostas curtas negativas."
-              }
+              id: "b7c-a1q1",
+              prompt: { en: "How do you say 6:15?", pt: "Como se diz 6:15?" },
+              options: ["quarter past six", "quarter to six", "half past six"],
+              answer: "quarter past six",
+              explanation: { en: "15 minutes after six.", pt: "15 minutos depois das seis." },
             },
-            {
-              "id": "b7c-act1-q2",
-              "prompt": {
-                "en": "Complete: A: Do you want to study together? B: _____, but I can't. I have homework.",
-                "pt": "Complete: A: Você quer estudar juntos? B: _____, mas não posso. Eu tenho dever de casa."
-              },
-              "options": [
-                "No, thank you",
-                "Yes, sure",
-                "I'd love to",
-                "Of course"
-              ],
-              "answer": "I'd love to",
-              "explanation": {
-                "en": "'I'd love to' is part of the expression 'I'd love to, but I can't'.",
-                "pt": "'I'd love to' faz parte da expressão 'I'd love to, but I can't'."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b7c-act2",
-          "title": {
-            "en": "Dialogue",
-            "pt": "Diálogo"
+          id: "b7c-a2",
+          title: { en: "My week", pt: "Minha semana" },
+          instruction: {
+            en: "Say what you do on three different days, with the day and the time.",
+            pt: "Diga o que você faz em três dias diferentes, com o dia e o horário.",
           },
-          "instruction": {
-            "en": "Work with a partner. Create a dialogue about school or work, asking and answering questions about daily tasks and using accept/refuse expressions.",
-            "pt": "Trabalhe com um parceiro. Crie um diálogo sobre escola ou trabalho, fazendo e respondendo perguntas sobre tarefas diárias e usando expressões de aceitar/recusar."
-          },
-          "phrases": [
-            {
-              "en": "Do you have a lot of homework this week?",
-              "pt": "Você tem muito dever de casa esta semana?"
-            },
-            {
-              "en": "Does your boss give you many deadlines?",
-              "pt": "Seu chefe te dá muitos prazos?"
-            },
-            {
-              "en": "Do you want to grab coffee after the meeting?",
-              "pt": "Você quer tomar um café depois da reunião?"
-            }
+          phrases: [
+            { en: "On Monday I study English at eight in the evening.", pt: "Na segunda eu estudo inglês às oito da noite." },
+            { en: "On Saturday I rest and I meet my family.", pt: "No sábado eu descanso e encontro minha família." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b7c-act2-q1",
-              "prompt": {
-                "en": "Which question asks about a work task?",
-                "pt": "Qual pergunta pede sobre uma tarefa de trabalho?"
-              },
-              "options": [
-                "Do you like pizza?",
-                "Does your boss give you many deadlines?",
-                "Do you watch TV?",
-                "Are you happy?"
-              ],
-              "answer": "Does your boss give you many deadlines?",
-              "explanation": {
-                "en": "Deadlines are a common work task.",
-                "pt": "Prazos são uma tarefa de trabalho comum."
-              }
+              id: "b7c-a2q1",
+              prompt: { en: "Complete: I work ___ the afternoon.", pt: "Complete: I work ___ the afternoon." },
+              options: ["on", "at", "in"],
+              answer: "in",
+              explanation: { en: "in the afternoon.", pt: "in the afternoon." },
             },
-            {
-              "id": "b7c-act2-q2",
-              "prompt": {
-                "en": "How do you accept an invitation?",
-                "pt": "Como você aceita um convite?"
-              },
-              "options": [
-                "No, thank you.",
-                "I'd love to, but I can't.",
-                "Yes, sure!",
-                "I don't like it."
-              ],
-              "answer": "Yes, sure!",
-              "explanation": {
-                "en": "'Yes, sure!' is a way to accept an invitation enthusiastically.",
-                "pt": "'Yes, sure!' é uma forma de aceitar um convite com entusiasmo."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b7c-act3",
-          "title": {
-            "en": "Talk About Yourself",
-            "pt": "Fale Sobre Você"
+          id: "b7c-a3",
+          title: { en: "Arrange a meeting", pt: "Marque um encontro" },
+          instruction: {
+            en: "Invite someone, hear a no, and offer a second day and time.",
+            pt: "Convide alguém, receba um não e ofereça um segundo dia e horário.",
           },
-          "instruction": {
-            "en": "Answer the questions about your school or work life. Use negative and interrogative forms.",
-            "pt": "Responda às perguntas sobre sua vida escolar ou profissional. Use as formas negativa e interrogativa."
-          },
-          "phrases": [
-            {
-              "en": "Do you have a lot of school work?",
-              "pt": "Você tem muito trabalho escolar?"
-            },
-            {
-              "en": "Does your colleague help you with tasks?",
-              "pt": "Seu colega te ajuda com as tarefas?"
-            },
-            {
-              "en": "Do you like your schedule?",
-              "pt": "Você gosta da sua agenda?"
-            }
+          phrases: [
+            { en: "Are you free on Wednesday at ten?", pt: "Você está livre na quarta às dez?" },
+            { en: "What about Thursday at two thirty?", pt: "Que tal quinta às duas e meia?" },
           ],
-          "check": [
+          check: [
             {
-              "id": "b7c-act3-q1",
-              "prompt": {
-                "en": "Choose the best answer for: 'Do you have a lot of school work?'",
-                "pt": "Escolha a melhor resposta para: 'Você tem muito trabalho escolar?'"
-              },
-              "options": [
-                "Yes, I am.",
-                "No, I don't.",
-                "Yes, I does.",
-                "No, I am not."
-              ],
-              "answer": "No, I don't.",
-              "explanation": {
-                "en": "The question uses 'Do you', so the short answer is 'I don't'.",
-                "pt": "A pergunta usa 'Do you', então a resposta curta é 'I don't'."
-              }
+              id: "b7c-a3q1",
+              prompt: { en: "Choose the natural invitation.", pt: "Escolha o convite natural." },
+              options: ["Let's meet on Friday at four.", "Let's meet in Friday on four.", "Let's meet at Friday in four."],
+              answer: "Let's meet on Friday at four.",
+              explanation: { en: "on + day, at + time.", pt: "on + dia, at + hora." },
             },
-            {
-              "id": "b7c-act3-q2",
-              "prompt": {
-                "en": "Which sentence is correct?",
-                "pt": "Qual frase está correta?"
-              },
-              "options": [
-                "My boss don't give deadlines.",
-                "My boss doesn't give deadlines.",
-                "My boss no give deadlines.",
-                "My boss do not gives deadlines."
-              ],
-              "answer": "My boss doesn't give deadlines.",
-              "explanation": {
-                "en": "'My boss' is third person singular, so we use 'doesn't' and the base verb 'give'.",
-                "pt": "'My boss' é terceira pessoa do singular, então usamos 'doesn't' e o verbo base 'give'."
-              }
-            }
-          ]
+          ],
         },
-        {
-          "id": "b7c-act4",
-          "title": {
-            "en": "Describe",
-            "pt": "Descreva"
-          },
-          "instruction": {
-            "en": "Describe your ideal classroom or office. What does it have? What doesn't it have? What do people do there?",
-            "pt": "Descreva sua sala de aula ou escritório ideal. O que ele tem? O que ele não tem? O que as pessoas fazem lá?"
-          },
-          "phrases": [
-            {
-              "en": "My ideal classroom has many books.",
-              "pt": "Minha sala de aula ideal tem muitos livros."
-            },
-            {
-              "en": "It doesn't have a strict teacher.",
-              "pt": "Não tem um professor rigoroso."
-            },
-            {
-              "en": "Students learn and play there.",
-              "pt": "Os alunos aprendem e brincam lá."
-            }
-          ],
-          "check": [
-            {
-              "id": "b7c-act4-q1",
-              "prompt": {
-                "en": "Which sentence correctly describes something *not* present in a place?",
-                "pt": "Qual frase descreve corretamente algo que *não* está presente em um lugar?"
-              },
-              "options": [
-                "It have a big window.",
-                "It don't have a window.",
-                "It doesn't have a small window.",
-                "It not has a window."
-              ],
-              "answer": "It doesn't have a small window.",
-              "explanation": {
-                "en": "For 'it', use 'doesn't have'.",
-                "pt": "Para 'it', use 'doesn't have'."
-              }
-            },
-            {
-              "id": "b7c-act4-q2",
-              "prompt": {
-                "en": "What is the English word for 'agenda'?",
-                "pt": "Qual é a palavra em inglês para 'agenda'?"
-              },
-              "options": [
-                "Deadline",
-                "Meeting",
-                "Schedule",
-                "Office"
-              ],
-              "answer": "Schedule",
-              "explanation": {
-                "en": "'Agenda' translates to 'schedule' in this context.",
-                "pt": "'Agenda' se traduz como 'schedule' neste contexto."
-              }
-            }
-          ]
-        },
-        {
-          "id": "b7c-act5",
-          "title": {
-            "en": "Give Your Opinion",
-            "pt": "Dê Sua Opinião"
-          },
-          "instruction": {
-            "en": "Share your opinion on statements about school and work. Agree or disagree and explain why.",
-            "pt": "Compartilhe sua opinião sobre afirmações sobre escola e trabalho. Concorde ou discorde e explique o porquê."
-          },
-          "phrases": [
-            {
-              "en": "Teachers don't give enough homework.",
-              "pt": "Professores não dão dever de casa suficiente."
-            },
-            {
-              "en": "A good boss doesn't give many deadlines.",
-              "pt": "Um bom chefe não dá muitos prazos."
-            },
-            {
-              "en": "Students don't need a classroom to learn.",
-              "pt": "Os alunos não precisam de uma sala de aula para aprender."
-            }
-          ],
-          "check": [
-            {
-              "id": "b7c-act5-q1",
-              "prompt": {
-                "en": "Which statement expresses a negative opinion about homework?",
-                "pt": "Qual afirmação expressa uma opinião negativa sobre o dever de casa?"
-              },
-              "options": [
-                "I love homework.",
-                "Homework is fun.",
-                "I don't like homework.",
-                "Homework is easy."
-              ],
-              "answer": "I don't like homework.",
-              "explanation": {
-                "en": "'I don't like homework' clearly states a negative opinion.",
-                "pt": "'I don't like homework' expressa claramente uma opinião negativa."
-              }
-            },
-            {
-              "id": "b7c-act5-q2",
-              "prompt": {
-                "en": "Complete the sentence with your opinion: 'Students _____ a lot of homework.'",
-                "pt": "Complete a frase com sua opinião: 'Alunos _____ muito dever de casa.'"
-              },
-              "options": [
-                "needs",
-                "doesn't need",
-                "don't need",
-                "need"
-              ],
-              "answer": "don't need",
-              "explanation": {
-                "en": "'Students' is plural, so we use 'don't need' for a negative opinion.",
-                "pt": "'Students' é plural, então usamos 'don't need' para uma opinião negativa."
-              }
-            }
-          ]
-        }
       ],
-      "challenge": {
-        "id": "b7c-chal1",
-        "title": {
-          "en": "Plan a Study Session",
-          "pt": "Planeje uma Sessão de Estudos"
+      challenge: {
+        id: "b7c-challenge",
+        title: { en: "Communication Challenge — Two appointments", pt: "Desafio de comunicação — Dois compromissos" },
+        instruction: {
+          en: "Arrange two appointments in six sentences: one for this week and one for next month, with day and exact time.",
+          pt: "Marque dois compromissos em seis frases: um para esta semana e outro para o próximo mês, com dia e horário exato.",
         },
-        "instruction": {
-          "en": "Imagine your friend invites you to study. Plan a short conversation where you ask about their schedule and homework, and then accept or refuse the invitation. Use at least 2 new vocabulary words and 1 expression.",
-          "pt": "Imagine que seu amigo te convida para estudar. Planeje uma breve conversa onde você pergunta sobre a agenda e o dever de casa dele, e então aceita ou recusa o convite. Use pelo menos 2 palavras do novo vocabulário e 1 expressão."
-        },
-        "phrases": [
-          {
-            "en": "Do you have a lot of homework?",
-            "pt": "Você tem muito dever de casa?"
-          },
-          {
-            "en": "What does your schedule look like this evening?",
-            "pt": "Como está sua agenda para esta noite?"
-          },
-          {
-            "en": "Yes, sure! I'd love to!",
-            "pt": "Sim, claro! Eu adoraria!"
-          }
+        phrases: [
+          { en: "Are you free on Tuesday morning?", pt: "Você está livre na terça de manhã?" },
+          { en: "Let's meet at quarter past nine in the small room.", pt: "Vamos nos encontrar às nove e quinze na sala pequena." },
+          { en: "My schedule is full in May, but I am free in June.", pt: "Minha agenda está cheia em maio, mas estou livre em junho." },
+          { en: "That works for me. See you then.", pt: "Isso funciona para mim. Até lá." },
         ],
-        "check": [
+        check: [
           {
-            "id": "b7c-chal1-q1",
-            "prompt": {
-              "en": "Which response correctly refuses an invitation?",
-              "pt": "Qual resposta recusa corretamente um convite?"
-            },
-            "options": [
-              "Yes, sure!",
-              "I'd love to, but I can't. I have a deadline.",
-              "Great idea!",
-              "I accept!"
-            ],
-            "answer": "I'd love to, but I can't. I have a deadline.",
-            "explanation": {
-              "en": "This expression politely refuses with a reason.",
-              "pt": "Esta expressão recusa educadamente com uma razão."
-            }
+            id: "b7c-ch1",
+            prompt: { en: "Which sentence has NO mistake?", pt: "Qual frase NÃO tem erro?" },
+            options: ["We meet in Monday at ten.", "We meet on Monday at ten.", "We meet at Monday on ten."],
+            answer: "We meet on Monday at ten.",
+            explanation: { en: "on + day, at + time.", pt: "on + dia, at + hora." },
           },
           {
-            "id": "b7c-chal1-q2",
-            "prompt": {
-              "en": "Your friend asks: 'Do you want to study in the classroom today?' What is a good way to accept?",
-              "pt": "Seu amigo pergunta: 'Você quer estudar na sala de aula hoje?' Qual é uma boa forma de aceitar?"
-            },
-            "options": [
-              "No, thank you.",
-              "I'd love to, but I can't.",
-              "Yes, sure! I need to finish my homework.",
-              "I don't like it."
-            ],
-            "answer": "Yes, sure! I need to finish my homework.",
-            "explanation": {
-              "en": "'Yes, sure!' is a positive acceptance.",
-              "pt": "'Yes, sure!' é uma aceitação positiva."
-            }
-          }
-        ]
+            id: "b7c-ch2",
+            prompt: { en: "Complete: She has an appointment ___ four o'clock.", pt: "Complete: She has an appointment ___ four o'clock." },
+            options: ["in", "on", "at"],
+            answer: "at",
+            explanation: { en: "Clock time uses at.", pt: "Hora exata usa at." },
+          },
+        ],
       },
-      "lessonReview": {
-        "summary": {
-          "en": "In this unit, we learned new vocabulary for 'school work' and practiced using the Simple Present in negative (don't/doesn't) and interrogative (do/does) forms. We also practiced expressions to accept and refuse invitations.",
-          "pt": "Nesta unidade, aprendemos novo vocabulário para 'school work' e praticamos o uso do Simple Present nas formas negativa (don't/doesn't) e interrogativa (do/does). Também praticamos expressões para aceitar e recusar convites."
+      lessonReview: {
+        summary: {
+          en: "You told the time, named days and months, and arranged appointments.",
+          pt: "Você disse as horas, nomeou dias e meses e marcou compromissos.",
         },
-        "canDo": [
-          {
-            "en": "Ask and answer questions about daily routines at school or work.",
-            "pt": "Fazer e responder perguntas sobre rotinas diárias na escola ou no trabalho."
-          },
-          {
-            "en": "Express what you do or don't do.",
-            "pt": "Expressar o que você faz ou não faz."
-          },
-          {
-            "en": "Politely accept or refuse an invitation.",
-            "pt": "Aceitar ou recusar um convite educadamente."
-          }
+        canDo: [
+          { en: "I can tell the time in English.", pt: "Consigo dizer as horas em inglês." },
+          { en: "I can use at, on and in correctly.", pt: "Consigo usar at, on e in corretamente." },
+          { en: "I can arrange a meeting with a day and a time.", pt: "Consigo marcar um encontro com dia e horário." },
         ],
-        "next": {
-          "en": "In the next unit, we will continue practicing the Simple Present and learn about prepositions of time.",
-          "pt": "Na próxima unidade, continuaremos praticando o Simple Present e aprenderemos sobre preposições de tempo."
-        }
-      }
-    }
+        next: {
+          en: "Next: say what you do not do, with don't and doesn't.",
+          pt: "Próximo: dizer o que você não faz, com don't e doesn't.",
+        },
+      },
+    },
   },
   {
-    "code": "BEGINNER-U08",
-    "number": 8,
-    "title": "Free Time",
-    "titlePt": "Tempo Livre",
-    "cefr": "A1",
-    "objective": {
-      "en": "Teach 'free time' vocabulary and 'adverbs of frequency' (always, usually, often, sometimes, never) and their position in the sentence in a contextualized way.",
-      "pt": "Ensinar vocabulário de 'tempo livre' e 'advérbios de frequência' (always, usually, often, sometimes, never) e sua posição na frase de forma contextualizada."
+    code: "BEGINNER-U08",
+    number: 8,
+    title: "I Don't, He Doesn't — Correct the information",
+    titlePt: "Eu não faço, ele não faz — Corrigir a informação",
+    cefr: "A1",
+    objective: {
+      en: "Use the negative of the present simple with don't and doesn't to say what people do not do and to correct wrong information politely.",
+      pt: "Usar a negativa do present simple com don't e doesn't para dizer o que as pessoas não fazem e corrigir informações erradas com educação.",
     },
-    "communicationGoal": {
-      "en": "The student will be able to use 'apologizing' and free time vocabulary to communicate in real situations.",
-      "pt": "O aluno será capaz de usar 'pedir desculpas' e o vocabulário de tempo livre para se comunicar em situações reais."
+    communicationGoal: {
+      en: "You can clear up a misunderstanding: say what is not true and then give the correct information.",
+      pt: "Você consegue desfazer um mal-entendido: dizer o que não é verdade e depois dar a informação correta.",
     },
-    "prerequisites": {
-      "en": "Grammar: Simple Present – negative (don't/doesn't) and interrogative (do/does) forms. Vocabulary: School Work.",
-      "pt": "Estrutura: Simple Present – formas negativa (don't/doesn't) e interrogativa (do/does). Vocabulário: School Work."
+    prerequisites: {
+      en: "Unit 7 — times and days, to correct schedule information.",
+      pt: "Unidade 7 — horários e dias, para corrigir informações de agenda.",
     },
-    "newContent": {
-      "en": "Grammar: Adverbs of frequency (always, usually, often, sometimes, never) and their position in the sentence. | Vocabulary: Free Time (10 lexical items) | Expressions: Apologizing",
-      "pt": "Gramática: Advérbios de frequência (always, usually, often, sometimes, never) e sua posição na frase. | Vocabulário: Tempo Livre (10 itens lexicais) | Expressões: Pedir desculpas"
+    newContent: {
+      en: "Grammar: present simple negative (don't / doesn't). Vocabulary: habits and free-time actions. Expressions: polite correction.",
+      pt: "Gramática: negativa do present simple (don't / doesn't). Vocabulário: hábitos e ações de tempo livre. Expressões: correção educada.",
     },
-    "reviewContent": {
-      "en": "Spiral review: Indefinite/definite articles (a/an/the) and demonstratives (this, that, these, those) (Unit 3).",
-      "pt": "Revisão em espiral: Artigos indefinidos/definidos (a/an/the) e demonstrativos (this, that, these, those) (Unidade 3)."
+    reviewContent: {
+      en: "Spaced review of Unit 5 and Unit 6: affirmative present simple and the third person -s.",
+      pt: "Revisão espaçada das Unidades 5 e 6: present simple afirmativo e o -s da terceira pessoa.",
     },
-    "discover": {
-      "id": "BEGINNER-U08-DISCOVER",
-      "warmUp": {
-        "prompt": {
-          "en": "Look at the pictures. What do you do in your free time?",
-          "pt": "Observe as imagens. O que você faz no seu tempo livre?"
+    discover: {
+      id: "BEGINNER-U08-DISCOVER",
+      warmUp: {
+        prompt: {
+          en: "Look at the picture. One person is correcting an idea. What do you think is not true?",
+          pt: "Observe a imagem. Uma pessoa está corrigindo uma ideia. O que você acha que não é verdade?",
         },
-        "phrases": [
-          {
-            "en": "Do you like to read?",
-            "pt": "Você gosta de ler?"
-          },
-          {
-            "en": "Do you play sports?",
-            "pt": "Você pratica esportes?"
-          },
-          {
-            "en": "What do you do on weekends?",
-            "pt": "O que você faz nos fins de semana?"
-          }
-        ]
-      },
-      "context": {
-        "situation": {
-          "en": "Sarah is late for a meeting with her friend, Tom.",
-          "pt": "Sarah está atrasada para um encontro com seu amigo, Tom."
-        },
-        "dialogue": [
-          {
-            "who": "Tom",
-            "en": "Hi, Sarah. Are you okay?",
-            "pt": "Oi, Sarah. Você está bem?"
-          },
-          {
-            "who": "Sarah",
-            "en": "Oh, Tom! I'm so sorry! I'm really late.",
-            "pt": "Ah, Tom! Me desculpe! Estou muito atrasada."
-          },
-          {
-            "who": "Tom",
-            "en": "No problem. I usually read a book while I wait.",
-            "pt": "Sem problemas. Eu geralmente leio um livro enquanto espero."
-          },
-          {
-            "who": "Sarah",
-            "en": "I apologize for being late. I sometimes lose track of time when I paint.",
-            "pt": "Peço desculpas por estar atrasada. Às vezes, perco a noção do tempo quando pinto."
-          },
-          {
-            "who": "Tom",
-            "en": "It's fine. What do you usually do in your free time?",
-            "pt": "Está tudo bem. O que você geralmente faz no seu tempo livre?"
-          },
-          {
-            "who": "Sarah",
-            "en": "I always paint. And I often listen to music.",
-            "pt": "Eu sempre pinto. E eu frequentemente ouço música."
-          },
-          {
-            "who": "Tom",
-            "en": "That's nice. Let's go!",
-            "pt": "Que legal. Vamos!"
-          }
-        ]
-      },
-      "vocabulary": [
-        {
-          "term": "watch TV",
-          "pt": "assistir TV",
-          "ipa": "/wɒtʃ tiːˈviː/",
-          "definition": "To look at programs on a television screen.",
-          "example": "I sometimes watch TV in the evening.",
-          "examplePt": "Eu às vezes assisto TV à noite."
-        },
-        {
-          "term": "read a book",
-          "pt": "ler um livro",
-          "ipa": "/riːd ə bʊk/",
-          "definition": "To look at and understand the words in a book.",
-          "example": "She usually reads a book before bed.",
-          "examplePt": "Ela geralmente lê um livro antes de dormir."
-        },
-        {
-          "term": "play sports",
-          "pt": "praticar esportes",
-          "ipa": "/pleɪ spɔːrts/",
-          "definition": "To take part in games like football, basketball, etc.",
-          "example": "They often play sports on Saturdays.",
-          "examplePt": "Eles frequentemente praticam esportes aos sábados."
-        },
-        {
-          "term": "listen to music",
-          "pt": "ouvir música",
-          "ipa": "/ˈlɪsən tuː ˈmjuːzɪk/",
-          "definition": "To hear and enjoy sounds produced by instruments or voices.",
-          "example": "He always listens to music when he exercises.",
-          "examplePt": "Ele sempre ouve música quando se exercita."
-        },
-        {
-          "term": "go out",
-          "pt": "sair",
-          "ipa": "/ɡoʊ aʊt/",
-          "definition": "To leave your home to go to a social event or public place.",
-          "example": "We sometimes go out for dinner.",
-          "examplePt": "Nós às vezes saímos para jantar."
-        },
-        {
-          "term": "relax",
-          "pt": "relaxar",
-          "ipa": "/rɪˈlæks/",
-          "definition": "To rest and feel calm and comfortable.",
-          "example": "On Sundays, I like to relax at home.",
-          "examplePt": "Aos domingos, gosto de relaxar em casa."
-        },
-        {
-          "term": "exercise",
-          "pt": "exercitar-se",
-          "ipa": "/ˈɛksərsaɪz/",
-          "definition": "To do physical activities to stay fit and healthy.",
-          "example": "She always exercises in the morning.",
-          "examplePt": "Ela sempre se exercita de manhã."
-        },
-        {
-          "term": "cook",
-          "pt": "cozinhar",
-          "ipa": "/kʊk/",
-          "definition": "To prepare food by heating it.",
-          "example": "My dad often cooks dinner.",
-          "examplePt": "Meu pai frequentemente cozinha o jantar."
-        },
-        {
-          "term": "paint",
-          "pt": "pintar",
-          "ipa": "/peɪnt/",
-          "definition": "To create a picture or apply color to a surface.",
-          "example": "He loves to paint in his free time.",
-          "examplePt": "Ele adora pintar no seu tempo livre."
-        },
-        {
-          "term": "garden",
-          "pt": "jardinar",
-          "ipa": "/ˈɡɑːrdən/",
-          "definition": "To work in a garden, growing plants.",
-          "example": "My grandma usually gardens in the afternoon.",
-          "examplePt": "Minha avó geralmente jardina à tarde."
-        }
-      ],
-      "expressions": [
-        {
-          "en": "I'm sorry.",
-          "pt": "Me desculpe."
-        },
-        {
-          "en": "I apologize for being late.",
-          "pt": "Peço desculpas por estar atrasado(a)."
-        },
-        {
-          "en": "Sorry about that.",
-          "pt": "Desculpe por isso."
-        }
-      ],
-      "grammar": [
-        {
-          "title": {
-            "en": "Adverbs of frequency and their position in the sentence",
-            "pt": "Advérbios de frequência e sua posição na frase"
-          },
-          "examples": [
-            {
-              "en": "I usually have breakfast at home.",
-              "pt": "Eu geralmente tomo café da manhã em casa."
-            },
-            {
-              "en": "He is never late.",
-              "pt": "Ele nunca está atrasado."
-            },
-            {
-              "en": "We often watch TV together.",
-              "pt": "Nós frequentemente assistimos TV juntos."
-            }
-          ],
-          "rule": {
-            "en": "Adverbs of frequency (always, usually, often, sometimes, never) usually go BEFORE the main verb. But they go AFTER the verb 'to be'.",
-            "pt": "Os advérbios de frequência (always, usually, often, sometimes, never) geralmente vêm ANTES do verbo principal. Mas eles vêm DEPOIS do verbo 'to be'."
-          },
-          "mistakes": [
-            {
-              "en": "Incorrect: I have always breakfast at home. Correct: I always have breakfast at home.",
-              "pt": "Incorreto: I have always breakfast at home. Correto: I always have breakfast at home."
-            },
-            {
-              "en": "Incorrect: He never is late. Correct: He is never late.",
-              "pt": "Incorreto: He never is late. Correto: He is never late."
-            }
-          ]
-        }
-      ],
-      "controlledPractice": [
-        {
-          "id": "b8d-cp1",
-          "prompt": {
-            "en": "Choose the correct sentence.",
-            "pt": "Escolha a frase correta."
-          },
-          "options": [
-            "She always reads books.",
-            "She reads always books."
-          ],
-          "answer": "She always reads books.",
-          "explanation": {
-            "en": "The adverb 'always' comes before the main verb 'reads'.",
-            "pt": "O advérbio 'always' vem antes do verbo principal 'reads'."
-          }
-        },
-        {
-          "id": "b8d-cp2",
-          "prompt": {
-            "en": "Choose the correct sentence.",
-            "pt": "Escolha a frase correta."
-          },
-          "options": [
-            "They are sometimes busy.",
-            "They sometimes are busy."
-          ],
-          "answer": "They are sometimes busy.",
-          "explanation": {
-            "en": "The adverb 'sometimes' comes after the verb 'to be' ('are').",
-            "pt": "O advérbio 'sometimes' vem depois do verbo 'to be' ('are')."
-          }
-        },
-        {
-          "id": "b8d-cp3",
-          "prompt": {
-            "en": "Complete the sentence: I ______ go out on Fridays. (usually)",
-            "pt": "Complete a frase: Eu ______ saio às sextas. (usually)"
-          },
-          "options": [
-            "usually go out",
-            "go out usually"
-          ],
-          "answer": "usually go out",
-          "explanation": {
-            "en": "'Usually' comes before the main verb 'go out'.",
-            "pt": "'Usually' vem antes do verbo principal 'go out'."
-          }
-        },
-        {
-          "id": "b8d-cp4",
-          "prompt": {
-            "en": "Complete the sentence: He ______ plays sports. (never)",
-            "pt": "Complete a frase: Ele ______ pratica esportes. (never)"
-          },
-          "options": [
-            "never plays",
-            "plays never"
-          ],
-          "answer": "never plays",
-          "explanation": {
-            "en": "'Never' comes before the main verb 'plays'.",
-            "pt": "'Never' vem antes do verbo principal 'plays'."
-          }
-        }
-      ],
-      "input": {
-        "kind": "listening",
-        "title": {
-          "en": "Listen to the dialogue between friends.",
-          "pt": "Ouça o diálogo entre amigos."
-        },
-        "lines": [
-          {
-            "en": "Hi, Anna. Sorry I'm late.",
-            "pt": "Oi, Anna. Desculpe o atraso."
-          },
-          {
-            "en": "It's okay, Mark. I'm usually here early.",
-            "pt": "Tudo bem, Mark. Eu geralmente chego cedo."
-          },
-          {
-            "en": "What do you do in your free time?",
-            "pt": "O que você faz no seu tempo livre?"
-          },
-          {
-            "en": "I always listen to music. And I often cook.",
-            "pt": "Eu sempre ouço música. E eu frequentemente cozinho."
-          },
-          {
-            "en": "That's nice. I sometimes watch TV.",
-            "pt": "Que legal. Eu às vezes assisto TV."
-          }
+        phrases: [
+          { en: "I don't work on Saturdays.", pt: "Eu não trabalho aos sábados." },
+          { en: "She doesn't drink coffee at night.", pt: "Ela não toma café à noite." },
+          { en: "Actually, I don't live here.", pt: "Na verdade, eu não moro aqui." },
         ],
-        "questions": [
-          {
-            "id": "b8d-lq1",
-            "prompt": {
-              "en": "Why does Mark apologize?",
-              "pt": "Por que Mark pede desculpas?"
-            },
-            "options": [
-              "He is early.",
-              "He is late.",
-              "He is busy."
-            ],
-            "answer": "He is late.",
-            "explanation": {
-              "en": "Mark says, 'Sorry I'm late.'",
-              "pt": "Mark diz 'Desculpe o atraso'."
-            }
-          },
-          {
-            "id": "b8d-lq2",
-            "prompt": {
-              "en": "What does Anna always do?",
-              "pt": "O que Anna sempre faz?"
-            },
-            "options": [
-              "Watch TV",
-              "Listen to music",
-              "Cook"
-            ],
-            "answer": "Listen to music",
-            "explanation": {
-              "en": "Anna says, 'I always listen to music.'",
-              "pt": "Anna diz 'Eu sempre ouço música'."
-            }
-          },
-          {
-            "id": "b8d-lq3",
-            "prompt": {
-              "en": "What does Mark sometimes do?",
-              "pt": "O que Mark às vezes faz?"
-            },
-            "options": [
-              "Cook",
-              "Listen to music",
-              "Watch TV"
-            ],
-            "answer": "Watch TV",
-            "explanation": {
-              "en": "Mark says, 'I sometimes watch TV.'",
-              "pt": "Mark diz 'Eu às vezes assisto TV'."
-            }
-          }
-        ]
       },
-      "quickCheck": [
+      context: {
+        situation: {
+          en: "Bruno believes Helena works every weekend. Helena corrects him politely.",
+          pt: "Bruno acha que Helena trabalha todo fim de semana. Helena o corrige com educação.",
+        },
+        dialogue: [
+          { who: "Bruno", en: "You work on Saturdays, right?", pt: "Você trabalha aos sábados, certo?" },
+          { who: "Helena", en: "Actually, I don't work at the weekend. I study on Saturday morning.", pt: "Na verdade, eu não trabalho no fim de semana. Eu estudo no sábado de manhã." },
+          { who: "Bruno", en: "Oh, sorry. And Ivan? He opens the office on Sunday.", pt: "Ah, desculpe. E o Ivan? Ele abre o escritório no domingo." },
+          { who: "Helena", en: "No, he doesn't. He doesn't come here on Sundays.", pt: "Não, ele não abre. Ele não vem aqui aos domingos." },
+          { who: "Bruno", en: "Good to know. I don't want to send him a message for nothing.", pt: "Bom saber. Não quero mandar mensagem para ele à toa." },
+        ],
+      },
+      vocabulary: [
+        { term: "weekday", pt: "dia útil", ipa: "/ˈwiːkdeɪ/", definition: "A day from Monday to Friday.", example: "I study on weekdays.", examplePt: "Eu estudo nos dias úteis." },
+        { term: "cook", pt: "cozinhar", ipa: "/kʊk/", definition: "To prepare food.", example: "He doesn't cook every day.", examplePt: "Ele não cozinha todo dia." },
+        { term: "drive", pt: "dirigir", ipa: "/draɪv/", definition: "To control a car.", example: "She doesn't drive to work.", examplePt: "Ela não dirige para o trabalho." },
+        { term: "smoke", pt: "fumar", ipa: "/smoʊk/", definition: "To breathe in smoke from a cigarette.", example: "I don't smoke.", examplePt: "Eu não fumo." },
+        { term: "travel", pt: "viajar", ipa: "/ˈtrævl/", definition: "To go from one place to another, usually far.", example: "They don't travel in winter.", examplePt: "Eles não viajam no inverno." },
+        { term: "rest", pt: "descansar", ipa: "/rest/", definition: "To stop working for a while.", example: "She rests on Sunday.", examplePt: "Ela descansa no domingo." },
+        { term: "usually", pt: "geralmente", ipa: "/ˈjuːʒuəli/", definition: "Most of the time.", example: "I usually walk to work.", examplePt: "Eu geralmente vou a pé para o trabalho." },
+        { term: "actually", pt: "na verdade", ipa: "/ˈæktʃuəli/", definition: "Used to give the real information.", example: "Actually, I don't live here.", examplePt: "Na verdade, eu não moro aqui." },
+        { term: "misunderstanding", pt: "mal-entendido", ipa: "/ˌmɪsʌndərˈstændɪŋ/", definition: "A wrong idea about something.", example: "It is a small misunderstanding.", examplePt: "É um pequeno mal-entendido." },
+        { term: "true", pt: "verdadeiro(a)", ipa: "/truː/", definition: "Correct, real.", example: "That is not true.", examplePt: "Isso não é verdade." },
+      ],
+      expressions: [
+        { en: "Actually, I don't.", pt: "Na verdade, eu não." },
+        { en: "No, he doesn't.", pt: "Não, ele não." },
+        { en: "That is not true, but thank you.", pt: "Isso não é verdade, mas obrigada." },
+        { en: "Let me correct that.", pt: "Deixe-me corrigir isso." },
+      ],
+      grammar: [
         {
-          "id": "b8d-qc1",
-          "prompt": {
-            "en": "Which word is an adverb of frequency?",
-            "pt": "Qual palavra é um advérbio de frequência?"
-          },
-          "options": [
-            "book",
-            "often",
-            "relax"
+          title: { en: "Negative with don't (I / you / we / they)", pt: "Negativa com don't (I / you / we / they)" },
+          examples: [
+            { en: "I don't work at the weekend.", pt: "Eu não trabalho no fim de semana." },
+            { en: "We don't travel in winter.", pt: "Nós não viajamos no inverno." },
+            { en: "They don't cook on weekdays.", pt: "Eles não cozinham nos dias úteis." },
           ],
-          "answer": "often",
-          "explanation": {
-            "en": "'Often' describes how frequently an action happens.",
-            "pt": "'Often' descreve a frequência com que uma ação acontece."
-          }
+          rule: {
+            en: "Use do not (don't) + base verb. The main verb never changes: I don't work, not I don't works.",
+            pt: "Use do not (don't) + verbo base. O verbo principal nunca muda: I don't work, e não I don't works.",
+          },
+          mistakes: [
+            { en: "I no work on Sunday. → I don't work on Sunday.", pt: "A negativa usa don't, não 'no'." },
+            { en: "We don't travels. → We don't travel.", pt: "Depois de don't, o verbo fica na forma base." },
+          ],
         },
         {
-          "id": "b8d-qc2",
-          "prompt": {
-            "en": "Complete: I'm _____. (apology)",
-            "pt": "Complete: Eu _____. (pedido de desculpas)"
-          },
-          "options": [
-            "sorry",
-            "happy",
-            "tired"
+          title: { en: "Negative with doesn't (he / she / it)", pt: "Negativa com doesn't (he / she / it)" },
+          examples: [
+            { en: "He doesn't come here on Sundays.", pt: "Ele não vem aqui aos domingos." },
+            { en: "She doesn't drive to work.", pt: "Ela não dirige para o trabalho." },
+            { en: "It doesn't start at nine.", pt: "Não começa às nove." },
           ],
-          "answer": "sorry",
-          "explanation": {
-            "en": "'I'm sorry' is an expression for apologizing.",
-            "pt": "'I'm sorry' é uma expressão para pedir desculpas."
-          }
+          rule: {
+            en: "With he, she and it use does not (doesn't) + base verb. The -s moves to doesn't: she works → she doesn't work.",
+            pt: "Com he, she e it use does not (doesn't) + verbo base. O -s passa para doesn't: she works → she doesn't work.",
+          },
+          mistakes: [
+            { en: "She doesn't works here. → She doesn't work here.", pt: "O -s já está em doesn't." },
+            { en: "He don't cook. → He doesn't cook.", pt: "Terceira pessoa usa doesn't." },
+          ],
+        },
+      ],
+      controlledPractice: [
+        {
+          id: "b8d-cp1",
+          prompt: { en: "Complete: I ___ work on Saturdays.", pt: "Complete: I ___ work on Saturdays." },
+          options: ["don't", "doesn't", "not"],
+          answer: "don't",
+          explanation: { en: "I + don't.", pt: "I + don't." },
         },
         {
-          "id": "b8d-qc3",
-          "prompt": {
-            "en": "Choose the correct sentence.",
-            "pt": "Escolha a frase correta."
-          },
-          "options": [
-            "He is usually at home.",
-            "He usually is at home."
-          ],
-          "answer": "He is usually at home.",
-          "explanation": {
-            "en": "Adverbs of frequency come after the verb 'to be'.",
-            "pt": "Advérbios de frequência vêm depois do verbo 'to be'."
-          }
+          id: "b8d-cp2",
+          prompt: { en: "Complete: She ___ drive to the office.", pt: "Complete: She ___ drive to the office." },
+          options: ["don't", "doesn't", "isn't"],
+          answer: "doesn't",
+          explanation: { en: "she + doesn't.", pt: "she + doesn't." },
         },
         {
-          "id": "b8d-qc4",
-          "prompt": {
-            "en": "What does 'read a book' mean?",
-            "pt": "O que significa 'read a book'?"
+          id: "b8d-cp3",
+          prompt: { en: "Choose the correct form: He doesn't ___ coffee at night.", pt: "Escolha a forma correta: He doesn't ___ coffee at night." },
+          options: ["drinks", "drink", "drinking"],
+          answer: "drink",
+          explanation: { en: "After doesn't, use the base verb.", pt: "Depois de doesn't, verbo base." },
+        },
+        {
+          id: "b8d-cp4",
+          prompt: { en: "Make it negative: They travel in July.", pt: "Passe para a negativa: They travel in July." },
+          options: ["They don't travel in July.", "They doesn't travel in July.", "They not travel in July."],
+          answer: "They don't travel in July.",
+          explanation: { en: "they + don't + base verb.", pt: "they + don't + verbo base." },
+        },
+        {
+          id: "b8d-cp5",
+          prompt: { en: "Which word introduces a polite correction?", pt: "Qual palavra introduz uma correção educada?" },
+          options: ["Actually", "Always", "Also"],
+          answer: "Actually",
+          explanation: { en: "Actually gives the real information.", pt: "Actually traz a informação real." },
+        },
+      ],
+      input: {
+        kind: "listening",
+        title: { en: "Listening — That is not exactly right", pt: "Listening — Não é bem assim" },
+        lines: [
+          { en: "Actually, I don't live in the city centre. I live near the park.", pt: "Na verdade, eu não moro no centro. Eu moro perto do parque." },
+          { en: "Helena doesn't work at the weekend. She studies on Saturday morning.", pt: "Helena não trabalha no fim de semana. Ela estuda no sábado de manhã." },
+          { en: "Ivan doesn't open the office on Sunday, because the building is closed.", pt: "Ivan não abre o escritório no domingo, porque o prédio está fechado." },
+        ],
+        questions: [
+          {
+            id: "b8d-r1",
+            prompt: { en: "Where does the first person live?", pt: "Onde mora a primeira pessoa?" },
+            options: ["near the park", "in the city centre", "near the office"],
+            answer: "near the park",
+            explanation: { en: "I live near the park.", pt: "I live near the park." },
           },
-          "options": [
-            "Assistir TV",
-            "Ler um livro",
-            "Cozinhar"
-          ],
-          "answer": "Ler um livro",
-          "explanation": {
-            "en": "'Read a book' is a common free time activity.",
-            "pt": "'Read a book' é uma atividade comum de tempo livre."
-          }
-        }
-      ]
+          {
+            id: "b8d-r2",
+            prompt: { en: "What does Helena do on Saturday morning?", pt: "O que Helena faz no sábado de manhã?" },
+            options: ["she studies", "she works", "she travels"],
+            answer: "she studies",
+            explanation: { en: "She studies on Saturday morning.", pt: "She studies on Saturday morning." },
+          },
+          {
+            id: "b8d-r3",
+            prompt: { en: "Why doesn't Ivan open the office on Sunday?", pt: "Por que Ivan não abre o escritório no domingo?" },
+            options: ["the building is closed", "he is tired", "he studies"],
+            answer: "the building is closed",
+            explanation: { en: "because the building is closed.", pt: "because the building is closed." },
+          },
+        ],
+      },
+      quickCheck: [
+        {
+          id: "b8d-qc1",
+          prompt: { en: "Choose the correct sentence.", pt: "Escolha a frase correta." },
+          options: ["He doesn't works here.", "He doesn't work here.", "He don't work here."],
+          answer: "He doesn't work here.",
+          explanation: { en: "doesn't + base verb.", pt: "doesn't + verbo base." },
+        },
+        {
+          id: "b8d-qc2",
+          prompt: { en: "Complete: We ___ cook on weekdays.", pt: "Complete: We ___ cook on weekdays." },
+          options: ["doesn't", "don't", "not"],
+          answer: "don't",
+          explanation: { en: "we + don't.", pt: "we + don't." },
+        },
+        {
+          id: "b8d-qc3",
+          prompt: { en: "Which answer corrects information politely?", pt: "Qual resposta corrige a informação com educação?" },
+          options: ["Actually, I don't. I study on Saturday.", "No! You are wrong.", "Yes, I work every day."],
+          answer: "Actually, I don't. I study on Saturday.",
+          explanation: { en: "Correct and give the real information.", pt: "Corrija e dê a informação real." },
+        },
+        {
+          id: "b8d-qc4",
+          prompt: { en: "What is a weekday?", pt: "O que é um weekday?" },
+          options: ["Monday to Friday", "Saturday and Sunday", "any day in May"],
+          answer: "Monday to Friday",
+          explanation: { en: "weekday = Monday to Friday.", pt: "weekday = de segunda a sexta." },
+        },
+      ],
     },
-    "communicate": {
-      "id": "BEGINNER-U08-COMMUNICATE",
-      "review": [
-        {
-          "en": "We learned about free time activities and how often we do them.",
-          "pt": "Aprendemos sobre atividades de tempo livre e a frequência com que as fazemos."
-        },
-        {
-          "en": "We also learned how to apologize.",
-          "pt": "Também aprendemos a pedir desculpas."
-        },
-        {
-          "en": "Remember: Adverbs of frequency go before the main verb, but after 'to be'.",
-          "pt": "Lembre-se: Advérbios de frequência vêm antes do verbo principal, mas depois do 'to be'."
-        }
+    communicate: {
+      id: "BEGINNER-U08-COMMUNICATE",
+      review: [
+        { en: "I / you / we / they + don't + base verb.", pt: "I / you / we / they + don't + verbo base." },
+        { en: "He / she / it + doesn't + base verb.", pt: "He / she / it + doesn't + verbo base." },
+        { en: "Polite correction: Actually, I don't...", pt: "Correção educada: Actually, I don't..." },
       ],
-      "activities": [
+      activities: [
         {
-          "id": "b8c-act1",
-          "title": {
-            "en": "Role-play: Apologizing for being late",
-            "pt": "Role-play: Pedindo desculpas por atraso"
+          id: "b8c-a1",
+          title: { en: "Three things I don't do", pt: "Três coisas que eu não faço" },
+          instruction: {
+            en: "Say three habits you do not have, using don't and a time expression.",
+            pt: "Diga três hábitos que você não tem, usando don't e uma expressão de tempo.",
           },
-          "instruction": {
-            "en": "Work with a partner. One person is late and apologizes. The other person accepts the apology and asks about free time. Use the expressions and adverbs of frequency.",
-            "pt": "Trabalhe com um parceiro. Uma pessoa está atrasada e pede desculpas. A outra pessoa aceita a desculpa e pergunta sobre tempo livre. Use as expressões e advérbios de frequência."
-          },
-          "phrases": [
-            {
-              "en": "I'm sorry for being late. I sometimes paint.",
-              "pt": "Me desculpe por estar atrasado. Eu às vezes pinto."
-            },
-            {
-              "en": "No problem! What do you usually do in your free time?",
-              "pt": "Sem problemas! O que você geralmente faz no seu tempo livre?"
-            },
-            {
-              "en": "Sorry about that. I never watch TV.",
-              "pt": "Desculpe por isso. Eu nunca assisto TV."
-            }
+          phrases: [
+            { en: "I don't drink coffee in the evening.", pt: "Eu não tomo café à noite." },
+            { en: "I don't work on weekdays after six.", pt: "Eu não trabalho nos dias úteis depois das seis." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b8c-act1-chk1",
-              "prompt": {
-                "en": "Student A apologizes using 'I'm sorry'.",
-                "pt": "O Aluno A pede desculpas usando 'I'm sorry'."
-              },
-              "options": [
-                "Yes",
-                "No"
-              ],
-              "answer": "Yes",
-              "explanation": {
-                "en": "The goal is to practice apologizing.",
-                "pt": "O objetivo é praticar o pedido de desculpas."
-              }
+              id: "b8c-a1q1",
+              prompt: { en: "Complete: I ___ smoke.", pt: "Complete: I ___ smoke." },
+              options: ["don't", "doesn't", "am not"],
+              answer: "don't",
+              explanation: { en: "I + don't.", pt: "I + don't." },
             },
-            {
-              "id": "b8c-act1-chk2",
-              "prompt": {
-                "en": "Student B asks about free time using an adverb of frequency.",
-                "pt": "O Aluno B pergunta sobre tempo livre usando um advérbio de frequência."
-              },
-              "options": [
-                "Yes",
-                "No"
-              ],
-              "answer": "Yes",
-              "explanation": {
-                "en": "Students should incorporate adverbs of frequency.",
-                "pt": "Os alunos devem incorporar advérbios de frequência."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b8c-act2",
-          "title": {
-            "en": "Talk to Your Partner: Free Time Habits",
-            "pt": "Converse com seu parceiro: Hábitos de Tempo Livre"
+          id: "b8c-a2",
+          title: { en: "What she doesn't do", pt: "O que ela não faz" },
+          instruction: {
+            en: "Talk about a person you know: two things the person does and two things the person doesn't do.",
+            pt: "Fale de alguém que você conhece: duas coisas que a pessoa faz e duas que não faz.",
           },
-          "instruction": {
-            "en": "Ask your partner about their free time activities. Use adverbs of frequency in your questions and answers.",
-            "pt": "Pergunte ao seu parceiro sobre suas atividades de tempo livre. Use advérbios de frequência em suas perguntas e respostas."
-          },
-          "phrases": [
-            {
-              "en": "Do you usually listen to music?",
-              "pt": "Você geralmente ouve música?"
-            },
-            {
-              "en": "I often play sports. Do you?",
-              "pt": "Eu frequentemente pratico esportes. E você?"
-            },
-            {
-              "en": "What do you sometimes do on Sundays?",
-              "pt": "O que você às vezes faz aos domingos?"
-            }
+          phrases: [
+            { en: "She studies English, but she doesn't watch films in English.", pt: "Ela estuda inglês, mas não assiste a filmes em inglês." },
+            { en: "He works in an office, but he doesn't drive to work.", pt: "Ele trabalha em escritório, mas não vai dirigindo ao trabalho." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b8c-act2-chk1",
-              "prompt": {
-                "en": "Did your partner use at least two different adverbs of frequency?",
-                "pt": "Seu parceiro usou pelo menos dois advérbios de frequência diferentes?"
-              },
-              "options": [
-                "Yes",
-                "No"
-              ],
-              "answer": "Yes",
-              "explanation": {
-                "en": "Focus on using varied adverbs of frequency.",
-                "pt": "Focar no uso de advérbios de frequência variados."
-              }
+              id: "b8c-a2q1",
+              prompt: { en: "Complete: My brother ___ cook.", pt: "Complete: My brother ___ cook." },
+              options: ["don't", "doesn't", "not"],
+              answer: "doesn't",
+              explanation: { en: "Third person + doesn't.", pt: "Terceira pessoa + doesn't." },
             },
-            {
-              "id": "b8c-act2-chk2",
-              "prompt": {
-                "en": "Did your partner mention at least two free time activities?",
-                "pt": "Seu parceiro mencionou pelo menos duas atividades de tempo livre?"
-              },
-              "options": [
-                "Yes",
-                "No"
-              ],
-              "answer": "Yes",
-              "explanation": {
-                "en": "Practice using the new vocabulary.",
-                "pt": "Praticar o uso do novo vocabulário."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b8c-act3",
-          "title": {
-            "en": "Ask and Answer: How often do you...?",
-            "pt": "Pergunte e Responda: Com que frequência você...?"
+          id: "b8c-a3",
+          title: { en: "Correct the misunderstanding", pt: "Corrija o mal-entendido" },
+          instruction: {
+            en: "Someone says something wrong about you. Correct it politely and give the real information.",
+            pt: "Alguém diz algo errado sobre você. Corrija com educação e dê a informação correta.",
           },
-          "instruction": {
-            "en": "Form questions using 'How often do you...' and free time activities. Your partner answers using an adverb of frequency.",
-            "pt": "Formule perguntas usando 'How often do you...' e atividades de tempo livre. Seu parceiro responde usando um advérbio de frequência."
-          },
-          "phrases": [
-            {
-              "en": "How often do you relax?",
-              "pt": "Com que frequência você relaxa?"
-            },
-            {
-              "en": "I always exercise.",
-              "pt": "Eu sempre me exercito."
-            },
-            {
-              "en": "How often do you garden?",
-              "pt": "Com que frequência você jardina?"
-            }
+          phrases: [
+            { en: "Actually, I don't live in the city centre. I live near the park.", pt: "Na verdade, eu não moro no centro. Eu moro perto do parque." },
+            { en: "No, she doesn't teach on Fridays. She teaches on Mondays.", pt: "Não, ela não dá aula às sextas. Ela dá aula às segundas." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b8c-act3-chk1",
-              "prompt": {
-                "en": "Did you ask a 'How often' question correctly?",
-                "pt": "Você fez uma pergunta 'How often' corretamente?"
-              },
-              "options": [
-                "Yes",
-                "No"
-              ],
-              "answer": "Yes",
-              "explanation": {
-                "en": "Ensure correct question formation.",
-                "pt": "Garantir a formação correta da pergunta."
-              }
+              id: "b8c-a3q1",
+              prompt: { en: "Choose the polite correction.", pt: "Escolha a correção educada." },
+              options: ["Actually, I don't work there. I work here.", "You never listen to me.", "I work there, yes."],
+              answer: "Actually, I don't work there. I work here.",
+              explanation: { en: "Negative + correct information.", pt: "Negativa + informação correta." },
             },
-            {
-              "id": "b8c-act3-chk2",
-              "prompt": {
-                "en": "Did your partner answer with an adverb of frequency before the main verb or after 'to be'?",
-                "pt": "Seu parceiro respondeu com um advérbio de frequência antes do verbo principal ou depois do 'to be'?"
-              },
-              "options": [
-                "Yes",
-                "No"
-              ],
-              "answer": "Yes",
-              "explanation": {
-                "en": "Reinforce adverb position.",
-                "pt": "Reforçar a posição do advérbio."
-              }
-            }
-          ]
+          ],
         },
-        {
-          "id": "b8c-act4",
-          "title": {
-            "en": "Short Speaking Task: My Week",
-            "pt": "Tarefa Curta de Fala: Minha Semana"
-          },
-          "instruction": {
-            "en": "Describe your typical week using at least three free time activities and three adverbs of frequency.",
-            "pt": "Descreva sua semana típica usando pelo menos três atividades de tempo livre e três advérbios de frequência."
-          },
-          "phrases": [
-            {
-              "en": "I always work on weekdays.",
-              "pt": "Eu sempre trabalho durante a semana."
-            },
-            {
-              "en": "On Saturdays, I usually go out with friends.",
-              "pt": "Aos sábados, eu geralmente saio com amigos."
-            },
-            {
-              "en": "I sometimes read a book before sleep.",
-              "pt": "Eu às vezes leio um livro antes de dormir."
-            }
-          ],
-          "check": [
-            {
-              "id": "b8c-act4-chk1",
-              "prompt": {
-                "en": "Did the student use at least three free time activities?",
-                "pt": "O aluno usou pelo menos três atividades de tempo livre?"
-              },
-              "options": [
-                "Yes",
-                "No"
-              ],
-              "answer": "Yes",
-              "explanation": {
-                "en": "Check for vocabulary usage.",
-                "pt": "Verificar o uso do vocabulário."
-              }
-            },
-            {
-              "id": "b8c-act4-chk2",
-              "prompt": {
-                "en": "Did the student use at least three adverbs of frequency in correct positions?",
-                "pt": "O aluno usou pelo menos três advérbios de frequência em posições corretas?"
-              },
-              "options": [
-                "Yes",
-                "No"
-              ],
-              "answer": "Yes",
-              "explanation": {
-                "en": "Check for grammar accuracy.",
-                "pt": "Verificar a precisão gramatical."
-              }
-            }
-          ]
-        },
-        {
-          "id": "b8c-act5",
-          "title": {
-            "en": "Listening Task: Understanding Daily Routines",
-            "pt": "Tarefa de Escuta: Compreendendo Rotinas Diárias"
-          },
-          "instruction": {
-            "en": "Listen to a short audio clip describing someone's free time routine. Identify the activities and their frequency.",
-            "pt": "Ouça um clipe de áudio curto descrevendo a rotina de tempo livre de alguém. Identifique as atividades e sua frequência."
-          },
-          "phrases": [
-            {
-              "en": "I always listen to music when I clean.",
-              "pt": "Eu sempre ouço música quando limpo."
-            },
-            {
-              "en": "I often watch TV in the evenings.",
-              "pt": "Eu frequentemente assisto TV à noite."
-            },
-            {
-              "en": "On weekends, I sometimes cook big meals.",
-              "pt": "Nos fins de semana, eu às vezes cozinho grandes refeições."
-            }
-          ],
-          "check": [
-            {
-              "id": "b8c-act5-chk1",
-              "prompt": {
-                "en": "According to the audio, what does the person always do?",
-                "pt": "De acordo com o áudio, o que a pessoa sempre faz?"
-              },
-              "options": [
-                "Cook big meals",
-                "Listen to music",
-                "Watch TV"
-              ],
-              "answer": "Listen to music",
-              "explanation": {
-                "en": "The audio states: 'I always listen to music'.",
-                "pt": "O áudio afirma: 'Eu sempre ouço música'."
-              }
-            },
-            {
-              "id": "b8c-act5-chk2",
-              "prompt": {
-                "en": "What free time activity is done 'sometimes'?",
-                "pt": "Qual atividade de tempo livre é feita 'às vezes'?"
-              },
-              "options": [
-                "Watch TV",
-                "Cook big meals",
-                "Listen to music"
-              ],
-              "answer": "Cook big meals",
-              "explanation": {
-                "en": "The audio states: 'I sometimes cook big meals'.",
-                "pt": "O áudio afirma: 'Eu às vezes cozinho grandes refeições'."
-              }
-            }
-          ]
-        }
       ],
-      "challenge": {
-        "id": "b8c-chg1",
-        "title": {
-          "en": "Planning a Weekend Meetup",
-          "pt": "Planejando um Encontro de Fim de Semana"
+      challenge: {
+        id: "b8c-challenge",
+        title: { en: "Communication Challenge — Clear it up", pt: "Desafio de comunicação — Desfaça o mal-entendido" },
+        instruction: {
+          en: "In six sentences, correct four wrong ideas about you and about a person you know, always giving the real information.",
+          pt: "Em seis frases, corrija quatro ideias erradas sobre você e sobre alguém que você conhece, sempre dando a informação real.",
         },
-        "instruction": {
-          "en": "You are planning to meet a friend this weekend, but you are late. Apologize and explain why (using a free time activity and an adverb of frequency). Then, ask your friend about their weekend plans, including what they usually do.",
-          "pt": "Você está planejando encontrar um amigo neste fim de semana, mas está atrasado. Peça desculpas e explique o motivo (usando uma atividade de tempo livre e um advérbio de frequência). Em seguida, pergunte ao seu amigo sobre os planos dele para o fim de semana, incluindo o que ele geralmente faz."
-        },
-        "phrases": [
-          {
-            "en": "Oh no, I'm so sorry! I apologize for being late. I was gardening, and I sometimes lose track of time.",
-            "pt": "Ah não, me desculpe muito! Peço desculpas por estar atrasado. Eu estava jardinando, e às vezes perco a noção do tempo."
-          },
-          {
-            "en": "It's okay! What do you usually do on Saturdays?",
-            "pt": "Está tudo bem! O que você geralmente faz aos sábados?"
-          },
-          {
-            "en": "I often play sports. How about you?",
-            "pt": "Eu frequentemente pratico esportes. E você?"
-          }
+        phrases: [
+          { en: "Actually, I don't work at the weekend.", pt: "Na verdade, eu não trabalho no fim de semana." },
+          { en: "I don't travel in July, I travel in December.", pt: "Eu não viajo em julho, eu viajo em dezembro." },
+          { en: "She doesn't start at eight, she starts at nine.", pt: "Ela não começa às oito, ela começa às nove." },
+          { en: "He doesn't live here, but he works near the office.", pt: "Ele não mora aqui, mas trabalha perto do escritório." },
         ],
-        "check": [
+        check: [
           {
-            "id": "b8c-chg1-chk1",
-            "prompt": {
-              "en": "Did you apologize clearly and explain with a free time activity and adverb of frequency?",
-              "pt": "Você pediu desculpas claramente e explicou com uma atividade de tempo livre e um advérbio de frequência?"
-            },
-            "options": [
-              "Yes",
-              "No"
-            ],
-            "answer": "Yes",
-            "explanation": {
-              "en": "Check for apology, activity, and adverb usage.",
-              "pt": "Verificar o uso de desculpa, atividade e advérbio."
-            }
+            id: "b8c-ch1",
+            prompt: { en: "Which sentence has NO mistake?", pt: "Qual frase NÃO tem erro?" },
+            options: ["She doesn't works on Monday.", "They doesn't cook.", "He doesn't travel in winter."],
+            answer: "He doesn't travel in winter.",
+            explanation: { en: "doesn't + base verb.", pt: "doesn't + verbo base." },
           },
           {
-            "id": "b8c-chg1-chk2",
-            "prompt": {
-              "en": "Did you ask about your friend's weekend plans using 'usually' or 'often'?",
-              "pt": "Você perguntou sobre os planos de fim de semana do seu amigo usando 'usually' ou 'often'?"
-            },
-            "options": [
-              "Yes",
-              "No"
-            ],
-            "answer": "Yes",
-            "explanation": {
-              "en": "Check for appropriate question formation and adverb usage.",
-              "pt": "Verificar a formação da pergunta e o uso do advérbio."
-            }
-          }
-        ]
+            id: "b8c-ch2",
+            prompt: { en: "Correct the information: 'You work on Sundays.'", pt: "Corrija a informação: 'You work on Sundays.'" },
+            options: ["Actually, I don't work on Sundays.", "Actually, I doesn't work on Sundays.", "Actually, I no work on Sundays."],
+            answer: "Actually, I don't work on Sundays.",
+            explanation: { en: "I + don't + base verb.", pt: "I + don't + verbo base." },
+          },
+        ],
       },
-      "lessonReview": {
-        "summary": {
-          "en": "In this unit, we learned about free time activities and how to describe how often we do them using adverbs of frequency (always, usually, often, sometimes, never). We also practiced apologizing.",
-          "pt": "Nesta unidade, aprendemos sobre atividades de tempo livre e como descrever a frequência com que as fazemos usando advérbios de frequência (always, usually, often, sometimes, never). Também praticamos como pedir desculpas."
+      lessonReview: {
+        summary: {
+          en: "You said what you and other people do not do, and you corrected wrong information politely.",
+          pt: "Você disse o que você e outras pessoas não fazem e corrigiu informações erradas com educação.",
         },
-        "canDo": [
-          {
-            "en": "I can talk about my free time activities.",
-            "pt": "Consigo falar sobre minhas atividades de tempo livre."
-          },
-          {
-            "en": "I can use adverbs of frequency (always, usually, often, sometimes, never) correctly.",
-            "pt": "Consigo usar advérbios de frequência (always, usually, often, sometimes, never) corretamente."
-          },
-          {
-            "en": "I can apologize for being late or for other small mistakes.",
-            "pt": "Consigo pedir desculpas por estar atrasado ou por pequenos erros."
-          }
+        canDo: [
+          { en: "I can make negative sentences with don't and doesn't.", pt: "Consigo fazer frases negativas com don't e doesn't." },
+          { en: "I can correct a misunderstanding politely.", pt: "Consigo corrigir um mal-entendido com educação." },
+          { en: "I can contrast what is true and what is not true.", pt: "Consigo contrastar o que é verdade e o que não é." },
         ],
-        "next": {
-          "en": "Next, we will learn about 'Daily Routines' and 'Time Expressions' to describe our day.",
-          "pt": "Em seguida, aprenderemos sobre 'Rotinas Diárias' e 'Expressões de Tempo' para descrever nosso dia."
-        }
-      }
-    }
+        next: {
+          en: "Next: ask questions with Do you...? and Does he...?",
+          pt: "Próximo: fazer perguntas com Do you...? e Does he...?",
+        },
+      },
+    },
   },
   {
     "code": "BEGINNER-U09",
