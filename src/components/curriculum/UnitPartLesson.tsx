@@ -81,14 +81,17 @@ export function UnitPartLesson({
     if (part === "discover") {
       const d = unit.discover;
       switch (key) {
-        case "warmup":
+        case "warmup": {
+          const warmUpImage =
+            warmUpImageForUnit(unit.code) ??
+            (warmUpNeedsImage(d.warmUp.prompt.en) ? warmUpImageFor(unit.title) : undefined);
           return (
             <>
-              {warmUpNeedsImage(d.warmUp.prompt.en) && (
+              {warmUpImage && (
                 <figure className="overflow-hidden rounded-2xl border border-gold/30">
                   <img
-                    src={warmUpImageFor(unit.title).src}
-                    alt={warmUpImageFor(unit.title).alt}
+                    src={warmUpImage.src}
+                    alt={warmUpImage.alt}
                     width={1024}
                     height={576}
                     loading="lazy"
