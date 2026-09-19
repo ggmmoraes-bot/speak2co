@@ -104,7 +104,7 @@ export function CourseUnitsAccordion({
                 />
                 <span className="min-w-0 flex-1">
                   <span className="block text-sm font-semibold text-foreground">
-                    UNIT {unit.number} — {unit.title}
+                    <span className="text-gold">UNIT {unit.number}</span> — {unit.title}
                   </span>
                   <span className="block text-xs text-muted-foreground">
                     CEFR {unit.cefr} · {unit.titlePt}
