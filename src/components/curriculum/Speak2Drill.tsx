@@ -6,6 +6,7 @@ import { MicRecorder } from "@/lib/audio-recorder";
 import { checkPronunciation, speakText } from "@/lib/voice-client";
 import {
   DRILL_GROUPS,
+  drillCue,
   flattenSet,
   getDrillSet,
   type DrillGroupKey,
@@ -91,6 +92,7 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
   if (queue.length === 0) return null;
 
   if (!started) {
+    const sample = queue[0]!.drill;
     return (
       <div className="rounded-2xl border border-gold/30 bg-gold/5 p-5">
         <h3 className="text-base font-semibold">
@@ -100,20 +102,50 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
           Practice what you learned. Speak it. Get feedback. Improve it.
         </p>
         <p className="mt-1 text-xs font-semibold tracking-wide text-gold uppercase">
-          Listen → Change → Speak → Check
+          Listen → Drill → Speak → Check
         </p>
         <p className="mt-2 text-sm text-foreground/80">
-          Use the sentence on the screen as your starting point. Follow the drill instruction,
-          change what is requested, and say the complete sentence aloud. Then click Speak &amp;
-          Check to get AI feedback.
+          Use the sentence on the screen as your starting point. Apply the drill, and say the
+          complete sentence aloud. Then click Speak &amp; Check to get AI feedback.
         </p>
         <p className="mt-0.5 text-xs text-muted-foreground italic">
-          Consolidação oral da unidade: leia a frase-base, faça a mudança pedida e fale em voz alta.
+          Consolidação oral da unidade: leia a frase-base, aplique o drill e fale em voz alta.
         </p>
+
+        {/* Exemplo com áudio da IA, antes de começar */}
+        <div className="mt-4 rounded-xl border border-gold/40 bg-background/60 p-4">
+          <p className="text-[11px] font-semibold tracking-wide text-gold uppercase">Example</p>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <p className="text-sm font-semibold text-foreground">{sample.base}</p>
+            <button
+              type="button"
+              onClick={() => play(sample.base)}
+              aria-label="Listen to the base sentence"
+              className="rounded-full border border-gold/50 p-1.5 text-gold transition hover:bg-gold/10"
+            >
+              <Volume2 className="h-3.5 w-3.5" />
+            </button>
+          </div>
+          <p className="mt-2 text-[11px] font-semibold tracking-wide text-gold uppercase">Drill</p>
+          <p className="text-sm font-semibold text-foreground">{drillCue(sample.instruction)}</p>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <p className="text-[11px] font-semibold tracking-wide text-gold uppercase">You say</p>
+            <p className="text-sm font-semibold text-foreground">{sample.answer}</p>
+            <button
+              type="button"
+              onClick={() => play(sample.answer)}
+              aria-label="Listen to the example answer"
+              className="rounded-full border border-gold/50 p-1.5 text-gold transition hover:bg-gold/10"
+            >
+              <Volume2 className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        </div>
+
         <button
           type="button"
           onClick={() => setStarted(true)}
-          className="mt-4 inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2 text-sm font-semibold text-navy transition hover:bg-gold/90"
+          className="mt-4 inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2 text-sm font-semibold text-gold-ink transition hover:bg-gold/90"
         >
           Start Speak2Drill
         </button>
@@ -157,7 +189,7 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
             key={g.key}
             className={
               g.key === group
-                ? "rounded-full bg-gold px-3 py-1 text-[11px] font-bold tracking-wide text-navy uppercase"
+                ? "rounded-full bg-gold px-3 py-1 text-[11px] font-bold tracking-wide text-gold-ink uppercase"
                 : "rounded-full border border-border/70 px-3 py-1 text-[11px] font-semibold tracking-wide text-muted-foreground uppercase"
             }
           >
@@ -188,7 +220,9 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
       {/* Instrução do drill */}
       <div className="mt-3 rounded-xl border border-gold/40 bg-gold/10 p-4">
         <p className="text-[11px] font-semibold tracking-wide text-gold uppercase">Drill</p>
-        <p className="mt-1 text-base font-semibold text-foreground">{drill.instruction}</p>
+        <p className="mt-1 text-base font-semibold text-foreground">
+          {drillCue(drill.instruction)}
+        </p>
       </div>
 
       <div className="mt-3 flex flex-wrap gap-2">
@@ -196,7 +230,7 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
           type="button"
           onClick={() => toggleRecording(drill.answer)}
           disabled={busy}
-          className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-5 py-2 text-sm font-semibold text-navy transition hover:bg-gold/90 disabled:opacity-60"
+          className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-5 py-2 text-sm font-semibold text-gold-ink transition hover:bg-gold/90 disabled:opacity-60"
         >
           {busy ? (
             <Loader2 className="h-4 w-4 animate-spin" />

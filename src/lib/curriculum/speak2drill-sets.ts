@@ -39,6 +39,21 @@ const AUTHORED: Record<string, DrillSet> = {
   "BEGINNER-U01": BEGINNER_U01_DRILLS,
 };
 
+/**
+ * Mostra apenas o drill proposto, sem a fórmula "Change X to Y":
+ * as substituições viram pistas curtas (I → She).
+ */
+export function drillCue(instruction: string): string {
+  const quoted = [...instruction.matchAll(/["“']([^"”']+)["”']/g)].map((m) => m[1]!);
+  if (/^change/i.test(instruction) && quoted.length >= 2) {
+    const pairs: string[] = [];
+    for (let i = 0; i + 1 < quoted.length; i += 2) pairs.push(`${quoted[i]} → ${quoted[i + 1]}`);
+    return pairs.join("   ·   ");
+  }
+  if (/^change/i.test(instruction) && quoted.length === 1) return quoted[0]!;
+  return instruction;
+}
+
 /** Conjunto de drills da unidade — autoral quando existir, senão gerado. */
 export function getDrillSet(unit: CourseUnit): DrillSet {
   const authored = AUTHORED[unit.code];
