@@ -1,6 +1,12 @@
 import type { CourseUnit } from "./types";
 import { buildUnitDrills } from "./speak2drill";
 import { BEGINNER_U01_DRILLS } from "./speak2drill-beginner-01";
+import * as D0205 from "./speak2drill-beginner-02-05";
+import * as D0610 from "./speak2drill-beginner-06-10";
+import * as D1115 from "./speak2drill-beginner-11-15";
+import * as D1620 from "./speak2drill-beginner-16-20";
+import * as D2125 from "./speak2drill-beginner-21-25";
+import * as D2630 from "./speak2drill-beginner-26-30";
 
 /**
  * Speak2Drill — consolidação oral da unidade.
