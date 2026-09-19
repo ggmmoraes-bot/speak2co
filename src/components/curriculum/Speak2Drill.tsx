@@ -6,6 +6,7 @@ import { MicRecorder } from "@/lib/audio-recorder";
 import { checkPronunciation, speakText } from "@/lib/voice-client";
 import {
   DRILL_GROUPS,
+  drillCue,
   flattenSet,
   getDrillSet,
   type DrillGroupKey,
