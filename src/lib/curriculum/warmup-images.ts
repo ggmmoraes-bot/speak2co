@@ -8,6 +8,12 @@ import beginnerU02 from "@/assets/warmup/beginner-u02-people-around-me.jpg";
 import beginnerU03 from "@/assets/warmup/beginner-u03-things-i-carry.jpg";
 import beginnerU04 from "@/assets/warmup/beginner-u04-numbers.jpg";
 import beginnerU05 from "@/assets/warmup/beginner-u05-my-day-begins.jpg";
+import beginnerU06 from "@/assets/warmup/beginner-u06-he-works-she-studies.jpg";
+import beginnerU07 from "@/assets/warmup/beginner-u07-clock-and-calendar.jpg";
+import beginnerU08 from "@/assets/warmup/beginner-u08-i-dont-he-doesnt.jpg";
+import beginnerU09 from "@/assets/warmup/beginner-u09-do-you.jpg";
+import beginnerU10 from "@/assets/warmup/beginner-u10-how-often.jpg";
+import beginnerU11 from "@/assets/warmup/beginner-u11-checkpoint.jpg";
 import business from "@/assets/warmup/business.jpg";
 import globalIssues from "@/assets/warmup/global-issues.jpg";
 import psychology from "@/assets/warmup/psychology.jpg";
@@ -192,6 +198,36 @@ const UNIT_IMAGES: Record<string, WarmUpImage> = {
     src: beginnerU05,
     alt: "A person having coffee in a sunlit kitchen early in the morning, with a bag by the door",
     altPt: "Uma pessoa tomando café numa cozinha ensolarada no início da manhã, com a mochila perto da porta",
+  },
+  "BEGINNER-U06": {
+    src: beginnerU06,
+    alt: "Three professionals working in a bright coworking space: a woman at a laptop, a man at a coffee counter and a nurse with a tablet",
+    altPt: "Três profissionais trabalhando em um coworking claro: uma mulher no laptop, um homem no balcão de café e uma enfermeira com um tablet",
+  },
+  "BEGINNER-U07": {
+    src: beginnerU07,
+    alt: "A round clock, an open monthly calendar and a phone with a daily schedule on a desk",
+    altPt: "Um relógio redondo, um calendário mensal aberto e um celular com a agenda do dia sobre uma mesa",
+  },
+  "BEGINNER-U08": {
+    src: beginnerU08,
+    alt: "Two colleagues at a cafe table clearing up a misunderstanding, one gesturing no with an open hand",
+    altPt: "Dois colegas em uma mesa de café desfazendo um mal-entendido, um deles gesticulando que não com a mão aberta",
+  },
+  "BEGINNER-U09": {
+    src: beginnerU09,
+    alt: "Two colleagues sitting face to face in a coworking lounge during a friendly interview",
+    altPt: "Dois colegas sentados frente a frente em um lounge de coworking durante uma entrevista amigável",
+  },
+  "BEGINNER-U10": {
+    src: beginnerU10,
+    alt: "A weekly planner on a desk with habits marked on different days",
+    altPt: "Um planner semanal sobre a mesa com hábitos marcados em dias diferentes",
+  },
+  "BEGINNER-U11": {
+    src: beginnerU11,
+    alt: "Three colleagues talking together at the end of the week in a bright coworking space",
+    altPt: "Três colegas conversando no fim da semana em um coworking iluminado",
   },
 };
 

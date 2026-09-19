@@ -3,879 +3,334 @@ import type { CourseUnit } from "./types";
 /** Speak2Co — Beginner English Course (A1). Units 11–20 do currículo oficial. */
 export const BEGINNER_UNITS_11_20: CourseUnit[] = [
   {
-    "code": "BEGINNER-U11",
-    "number": 11,
-    "title": "Weather Seasons - Present Continuous",
-    "titlePt": "Estações do Ano - Present Continuous",
-    "cefr": "A1",
-    "objective": {
-      "en": "Teach weather seasons and Present Continuous (affirmative) for actions happening now in a contextualized way.",
-      "pt": "Ensinar estações do ano e o Present Continuous (afirmativo) para ações acontecendo agora de forma contextualizada."
+    code: "BEGINNER-U11",
+    number: 11,
+    title: "Checkpoint — Everyday Me",
+    titlePt: "Checkpoint — Meu dia a dia",
+    cefr: "A1",
+    objective: {
+      en: "Put Units 1–10 together: introduce yourself, describe your routine and ask about someone else's.",
+      pt: "Juntar as Unidades 1–10: se apresentar, descrever sua rotina e perguntar sobre a de outra pessoa.",
     },
-    "communicationGoal": {
-      "en": "The student will be able to use 'routines' and vocabulary about weather seasons to communicate in real situations.",
-      "pt": "O aluno será capaz de usar 'routines' e o vocabulário de estações do ano para se comunicar em situações reais."
+    communicationGoal: {
+      en: "You can hold a guided two-minute conversation about who you are and what you do every week.",
+      pt: "Você consegue manter uma conversa guiada de dois minutos sobre quem você é e o que faz toda semana.",
     },
-    "prerequisites": {
-      "en": "Grammar: Prepositions of time and place (at, in, on, next to, between). Vocabulary: Activities Now.",
-      "pt": "Estrutura: Preposições de tempo e lugar (at, in, on, next to, between). Vocabulário: Atividades Agora."
+    prerequisites: {
+      en: "Units 1–10 — to be, present simple, negatives, questions and frequency.",
+      pt: "Unidades 1–10 — to be, present simple, negativas, perguntas e frequência.",
     },
-    "newContent": {
-      "en": "Grammar: Present Continuous (affirmative) for actions happening now. Vocabulary: Weather Seasons (10 lexical items). Expressions: Routines.",
-      "pt": "Gramática: Present Continuous (afirmativo) para ações acontecendo agora. Vocabulário: Estações do Ano (10 itens lexicais). Expressões: Rotinas."
+    newContent: {
+      en: "No new grammar: this unit consolidates everything with longer turns and linking words and, but, because.",
+      pt: "Sem gramática nova: esta unidade consolida tudo com falas mais longas e conectivos and, but, because.",
     },
-    "reviewContent": {
-      "en": "Spiral review: Simple Present (affirmative) for habits and routines, with third-person -s (Unit 6). Vocabulary review: Personal Info (Unit 1).",
-      "pt": "Revisão em espiral: Simple Present (afirmativo) para hábitos e rotinas, com third-person -s (Unidade 6). Revisão de vocabulário: Informações Pessoais (Unidade 1)."
+    reviewContent: {
+      en: "Full review of Units 1–10: identity, family, objects, numbers, routine, times, negatives, questions and frequency.",
+      pt: "Revisão completa das Unidades 1–10: identidade, família, objetos, números, rotina, horários, negativas, perguntas e frequência.",
     },
-    "discover": {
-      "id": "BEGINNER-U11-DISCOVER",
-      "warmUp": {
-        "prompt": {
-          "en": "Look at the images. What do you see? What's the weather like?",
-          "pt": "Olhe as imagens. O que você vê? Como está o tempo?"
+    discover: {
+      id: "BEGINNER-U11-DISCOVER",
+      warmUp: {
+        prompt: {
+          en: "Look at the picture. Three colleagues are talking at the end of the week. What do they say about their week?",
+          pt: "Observe a imagem. Três colegas conversam no fim da semana. O que eles dizem sobre a semana?",
         },
-        "phrases": [
-          {
-            "en": "It's sunny today!",
-            "pt": "Está ensolarado hoje!"
-          },
-          {
-            "en": "I like winter. It's cold.",
-            "pt": "Eu gosto do inverno. Está frio."
-          },
-          {
-            "en": "Is it raining outside?",
-            "pt": "Está chovendo lá fora?"
-          }
-        ]
-      },
-      "context": {
-        "situation": {
-          "en": "Julia and Pedro are talking about the weather and their routines. They are planning a weekend trip.",
-          "pt": "Julia e Pedro estão conversando sobre o tempo e suas rotinas. Eles estão planejando uma viagem de fim de semana."
-        },
-        "dialogue": [
-          {
-            "who": "Julia",
-            "en": "Hi Pedro! What are you doing?",
-            "pt": "Oi Pedro! O que você está fazendo?"
-          },
-          {
-            "who": "Pedro",
-            "en": "Hi Julia! I am looking at the weather forecast. It's sunny and hot now, but it will be rainy tomorrow.",
-            "pt": "Oi Julia! Estou olhando a previsão do tempo. Está ensolarado e quente agora, mas vai chover amanhã."
-          },
-          {
-            "who": "Julia",
-            "en": "Oh, no! I usually go to the park on Saturdays. But I can't when it's rainy.",
-            "pt": "Ah, não! Eu geralmente vou ao parque aos sábados. Mas não posso quando está chuvoso."
-          },
-          {
-            "who": "Pedro",
-            "en": "Yes. And I usually play soccer in the summer, but it's autumn now. The weather is changing.",
-            "pt": "Sim. E eu geralmente jogo futebol no verão, mas agora é outono. O tempo está mudando."
-          },
-          {
-            "who": "Julia",
-            "en": "What do you do when it's cold or snowy?",
-            "pt": "O que você faz quando está frio ou nevando?"
-          },
-          {
-            "who": "Pedro",
-            "en": "When it's snowy, I am watching movies at home. I have dinner at 7 PM.",
-            "pt": "Quando está nevando, eu estou assistindo filmes em casa. Eu janto às 19h."
-          },
-          {
-            "who": "Julia",
-            "en": "Nice! I usually wake up at 6 AM every day, but not on weekends. When it's rainy, I am reading a book. My routine changes with the weather.",
-            "pt": "Legal! Eu geralmente acordo às 6 da manhã todos os dias, mas não nos fins de semana. Quando está chuvoso, estou lendo um livro. Minha rotina muda com o tempo."
-          }
-        ]
-      },
-      "vocabulary": [
-        {
-          "term": "sunny",
-          "pt": "ensolarado",
-          "ipa": "/ˈsʌni/",
-          "definition": "Receiving a lot of light from the sun.",
-          "example": "It is a beautiful sunny day today.",
-          "examplePt": "É um lindo dia ensolarado hoje."
-        },
-        {
-          "term": "rainy",
-          "pt": "chuvoso",
-          "ipa": "/ˈreɪni/",
-          "definition": "Having a lot of rain.",
-          "example": "Let's stay home, it's very rainy outside.",
-          "examplePt": "Vamos ficar em casa, está muito chuvoso lá fora."
-        },
-        {
-          "term": "cloudy",
-          "pt": "nublado",
-          "ipa": "/ˈklaʊdi/",
-          "definition": "With many clouds in the sky.",
-          "example": "The sky is cloudy, so it might rain soon.",
-          "examplePt": "O céu está nublado, então pode chover em breve."
-        },
-        {
-          "term": "windy",
-          "pt": "ventoso",
-          "ipa": "/ˈwɪndi/",
-          "definition": "With a lot of wind.",
-          "example": "It's a windy day, so hold onto your hat!",
-          "examplePt": "É um dia ventoso, então segure seu chapéu!"
-        },
-        {
-          "term": "snowy",
-          "pt": "nevado",
-          "ipa": "/ˈsnoʊi/",
-          "definition": "With a lot of snow.",
-          "example": "The mountains are snowy in winter.",
-          "examplePt": "As montanhas estão nevadas no inverno."
-        },
-        {
-          "term": "hot",
-          "pt": "quente",
-          "ipa": "/hɒt/",
-          "definition": "Having a high temperature.",
-          "example": "Wear light clothes, it's very hot today.",
-          "examplePt": "Use roupas leves, está muito quente hoje."
-        },
-        {
-          "term": "cold",
-          "pt": "frio",
-          "ipa": "/koʊld/",
-          "definition": "Having a low temperature.",
-          "example": "It's cold, so I am wearing a jacket.",
-          "examplePt": "Está frio, então estou usando uma jaqueta."
-        },
-        {
-          "term": "spring",
-          "pt": "primavera",
-          "ipa": "/sprɪŋ/",
-          "definition": "The season between winter and summer, when plants begin to grow.",
-          "example": "Many flowers bloom in spring.",
-          "examplePt": "Muitas flores desabrocham na primavera."
-        },
-        {
-          "term": "summer",
-          "pt": "verão",
-          "ipa": "/ˈsʌmər/",
-          "definition": "The warmest season of the year, between spring and autumn.",
-          "example": "We go to the beach in summer.",
-          "examplePt": "Nós vamos à praia no verão."
-        },
-        {
-          "term": "autumn/winter",
-          "pt": "outono/inverno",
-          "ipa": "/ˈɔːtəm/",
-          "definition": "Autumn: The season between summer and winter. Winter: The coldest season of the year.",
-          "example": "In autumn, leaves fall from trees. Winter is cold and sometimes snowy.",
-          "examplePt": "No outono, as folhas caem das árvores. O inverno é frio e às vezes nevado."
-        }
-      ],
-      "expressions": [
-        {
-          "en": "I usually wake up at 7.",
-          "pt": "Eu geralmente acordo às 7."
-        },
-        {
-          "en": "I go to work by bus.",
-          "pt": "Eu vou para o trabalho de ônibus."
-        },
-        {
-          "en": "I have dinner at 8.",
-          "pt": "Eu janto às 8."
-        }
-      ],
-      "grammar": [
-        {
-          "title": {
-            "en": "Present Continuous (affirmative) for actions happening now",
-            "pt": "Present Continuous (afirmativo) para ações acontecendo agora"
-          },
-          "examples": [
-            {
-              "en": "I am studying English right now.",
-              "pt": "Eu estou estudando inglês agora."
-            },
-            {
-              "en": "They are having lunch.",
-              "pt": "Eles estão almoçando."
-            },
-            {
-              "en": "She is reading a book.",
-              "pt": "Ela está lendo um livro."
-            }
-          ],
-          "rule": {
-            "en": "Use the Present Continuous to talk about actions happening at the moment of speaking. Form: Subject + 'to be' (am/is/are) + Verb-ing.",
-            "pt": "Use o Present Continuous para falar sobre ações acontecendo no momento da fala. Formação: Sujeito + 'to be' (am/is/are) + Verbo-ing."
-          },
-          "mistakes": [
-            {
-              "en": "Omitting 'to be': 'I studying English.' (Incorrect) -> 'I am studying English.' (Correct)",
-              "pt": "Omitir 'to be': 'Eu estudando inglês.' (Incorreto) -> 'Eu estou estudando inglês.' (Correto)"
-            },
-            {
-              "en": "Forgetting '-ing': 'She is read a book.' (Incorrect) -> 'She is reading a book.' (Correct)",
-              "pt": "Esquecer '-ing': 'Ela está ler um livro.' (Incorreto) -> 'Ela está lendo um livro.' (Correto)"
-            }
-          ]
-        }
-      ],
-      "controlledPractice": [
-        {
-          "id": "b11d-cp-1",
-          "prompt": {
-            "en": "Complete the sentence: My sister _____ (watch) TV right now.",
-            "pt": "Complete a frase: Minha irmã _____ (assistir) TV agora."
-          },
-          "options": [
-            "watches",
-            "is watching",
-            "watch",
-            "are watching"
-          ],
-          "answer": "is watching",
-          "explanation": {
-            "en": "For 'she' (my sister), use 'is' and the '-ing' form of the verb.",
-            "pt": "Para 'ela' (minha irmã), use 'is' e a forma '-ing' do verbo."
-          }
-        },
-        {
-          "id": "b11d-cp-2",
-          "prompt": {
-            "en": "Choose the correct sentence: They ____ soccer in the park now.",
-            "pt": "Escolha a frase correta: Eles ____ futebol no parque agora."
-          },
-          "options": [
-            "play",
-            "is playing",
-            "are playing",
-            "plays"
-          ],
-          "answer": "are playing",
-          "explanation": {
-            "en": "For 'they', use 'are' and the '-ing' form of the verb.",
-            "pt": "Para 'eles', use 'are' e a forma '-ing' do verbo."
-          }
-        },
-        {
-          "id": "b11d-cp-3",
-          "prompt": {
-            "en": "What is the weather like in winter?",
-            "pt": "Como é o tempo no inverno?"
-          },
-          "options": [
-            "It's hot and sunny.",
-            "It's cold and snowy.",
-            "It's warm and rainy.",
-            "It's windy and cloudy."
-          ],
-          "answer": "It's cold and snowy.",
-          "explanation": {
-            "en": "Winter is typically cold and can be snowy.",
-            "pt": "O inverno é tipicamente frio e pode nevar."
-          }
-        },
-        {
-          "id": "b11d-cp-4",
-          "prompt": {
-            "en": "Complete the routine: I usually wake up _____ 7 AM.",
-            "pt": "Complete a rotina: Eu geralmente acordo _____ 7 da manhã."
-          },
-          "options": [
-            "on",
-            "in",
-            "at",
-            "for"
-          ],
-          "answer": "at",
-          "explanation": {
-            "en": "Use 'at' for specific times.",
-            "pt": "Use 'at' para horários específicos."
-          }
-        }
-      ],
-      "input": {
-        "kind": "reading",
-        "title": {
-          "en": "A Day in Spring",
-          "pt": "Um Dia na Primavera"
-        },
-        "lines": [
-          {
-            "en": "Hi, I'm Sofia. It's a beautiful spring day today. The sun is shining, and the birds are singing. It's not too hot, and it's not cold. The weather is perfect!",
-            "pt": "Oi, sou Sofia. É um lindo dia de primavera hoje. O sol está brilhando e os pássaros estão cantando. Não está muito quente, e não está frio. O tempo está perfeito!"
-          },
-          {
-            "en": "I usually go to school by bike in the spring. Today, I am going to the park with my friends. We are planning a picnic. My friend, Leo, is bringing sandwiches, and Ana is making juice. We are all very happy.",
-            "pt": "Eu geralmente vou para a escola de bicicleta na primavera. Hoje, estou indo para o parque com meus amigos. Estamos planejando um piquenique. Meu amigo, Leo, está trazendo sanduíches, e Ana está fazendo suco. Estamos todos muito felizes."
-          },
-          {
-            "en": "After the park, I usually have dinner at 6 PM. But today, I am meeting my family at a restaurant. My mom is cooking a special dessert for us. It's a busy but wonderful day!",
-            "pt": "Depois do parque, eu geralmente janto às 18h. Mas hoje, estou encontrando minha família em um restaurante. Minha mãe está cozinhando uma sobremesa especial para nós. É um dia agitado, mas maravilhoso!"
-          }
+        phrases: [
+          { en: "My name is Bruno and I work in a coworking space.", pt: "Meu nome é Bruno e eu trabalho em um coworking." },
+          { en: "I usually start at nine, but on Friday I start later.", pt: "Eu geralmente começo às nove, mas na sexta começo mais tarde." },
+          { en: "I study English because I want a new job.", pt: "Eu estudo inglês porque quero um trabalho novo." },
         ],
-        "questions": [
-          {
-            "id": "b11d-qc-1",
-            "prompt": {
-              "en": "What season is it in the text?",
-              "pt": "Qual estação do ano é no texto?"
-            },
-            "options": [
-              "Winter",
-              "Summer",
-              "Spring",
-              "Autumn"
-            ],
-            "answer": "Spring",
-            "explanation": {
-              "en": "The text explicitly states 'It's a beautiful spring day today'.",
-              "pt": "O texto afirma explicitamente 'É um lindo dia de primavera hoje'."
-            }
-          },
-          {
-            "id": "b11d-qc-2",
-            "prompt": {
-              "en": "What are Sofia and her friends doing at the park?",
-              "pt": "O que Sofia e seus amigos estão fazendo no parque?"
-            },
-            "options": [
-              "Playing soccer",
-              "Having a picnic",
-              "Watching birds",
-              "Reading books"
-            ],
-            "answer": "Having a picnic",
-            "explanation": {
-              "en": "The text says 'We are planning a picnic'.",
-              "pt": "O texto diz 'Estamos planejando um piquenique'."
-            }
-          },
-          {
-            "id": "b11d-qc-3",
-            "prompt": {
-              "en": "What is Sofia's mom doing today?",
-              "pt": "O que a mãe de Sofia está fazendo hoje?"
-            },
-            "options": [
-              "Going to the park",
-              "Cooking a special dessert",
-              "Having dinner at 6 PM",
-              "Bringing sandwiches"
-            ],
-            "answer": "Cooking a special dessert",
-            "explanation": {
-              "en": "The text mentions 'My mom is cooking a special dessert for us'.",
-              "pt": "O texto menciona 'Minha mãe está cozinhando uma sobremesa especial para nós'."
-            }
-          }
-        ]
       },
-      "quickCheck": [
+      context: {
+        situation: {
+          en: "Helena introduces Bruno to a new member of the coworking space, and they compare weeks.",
+          pt: "Helena apresenta Bruno a um novo membro do coworking, e eles comparam as semanas.",
+        },
+        dialogue: [
+          { who: "Helena", en: "Ivan, this is Bruno. He works here three days a week.", pt: "Ivan, este é o Bruno. Ele trabalha aqui três dias por semana." },
+          { who: "Ivan", en: "Nice to meet you, Bruno. Where do you live?", pt: "Prazer, Bruno. Onde você mora?" },
+          { who: "Bruno", en: "I live near the station, so I usually walk here.", pt: "Eu moro perto da estação, então geralmente venho a pé." },
+          { who: "Ivan", en: "Do you work on Saturday?", pt: "Você trabalha no sábado?" },
+          { who: "Bruno", en: "No, I don't. I never work at the weekend because I study English.", pt: "Não. Eu nunca trabalho no fim de semana porque estudo inglês." },
+          { who: "Helena", en: "He has two classes a week, and he always does the homework.", pt: "Ele tem duas aulas por semana, e sempre faz a lição de casa." },
+          { who: "Ivan", en: "That is great. I hardly ever practice, but I want to start.", pt: "Que ótimo. Eu quase nunca pratico, mas quero começar." },
+        ],
+      },
+      vocabulary: [
+        { term: "colleague", pt: "colega de trabalho", ipa: "/ˈkɑːliːɡ/", definition: "A person you work with.", example: "My colleague speaks English well.", examplePt: "Meu colega fala inglês bem." },
+        { term: "routine", pt: "rotina", ipa: "/ruːˈtiːn/", definition: "The things you do regularly.", example: "My routine is simple.", examplePt: "Minha rotina é simples." },
+        { term: "because", pt: "porque", ipa: "/bɪˈkɔːz/", definition: "Used to give a reason.", example: "I study because I want a new job.", examplePt: "Eu estudo porque quero um trabalho novo." },
+        { term: "so", pt: "então, por isso", ipa: "/soʊ/", definition: "Used to give a result.", example: "I live near, so I walk.", examplePt: "Eu moro perto, então vou a pé." },
+        { term: "homework", pt: "lição de casa", ipa: "/ˈhoʊmwɜːrk/", definition: "Work you do at home for a class.", example: "I do my homework at night.", examplePt: "Eu faço a lição de casa à noite." },
+        { term: "class", pt: "aula", ipa: "/klæs/", definition: "A lesson with a teacher.", example: "I have two classes a week.", examplePt: "Eu tenho duas aulas por semana." },
+        { term: "week", pt: "semana", ipa: "/wiːk/", definition: "Seven days.", example: "This week is busy.", examplePt: "Esta semana está cheia." },
+        { term: "near", pt: "perto", ipa: "/nɪr/", definition: "Not far away.", example: "I live near the station.", examplePt: "Eu moro perto da estação." },
+        { term: "station", pt: "estação", ipa: "/ˈsteɪʃn/", definition: "A place where trains or buses stop.", example: "The station is behind the building.", examplePt: "A estação fica atrás do prédio." },
+        { term: "member", pt: "membro", ipa: "/ˈmembər/", definition: "A person who belongs to a group or place.", example: "He is a new member here.", examplePt: "Ele é um novo membro aqui." },
+      ],
+      expressions: [
+        { en: "Nice to meet you.", pt: "Prazer em conhecer você." },
+        { en: "Let me tell you about my week.", pt: "Deixa eu te contar sobre a minha semana." },
+        { en: "And what about you?", pt: "E você?" },
+        { en: "That is great.", pt: "Que ótimo." },
+      ],
+      grammar: [
         {
-          "id": "b11d-qck-1",
-          "prompt": {
-            "en": "Which word describes a day with lots of wind?",
-            "pt": "Qual palavra descreve um dia com muito vento?"
-          },
-          "options": [
-            "Sunny",
-            "Rainy",
-            "Windy",
-            "Cloudy"
+          title: { en: "Putting it together: to be and present simple", pt: "Juntando tudo: to be e present simple" },
+          examples: [
+            { en: "I am Bruno and I work here.", pt: "Eu sou o Bruno e trabalho aqui." },
+            { en: "She is a teacher and she teaches at night.", pt: "Ela é professora e dá aula à noite." },
+            { en: "They are colleagues and they live near the office.", pt: "Eles são colegas e moram perto do escritório." },
           ],
-          "answer": "Windy",
-          "explanation": {
-            "en": "'Windy' means with a lot of wind.",
-            "pt": "'Windy' significa com muito vento."
-          }
+          rule: {
+            en: "Use to be for identity and description, and the present simple for habits. Remember the -s for he, she and it.",
+            pt: "Use to be para identidade e descrição, e o present simple para hábitos. Lembre do -s para he, she e it.",
+          },
+          mistakes: [
+            { en: "I am work here. → I work here.", pt: "Não use to be antes de um verbo de ação no present simple." },
+            { en: "She teach at night. → She teaches at night.", pt: "Terceira pessoa precisa de -s / -es." },
+          ],
         },
         {
-          "id": "b11d-qck-2",
-          "prompt": {
-            "en": "What season is usually very hot?",
-            "pt": "Qual estação é geralmente muito quente?"
-          },
-          "options": [
-            "Winter",
-            "Spring",
-            "Autumn",
-            "Summer"
+          title: { en: "Linking ideas with and, but, because and so", pt: "Ligando ideias com and, but, because e so" },
+          examples: [
+            { en: "I work here and I study at home.", pt: "Eu trabalho aqui e estudo em casa." },
+            { en: "I like Monday, but I don't like Friday.", pt: "Eu gosto de segunda, mas não gosto de sexta." },
+            { en: "I study English because I want a new job.", pt: "Eu estudo inglês porque quero um trabalho novo." },
           ],
-          "answer": "Summer",
-          "explanation": {
-            "en": "Summer is the warmest season.",
-            "pt": "O verão é a estação mais quente."
-          }
+          rule: {
+            en: "Use and to add, but to contrast, because to give a reason and so to give a result. Each one joins two complete sentences.",
+            pt: "Use and para somar, but para contrastar, because para dar um motivo e so para dar um resultado. Cada um liga duas frases completas.",
+          },
+          mistakes: [
+            { en: "I study because of I want a job. → I study because I want a job.", pt: "because vem antes de uma frase completa." },
+            { en: "I like coffee, but I like tea. → I like coffee, but I don't like tea.", pt: "but precisa de um contraste real." },
+          ],
+        },
+      ],
+      controlledPractice: [
+        {
+          id: "b11d-cp1",
+          prompt: { en: "Complete: I ___ a student and I ___ every day.", pt: "Complete: I ___ a student and I ___ every day." },
+          options: ["am / study", "am / am study", "study / am"],
+          answer: "am / study",
+          explanation: { en: "to be for identity, present simple for the habit.", pt: "to be para identidade, present simple para o hábito." },
         },
         {
-          "id": "b11d-qck-3",
-          "prompt": {
-            "en": "Choose the correct sentence: My father ____ a newspaper now.",
-            "pt": "Escolha a frase correta: Meu pai ____ um jornal agora."
-          },
-          "options": [
-            "read",
-            "is reading",
-            "reads",
-            "are reading"
-          ],
-          "answer": "is reading",
-          "explanation": {
-            "en": "For 'he' (my father), use 'is' and the '-ing' form of the verb.",
-            "pt": "Para 'ele' (meu pai), use 'is' e a forma '-ing' do verbo."
-          }
+          id: "b11d-cp2",
+          prompt: { en: "Choose the correct linking word: I walk to work ___ I live near.", pt: "Escolha o conectivo: I walk to work ___ I live near." },
+          options: ["but", "because", "so"],
+          answer: "because",
+          explanation: { en: "It gives the reason.", pt: "Dá o motivo." },
         },
         {
-          "id": "b11d-qck-4",
-          "prompt": {
-            "en": "What is the meaning of 'I usually wake up at 7'?",
-            "pt": "Qual o significado de 'I usually wake up at 7'?"
+          id: "b11d-cp3",
+          prompt: { en: "Complete: She ___ work on Sunday.", pt: "Complete: She ___ work on Sunday." },
+          options: ["doesn't", "don't", "isn't"],
+          answer: "doesn't",
+          explanation: { en: "she + doesn't + base verb.", pt: "she + doesn't + verbo base." },
+        },
+        {
+          id: "b11d-cp4",
+          prompt: { en: "Complete: ___ you have a class today?", pt: "Complete: ___ you have a class today?" },
+          options: ["Do", "Does", "Are"],
+          answer: "Do",
+          explanation: { en: "you + Do.", pt: "you + Do." },
+        },
+        {
+          id: "b11d-cp5",
+          prompt: { en: "Choose the correct order.", pt: "Escolha a ordem correta." },
+          options: ["He always is on time.", "He is always on time.", "Always he is on time."],
+          answer: "He is always on time.",
+          explanation: { en: "The adverb comes after to be.", pt: "O advérbio vem depois do to be." },
+        },
+      ],
+      input: {
+        kind: "reading",
+        title: { en: "Reading — A week in three lines", pt: "Reading — Uma semana em três linhas" },
+        lines: [
+          { en: "My name is Helena. I am a designer and I work in a coworking space near the station.", pt: "Meu nome é Helena. Sou designer e trabalho em um coworking perto da estação." },
+          { en: "I start at nine and I usually finish at six, but on Friday I finish at four.", pt: "Eu começo às nove e geralmente termino às seis, mas na sexta termino às quatro." },
+          { en: "I don't work at the weekend because I have two English classes and I always do my homework.", pt: "Eu não trabalho no fim de semana porque tenho duas aulas de inglês e sempre faço minha lição." },
+        ],
+        questions: [
+          {
+            id: "b11d-r1",
+            prompt: { en: "What is Helena's job?", pt: "Qual é o trabalho da Helena?" },
+            options: ["designer", "teacher", "doctor"],
+            answer: "designer",
+            explanation: { en: "I am a designer.", pt: "I am a designer." },
           },
-          "options": [
-            "I am waking up now.",
-            "I wake up at 7 AM every day.",
-            "I never wake up at 7 AM.",
-            "I woke up at 7 AM yesterday."
-          ],
-          "answer": "I wake up at 7 AM every day.",
-          "explanation": {
-            "en": "'Usually' indicates a habit or routine, used with Simple Present.",
-            "pt": "'Usually' indica um hábito ou rotina, usado com o Simple Present."
-          }
-        }
-      ]
+          {
+            id: "b11d-r2",
+            prompt: { en: "When does she finish on Friday?", pt: "Quando ela termina na sexta?" },
+            options: ["at four", "at six", "at nine"],
+            answer: "at four",
+            explanation: { en: "on Friday I finish at four.", pt: "on Friday I finish at four." },
+          },
+          {
+            id: "b11d-r3",
+            prompt: { en: "Why doesn't she work at the weekend?", pt: "Por que ela não trabalha no fim de semana?" },
+            options: ["because she has English classes", "because she travels", "because she is tired"],
+            answer: "because she has English classes",
+            explanation: { en: "because I have two English classes.", pt: "because I have two English classes." },
+          },
+        ],
+      },
+      quickCheck: [
+        {
+          id: "b11d-qc1",
+          prompt: { en: "Choose the sentence with NO mistake.", pt: "Escolha a frase sem erro." },
+          options: ["I am live near here.", "I live near here.", "I lives near here."],
+          answer: "I live near here.",
+          explanation: { en: "Present simple with I.", pt: "Present simple com I." },
+        },
+        {
+          id: "b11d-qc2",
+          prompt: { en: "Complete: He works a lot, ___ he is never tired.", pt: "Complete: He works a lot, ___ he is never tired." },
+          options: ["but", "because", "and so"],
+          answer: "but",
+          explanation: { en: "It shows contrast.", pt: "Mostra contraste." },
+        },
+        {
+          id: "b11d-qc3",
+          prompt: { en: "Which answer fits 'How often do you study?'", pt: "Qual resposta cabe em 'How often do you study?'" },
+          options: ["At home.", "Four times a week.", "With my colleague."],
+          answer: "Four times a week.",
+          explanation: { en: "The question asks about frequency.", pt: "A pergunta é sobre frequência." },
+        },
+        {
+          id: "b11d-qc4",
+          prompt: { en: "Complete the introduction: ___ to meet you.", pt: "Complete a apresentação: ___ to meet you." },
+          options: ["Nice", "Good", "Fine"],
+          answer: "Nice",
+          explanation: { en: "Nice to meet you.", pt: "Nice to meet you." },
+        },
+      ],
     },
-    "communicate": {
-      "id": "BEGINNER-U11-COMMUNICATE",
-      "review": [
-        {
-          "en": "Remember the weather words: sunny, rainy, cloudy, windy, snowy, hot, cold. And the seasons: spring, summer, autumn, winter.",
-          "pt": "Lembre-se das palavras do tempo: ensolarado, chuvoso, nublado, ventoso, nevado, quente, frio. E das estações: primavera, verão, outono, inverno."
-        },
-        {
-          "en": "Present Continuous: Subject + am/is/are + verb-ing. Use it for actions happening now. Example: 'I am eating lunch.'",
-          "pt": "Present Continuous: Sujeito + am/is/are + verbo-ing. Use para ações acontecendo agora. Exemplo: 'Eu estou almoçando.'"
-        },
-        {
-          "en": "Routines: Use Simple Present and expressions like 'I usually wake up at 7.'",
-          "pt": "Rotinas: Use o Simple Present e expressões como 'Eu geralmente acordo às 7'."
-        }
+    communicate: {
+      id: "BEGINNER-U11-COMMUNICATE",
+      review: [
+        { en: "Identity: I am... / I work... / I live...", pt: "Identidade: I am... / I work... / I live..." },
+        { en: "Routine and frequency: I usually... / twice a week.", pt: "Rotina e frequência: I usually... / twice a week." },
+        { en: "Questions: Do you...? Does he...? How often...?", pt: "Perguntas: Do you...? Does he...? How often...?" },
+        { en: "Linking: and, but, because, so.", pt: "Conectivos: and, but, because, so." },
       ],
-      "activities": [
+      activities: [
         {
-          "id": "b11c-act-1",
-          "title": {
-            "en": "Reading Comprehension: Weather and Activities",
-            "pt": "Compreensão de Leitura: Tempo e Atividades"
+          id: "b11c-a1",
+          title: { en: "Introduce yourself in five lines", pt: "Apresente-se em cinco linhas" },
+          instruction: {
+            en: "Say five sentences: name, job or studies, where you live, one habit and one frequency.",
+            pt: "Diga cinco frases: nome, trabalho ou estudos, onde mora, um hábito e uma frequência.",
           },
-          "instruction": {
-            "en": "Read the short text about Maria's day and answer the questions.",
-            "pt": "Leia o pequeno texto sobre o dia de Maria e responda às perguntas."
-          },
-          "phrases": [
-            {
-              "en": "It's summer and it's very hot. Maria is swimming at the beach with her friends. They are drinking cold juice.",
-              "pt": "É verão e está muito quente. Maria está nadando na praia com suas amigas. Elas estão bebendo suco gelado."
-            },
-            {
-              "en": "In winter, Maria usually stays home. She watches movies and drinks hot chocolate. It's cold and sometimes snowy.",
-              "pt": "No inverno, Maria geralmente fica em casa. Ela assiste filmes e bebe chocolate quente. Está frio e às vezes nevado."
-            },
-            {
-              "en": "Today, it is autumn. The weather is windy. Maria is walking her dog in the park. She is wearing a light jacket.",
-              "pt": "Hoje, é outono. O tempo está ventoso. Maria está passeando com seu cachorro no parque. Ela está usando uma jaqueta leve."
-            }
+          phrases: [
+            { en: "My name is Ana and I am an assistant.", pt: "Meu nome é Ana e sou assistente." },
+            { en: "I live near the centre and I usually take the bus.", pt: "Eu moro perto do centro e geralmente pego o ônibus." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b11c-rc-1",
-              "prompt": {
-                "en": "What is Maria doing right now?",
-                "pt": "O que Maria está fazendo agora?"
-              },
-              "options": [
-                "Swimming at the beach",
-                "Watching movies",
-                "Walking her dog",
-                "Drinking hot chocolate"
-              ],
-              "answer": "Walking her dog",
-              "explanation": {
-                "en": "The text says 'Today, it is autumn... Maria is walking her dog'.",
-                "pt": "O texto diz 'Hoje, é outono... Maria está passeando com seu cachorro'."
-              }
+              id: "b11c-a1q1",
+              prompt: { en: "Complete: I ___ an assistant and I ___ in the centre.", pt: "Complete: I ___ an assistant and I ___ in the centre." },
+              options: ["am / work", "am / am work", "work / am"],
+              answer: "am / work",
+              explanation: { en: "to be + present simple.", pt: "to be + present simple." },
             },
-            {
-              "id": "b11c-rc-2",
-              "prompt": {
-                "en": "What does Maria usually do in winter?",
-                "pt": "O que Maria geralmente faz no inverno?"
-              },
-              "options": [
-                "Goes to the beach",
-                "Walks her dog",
-                "Watches movies at home",
-                "Drinks cold juice"
-              ],
-              "answer": "Watches movies at home",
-              "explanation": {
-                "en": "In winter, Maria usually stays home. She watches movies.",
-                "pt": "No inverno, Maria geralmente fica em casa. Ela assiste filmes."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b11c-act-2",
-          "title": {
-            "en": "Answer the Questions: Your Day",
-            "pt": "Responda às Perguntas: Seu Dia"
+          id: "b11c-a2",
+          title: { en: "Ask about their week", pt: "Pergunte sobre a semana da pessoa" },
+          instruction: {
+            en: "Ask four questions about someone's week and react to each answer.",
+            pt: "Faça quatro perguntas sobre a semana de alguém e reaja a cada resposta.",
           },
-          "instruction": {
-            "en": "Answer these questions about your current activities and routines.",
-            "pt": "Responda a estas perguntas sobre suas atividades e rotinas atuais."
-          },
-          "phrases": [
-            {
-              "en": "What are you doing now?",
-              "pt": "O que você está fazendo agora?"
-            },
-            {
-              "en": "What's the weather like today?",
-              "pt": "Como está o tempo hoje?"
-            },
-            {
-              "en": "What do you usually do when it's sunny?",
-              "pt": "O que você geralmente faz quando está ensolarado?"
-            }
+          phrases: [
+            { en: "Do you work every day? And what about the weekend?", pt: "Você trabalha todo dia? E o fim de semana?" },
+            { en: "How often does your team meet?", pt: "Com que frequência seu time se reúne?" },
           ],
-          "check": [
+          check: [
             {
-              "id": "b11c-aq-1",
-              "prompt": {
-                "en": "How do you answer 'What are you doing now?'",
-                "pt": "Como você responde 'O que você está fazendo agora?'"
-              },
-              "options": [
-                "I am working.",
-                "I work.",
-                "I worked.",
-                "I will work."
-              ],
-              "answer": "I am working.",
-              "explanation": {
-                "en": "Use Present Continuous to describe actions happening now.",
-                "pt": "Use Present Continuous para descrever ações acontecendo agora."
-              }
+              id: "b11c-a2q1",
+              prompt: { en: "Choose the correct question.", pt: "Escolha a pergunta correta." },
+              options: ["How often your team meets?", "How often does your team meet?", "How often do your team meets?"],
+              answer: "How often does your team meet?",
+              explanation: { en: "does + base verb.", pt: "does + verbo base." },
             },
-            {
-              "id": "b11c-aq-2",
-              "prompt": {
-                "en": "How do you answer 'What do you usually do when it's rainy?'",
-                "pt": "Como você responde 'O que você geralmente faz quando está chuvoso?'"
-              },
-              "options": [
-                "I am reading a book.",
-                "I am reading a book now.",
-                "I read a book.",
-                "I usually read a book."
-              ],
-              "answer": "I usually read a book.",
-              "explanation": {
-                "en": "Use 'usually' with Simple Present for routines.",
-                "pt": "Use 'usually' com Simple Present para rotinas."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b11c-act-3",
-          "title": {
-            "en": "Complete the Conversation: Weather Talk",
-            "pt": "Complete a Conversa: Conversa sobre o Tempo"
+          id: "b11c-a3",
+          title: { en: "Correct the mistakes", pt: "Corrija os erros" },
+          instruction: {
+            en: "Listen to three sentences with mistakes from Units 1–10 and say the correct version.",
+            pt: "Ouça três frases com erros das Unidades 1–10 e diga a versão correta.",
           },
-          "instruction": {
-            "en": "Complete the dialogue with the correct words or phrases.",
-            "pt": "Complete o diálogo com as palavras ou frases corretas."
-          },
-          "phrases": [
-            {
-              "en": "A: It's ____ and cold today! B: Yes, it's _____. I'm drinking hot tea.",
-              "pt": "A: Está ____ e frio hoje! B: Sim, está _____. Estou bebendo chá quente."
-            },
-            {
-              "en": "A: What are you ____? B: I am ____ a movie. It's too windy to go out.",
-              "pt": "A: O que você está ____? B: Eu estou ____ um filme. Está muito ventoso para sair."
-            },
-            {
-              "en": "A: I usually ____ up at 6 AM. B: Me too! But I ____ dinner at 7 PM.",
-              "pt": "A: Eu geralmente ____ às 6 da manhã. B: Eu também! Mas eu ____ jantar às 19h."
-            }
+          phrases: [
+            { en: "She doesn't works here. → She doesn't work here.", pt: "She doesn't works here. → She doesn't work here." },
+            { en: "I practice always at night. → I always practice at night.", pt: "I practice always at night. → I always practice at night." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b11c-cc-1",
-              "prompt": {
-                "en": "Complete: A: It's ____ and cold today! B: Yes, it's _____. I'm drinking hot tea.",
-                "pt": "Complete: A: Está ____ e frio hoje! B: Sim, está _____. Estou bebendo chá quente."
-              },
-              "options": [
-                "sunny / spring",
-                "cloudy / winter",
-                "hot / summer",
-                "rainy / autumn"
-              ],
-              "answer": "cloudy / winter",
-              "explanation": {
-                "en": "Cold weather is typical of winter, and 'cloudy' fits the description of cold.",
-                "pt": "Tempo frio é típico do inverno, e 'nublado' se encaixa na descrição de frio."
-              }
+              id: "b11c-a3q1",
+              prompt: { en: "Correct this: Do she like coffee?", pt: "Corrija: Do she like coffee?" },
+              options: ["Does she like coffee?", "Does she likes coffee?", "Do she likes coffee?"],
+              answer: "Does she like coffee?",
+              explanation: { en: "she + Does + base verb.", pt: "she + Does + verbo base." },
             },
-            {
-              "id": "b11c-cc-2",
-              "prompt": {
-                "en": "Complete: A: What are you ____? B: I am ____ a movie. It's too windy to go out.",
-                "pt": "Complete: A: O que você está ____? B: Eu estou ____ um filme. Está muito ventoso para sair."
-              },
-              "options": [
-                "do / watch",
-                "doing / watching",
-                "do / watching",
-                "doing / watch"
-              ],
-              "answer": "doing / watching",
-              "explanation": {
-                "en": "Both parts require the '-ing' form for Present Continuous questions and answers.",
-                "pt": "Ambas as partes exigem a forma '-ing' para perguntas e respostas no Present Continuous."
-              }
-            }
-          ]
+          ],
         },
-        {
-          "id": "b11c-act-4",
-          "title": {
-            "en": "Dialogue: Planning a Day",
-            "pt": "Diálogo: Planejando um Dia"
-          },
-          "instruction": {
-            "en": "Read the dialogue. Practice with a partner. Then create your own short dialogue.",
-            "pt": "Leia o diálogo. Pratique com um parceiro. Depois crie seu próprio diálogo curto."
-          },
-          "phrases": [
-            {
-              "en": "Person A: What's the weather like today?",
-              "pt": "Pessoa A: Como está o tempo hoje?"
-            },
-            {
-              "en": "Person B: It's sunny and hot. What are you doing?",
-              "pt": "Pessoa B: Está ensolarado e quente. O que você está fazendo?"
-            },
-            {
-              "en": "Person A: I am going to the park. I usually go to the park when it's sunny.",
-              "pt": "Pessoa A: Estou indo para o parque. Eu geralmente vou ao parque quando está ensolarado."
-            }
-          ],
-          "check": [
-            {
-              "id": "b11c-d-1",
-              "prompt": {
-                "en": "If Person B says 'It's rainy and cold. What are you doing?', how could Person A respond about a routine?",
-                "pt": "Se a Pessoa B diz 'Está chuvoso e frio. O que você está fazendo?', como a Pessoa A poderia responder sobre uma rotina?"
-              },
-              "options": [
-                "I am playing soccer.",
-                "I usually stay home and read.",
-                "I go to the beach.",
-                "I am going to the park."
-              ],
-              "answer": "I usually stay home and read.",
-              "explanation": {
-                "en": "The question asks about a routine, so 'usually' with Simple Present is appropriate.",
-                "pt": "A pergunta é sobre uma rotina, então 'usually' com Simple Present é apropriado."
-              }
-            },
-            {
-              "id": "b11c-d-2",
-              "prompt": {
-                "en": "What is the correct response for 'What's the weather like today?' if it is snowing?",
-                "pt": "Qual é a resposta correta para 'Como está o tempo hoje?' se está nevando?"
-              },
-              "options": [
-                "It's snowy.",
-                "It snow.",
-                "It is snows.",
-                "It is snowed."
-              ],
-              "answer": "It's snowy.",
-              "explanation": {
-                "en": "'It's snowy' is the correct way to describe snowy weather.",
-                "pt": "'It's snowy' é a forma correta de descrever o tempo nevado."
-              }
-            }
-          ]
-        },
-        {
-          "id": "b11c-act-5",
-          "title": {
-            "en": "Talk About Yourself: Weather and Routines",
-            "pt": "Fale Sobre Você: Tempo e Rotinas"
-          },
-          "instruction": {
-            "en": "Describe your routines for different weather seasons and what you are doing now.",
-            "pt": "Descreva suas rotinas para diferentes estações do ano e o que você está fazendo agora."
-          },
-          "phrases": [
-            {
-              "en": "What do you usually do in summer when it's hot?",
-              "pt": "O que você geralmente faz no verão quando está quente?"
-            },
-            {
-              "en": "What are you wearing now? Why?",
-              "pt": "O que você está vestindo agora? Por quê?"
-            },
-            {
-              "en": "Tell me about your favorite season and your routine in that season.",
-              "pt": "Me fale sobre sua estação favorita e sua rotina nessa estação."
-            }
-          ],
-          "check": [
-            {
-              "id": "b11c-tay-1",
-              "prompt": {
-                "en": "How would you start describing your routine in summer?",
-                "pt": "Como você começaria a descrever sua rotina no verão?"
-              },
-              "options": [
-                "In summer, I am going to the beach.",
-                "In summer, I usually go to the beach.",
-                "In summer, I went to the beach.",
-                "In summer, I will go to the beach."
-              ],
-              "answer": "In summer, I usually go to the beach.",
-              "explanation": {
-                "en": "Use 'usually' and Simple Present for routines.",
-                "pt": "Use 'usually' e Simple Present para rotinas."
-              }
-            },
-            {
-              "id": "b11c-tay-2",
-              "prompt": {
-                "en": "If it's cold, what could you say you are wearing?",
-                "pt": "Se está frio, o que você poderia dizer que está vestindo?"
-              },
-              "options": [
-                "I am wearing shorts.",
-                "I am wearing a T-shirt.",
-                "I am wearing a jacket and a scarf.",
-                "I am wearing sandals."
-              ],
-              "answer": "I am wearing a jacket and a scarf.",
-              "explanation": {
-                "en": "A jacket and scarf are appropriate for cold weather.",
-                "pt": "Uma jaqueta e um cachecol são apropriados para o tempo frio."
-              }
-            }
-          ]
-        }
       ],
-      "challenge": {
-        "id": "b11c-chall",
-        "title": {
-          "en": "Your Ideal Weekend",
-          "pt": "Seu Fim de Semana Ideal"
+      challenge: {
+        id: "b11c-challenge",
+        title: { en: "Communication Challenge — Two-minute conversation", pt: "Desafio de comunicação — Conversa de dois minutos" },
+        instruction: {
+          en: "Hold a guided conversation: introduce yourself, describe your week, ask two questions and close politely.",
+          pt: "Mantenha uma conversa guiada: apresente-se, descreva sua semana, faça duas perguntas e encerre com educação.",
         },
-        "instruction": {
-          "en": "Imagine your ideal weekend. Describe the weather and what you are doing. Talk about your routine and how it changes.",
-          "pt": "Imagine seu fim de semana ideal. Descreva o tempo e o que você está fazendo. Fale sobre sua rotina e como ela muda."
-        },
-        "phrases": [
-          {
-            "en": "My ideal weekend is when it's sunny and warm, like in spring.",
-            "pt": "Meu fim de semana ideal é quando está ensolarado e quente, como na primavera."
-          },
-          {
-            "en": "On Saturday, I am going to the park with my friends. We are playing volleyball.",
-            "pt": "No sábado, estou indo para o parque com meus amigos. Estamos jogando vôlei."
-          },
-          {
-            "en": "On Sunday, I usually wake up late. I am reading a book now.",
-            "pt": "No domingo, eu geralmente acordo tarde. Estou lendo um livro agora."
-          }
+        phrases: [
+          { en: "Hi, my name is Marcos. Nice to meet you.", pt: "Oi, meu nome é Marcos. Prazer em conhecer você." },
+          { en: "I work in a small office and I study English twice a week.", pt: "Eu trabalho em um escritório pequeno e estudo inglês duas vezes por semana." },
+          { en: "I don't work on Sunday because I visit my family.", pt: "Eu não trabalho no domingo porque visito minha família." },
+          { en: "And what about you? How often do you practice?", pt: "E você? Com que frequência você pratica?" },
         ],
-        "check": [
+        check: [
           {
-            "id": "b11c-chall-1",
-            "prompt": {
-              "en": "Which sentence correctly describes an action happening now?",
-              "pt": "Qual frase descreve corretamente uma ação acontecendo agora?"
-            },
-            "options": [
-              "I go to the beach.",
-              "I usually go to the beach.",
-              "I am going to the beach.",
-              "I went to the beach."
+            id: "b11c-ch1",
+            prompt: { en: "Which sentence links two ideas correctly?", pt: "Qual frase liga duas ideias corretamente?" },
+            options: [
+              "I stay home because of it rains.",
+              "I stay home because it rains.",
+              "I stay home, because rains.",
             ],
-            "answer": "I am going to the beach.",
-            "explanation": {
-              "en": "The Present Continuous (am/is/are + -ing) is used for actions happening at the moment.",
-              "pt": "O Present Continuous (am/is/are + -ing) é usado para ações acontecendo no momento."
-            }
+            answer: "I stay home because it rains.",
+            explanation: { en: "because + complete sentence.", pt: "because + frase completa." },
           },
           {
-            "id": "b11c-chall-2",
-            "prompt": {
-              "en": "How do you talk about a regular routine for a season?",
-              "pt": "Como você fala sobre uma rotina regular para uma estação?"
-            },
-            "options": [
-              "In winter, I am staying home.",
-              "In winter, I usually stay home.",
-              "In winter, I will stay home.",
-              "In winter, I stayed home."
-            ],
-            "answer": "In winter, I usually stay home.",
-            "explanation": {
-              "en": "Use 'usually' with the Simple Present for routines and habits.",
-              "pt": "Use 'usually' com o Simple Present para rotinas e hábitos."
-            }
-          }
-        ]
+            id: "b11c-ch2",
+            prompt: { en: "Choose a polite way to close a conversation.", pt: "Escolha uma forma educada de encerrar a conversa." },
+            options: ["It was nice to meet you.", "Finish now.", "No more questions."],
+            answer: "It was nice to meet you.",
+            explanation: { en: "It closes politely.", pt: "Encerra com educação." },
+          },
+        ],
       },
-      "lessonReview": {
-        "summary": {
-          "en": "In this unit, you learned about weather seasons and how to use the Present Continuous for actions happening now. You also reviewed routines with the Simple Present.",
-          "pt": "Nesta unidade, você aprendeu sobre as estações do ano e como usar o Present Continuous para ações acontecendo agora. Você também revisou rotinas com o Simple Present."
+      lessonReview: {
+        summary: {
+          en: "You brought Units 1–10 together in one real conversation about your everyday life.",
+          pt: "Você juntou as Unidades 1–10 em uma conversa real sobre o seu dia a dia.",
         },
-        "canDo": [
-          {
-            "en": "Describe the weather using words like 'sunny', 'rainy', 'cold'.",
-            "pt": "Descrever o tempo usando palavras como 'ensolarado', 'chuvoso', 'frio'."
-          },
-          {
-            "en": "Talk about the four seasons: 'spring', 'summer', 'autumn', 'winter'.",
-            "pt": "Falar sobre as quatro estações: 'primavera', 'verão', 'outono', 'inverno'."
-          },
-          {
-            "en": "Form affirmative sentences in the Present Continuous (e.g., 'I am studying').",
-            "pt": "Formar frases afirmativas no Present Continuous (por exemplo, 'Eu estou estudando')."
-          },
-          {
-            "en": "Discuss your routines using expressions like 'I usually wake up at 7'.",
-            "pt": "Discutir suas rotinas usando expressões como 'Eu geralmente acordo às 7'."
-          }
+        canDo: [
+          { en: "I can introduce myself and describe my week.", pt: "Consigo me apresentar e descrever minha semana." },
+          { en: "I can ask and answer questions about routine and frequency.", pt: "Consigo perguntar e responder sobre rotina e frequência." },
+          { en: "I can link ideas with and, but, because and so.", pt: "Consigo ligar ideias com and, but, because e so." },
         ],
-        "next": {
-          "en": "Next, we will practice asking questions and making negative sentences with the Present Continuous.",
-          "pt": "Em seguida, vamos praticar fazer perguntas e frases negativas com o Present Continuous."
-        }
-      }
-    }
+        next: {
+          en: "Next block: the world around me — places, weather and directions.",
+          pt: "Próximo bloco: o mundo ao meu redor — lugares, clima e direções.",
+        },
+      },
+    },
   },
   {
     "code": "BEGINNER-U12",
