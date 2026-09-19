@@ -13,6 +13,19 @@ import {
 } from "@/lib/curriculum/speak2drill-sets";
 import type { CourseUnit } from "@/lib/curriculum/types";
 
+/** Mostra a pista do drill com a seta em dourado e maior. */
+function renderCue(cue: string) {
+  const parts = cue.split("→");
+  return parts.map((part, i) => (
+    <span key={i}>
+      {i > 0 ? (
+        <span className="mx-1 align-middle text-xl leading-none font-bold text-gold">→</span>
+      ) : null}
+      {part.trim()}
+    </span>
+  ));
+}
+
 /**
  * Speak2Drill — consolidação oral da unidade.
  * O aluno vê a frase-base (sempre visível), a instrução de transformação,
