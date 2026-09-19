@@ -127,7 +127,7 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
             </button>
           </div>
           <p className="mt-2 text-[11px] font-semibold tracking-wide text-gold uppercase">Drill</p>
-          <p className="text-sm font-semibold text-foreground">{drillCue(sample.instruction)}</p>
+          <p className="text-sm font-semibold text-foreground">{renderCue(drillCue(sample.instruction))}</p>
           <div className="mt-2 flex flex-wrap items-center gap-2">
             <p className="text-[11px] font-semibold tracking-wide text-gold uppercase">You say</p>
             <p className="text-sm font-semibold text-foreground">{sample.answer}</p>
