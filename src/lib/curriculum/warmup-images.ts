@@ -4,6 +4,10 @@
  * currículo Speak2Co) e, como apoio, por tema do título da unidade.
  */
 import beginnerU01 from "@/assets/warmup/beginner-u01-first-contact.jpg";
+import beginnerU02 from "@/assets/warmup/beginner-u02-people-around-me.jpg";
+import beginnerU03 from "@/assets/warmup/beginner-u03-things-i-carry.jpg";
+import beginnerU04 from "@/assets/warmup/beginner-u04-numbers.jpg";
+import beginnerU05 from "@/assets/warmup/beginner-u05-my-day-begins.jpg";
 import business from "@/assets/warmup/business.jpg";
 import globalIssues from "@/assets/warmup/global-issues.jpg";
 import psychology from "@/assets/warmup/psychology.jpg";
@@ -168,6 +172,26 @@ const UNIT_IMAGES: Record<string, WarmUpImage> = {
     src: beginnerU01,
     alt: "Three colleagues meeting for the first time in a bright coworking lobby",
     altPt: "Três colegas se conhecendo no saguão claro de um coworking",
+  },
+  "BEGINNER-U02": {
+    src: beginnerU02,
+    alt: "A family photo album open on a kitchen table with printed photos around it",
+    altPt: "Um álbum de fotos de família aberto na mesa da cozinha, com fotos impressas ao redor",
+  },
+  "BEGINNER-U03": {
+    src: beginnerU03,
+    alt: "Everyday personal objects arranged on a desk: keys, wallet, notebook, pen, phone, umbrella",
+    altPt: "Objetos pessoais do dia a dia sobre uma mesa: chaves, carteira, caderno, caneta, celular, guarda-chuva",
+  },
+  "BEGINNER-U04": {
+    src: beginnerU04,
+    alt: "A visitor talking to a receptionist at a school reception desk with numbered rooms",
+    altPt: "Uma visitante conversando com a recepcionista na recepção de uma escola, com salas numeradas",
+  },
+  "BEGINNER-U05": {
+    src: beginnerU05,
+    alt: "A person having coffee in a sunlit kitchen early in the morning, with a bag by the door",
+    altPt: "Uma pessoa tomando café numa cozinha ensolarada no início da manhã, com a mochila perto da porta",
   },
 };
 

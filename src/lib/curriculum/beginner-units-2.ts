@@ -3,1724 +3,654 @@ import type { CourseUnit } from "./types";
 /** Speak2Co — Beginner English Course (A1). Units 4–10 do currículo oficial. */
 export const BEGINNER_UNITS_4_10: CourseUnit[] = [
   {
-    "code": "BEGINNER-U04",
-    "number": 4,
-    "title": "Home Rooms - There is / There are",
-    "titlePt": "Cômodos da Casa - Tem / Existem",
-    "cefr": "A1",
-    "objective": {
-      "en": "To teach home rooms and 'there is / there are' for existence, singular and plural, in a contextualized way.",
-      "pt": "Ensinar os cômodos da casa e 'there is / there are' para existência, singular e plural, de forma contextualizada."
+    code: "BEGINNER-U04",
+    number: 4,
+    title: "Numbers and Plurals — Give exact information",
+    titlePt: "Números e plurais — Dar informações exatas",
+    cefr: "A1",
+    objective: {
+      en: "Form regular and irregular plurals and use numbers from 1 to 100 to give exact information.",
+      pt: "Formar plurais regulares e irregulares e usar números de 1 a 100 para dar informações exatas.",
     },
-    "communicationGoal": {
-      "en": "The student will be able to use 'likes dislikes' and home room vocabulary to communicate in real situations.",
-      "pt": "O aluno será capaz de usar 'gostos e desgostos' e o vocabulário de cômodos da casa para se comunicar em situações reais."
+    communicationGoal: {
+      en: "You can say a phone number, an age and a price clearly, and count what you see.",
+      pt: "Você consegue dizer um telefone, uma idade e um preço com clareza, e contar o que vê.",
     },
-    "prerequisites": {
-      "en": "Articles (a/an/the) and demonstratives (this, that, these, those). Home Objects vocabulary.",
-      "pt": "Estrutura: Artigos (a/an/the) e demonstrativos (this, that, these, those). Vocabulário: Objetos da Casa."
+    prerequisites: {
+      en: "Unit 3 — articles and this / that / these / those.",
+      pt: "Unidade 3 — artigos e this / that / these / those.",
     },
-    "newContent": {
-      "en": "Grammar: There is / There are for existence, singular and plural. Vocabulary: Home Rooms (10 lexical items). Expressions: Likes Dislikes.",
-      "pt": "Gramática: There is / There are para existência, singular e plural. Vocabulário: Cômodos da Casa (10 itens lexicais). Expressões: Gostos e desgostos."
+    newContent: {
+      en: "Grammar: plural -s / -es and irregular plurals. Vocabulary: numbers 1–100. Expressions: How many? / How much is it?",
+      pt: "Gramática: plural -s / -es e plurais irregulares. Vocabulário: números 1–100. Expressões: How many? / How much is it?",
     },
-    "reviewContent": {
-      "en": "Not applicable - initial unit of the course.",
-      "pt": "Não aplicável — unidade inicial do curso."
+    reviewContent: {
+      en: "Review from Unit 3: a / an and demonstratives with plural nouns.",
+      pt: "Revisão da Unidade 3: a / an e demonstrativos com substantivos no plural.",
     },
-    "discover": {
-      "id": "BEGINNER-U04-DISCOVER",
-      "warmUp": {
-        "prompt": {
-          "en": "Look at the pictures. What rooms do you see? What do you like in a home?",
-          "pt": "Olhe as imagens. Que cômodos você vê? O que você gosta em uma casa?"
+    discover: {
+      id: "BEGINNER-U04-DISCOVER",
+      warmUp: {
+        prompt: {
+          en: "Look at the picture. A visitor is at a school reception. How many numbers can you find in this situation?",
+          pt: "Observe a imagem. Uma visitante está na recepção de uma escola. Quantos números você encontra nessa situação?",
         },
-        "phrases": [
-          {
-            "en": "This is a kitchen.",
-            "pt": "Esta é uma cozinha."
-          },
-          {
-            "en": "I like a big living room.",
-            "pt": "Eu gosto de uma sala de estar grande."
-          },
-          {
-            "en": "Is this a bedroom?",
-            "pt": "Este é um quarto?"
-          }
-        ]
-      },
-      "context": {
-        "situation": {
-          "en": "Ana and Pedro are looking for a new apartment. They are talking about what they like and don't like in a home.",
-          "pt": "Ana e Pedro estão procurando um apartamento novo. Eles estão conversando sobre o que gostam e não gostam em uma casa."
-        },
-        "dialogue": [
-          {
-            "who": "Ana",
-            "en": "I like this apartment, Pedro. There is a big kitchen.",
-            "pt": "Eu gosto deste apartamento, Pedro. Tem uma cozinha grande."
-          },
-          {
-            "who": "Pedro",
-            "en": "Yes, but there isn't a garden. I love gardens!",
-            "pt": "Sim, mas não tem um jardim. Eu amo jardins!"
-          },
-          {
-            "who": "Ana",
-            "en": "True. But there are two bathrooms and a nice balcony.",
-            "pt": "É verdade. Mas tem dois banheiros e uma sacada agradável."
-          },
-          {
-            "who": "Pedro",
-            "en": "Hmm, I don't like small balconies. And look, there are many stairs.",
-            "pt": "Hmm, eu não gosto de sacadas pequenas. E olhe, tem muitas escadas."
-          },
-          {
-            "who": "Ana",
-            "en": "Oh, but there is a closet in the bedroom. I like closets!",
-            "pt": "Ah, mas tem um armário no quarto. Eu gosto de armários!"
-          }
-        ]
-      },
-      "vocabulary": [
-        {
-          "term": "garage",
-          "pt": "garagem",
-          "ipa": "/ɡəˈrɑːʒ/",
-          "definition": "A building or part of a building where a car is kept.",
-          "example": "There is a car in the garage.",
-          "examplePt": "Tem um carro na garagem."
-        },
-        {
-          "term": "garden",
-          "pt": "jardim",
-          "ipa": "/ˈɡɑːrdən/",
-          "definition": "An area of ground where plants (such as flowers or vegetables) are grown.",
-          "example": "I love to sit in the garden.",
-          "examplePt": "Eu adoro sentar no jardim."
-        },
-        {
-          "term": "balcony",
-          "pt": "sacada",
-          "ipa": "/ˈbæl.kə.ni/",
-          "definition": "A platform on the outside of a building, with a wall or rail around it.",
-          "example": "There is a small table on the balcony.",
-          "examplePt": "Tem uma mesa pequena na sacada."
-        },
-        {
-          "term": "hallway",
-          "pt": "corredor",
-          "ipa": "/ˈhɔːl.weɪ/",
-          "definition": "A long passage in a building from which doors lead into rooms.",
-          "example": "The hallway is dark.",
-          "examplePt": "O corredor está escuro."
-        },
-        {
-          "term": "roof",
-          "pt": "telhado",
-          "ipa": "/ruːf/",
-          "definition": "The top covering of a building, vehicle, etc.",
-          "example": "The house has a red roof.",
-          "examplePt": "A casa tem um telhado vermelho."
-        },
-        {
-          "term": "stairs",
-          "pt": "escadas",
-          "ipa": "/sterz/",
-          "definition": "A set of steps that lead from one floor of a building to another.",
-          "example": "There are many stairs to the second floor.",
-          "examplePt": "Tem muitas escadas para o segundo andar."
-        },
-        {
-          "term": "closet",
-          "pt": "armário/guarda-roupa",
-          "ipa": "/ˈklɑːzɪt/",
-          "definition": "A small room or space used for storing things, especially clothes.",
-          "example": "My clothes are in the closet.",
-          "examplePt": "Minhas roupas estão no armário."
-        },
-        {
-          "term": "shelf",
-          "pt": "prateleira",
-          "ipa": "/ʃelf/",
-          "definition": "A flat length of wood or other rigid material, attached to a wall or forming part of a unit, used for displaying or storing objects.",
-          "example": "There is a book on the shelf.",
-          "examplePt": "Tem um livro na prateleira."
-        },
-        {
-          "term": "furniture",
-          "pt": "móveis",
-          "ipa": "/ˈfɜːrnɪtʃər/",
-          "definition": "The movable articles that are used to make a room or building suitable for living or working in, such as tables, chairs, or beds.",
-          "example": "There is new furniture in the living room.",
-          "examplePt": "Tem móveis novos na sala de estar."
-        },
-        {
-          "term": "appliance",
-          "pt": "eletrodoméstico",
-          "ipa": "/əˈplaɪəns/",
-          "definition": "A piece of equipment, such as a refrigerator or stove, used in homes to perform a particular task.",
-          "example": "The kitchen has new appliances.",
-          "examplePt": "A cozinha tem eletrodomésticos novos."
-        }
-      ],
-      "expressions": [
-        {
-          "en": "I like coffee.",
-          "pt": "Eu gosto de café."
-        },
-        {
-          "en": "I don't like loud music.",
-          "pt": "Eu não gosto de música alta."
-        },
-        {
-          "en": "I love traveling.",
-          "pt": "Eu amo viajar."
-        },
-        {
-          "en": "I hate waiting.",
-          "pt": "Eu odeio esperar."
-        }
-      ],
-      "grammar": [
-        {
-          "title": {
-            "en": "There is / There are for existence (singular and plural)",
-            "pt": "There is / There are para existência (singular e plural)"
-          },
-          "examples": [
-            {
-              "en": "There is a table in the kitchen.",
-              "pt": "Tem uma mesa na cozinha."
-            },
-            {
-              "en": "There are three chairs in the room.",
-              "pt": "Tem três cadeiras na sala."
-            },
-            {
-              "en": "There isn't a garden.",
-              "pt": "Não tem um jardim."
-            },
-            {
-              "en": "Are there any books on the shelf?",
-              "pt": "Tem alguns livros na prateleira?"
-            }
-          ],
-          "rule": {
-            "en": "'There is' is used for singular nouns to say that something exists. 'There are' is used for plural nouns. For negative, we add 'not': 'There isn't' (singular) and 'There aren't' (plural). For questions, we invert: 'Is there...?' and 'Are there...?'",
-            "pt": "'There is' é usado para substantivos singulares para dizer que algo existe. 'There are' é usado para substantivos plurais. Para a forma negativa, adicionamos 'not': 'There isn't' (singular) e 'There aren't' (plural). Para perguntas, invertemos: 'Is there...?' e 'Are there...?'"
-          },
-          "mistakes": [
-            {
-              "en": "Using 'have' instead of 'there is/are' for existence. (e.g., 'The house has a garden' is correct for possession, but 'There is a garden in the house' for existence.)",
-              "pt": "Usar 'have' em vez de 'there is/are' para existência. (Ex: 'A casa tem um jardim' está correto para posse, mas 'Tem um jardim na casa' para existência.)"
-            },
-            {
-              "en": "Incorrect agreement: 'There is three chairs' instead of 'There are three chairs'.",
-              "pt": "Concordância incorreta: 'There is three chairs' em vez de 'There are three chairs'."
-            }
-          ]
-        }
-      ],
-      "controlledPractice": [
-        {
-          "id": "b4d-cp-1",
-          "prompt": {
-            "en": "Choose the correct option: There ______ a big kitchen.",
-            "pt": "Escolha a opção correta: ______ uma cozinha grande."
-          },
-          "options": [
-            "is",
-            "are",
-            "have"
-          ],
-          "answer": "is",
-          "explanation": {
-            "en": "'Kitchen' is singular, so we use 'there is'.",
-            "pt": "'Kitchen' é singular, então usamos 'there is'."
-          }
-        },
-        {
-          "id": "b4d-cp-2",
-          "prompt": {
-            "en": "Choose the correct option: There ______ two bedrooms.",
-            "pt": "Escolha a opção correta: ______ dois quartos."
-          },
-          "options": [
-            "is",
-            "are",
-            "isn't"
-          ],
-          "answer": "are",
-          "explanation": {
-            "en": "'Two bedrooms' is plural, so we use 'there are'.",
-            "pt": "'Dois quartos' é plural, então usamos 'there are'."
-          }
-        },
-        {
-          "id": "b4d-cp-3",
-          "prompt": {
-            "en": "Choose the correct option: ______ a garage?",
-            "pt": "Escolha a opção correta: ______ uma garagem?"
-          },
-          "options": [
-            "Is there",
-            "Are there",
-            "There is"
-          ],
-          "answer": "Is there",
-          "explanation": {
-            "en": "For a singular question, we use 'Is there'.",
-            "pt": "Para uma pergunta singular, usamos 'Is there'."
-          }
-        },
-        {
-          "id": "b4d-cp-4",
-          "prompt": {
-            "en": "Choose the correct option: I ______ small balconies. (I don't like / I like / I love)",
-            "pt": "Escolha a opção correta: Eu ______ sacadas pequenas."
-          },
-          "options": [
-            "don't like",
-            "like",
-            "love"
-          ],
-          "answer": "don't like",
-          "explanation": {
-            "en": "The context implies dislike, so 'I don't like' is appropriate.",
-            "pt": "O contexto implica desgosto, então 'I don't like' é apropriado."
-          }
-        }
-      ],
-      "input": {
-        "kind": "listening",
-        "title": {
-          "en": "Listen to the dialogue about a new house.",
-          "pt": "Ouça o diálogo sobre uma casa nova."
-        },
-        "lines": [
-          {
-            "en": "Hello, Marco! Welcome to my new house.",
-            "pt": "Olá, Marco! Bem-vindo à minha casa nova."
-          },
-          {
-            "en": "Wow, Isabela! This is nice. Is there a garden?",
-            "pt": "Uau, Isabela! Que legal. Tem um jardim?"
-          },
-          {
-            "en": "Yes, there is a small garden. And there is a big garage.",
-            "pt": "Sim, tem um jardim pequeno. E tem uma garagem grande."
-          },
-          {
-            "en": "Great! And are there many stairs?",
-            "pt": "Ótimo! E tem muitas escadas?"
-          },
-          {
-            "en": "No, there aren't many stairs. Just a few to the roof.",
-            "pt": "Não, não tem muitas escadas. Apenas algumas para o telhado."
-          },
-          {
-            "en": "Oh, a roof access! I love that. And is there a closet in the bedroom?",
-            "pt": "Ah, acesso ao telhado! Eu adoro isso. E tem um armário no quarto?"
-          },
-          {
-            "en": "Yes, there is a huge closet! I like big closets.",
-            "pt": "Sim, tem um armário enorme! Eu gosto de armários grandes."
-          }
+        phrases: [
+          { en: "How many students are in the class?", pt: "Quantos alunos há na turma?" },
+          { en: "There are twenty-two chairs.", pt: "Há vinte e duas cadeiras." },
+          { en: "My phone number is nine one four…", pt: "Meu número de telefone é nove um quatro…" },
         ],
-        "questions": [
-          {
-            "id": "b4d-lq-1",
-            "prompt": {
-              "en": "Is there a garden in Isabela's new house?",
-              "pt": "Tem um jardim na casa nova da Isabela?"
-            },
-            "options": [
-              "Yes, there is.",
-              "No, there isn't.",
-              "It's a big garden."
-            ],
-            "answer": "Yes, there is.",
-            "explanation": {
-              "en": "Isabela says, 'Yes, there is a small garden.'",
-              "pt": "Isabela diz: 'Sim, tem um jardim pequeno.'"
-            }
-          },
-          {
-            "id": "b4d-lq-2",
-            "prompt": {
-              "en": "Are there many stairs in the house?",
-              "pt": "Tem muitas escadas na casa?"
-            },
-            "options": [
-              "Yes, there are.",
-              "No, there aren't.",
-              "Only to the garage."
-            ],
-            "answer": "No, there aren't.",
-            "explanation": {
-              "en": "Isabela says, 'No, there aren't many stairs.'",
-              "pt": "Isabela diz: 'Não, não tem muitas escadas.'"
-            }
-          },
-          {
-            "id": "b4d-lq-3",
-            "prompt": {
-              "en": "What does Isabela like?",
-              "pt": "O que Isabela gosta?"
-            },
-            "options": [
-              "Small gardens.",
-              "Many stairs.",
-              "Big closets."
-            ],
-            "answer": "Big closets.",
-            "explanation": {
-              "en": "Isabela says, 'I like big closets.'",
-              "pt": "Isabela diz: 'Eu gosto de armários grandes.'"
-            }
-          }
-        ]
       },
-      "quickCheck": [
+      context: {
+        situation: {
+          en: "Marina arrives at a language school reception to ask about a course.",
+          pt: "Marina chega à recepção de uma escola de idiomas para perguntar sobre um curso.",
+        },
+        dialogue: [
+          { who: "Marina", en: "Good afternoon. How many classes are there per week?", pt: "Boa tarde. Quantas aulas há por semana?" },
+          { who: "Receptionist", en: "There are two classes a week, with twelve students in each group.", pt: "São duas aulas por semana, com doze alunos em cada grupo." },
+          { who: "Marina", en: "And how much is it?", pt: "E quanto custa?" },
+          { who: "Receptionist", en: "It is ninety reais a month. Your room is number fifteen.", pt: "São noventa reais por mês. Sua sala é a número quinze." },
+          { who: "Marina", en: "Perfect. My phone number is nine, nine, four, three, one, zero.", pt: "Perfeito. Meu telefone é nove, nove, quatro, três, um, zero." },
+        ],
+      },
+      vocabulary: [
+        { term: "number", pt: "número", ipa: "/ˈnʌmbər/", definition: "A symbol we use to count.", example: "My room number is fifteen.", examplePt: "O número da minha sala é quinze." },
+        { term: "price", pt: "preço", ipa: "/praɪs/", definition: "How much money something costs.", example: "The price is ninety reais.", examplePt: "O preço é noventa reais." },
+        { term: "class", pt: "aula, turma", ipa: "/klæs/", definition: "A group of students or a lesson.", example: "There are two classes a week.", examplePt: "São duas aulas por semana." },
+        { term: "student", pt: "aluno, aluna", ipa: "/ˈstuːdnt/", definition: "A person who studies.", example: "Twelve students are in the group.", examplePt: "Doze alunos estão no grupo." },
+        { term: "chair", pt: "cadeira", ipa: "/tʃer/", definition: "You sit on it.", example: "There are twenty chairs.", examplePt: "Há vinte cadeiras." },
+        { term: "box", pt: "caixa", ipa: "/bɑːks/", definition: "A container with straight sides.", example: "Three boxes are on the floor.", examplePt: "Três caixas estão no chão." },
+        { term: "child", pt: "criança", ipa: "/tʃaɪld/", definition: "A young person. Plural: children.", example: "Five children are here.", examplePt: "Cinco crianças estão aqui." },
+        { term: "person", pt: "pessoa", ipa: "/ˈpɜːrsn̩/", definition: "One human being. Plural: people.", example: "Ten people are waiting.", examplePt: "Dez pessoas estão esperando." },
+        { term: "week", pt: "semana", ipa: "/wiːk/", definition: "Seven days together.", example: "Two classes a week.", examplePt: "Duas aulas por semana." },
+        { term: "month", pt: "mês", ipa: "/mʌnθ/", definition: "About thirty days.", example: "Ninety reais a month.", examplePt: "Noventa reais por mês." },
+      ],
+      expressions: [
+        { en: "How many students are there?", pt: "Quantos alunos há?" },
+        { en: "How much is it?", pt: "Quanto custa?" },
+        { en: "It costs ninety reais.", pt: "Custa noventa reais." },
+        { en: "Can you repeat the number, please?", pt: "Pode repetir o número, por favor?" },
+      ],
+      grammar: [
         {
-          "id": "b4d-qc-1",
-          "prompt": {
-            "en": "Complete the sentence: There ______ a shelf in my room.",
-            "pt": "Complete a frase: ______ uma prateleira no meu quarto."
-          },
-          "options": [
-            "is",
-            "are",
-            "isn't"
+          title: { en: "Regular plurals: -s and -es", pt: "Plurais regulares: -s e -es" },
+          examples: [
+            { en: "one chair → two chairs", pt: "uma cadeira → duas cadeiras" },
+            { en: "one class → three classes", pt: "uma turma → três turmas" },
+            { en: "one city → two cities", pt: "uma cidade → duas cidades" },
           ],
-          "answer": "is",
-          "explanation": {
-            "en": "'A shelf' is singular, so 'is' is correct.",
-            "pt": "'Uma prateleira' é singular, então 'is' está correto."
-          }
+          rule: {
+            en: "Add -s to most nouns. Add -es after s, ss, sh, ch, x. When a noun ends in consonant + y, change y to ies.",
+            pt: "Acrescente -s na maioria dos substantivos. Use -es depois de s, ss, sh, ch, x. Quando termina em consoante + y, troque y por ies.",
+          },
+          mistakes: [
+            { en: "two classs → two classes", pt: "Depois de ss use -es." },
+            { en: "three citys → three cities", pt: "Consoante + y vira ies." },
+          ],
         },
         {
-          "id": "b4d-qc-2",
-          "prompt": {
-            "en": "Complete the sentence: There ______ any furniture in the balcony.",
-            "pt": "Complete a frase: ______ móveis na sacada."
-          },
-          "options": [
-            "isn't",
-            "aren't",
-            "is"
+          title: { en: "Irregular plurals", pt: "Plurais irregulares" },
+          examples: [
+            { en: "one child → two children", pt: "uma criança → duas crianças" },
+            { en: "one person → ten people", pt: "uma pessoa → dez pessoas" },
+            { en: "one man → two men", pt: "um homem → dois homens" },
           ],
-          "answer": "isn't",
-          "explanation": {
-            "en": "'Furniture' is an uncountable noun and takes singular verb forms, so 'isn't' is correct for negative.",
-            "pt": "'Furniture' é um substantivo incontável e usa formas verbais singulares, então 'isn't' está correto para o negativo."
-          }
+          rule: {
+            en: "Some nouns change form: child/children, person/people, man/men, woman/women, foot/feet.",
+            pt: "Alguns substantivos mudam de forma: child/children, person/people, man/men, woman/women, foot/feet.",
+          },
+          mistakes: [
+            { en: "two childs → two children", pt: "child tem plural irregular." },
+            { en: "five persons → five people", pt: "Na fala comum, use people." },
+          ],
+        },
+      ],
+      controlledPractice: [
+        {
+          id: "b4d-cp1",
+          prompt: { en: "Plural of 'box':", pt: "Plural de 'box':" },
+          options: ["boxs", "boxes", "boxies"],
+          answer: "boxes",
+          explanation: { en: "After x we add -es.", pt: "Depois de x usamos -es." },
         },
         {
-          "id": "b4d-qc-3",
-          "prompt": {
-            "en": "What do you like in a house?",
-            "pt": "O que você gosta em uma casa?"
-          },
-          "options": [
-            "I like a big kitchen.",
-            "I don't like a roof.",
-            "There is a garden."
-          ],
-          "answer": "I like a big kitchen.",
-          "explanation": {
-            "en": "This option expresses a personal preference ('I like').",
-            "pt": "Esta opção expressa uma preferência pessoal ('Eu gosto')."
-          }
+          id: "b4d-cp2",
+          prompt: { en: "Plural of 'child':", pt: "Plural de 'child':" },
+          options: ["childs", "childes", "children"],
+          answer: "children",
+          explanation: { en: "child → children.", pt: "child → children." },
         },
         {
-          "id": "b4d-qc-4",
-          "prompt": {
-            "en": "Is this sentence correct? 'Are there a garage?'",
-            "pt": "Esta frase está correta? 'Are there a garage?'"
+          id: "b4d-cp3",
+          prompt: { en: "Complete: There ___ twelve students.", pt: "Complete: There ___ twelve students." },
+          options: ["is", "are", "am"],
+          answer: "are",
+          explanation: { en: "Plural → are.", pt: "Plural → are." },
+        },
+        {
+          id: "b4d-cp4",
+          prompt: { en: "Which question asks about quantity?", pt: "Qual pergunta é sobre quantidade?" },
+          options: ["How much is it?", "How many chairs are there?", "Who is this?"],
+          answer: "How many chairs are there?",
+          explanation: { en: "How many + countable nouns.", pt: "How many + substantivos contáveis." },
+        },
+        {
+          id: "b4d-cp5",
+          prompt: { en: "Write 90 in words:", pt: "Escreva 90 por extenso:" },
+          options: ["nineteen", "ninety", "nine hundred"],
+          answer: "ninety",
+          explanation: { en: "90 = ninety; 19 = nineteen.", pt: "90 = ninety; 19 = nineteen." },
+        },
+      ],
+      input: {
+        kind: "listening",
+        title: { en: "Listening — At the reception desk", pt: "Listening — Na recepção" },
+        lines: [
+          { en: "The course has sixteen lessons and two teachers.", pt: "O curso tem dezesseis aulas e dois professores." },
+          { en: "It costs eighty reais a month for children and one hundred for adults.", pt: "Custa oitenta reais por mês para crianças e cem para adultos." },
+          { en: "My phone number is three, seven, zero, five, one, two.", pt: "Meu telefone é três, sete, zero, cinco, um, dois." },
+        ],
+        questions: [
+          {
+            id: "b4d-r1",
+            prompt: { en: "How many lessons does the course have?", pt: "Quantas aulas o curso tem?" },
+            options: ["sixteen", "sixty", "six"],
+            answer: "sixteen",
+            explanation: { en: "sixteen = 16.", pt: "sixteen = 16." },
           },
-          "options": [
-            "Yes, it is.",
-            "No, it isn't. It should be 'Is there a garage?'.",
-            "No, it isn't. It should be 'There are a garage?'"
-          ],
-          "answer": "No, it isn't. It should be 'Is there a garage?'.",
-          "explanation": {
-            "en": "'Garage' is singular, so we use 'Is there'.",
-            "pt": "'Garage' é singular, então usamos 'Is there'."
-          }
-        }
-      ]
+          {
+            id: "b4d-r2",
+            prompt: { en: "How much is it for children?", pt: "Quanto custa para crianças?" },
+            options: ["eighty reais", "one hundred reais", "eighteen reais"],
+            answer: "eighty reais",
+            explanation: { en: "Eighty for children, one hundred for adults.", pt: "Eighty para crianças, one hundred para adultos." },
+          },
+          {
+            id: "b4d-r3",
+            prompt: { en: "Which digit is NOT in the phone number?", pt: "Qual dígito NÃO está no telefone?" },
+            options: ["nine", "seven", "five"],
+            answer: "nine",
+            explanation: { en: "The number is 3-7-0-5-1-2.", pt: "O número é 3-7-0-5-1-2." },
+          },
+        ],
+      },
+      quickCheck: [
+        {
+          id: "b4d-qc1",
+          prompt: { en: "Plural of 'person' in everyday speech:", pt: "Plural de 'person' na fala cotidiana:" },
+          options: ["persons", "people", "peoples"],
+          answer: "people",
+          explanation: { en: "person → people.", pt: "person → people." },
+        },
+        {
+          id: "b4d-qc2",
+          prompt: { en: "Which number is 15?", pt: "Qual número é 15?" },
+          options: ["fifty", "fifteen", "five"],
+          answer: "fifteen",
+          explanation: { en: "-teen = 13–19.", pt: "-teen = 13–19." },
+        },
+        {
+          id: "b4d-qc3",
+          prompt: { en: "Complete: ___ is the price?", pt: "Complete: ___ is the price?" },
+          options: ["How many", "How much", "How old"],
+          answer: "How much",
+          explanation: { en: "Price → How much.", pt: "Preço → How much." },
+        },
+        {
+          id: "b4d-qc4",
+          prompt: { en: "You did not understand a number. You say:", pt: "Você não entendeu um número. Você diz:" },
+          options: ["Can you repeat the number, please?", "I am number.", "Number is what?"],
+          answer: "Can you repeat the number, please?",
+          explanation: { en: "Polite request for repetition.", pt: "Pedido educado de repetição." },
+        },
+      ],
     },
-    "communicate": {
-      "id": "BEGINNER-U04-COMMUNICATE",
-      "review": [
-        {
-          "en": "Remember 'There is' for one thing and 'There are' for many things.",
-          "pt": "Lembre-se de 'There is' para uma coisa e 'There are' para muitas coisas."
-        },
-        {
-          "en": "We use 'I like / I don't like / I love / I hate' to talk about our preferences.",
-          "pt": "Usamos 'Eu gosto / Eu não gosto / Eu amo / Eu odeio' para falar sobre nossas preferências."
-        },
-        {
-          "en": "Home rooms: garage, garden, balcony, hallway, roof, stairs, closet, shelf, furniture, appliance.",
-          "pt": "Cômodos da casa: garagem, jardim, sacada, corredor, telhado, escadas, armário, prateleira, móveis, eletrodoméstico."
-        }
+    communicate: {
+      id: "BEGINNER-U04-COMMUNICATE",
+      review: [
+        { en: "Plurals: -s, -es, y → ies, and irregular forms.", pt: "Plurais: -s, -es, y → ies e formas irregulares." },
+        { en: "How many (quantity) · How much (price).", pt: "How many (quantidade) · How much (preço)." },
+        { en: "Numbers: -teen (13–19) and -ty (20–90).", pt: "Números: -teen (13–19) e -ty (20–90)." },
       ],
-      "activities": [
+      activities: [
         {
-          "id": "b4c-act-1",
-          "title": {
-            "en": "Ask and Answer: Your Dream Home",
-            "pt": "Pergunte e Responda: Sua Casa dos Sonhos"
+          id: "b4c-a1",
+          title: { en: "Say your numbers", pt: "Diga seus números" },
+          instruction: {
+            en: "Say your phone number digit by digit, then your age and your street number.",
+            pt: "Diga seu telefone dígito por dígito, depois sua idade e o número da sua rua.",
           },
-          "instruction": {
-            "en": "Work with a partner. Ask questions about their dream home using 'Is there...?' and 'Are there...?'. Answer using 'Yes, there is/are' or 'No, there isn't/aren't'. Talk about what you like and don't like.",
-            "pt": "Trabalhe com um parceiro. Faça perguntas sobre a casa dos sonhos dele usando 'Is there...?' e 'Are there...?'. Responda usando 'Sim, tem' ou 'Não, não tem'. Fale sobre o que você gosta e não gosta."
-          },
-          "phrases": [
-            {
-              "en": "Is there a big garden?",
-              "pt": "Tem um jardim grande?"
-            },
-            {
-              "en": "Are there many stairs?",
-              "pt": "Tem muitas escadas?"
-            },
-            {
-              "en": "I like a big kitchen. Do you?",
-              "pt": "Eu gosto de uma cozinha grande. E você?"
-            }
+          phrases: [
+            { en: "My phone number is nine, eight, two, four, one, seven.", pt: "Meu telefone é nove, oito, dois, quatro, um, sete." },
+            { en: "I am thirty-four years old and I live at number sixty.", pt: "Eu tenho trinta e quatro anos e moro no número sessenta." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b4c-a1-c1",
-              "prompt": {
-                "en": "Which question is correct for 'a garage'?",
-                "pt": "Qual pergunta está correta para 'uma garagem'?"
-              },
-              "options": [
-                "Are there a garage?",
-                "Is there a garage?",
-                "There is a garage?"
-              ],
-              "answer": "Is there a garage?",
-              "explanation": {
-                "en": "'Garage' is singular, so 'Is there' is correct.",
-                "pt": "'Garage' é singular, então 'Is there' está correto."
-              }
+              id: "b4c-a1q1",
+              prompt: { en: "Which sentence gives an age correctly?", pt: "Qual frase dá a idade corretamente?" },
+              options: ["I have thirty years.", "I am thirty years old.", "I am thirty years."],
+              answer: "I am thirty years old.",
+              explanation: { en: "Age uses to be + years old.", pt: "Idade usa to be + years old." },
             },
-            {
-              "id": "b4c-a1-c2",
-              "prompt": {
-                "en": "How do you express dislike?",
-                "pt": "Como você expressa desgosto?"
-              },
-              "options": [
-                "I like",
-                "I don't like",
-                "I love"
-              ],
-              "answer": "I don't like",
-              "explanation": {
-                "en": "'I don't like' is used to express dislike.",
-                "pt": "'Eu não gosto' é usado para expressar desgosto."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b4c-act-2",
-          "title": {
-            "en": "Short Speaking Task: Describe your room",
-            "pt": "Tarefa de Fala Curta: Descreva seu quarto"
+          id: "b4c-a2",
+          title: { en: "Count what you see", pt: "Conte o que você vê" },
+          instruction: {
+            en: "Look around you. Count five groups of objects and say the plural out loud.",
+            pt: "Olhe ao redor. Conte cinco grupos de objetos e diga o plural em voz alta.",
           },
-          "instruction": {
-            "en": "Describe your favorite room in your home. Use 'there is' and 'there are' to talk about what is in the room. Also, mention what you like or don't like about it.",
-            "pt": "Descreva seu cômodo favorito em sua casa. Use 'there is' e 'there are' para falar sobre o que tem no cômodo. Também mencione o que você gosta ou não gosta nele."
-          },
-          "phrases": [
-            {
-              "en": "In my bedroom, there is a big bed.",
-              "pt": "No meu quarto, tem uma cama grande."
-            },
-            {
-              "en": "There are two shelves with books.",
-              "pt": "Tem duas prateleiras com livros."
-            },
-            {
-              "en": "I love my closet!",
-              "pt": "Eu amo meu armário!"
-            }
+          phrases: [
+            { en: "There are four chairs and two boxes here.", pt: "Há quatro cadeiras e duas caixas aqui." },
+            { en: "There are three people in the room.", pt: "Há três pessoas na sala." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b4c-a2-c1",
-              "prompt": {
-                "en": "Which sentence describes something in a room?",
-                "pt": "Qual frase descreve algo em um cômodo?"
-              },
-              "options": [
-                "I love my home.",
-                "There is a chair in the room.",
-                "It is a big house."
-              ],
-              "answer": "There is a chair in the room.",
-              "explanation": {
-                "en": "This sentence uses 'there is' to describe an object's existence in a room.",
-                "pt": "Esta frase usa 'there is' para descrever a existência de um objeto em um cômodo."
-              }
+              id: "b4c-a2q1",
+              prompt: { en: "Complete: There are two ___ in the class.", pt: "Complete: There are two ___ in the class." },
+              options: ["woman", "womans", "women"],
+              answer: "women",
+              explanation: { en: "woman → women.", pt: "woman → women." },
             },
-            {
-              "id": "b4c-a2-c2",
-              "prompt": {
-                "en": "How do you say 'não tem' for a single item?",
-                "pt": "Como se diz 'não tem' para um único item?"
-              },
-              "options": [
-                "There isn't",
-                "There aren't",
-                "There no"
-              ],
-              "answer": "There isn't",
-              "explanation": {
-                "en": "'There isn't' is the correct negative for singular items.",
-                "pt": "'There isn't' é a forma negativa correta para itens singulares."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b4c-act-3",
-          "title": {
-            "en": "Listening Task: Finding an Apartment",
-            "pt": "Tarefa de Escuta: Encontrando um Apartamento"
+          id: "b4c-a3",
+          title: { en: "Ask about prices", pt: "Pergunte preços" },
+          instruction: {
+            en: "Ask the price of three things and answer with a full sentence.",
+            pt: "Pergunte o preço de três coisas e responda com uma frase completa.",
           },
-          "instruction": {
-            "en": "Listen to a person describing an apartment. Note down what rooms and features there are, and what the person likes/dislikes.",
-            "pt": "Ouça uma pessoa descrevendo um apartamento. Anote quais cômodos e características existem, e o que a pessoa gosta/não gosta."
-          },
-          "phrases": [
-            {
-              "en": "There is a small kitchen, but it is functional.",
-              "pt": "Tem uma cozinha pequena, mas é funcional."
-            },
-            {
-              "en": "There aren't many windows. I don't like dark places.",
-              "pt": "Não tem muitas janelas. Eu não gosto de lugares escuros."
-            },
-            {
-              "en": "But there is a nice balcony with a view. I love balconies!",
-              "pt": "Mas tem uma sacada agradável com vista. Eu amo sacadas!"
-            }
+          phrases: [
+            { en: "How much is the course? It costs one hundred reais.", pt: "Quanto custa o curso? Custa cem reais." },
+            { en: "How much are the books? They are forty reais.", pt: "Quanto custam os livros? São quarenta reais." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b4c-a3-c1",
-              "prompt": {
-                "en": "Based on the phrase, what does the person dislike?",
-                "pt": "Com base na frase, o que a pessoa não gosta?"
-              },
-              "options": [
-                "Small kitchens.",
-                "Dark places.",
-                "Nice balconies."
-              ],
-              "answer": "Dark places.",
-              "explanation": {
-                "en": "The person states: 'I don't like dark places.'",
-                "pt": "A pessoa afirma: 'Eu não gosto de lugares escuros.'"
-              }
+              id: "b4c-a3q1",
+              prompt: { en: "Complete: How much ___ the books?", pt: "Complete: How much ___ the books?" },
+              options: ["is", "are", "am"],
+              answer: "are",
+              explanation: { en: "Plural subject → are.", pt: "Sujeito plural → are." },
             },
-            {
-              "id": "b4c-a3-c2",
-              "prompt": {
-                "en": "What is mentioned about the kitchen?",
-                "pt": "O que é mencionado sobre a cozinha?"
-              },
-              "options": [
-                "It's big.",
-                "It's small but functional.",
-                "There isn't a kitchen."
-              ],
-              "answer": "It's small but functional.",
-              "explanation": {
-                "en": "The person says: 'There is a small kitchen, but it is functional.'",
-                "pt": "A pessoa diz: 'Tem uma cozinha pequena, mas é funcional.'"
-              }
-            }
-          ]
+          ],
         },
-        {
-          "id": "b4c-act-4",
-          "title": {
-            "en": "Real-life Communication Activity: Apartment Search",
-            "pt": "Atividade de Comunicação da Vida Real: Busca de Apartamento"
-          },
-          "instruction": {
-            "en": "Imagine you are an apartment agent, and your partner is a client. The client describes what they want in an apartment (rooms, features, likes/dislikes). As the agent, suggest an apartment and describe it using 'there is/are'.",
-            "pt": "Imagine que você é um agente imobiliário e seu parceiro é um cliente. O cliente descreve o que quer em um apartamento (cômodos, características, gostos/desgostos). Como agente, sugira um apartamento e descreva-o usando 'there is/are'."
-          },
-          "phrases": [
-            {
-              "en": "I need a big living room and a balcony.",
-              "pt": "Eu preciso de uma sala de estar grande e uma sacada."
-            },
-            {
-              "en": "Okay, this apartment has a big living room. There is a small balcony.",
-              "pt": "Ok, este apartamento tem uma sala de estar grande. Tem uma sacada pequena."
-            },
-            {
-              "en": "I don't like apartments with many stairs.",
-              "pt": "Eu não gosto de apartamentos com muitas escadas."
-            }
-          ],
-          "check": [
-            {
-              "id": "b4c-a4-c1",
-              "prompt": {
-                "en": "If a client says, 'I love a big garden!', what might the agent say?",
-                "pt": "Se um cliente diz, 'Eu amo um jardim grande!', o que o agente pode dizer?"
-              },
-              "options": [
-                "There isn't a garden.",
-                "There are two gardens.",
-                "There is a large garden here."
-              ],
-              "answer": "There is a large garden here.",
-              "explanation": {
-                "en": "The agent should suggest something the client likes.",
-                "pt": "O agente deve sugerir algo que o cliente gosta."
-              }
-            },
-            {
-              "id": "b4c-a4-c2",
-              "prompt": {
-                "en": "Which of these is a 'home room'?",
-                "pt": "Qual destes é um 'cômodo da casa'?"
-              },
-              "options": [
-                "Car",
-                "Coffee",
-                "Hallway"
-              ],
-              "answer": "Hallway",
-              "explanation": {
-                "en": "A hallway is a common room in a house.",
-                "pt": "Um corredor é um cômodo comum em uma casa."
-              }
-            }
-          ]
-        },
-        {
-          "id": "b4c-act-5",
-          "title": {
-            "en": "Make Questions: About your partner's home",
-            "pt": "Faça Perguntas: Sobre a casa do seu parceiro"
-          },
-          "instruction": {
-            "en": "Think about your partner's home (or a friend's/family member's home). Write down 3-5 questions using 'Is there...?' or 'Are there...?' to ask about different rooms or features. Then ask your partner and listen to their answers.",
-            "pt": "Pense na casa do seu parceiro (ou de um amigo/familiar). Escreva 3-5 perguntas usando 'Is there...?' ou 'Are there...?' para perguntar sobre diferentes cômodos ou características. Depois, pergunte ao seu parceiro e ouça as respostas."
-          },
-          "phrases": [
-            {
-              "en": "Is there a balcony in your apartment?",
-              "pt": "Tem uma sacada no seu apartamento?"
-            },
-            {
-              "en": "Are there many shelves in your living room?",
-              "pt": "Tem muitas prateleiras na sua sala de estar?"
-            },
-            {
-              "en": "Do you like your garden?",
-              "pt": "Você gosta do seu jardim?"
-            }
-          ],
-          "check": [
-            {
-              "id": "b4c-a5-c1",
-              "prompt": {
-                "en": "Form a question for 'many appliances'.",
-                "pt": "Forme uma pergunta para 'muitos eletrodomésticos'."
-              },
-              "options": [
-                "Is there many appliances?",
-                "Are there many appliances?",
-                "There are many appliances?"
-              ],
-              "answer": "Are there many appliances?",
-              "explanation": {
-                "en": "'Many appliances' is plural, so 'Are there' is correct.",
-                "pt": "'Muitos eletrodomésticos' é plural, então 'Are there' está correto."
-              }
-            },
-            {
-              "id": "b4c-a5-c2",
-              "prompt": {
-                "en": "What is the correct negative answer for 'Is there a garage?'",
-                "pt": "Qual é a resposta negativa correta para 'Is there a garage?'"
-              },
-              "options": [
-                "No, there aren't.",
-                "No, there isn't.",
-                "Yes, there is."
-              ],
-              "answer": "No, there isn't.",
-              "explanation": {
-                "en": "For a singular 'Is there' question, the negative answer is 'No, there isn't'.",
-                "pt": "Para uma pergunta singular com 'Is there', a resposta negativa é 'No, there isn't'."
-              }
-            }
-          ]
-        }
       ],
-      "challenge": {
-        "id": "b4c-challenge",
-        "title": {
-          "en": "Design Your Dream Home!",
-          "pt": "Projete a Casa dos Seus Sonhos!"
+      challenge: {
+        id: "b4c-challenge",
+        title: { en: "Communication Challenge — At the reception", pt: "Desafio de comunicação — Na recepção" },
+        instruction: {
+          en: "You are at a school reception. Ask about quantity and price, give your phone number and your age, and repeat one number for confirmation.",
+          pt: "Você está na recepção de uma escola. Pergunte quantidade e preço, dê seu telefone e sua idade, e repita um número para confirmar.",
         },
-        "instruction": {
-          "en": "Draw a simple layout of your dream home. Label the rooms. Then, in small groups, describe your home to your classmates. Use 'There is/are' to describe what's in each room and 'I like/don't like' to explain your choices.",
-          "pt": "Desenhe um layout simples da casa dos seus sonhos. Rotule os cômodos. Em seguida, em pequenos grupos, descreva sua casa para seus colegas. Use 'There is/are' para descrever o que há em cada cômodo e 'Eu gosto/não gosto' para explicar suas escolhas."
-        },
-        "phrases": [
-          {
-            "en": "In my dream home, there is a big kitchen.",
-            "pt": "Na casa dos meus sonhos, tem uma cozinha grande."
-          },
-          {
-            "en": "There are three bedrooms and a lovely garden.",
-            "pt": "Tem três quartos e um lindo jardim."
-          },
-          {
-            "en": "I don't like many stairs, so there aren't many in my house.",
-            "pt": "Eu não gosto de muitas escadas, então não tem muitas na minha casa."
-          }
+        phrases: [
+          { en: "How many students are there in each class?", pt: "Quantos alunos há em cada turma?" },
+          { en: "How much is the course a month?", pt: "Quanto custa o curso por mês?" },
+          { en: "My number is seven, two, six, zero, four, one.", pt: "Meu número é sete, dois, seis, zero, quatro, um." },
+          { en: "Sorry, is it fifteen or fifty?", pt: "Desculpe, é quinze ou cinquenta?" },
         ],
-        "check": [
+        check: [
           {
-            "id": "b4c-ch-1",
-            "prompt": {
-              "en": "Which sentence correctly describes multiple items?",
-              "pt": "Qual frase descreve corretamente vários itens?"
-            },
-            "options": [
-              "There is two bathrooms.",
-              "There are two bathrooms.",
-              "There isn't two bathrooms."
-            ],
-            "answer": "There are two bathrooms.",
-            "explanation": {
-              "en": "'Two bathrooms' is plural, requiring 'There are'.",
-              "pt": "'Dois banheiros' é plural, exigindo 'There are'."
-            }
+            id: "b4c-ch1",
+            prompt: { en: "Which sentence has NO mistake?", pt: "Qual frase NÃO tem erro?" },
+            options: ["There are two childs.", "There are two children.", "There is two children."],
+            answer: "There are two children.",
+            explanation: { en: "children + are.", pt: "children + are." },
           },
           {
-            "id": "b4c-ch-2",
-            "prompt": {
-              "en": "How would you express a strong positive feeling about a 'balcony'?",
-              "pt": "Como você expressaria um sentimento positivo forte sobre uma 'sacada'?"
-            },
-            "options": [
-              "I don't like the balcony.",
-              "I like the balcony.",
-              "I love the balcony!"
-            ],
-            "answer": "I love the balcony!",
-            "explanation": {
-              "en": "'I love' expresses a strong positive feeling.",
-              "pt": "'Eu amo' expressa um sentimento positivo forte."
-            }
-          }
-        ]
+            id: "b4c-ch2",
+            prompt: { en: "50 in words is:", pt: "50 por extenso é:" },
+            options: ["fifteen", "fifty", "five"],
+            answer: "fifty",
+            explanation: { en: "-ty = tens.", pt: "-ty = dezenas." },
+          },
+        ],
       },
-      "lessonReview": {
-        "summary": {
-          "en": "In this unit, you learned about home rooms, how to say what exists in a place using 'There is' and 'There are', and how to express what you like or don't like.",
-          "pt": "Nesta unidade, você aprendeu sobre os cômodos da casa, como dizer o que existe em um lugar usando 'There is' e 'There are', e como expressar o que você gosta ou não gosta."
+      lessonReview: {
+        summary: {
+          en: "You gave exact information: quantities, prices, ages and phone numbers.",
+          pt: "Você deu informações exatas: quantidades, preços, idades e telefones.",
         },
-        "canDo": [
-          {
-            "en": "Identify and name common home rooms (garage, garden, balcony, etc.).",
-            "pt": "Identificar e nomear cômodos comuns da casa (garagem, jardim, sacada, etc.)."
-          },
-          {
-            "en": "Use 'There is' for singular items and 'There are' for plural items.",
-            "pt": "Usar 'There is' para itens singulares e 'There are' para itens plurais."
-          },
-          {
-            "en": "Form questions with 'Is there...?' and 'Are there...?'",
-            "pt": "Formar perguntas com 'Is there...?' e 'Are there...?'"
-          },
-          {
-            "en": "Express personal preferences using 'I like', 'I don't like', 'I love', 'I hate'.",
-            "pt": "Expressar preferências pessoais usando 'Eu gosto', 'Eu não gosto', 'Eu amo', 'Eu odeio'."
-          },
-          {
-            "en": "Describe a room or a house using the new grammar and vocabulary.",
-            "pt": "Descrever um cômodo ou uma casa usando a nova gramática e vocabulário."
-          }
+        canDo: [
+          { en: "I can form regular and irregular plurals.", pt: "Consigo formar plurais regulares e irregulares." },
+          { en: "I can say numbers from 1 to 100 clearly.", pt: "Consigo dizer números de 1 a 100 com clareza." },
+          { en: "I can ask How many and How much.", pt: "Consigo perguntar How many e How much." },
         ],
-        "next": {
-          "en": "In the next unit, we will talk about daily routines and present simple tense.",
-          "pt": "Na próxima unidade, falaremos sobre rotinas diárias e o presente simples."
-        }
-      }
-    }
+        next: {
+          en: "Next: talk about your morning routine with the present simple.",
+          pt: "Próximo: falar da sua rotina da manhã com o present simple.",
+        },
+      },
+    },
   },
   {
-    "code": "BEGINNER-U05",
-    "number": 5,
-    "title": "Possessions — Have / Has",
-    "titlePt": "Posse — Ter / Tem",
-    "cefr": "A1",
-    "objective": {
-      "en": "To teach 'possessions' and 'have / has' for possession and family relationships in a contextualized way.",
-      "pt": "Ensinar possessions e have / Has for possession and family relationships de forma contextualizada."
+    code: "BEGINNER-U05",
+    number: 5,
+    title: "My Day Begins — Present simple",
+    titlePt: "Meu dia começa — Present simple",
+    cefr: "A1",
+    objective: {
+      en: "Use the present simple in affirmative sentences with I, you, we and they to describe everyday routines.",
+      pt: "Usar o present simple em frases afirmativas com I, you, we e they para descrever rotinas diárias.",
     },
-    "communicationGoal": {
-      "en": "The student will be able to use 'requests' and vocabulary about possessions to communicate in real situations.",
-      "pt": "O aluno será capaz de usar 'requests' e o vocabulário de possessions para se comunicar em situações reais."
+    communicationGoal: {
+      en: "You can describe five actions of your morning in order.",
+      pt: "Você consegue descrever cinco ações da sua manhã em ordem.",
     },
-    "prerequisites": {
-      "en": "Structure: There is / There are for existence, singular and plural. Vocabulary: Home Rooms.",
-      "pt": "Estrutura: There is / There are for existence, singular and plural. Vocabulário: Home Rooms."
+    prerequisites: {
+      en: "Unit 4 — numbers, to say times and quantities.",
+      pt: "Unidade 4 — números, para dizer horas e quantidades.",
     },
-    "newContent": {
-      "en": "Grammar: Have / Has for possession and family relationships. | Vocabulary: Possessions (10 lexical items) | Expressions: Requests",
-      "pt": "Grammar: Have / Has for possession and family relationships. | Vocabulary: Possessions (10 itens lexicais) | Expressions: Requests"
+    newContent: {
+      en: "Grammar: present simple (affirmative) and time expressions. Vocabulary: routine verbs. Expressions: first, then, after that.",
+      pt: "Gramática: present simple (afirmativo) e expressões de tempo. Vocabulário: verbos de rotina. Expressões: first, then, after that.",
     },
-    "reviewContent": {
-      "en": "Not applicable — initial unit of the course.",
-      "pt": "Não aplicável — unidade inicial do curso."
+    reviewContent: {
+      en: "Review from Units 1–4: to be, plurals and numbers.",
+      pt: "Revisão das Unidades 1–4: to be, plurais e números.",
     },
-    "discover": {
-      "id": "BEGINNER-U05-DISCOVER",
-      "warmUp": {
-        "prompt": {
-          "en": "Look at the pictures. What do you see? Do you have these things?",
-          "pt": "Olhe as imagens. O que você vê? Você tem essas coisas?"
+    discover: {
+      id: "BEGINNER-U05-DISCOVER",
+      warmUp: {
+        prompt: {
+          en: "Look at the picture. It is early morning at home. What does this person do before leaving?",
+          pt: "Observe a imagem. É início da manhã em casa. O que essa pessoa faz antes de sair?",
         },
-        "phrases": [
-          {
-            "en": "I have a phone.",
-            "pt": "Eu tenho um telefone."
-          },
-          {
-            "en": "She has a bag.",
-            "pt": "Ela tem uma bolsa."
-          },
-          {
-            "en": "Do you have keys?",
-            "pt": "Você tem chaves?"
-          }
-        ]
-      },
-      "context": {
-        "situation": {
-          "en": "Ana is looking for her things at home. Pedro is helping her.",
-          "pt": "Ana está procurando as coisas dela em casa. Pedro está ajudando-a."
-        },
-        "dialogue": [
-          {
-            "who": "Ana",
-            "en": "Oh no, where is my phone? And my keys?",
-            "pt": "Ah não, onde está meu telefone? E minhas chaves?"
-          },
-          {
-            "who": "Pedro",
-            "en": "Hmm. I see a bag on the table. Do you have your phone in your bag?",
-            "pt": "Hmm. Eu vejo uma bolsa na mesa. Você tem seu telefone na sua bolsa?"
-          },
-          {
-            "who": "Ana",
-            "en": "Let me check. Yes! I have my phone. But no keys. And my book?",
-            "pt": "Deixe-me verificar. Sim! Eu tenho meu telefone. Mas sem chaves. E meu livro?"
-          },
-          {
-            "who": "Pedro",
-            "en": "I think your book is in your backpack. Could you open the backpack, please?",
-            "pt": "Eu acho que seu livro está na sua mochila. Você poderia abrir a mochila, por favor?"
-          },
-          {
-            "who": "Ana",
-            "en": "Oh, yes! I have my book here. And my keys too! Thank you, Pedro. Can you help me, please? I need my laptop for work.",
-            "pt": "Ah, sim! Eu tenho meu livro aqui. E minhas chaves também! Obrigada, Pedro. Você pode me ajudar, por favor? Eu preciso do meu laptop para trabalhar."
-          },
-          {
-            "who": "Pedro",
-            "en": "Your laptop is on the desk. You have a meeting soon.",
-            "pt": "Seu laptop está na mesa. Você tem uma reunião em breve."
-          },
-          {
-            "who": "Ana",
-            "en": "Great! Thanks!",
-            "pt": "Ótimo! Obrigada!"
-          }
-        ]
-      },
-      "vocabulary": [
-        {
-          "term": "laptop",
-          "pt": "laptop",
-          "ipa": "/ˈlæp.tɒp/",
-          "definition": "A portable computer.",
-          "example": "I have a new laptop for work.",
-          "examplePt": "Eu tenho um laptop novo para o trabalho."
-        },
-        {
-          "term": "phone",
-          "pt": "telefone",
-          "ipa": "/foʊn/",
-          "definition": "A device used for talking to people over long distances, often with internet access.",
-          "example": "She has a red phone.",
-          "examplePt": "Ela tem um telefone vermelho."
-        },
-        {
-          "term": "bag",
-          "pt": "bolsa",
-          "ipa": "/bæɡ/",
-          "definition": "A container made of flexible material, used for carrying things.",
-          "example": "My keys are in my bag.",
-          "examplePt": "Minhas chaves estão na minha bolsa."
-        },
-        {
-          "term": "wallet",
-          "pt": "carteira",
-          "ipa": "/ˈwɒl.ɪt/",
-          "definition": "A small folding case for holding paper money, cards, and other small items.",
-          "example": "He has a black wallet.",
-          "examplePt": "Ele tem uma carteira preta."
-        },
-        {
-          "term": "keys",
-          "pt": "chaves",
-          "ipa": "/kiːz/",
-          "definition": "Small pieces of shaped metal used to open or close a lock.",
-          "example": "Do you have your car keys?",
-          "examplePt": "Você tem as chaves do seu carro?"
-        },
-        {
-          "term": "book",
-          "pt": "livro",
-          "ipa": "/bʊk/",
-          "definition": "A written or printed work consisting of pages glued or sewn together along one side and bound in covers.",
-          "example": "I have a good book to read.",
-          "examplePt": "Eu tenho um bom livro para ler."
-        },
-        {
-          "term": "watch",
-          "pt": "relógio (de pulso)",
-          "ipa": "/wɒtʃ/",
-          "definition": "A small clock worn on the wrist or carried in a pocket.",
-          "example": "She has a nice watch.",
-          "examplePt": "Ela tem um relógio bonito."
-        },
-        {
-          "term": "glasses",
-          "pt": "óculos",
-          "ipa": "/ˈɡlɑː.sɪz/",
-          "definition": "Two lenses in a frame that rest on the nose and ears, used to correct vision.",
-          "example": "My father has new glasses.",
-          "examplePt": "Meu pai tem óculos novos."
-        },
-        {
-          "term": "umbrella",
-          "pt": "guarda-chuva",
-          "ipa": "/ʌmˈbrel.ə/",
-          "definition": "A device consisting of a circular canopy of cloth on a folding metal frame supported by a central rod, used as protection from rain or sun.",
-          "example": "It's raining. I need my umbrella.",
-          "examplePt": "Está chovendo. Eu preciso do meu guarda-chuva."
-        },
-        {
-          "term": "backpack",
-          "pt": "mochila",
-          "ipa": "/ˈbæk.pæk/",
-          "definition": "A bag with shoulder straps that allow it to be carried on someone's back.",
-          "example": "He has a lot of books in his backpack.",
-          "examplePt": "Ele tem muitos livros na mochila dele."
-        }
-      ],
-      "expressions": [
-        {
-          "en": "Can you help me, please?",
-          "pt": "Você pode me ajudar, por favor?"
-        },
-        {
-          "en": "Could you open the window?",
-          "pt": "Você poderia abrir a janela?"
-        },
-        {
-          "en": "Can I have the menu, please?",
-          "pt": "Posso ter o cardápio, por favor?"
-        }
-      ],
-      "grammar": [
-        {
-          "title": {
-            "en": "Have / Has for possession and family relationships",
-            "pt": "Have / Has para posse e relações familiares"
-          },
-          "examples": [
-            {
-              "en": "I have two brothers.",
-              "pt": "Eu tenho dois irmãos."
-            },
-            {
-              "en": "She has a new phone.",
-              "pt": "Ela tem um telefone novo."
-            },
-            {
-              "en": "We have a big house.",
-              "pt": "Nós temos uma casa grande."
-            }
-          ],
-          "rule": {
-            "en": "We use 'have' for I, You, We, They. We use 'has' for He, She, It. This verb shows possession or relationships.",
-            "pt": "Usamos 'have' para I, You, We, They. Usamos 'has' para He, She, It. Este verbo mostra posse ou relações."
-          },
-          "mistakes": [
-            {
-              "en": "Incorrect: She have a car. Correct: She has a car.",
-              "pt": "Incorreto: She have a car. Correto: She has a car."
-            },
-            {
-              "en": "Incorrect: He has two sister. Correct: He has two sisters.",
-              "pt": "Incorreto: He has two sister. Correto: He has two sisters."
-            }
-          ]
-        }
-      ],
-      "controlledPractice": [
-        {
-          "id": "b5d-cp-1",
-          "prompt": {
-            "en": "Choose the correct form: I ___ a new phone.",
-            "pt": "Escolha a forma correta: Eu ___ um telefone novo."
-          },
-          "options": [
-            "have",
-            "has"
-          ],
-          "answer": "have",
-          "explanation": {
-            "en": "For 'I', we use 'have'.",
-            "pt": "Para 'I', usamos 'have'."
-          }
-        },
-        {
-          "id": "b5d-cp-2",
-          "prompt": {
-            "en": "Choose the correct form: My sister ___ a red bag.",
-            "pt": "Escolha a forma correta: Minha irmã ___ uma bolsa vermelha."
-          },
-          "options": [
-            "have",
-            "has"
-          ],
-          "answer": "has",
-          "explanation": {
-            "en": "My sister is 'She', so we use 'has'.",
-            "pt": "My sister é 'She', então usamos 'has'."
-          }
-        },
-        {
-          "id": "b5d-cp-3",
-          "prompt": {
-            "en": "Complete the sentence: They ___ a lot of books.",
-            "pt": "Complete a frase: Eles ___ muitos livros."
-          },
-          "options": [
-            "have",
-            "has"
-          ],
-          "answer": "have",
-          "explanation": {
-            "en": "For 'They', we use 'have'.",
-            "pt": "Para 'They', usamos 'have'."
-          }
-        },
-        {
-          "id": "b5d-cp-4",
-          "prompt": {
-            "en": "Complete the sentence: My dog ___ a small bed.",
-            "pt": "Complete a frase: Meu cachorro ___ uma cama pequena."
-          },
-          "options": [
-            "have",
-            "has"
-          ],
-          "answer": "has",
-          "explanation": {
-            "en": "My dog is 'It', so we use 'has'.",
-            "pt": "My dog é 'It', então usamos 'has'."
-          }
-        }
-      ],
-      "input": {
-        "kind": "reading",
-        "title": {
-          "en": "My Daily Items",
-          "pt": "Meus Itens Diários"
-        },
-        "lines": [
-          {
-            "en": "Hello! My name is Clara. I have a busy day today. First, I need my laptop for work. I always have my phone with me. It’s important!",
-            "pt": "Olá! Meu nome é Clara. Eu tenho um dia agitado hoje. Primeiro, eu preciso do meu laptop para trabalhar. Eu sempre tenho meu telefone comigo. É importante!"
-          },
-          {
-            "en": "I have a big red bag, and in my bag, I have my wallet and my keys. Oh, and I have a new book. I like to read on the bus.",
-            "pt": "Eu tenho uma bolsa grande e vermelha, e na minha bolsa, eu tenho minha carteira e minhas chaves. Ah, e eu tenho um livro novo. Eu gosto de ler no ônibus."
-          },
-          {
-            "en": "My brother, Tom, has a new watch. He also has nice glasses. He needs them for reading. We both have umbrellas because it often rains here.",
-            "pt": "Meu irmão, Tom, tem um relógio novo. Ele também tem óculos bonitos. Ele precisa deles para ler. Nós dois temos guarda-chuvas porque frequentemente chove aqui."
-          },
-          {
-            "en": "Today, Tom has his backpack with him. He has his laptop and a book inside.",
-            "pt": "Hoje, Tom tem sua mochila com ele. Ele tem seu laptop e um livro dentro."
-          }
+        phrases: [
+          { en: "I wake up at six.", pt: "Eu acordo às seis." },
+          { en: "I drink coffee in the kitchen.", pt: "Eu tomo café na cozinha." },
+          { en: "We leave home at seven thirty.", pt: "Nós saímos de casa às sete e meia." },
         ],
-        "questions": [
-          {
-            "id": "b5d-rd-1",
-            "prompt": {
-              "en": "What does Clara have for work?",
-              "pt": "O que Clara tem para o trabalho?"
-            },
-            "options": [
-              "A phone",
-              "A laptop",
-              "A book"
-            ],
-            "answer": "A laptop",
-            "explanation": {
-              "en": "Clara says: 'I need my laptop for work.'",
-              "pt": "Clara diz: 'Eu preciso do meu laptop para trabalhar.'"
-            }
-          },
-          {
-            "id": "b5d-rd-2",
-            "prompt": {
-              "en": "What does Tom have in his backpack today?",
-              "pt": "O que Tom tem na mochila dele hoje?"
-            },
-            "options": [
-              "An umbrella and keys",
-              "A laptop and a book",
-              "A phone and a wallet"
-            ],
-            "answer": "A laptop and a book",
-            "explanation": {
-              "en": "The text says: 'Tom has his backpack with him. He has his laptop and a book inside.'",
-              "pt": "O texto diz: 'Tom tem sua mochila com ele. Ele tem seu laptop e um livro dentro.'"
-            }
-          },
-          {
-            "id": "b5d-rd-3",
-            "prompt": {
-              "en": "Do Clara and Tom both have umbrellas?",
-              "pt": "Clara e Tom ambos têm guarda-chuvas?"
-            },
-            "options": [
-              "Yes, they do.",
-              "No, only Clara has one.",
-              "No, only Tom has one."
-            ],
-            "answer": "Yes, they do.",
-            "explanation": {
-              "en": "The text says: 'We both have umbrellas.'",
-              "pt": "O texto diz: 'Nós dois temos guarda-chuvas.'"
-            }
-          }
-        ]
       },
-      "quickCheck": [
+      context: {
+        situation: {
+          en: "Helena tells Bruno how her mornings work before she arrives at the coworking.",
+          pt: "Helena conta a Bruno como são suas manhãs antes de chegar ao coworking.",
+        },
+        dialogue: [
+          { who: "Bruno", en: "You always arrive early. What time do you wake up?", pt: "Você sempre chega cedo. Que horas você acorda?" },
+          { who: "Helena", en: "I wake up at five thirty. First I drink water, then I walk for twenty minutes.", pt: "Eu acordo às cinco e meia. Primeiro bebo água, depois caminho por vinte minutos." },
+          { who: "Bruno", en: "And after that?", pt: "E depois disso?" },
+          { who: "Helena", en: "After that I take a shower, I have breakfast and I read the news.", pt: "Depois disso tomo banho, tomo café da manhã e leio as notícias." },
+          { who: "Bruno", en: "We start work at nine, so you have a long morning!", pt: "Nós começamos a trabalhar às nove, então você tem uma manhã longa!" },
+        ],
+      },
+      vocabulary: [
+        { term: "wake up", pt: "acordar", ipa: "/weɪk ʌp/", definition: "To stop sleeping.", example: "I wake up at six.", examplePt: "Eu acordo às seis." },
+        { term: "get up", pt: "levantar-se", ipa: "/ɡet ʌp/", definition: "To leave the bed.", example: "They get up early.", examplePt: "Eles se levantam cedo." },
+        { term: "take a shower", pt: "tomar banho", ipa: "/teɪk ə ˈʃaʊər/", definition: "To wash your body with water.", example: "I take a shower every morning.", examplePt: "Eu tomo banho toda manhã." },
+        { term: "have breakfast", pt: "tomar café da manhã", ipa: "/hæv ˈbrekfəst/", definition: "To eat the first meal of the day.", example: "We have breakfast together.", examplePt: "Nós tomamos café da manhã juntos." },
+        { term: "leave home", pt: "sair de casa", ipa: "/liːv hoʊm/", definition: "To go out of your house.", example: "I leave home at seven.", examplePt: "Eu saio de casa às sete." },
+        { term: "walk", pt: "caminhar", ipa: "/wɔːk/", definition: "To go somewhere on foot.", example: "They walk to the office.", examplePt: "Eles vão a pé para o escritório." },
+        { term: "start work", pt: "começar a trabalhar", ipa: "/stɑːrt wɜːrk/", definition: "To begin your working day.", example: "We start work at nine.", examplePt: "Nós começamos a trabalhar às nove." },
+        { term: "read", pt: "ler", ipa: "/riːd/", definition: "To look at words and understand them.", example: "I read the news.", examplePt: "Eu leio as notícias." },
+        { term: "early", pt: "cedo", ipa: "/ˈɜːrli/", definition: "Before the usual time.", example: "She arrives early.", examplePt: "Ela chega cedo." },
+        { term: "late", pt: "tarde", ipa: "/leɪt/", definition: "After the usual time.", example: "I never leave late.", examplePt: "Eu nunca saio tarde." },
+      ],
+      expressions: [
+        { en: "First, I wake up.", pt: "Primeiro, eu acordo." },
+        { en: "Then I have breakfast.", pt: "Depois eu tomo café da manhã." },
+        { en: "After that, I leave home.", pt: "Depois disso, eu saio de casa." },
+        { en: "Every day I do the same.", pt: "Todo dia eu faço o mesmo." },
+      ],
+      grammar: [
         {
-          "id": "b5d-qc-1",
-          "prompt": {
-            "en": "Which sentence is correct?",
-            "pt": "Qual frase está correta?"
-          },
-          "options": [
-            "He have a watch.",
-            "She has a watch.",
-            "They has a watch."
+          title: { en: "Present simple with I / you / we / they", pt: "Present simple com I / you / we / they" },
+          examples: [
+            { en: "I drink water in the morning.", pt: "Eu bebo água de manhã." },
+            { en: "We start work at nine.", pt: "Nós começamos a trabalhar às nove." },
+            { en: "They walk to the office.", pt: "Eles vão a pé para o escritório." },
           ],
-          "answer": "She has a watch.",
-          "explanation": {
-            "en": "'She' uses 'has'.",
-            "pt": "'She' usa 'has'."
-          }
+          rule: {
+            en: "With I, you, we and they, use the base verb with no ending: I work, you study, we read, they leave.",
+            pt: "Com I, you, we e they, use o verbo na forma base, sem terminação: I work, you study, we read, they leave.",
+          },
+          mistakes: [
+            { en: "I am wake up at six. → I wake up at six.", pt: "Não use to be junto de outro verbo no present simple." },
+            { en: "We starts at nine. → We start at nine.", pt: "O -s é só da terceira pessoa (he / she / it)." },
+          ],
         },
         {
-          "id": "b5d-qc-2",
-          "prompt": {
-            "en": "What is 'carteira' in English?",
-            "pt": "O que é 'carteira' em inglês?"
-          },
-          "options": [
-            "bag",
-            "wallet",
-            "backpack"
+          title: { en: "Time expressions and sequence", pt: "Expressões de tempo e sequência" },
+          examples: [
+            { en: "I wake up at six every day.", pt: "Eu acordo às seis todo dia." },
+            { en: "First I walk, then I take a shower.", pt: "Primeiro eu caminho, depois tomo banho." },
+            { en: "After that, I have breakfast.", pt: "Depois disso, eu tomo café da manhã." },
           ],
-          "answer": "wallet",
-          "explanation": {
-            "en": "'Carteira' means 'wallet'.",
-            "pt": "'Carteira' significa 'wallet'."
-          }
+          rule: {
+            en: "Use at + clock time (at seven), in + part of the day (in the morning) and first / then / after that to put actions in order.",
+            pt: "Use at + hora (at seven), in + parte do dia (in the morning) e first / then / after that para ordenar as ações.",
+          },
+          mistakes: [
+            { en: "I wake up in six. → I wake up at six.", pt: "Hora exata usa at." },
+            { en: "I study at the morning. → I study in the morning.", pt: "Parte do dia usa in." },
+          ],
+        },
+      ],
+      controlledPractice: [
+        {
+          id: "b5d-cp1",
+          prompt: { en: "Complete: I ___ up at six.", pt: "Complete: I ___ up at six." },
+          options: ["wake", "wakes", "am wake"],
+          answer: "wake",
+          explanation: { en: "I + base verb.", pt: "I + verbo base." },
         },
         {
-          "id": "b5d-qc-3",
-          "prompt": {
-            "en": "Complete the request: ___ you help me, please?",
-            "pt": "Complete o pedido: ___ você me ajudar, por favor?"
-          },
-          "options": [
-            "Is",
-            "Do",
-            "Can"
-          ],
-          "answer": "Can",
-          "explanation": {
-            "en": "'Can you help me, please?' is a common request.",
-            "pt": "'Can you help me, please?' é um pedido comum."
-          }
+          id: "b5d-cp2",
+          prompt: { en: "Complete: We ___ work at nine.", pt: "Complete: We ___ work at nine." },
+          options: ["starts", "start", "are start"],
+          answer: "start",
+          explanation: { en: "we + base verb.", pt: "we + verbo base." },
         },
         {
-          "id": "b5d-qc-4",
-          "prompt": {
-            "en": "They ___ a big family.",
-            "pt": "Eles ___ uma família grande."
+          id: "b5d-cp3",
+          prompt: { en: "Complete: They walk ___ the morning.", pt: "Complete: They walk ___ the morning." },
+          options: ["at", "in", "on"],
+          answer: "in",
+          explanation: { en: "in the morning / afternoon / evening.", pt: "in the morning / afternoon / evening." },
+        },
+        {
+          id: "b5d-cp4",
+          prompt: { en: "Which word shows the first action?", pt: "Qual palavra mostra a primeira ação?" },
+          options: ["First", "After that", "Then"],
+          answer: "First",
+          explanation: { en: "First opens the sequence.", pt: "First abre a sequência." },
+        },
+        {
+          id: "b5d-cp5",
+          prompt: { en: "Complete: I leave home ___ seven thirty.", pt: "Complete: I leave home ___ seven thirty." },
+          options: ["in", "at", "of"],
+          answer: "at",
+          explanation: { en: "Clock time uses at.", pt: "Hora exata usa at." },
+        },
+      ],
+      input: {
+        kind: "listening",
+        title: { en: "Listening — Two different mornings", pt: "Listening — Duas manhãs diferentes" },
+        lines: [
+          { en: "I get up at five and I walk in the park before work.", pt: "Eu me levanto às cinco e caminho no parque antes do trabalho." },
+          { en: "We have breakfast together, then we leave home at seven.", pt: "Nós tomamos café da manhã juntos, depois saímos de casa às sete." },
+          { en: "They start work at ten because they study in the morning.", pt: "Eles começam a trabalhar às dez porque estudam de manhã." },
+        ],
+        questions: [
+          {
+            id: "b5d-r1",
+            prompt: { en: "What does the first person do before work?", pt: "O que a primeira pessoa faz antes do trabalho?" },
+            options: ["walks in the park", "reads the news", "takes a shower"],
+            answer: "walks in the park",
+            explanation: { en: "I walk in the park before work.", pt: "I walk in the park before work." },
           },
-          "options": [
-            "has",
-            "have"
-          ],
-          "answer": "have",
-          "explanation": {
-            "en": "For 'They', we use 'have'.",
-            "pt": "Para 'They', usamos 'have'."
-          }
-        }
-      ]
+          {
+            id: "b5d-r2",
+            prompt: { en: "What time do they leave home?", pt: "Que horas eles saem de casa?" },
+            options: ["at five", "at seven", "at ten"],
+            answer: "at seven",
+            explanation: { en: "We leave home at seven.", pt: "We leave home at seven." },
+          },
+          {
+            id: "b5d-r3",
+            prompt: { en: "Why do they start work at ten?", pt: "Por que eles começam a trabalhar às dez?" },
+            options: ["they study in the morning", "they walk to work", "they wake up late"],
+            answer: "they study in the morning",
+            explanation: { en: "because they study in the morning.", pt: "because they study in the morning." },
+          },
+        ],
+      },
+      quickCheck: [
+        {
+          id: "b5d-qc1",
+          prompt: { en: "Choose the correct sentence.", pt: "Escolha a frase correta." },
+          options: ["I am read the news.", "I read the news.", "I reads the news."],
+          answer: "I read the news.",
+          explanation: { en: "I + base verb, with no to be.", pt: "I + verbo base, sem to be." },
+        },
+        {
+          id: "b5d-qc2",
+          prompt: { en: "Complete: They ___ home at eight.", pt: "Complete: They ___ home at eight." },
+          options: ["leave", "leaves", "leaving"],
+          answer: "leave",
+          explanation: { en: "they + base verb.", pt: "they + verbo base." },
+        },
+        {
+          id: "b5d-qc3",
+          prompt: { en: "Which sentence puts actions in order?", pt: "Qual frase coloca as ações em ordem?" },
+          options: ["I wake up and after that I take a shower.", "I wake up because shower.", "After I wake up shower."],
+          answer: "I wake up and after that I take a shower.",
+          explanation: { en: "after that connects two actions.", pt: "after that liga duas ações." },
+        },
+        {
+          id: "b5d-qc4",
+          prompt: { en: "Opposite of 'early':", pt: "Oposto de 'early':" },
+          options: ["late", "long", "fast"],
+          answer: "late",
+          explanation: { en: "early ↔ late.", pt: "early ↔ late." },
+        },
+      ],
     },
-    "communicate": {
-      "id": "BEGINNER-U05-COMMUNICATE",
-      "review": [
-        {
-          "en": "Remember: 'have' for I, You, We, They. 'has' for He, She, It.",
-          "pt": "Lembre-se: 'have' para I, You, We, They. 'has' para He, She, It."
-        },
-        {
-          "en": "New words: laptop, phone, bag, wallet, keys, book, watch, glasses, umbrella, backpack.",
-          "pt": "Novas palavras: laptop, phone, bag, wallet, keys, book, watch, glasses, umbrella, backpack."
-        },
-        {
-          "en": "Requests: Can you help me, please? Could you open the window? Can I have the menu, please?",
-          "pt": "Pedidos: Can you help me, please? Could you open the window? Can I have the menu, please?"
-        }
+    communicate: {
+      id: "BEGINNER-U05-COMMUNICATE",
+      review: [
+        { en: "Present simple: I / you / we / they + base verb.", pt: "Present simple: I / you / we / they + verbo base." },
+        { en: "at + clock time · in + part of the day.", pt: "at + hora · in + parte do dia." },
+        { en: "Sequence: first, then, after that.", pt: "Sequência: first, then, after that." },
       ],
-      "activities": [
+      activities: [
         {
-          "id": "b5c-act-1",
-          "title": {
-            "en": "Writing Task: My Possessions",
-            "pt": "Tarefa de Escrita: Minhas Posses"
+          id: "b5c-a1",
+          title: { en: "Five actions of your morning", pt: "Cinco ações da sua manhã" },
+          instruction: {
+            en: "Say five things you do every morning, in order, with the time.",
+            pt: "Diga cinco coisas que você faz toda manhã, em ordem, com o horário.",
           },
-          "instruction": {
-            "en": "Write 3-4 sentences about things you have. Use 'I have...' and new vocabulary.",
-            "pt": "Escreva 3-4 frases sobre coisas que você tem. Use 'I have...' e o vocabulário novo."
-          },
-          "phrases": [
-            {
-              "en": "I have a phone and a laptop.",
-              "pt": "Eu tenho um telefone e um laptop."
-            },
-            {
-              "en": "I have keys for my house.",
-              "pt": "Eu tenho chaves para minha casa."
-            },
-            {
-              "en": "I have a blue backpack.",
-              "pt": "Eu tenho uma mochila azul."
-            }
+          phrases: [
+            { en: "I wake up at six and I drink water.", pt: "Eu acordo às seis e bebo água." },
+            { en: "Then I take a shower and I have breakfast.", pt: "Depois tomo banho e tomo café da manhã." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b5c-act1-1",
-              "prompt": {
-                "en": "Which sentence correctly uses 'have'?",
-                "pt": "Qual frase usa 'have' corretamente?"
-              },
-              "options": [
-                "My friend have a book.",
-                "I have a watch.",
-                "She have an umbrella."
-              ],
-              "answer": "I have a watch.",
-              "explanation": {
-                "en": "'I' uses 'have'.",
-                "pt": "'I' usa 'have'."
-              }
+              id: "b5c-a1q1",
+              prompt: { en: "Complete: I have breakfast ___ seven.", pt: "Complete: I have breakfast ___ seven." },
+              options: ["in", "at", "on"],
+              answer: "at",
+              explanation: { en: "Clock time uses at.", pt: "Hora exata usa at." },
             },
-            {
-              "id": "b5c-act1-2",
-              "prompt": {
-                "en": "What is a 'mochila' in English?",
-                "pt": "O que é 'mochila' em inglês?"
-              },
-              "options": [
-                "bag",
-                "wallet",
-                "backpack"
-              ],
-              "answer": "backpack",
-              "explanation": {
-                "en": "Mochila = backpack.",
-                "pt": "Mochila = backpack."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b5c-act-2",
-          "title": {
-            "en": "Reading Comprehension: Friend's Family",
-            "pt": "Compreensão de Leitura: Família do Amigo"
+          id: "b5c-a2",
+          title: { en: "Our routine", pt: "Nossa rotina" },
+          instruction: {
+            en: "Talk about a routine you share with someone, using we and they.",
+            pt: "Fale de uma rotina que você divide com alguém, usando we e they.",
           },
-          "instruction": {
-            "en": "Read the text about Leo's family and answer the questions.",
-            "pt": "Leia o texto sobre a família de Leo e responda às perguntas."
-          },
-          "phrases": [
-            {
-              "en": "My friend Leo has a big family. He has one brother and two sisters. His father has a new car. His mother has a small dog.",
-              "pt": "Meu amigo Leo tem uma família grande. Ele tem um irmão e duas irmãs. O pai dele tem um carro novo. A mãe dele tem um cachorro pequeno."
-            },
-            {
-              "en": "Leo's brother has a laptop for school. His sisters have many books. Leo has a nice watch from his grandparents. He loves his family.",
-              "pt": "O irmão de Leo tem um laptop para a escola. As irmãs dele têm muitos livros. Leo tem um relógio bonito dos avós dele. Ele ama a família dele."
-            }
+          phrases: [
+            { en: "We leave home together at seven thirty.", pt: "Nós saímos de casa juntos às sete e meia." },
+            { en: "They start work at nine and we start at ten.", pt: "Eles começam a trabalhar às nove e nós começamos às dez." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b5c-act2-1",
-              "prompt": {
-                "en": "How many sisters does Leo have?",
-                "pt": "Quantas irmãs Leo tem?"
-              },
-              "options": [
-                "One",
-                "Two",
-                "Three"
-              ],
-              "answer": "Two",
-              "explanation": {
-                "en": "Leo has two sisters.",
-                "pt": "Leo tem duas irmãs."
-              }
+              id: "b5c-a2q1",
+              prompt: { en: "Complete: We ___ to the office every day.", pt: "Complete: We ___ to the office every day." },
+              options: ["walks", "walk", "are walk"],
+              answer: "walk",
+              explanation: { en: "we + base verb.", pt: "we + verbo base." },
             },
-            {
-              "id": "b5c-act2-2",
-              "prompt": {
-                "en": "What does Leo's father have?",
-                "pt": "O que o pai de Leo tem?"
-              },
-              "options": [
-                "A small dog",
-                "A new car",
-                "Many books"
-              ],
-              "answer": "A new car",
-              "explanation": {
-                "en": "His father has a new car.",
-                "pt": "O pai dele tem um carro novo."
-              }
-            }
-          ]
+          ],
         },
         {
-          "id": "b5c-act-3",
-          "title": {
-            "en": "Answer the Questions: What do you have?",
-            "pt": "Responda às Perguntas: O que você tem?"
+          id: "b5c-a3",
+          title: { en: "Early or late?", pt: "Cedo ou tarde?" },
+          instruction: {
+            en: "Compare your morning with a busy day. Say what changes and at what time.",
+            pt: "Compare sua manhã com um dia corrido. Diga o que muda e em que horário.",
           },
-          "instruction": {
-            "en": "Answer the questions about your possessions or family.",
-            "pt": "Responda às perguntas sobre suas posses ou família."
-          },
-          "phrases": [
-            {
-              "en": "Do you have a laptop?",
-              "pt": "Você tem um laptop?"
-            },
-            {
-              "en": "Does your friend have a phone?",
-              "pt": "Seu amigo tem um telefone?"
-            },
-            {
-              "en": "Do you have any brothers or sisters?",
-              "pt": "Você tem irmãos ou irmãs?"
-            }
+          phrases: [
+            { en: "On busy days I wake up early and I leave home at six.", pt: "Em dias corridos eu acordo cedo e saio de casa às seis." },
+            { en: "I never arrive late at work.", pt: "Eu nunca chego tarde ao trabalho." },
           ],
-          "check": [
+          check: [
             {
-              "id": "b5c-act3-1",
-              "prompt": {
-                "en": "Complete the question: ___ she have a backpack?",
-                "pt": "Complete a pergunta: ___ ela tem uma mochila?"
-              },
-              "options": [
-                "Do",
-                "Does",
-                "Is"
-              ],
-              "answer": "Does",
-              "explanation": {
-                "en": "For 'She' in questions, we use 'Does'.",
-                "pt": "Para 'She' em perguntas, usamos 'Does'."
-              }
+              id: "b5c-a3q1",
+              prompt: { en: "Choose the natural sentence.", pt: "Escolha a frase natural." },
+              options: ["I wake up in six.", "I wake up at six in the morning.", "I wake up on morning."],
+              answer: "I wake up at six in the morning.",
+              explanation: { en: "at + time, in + part of the day.", pt: "at + hora, in + parte do dia." },
             },
-            {
-              "id": "b5c-act3-2",
-              "prompt": {
-                "en": "Which is a 'request' expression?",
-                "pt": "Qual é uma expressão de 'pedido'?"
-              },
-              "options": [
-                "I am happy.",
-                "What is this?",
-                "Can you help me, please?"
-              ],
-              "answer": "Can you help me, please?",
-              "explanation": {
-                "en": "'Can you help me, please?' is a polite request.",
-                "pt": "'Can you help me, please?' é um pedido educado."
-              }
-            }
-          ]
+          ],
         },
-        {
-          "id": "b5c-act-4",
-          "title": {
-            "en": "Complete the Conversation",
-            "pt": "Complete a Conversa"
-          },
-          "instruction": {
-            "en": "Complete the dialogue with the correct words or phrases.",
-            "pt": "Complete o diálogo com as palavras ou frases corretas."
-          },
-          "phrases": [
-            {
-              "en": "A: Excuse me, ___ I have a coffee, please?",
-              "pt": "A: Com licença, ___ eu posso ter um café, por favor?"
-            },
-            {
-              "en": "B: Yes. And ___ you have sugar?",
-              "pt": "B: Sim. E ___ você tem açúcar?"
-            },
-            {
-              "en": "A: Yes, please. My friend ___ a new phone. It is very nice.",
-              "pt": "A: Sim, por favor. Minha amiga ___ um telefone novo. É muito bonito."
-            }
-          ],
-          "check": [
-            {
-              "id": "b5c-act4-1",
-              "prompt": {
-                "en": "What completes the first sentence: '___ I have a coffee, please?'",
-                "pt": "O que completa a primeira frase: '___ eu posso ter um café, por favor?'"
-              },
-              "options": [
-                "Do",
-                "Can",
-                "Am"
-              ],
-              "answer": "Can",
-              "explanation": {
-                "en": "'Can I have...' is a common way to ask for something.",
-                "pt": "'Can I have...' é uma forma comum de pedir algo."
-              }
-            },
-            {
-              "id": "b5c-act4-2",
-              "prompt": {
-                "en": "What completes the third sentence: 'My friend ___ a new phone.'",
-                "pt": "O que completa a terceira frase: 'Minha amiga ___ um telefone novo.'"
-              },
-              "options": [
-                "have",
-                "has"
-              ],
-              "answer": "has",
-              "explanation": {
-                "en": "'My friend' is 'She', so we use 'has'.",
-                "pt": "'My friend' é 'She', então usamos 'has'."
-              }
-            }
-          ]
-        },
-        {
-          "id": "b5c-act-5",
-          "title": {
-            "en": "Dialogue: Lost and Found",
-            "pt": "Diálogo: Perdidos e Achados"
-          },
-          "instruction": {
-            "en": "Practice the dialogue with a partner, then change roles. Use the vocabulary and requests.",
-            "pt": "Pratique o diálogo com um parceiro, depois troque os papéis. Use o vocabulário e os pedidos."
-          },
-          "phrases": [
-            {
-              "en": "A: Excuse me, I have a problem. I don't have my keys. Can you help me, please?",
-              "pt": "A: Com licença, eu tenho um problema. Eu não tenho minhas chaves. Você pode me ajudar, por favor?"
-            },
-            {
-              "en": "B: Of course. What do you have with you?",
-              "pt": "B: Claro. O que você tem com você?"
-            },
-            {
-              "en": "A: I have my phone and my wallet. I think my keys are in my backpack. Could you check my backpack?",
-              "pt": "A: Eu tenho meu telefone e minha carteira. Eu acho que minhas chaves estão na minha mochila. Você poderia verificar minha mochila?"
-            },
-            {
-              "en": "B: Yes, here are your keys! And you also have a book here.",
-              "pt": "B: Sim, aqui estão suas chaves! E você também tem um livro aqui."
-            },
-            {
-              "en": "A: Oh, thank you! You are very helpful.",
-              "pt": "A: Ah, obrigada! Você é muito prestativo(a)."
-            }
-          ],
-          "check": [
-            {
-              "id": "b5c-act5-1",
-              "prompt": {
-                "en": "What does person A ask for?",
-                "pt": "O que a pessoa A pede?"
-              },
-              "options": [
-                "A new phone",
-                "Help to find keys",
-                "A book to read"
-              ],
-              "answer": "Help to find keys",
-              "explanation": {
-                "en": "Person A says: 'I don't have my keys. Can you help me, please?'",
-                "pt": "A pessoa A diz: 'Eu não tenho minhas chaves. Você pode me ajudar, por favor?'"
-              }
-            },
-            {
-              "id": "b5c-act5-2",
-              "prompt": {
-                "en": "What items are mentioned in the dialogue?",
-                "pt": "Quais itens são mencionados no diálogo?"
-              },
-              "options": [
-                "Laptop, watch, glasses",
-                "Keys, phone, wallet, backpack, book",
-                "Umbrella, bag, car"
-              ],
-              "answer": "Keys, phone, wallet, backpack, book",
-              "explanation": {
-                "en": "The dialogue includes 'keys', 'phone', 'wallet', 'backpack', and 'book'.",
-                "pt": "O diálogo inclui 'keys', 'phone', 'wallet', 'backpack' e 'book'."
-              }
-            }
-          ]
-        }
       ],
-      "challenge": {
-        "id": "b5c-challenge-1",
-        "title": {
-          "en": "Shopping for Essentials",
-          "pt": "Comprando Essenciais"
+      challenge: {
+        id: "b5c-challenge",
+        title: { en: "Communication Challenge — Tell me your morning", pt: "Desafio de comunicação — Conte sua manhã" },
+        instruction: {
+          en: "Describe your morning in six sentences: five actions in order with times, and one sentence about someone else's routine.",
+          pt: "Descreva sua manhã em seis frases: cinco ações em ordem com horários e uma frase sobre a rotina de outra pessoa.",
         },
-        "instruction": {
-          "en": "Imagine you are in a store. You need to buy some items and also ask for help. Create a short dialogue (4-5 lines) using 'have/has' for possessions and 'requests'.",
-          "pt": "Imagine que você está em uma loja. Você precisa comprar alguns itens e também pedir ajuda. Crie um pequeno diálogo (4-5 linhas) usando 'have/has' para posses e 'requests'."
-        },
-        "phrases": [
-          {
-            "en": "A: Excuse me, do you have a blue umbrella?",
-            "pt": "A: Com licença, você tem um guarda-chuva azul?"
-          },
-          {
-            "en": "B: Yes, we have many umbrellas. We also have new bags.",
-            "pt": "B: Sim, nós temos muitos guarda-chuvas. Nós também temos bolsas novas."
-          },
-          {
-            "en": "A: Great! Can I have the umbrella, please?",
-            "pt": "A: Ótimo! Posso ter o guarda-chuva, por favor?"
-          }
+        phrases: [
+          { en: "First, I wake up at five thirty.", pt: "Primeiro, eu acordo às cinco e meia." },
+          { en: "Then I drink coffee and I read the news.", pt: "Depois tomo café e leio as notícias." },
+          { en: "After that, I leave home and I walk to the station.", pt: "Depois disso, saio de casa e caminho até a estação." },
+          { en: "We start work at nine every day.", pt: "Nós começamos a trabalhar às nove todo dia." },
         ],
-        "check": [
+        check: [
           {
-            "id": "b5c-chall-1",
-            "prompt": {
-              "en": "Which sentence is a correct request?",
-              "pt": "Qual frase é um pedido correto?"
-            },
-            "options": [
-              "You have a phone?",
-              "I want a coffee.",
-              "Could you pass the salt, please?"
-            ],
-            "answer": "Could you pass the salt, please?",
-            "explanation": {
-              "en": "'Could you pass the salt, please?' is a polite request.",
-              "pt": "'Could you pass the salt, please?' é um pedido educado."
-            }
+            id: "b5c-ch1",
+            prompt: { en: "Which sentence has NO mistake?", pt: "Qual frase NÃO tem erro?" },
+            options: ["I am have breakfast.", "We reads the news.", "They leave home at seven."],
+            answer: "They leave home at seven.",
+            explanation: { en: "they + base verb + at + time.", pt: "they + verbo base + at + hora." },
           },
           {
-            "id": "b5c-chall-2",
-            "prompt": {
-              "en": "Which item is a 'relógio de pulso'?",
-              "pt": "Qual item é um 'relógio de pulso'?"
-            },
-            "options": [
-              "Glasses",
-              "Watch",
-              "Laptop"
+            id: "b5c-ch2",
+            prompt: { en: "Which sequence is correct?", pt: "Qual sequência está correta?" },
+            options: [
+              "First I wake up, then I take a shower, after that I leave home.",
+              "After that I wake up, first I leave home, then I shower.",
+              "Then I wake up, after that first I leave.",
             ],
-            "answer": "Watch",
-            "explanation": {
-              "en": "'Relógio de pulso' is 'watch'.",
-              "pt": "'Relógio de pulso' é 'watch'."
-            }
-          }
-        ]
+            answer: "First I wake up, then I take a shower, after that I leave home.",
+            explanation: { en: "first → then → after that.", pt: "first → then → after that." },
+          },
+        ],
       },
-      "lessonReview": {
-        "summary": {
-          "en": "In this unit, you learned how to talk about possessions and family relationships using 'have' and 'has'. You also learned new vocabulary for everyday items and how to make polite requests.",
-          "pt": "Nesta unidade, você aprendeu como falar sobre posses e relações familiares usando 'have' e 'has'. Você também aprendeu vocabulário novo para itens do dia a dia e como fazer pedidos educados."
+      lessonReview: {
+        summary: {
+          en: "You described your morning routine in order, with times and connected actions.",
+          pt: "Você descreveu sua rotina da manhã em ordem, com horários e ações encadeadas.",
         },
-        "canDo": [
-          {
-            "en": "I can use 'have' and 'has' correctly.",
-            "pt": "Eu consigo usar 'have' e 'has' corretamente."
-          },
-          {
-            "en": "I can name common possessions like 'laptop' and 'keys'.",
-            "pt": "Eu consigo nomear posses comuns como 'laptop' e 'keys'."
-          },
-          {
-            "en": "I can make simple requests like 'Can you help me, please?'.",
-            "pt": "Eu consigo fazer pedidos simples como 'Can you help me, please?'."
-          }
+        canDo: [
+          { en: "I can describe five actions of my day.", pt: "Consigo descrever cinco ações do meu dia." },
+          { en: "I can say at what time I do each thing.", pt: "Consigo dizer a que horas faço cada coisa." },
+          { en: "I can connect actions with first, then and after that.", pt: "Consigo encadear ações com first, then e after that." },
         ],
-        "next": {
-          "en": "Next, we will explore Unit 6: Daily Routines.",
-          "pt": "Em seguida, exploraremos a Unidade 6: Rotinas Diárias."
-        }
-      }
-    }
+        next: {
+          en: "Next: talk about other people's routines with he works, she studies.",
+          pt: "Próximo: falar da rotina de outras pessoas com he works, she studies.",
+        },
+      },
+    },
   },
   {
     "code": "BEGINNER-U06",
