@@ -161,3 +161,16 @@ export function warmUpNeedsImage(prompt: string): boolean {
 export function warmUpImageFor(unitTitle: string): WarmUpImage {
   return THEMES.find((t) => t.match.test(unitTitle))?.image ?? FALLBACK;
 }
+
+/** Imagem própria de uma lição do novo currículo Speak2Co (por código da unidade). */
+const UNIT_IMAGES: Record<string, WarmUpImage> = {
+  "BEGINNER-U01": {
+    src: beginnerU01,
+    alt: "Three colleagues meeting for the first time in a bright coworking lobby",
+    altPt: "Três colegas se conhecendo no saguão claro de um coworking",
+  },
+};
+
+export function warmUpImageForUnit(unitCode: string): WarmUpImage | undefined {
+  return UNIT_IMAGES[unitCode.toUpperCase()];
+}
