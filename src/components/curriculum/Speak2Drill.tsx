@@ -221,7 +221,7 @@ export function Speak2Drill({ unit }: { unit: CourseUnit }) {
       <div className="mt-3 rounded-xl border border-gold/40 bg-gold/10 p-4">
         <p className="text-[11px] font-semibold tracking-wide text-gold uppercase">Drill</p>
         <p className="mt-1 text-base font-semibold text-foreground">
-          {drillCue(drill.instruction)}
+          {renderCue(drillCue(drill.instruction))}
         </p>
       </div>
 
