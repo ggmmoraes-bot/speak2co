@@ -196,6 +196,21 @@ const UNIT_IMAGES: Record<string, WarmUpImage> = {
     alt: "A person having coffee in a sunlit kitchen early in the morning, with a bag by the door",
     altPt: "Uma pessoa tomando café numa cozinha ensolarada no início da manhã, com a mochila perto da porta",
   },
+  "BEGINNER-U06": {
+    src: beginnerU06,
+    alt: "Three professionals working in a bright coworking space: a woman at a laptop, a man at a coffee counter and a nurse with a tablet",
+    altPt: "Três profissionais trabalhando em um coworking claro: uma mulher no laptop, um homem no balcão de café e uma enfermeira com um tablet",
+  },
+  "BEGINNER-U07": {
+    src: beginnerU07,
+    alt: "A round clock, an open monthly calendar and a phone with a daily schedule on a desk",
+    altPt: "Um relógio redondo, um calendário mensal aberto e um celular com a agenda do dia sobre uma mesa",
+  },
+  "BEGINNER-U08": {
+    src: beginnerU08,
+    alt: "Two colleagues at a cafe table clearing up a misunderstanding, one gesturing no with an open hand",
+    altPt: "Dois colegas em uma mesa de café desfazendo um mal-entendido, um deles gesticulando que não com a mão aberta",
+  },
 };
 
 export function warmUpImageForUnit(unitCode: string): WarmUpImage | undefined {
