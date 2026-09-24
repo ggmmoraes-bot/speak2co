@@ -1,0 +1,85 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Intermediate Unit 22 (Job Interviews).
+ * Conteúdo autoral Speak2Co: reported speech (say/tell, statements e
+ * perguntas) e vocabulário de entrevistas de emprego.
+ */
+const d = (id: string, base: string, basePt: string, instruction: string, answer: string) => ({
+  id,
+  base,
+  basePt,
+  instruction,
+  answer,
+});
+
+export const INTERMEDIATE_U22_DRILLS: DrillSet = {
+  verbs: [
+    d("i22dr-v01", "She said the position required experience.", "Ela disse que a vaga exigia experiência.", "Change \"She\" to \"He\".", "He said the position required experience."),
+    d("i22dr-v02", "She said she would call me.", "Ela disse que ligaria para mim.", "Change \"call me\" to \"send an email\".", "She said she would send an email."),
+    d("i22dr-v03", "She told me the company offered a good salary.", "Ela me disse que a empresa oferecia um bom salário.", "Make a question.", "Did she tell me the company offered a good salary?"),
+    d("i22dr-v04", "He told me the team was very friendly.", "Ele me disse que a equipe era muito amigável.", "Change \"the team\" to \"the manager\".", "He told me the manager was very friendly."),
+    d("i22dr-v05", "She asked if I had worked in a team before.", "Ela perguntou se eu já tinha trabalhado em equipe antes.", "Change \"I\" to \"he\".", "She asked if he had worked in a team before."),
+    d("i22dr-v06", "She asked why I wanted to change jobs.", "Ela perguntou por que eu queria mudar de emprego.", "Change \"why\" to \"when\".", "She asked when I wanted to change jobs."),
+    d("i22dr-v07", "He asked if they had called me.", "Ele perguntou se eles tinham me ligado.", "Make it negative.", "He asked if they hadn't called me."),
+    d("i22dr-v08", "She asked if I had any questions.", "Ela perguntou se eu tinha alguma pergunta.", "Change \"I\" to \"we\".", "She asked if we had any questions."),
+    d("i22dr-v09", "He asked why I left my last job.", "Ele perguntou por que eu saí do meu último emprego.", "Change \"my last job\" to \"the company\".", "He asked why I left the company."),
+    d("i22dr-v10", "She asked if I was available to start soon.", "Ela perguntou se eu estava disponível para começar logo.", "Make a question about the interviewer.", "Did she ask if I was available to start soon?"),
+    d("i22dr-v11", "She said the company was growing fast.", "Ela disse que a empresa estava crescendo rápido.", "Change \"the company\" to \"the team\".", "She said the team was growing fast."),
+    d("i22dr-v12", "She said she would send an email with more details.", "Ela disse que enviaria um e-mail com mais detalhes.", "Change \"email\" to \"message\".", "She said she would send a message with more details."),
+    d("i22dr-v13", "She asked if I had experience.", "Ela perguntou se eu tinha experiência.", "Make it about \"he\".", "She asked if he had experience."),
+    d("i22dr-v14", "He said the company offered flexible hours.", "Ele disse que a empresa oferecia horário flexível.", "Change \"flexible hours\" to \"good benefits\".", "He said the company offered good benefits."),
+    d("i22dr-v15", "She said she was tired.", "Ela disse que estava cansada.", "Change \"She\" to \"They\".", "They said they were tired."),
+  ],
+  vocabulary: [
+    d("i22dr-n01", "The interviewer asked about my previous experience.", "O entrevistador perguntou sobre minha experiência anterior.", "Change \"my previous experience\" to \"my strengths\".", "The interviewer asked about my strengths."),
+    d("i22dr-n02", "There were ten candidates for the position.", "Havia dez candidatos para a vaga.", "Change \"ten\" to \"twenty\".", "There were twenty candidates for the position."),
+    d("i22dr-n03", "Send your résumé before Friday.", "Envie seu currículo antes de sexta.", "Change \"Friday\" to \"Monday\".", "Send your résumé before Monday."),
+    d("i22dr-n04", "The position requires strong communication skills.", "O cargo exige boas habilidades de comunicação.", "Change \"communication\" to \"leadership\".", "The position requires strong leadership skills."),
+    d("i22dr-n05", "Experience with software is a requirement.", "Experiência com software é um requisito.", "Change \"software\" to \"marketing\".", "Experience with marketing is a requirement."),
+    d("i22dr-n06", "The company offered a good salary.", "A empresa ofereceu um bom salário.", "Make it negative.", "The company didn't offer a good salary."),
+    d("i22dr-n07", "The job includes health benefits.", "O emprego inclui benefícios de saúde.", "Change \"health benefits\" to \"flexible hours\".", "The job includes flexible hours."),
+    d("i22dr-n08", "My biggest strength is teamwork.", "Meu maior ponto forte é o trabalho em equipe.", "Change \"strength\" to \"weakness\".", "My biggest weakness is teamwork."),
+    d("i22dr-n09", "My weakness is public speaking.", "Meu ponto fraco é falar em público.", "Change \"My\" to \"His\".", "His weakness is public speaking."),
+    d("i22dr-n10", "The company decided to hire her.", "A empresa decidiu contratá-la.", "Change \"her\" to \"him\".", "The company decided to hire him."),
+    d("i22dr-n11", "The company offers flexible hours.", "A empresa oferece horário flexível.", "Make a question.", "Does the company offer flexible hours?"),
+    d("i22dr-n12", "She gave me useful feedback after the interview.", "Ela me deu um feedback útil depois da entrevista.", "Change \"useful\" to \"positive\".", "She gave me positive feedback after the interview."),
+    d("i22dr-n13", "The interviewer usually asks about your strengths and weaknesses.", "O entrevistador geralmente pergunta sobre seus pontos fortes e fracos.", "Change \"strengths and weaknesses\" to \"experience\".", "The interviewer usually asks about your experience."),
+    d("i22dr-n14", "Candidates should ask about the position and the benefits.", "Os candidatos devem perguntar sobre a vaga e os benefícios.", "Change \"Candidates\" to \"She\".", "She should ask about the position and the benefits."),
+    d("i22dr-n15", "The position requires a lot of experience.", "A vaga exige muita experiência.", "Make it negative.", "The position doesn't require a lot of experience."),
+  ],
+  expressions: [
+    d("i22dr-e01", "Tell me everything!", "Me conta tudo!", "Change \"me\" to \"us\".", "Tell us everything!"),
+    d("i22dr-e02", "That sounds great!", "Isso parece ótimo!", "Change \"great\" to \"interesting\".", "That sounds interesting!"),
+    d("i22dr-e03", "How did it go?", "Como foi?", "Change \"it\" to \"the interview\".", "How did the interview go?"),
+    d("i22dr-e04", "I'm so nervous.", "Estou tão nervoso(a).", "Change \"I\" to \"She\".", "She's so nervous."),
+    d("i22dr-e05", "It was intense.", "Foi intenso.", "Make it a question.", "Was it intense?"),
+    d("i22dr-e06", "with the result", "com o resultado", "Add \"She said she would call me\" before it.", "She said she would call me with the result."),
+    d("i22dr-e07", "Tell me everything!", "Me conta tudo!", "Change \"everything\" to \"what happened\".", "Tell me what happened!"),
+    d("i22dr-e08", "That sounds great!", "Isso parece ótimo!", "Change \"That\" to \"This\".", "This sounds great!"),
+    d("i22dr-e09", "How did it go?", "Como foi?", "Change \"go\" to \"end\".", "How did it end?"),
+    d("i22dr-e10", "I'm so nervous.", "Estou tão nervoso(a).", "Make it negative.", "I'm not so nervous."),
+    d("i22dr-e11", "It was intense.", "Foi intenso.", "Change \"intense\" to \"long\".", "It was long."),
+    d("i22dr-e12", "She said she would call me next week with the result.", "Ela disse que ligaria para mim na próxima semana com o resultado.", "Change \"next week\" to \"tomorrow\".", "She said she would call me tomorrow with the result."),
+    d("i22dr-e13", "Tell me everything!", "Me conta tudo!", "Change \"Tell\" to \"Ask\" and \"me\" to \"her\".", "Ask her everything!"),
+    d("i22dr-e14", "That sounds great!", "Isso parece ótimo!", "Add \"to me\" at the end.", "That sounds great to me!"),
+    d("i22dr-e15", "I'm so nervous.", "Estou tão nervoso(a).", "Add \"about the result\" at the end.", "I'm so nervous about the result."),
+  ],
+  grammar: [
+    d("i22dr-g01", "She said the position required a lot of experience.", "Ela disse que a vaga exigia muita experiência.", "Change \"a lot of experience\" to \"good English\".", "She said the position required good English."),
+    d("i22dr-g02", "She asked if I had worked in a team before.", "Ela perguntou se eu já tinha trabalhado em equipe antes.", "Make it a wh-question with \"how long\".", "She asked how long I had worked in a team."),
+    d("i22dr-g03", "She asked why I wanted to change jobs.", "Ela perguntou por que eu queria mudar de emprego.", "Change \"why\" to \"if\".", "She asked if I wanted to change jobs."),
+    d("i22dr-g04", "She told me the company offered a good salary and flexible hours.", "Ela me disse que a empresa oferecia um bom salário e horário flexível.", "Change \"told me\" to \"said\".", "She said the company offered a good salary and flexible hours."),
+    d("i22dr-g05", "She said she would call me next week.", "Ela disse que ligaria para mim na próxima semana.", "Change \"call me\" to \"email me\".", "She said she would email me next week."),
+    d("i22dr-g06", "Report: \"I will call you.\"", "Relate: \"I will call you.\"", "Report it starting with \"She said...\".", "She said she would call me."),
+    d("i22dr-g07", "Report: \"Do you have experience?\"", "Relate: \"Do you have experience?\"", "Report it starting with \"She asked...\".", "She asked if I had experience."),
+    d("i22dr-g08", "Report: \"Why do you want this job?\"", "Relate: \"Why do you want this job?\"", "Report it starting with \"She asked...\".", "She asked why I wanted that job."),
+    d("i22dr-g09", "He told me the team was very friendly.", "Ele me disse que a equipe era muito amigável.", "Change \"He\" to \"They\".", "They told me the team was very friendly."),
+    d("i22dr-g10", "She asked if I was available to start soon.", "Ela perguntou se eu estava disponível para começar logo.", "Make it negative.", "She asked if I wasn't available to start soon."),
+    d("i22dr-g11", "He asked why I left my last job.", "Ele perguntou por que eu saí do meu último emprego.", "Change \"He\" to \"She\".", "She asked why I left my last job."),
+    d("i22dr-g12", "Report: \"Have you worked in a team?\"", "Relate: \"Have you worked in a team?\"", "Report it starting with \"He asked...\".", "He asked if I had worked in a team."),
+    d("i22dr-g13", "Report: \"Did they call you?\"", "Relate: \"Did they call you?\"", "Report it starting with \"He asked...\".", "He asked if they had called me."),
+    d("i22dr-g14", "She told me the salary was good.", "Ela me disse que o salário era bom.", "Make a question about the interviewer.", "Did she tell me the salary was good?"),
+    d("i22dr-g15", "She said she would call me with the result.", "Ela disse que ligaria para mim com o resultado.", "Change \"call me\" to \"write to me\".", "She said she would write to me with the result."),
+  ],
+};
