@@ -15,6 +15,7 @@ import beginnerU09 from "@/assets/warmup/beginner-u09-do-you.jpg";
 import beginnerU10 from "@/assets/warmup/beginner-u10-how-often.jpg";
 import beginnerU11 from "@/assets/warmup/beginner-u11-checkpoint.jpg";
 import intermediateU01 from "@/assets/warmup/intermediate-u01-plans-and-forecasts.jpg";
+import { WARMUP_INTERMEDIATE } from "./warmup-images-intermediate";
 import { WARMUP_12_16 } from "./warmup-images-12-16";
 import { WARMUP_17_21 } from "./warmup-images-17-21";
 import { WARMUP_22_26 } from "./warmup-images-22-26";
@@ -238,6 +239,7 @@ const UNIT_IMAGES: Record<string, WarmUpImage> = {
   ...WARMUP_17_21,
   ...WARMUP_22_26,
   ...WARMUP_27_30,
+  ...WARMUP_INTERMEDIATE,
   "INTERMEDIATE-U01": {
     src: intermediateU01,
     alt: "Three friends planning a weekend trip with a map and a weather forecast on a laptop",

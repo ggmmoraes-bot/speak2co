@@ -6,6 +6,7 @@ import { INTERMEDIATE_U04_DRILLS } from "./speak2drill-intermediate-04";
 import { INTERMEDIATE_U02_DRILLS } from "./speak2drill-intermediate-02";
 import { INTERMEDIATE_U11_DRILLS } from "./speak2drill-intermediate-11";
 import { INTERMEDIATE_U22_DRILLS } from "./speak2drill-intermediate-22";
+import { INTERMEDIATE_DRILLS } from "./intermediate-drills";
 import * as D0205 from "./speak2drill-beginner-02-05";
 import * as D0610 from "./speak2drill-beginner-06-10";
 import * as D1115 from "./speak2drill-beginner-11-15";
@@ -54,6 +55,7 @@ const AUTHORED: Record<string, DrillSet> = (() => {
   const map: Record<string, DrillSet> = {
     "BEGINNER-U01": BEGINNER_U01_DRILLS,
     "INTERMEDIATE-U01": INTERMEDIATE_U01_DRILLS,
+    ...INTERMEDIATE_DRILLS,
     "INTERMEDIATE-U04": INTERMEDIATE_U04_DRILLS,
     "INTERMEDIATE-U02": INTERMEDIATE_U02_DRILLS,
     "INTERMEDIATE-U11": INTERMEDIATE_U11_DRILLS,
