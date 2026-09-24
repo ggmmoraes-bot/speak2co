@@ -1,6 +1,7 @@
 import type { CourseUnit } from "./types";
 import { buildUnitDrills } from "./speak2drill";
 import { BEGINNER_U01_DRILLS } from "./speak2drill-beginner-01";
+import { INTERMEDIATE_U01_DRILLS } from "./speak2drill-intermediate-01";
 import * as D0205 from "./speak2drill-beginner-02-05";
 import * as D0610 from "./speak2drill-beginner-06-10";
 import * as D1115 from "./speak2drill-beginner-11-15";
@@ -46,7 +47,10 @@ const BATCHES: Record<string, DrillSet>[] = [D0205, D0610, D1115, D1620, D2125, 
 );
 
 const AUTHORED: Record<string, DrillSet> = (() => {
-  const map: Record<string, DrillSet> = { "BEGINNER-U01": BEGINNER_U01_DRILLS };
+  const map: Record<string, DrillSet> = {
+    "BEGINNER-U01": BEGINNER_U01_DRILLS,
+    "INTERMEDIATE-U01": INTERMEDIATE_U01_DRILLS,
+  };
   for (const mod of BATCHES) {
     for (const [name, set] of Object.entries(mod)) {
       const m = /^BEGINNER_U(\d{2})_DRILLS$/.exec(name);
