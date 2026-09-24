@@ -233,3 +233,252 @@ export const INTERMEDIATE_U27: CourseUnit = {
     },
   },
 };
+
+/**
+ * Intermediate — Unit 28 (House Rules). Conteúdo autoral Speak2Co.
+ * Foco: have to / must / don't have to / mustn't para obrigação, e
+ * some/any/much/many para quantidades. Personagens: Priya e Sam, colegas de apê.
+ */
+export const INTERMEDIATE_U28: CourseUnit = {
+  code: "INTERMEDIATE-U28",
+  number: 28,
+  title: "House Rules — What do you have to do?",
+  titlePt: "Regras da Casa — O que você tem que fazer?",
+  cefr: "B1",
+  objective: {
+    en: "Talk about obligation, prohibition and lack of obligation with 'have to', 'must' and 'mustn't', and describe quantities with 'some', 'any', 'much' and 'many'.",
+    pt: "Falar de obrigação, proibição e falta de obrigação com 'have to', 'must' e 'mustn't', e descrever quantidades com 'some', 'any', 'much' e 'many'.",
+  },
+  communicationGoal: {
+    en: "Agree on house rules with a roommate and make a shared shopping list.",
+    pt: "Combinar regras da casa com um colega de apê e montar uma lista de compras conjunta.",
+  },
+  prerequisites: {
+    en: "Used to for past habits, simple present and simple past from previous units.",
+    pt: "Used to para hábitos do passado, presente simples e passado simples das unidades anteriores.",
+  },
+  newContent: {
+    en: "Grammar: 'have to / don't have to', 'must / mustn't' for obligation and prohibition; 'some / any / much / many' | Vocabulary: shared housing (12 items) | Expressions: agreeing on rules",
+    pt: "Gramática: 'have to / don't have to', 'must / mustn't' para obrigação e proibição; 'some / any / much / many' | Vocabulário: moradia compartilhada (12 itens) | Expressões: combinando regras",
+  },
+  reviewContent: {
+    en: "Used to for past habits and states, and comparative adjectives.",
+    pt: "Used to para hábitos e estados do passado, e adjetivos comparativos.",
+  },
+  discover: {
+    id: "INTERMEDIATE-U28-DISCOVER",
+    warmUp: {
+      prompt: {
+        en: "Look at the picture. What rules do people usually have when they share a house?",
+        pt: "Observe a imagem. Que regras as pessoas costumam ter quando dividem uma casa?",
+      },
+      phrases: [
+        { en: "Do you have to clean up after yourself at home?", pt: "Você tem que limpar depois de si mesmo em casa?" },
+        { en: "What rules do you have with your roommates?", pt: "Que regras você tem com seus colegas de apê?" },
+        { en: "Is there anything you mustn't do in your building?", pt: "Tem alguma coisa que você não pode fazer no seu prédio?" },
+      ],
+    },
+    context: {
+      situation: {
+        en: "Priya and Sam just moved into a small apartment together. They are setting the house rules and making a shopping list for the week.",
+        pt: "Priya e Sam acabaram de se mudar juntos para um apartamento pequeno. Eles estão definindo as regras da casa e fazendo a lista de compras da semana.",
+      },
+      dialogue: [
+        { who: "Priya", en: "Okay, first rule: we have to wash our own dishes right after we eat.", pt: "Ok, primeira regra: temos que lavar nossa própria louça logo depois de comer." },
+        { who: "Sam", en: "Fair enough. And we mustn't leave the trash for more than two days.", pt: "Justo. E não podemos deixar o lixo por mais de dois dias." },
+        { who: "Priya", en: "Agreed. Do we have to split the rent exactly in half?", pt: "Combinado. Temos que dividir o aluguel exatamente na metade?" },
+        { who: "Sam", en: "Yes, but we don't have to split the internet bill — I already pay for that one.", pt: "Sim, mas não precisamos dividir a conta de internet — eu já pago essa." },
+        { who: "Priya", en: "Great. Now, how much milk do we need this week?", pt: "Ótimo. Agora, quanta quantidade de leite a gente precisa essa semana?" },
+        { who: "Sam", en: "We don't have much milk left, so we need some. And we don't have any coffee at all.", pt: "Não sobrou muito leite, então precisamos de um pouco. E não temos café nenhum." },
+        { who: "Priya", en: "How many eggs are in the fridge?", pt: "Quantos ovos tem na geladeira?" },
+        { who: "Sam", en: "There aren't many — just three. Let's add eggs to the list too.", pt: "Não tem muitos — só três. Vamos colocar ovos na lista também." },
+      ],
+    },
+    vocabulary: [
+      { term: "roommate", pt: "colega de apartamento", ipa: "/ˈruːmmeɪt/", definition: "A person you share a house or apartment with.", example: "My roommate and I split the bills evenly.", examplePt: "Eu e meu colega de apê dividimos as contas igualmente." },
+      { term: "rent", pt: "aluguel", ipa: "/rent/", definition: "Money you pay regularly to live in a place.", example: "We have to pay the rent on the first of the month.", examplePt: "Temos que pagar o aluguel no primeiro dia do mês." },
+      { term: "landlord", pt: "senhorio, proprietário", ipa: "/ˈlændlɔːrd/", definition: "A person who owns a property and rents it to others.", example: "You mustn't paint the walls without asking the landlord.", examplePt: "Você não pode pintar as paredes sem pedir ao senhorio." },
+      { term: "lease", pt: "contrato de aluguel", ipa: "/liːs/", definition: "A legal agreement to rent a place for a period of time.", example: "We have to sign the lease before we move in.", examplePt: "Temos que assinar o contrato antes de nos mudarmos." },
+      { term: "deposit", pt: "depósito, caução", ipa: "/dɪˈpɑːzɪt/", definition: "Money you pay in advance as a guarantee.", example: "You have to pay a deposit before you move in.", examplePt: "Você tem que pagar um depósito antes de se mudar." },
+      { term: "utilities", pt: "contas de serviços (água, luz, etc.)", ipa: "/juːˈtɪlətiz/", definition: "Services like water, electricity and gas.", example: "We split the utilities every month.", examplePt: "Dividimos as contas de água e luz todo mês." },
+      { term: "trash", pt: "lixo", ipa: "/træʃ/", definition: "Waste that you throw away.", example: "You mustn't leave the trash outside the door.", examplePt: "Você não pode deixar o lixo do lado de fora da porta." },
+      { term: "dishes", pt: "louça", ipa: "/ˈdɪʃɪz/", definition: "Plates, cups and other things used for eating.", example: "We have to wash the dishes after dinner.", examplePt: "Temos que lavar a louça depois do jantar." },
+      { term: "groceries", pt: "mantimentos, compras do mercado", ipa: "/ˈɡroʊsəriz/", definition: "Food and other items you buy at the market.", example: "We need to buy some groceries this weekend.", examplePt: "Precisamos comprar mantimentos esse fim de semana." },
+      { term: "receipt", pt: "recibo, nota fiscal", ipa: "/rɪˈsiːt/", definition: "A paper that proves you paid for something.", example: "Keep the receipt in case we split the bill.", examplePt: "Guarde o recibo caso a gente divida a conta." },
+      { term: "recycle", pt: "reciclar", ipa: "/riːˈsaɪkl/", definition: "To use waste materials again instead of throwing them away.", example: "We have to recycle the plastic bottles.", examplePt: "Temos que reciclar as garrafas de plástico." },
+      { term: "guest", pt: "convidado, visita", ipa: "/ɡest/", definition: "A person invited to visit or stay somewhere.", example: "You mustn't have guests after midnight.", examplePt: "Você não pode ter visitas depois da meia-noite." },
+    ],
+    expressions: [
+      { en: "Fair enough.", pt: "Justo. / Faz sentido." },
+      { en: "Agreed.", pt: "Combinado." },
+      { en: "Let's add it to the list.", pt: "Vamos colocar na lista." },
+      { en: "That works for me.", pt: "Por mim tudo bem." },
+      { en: "No big deal.", pt: "Não é grande coisa." },
+      { en: "As long as…", pt: "Contanto que…" },
+    ],
+    grammar: [
+      {
+        title: { en: "Have to / don't have to — obligation and lack of obligation", pt: "Have to / don't have to — obrigação e falta de obrigação" },
+        examples: [
+          { en: "We have to wash our own dishes.", pt: "Temos que lavar nossa própria louça. (obrigação)" },
+          { en: "We don't have to split the internet bill.", pt: "Não precisamos dividir a conta de internet. (não é obrigatório)" },
+          { en: "Does she have to pay a deposit?", pt: "Ela tem que pagar um depósito?" },
+          { en: "Do you have to sign a lease?", pt: "Você tem que assinar um contrato?" },
+        ],
+        rule: {
+          en: "Use 'have to / has to + base verb' for obligations that come from rules or circumstances. Negative 'don't have to / doesn't have to' means something is not necessary, not that it is forbidden. Questions use do/does.",
+          pt: "Use 'have to / has to + verbo base' para obrigações que vêm de regras ou circunstâncias. A negativa 'don't have to / doesn't have to' significa que algo não é necessário, não que é proibido. Perguntas usam do/does.",
+        },
+        mistakes: [
+          { en: "✗ She have to pay. → ✓ She has to pay. (third person)", pt: "✗ She have to pay. → ✓ She has to pay. (terceira pessoa)" },
+          { en: "✗ I don't have to smoke here. (meaning forbidden) → use 'mustn't' for prohibition.", pt: "✗ I don't have to smoke here. (com sentido de proibido) → use 'mustn't' para proibição." },
+        ],
+      },
+      {
+        title: { en: "Must / mustn't — strong obligation and prohibition", pt: "Must / mustn't — obrigação forte e proibição" },
+        examples: [
+          { en: "We mustn't leave the trash for more than two days.", pt: "Não podemos deixar o lixo por mais de dois dias." },
+          { en: "You mustn't have guests after midnight.", pt: "Você não pode ter visitas depois da meia-noite." },
+          { en: "Everyone must sign the lease.", pt: "Todo mundo deve assinar o contrato." },
+        ],
+        rule: {
+          en: "Use 'must' for strong obligation (often rules) and 'mustn't' for prohibition — something is not allowed. 'Must' doesn't change with the subject and is not usually used in questions in everyday speech (we prefer 'have to').",
+          pt: "Use 'must' para obrigação forte (geralmente regras) e 'mustn't' para proibição — algo que não é permitido. 'Must' não muda com o sujeito e geralmente não é usado em perguntas no dia a dia (preferimos 'have to').",
+        },
+        mistakes: [
+          { en: "✗ You don't must smoke here. → ✓ You mustn't smoke here.", pt: "✗ You don't must smoke here. → ✓ You mustn't smoke here." },
+        ],
+      },
+      {
+        title: { en: "Some / any / much / many", pt: "Some / any / much / many" },
+        examples: [
+          { en: "We need some milk.", pt: "Precisamos de um pouco de leite." },
+          { en: "We don't have any coffee.", pt: "Não temos café nenhum." },
+          { en: "We don't have much milk left.", pt: "Não sobrou muito leite." },
+          { en: "There aren't many eggs.", pt: "Não tem muitos ovos." },
+          { en: "How much milk do we need? How many eggs are there?", pt: "Quanto leite a gente precisa? Quantos ovos tem?" },
+        ],
+        rule: {
+          en: "Use 'some' in affirmative sentences and offers; use 'any' in negatives and questions. Use 'much' with uncountable nouns (milk, coffee) and 'many' with countable nouns (eggs, apples), usually in negatives and questions.",
+          pt: "Use 'some' em frases afirmativas e ofertas; use 'any' em negativas e perguntas. Use 'much' com substantivos incontáveis (milk, coffee) e 'many' com contáveis (eggs, apples), geralmente em negativas e perguntas.",
+        },
+        mistakes: [
+          { en: "✗ We have some coffee? → ✓ Do we have any coffee?", pt: "✗ We have some coffee? → ✓ Do we have any coffee?" },
+          { en: "✗ How much eggs? → ✓ How many eggs?", pt: "✗ How much eggs? → ✓ How many eggs?" },
+        ],
+      },
+    ],
+    controlledPractice: [
+      { id: "i28d-cp1", prompt: { en: "Complete: 'She ___ to pay a deposit.'", pt: "Complete: 'She ___ to pay a deposit.'" }, options: ["have", "has", "having"], answer: "has", explanation: { en: "Third person: has to.", pt: "Terceira pessoa: has to." } },
+      { id: "i28d-cp2", prompt: { en: "Which means 'it's not necessary'?", pt: "Qual significa 'não é necessário'?" }, options: ["We mustn't go.", "We don't have to go.", "We can't go."], answer: "We don't have to go.", explanation: { en: "Don't have to = not necessary.", pt: "Don't have to = não é necessário." } },
+      { id: "i28d-cp3", prompt: { en: "Which means 'it's forbidden'?", pt: "Qual significa 'é proibido'?" }, options: ["You don't have to smoke here.", "You mustn't smoke here.", "You have to smoke here."], answer: "You mustn't smoke here.", explanation: { en: "Mustn't = prohibition.", pt: "Mustn't = proibição." } },
+      { id: "i28d-cp4", prompt: { en: "Complete: 'We don't have ___ coffee.'", pt: "Complete: 'We don't have ___ coffee.'" }, options: ["some", "any", "many"], answer: "any", explanation: { en: "Negatives usually use 'any'.", pt: "Negativas geralmente usam 'any'." } },
+      { id: "i28d-cp5", prompt: { en: "Complete: 'How ___ eggs are there?'", pt: "Complete: 'How ___ eggs are there?'" }, options: ["much", "many", "some"], answer: "many", explanation: { en: "'Eggs' is countable: use 'many'.", pt: "'Eggs' é contável: use 'many'." } },
+    ],
+    input: {
+      kind: "listening",
+      title: { en: "Building rules announcement", pt: "Aviso de regras do prédio" },
+      lines: [
+        { en: "Good morning, residents. A few reminders about our building rules.", pt: "Bom dia, moradores. Alguns lembretes sobre as regras do prédio." },
+        { en: "You have to keep the hallways clean, and you mustn't leave bikes there.", pt: "Vocês têm que manter os corredores limpos, e não podem deixar bicicletas ali." },
+        { en: "You don't have to pay for parking, but you must park in your own spot.", pt: "Vocês não precisam pagar pelo estacionamento, mas devem estacionar na própria vaga." },
+        { en: "We don't have much space for guest parking, so please don't invite many cars at once.", pt: "Não temos muito espaço para visitantes, então não convidem muitos carros de uma vez." },
+        { en: "And remember: you mustn't make noise after 10 p.m. Thank you for your cooperation!", pt: "E lembrem-se: não podem fazer barulho depois das 22h. Obrigado pela colaboração!" },
+      ],
+      questions: [
+        { id: "i28d-iq1", prompt: { en: "What mustn't residents leave in the hallways?", pt: "O que os moradores não podem deixar nos corredores?" }, options: ["Bikes", "Guests", "Trash bags"], answer: "Bikes", explanation: { en: "'You mustn't leave bikes there.'", pt: "'Vocês não podem deixar bicicletas ali.'" } },
+        { id: "i28d-iq2", prompt: { en: "Do residents have to pay for parking?", pt: "Os moradores têm que pagar pelo estacionamento?" }, options: ["Yes", "No", "Only on weekends"], answer: "No", explanation: { en: "'You don't have to pay for parking.'", pt: "'Vocês não precisam pagar pelo estacionamento.'" } },
+        { id: "i28d-iq3", prompt: { en: "What time mustn't residents make noise after?", pt: "A partir de que horário não podem fazer barulho?" }, options: ["10 p.m.", "midnight", "9 p.m."], answer: "10 p.m.", explanation: { en: "'You mustn't make noise after 10 p.m.'", pt: "'Não podem fazer barulho depois das 22h.'" } },
+      ],
+    },
+    quickCheck: [
+      { id: "i28d-qc1", prompt: { en: "What is a 'lease'?", pt: "O que é um 'lease'?" }, options: ["A rental agreement", "A type of trash", "A shopping list"], answer: "A rental agreement", explanation: { en: "A lease is a legal renting contract.", pt: "Um lease é um contrato de aluguel." } },
+      { id: "i28d-qc2", prompt: { en: "Complete: 'We ___ split the rent.'", pt: "Complete: 'We ___ split the rent.'" }, options: ["have to", "has to", "having to"], answer: "have to", explanation: { en: "We + have to.", pt: "We + have to." } },
+      { id: "i28d-qc3", prompt: { en: "Choose the correct quantity word: 'There aren't ___ eggs.'", pt: "Escolha a palavra correta: 'There aren't ___ eggs.'" }, options: ["much", "many", "any much"], answer: "many", explanation: { en: "Countable noun + many.", pt: "Substantivo contável + many." } },
+      { id: "i28d-qc4", prompt: { en: "'You ___ leave guests without asking.' (prohibition)", pt: "'You ___ leave guests without asking.' (proibição)" }, options: ["don't have to", "mustn't", "must"], answer: "mustn't", explanation: { en: "Prohibition = mustn't.", pt: "Proibição = mustn't." } },
+    ],
+  },
+  communicate: {
+    id: "INTERMEDIATE-U28-COMMUNICATE",
+    review: [
+      { en: "We have to wash our own dishes. Do we have to split the internet bill?", pt: "Temos que lavar nossa própria louça. Precisamos dividir a conta de internet?" },
+      { en: "We mustn't leave the trash for more than two days.", pt: "Não podemos deixar o lixo por mais de dois dias." },
+      { en: "We don't have much milk, but we don't have any coffee.", pt: "Não sobrou muito leite, e não temos café nenhum." },
+      { en: "How many eggs are there? There aren't many.", pt: "Quantos ovos tem? Não tem muitos." },
+    ],
+    activities: [
+      {
+        id: "i28c-a1",
+        title: { en: "Our House Rules", pt: "Nossas regras da casa" },
+        instruction: { en: "Create three house rules using 'have to' and 'mustn't'.", pt: "Crie três regras da casa usando 'have to' e 'mustn't'." },
+        phrases: [
+          { en: "We have to take out the trash on Fridays.", pt: "Temos que tirar o lixo às sextas." },
+          { en: "We mustn't leave dirty dishes overnight.", pt: "Não podemos deixar louça suja de um dia pro outro." },
+          { en: "We don't have to clean every day, but we have to clean every week.", pt: "Não precisamos limpar todo dia, mas temos que limpar toda semana." },
+        ],
+        check: [
+          { id: "i28c-a1q1", prompt: { en: "Which expresses prohibition?", pt: "Qual expressa proibição?" }, options: ["We have to clean.", "We mustn't smoke inside.", "We don't have to pay."], answer: "We mustn't smoke inside.", explanation: { en: "Mustn't = forbidden.", pt: "Mustn't = proibido." } },
+          { id: "i28c-a1q2", prompt: { en: "Complete: 'He ___ to pay the rent.'", pt: "Complete: 'He ___ to pay the rent.'" }, options: ["have", "has", "having"], answer: "has", explanation: { en: "Third person singular: has to.", pt: "Terceira pessoa: has to." } },
+        ],
+      },
+      {
+        id: "i28c-a2",
+        title: { en: "Shopping List", pt: "Lista de compras" },
+        instruction: { en: "Talk about what you have and don't have at home, using some, any, much and many.", pt: "Fale sobre o que você tem e não tem em casa, usando some, any, much e many." },
+        phrases: [
+          { en: "We have some rice, but we don't have any beans.", pt: "Temos um pouco de arroz, mas não temos feijão nenhum." },
+          { en: "We don't have much sugar left.", pt: "Não sobrou muito açúcar." },
+          { en: "How many apples do we have?", pt: "Quantas maçãs a gente tem?" },
+        ],
+        check: [
+          { id: "i28c-a2q1", prompt: { en: "Complete: 'We don't have ___ apples.'", pt: "Complete: 'We don't have ___ apples.'" }, options: ["much", "many", "some"], answer: "many", explanation: { en: "Countable + many.", pt: "Contável + many." } },
+          { id: "i28c-a2q2", prompt: { en: "Complete: 'Can I have ___ water, please?'", pt: "Complete: 'Can I have ___ water, please?'" }, options: ["any", "some", "many"], answer: "some", explanation: { en: "Offers/requests usually use 'some'.", pt: "Ofertas/pedidos geralmente usam 'some'." } },
+        ],
+      },
+      {
+        id: "i28c-a3",
+        title: { en: "Landlord Rules", pt: "Regras do proprietário" },
+        instruction: { en: "Imagine you are a landlord. Tell a new tenant three rules of the building.", pt: "Imagine que você é o proprietário. Diga a um novo inquilino três regras do prédio." },
+        phrases: [
+          { en: "You have to pay the rent by the fifth of the month.", pt: "Você tem que pagar o aluguel até o dia cinco." },
+          { en: "You mustn't have loud parties on weekdays.", pt: "Você não pode fazer festas barulhentas nos dias de semana." },
+          { en: "You don't have to pay for water, but you have to pay for electricity.", pt: "Você não precisa pagar pela água, mas tem que pagar pela luz." },
+        ],
+        check: [
+          { id: "i28c-a3q1", prompt: { en: "What must a new tenant sign?", pt: "O que um novo inquilino deve assinar?" }, options: ["a lease", "a receipt", "a deposit"], answer: "a lease", explanation: { en: "A lease is the rental agreement.", pt: "O lease é o contrato de aluguel." } },
+          { id: "i28c-a3q2", prompt: { en: "Choose the correct sentence.", pt: "Escolha a frase correta." }, options: ["You must to pay rent.", "You have to pay rent.", "You must paying rent."], answer: "You have to pay rent.", explanation: { en: "Have to + base verb.", pt: "Have to + verbo base." } },
+        ],
+      },
+    ],
+    challenge: {
+      id: "i28c-cc1",
+      title: { en: "Negotiate the Rules", pt: "Negocie as regras" },
+      instruction: {
+        en: "Talk out loud about the rules you would set with a roommate: what you have to do, what you mustn't do, and what you don't have to do. Mention quantities of something you would share.",
+        pt: "Fale em voz alta sobre as regras que você combinaria com um colega de apê: o que tem que fazer, o que não pode fazer, e o que não precisa fazer. Mencione a quantidade de algo que vocês dividiriam.",
+      },
+      phrases: [
+        { en: "We have to keep the kitchen clean.", pt: "Temos que manter a cozinha limpa." },
+        { en: "We mustn't invite guests without asking first.", pt: "Não podemos convidar visitas sem avisar antes." },
+        { en: "We don't have to share our food, but we do have to share the internet bill.", pt: "Não precisamos dividir a comida, mas temos que dividir a conta de internet." },
+        { en: "We don't have much space, so we can't buy many things.", pt: "Não temos muito espaço, então não podemos comprar muitas coisas." },
+      ],
+      check: [
+        { id: "i28c-cc1q1", prompt: { en: "Did you use 'have to' and 'mustn't' correctly?", pt: "Você usou 'have to' e 'mustn't' corretamente?" }, options: ["Yes", "No", "Partially"], answer: "Yes", explanation: { en: "Self-check: obligation vs. prohibition.", pt: "Autoavaliação: obrigação vs. proibição." } },
+        { id: "i28c-cc1q2", prompt: { en: "Did you use 'much' or 'many' correctly?", pt: "Você usou 'much' ou 'many' corretamente?" }, options: ["Yes", "No", "Partially"], answer: "Yes", explanation: { en: "Self-check: much with uncountable, many with countable.", pt: "Autoavaliação: much com incontável, many com contável." } },
+      ],
+    },
+    lessonReview: {
+      summary: {
+        en: "You talked about obligation and prohibition with 'have to' and 'mustn't', and described quantities with 'some', 'any', 'much' and 'many'.",
+        pt: "Você falou de obrigação e proibição com 'have to' e 'mustn't', e descreveu quantidades com 'some', 'any', 'much' e 'many'.",
+      },
+      canDo: [
+        { en: "I can talk about obligations with 'have to'.", pt: "Consigo falar de obrigações com 'have to'." },
+        { en: "I can express prohibition with 'mustn't'.", pt: "Consigo expressar proibição com 'mustn't'." },
+        { en: "I can ask and answer about quantities with 'much' and 'many'.", pt: "Consigo perguntar e responder sobre quantidades com 'much' e 'many'." },
+      ],
+      next: { en: "Next unit: gossip and news — reporting what people said.", pt: "Próxima unidade: fofocas e notícias — relatar o que as pessoas disseram." },
+    },
+  },
+};
