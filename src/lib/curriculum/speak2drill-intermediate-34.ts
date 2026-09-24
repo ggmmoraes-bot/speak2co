@@ -1,0 +1,85 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Intermediate Unit 34 (Look at the Stars).
+ * Conteúdo autoral Speak2Co: present perfect (ever/never, been/gone) e
+ * revisão de saw/went/felt.
+ */
+const d = (id: string, base: string, basePt: string, instruction: string, answer: string) => ({
+  id,
+  base,
+  basePt,
+  instruction,
+  answer,
+});
+
+export const INTERMEDIATE_U34_DRILLS: DrillSet = {
+  verbs: [
+    d("i34dr-v01", "I've never seen so many stars.", "Nunca vi tantas estrelas.", "Change \"I\" to \"She\".", "She's never seen so many stars."),
+    d("i34dr-v02", "I've seen a shooting star.", "Já vi uma estrela cadente.", "Make a question.", "Have you seen a shooting star?"),
+    d("i34dr-v03", "Have you ever been to a desert?", "Você já esteve em um deserto?", "Answer negatively.", "No, I've never been to a desert."),
+    d("i34dr-v04", "She has made a wish.", "Ela já pediu um desejo.", "Change \"She\" to \"They\".", "They have made a wish."),
+    d("i34dr-v05", "We haven't done a trip like that.", "Não fizemos uma viagem assim.", "Make it affirmative.", "We have done a trip like that."),
+    d("i34dr-v06", "Has Diego ever camped alone?", "O Diego já acampou sozinho?", "Answer affirmatively.", "Yes, he has camped alone."),
+    d("i34dr-v07", "I've been to the mountains twice.", "Já fui às montanhas duas vezes.", "Change \"twice\" to \"three times\".", "I've been to the mountains three times."),
+    d("i34dr-v08", "He's gone to the campsite.", "Ele foi para o acampamento.", "Change \"He\" to \"They\".", "They've gone to the campsite."),
+    d("i34dr-v09", "I saw a shooting star last night.", "Vi uma estrela cadente ontem à noite.", "Make a question.", "Did you see a shooting star last night?"),
+    d("i34dr-v10", "They went camping last summer.", "Eles foram acampar no verão passado.", "Make the sentence negative.", "They didn't go camping last summer."),
+    d("i34dr-v11", "She felt small under the stars.", "Ela se sentiu pequena sob as estrelas.", "Make a question.", "Did she feel small under the stars?"),
+    d("i34dr-v12", "I didn't see the shooting star.", "Não vi a estrela cadente.", "Change \"I\" to \"We\".", "We didn't see the shooting star."),
+    d("i34dr-v13", "Did you go camping alone?", "Você foi acampar sozinho?", "Answer affirmatively.", "Yes, I went camping alone."),
+    d("i34dr-v14", "I've never felt so small.", "Nunca me senti tão pequeno.", "Change \"I\" to \"He\".", "He's never felt so small."),
+    d("i34dr-v15", "Have they ever gone to the desert?", "Eles já foram ao deserto?", "Answer negatively.", "No, they've never gone to the desert."),
+  ],
+  vocabulary: [
+    d("i34dr-n01", "Look at the stars tonight.", "Olhe as estrelas hoje à noite.", "Change \"tonight\" to \"tomorrow\".", "Look at the stars tomorrow."),
+    d("i34dr-n02", "The sky is so clear tonight.", "O céu está tão limpo hoje à noite.", "Change \"clear\" to \"dark\".", "The sky is so dark tonight."),
+    d("i34dr-n03", "I saw a shooting star.", "Vi uma estrela cadente.", "Change \"a shooting star\" to \"the moon\".", "I saw the moon."),
+    d("i34dr-n04", "The moon is full tonight.", "A lua está cheia hoje à noite.", "Change \"full\" to \"beautiful\".", "The moon is beautiful tonight."),
+    d("i34dr-n05", "It gets dark very early here.", "Escurece muito cedo aqui.", "Change \"early\" to \"late\".", "It gets dark very late here."),
+    d("i34dr-n06", "We sat around the campfire.", "Ficamos sentados ao redor da fogueira.", "Change \"campfire\" to \"tent\".", "We sat around the tent."),
+    d("i34dr-n07", "We set up the tent before dark.", "Montamos a barraca antes de escurecer.", "Change \"before dark\" to \"in the afternoon\".", "We set up the tent in the afternoon."),
+    d("i34dr-n08", "The stars are amazing in the desert.", "As estrelas são incríveis no deserto.", "Change \"the desert\" to \"the mountains\".", "The stars are amazing in the mountains."),
+    d("i34dr-n09", "She made a wish.", "Ela pediu um desejo.", "Change \"a wish\" to \"two wishes\".", "She made two wishes."),
+    d("i34dr-n10", "That view was amazing.", "Aquela vista foi incrível.", "Change \"amazing\" to \"unforgettable\".", "That view was unforgettable."),
+    d("i34dr-n11", "It's so quiet out here.", "É tão silencioso aqui.", "Change \"quiet\" to \"peaceful\".", "It's so peaceful out here."),
+    d("i34dr-n12", "We put a blanket on the grass.", "Colocamos uma manta na grama.", "Change \"the grass\" to \"the sand\".", "We put a blanket on the sand."),
+    d("i34dr-n13", "I've never seen a desert.", "Nunca vi um deserto.", "Change \"a desert\" to \"the ocean\".", "I've never seen the ocean."),
+    d("i34dr-n14", "The sky was full of stars.", "O céu estava cheio de estrelas.", "Change \"stars\" to \"clouds\".", "The sky was full of clouds."),
+    d("i34dr-n15", "We told stories by the campfire.", "Contamos histórias perto da fogueira.", "Change \"stories\" to \"jokes\".", "We told jokes by the campfire."),
+  ],
+  expressions: [
+    d("i34dr-e01", "Look at that!", "Olha aquilo!", "Change \"that\" to \"the moon\".", "Look at the moon!"),
+    d("i34dr-e02", "I've never seen so many stars.", "Nunca vi tantas estrelas.", "Change \"stars\" to \"people\".", "I've never seen so many people."),
+    d("i34dr-e03", "Make a wish!", "Peça um desejo!", "Add \"quickly\" at the end.", "Make a wish quickly!"),
+    d("i34dr-e04", "I felt so small.", "Me senti tão pequeno.", "Change \"small\" to \"peaceful\".", "I felt so peaceful."),
+    d("i34dr-e05", "We haven't done a trip like that since.", "Não fizemos uma viagem assim desde então.", "Change \"a trip\" to \"a camping trip\".", "We haven't done a camping trip like that since."),
+    d("i34dr-e06", "Have you ever…?", "Você já…?", "Complete with \"seen the northern lights\".", "Have you ever seen the northern lights?"),
+    d("i34dr-e07", "Did you see it too?", "Você também viu?", "Change \"see\" to \"hear\".", "Did you hear it too?"),
+    d("i34dr-e08", "I felt so small under all those stars.", "Me senti tão pequeno sob todas aquelas estrelas.", "Change \"small\" to \"grateful\".", "I felt so grateful under all those stars."),
+    d("i34dr-e09", "We went with my family.", "Fomos com minha família.", "Change \"my family\" to \"our friends\".", "We went with our friends."),
+    d("i34dr-e10", "I've never been to a desert.", "Nunca fui a um deserto.", "Change \"a desert\" to \"the mountains\".", "I've never been to the mountains."),
+    d("i34dr-e11", "That was an unforgettable night.", "Aquela foi uma noite inesquecível.", "Change \"night\" to \"trip\".", "That was an unforgettable trip."),
+    d("i34dr-e12", "Let's lie on the grass and look up.", "Vamos deitar na grama e olhar para cima.", "Change \"the grass\" to \"the blanket\".", "Let's lie on the blanket and look up."),
+    d("i34dr-e13", "I'm so glad we came here.", "Estou tão feliz por termos vindo aqui.", "Change \"here\" to \"camping\".", "I'm so glad we went camping."),
+    d("i34dr-e14", "This place is far from the city.", "Este lugar é longe da cidade.", "Change \"the city\" to \"everything\".", "This place is far from everything."),
+    d("i34dr-e15", "It's always good to disconnect.", "É sempre bom se desconectar.", "Add \"from time to time\" at the end.", "It's always good to disconnect from time to time."),
+  ],
+  grammar: [
+    d("i34dr-g01", "Have you ever seen a shooting star?", "Você já viu uma estrela cadente?", "Answer with \"Yes, I have\".", "Yes, I have seen a shooting star."),
+    d("i34dr-g02", "I've never camped in the desert.", "Nunca acampei no deserto.", "Change \"I\" to \"We\".", "We've never camped in the desert."),
+    d("i34dr-g03", "She has been to the mountains.", "Ela já esteve nas montanhas.", "Make it negative.", "She hasn't been to the mountains."),
+    d("i34dr-g04", "Has he ever made a wish on a star?", "Ele já pediu um desejo para uma estrela?", "Answer with \"No, he hasn't\".", "No, he hasn't made a wish on a star."),
+    d("i34dr-g05", "They have gone camping.", "Eles foram acampar (e ainda estão lá).", "Change \"They\" to \"She\".", "She has gone camping."),
+    d("i34dr-g06", "I've been to the desert twice.", "Já fui ao deserto duas vezes.", "Change \"twice\" to \"once\".", "I've been to the desert once."),
+    d("i34dr-g07", "We haven't seen the moon tonight.", "Não vimos a lua hoje à noite.", "Make it affirmative.", "We have seen the moon tonight."),
+    d("i34dr-g08", "Have you ever felt so small?", "Você já se sentiu tão pequeno?", "Change \"small\" to \"happy\".", "Have you ever felt so happy?"),
+    d("i34dr-g09", "I saw a shooting star last night.", "Vi uma estrela cadente ontem à noite.", "Change \"last night\" to \"yesterday\".", "I saw a shooting star yesterday."),
+    d("i34dr-g10", "They went camping last summer.", "Eles foram acampar no verão passado.", "Make a question.", "Did they go camping last summer?"),
+    d("i34dr-g11", "She felt small under the stars.", "Ela se sentiu pequena sob as estrelas.", "Make it negative.", "She didn't feel small under the stars."),
+    d("i34dr-g12", "Did you see the shooting star?", "Você viu a estrela cadente?", "Answer with \"Yes, I did\".", "Yes, I saw the shooting star."),
+    d("i34dr-g13", "We haven't done a trip like that since.", "Não fizemos uma viagem assim desde então.", "Change \"since\" to \"this year\".", "We haven't done a trip like that this year."),
+    d("i34dr-g14", "Has she ever been to a desert?", "Ela já esteve em um deserto?", "Answer with \"Yes, she has\".", "Yes, she has been to a desert."),
+    d("i34dr-g15", "I didn't go camping alone.", "Não fui acampar sozinho.", "Make it a question.", "Did you go camping alone?"),
+  ],
+};
