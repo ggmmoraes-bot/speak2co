@@ -2,6 +2,7 @@ import type { CourseUnit } from "./types";
 import { buildUnitDrills } from "./speak2drill";
 import { BEGINNER_U01_DRILLS } from "./speak2drill-beginner-01";
 import { INTERMEDIATE_U01_DRILLS } from "./speak2drill-intermediate-01";
+import { INTERMEDIATE_U02_DRILLS } from "./speak2drill-intermediate-02";
 import * as D0205 from "./speak2drill-beginner-02-05";
 import * as D0610 from "./speak2drill-beginner-06-10";
 import * as D1115 from "./speak2drill-beginner-11-15";
@@ -50,6 +51,7 @@ const AUTHORED: Record<string, DrillSet> = (() => {
   const map: Record<string, DrillSet> = {
     "BEGINNER-U01": BEGINNER_U01_DRILLS,
     "INTERMEDIATE-U01": INTERMEDIATE_U01_DRILLS,
+    "INTERMEDIATE-U02": INTERMEDIATE_U02_DRILLS,
   };
   for (const mod of BATCHES) {
     for (const [name, set] of Object.entries(mod)) {
