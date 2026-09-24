@@ -1,0 +1,85 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Intermediate Unit 35 (Better Than Before).
+ * Conteúdo autoral Speak2Co: comparativos regulares e irregulares, vocabulário
+ * de aluguel de carro, expressões de decisão e revisão de "going to".
+ */
+const d = (id: string, base: string, basePt: string, instruction: string, answer: string) => ({
+  id,
+  base,
+  basePt,
+  instruction,
+  answer,
+});
+
+export const INTERMEDIATE_U35_DRILLS: DrillSet = {
+  verbs: [
+    d("i35dr-v01", "This car is cheaper than that one.", "Este carro é mais barato do que aquele.", "Change \"cheaper\" to \"bigger\".", "This car is bigger than that one."),
+    d("i35dr-v02", "The van is more spacious than the car.", "A van é mais espaçosa do que o carro.", "Make a question.", "Is the van more spacious than the car?"),
+    d("i35dr-v03", "The van is more spacious than the car.", "A van é mais espaçosa do que o carro.", "Make the sentence negative.", "The van isn't more spacious than the car."),
+    d("i35dr-v04", "Is the van bigger than the car?", "A van é maior do que o carro?", "Answer with \"Yes, it is.\".", "Yes, it is. The van is bigger than the car."),
+    d("i35dr-v05", "The mileage is worse than the car's.", "O consumo é pior do que o do carro.", "Change \"worse\" to \"better\".", "The mileage is better than the car's."),
+    d("i35dr-v06", "This deal is better than the other one.", "Este negócio é melhor do que o outro.", "Make a question.", "Is this deal better than the other one?"),
+    d("i35dr-v07", "This deal is better than the other one.", "Este negócio é melhor do que o outro.", "Make the sentence negative.", "This deal isn't better than the other one."),
+    d("i35dr-v08", "We're going to travel with four friends.", "Vamos viajar com quatro amigos.", "Change \"We\" to \"They\".", "They're going to travel with four friends."),
+    d("i35dr-v09", "We're going to travel with four friends.", "Vamos viajar com quatro amigos.", "Make the sentence negative.", "We aren't going to travel with four friends."),
+    d("i35dr-v10", "Are you going to rent the van?", "Você vai alugar a van?", "Answer with \"No, I'm not.\".", "No, I'm not going to rent the van."),
+    d("i35dr-v11", "I'm not going to drive at night.", "Eu não vou dirigir à noite.", "Make a question.", "Are you going to drive at night?"),
+    d("i35dr-v12", "This apartment is smaller than that one.", "Este apartamento é menor do que aquele.", "Change \"smaller\" to \"more expensive\".", "This apartment is more expensive than that one."),
+    d("i35dr-v13", "The city is more interesting than the town.", "A cidade é mais interessante do que a cidadezinha.", "Make a question.", "Is the city more interesting than the town?"),
+    d("i35dr-v14", "The traffic is worse than yesterday.", "O trânsito está pior do que ontem.", "Make the sentence negative.", "The traffic isn't worse than yesterday."),
+    d("i35dr-v15", "I'm going to choose the cheaper hotel.", "Vou escolher o hotel mais barato.", "Change \"I\" to \"We\".", "We're going to choose the cheaper hotel."),
+  ],
+  vocabulary: [
+    d("i35dr-n01", "We booked a car rental for the week.", "Reservamos um aluguel de carro para a semana.", "Change \"for the week\" to \"for two days\".", "We booked a car rental for two days."),
+    d("i35dr-n02", "This is a great deal for a weekend trip.", "Este é um ótimo negócio para uma viagem de fim de semana.", "Change \"weekend trip\" to \"road trip\".", "This is a great deal for a road trip."),
+    d("i35dr-n03", "This car has better mileage than the van.", "Este carro tem melhor consumo do que a van.", "Change \"better\" to \"worse\".", "This car has worse mileage than the van."),
+    d("i35dr-n04", "The insurance is cheaper this month.", "O seguro está mais barato este mês.", "Change \"cheaper\" to \"more expensive\".", "The insurance is more expensive this month."),
+    d("i35dr-n05", "The van is more spacious than the car.", "A van é mais espaçosa do que o carro.", "Change \"the van\" to \"this apartment\".", "This apartment is more spacious than the car."),
+    d("i35dr-n06", "A compact car is easier to park.", "Um carro compacto é mais fácil de estacionar.", "Change \"compact car\" to \"small van\".", "A small van is easier to park."),
+    d("i35dr-n07", "We paid for an upgrade to a bigger car.", "Pagamos por um upgrade para um carro maior.", "Change \"bigger car\" to \"faster car\".", "We paid for an upgrade to a faster car."),
+    d("i35dr-n08", "You need to leave a deposit to rent the van.", "Você precisa deixar um depósito para alugar a van.", "Change \"the van\" to \"the car\".", "You need to leave a deposit to rent the car."),
+    d("i35dr-n09", "Don't forget to ask for the receipt.", "Não esqueça de pedir o recibo.", "Add \"at the counter\" at the end.", "Don't forget to ask for the receipt at the counter."),
+    d("i35dr-n10", "The van's trunk is bigger than the car's.", "O porta-malas da van é maior do que o do carro.", "Change \"bigger\" to \"more organized\".", "The van's trunk is more organized than the car's."),
+    d("i35dr-n11", "The seats in the van are more comfortable.", "Os bancos da van são mais confortáveis.", "Make a question.", "Are the seats in the van more comfortable?"),
+    d("i35dr-n12", "The extra space is worth it for a long trip.", "O espaço extra vale a pena para uma viagem longa.", "Change \"long trip\" to \"family trip\".", "The extra space is worth it for a family trip."),
+    d("i35dr-n13", "This deal is worth it in the end.", "Este negócio vale a pena no final.", "Make the sentence negative.", "This deal isn't worth it in the end."),
+    d("i35dr-n14", "The rental agency is open until six.", "A locadora está aberta até as seis.", "Change \"six\" to \"eight\".", "The rental agency is open until eight."),
+    d("i35dr-n15", "We need a bigger trunk for our bags.", "Precisamos de um porta-malas maior para as malas.", "Change \"bigger\" to \"more organized\".", "We need a more organized trunk for our bags."),
+  ],
+  expressions: [
+    d("i35dr-e01", "It's worth it.", "Vale a pena.", "Make it a question.", "Is it worth it?"),
+    d("i35dr-e02", "Let's go for it.", "Vamos com essa.", "Change \"it\" to \"the van\".", "Let's go for the van."),
+    d("i35dr-e03", "What a deal!", "Que negócio bom!", "Change \"deal\" to \"car\".", "What a car!"),
+    d("i35dr-e04", "Even with the mileage, it's a better deal.", "Mesmo com o consumo, é um negócio melhor.", "Change \"the mileage\" to \"the price\".", "Even with the price, it's a better deal."),
+    d("i35dr-e05", "Agreed. Let's go for it.", "Concordo. Vamos com essa.", "Change \"go for it\" to \"choose the van\".", "Agreed. Let's choose the van."),
+    d("i35dr-e06", "On second thought, the car is better.", "Pensando bem, o carro é melhor.", "Change \"the car\" to \"the van\".", "On second thought, the van is better."),
+    d("i35dr-e07", "It's a better deal than the car.", "É um negócio melhor do que o carro.", "Make a question.", "Is it a better deal than the car?"),
+    d("i35dr-e08", "We're going to travel with four friends and a lot of bags.", "Vamos viajar com quatro amigos e muitas malas.", "Change \"four friends\" to \"two friends\".", "We're going to travel with two friends and a lot of bags."),
+    d("i35dr-e09", "The van is a better deal, even with worse mileage.", "A van é um negócio melhor, mesmo com consumo pior.", "Change \"the van\" to \"this option\".", "This option is a better deal, even with worse mileage."),
+    d("i35dr-e10", "I think the van is a better deal for our group.", "Eu acho que a van é um negócio melhor para o nosso grupo.", "Change \"our group\" to \"the trip\".", "I think the van is a better deal for the trip."),
+    d("i35dr-e11", "This phone is more expensive, but its camera is better.", "Este celular é mais caro, mas a câmera é melhor.", "Change \"phone\" to \"car\".", "This car is more expensive, but its camera is better."),
+    d("i35dr-e12", "The beach trip is more relaxing than the city trip.", "A viagem à praia é mais relaxante do que a viagem à cidade.", "Change \"beach trip\" to \"mountain trip\".", "The mountain trip is more relaxing than the city trip."),
+    d("i35dr-e13", "I'm going to choose the option that's worth it in the end.", "Vou escolher a opção que vale a pena no final.", "Change \"I\" to \"We\".", "We're going to choose the option that's worth it in the end."),
+    d("i35dr-e14", "This restaurant has better reviews than that one.", "Este restaurante tem melhores avaliações do que aquele.", "Make a question.", "Does this restaurant have better reviews than that one?"),
+    d("i35dr-e15", "This job is more interesting, but the other one pays better.", "Este emprego é mais interessante, mas o outro paga melhor.", "Change \"job\" to \"course\".", "This course is more interesting, but the other one pays better."),
+  ],
+  grammar: [
+    d("i35dr-g01", "This car is cheaper than that one.", "Este carro é mais barato do que aquele.", "Change \"cheaper\" to \"easier to park\".", "This car is easier to park than that one."),
+    d("i35dr-g02", "The van is bigger than the car.", "A van é maior do que o carro.", "Change \"bigger\" to \"more spacious\".", "The van is more spacious than the car."),
+    d("i35dr-g03", "This van is more spacious than that car.", "Esta van é mais espaçosa do que aquele carro.", "Make the sentence negative.", "This van isn't more spacious than that car."),
+    d("i35dr-g04", "Is the van more comfortable than the car?", "A van é mais confortável do que o carro?", "Answer with \"Yes, it is.\".", "Yes, it is. The van is more comfortable than the car."),
+    d("i35dr-g05", "This trip isn't cheaper than the last one.", "Esta viagem não é mais barata do que a última.", "Make it affirmative.", "This trip is cheaper than the last one."),
+    d("i35dr-g06", "The van is a better deal than the car.", "A van é um negócio melhor do que o carro.", "Make a question.", "Is the van a better deal than the car?"),
+    d("i35dr-g07", "Is the mileage worse than the car's?", "O consumo é pior do que o do carro?", "Answer with \"No, it isn't.\".", "No, it isn't. The mileage isn't worse than the car's."),
+    d("i35dr-g08", "This week's price is better than last week's.", "O preço desta semana é melhor do que o da semana passada.", "Change \"better\" to \"worse\".", "This week's price is worse than last week's."),
+    d("i35dr-g09", "The traffic is worse than yesterday.", "O trânsito está pior do que ontem.", "Make a question.", "Is the traffic worse than yesterday?"),
+    d("i35dr-g10", "This apartment is smaller, but it's cheaper than this one.", "Aquele apartamento é menor, mas é mais barato do que este.", "Change \"cheaper\" to \"more comfortable\".", "This apartment is smaller, but it's more comfortable than this one."),
+    d("i35dr-g11", "This is a great deal for a weekend trip.", "Este é um ótimo negócio para uma viagem de fim de semana.", "Change \"great\" to \"better\".", "This is a better deal for a weekend trip."),
+    d("i35dr-g12", "This restaurant has better reviews than that one.", "Este restaurante tem melhores avaliações do que aquele.", "Change \"better\" to \"worse\".", "This restaurant has worse reviews than that one."),
+    d("i35dr-g13", "We're going to choose the cheaper hotel.", "Vamos escolher o hotel mais barato.", "Change \"cheaper\" to \"better\".", "We're going to choose the better hotel."),
+    d("i35dr-g14", "This city is bigger, but that one is cheaper to live in.", "Esta cidade é maior, mas aquela é mais barata para se viver.", "Change \"bigger\" to \"more expensive\".", "This city is more expensive, but that one is cheaper to live in."),
+    d("i35dr-g15", "This job is more interesting, but the other one pays better.", "Este emprego é mais interessante, mas o outro paga melhor.", "Make a question with \"Which job\".", "Which job is more interesting?"),
+  ],
+};

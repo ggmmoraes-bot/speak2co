@@ -1,0 +1,80 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Intermediate Unit 33 (Who Are You Talking To?).
+ * Conteúdo autoral Speak2Co: reported speech (statements/questions) e verbos de comunicação.
+ */
+const d = (id: string, base: string, basePt: string, instruction: string, answer: string) => ({
+  id, base, basePt, instruction, answer,
+});
+
+export const INTERMEDIATE_U33_DRILLS: DrillSet = {
+  verbs: [
+    d("i33dr-v01", "She said that she was tired.", "Ela disse que estava cansada.", "Change \"tired\" to \"busy\".", "She said that she was busy."),
+    d("i33dr-v02", "He said that he worked there.", "Ele disse que trabalhava lá.", "Change \"he\" to \"they\".", "He said that they worked there."),
+    d("i33dr-v03", "\"I will call you.\"", "\"Eu vou te ligar.\"", "Report it: She said that she ___ call me.", "She said that she would call me."),
+    d("i33dr-v04", "\"I have finished.\"", "\"Eu terminei.\"", "Report it: He said that he ___ finished.", "He said that he had finished."),
+    d("i33dr-v05", "He asked if I was okay.", "Ele perguntou se eu estava bem.", "Change \"okay\" to \"ready\".", "He asked if I was ready."),
+    d("i33dr-v06", "\"Do you live here?\"", "\"Você mora aqui?\"", "Report it: He asked if I ___ there.", "He asked if I lived there."),
+    d("i33dr-v07", "\"Where do you work?\"", "\"Onde você trabalha?\"", "Report it: She asked where I ___.", "She asked where I worked."),
+    d("i33dr-v08", "\"What time is it?\"", "\"Que horas são?\"", "Report it: He asked what time it ___.", "He asked what time it was."),
+    d("i33dr-v09", "He admitted that he had forgotten to send the email.", "Ele admitiu que tinha esquecido de enviar o e-mail.", "Change \"email\" to \"report\".", "He admitted that he had forgotten to send the report."),
+    d("i33dr-v10", "She complained that the room was too noisy.", "Ela reclamou que o quarto era muito barulhento.", "Change \"noisy\" to \"cold\".", "She complained that the room was too cold."),
+    d("i33dr-v11", "He warned me that the roads were icy.", "Ele me avisou que as estradas estavam com gelo.", "Change \"icy\" to \"dangerous\".", "He warned me that the roads were dangerous."),
+    d("i33dr-v12", "She promised that she would call.", "Ela prometeu que ligaria.", "Change \"call\" to \"help\".", "She promised that she would help."),
+    d("i33dr-v13", "He apologized for being rude.", "Ele se desculpou por ser rude.", "Change \"rude\" to \"late\".", "He apologized for being late."),
+    d("i33dr-v14", "She denied that she was late.", "Ela negou que estava atrasada.", "Make it: She denied ___ late. (verb-ing)", "She denied being late."),
+    d("i33dr-v15", "He suggested that we take a break.", "Ele sugeriu que fizéssemos uma pausa.", "Change \"take a break\" to \"leave early\".", "He suggested that we leave early."),
+  ],
+  vocabulary: [
+    d("i33dr-n01", "She mentioned that she was tired.", "Ela mencionou que estava cansada.", "Change \"tired\" to \"nervous\".", "She mentioned that she was nervous."),
+    d("i33dr-n02", "They argued about the schedule.", "Eles discutiram sobre a agenda.", "Change \"the schedule\" to \"the budget\".", "They argued about the budget."),
+    d("i33dr-n03", "She whispered the answer to me.", "Ela sussurrou a resposta para mim.", "Change \"me\" to \"him\".", "She whispered the answer to him."),
+    d("i33dr-n04", "He shouted my name across the street.", "Ele gritou meu nome do outro lado da rua.", "Change \"my name\" to \"her name\".", "He shouted her name across the street."),
+    d("i33dr-n05", "The manager said that the meeting was moved.", "O gerente disse que a reunião foi remarcada.", "Change \"moved\" to \"canceled\".", "The manager said that the meeting was canceled."),
+    d("i33dr-n06", "She asked if everyone could confirm by email.", "Ela perguntou se todo mundo podia confirmar por e-mail.", "Change \"by email\" to \"by phone\".", "She asked if everyone could confirm by phone."),
+    d("i33dr-n07", "He warned us that the client might join late.", "Ele nos avisou que o cliente talvez entrasse atrasado.", "Change \"the client\" to \"the manager\".", "He warned us that the manager might join late."),
+    d("i33dr-n08", "I promised that I would send it right away.", "Eu prometi que mandaria imediatamente.", "Change \"send it\" to \"finish it\".", "I promised that I would finish it right away."),
+    d("i33dr-n09", "She said that the deadline changed.", "Ela disse que o prazo mudou.", "Change \"the deadline\" to \"the plan\".", "She said that the plan changed."),
+    d("i33dr-n10", "He told me that the client wanted the report by Friday.", "Ele me disse que o cliente queria o relatório até sexta.", "Change \"Friday\" to \"Monday\".", "He told me that the client wanted the report by Monday."),
+    d("i33dr-n11", "According to him, the project is finished.", "Segundo ele, o projeto está terminado.", "Change \"him\" to \"her\".", "According to her, the project is finished."),
+    d("i33dr-n12", "As far as I remember, she said she agreed.", "Pelo que eu me lembro, ela disse que concordou.", "Change \"agreed\" to \"understood\".", "As far as I remember, she said she understood."),
+    d("i33dr-n13", "He admitted that he had lost the keys.", "Ele admitiu que tinha perdido as chaves.", "Change \"the keys\" to \"the tickets\".", "He admitted that he had lost the tickets."),
+    d("i33dr-n14", "She complained that the internet was too slow.", "Ela reclamou que a internet estava muito lenta.", "Change \"the internet\" to \"the computer\".", "She complained that the computer was too slow."),
+    d("i33dr-n15", "They denied that they had argued.", "Eles negaram que tinham discutido.", "Change \"argued\" to \"complained\".", "They denied that they had complained."),
+  ],
+  expressions: [
+    d("i33dr-e01", "Who are you talking to?", "Com quem você está falando?", "Change \"you\" to \"she\".", "Who is she talking to?"),
+    d("i33dr-e02", "What did he say to you?", "O que ele disse a você?", "Change \"he\" to \"they\".", "What did they say to you?"),
+    d("i33dr-e03", "Did she ask you a question?", "Ela te fez uma pergunta?", "Change \"she\" to \"he\".", "Did he ask you a question?"),
+    d("i33dr-e04", "She said that.", "Ela disse isso.", "Add \"the deadline changed\" as the reported clause.", "She said that the deadline changed."),
+    d("i33dr-e05", "He told me that.", "Ele me disse isso.", "Add \"he was busy\" as the reported clause.", "He told me that he was busy."),
+    d("i33dr-e06", "She asked if.", "Ela perguntou se.", "Add \"we could finish it faster\" as the reported clause.", "She asked if we could finish it faster."),
+    d("i33dr-e07", "He asked what.", "Ele perguntou o quê.", "Add \"time it was\" as the reported clause.", "He asked what time it was."),
+    d("i33dr-e08", "According to him.", "Segundo ele.", "Add \"the project is done\".", "According to him, the project is done."),
+    d("i33dr-e09", "As far as I remember.", "Pelo que eu me lembro.", "Add \"she said she would come\".", "As far as I remember, she said she would come."),
+    d("i33dr-e10", "Don't worry.", "Não se preocupe.", "Change to \"We won't complain\".", "Don't worry. We won't complain."),
+    d("i33dr-e11", "We'll just get it done.", "Vamos apenas fazer isso.", "Change \"we'll\" to \"I'll\".", "I'll just get it done."),
+    d("i33dr-e12", "So he apologized?", "Então ele se desculpou?", "Change \"he\" to \"she\".", "So she apologized?"),
+    d("i33dr-e13", "He explained why.", "Ele explicou por quê.", "Change \"why\" to \"how\".", "He explained how."),
+    d("i33dr-e14", "I said we would try.", "Eu disse que a gente ia tentar.", "Change \"we\" to \"I\".", "I said I would try."),
+    d("i33dr-e15", "You looked so serious.", "Você parecia tão sério.", "Change \"serious\" to \"worried\".", "You looked so worried."),
+  ],
+  grammar: [
+    d("i33dr-g01", "\"I'm tired,\" she said.", "\"Estou cansada\", ela disse.", "Report it fully.", "She said that she was tired."),
+    d("i33dr-g02", "\"We are leaving,\" they said.", "\"Estamos saindo\", eles disseram.", "Report it fully.", "They said that they were leaving."),
+    d("i33dr-g03", "\"I can help you,\" he said.", "\"Eu posso te ajudar\", ele disse.", "Report it fully.", "He said that he could help me."),
+    d("i33dr-g04", "\"Are you coming?\" he asked.", "\"Você vem?\", ele perguntou.", "Report it fully.", "He asked if I was coming."),
+    d("i33dr-g05", "\"Do you like it?\" she asked.", "\"Você gosta disso?\", ela perguntou.", "Report it fully.", "She asked if I liked it."),
+    d("i33dr-g06", "\"Where do you live?\" he asked.", "\"Onde você mora?\", ele perguntou.", "Report it fully.", "He asked where I lived."),
+    d("i33dr-g07", "\"Why are you late?\" she asked.", "\"Por que você está atrasado?\", ela perguntou.", "Report it fully.", "She asked why I was late."),
+    d("i33dr-g08", "\"Can you help me?\" she asked.", "\"Você pode me ajudar?\", ela perguntou.", "Report it fully.", "She asked if I could help her."),
+    d("i33dr-g09", "\"I will call you,\" he said.", "\"Eu vou te ligar\", ele disse.", "Report it fully.", "He said that he would call me."),
+    d("i33dr-g10", "\"I have already eaten,\" she said.", "\"Eu já comi\", ela disse.", "Report it fully.", "She said that she had already eaten."),
+    d("i33dr-g11", "\"What time is the meeting?\" he asked.", "\"Que horas é a reunião?\", ele perguntou.", "Report it fully.", "He asked what time the meeting was."),
+    d("i33dr-g12", "\"I don't understand,\" she said.", "\"Eu não entendo\", ela disse.", "Report it fully.", "She said that she didn't understand."),
+    d("i33dr-g13", "\"Did you finish it?\" he asked.", "\"Você terminou isso?\", ele perguntou.", "Report it fully.", "He asked if I had finished it."),
+    d("i33dr-g14", "\"I'm going to move,\" she said.", "\"Eu vou me mudar\", ela disse.", "Report it fully.", "She said that she was going to move."),
+    d("i33dr-g15", "\"Who is calling?\" he asked.", "\"Quem está ligando?\", ele perguntou.", "Report it fully.", "He asked who was calling."),
+  ],
+};

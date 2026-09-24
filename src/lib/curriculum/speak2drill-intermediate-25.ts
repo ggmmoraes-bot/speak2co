@@ -1,0 +1,85 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Intermediate Unit 25 (Have You Ever...?).
+ * Conteúdo autoral Speak2Co: present perfect com ever/never, viagem e
+ * revisão de comparativos e superlativos.
+ */
+const d = (id: string, base: string, basePt: string, instruction: string, answer: string) => ({
+  id,
+  base,
+  basePt,
+  instruction,
+  answer,
+});
+
+export const INTERMEDIATE_U25_DRILLS: DrillSet = {
+  verbs: [
+    d("i25dr-v01", "I have traveled alone.", "Eu já viajei sozinho.", "Make a question with \"ever\".", "Have you ever traveled alone?"),
+    d("i25dr-v02", "I have traveled alone.", "Eu já viajei sozinho.", "Make the sentence negative with \"never\".", "I have never traveled alone."),
+    d("i25dr-v03", "She has been to Peru.", "Ela já esteve no Peru.", "Change \"She\" to \"They\".", "They have been to Peru."),
+    d("i25dr-v04", "Have you been to Peru?", "Você já esteve no Peru?", "Answer with \"Yes, I have\".", "Yes, I have. I've been to Peru."),
+    d("i25dr-v05", "He has climbed Machu Picchu.", "Ele já escalou Machu Picchu.", "Make a negative sentence.", "He hasn't climbed Machu Picchu."),
+    d("i25dr-v06", "We have tried surfing.", "Nós já tentamos surfar.", "Make a question.", "Have you tried surfing?"),
+    d("i25dr-v07", "I have seen that movie.", "Eu já vi esse filme.", "Change \"I\" to \"She\".", "She has seen that movie."),
+    d("i25dr-v08", "They have eaten sushi.", "Eles já comeram sushi.", "Make the sentence negative.", "They haven't eaten sushi."),
+    d("i25dr-v09", "Have you done anything adventurous?", "Você já fez algo aventureiro?", "Answer with \"No, I haven't\".", "No, I haven't. I've never done anything adventurous."),
+    d("i25dr-v10", "I have never tried an extreme sport.", "Eu nunca tentei um esporte radical.", "Change \"I\" to \"My brother\".", "My brother has never tried an extreme sport."),
+    d("i25dr-v11", "She has gone to Machu Picchu.", "Ela já foi a Machu Picchu.", "Make a question with \"ever\".", "Has she ever gone to Machu Picchu?"),
+    d("i25dr-v12", "We have explored the old city.", "Nós exploramos a cidade antiga.", "Change \"We\" to \"He\".", "He has explored the old city."),
+    d("i25dr-v13", "I have never been abroad.", "Eu nunca fui ao exterior.", "Make it a question.", "Have you ever been abroad?"),
+    d("i25dr-v14", "You have made a bucket list.", "Você já fez uma lista de desejos.", "Make a negative sentence.", "You haven't made a bucket list."),
+    d("i25dr-v15", "Has he ever climbed a mountain?", "Ele já escalou uma montanha?", "Answer with \"Yes, he has\".", "Yes, he has. He's climbed a mountain."),
+  ],
+  vocabulary: [
+    d("i25dr-n01", "It was a long journey.", "Foi uma jornada longa.", "Change \"long\" to \"short\".", "It was a short journey."),
+    d("i25dr-n02", "It was a real adventure.", "Foi uma verdadeira aventura.", "Add \"unforgettable\" before \"adventure\".", "It was a real, unforgettable adventure."),
+    d("i25dr-n03", "Have you ever studied abroad?", "Você já estudou no exterior?", "Change \"studied\" to \"lived\".", "Have you ever lived abroad?"),
+    d("i25dr-n04", "I always check my passport.", "Sempre confiro meu passaporte.", "Add \"before a trip\".", "I always check my passport before a trip."),
+    d("i25dr-n05", "My luggage was heavy.", "Minha bagagem estava pesada.", "Change \"heavy\" to \"light\".", "My luggage was light."),
+    d("i25dr-n06", "I bought a souvenir for my sister.", "Comprei uma lembrança para minha irmã.", "Change \"my sister\" to \"my parents\".", "I bought a souvenir for my parents."),
+    d("i25dr-n07", "We climbed to the top of the hill.", "Escalamos até o topo da colina.", "Change \"the hill\" to \"the mountain\".", "We climbed to the top of the mountain."),
+    d("i25dr-n08", "I tried to surf last summer.", "Tentei surfar no verão passado.", "Change \"last summer\" to \"last year\".", "I tried to surf last year."),
+    d("i25dr-n09", "Skydiving is an extreme sport.", "Paraquedismo é um esporte radical.", "Change \"Skydiving\" to \"Surfing\".", "Surfing is an extreme sport."),
+    d("i25dr-n10", "We explored the old city for hours.", "Exploramos a cidade antiga por horas.", "Change \"the old city\" to \"the island\".", "We explored the island for hours."),
+    d("i25dr-n11", "You were so brave to travel alone!", "Você foi tão corajoso de viajar sozinho!", "Change \"travel alone\" to \"climb that mountain\".", "You were so brave to climb that mountain!"),
+    d("i25dr-n12", "It was an unforgettable trip.", "Foi uma viagem inesquecível.", "Change \"trip\" to \"experience\".", "It was an unforgettable experience."),
+    d("i25dr-n13", "I've never traveled outside South America.", "Nunca viajei para fora da América do Sul.", "Change \"South America\" to \"Brazil\".", "I've never traveled outside Brazil."),
+    d("i25dr-n14", "He has already climbed to Machu Picchu.", "Ele já escalou até Machu Picchu.", "Change \"climbed\" to \"traveled\".", "He has already traveled to Machu Picchu."),
+    d("i25dr-n15", "I want to try it again.", "Quero tentar de novo.", "Change \"try it\" to \"see it\".", "I want to see it again."),
+  ],
+  expressions: [
+    d("i25dr-e01", "Have you ever…?", "Você já…?", "Add \"tried surfing\" to the end.", "Have you ever tried surfing?"),
+    d("i25dr-e02", "I've never done anything like that.", "Nunca fiz nada parecido com isso.", "Change \"like that\" to \"so brave\".", "I've never done anything so brave."),
+    d("i25dr-e03", "It was harder than I expected.", "Foi mais difícil do que eu esperava.", "Change \"harder\" to \"easier\".", "It was easier than I expected."),
+    d("i25dr-e04", "At least I tried surfing.", "Pelo menos tentei surfar.", "Change \"surfing\" to \"climbing\".", "At least I tried climbing."),
+    d("i25dr-e05", "It's more difficult than it looks.", "É mais difícil do que parece.", "Change \"difficult\" to \"dangerous\".", "It's more dangerous than it looks."),
+    d("i25dr-e06", "Surfing is the best way to start.", "Surfar é a melhor forma de começar.", "Change \"Surfing\" to \"Swimming\".", "Swimming is the best way to start."),
+    d("i25dr-e07", "Maybe we should travel together.", "Talvez devêssemos viajar juntos.", "Change \"travel\" to \"go on an adventure\".", "Maybe we should go on an adventure together."),
+    d("i25dr-e08", "That sounds like an amazing experience.", "Isso parece uma experiência incrível.", "Change \"amazing\" to \"scary\".", "That sounds like a scary experience."),
+    d("i25dr-e09", "I'd love to try that someday.", "Eu adoraria tentar isso um dia.", "Change \"try that\" to \"visit Peru\".", "I'd love to visit Peru someday."),
+    d("i25dr-e10", "What's the most exciting thing you've done?", "Qual é a coisa mais empolgante que você já fez?", "Change \"exciting\" to \"scary\".", "What's the scariest thing you've done?"),
+    d("i25dr-e11", "I still can't believe I did that.", "Ainda não acredito que fiz isso.", "Change \"I did that\" to \"I climbed that mountain\".", "I still can't believe I climbed that mountain."),
+    d("i25dr-e12", "It was worth every second.", "Valeu cada segundo.", "Change \"every second\" to \"the effort\".", "It was worth the effort."),
+    d("i25dr-e13", "That's on my bucket list.", "Isso está na minha lista de desejos.", "Change \"That's\" to \"Climbing a mountain is\".", "Climbing a mountain is on my bucket list."),
+    d("i25dr-e14", "I've always wanted to do that.", "Sempre quis fazer isso.", "Change \"do that\" to \"travel abroad\".", "I've always wanted to travel abroad."),
+    d("i25dr-e15", "Let's make a bucket list together.", "Vamos fazer uma lista de desejos juntos.", "Change \"together\" to \"this weekend\".", "Let's make a bucket list this weekend."),
+  ],
+  grammar: [
+    d("i25dr-g01", "I've been to three countries.", "Já estive em três países.", "Change \"three\" to \"five\".", "I've been to five countries."),
+    d("i25dr-g02", "He's seen that movie before.", "Ele já viu esse filme antes.", "Make a question.", "Has he seen that movie before?"),
+    d("i25dr-g03", "We've eaten sushi many times.", "Já comemos sushi muitas vezes.", "Make the sentence negative.", "We haven't eaten sushi many times."),
+    d("i25dr-g04", "They've never tried Peruvian food.", "Eles nunca tentaram comida peruana.", "Change \"Peruvian\" to \"Japanese\".", "They've never tried Japanese food."),
+    d("i25dr-g05", "It was harder than I expected.", "Foi mais difícil do que eu esperava.", "Change \"harder\" to \"more exciting\".", "It was more exciting than I expected."),
+    d("i25dr-g06", "It was the most exciting trip of my life.", "Foi a viagem mais empolgante da minha vida.", "Change \"exciting\" to \"difficult\".", "It was the most difficult trip of my life."),
+    d("i25dr-g07", "Surfing is the best way to start.", "Surfar é a melhor forma de começar.", "Change \"best\" to \"worst\".", "Surfing is the worst way to start."),
+    d("i25dr-g08", "This trip was more exciting than the last one.", "Essa viagem foi mais empolgante do que a última.", "Change \"more exciting\" to \"better\".", "This trip was better than the last one."),
+    d("i25dr-g09", "Have you ever climbed a mountain?", "Você já escalou uma montanha?", "Answer with \"No, never\".", "No, I've never climbed a mountain."),
+    d("i25dr-g10", "She hasn't ever climbed a mountain.", "Ela nunca escalou uma montanha.", "Make it affirmative.", "She has climbed a mountain."),
+    d("i25dr-g11", "Have they ever traveled abroad?", "Eles já viajaram para o exterior?", "Change \"they\" to \"your parents\".", "Have your parents ever traveled abroad?"),
+    d("i25dr-g12", "I've never had a worse experience than that.", "Nunca tive uma experiência pior do que aquela.", "Change \"worse\" to \"better\".", "I've never had a better experience than that."),
+    d("i25dr-g13", "It's more difficult than it looks.", "É mais difícil do que parece.", "Change \"more difficult\" to \"easier\".", "It's easier than it looks."),
+    d("i25dr-g14", "What's the most adventurous thing on your bucket list?", "Qual é a coisa mais aventureira na sua lista de desejos?", "Change \"adventurous\" to \"exciting\".", "What's the most exciting thing on your bucket list?"),
+    d("i25dr-g15", "Have you ever done something braver than that?", "Você já fez algo mais corajoso do que isso?", "Answer with \"Yes, I have\".", "Yes, I have. I've done something braver than that."),
+  ],
+};
