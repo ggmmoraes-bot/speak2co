@@ -35,7 +35,7 @@ export const UPPER_U01_DRILLS: DrillSet = {
     d("u1dr-n01", "The company made a significant investment.", "A empresa fez um investimento significativo.", "Change \"investment\" to \"profit\".", "The company made a significant profit."),
     d("u1dr-n02", "There is a growing market for electric cars.", "Há um mercado crescente para carros elétricos.", "Change \"electric cars\" to \"renewable energy\".", "There is a growing market for renewable energy."),
     d("u1dr-n03", "Our revenue rose this year.", "Nossa receita subiu este ano.", "Add \"net\" before \"revenue\".", "Our net revenue rose this year."),
-    d("u1dr-v-n04".replace("v-", ""), "She works for a tech startup.", "Ela trabalha para uma startup de tecnologia.", "Change \"tech\" to \"fintech\".", "She works for a fintech startup."),
+    d("u1dr-n04", "She works for a tech startup.", "Ela trabalha para uma startup de tecnologia.", "Change \"tech\" to \"fintech\".", "She works for a fintech startup."),
     d("u1dr-n05", "The competition is intense.", "A concorrência é intensa.", "Add \"in this space\".", "The competition in this space is intense."),
     d("u1dr-n06", "The country had strong growth.", "O país teve um forte crescimento.", "Add \"economic\" before \"growth\".", "The country had strong economic growth."),
     d("u1dr-n07", "Our strategy is focused on long-term value.", "Nossa estratégia é focada em valor de longo prazo.", "Change \"long-term value\" to \"customer loyalty\".", "Our strategy is focused on customer loyalty."),
