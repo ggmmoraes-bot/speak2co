@@ -65,14 +65,20 @@ const AUTHORED: Record<string, DrillSet> = (() => {
  * as substituições viram pistas curtas (I → She).
  */
 export function drillCue(instruction: string): string {
-  const quoted = [...instruction.matchAll(/["“']([^"”']+)["”']/g)].map((m) => m[1]!);
-  if (/^change/i.test(instruction) && quoted.length >= 2) {
-    const pairs: string[] = [];
-    for (let i = 0; i + 1 < quoted.length; i += 2) pairs.push(`${quoted[i]} → ${quoted[i + 1]}`);
-    return pairs.join("   ·   ");
-  }
-  if (/^change/i.test(instruction) && quoted.length === 1) return quoted[0]!;
-  return instruction;
+  const Q = `["“][^"”]+["”]`;
+  const LIST = `${Q}(?:\\s*(?:,|and)\\s*${Q})*`;
+  const m = new RegExp(`^change\\s+(?:the\\s+\\w+\\s+)?(${LIST})\\s+to\\s+(${LIST})(.*)$`, "i").exec(
+    instruction.trim(),
+  );
+  if (!m) return instruction;
+  const pick = (s: string) => [...s.matchAll(/["“]([^"”]+)["”]/g)].map((x) => x[1]!);
+  const from = pick(m[1]!);
+  const to = pick(m[2]!);
+  if (from.length !== to.length) return instruction;
+  const pairs = from.map((f, i) => `${f} → ${to[i]}`).join("   ·   ");
+  // Mantém qualquer passo extra (ex.: "and use the plural") visível ao aluno.
+  const rest = m[3]!.replace(/^[\s,;]*(and\s+)?/i, "").replace(/\.\s*$/, "").trim();
+  return rest ? `${pairs}   ·   ${rest.charAt(0).toUpperCase()}${rest.slice(1)}` : pairs;
 }
 
 /** Conjunto de drills da unidade — autoral quando existir, senão gerado. */
