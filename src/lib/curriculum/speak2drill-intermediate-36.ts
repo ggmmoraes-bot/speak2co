@@ -1,0 +1,85 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Intermediate Unit 36 (More and More).
+ * Conteúdo autoral Speak2Co: double comparatives ("more and more" / "-er and
+ * -er"), vocabulário de mudança urbana e expressões de conversa sobre o tempo.
+ */
+const d = (id: string, base: string, basePt: string, instruction: string, answer: string) => ({
+  id,
+  base,
+  basePt,
+  instruction,
+  answer,
+});
+
+export const INTERMEDIATE_U36_DRILLS: DrillSet = {
+  verbs: [
+    d("i36dr-v01", "Rent is getting higher and higher.", "O aluguel está ficando cada vez mais alto.", "Change \"higher\" to \"lower\".", "Rent is getting lower and lower."),
+    d("i36dr-v02", "It's harder and harder to find parking.", "Está cada vez mais difícil achar estacionamento.", "Make a question.", "Is it harder and harder to find parking?"),
+    d("i36dr-v03", "More and more people are moving here.", "Cada vez mais pessoas estão se mudando para cá.", "Make the sentence negative.", "More and more people aren't moving here."),
+    d("i36dr-v04", "Are more and more people moving here?", "Cada vez mais pessoas estão se mudando para cá?", "Answer with \"Yes, they are.\".", "Yes, they are. More and more people are moving here."),
+    d("i36dr-v05", "The traffic has gotten worse and worse.", "O trânsito ficou cada vez pior.", "Change \"worse\" to \"better\".", "The traffic has gotten better and better."),
+    d("i36dr-v06", "This neighborhood is getting greener and greener.", "Esse bairro está ficando cada vez mais verde.", "Make a question.", "Is this neighborhood getting greener and greener?"),
+    d("i36dr-v07", "This neighborhood is getting greener and greener.", "Esse bairro está ficando cada vez mais verde.", "Make the sentence negative.", "This neighborhood isn't getting greener and greener."),
+    d("i36dr-v08", "New buildings keep appearing.", "Novos prédios continuam aparecendo.", "Change \"buildings\" to \"stores\".", "New stores keep appearing."),
+    d("i36dr-v09", "I don't recognize this street anymore.", "Eu não reconheço mais essa rua.", "Make a question.", "Do you recognize this street anymore?"),
+    d("i36dr-v10", "Does he recognize this street anymore?", "Ele reconhece mais essa rua?", "Answer with \"No, he doesn't.\".", "No, he doesn't recognize this street anymore."),
+    d("i36dr-v11", "The population is growing more and more.", "A população está crescendo cada vez mais.", "Change \"growing\" to \"shrinking\".", "The population is shrinking more and more."),
+    d("i36dr-v12", "The streets are getting more and more crowded.", "As ruas estão ficando cada vez mais lotadas.", "Make the sentence negative.", "The streets aren't getting more and more crowded."),
+    d("i36dr-v13", "Life is getting more and more complicated.", "A vida está ficando cada vez mais complicada.", "Make a question.", "Is life getting more and more complicated?"),
+    d("i36dr-v14", "I guess not everything is getting worse.", "Acho que nem tudo está piorando.", "Change \"worse\" to \"better\".", "I guess not everything is getting better."),
+    d("i36dr-v15", "Some things change for the better.", "Algumas coisas mudam para melhor.", "Change \"for the better\" to \"for the worse\".", "Some things change for the worse."),
+  ],
+  vocabulary: [
+    d("i36dr-n01", "This neighborhood has changed a lot.", "Esse bairro mudou muito.", "Change \"neighborhood\" to \"downtown\".", "This downtown has changed a lot."),
+    d("i36dr-n02", "Rent is getting higher every year.", "O aluguel está ficando mais alto a cada ano.", "Change \"rent\" to \"the population\".", "The population is getting higher every year."),
+    d("i36dr-n03", "Traffic gets worse and worse downtown.", "O trânsito fica cada vez pior no centro.", "Change \"downtown\" to \"in this neighborhood\".", "Traffic gets worse and worse in this neighborhood."),
+    d("i36dr-n04", "It's hard to find parking downtown.", "É difícil achar estacionamento no centro.", "Change \"parking\" to \"a house\".", "It's hard to find a house downtown."),
+    d("i36dr-n05", "The population is growing more and more.", "A população está crescendo cada vez mais.", "Change \"population\" to \"traffic\".", "The traffic is growing more and more."),
+    d("i36dr-n06", "The streets are getting more and more crowded.", "As ruas estão ficando cada vez mais lotadas.", "Change \"streets\" to \"neighborhoods\".", "The neighborhoods are getting more and more crowded."),
+    d("i36dr-n07", "There's construction on every corner now.", "Tem construção em cada esquina agora.", "Change \"every corner\" to \"every street\".", "There's construction on every street now."),
+    d("i36dr-n08", "I don't recognize this street anymore.", "Eu não reconheço mais essa rua.", "Change \"street\" to \"neighborhood\".", "I don't recognize this neighborhood anymore."),
+    d("i36dr-n09", "New buildings keep appearing.", "Novos prédios continuam aparecendo.", "Change \"appearing\" to \"growing\".", "New buildings keep growing."),
+    d("i36dr-n10", "Life in a big city can get more and more complicated.", "A vida numa cidade grande pode ficar cada vez mais complicada.", "Change \"big city\" to \"crowded downtown\".", "Life in a crowded downtown can get more and more complicated."),
+    d("i36dr-n11", "The rent in this neighborhood is very high.", "O aluguel neste bairro é muito alto.", "Make a question.", "Is the rent in this neighborhood very high?"),
+    d("i36dr-n12", "The traffic downtown is worse every year.", "O trânsito no centro está pior a cada ano.", "Change \"downtown\" to \"in this neighborhood\".", "The traffic in this neighborhood is worse every year."),
+    d("i36dr-n13", "This construction is taking forever.", "Essa construção está demorando uma eternidade.", "Make the sentence negative.", "This construction isn't taking forever."),
+    d("i36dr-n14", "The population of this city keeps growing.", "A população desta cidade continua crescendo.", "Change \"city\" to \"neighborhood\".", "The population of this neighborhood keeps growing."),
+    d("i36dr-n15", "It's getting harder to recognize the old streets.", "Está ficando mais difícil reconhecer as ruas antigas.", "Change \"streets\" to \"neighborhoods\".", "It's getting harder to recognize the old neighborhoods."),
+  ],
+  expressions: [
+    d("i36dr-e01", "To be honest, I don't recognize this street.", "Para ser sincero, eu não reconheço essa rua.", "Change \"this street\" to \"this neighborhood\".", "To be honest, I don't recognize this neighborhood."),
+    d("i36dr-e02", "It seems like more people are moving here.", "Parece que mais pessoas estão se mudando para cá.", "Change \"more people\" to \"more families\".", "It seems like more families are moving here."),
+    d("i36dr-e03", "Over the years, things have changed a lot.", "Ao longo dos anos, as coisas mudaram muito.", "Change \"things\" to \"this city\".", "Over the years, this city has changed a lot."),
+    d("i36dr-e04", "It's been years!", "Faz anos!", "Change \"years\" to \"a long time\".", "It's been a long time!"),
+    d("i36dr-e05", "I guess not everything is getting worse.", "Acho que nem tudo está piorando.", "Change \"worse\" to \"better\".", "I guess not everything is getting better."),
+    d("i36dr-e06", "To be honest, the traffic is getting worse and worse.", "Para ser sincero, o trânsito está ficando cada vez pior.", "Make a question.", "Is the traffic getting worse and worse?"),
+    d("i36dr-e07", "It seems like this neighborhood is changing fast.", "Parece que esse bairro está mudando rápido.", "Change \"this neighborhood\" to \"this city\".", "It seems like this city is changing fast."),
+    d("i36dr-e08", "Over the years, the rent has gotten higher and higher.", "Ao longo dos anos, o aluguel ficou cada vez mais alto.", "Change \"higher\" to \"lower\".", "Over the years, the rent has gotten lower and lower."),
+    d("i36dr-e09", "It's been years since I visited this park.", "Faz anos que eu não visito esse parque.", "Change \"this park\" to \"this neighborhood\".", "It's been years since I visited this neighborhood."),
+    d("i36dr-e10", "I guess this city is getting more and more crowded.", "Acho que essa cidade está ficando cada vez mais lotada.", "Change \"crowded\" to \"expensive\".", "I guess this city is getting more and more expensive."),
+    d("i36dr-e11", "To be honest, I like this neighborhood more and more.", "Para ser sincero, eu gosto cada vez mais desse bairro.", "Make the sentence negative.", "To be honest, I don't like this neighborhood more and more."),
+    d("i36dr-e12", "It seems like the population keeps growing.", "Parece que a população continua crescendo.", "Change \"the population\" to \"the traffic\".", "It seems like the traffic keeps growing."),
+    d("i36dr-e13", "Over the years, this park has stayed the same.", "Ao longo dos anos, esse parque continuou o mesmo.", "Make a question.", "Has this park stayed the same over the years?"),
+    d("i36dr-e14", "That's a good change.", "Essa é uma boa mudança.", "Change \"good\" to \"big\".", "That's a big change."),
+    d("i36dr-e15", "Some things change for the better, and some just get more complicated.", "Algumas coisas mudam para melhor, e outras só ficam mais complicadas.", "Change \"the better\" to \"the worse\".", "Some things change for the worse, and some just get more complicated."),
+  ],
+  grammar: [
+    d("i36dr-g01", "Rent is getting higher and higher.", "O aluguel está ficando cada vez mais alto.", "Change \"higher\" to \"bigger\".", "Rent is getting bigger and bigger."),
+    d("i36dr-g02", "It's harder and harder to find parking.", "Está cada vez mais difícil achar estacionamento.", "Change \"harder\" to \"easier\".", "It's easier and easier to find parking."),
+    d("i36dr-g03", "More and more people are moving here.", "Cada vez mais pessoas estão se mudando para cá.", "Make a question.", "Are more and more people moving here?"),
+    d("i36dr-g04", "The traffic has gotten worse and worse.", "O trânsito ficou cada vez pior.", "Make the sentence negative.", "The traffic hasn't gotten worse and worse."),
+    d("i36dr-g05", "Is the neighborhood getting greener and greener?", "O bairro está ficando cada vez mais verde?", "Answer with \"Yes, it is.\".", "Yes, it is. The neighborhood is getting greener and greener."),
+    d("i36dr-g06", "The city isn't getting more and more crowded.", "A cidade não está ficando cada vez mais lotada.", "Make it affirmative.", "The city is getting more and more crowded."),
+    d("i36dr-g07", "Rent is getting more and more expensive.", "O aluguel está ficando cada vez mais caro.", "Change \"expensive\" to \"affordable\".", "Rent is getting more and more affordable."),
+    d("i36dr-g08", "The population is growing bigger and bigger.", "A população está crescendo cada vez mais.", "Make a question.", "Is the population growing bigger and bigger?"),
+    d("i36dr-g09", "Is it getting harder and harder to park downtown?", "Está ficando cada vez mais difícil estacionar no centro?", "Answer with \"No, it isn't.\".", "No, it isn't. It isn't getting harder and harder to park downtown."),
+    d("i36dr-g10", "This street is getting more and more crowded, but that one is quieter.", "Essa rua está ficando cada vez mais lotada, mas aquela é mais tranquila.", "Change \"crowded\" to \"dangerous\".", "This street is getting more and more dangerous, but that one is quieter."),
+    d("i36dr-g11", "The traffic is getting worse and worse every year.", "O trânsito está ficando cada vez pior a cada ano.", "Change \"worse\" to \"better\".", "The traffic is getting better and better every year."),
+    d("i36dr-g12", "This park has better trees than that one.", "Esse parque tem árvores melhores do que aquele.", "Change \"better\" to \"greener and greener\".", "This park has greener and greener trees than that one."),
+    d("i36dr-g13", "We're going to see more and more construction downtown.", "Vamos ver cada vez mais construção no centro.", "Change \"more and more\" to \"less and less\".", "We're going to see less and less construction downtown."),
+    d("i36dr-g14", "This city is getting bigger, but that one is getting quieter.", "Essa cidade está ficando maior, mas aquela está ficando mais tranquila.", "Change \"bigger\" to \"more and more crowded\".", "This city is getting more and more crowded, but that one is getting quieter."),
+    d("i36dr-g15", "Life here is getting more and more complicated, but the neighborhood is getting greener.", "A vida aqui está ficando cada vez mais complicada, mas o bairro está ficando mais verde.", "Make a question with \"Is life\".", "Is life here getting more and more complicated?"),
+  ],
+};

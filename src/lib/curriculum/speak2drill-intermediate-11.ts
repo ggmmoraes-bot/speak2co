@@ -1,0 +1,85 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Intermediate Unit 11 (Business Economy — First Conditional).
+ * Conteúdo autoral Speak2Co: First Conditional, vocabulário de economia de
+ * negócios e expressões para descrever pessoas.
+ */
+const d = (id: string, base: string, basePt: string, instruction: string, answer: string) => ({
+  id,
+  base,
+  basePt,
+  instruction,
+  answer,
+});
+
+export const INTERMEDIATE_U11_DRILLS: DrillSet = {
+  verbs: [
+    d("i11dr-v01", "If I have time, I'll call you.", "Se eu tiver tempo, eu te ligo.", "Change \"I'll call you\" to \"I'll email you\".", "If I have time, I'll email you."),
+    d("i11dr-v02", "If it rains, we won't go out.", "Se chover, não sairemos.", "Make it affirmative.", "If it rains, we will go out."),
+    d("i11dr-v03", "If they invest now, their company will grow.", "Se eles investirem agora, a empresa deles crescerá.", "Change \"they\" to \"she\".", "If she invests now, her company will grow."),
+    d("i11dr-v04", "If she studies hard, she will pass the exam.", "Se ela estudar muito, ela passará no exame.", "Make the if-clause negative.", "If she doesn't study hard, she will pass the exam."),
+    d("i11dr-v05", "If he saves money, he will buy a car.", "Se ele economizar dinheiro, ele comprará um carro.", "Make a question.", "If he saves money, will he buy a car?"),
+    d("i11dr-v06", "If we launch the product, our sales will increase.", "Se lançarmos o produto, nossas vendas aumentarão.", "Change \"we\" to \"you\".", "If you launch the product, your sales will increase."),
+    d("i11dr-v07", "If the market reacts positively, we'll need to expand.", "Se o mercado reagir positivamente, precisaremos expandir.", "Change \"expand\" to \"hire more people\".", "If the market reacts positively, we'll need to hire more people."),
+    d("i11dr-v08", "If he secures that investment, our growth will accelerate.", "Se ele conseguir esse investimento, nosso crescimento vai acelerar.", "Change \"he\" to \"they\".", "If they secure that investment, our growth will accelerate."),
+    d("i11dr-v09", "If we can optimize it, our costs will go down.", "Se pudermos otimizá-la, nossos custos cairão.", "Make it negative.", "If we can't optimize it, our costs will go down."),
+    d("i11dr-v10", "If we hire Ana, our marketing strategy will improve.", "Se contratarmos a Ana, nossa estratégia de marketing vai melhorar.", "Change \"Ana\" to \"John\".", "If we hire John, our marketing strategy will improve."),
+    d("i11dr-v11", "If we focus on these trends, our startup will succeed.", "Se focarmos nessas tendências, nossa startup terá sucesso.", "Make a question.", "If we focus on these trends, will our startup succeed?"),
+    d("i11dr-v12", "If they don't arrive soon, we will start without them.", "Se eles não chegarem logo, começaremos sem eles.", "Change \"they\" to \"he\".", "If he doesn't arrive soon, we will start without him."),
+    d("i11dr-v13", "If our digital campaign succeeds, our revenue will increase.", "Se nossa campanha digital for bem-sucedida, nossa receita vai aumentar.", "Change \"increase\" to \"double\".", "If our digital campaign succeeds, our revenue will double."),
+    d("i11dr-v14", "If we don't innovate, we won't stay ahead.", "Se não inovarmos, não ficaremos à frente.", "Make it affirmative.", "If we innovate, we will stay ahead."),
+    d("i11dr-v15", "If everyone works hard, the company will achieve its goals.", "Se todos trabalharem duro, a empresa alcançará seus objetivos.", "Change \"the company\" to \"we\".", "If everyone works hard, we will achieve our goals."),
+  ],
+  vocabulary: [
+    d("i11dr-n01", "His investment in education paid off.", "O investimento dele em educação valeu a pena.", "Change \"education\" to \"the startup\".", "His investment in the startup paid off."),
+    d("i11dr-n02", "The real estate market is very competitive.", "O mercado imobiliário está muito competitivo.", "Change \"real estate\" to \"tech\".", "The tech market is very competitive."),
+    d("i11dr-n03", "The company increased its revenue by 20% this quarter.", "A empresa aumentou sua receita em 20% neste trimestre.", "Change \"20%\" to \"30%\".", "The company increased its revenue by 30% this quarter."),
+    d("i11dr-n04", "Many young entrepreneurs want to create their own startup.", "Muitos jovens empreendedores querem criar sua própria startup.", "Change \"young entrepreneurs\" to \"students\".", "Many students want to create their own startup."),
+    d("i11dr-n05", "There is strong competition among smartphone manufacturers.", "Existe uma forte concorrência entre os fabricantes de smartphones.", "Change \"smartphone manufacturers\" to \"tech companies\".", "There is strong competition among tech companies."),
+    d("i11dr-n06", "Economic growth is important for a country's development.", "O crescimento econômico é importante para o desenvolvimento de um país.", "Change \"a country's\" to \"a company's\".", "Economic growth is important for a company's development."),
+    d("i11dr-n07", "Our marketing strategy focuses on social media engagement.", "Nossa estratégia de marketing foca no engajamento em redes sociais.", "Change \"social media engagement\" to \"customer service\".", "Our marketing strategy focuses on customer service."),
+    d("i11dr-n08", "Problems in the supply chain caused delays.", "Problemas na cadeia de suprimentos causaram atrasos.", "Change \"delays\" to \"extra costs\".", "Problems in the supply chain caused extra costs."),
+    d("i11dr-n09", "The company tries to understand what the consumer wants.", "A empresa tenta entender o que o consumidor quer.", "Change \"the consumer\" to \"the market\".", "The company tries to understand what the market wants."),
+    d("i11dr-n10", "Sustainable fashion is a growing trend in the industry.", "Moda sustentável é uma tendência crescente na indústria.", "Change \"Sustainable fashion\" to \"Remote work\".", "Remote work is a growing trend in the industry."),
+    d("i11dr-n11", "If she secures that investment, our growth will accelerate.", "Se ela conseguir esse investimento, nosso crescimento vai acelerar.", "Change \"our growth\" to \"our revenue\".", "If she secures that investment, our revenue will accelerate."),
+    d("i11dr-n12", "Our current marketing strategy focuses on digital presence.", "Nossa estratégia de marketing atual foca na presença digital.", "Make a question.", "Does our current marketing strategy focus on digital presence?"),
+    d("i11dr-n13", "John is our head of logistics.", "John é nosso chefe de logística.", "Change \"John\" to \"Maria\".", "Maria is our head of logistics."),
+    d("i11dr-n14", "The startup faces a crucial year.", "A startup enfrenta um ano crucial.", "Make it negative.", "The startup doesn't face a crucial year."),
+    d("i11dr-n15", "Competition is tough in this market.", "A concorrência é forte neste mercado.", "Change \"tough\" to \"fierce\".", "Competition is fierce in this market."),
+  ],
+  expressions: [
+    d("i11dr-e01", "She's very easygoing.", "Ela é muito tranquila.", "Change \"She\" to \"He\".", "He's very easygoing."),
+    d("i11dr-e02", "He's known for being reliable.", "Ele é conhecido por ser confiável.", "Change \"reliable\" to \"creative\".", "He's known for being creative."),
+    d("i11dr-e03", "They get along really well.", "Eles se dão muito bem.", "Make it negative.", "They don't get along really well."),
+    d("i11dr-e04", "She's very easygoing and creative.", "Ela é muito tranquila e criativa.", "Change \"She\" to \"They\".", "They're very easygoing and creative."),
+    d("i11dr-e05", "He's known for being reliable.", "Ele é conhecido por ser confiável.", "Make a question.", "Is he known for being reliable?"),
+    d("i11dr-e06", "They get along really well with the team.", "Eles se dão muito bem com a equipe.", "Change \"the team\" to \"their clients\".", "They get along really well with their clients."),
+    d("i11dr-e07", "She's very easygoing.", "Ela é muito tranquila.", "Add \"at work\" at the end.", "She's very easygoing at work."),
+    d("i11dr-e08", "He's known for being reliable.", "Ele é conhecido por ser confiável.", "Change \"reliable\" to \"hardworking\".", "He's known for being hardworking."),
+    d("i11dr-e09", "They get along really well.", "Eles se dão muito bem.", "Change \"They\" to \"We\".", "We get along really well."),
+    d("i11dr-e10", "She's very easygoing.", "Ela é muito tranquila.", "Make it a question with \"Is\".", "Is she very easygoing?"),
+    d("i11dr-e11", "He's known for being reliable.", "Ele é conhecido por ser confiável.", "Change \"He\" to \"Ana\".", "Ana's known for being reliable."),
+    d("i11dr-e12", "They get along really well.", "Eles se dão muito bem.", "Add \"since they started the project\" at the end.", "They get along really well since they started the project."),
+    d("i11dr-e13", "She's very easygoing.", "Ela é muito tranquila.", "Change \"easygoing\" to \"reliable\".", "She's very reliable."),
+    d("i11dr-e14", "He's known for being reliable.", "Ele é conhecido por ser confiável.", "Make it negative.", "He isn't known for being reliable."),
+    d("i11dr-e15", "They get along really well.", "Eles se dão muito bem.", "Change \"They\" to \"Maria and Lucas\".", "Maria and Lucas get along really well."),
+  ],
+  grammar: [
+    d("i11dr-g01", "If I have time, I'll call you.", "Se eu tiver tempo, eu te ligo.", "Change \"I\" to \"we\".", "If we have time, we'll call you."),
+    d("i11dr-g02", "If it rains, we won't go out.", "Se chover, não sairemos.", "Change \"it rains\" to \"it snows\".", "If it snows, we won't go out."),
+    d("i11dr-g03", "If they invest now, their company will grow.", "Se eles investirem agora, a empresa deles crescerá.", "Make it negative in the if-clause.", "If they don't invest now, their company will grow."),
+    d("i11dr-g04", "If she studies hard, she will pass the exam.", "Se ela estudar muito, ela passará no exame.", "Change \"pass the exam\" to \"get a good grade\".", "If she studies hard, she will get a good grade."),
+    d("i11dr-g05", "If he gets that investment, his company will grow.", "Se ele conseguir esse investimento, a empresa dele vai crescer.", "Make a question.", "If he gets that investment, will his company grow?"),
+    d("i11dr-g06", "If our digital campaign succeeds, our revenue will increase.", "Se nossa campanha digital for bem-sucedida, nossa receita vai aumentar.", "Change \"our digital campaign\" to \"the new strategy\".", "If the new strategy succeeds, our revenue will increase."),
+    d("i11dr-g07", "If he optimizes our supply chain, our costs will go down.", "Se ele otimizar nossa cadeia de suprimentos, nossos custos vão diminuir.", "Change \"he\" to \"we\".", "If we optimize our supply chain, our costs will go down."),
+    d("i11dr-g08", "If everyone works hard, the startup will achieve its goals.", "Se todos trabalharem duro, a startup alcançará seus objetivos.", "Make it negative.", "If everyone doesn't work hard, the startup will achieve its goals."),
+    d("i11dr-g09", "If we don't innovate, we won't stay ahead.", "Se não inovarmos, não ficaremos à frente.", "Make it affirmative.", "If we innovate, we will stay ahead."),
+    d("i11dr-g10", "If they don't arrive soon, we will start without them.", "Se eles não chegarem logo, começaremos sem eles.", "Change \"soon\" to \"on time\".", "If they don't arrive on time, we will start without them."),
+    d("i11dr-g11", "If we understand the consumer's needs, we will develop better products.", "Se entendermos as necessidades do consumidor, desenvolveremos produtos melhores.", "Change \"better products\" to \"a better strategy\".", "If we understand the consumer's needs, we will develop a better strategy."),
+    d("i11dr-g12", "If we focus on these trends, our startup will succeed.", "Se focarmos nessas tendências, nossa startup terá sucesso.", "Change \"our startup\" to \"the company\".", "If we focus on these trends, the company will succeed."),
+    d("i11dr-g13", "Unless we get the investment, we won't expand.", "A menos que consigamos o investimento, não vamos expandir.", "Change \"the investment\" to \"more clients\".", "Unless we get more clients, we won't expand."),
+    d("i11dr-g14", "If he saves money, he will buy a car.", "Se ele economizar dinheiro, ele comprará um carro.", "Make a question with \"When\".", "When will he buy a car if he saves money?"),
+    d("i11dr-g15", "If she secures that investment, our growth will accelerate.", "Se ela conseguir esse investimento, nosso crescimento vai acelerar.", "Change \"our growth\" to \"the company's growth\".", "If she secures that investment, the company's growth will accelerate."),
+  ],
+};
