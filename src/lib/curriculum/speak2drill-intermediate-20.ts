@@ -1,0 +1,80 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Intermediate Unit 20 (City or Country?).
+ * Conteúdo autoral Speak2Co: comparativos, superlativos e "as...as".
+ */
+const d = (id: string, base: string, basePt: string, instruction: string, answer: string) => ({
+  id, base, basePt, instruction, answer,
+});
+
+export const INTERMEDIATE_U20_DRILLS: DrillSet = {
+  verbs: [
+    d("i20dr-v01", "The city is busier than the countryside.", "A cidade é mais movimentada do que o campo.", "Change \"busier\" to \"quieter\" and reverse the comparison.", "The countryside is quieter than the city."),
+    d("i20dr-v02", "Rent is cheaper here.", "O aluguel é mais barato aqui.", "Make it a superlative.", "Rent is the cheapest here."),
+    d("i20dr-v03", "This apartment is more convenient.", "Este apartamento é mais conveniente.", "Make the sentence negative.", "This apartment isn't more convenient."),
+    d("i20dr-v04", "Is the city safer than the countryside?", "A cidade é mais segura do que o campo?", "Answer with \"No, it isn't.\"", "No, it isn't safer than the countryside."),
+    d("i20dr-v05", "This town is friendlier than mine.", "Esta cidade é mais amigável do que a minha.", "Change \"friendlier\" to the superlative form.", "This town is the friendliest."),
+    d("i20dr-v06", "The traffic is worse today.", "O trânsito está pior hoje.", "Change \"worse\" to \"better\".", "The traffic is better today."),
+    d("i20dr-v07", "It's the best hospital in the city.", "É o melhor hospital da cidade.", "Change \"best\" to \"worst\".", "It's the worst hospital in the city."),
+    d("i20dr-v08", "My hometown is as safe as the capital.", "Minha cidade natal é tão segura quanto a capital.", "Make it negative.", "My hometown isn't as safe as the capital."),
+    d("i20dr-v09", "Is your neighborhood as peaceful as this one?", "Seu bairro é tão tranquilo quanto este?", "Answer with \"Yes, it is.\"", "Yes, it is as peaceful as this one."),
+    d("i20dr-v10", "The countryside is more affordable.", "O campo é mais acessível.", "Change \"the countryside\" to \"small towns\".", "Small towns are more affordable."),
+    d("i20dr-v11", "This is the most crowded street in town.", "Esta é a rua mais lotada da cidade.", "Change \"this\" to \"that\".", "That is the most crowded street in town."),
+    d("i20dr-v12", "The commute is longer in the city.", "O trajeto é mais longo na cidade.", "Make it a question.", "Is the commute longer in the city?"),
+    d("i20dr-v13", "Our new house is bigger than the old one.", "Nossa casa nova é maior do que a antiga.", "Make the sentence negative.", "Our new house isn't bigger than the old one."),
+    d("i20dr-v14", "This is the friendliest place I know.", "Este é o lugar mais amigável que eu conheço.", "Change \"friendliest\" to \"quietest\".", "This is the quietest place I know."),
+    d("i20dr-v15", "The city has better hospitals.", "A cidade tem hospitais melhores.", "Change \"better\" to \"the best\".", "The city has the best hospitals."),
+  ],
+  vocabulary: [
+    d("i20dr-n01", "We are moving to the countryside.", "Estamos nos mudando para o campo.", "Change \"the countryside\" to \"a small town\".", "We are moving to a small town."),
+    d("i20dr-n02", "The traffic here is terrible.", "O trânsito aqui é terrível.", "Change \"terrible\" to \"light\".", "The traffic here is light."),
+    d("i20dr-n03", "My commute takes an hour.", "Meu trajeto demora uma hora.", "Change \"an hour\" to \"thirty minutes\".", "My commute takes thirty minutes."),
+    d("i20dr-n04", "This neighborhood is affordable.", "Este bairro é acessível.", "Make the sentence negative.", "This neighborhood isn't affordable."),
+    d("i20dr-n05", "There is a lot of crime downtown.", "Tem muito crime no centro.", "Change \"downtown\" to \"in this area\".", "There is a lot of crime in this area."),
+    d("i20dr-n06", "I like a quiet lifestyle.", "Eu gosto de um estilo de vida tranquilo.", "Change \"quiet\" to \"busy\".", "I like a busy lifestyle."),
+    d("i20dr-n07", "They own a small farm.", "Eles têm uma pequena fazenda.", "Change \"small\" to \"big\".", "They own a big farm."),
+    d("i20dr-n08", "Our neighbors are very kind.", "Nossos vizinhos são muito gentis.", "Make it a question.", "Are our neighbors very kind?"),
+    d("i20dr-n09", "The subway is crowded at rush hour.", "O metrô fica lotado na hora do rush.", "Change \"crowded\" to \"empty\".", "The subway is empty at rush hour."),
+    d("i20dr-n10", "This village is peaceful.", "Este vilarejo é tranquilo.", "Change \"village\" to \"city\".", "This city is peaceful."),
+    d("i20dr-n11", "Living downtown is convenient.", "Morar no centro é conveniente.", "Make the sentence negative.", "Living downtown isn't convenient."),
+    d("i20dr-n12", "My hometown is small but lively.", "Minha cidade natal é pequena, mas animada.", "Change \"small\" to \"large\".", "My hometown is large but lively."),
+    d("i20dr-n13", "Is there a lot of crime here?", "Tem muito crime aqui?", "Answer with \"No, there isn't.\"", "No, there isn't a lot of crime here."),
+    d("i20dr-n14", "This apartment is very convenient for work.", "Este apartamento é muito conveniente para o trabalho.", "Change \"convenient\" to \"far\".", "This apartment is very far for work."),
+    d("i20dr-n15", "The farm has a lot of animals.", "A fazenda tem muitos animais.", "Make it a question.", "Does the farm have a lot of animals?"),
+  ],
+  expressions: [
+    d("i20dr-e01", "That's a good point.", "É um bom ponto.", "Make it a question.", "Is that a good point?"),
+    d("i20dr-e02", "I think so.", "Acho que sim.", "Change \"I\" to \"We\".", "We think so."),
+    d("i20dr-e03", "It seems better for our lifestyle.", "Parece melhor para o nosso estilo de vida.", "Change \"our\" to \"my\".", "It seems better for my lifestyle."),
+    d("i20dr-e04", "Actually, small towns are safer.", "Na verdade, cidades pequenas são mais seguras.", "Change \"small towns\" to \"the countryside\".", "Actually, the countryside is safer."),
+    d("i20dr-e05", "The commute takes forever.", "O trajeto demora uma eternidade.", "Change \"takes forever\" to \"is quick\".", "The commute is quick."),
+    d("i20dr-e06", "There's less crime here.", "Há menos crime aqui.", "Change \"less\" to \"more\".", "There's more crime here."),
+    d("i20dr-e07", "The countryside seems better now.", "O campo parece melhor agora.", "Make the sentence negative.", "The countryside doesn't seem better now."),
+    d("i20dr-e08", "It's the friendliest place we've visited.", "É o lugar mais amigável que já visitamos.", "Change \"friendliest\" to \"most peaceful\".", "It's the most peaceful place we've visited."),
+    d("i20dr-e09", "We found an affordable apartment.", "Encontramos um apartamento acessível.", "Change \"an apartment\" to \"a house\".", "We found an affordable house."),
+    d("i20dr-e10", "The best choice depends on your job.", "A melhor escolha depende do seu trabalho.", "Change \"your job\" to \"your budget\".", "The best choice depends on your budget."),
+    d("i20dr-e11", "This is a peaceful neighborhood.", "Este é um bairro tranquilo.", "Make it a question.", "Is this a peaceful neighborhood?"),
+    d("i20dr-e12", "I agree with you.", "Concordo com você.", "Make the sentence negative.", "I don't agree with you."),
+    d("i20dr-e13", "That's the most affordable option.", "Essa é a opção mais acessível.", "Change \"most affordable\" to \"cheapest\".", "That's the cheapest option."),
+    d("i20dr-e14", "It's a friendly neighborhood.", "É um bairro simpático.", "Change \"friendly\" to \"peaceful\".", "It's a peaceful neighborhood."),
+    d("i20dr-e15", "We should move to the countryside.", "Devíamos nos mudar para o campo.", "Change \"should\" to \"shouldn't\".", "We shouldn't move to the countryside."),
+  ],
+  grammar: [
+    d("i20dr-g01", "The countryside is quieter than the city.", "O campo é mais tranquilo do que a cidade.", "Change \"quieter\" to the superlative form.", "The countryside is the quietest."),
+    d("i20dr-g02", "This house is bigger than that one.", "Esta casa é maior do que aquela.", "Make it negative.", "This house isn't bigger than that one."),
+    d("i20dr-g03", "It's the most affordable option for us.", "É a opção mais acessível para nós.", "Change \"most affordable\" to \"cheapest\".", "It's the cheapest option for us."),
+    d("i20dr-g04", "The city has the best hospitals.", "A cidade tem os melhores hospitais.", "Change \"best\" to \"worst\".", "The city has the worst hospitals."),
+    d("i20dr-g05", "It's the friendliest place we've visited.", "É o lugar mais amigável que já visitamos.", "Make it a question.", "Is it the friendliest place we've visited?"),
+    d("i20dr-g06", "Small towns are safer than big cities.", "Cidades pequenas são mais seguras do que cidades grandes.", "Change \"safer\" to \"more dangerous\".", "Small towns are more dangerous than big cities."),
+    d("i20dr-g07", "Is the small town as safe as the city?", "A cidade pequena é tão segura quanto a cidade grande?", "Answer with \"Yes, it is.\"", "Yes, it is as safe as the city."),
+    d("i20dr-g08", "This apartment isn't as convenient as the last one.", "Este apartamento não é tão conveniente quanto o anterior.", "Change \"isn't\" to \"is\".", "This apartment is as convenient as the last one."),
+    d("i20dr-g09", "Our new neighbors are as friendly as the old ones.", "Nossos novos vizinhos são tão simpáticos quanto os antigos.", "Make it a question.", "Are our new neighbors as friendly as the old ones?"),
+    d("i20dr-g10", "This town isn't as busy as the capital.", "Esta cidade não é tão movimentada quanto a capital.", "Change \"this town\" to \"my hometown\".", "My hometown isn't as busy as the capital."),
+    d("i20dr-g11", "The traffic today is worse than yesterday.", "O trânsito hoje está pior do que ontem.", "Change \"worse\" to \"better\".", "The traffic today is better than yesterday."),
+    d("i20dr-g12", "This is the worst commute of my life.", "Este é o pior trajeto da minha vida.", "Change \"worst\" to \"best\".", "This is the best commute of my life."),
+    d("i20dr-g13", "The city is more crowded than the countryside.", "A cidade é mais lotada do que o campo.", "Make it negative.", "The city isn't more crowded than the countryside."),
+    d("i20dr-g14", "This is the most convenient neighborhood in town.", "Este é o bairro mais conveniente da cidade.", "Change \"most convenient\" to \"most peaceful\".", "This is the most peaceful neighborhood in town."),
+    d("i20dr-g15", "Is this place as affordable as the one downtown?", "Este lugar é tão acessível quanto o do centro?", "Answer with \"No, it isn't.\"", "No, it isn't as affordable as the one downtown."),
+  ],
+};
