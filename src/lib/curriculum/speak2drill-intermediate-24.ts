@@ -1,0 +1,85 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Intermediate Unit 24 (Psychology Mindset — Linking words).
+ * Conteúdo autoral Speak2Co: however, although, therefore, in addition;
+ * vocabulário de mindset e expressões de conselho.
+ */
+const d = (id: string, base: string, basePt: string, instruction: string, answer: string) => ({
+  id,
+  base,
+  basePt,
+  instruction,
+  answer,
+});
+
+export const INTERMEDIATE_U24_DRILLS: DrillSet = {
+  verbs: [
+    d("i24dr-v01", "I'd recommend building your resilience.", "Eu recomendaria construir sua resiliência.", "Change \"I'd\" to \"We'd\".", "We'd recommend building your resilience."),
+    d("i24dr-v02", "You could try meditating every morning.", "Você poderia tentar meditar toda manhã.", "Make the sentence negative.", "You couldn't try meditating every morning."),
+    d("i24dr-v03", "It might be a good idea to rest.", "Pode ser uma boa ideia descansar.", "Make a question.", "Might it be a good idea to rest?"),
+    d("i24dr-v04", "She recommends focusing on self-awareness.", "Ela recomenda focar na autoconsciência.", "Change to \"I'd recommend\" form.", "I'd recommend focusing on self-awareness."),
+    d("i24dr-v05", "He tries to stay positive.", "Ele tenta ficar positivo.", "Change \"tries\" to \"could try\".", "He could try to stay positive."),
+    d("i24dr-v06", "We reflect on our achievements.", "Refletimos sobre nossas conquistas.", "Change \"We\" to \"She\".", "She reflects on her achievements."),
+    d("i24dr-v07", "They acknowledge their small victories.", "Eles reconhecem suas pequenas vitórias.", "Make the sentence negative.", "They don't acknowledge their small victories."),
+    d("i24dr-v08", "I manage my stress well.", "Eu controlo bem meu estresse.", "Make a question.", "Do I manage my stress well?"),
+    d("i24dr-v09", "You should focus on your growth.", "Você deveria focar no seu crescimento.", "Change \"should\" to \"might want to\".", "You might want to focus on your growth."),
+    d("i24dr-v10", "Carlos feels a lot of pressure.", "Carlos sente muita pressão.", "Change \"Carlos\" to \"I\".", "I feel a lot of pressure."),
+    d("i24dr-v11", "Maria gives advice about mindset.", "Maria dá conselhos sobre mentalidade.", "Make a question.", "Does Maria give advice about mindset?"),
+    d("i24dr-v12", "I'd recommend building resilience, although it takes time.", "Eu recomendaria construir resiliência, embora leve tempo.", "Change \"I'd recommend\" to \"You could try\".", "You could try building resilience, although it takes time."),
+    d("i24dr-v13", "We could try setting clearer boundaries.", "Poderíamos tentar estabelecer limites mais claros.", "Change \"We\" to \"You\".", "You could try setting clearer boundaries."),
+    d("i24dr-v14", "It might be a good idea to find a new hobby.", "Pode ser uma boa ideia encontrar um novo hobby.", "Make the sentence negative.", "It might not be a good idea to find a new hobby."),
+    d("i24dr-v15", "She's trying to stay resilient.", "Ela está tentando permanecer resiliente.", "Change \"She's\" to \"They're\".", "They're trying to stay resilient."),
+  ],
+  vocabulary: [
+    d("i24dr-n01", "His motivation is very strong.", "Sua motivação é muito forte.", "Change \"strong\" to \"low\".", "His motivation is very low."),
+    d("i24dr-n02", "Her resilience helped her keep going.", "Sua resiliência a ajudou a continuar.", "Change \"her\" (first) to \"his\".", "His resilience helped him keep going."),
+    d("i24dr-n03", "Having a growth mindset is important.", "Ter uma mentalidade de crescimento é importante.", "Change \"growth\" to \"positive\".", "Having a positive mindset is important."),
+    d("i24dr-n04", "She developed greater self-awareness.", "Ela desenvolveu maior autoconsciência.", "Change \"She\" to \"He\".", "He developed greater self-awareness."),
+    d("i24dr-n05", "Drinking coffee is a common habit.", "Beber café é um hábito comum.", "Change \"Drinking coffee\" to \"Exercising\".", "Exercising is a common habit."),
+    d("i24dr-n06", "He gained confidence after practicing.", "Ele ganhou confiança depois de praticar.", "Make the sentence negative.", "He didn't gain confidence after practicing."),
+    d("i24dr-n07", "Too much work can cause high stress.", "Trabalhar demais pode causar alto estresse.", "Change \"high stress\" to \"a lot of pressure\".", "Too much work can cause a lot of pressure."),
+    d("i24dr-n08", "Finding balance is essential for well-being.", "Encontrar equilíbrio é essencial para o bem-estar.", "Make a question.", "Is finding balance essential for well-being?"),
+    d("i24dr-n09", "The company showed significant growth.", "A empresa demonstrou crescimento significativo.", "Change \"company\" to \"team\".", "The team showed significant growth."),
+    d("i24dr-n10", "She spent time in quiet reflection.", "Ela passou um tempo em reflexão silenciosa.", "Change \"quiet\" to \"deep\".", "She spent time in deep reflection."),
+    d("i24dr-n11", "A good mindset helps you in life.", "Uma boa mentalidade ajuda você na vida.", "Change \"you\" to \"us\".", "A good mindset helps us in life."),
+    d("i24dr-n12", "Stress affects his motivation.", "O estresse afeta sua motivação.", "Make a question.", "Does stress affect his motivation?"),
+    d("i24dr-n13", "Confidence comes from practice.", "A confiança vem da prática.", "Change \"practice\" to \"experience\".", "Confidence comes from experience."),
+    d("i24dr-n14", "Building resilience takes patience.", "Construir resiliência exige paciência.", "Make the sentence negative.", "Building resilience doesn't take patience."),
+    d("i24dr-n15", "Reflection helps improve self-awareness.", "A reflexão ajuda a melhorar a autoconsciência.", "Change \"Reflection\" to \"Meditation\".", "Meditation helps improve self-awareness."),
+  ],
+  expressions: [
+    d("i24dr-e01", "I'd recommend focusing on your self-awareness.", "Eu recomendaria focar na sua autoconsciência.", "Change \"self-awareness\" to \"confidence\".", "I'd recommend focusing on your confidence."),
+    d("i24dr-e02", "It might be a good idea to reflect.", "Pode ser uma boa ideia refletir.", "Change \"reflect\" to \"rest\".", "It might be a good idea to rest."),
+    d("i24dr-e03", "You could try improving your balance.", "Você poderia tentar melhorar seu equilíbrio.", "Change \"balance\" to \"habits\".", "You could try improving your habits."),
+    d("i24dr-e04", "I'd recommend building resilience.", "Eu recomendaria construir resiliência.", "Make it a question.", "Would you recommend building resilience?"),
+    d("i24dr-e05", "It might be a good idea to manage stress.", "Pode ser uma boa ideia controlar o estresse.", "Make the sentence negative.", "It might not be a good idea to manage stress."),
+    d("i24dr-e06", "You could try a new hobby.", "Você poderia tentar um novo hobby.", "Change \"a new hobby\" to \"meditation\".", "You could try meditation."),
+    d("i24dr-e07", "I understand your pressure.", "Eu entendo sua pressão.", "Change \"your pressure\" to \"your stress\".", "I understand your stress."),
+    d("i24dr-e08", "I'd recommend focusing on growth.", "Eu recomendaria focar no crescimento.", "Change \"I'd\" to \"We'd\".", "We'd recommend focusing on growth."),
+    d("i24dr-e09", "It's hard to stay positive.", "É difícil permanecer positivo.", "Add \"when everything goes wrong\" at the end.", "It's hard to stay positive when everything goes wrong."),
+    d("i24dr-e10", "That's a good point.", "É um bom ponto.", "Make it a question.", "Is that a good point?"),
+    d("i24dr-e11", "Every step forward counts.", "Cada passo à frente conta.", "Change \"forward\" to \"you take\".", "Every step you take counts."),
+    d("i24dr-e12", "You should acknowledge them.", "Você deve reconhecê-las.", "Change \"should\" to \"could try to\".", "You could try to acknowledge them."),
+    d("i24dr-e13", "I probably need to manage my stress better.", "Provavelmente preciso controlar melhor o meu estresse.", "Change \"I\" to \"He\".", "He probably needs to manage his stress better."),
+    d("i24dr-e14", "I'd recommend focusing on resilience.", "Eu recomendaria focar na resiliência.", "Make the sentence negative.", "I wouldn't recommend focusing on resilience."),
+    d("i24dr-e15", "It might be a good idea to plan ahead.", "Pode ser uma boa ideia planejar com antecedência.", "Change \"plan ahead\" to \"ask for help\".", "It might be a good idea to ask for help."),
+  ],
+  grammar: [
+    d("i24dr-g01", "The project was late; however, the results were excellent.", "O projeto estava atrasado; no entanto, os resultados foram excelentes.", "Change \"late\" to \"difficult\".", "The project was difficult; however, the results were excellent."),
+    d("i24dr-g02", "Although it was difficult, we finished on time.", "Embora tenha sido difícil, terminamos no prazo.", "Change \"difficult\" to \"stressful\".", "Although it was stressful, we finished on time."),
+    d("i24dr-g03", "She studied hard; therefore, she passed the exam.", "Ela estudou muito; portanto, passou no exame.", "Change \"passed the exam\" to \"got a good grade\".", "She studied hard; therefore, she got a good grade."),
+    d("i24dr-g04", "He felt tired; however, he continued.", "Ele se sentiu cansado; no entanto, continuou.", "Change \"tired\" to \"stressed\".", "He felt stressed; however, he continued."),
+    d("i24dr-g05", "Although it rained, we went out.", "Embora tenha chovido, saímos.", "Change \"it rained\" to \"it was cold\".", "Although it was cold, we went out."),
+    d("i24dr-g06", "I understand. However, a positive mindset can change a lot.", "Eu entendo. No entanto, uma mentalidade positiva pode mudar muito.", "Change \"a positive mindset\" to \"resilience\".", "I understand. However, resilience can change a lot."),
+    d("i24dr-g07", "Although it feels small, every step counts.", "Embora pareça pequeno, cada passo conta.", "Change \"small\" to \"slow\".", "Although it feels slow, every step counts."),
+    d("i24dr-g08", "Therefore, you should acknowledge them.", "Portanto, você deve reconhecê-las.", "Change \"you should\" to \"we should\".", "Therefore, we should acknowledge them."),
+    d("i24dr-g09", "In addition, I need to manage my stress better.", "Além disso, preciso controlar melhor meu estresse.", "Change \"I\" to \"she\".", "In addition, she needs to manage her stress better."),
+    d("i24dr-g10", "He is intelligent. In addition, he is very kind.", "Ele é inteligente. Além disso, ele é muito gentil.", "Change \"he\" (second sentence) to \"she\".", "He is intelligent. In addition, she is very kind."),
+    d("i24dr-g11", "She felt nervous; however, she gave a great presentation.", "Ela se sentiu nervosa; no entanto, ela fez uma ótima apresentação.", "Change \"nervous\" to \"anxious\".", "She felt anxious; however, she gave a great presentation."),
+    d("i24dr-g12", "Although the bad weather, we still enjoyed the picnic.", "Apesar do tempo ruim, ainda aproveitamos o piquenique.", "Correct the sentence with \"Despite\".", "Despite the bad weather, we still enjoyed the picnic."),
+    d("i24dr-g13", "You could try reflecting; therefore, you will feel better.", "Você poderia tentar refletir; portanto, se sentirá melhor.", "Change \"reflecting\" to \"resting\".", "You could try resting; therefore, you will feel better."),
+    d("i24dr-g14", "In addition, try to reflect on your achievements.", "Além disso, tente refletir sobre suas conquistas.", "Change \"reflect on your achievements\" to \"build confidence\".", "In addition, try to build confidence."),
+    d("i24dr-g15", "It's hard to stay positive; however, it's possible.", "É difícil ficar positivo; no entanto, é possível.", "Change \"positive\" to \"calm\".", "It's hard to stay calm; however, it's possible."),
+  ],
+};
