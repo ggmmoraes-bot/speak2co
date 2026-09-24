@@ -1,0 +1,80 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Intermediate Unit 4 (Back Then).
+ * Conteúdo autoral Speak2Co: was/were, take/took, Mr./Mrs./Miss, plurais irregulares.
+ */
+const d = (id: string, base: string, basePt: string, instruction: string, answer: string) => ({
+  id, base, basePt, instruction, answer,
+});
+
+export const INTERMEDIATE_U04_DRILLS: DrillSet = {
+  verbs: [
+    d("i4dr-v01", "We took the same bus every morning.", "Pegávamos o mesmo ônibus toda manhã.", "Change \"We\" to \"I\".", "I took the same bus every morning."),
+    d("i4dr-v02", "He took his dog to the gate.", "Ele levava o cachorro até o portão.", "Make the sentence negative.", "He didn't take his dog to the gate."),
+    d("i4dr-v03", "You took a lot of photos.", "Você tirou muitas fotos.", "Make a question.", "Did you take a lot of photos?"),
+    d("i4dr-v04", "Did they take the same bus?", "Eles pegavam o mesmo ônibus?", "Make a negative question.", "Didn't they take the same bus?"),
+    d("i4dr-v05", "She took care of her little brother.", "Ela cuidava do irmão mais novo.", "Change \"She\" to \"They\".", "They took care of their little brother."),
+    d("i4dr-v06", "I took my bike to the park.", "Eu levava minha bicicleta ao parque.", "Make the sentence negative.", "I didn't take my bike to the park."),
+    d("i4dr-v07", "Rafa took a photo of it.", "O Rafa tirou uma foto disso.", "Make a question.", "Did Rafa take a photo of it?"),
+    d("i4dr-v08", "We were so young in that photo.", "Éramos tão jovens naquela foto.", "Change \"We\" to \"I\".", "I was so young in that photo."),
+    d("i4dr-v09", "She was really strict.", "Ela era bem rígida.", "Make the sentence negative.", "She wasn't really strict."),
+    d("i4dr-v10", "They were in my class.", "Eles eram da minha turma.", "Make a question.", "Were they in my class?"),
+    d("i4dr-v11", "Was I really that short?", "Eu era mesmo tão baixinha?", "Answer with \"Yes, you were.\"", "Yes, you were."),
+    d("i4dr-v12", "There were many people on the bus.", "Tinha muita gente no ônibus.", "Make the sentence negative.", "There weren't many people on the bus."),
+    d("i4dr-v13", "There was a woman near the door.", "Tinha uma mulher perto da porta.", "Make a question.", "Was there a woman near the door?"),
+    d("i4dr-v14", "My feet were on the seat.", "Meus pés estavam no banco.", "Change \"My feet\" to \"His foot\".", "His foot was on the seat."),
+    d("i4dr-v15", "Weren't you in trouble that day?", "Você não se deu mal naquele dia?", "Answer with \"Yes, I was.\"", "Yes, I was."),
+  ],
+  vocabulary: [
+    d("i4dr-n01", "There were ten children on the bus.", "Tinha dez crianças no ônibus.", "Change \"children\" to \"people\".", "There were ten people on the bus."),
+    d("i4dr-n02", "The men in the picture were our teachers.", "Os homens na foto eram nossos professores.", "Change \"men\" to \"women\".", "The women in the picture were our teachers."),
+    d("i4dr-n03", "My childhood was full of good memories.", "Minha infância foi cheia de boas lembranças.", "Change \"good\" to \"funny\".", "My childhood was full of funny memories."),
+    d("i4dr-n04", "His teeth were huge back then.", "Os dentes dele eram enormes naquela época.", "Change \"huge\" to \"small\".", "His teeth were small back then."),
+    d("i4dr-n05", "The little bus was very crowded.", "O ônibus pequeno estava muito lotado.", "Change \"bus\" to \"classroom\".", "The little classroom was very crowded."),
+    d("i4dr-n06", "He waited for me at the school gate.", "Ele me esperava no portão da escola.", "Change \"school gate\" to \"bus stop\".", "He waited for me at the bus stop."),
+    d("i4dr-n07", "I was in trouble for that.", "Eu me dei mal por causa disso.", "Change \"I\" to \"She\".", "She was in trouble for that."),
+    d("i4dr-n08", "That photo brings back a good memory.", "Aquela foto traz uma boa lembrança.", "Change \"a good memory\" to \"many memories\".", "That photo brings back many memories."),
+    d("i4dr-n09", "Our old teacher was very strict.", "Nossa professora antiga era bem rígida.", "Change \"strict\" to \"kind\".", "Our old teacher was very kind."),
+    d("i4dr-n10", "There were a lot of people at the party.", "Tinha muita gente na festa.", "Change \"people\" to \"children\".", "There were a lot of children at the party."),
+    d("i4dr-n11", "Two women were standing near the door.", "Duas mulheres estavam perto da porta.", "Change \"women\" to \"men\".", "Two men were standing near the door."),
+    d("i4dr-n12", "My feet were always dirty.", "Meus pés sempre estavam sujos.", "Change \"feet\" to \"hands\".", "My hands were always dirty."),
+    d("i4dr-n13", "That was a good childhood memory.", "Aquela foi uma boa lembrança de infância.", "Change \"good\" to \"funny\".", "That was a funny childhood memory."),
+    d("i4dr-n14", "There were many children on my street.", "Tinha muitas crianças na minha rua.", "Change \"children\" to \"people\".", "There were many people on my street."),
+    d("i4dr-n15", "My school was small and crowded.", "Minha escola era pequena e lotada.", "Change \"small\" to \"old\".", "My school was old and crowded."),
+  ],
+  expressions: [
+    d("i4dr-e01", "Back then, we were so young.", "Naquela época, éramos tão jovens.", "Change \"we\" to \"I\".", "Back then, I was so young."),
+    d("i4dr-e02", "Remember when we took the same bus?", "Lembra quando pegávamos o mesmo ônibus?", "Change \"we\" to \"you\".", "Remember when you took the same bus?"),
+    d("i4dr-e03", "So young! Was I really that short?", "Tão jovem! Eu era mesmo tão baixinha?", "Change \"short\" to \"shy\".", "So young! Was I really that shy?"),
+    d("i4dr-e04", "Very funny. Who was that woman?", "Muito engraçado. Quem era aquela mulher?", "Change \"that woman\" to \"that man\".", "Very funny. Who was that man?"),
+    d("i4dr-e05", "Right! We took the same bus every morning.", "É verdade! Pegávamos o mesmo ônibus toda manhã.", "Change \"every morning\" to \"every day\".", "Right! We took the same bus every day."),
+    d("i4dr-e06", "I was in trouble that day.", "Eu me dei mal naquele dia.", "Change \"that day\" to \"yesterday\".", "I was in trouble yesterday."),
+    d("i4dr-e07", "That's true. It was crowded.", "É verdade. Estava lotado.", "Make the sentence negative.", "That's true. It wasn't crowded."),
+    d("i4dr-e08", "Those were good times.", "Aqueles eram bons tempos.", "Make a question.", "Were those good times?"),
+    d("i4dr-e09", "That man was Mr. Costa.", "Aquele homem era o Sr. Costa.", "Change \"Mr. Costa\" to \"Mrs. Lopes\".", "That man was Mrs. Lopes."),
+    d("i4dr-e10", "Mrs. Lopes was our first teacher.", "A Sra. Lopes foi nossa primeira professora.", "Change \"first\" to \"last\".", "Mrs. Lopes was our last teacher."),
+    d("i4dr-e11", "Miss Andrade was the new teacher.", "A Miss Andrade era a professora nova.", "Make a question.", "Was Miss Andrade the new teacher?"),
+    d("i4dr-e12", "I took a photo of it once.", "Eu tirei uma foto disso uma vez.", "Change \"once\" to \"yesterday\".", "I took a photo of it yesterday."),
+    d("i4dr-e13", "My childhood was full of good memories.", "Minha infância foi cheia de boas lembranças.", "Make a question.", "Was your childhood full of good memories?"),
+    d("i4dr-e14", "There were many children on the bus.", "Tinha muitas crianças no ônibus.", "Make a question.", "Were there many children on the bus?"),
+    d("i4dr-e15", "He always took his dog to the gate.", "Ele sempre levava o cachorro até o portão.", "Make the sentence negative.", "He didn't always take his dog to the gate."),
+  ],
+  grammar: [
+    d("i4dr-g01", "I was a shy child.", "Eu era uma criança tímida.", "Change \"I\" to \"He\".", "He was a shy child."),
+    d("i4dr-g02", "We were so young in that photo.", "Éramos tão jovens naquela foto.", "Make a question.", "Were we so young in that photo?"),
+    d("i4dr-g03", "She wasn't strict at all.", "Ela não era nada rígida.", "Change \"She\" to \"They\".", "They weren't strict at all."),
+    d("i4dr-g04", "They weren't in the same class.", "Eles não eram da mesma turma.", "Make the sentence affirmative.", "They were in the same class."),
+    d("i4dr-g05", "Was there a lot of fog that day?", "Tinha muita neblina naquele dia?", "Answer with \"No, there wasn't.\"", "No, there wasn't."),
+    d("i4dr-g06", "Were there many people on the bus?", "Tinha muita gente no ônibus?", "Answer with \"Yes, there were.\"", "Yes, there were."),
+    d("i4dr-g07", "I didn't take any photos that day.", "Eu não tirei nenhuma foto naquele dia.", "Make the sentence affirmative.", "I took some photos that day."),
+    d("i4dr-g08", "Did you take the bus to school too?", "Você também pegava o ônibus para a escola?", "Change \"you\" to \"she\".", "Did she take the bus to school too?"),
+    d("i4dr-g09", "That man was Mr. Costa.", "Aquele homem era o Sr. Costa.", "Make a question.", "Was that man Mr. Costa?"),
+    d("i4dr-g10", "There were a lot of children on the bus.", "Tinha muitas crianças no ônibus.", "Change \"children\" to \"people\".", "There were a lot of people on the bus."),
+    d("i4dr-g11", "The men and women in the photo were our neighbors.", "Os homens e mulheres na foto eram nossos vizinhos.", "Make a question.", "Were the men and women in the photo our neighbors?"),
+    d("i4dr-g12", "My feet were on the seat.", "Meus pés estavam no banco.", "Change \"feet\" to \"foot\".", "My foot was on the seat."),
+    d("i4dr-g13", "His teeth were huge back then.", "Os dentes dele eram enormes naquela época.", "Make the sentence negative.", "His teeth weren't huge back then."),
+    d("i4dr-g14", "Why wasn't she strict?", "Por que ela não era rígida?", "Change \"she\" to \"they\".", "Why weren't they strict?"),
+    d("i4dr-g15", "Who was that woman next to Mrs. Lopes?", "Quem era aquela mulher ao lado da Sra. Lopes?", "Change \"that woman\" to \"those people\".", "Who were those people next to Mrs. Lopes?"),
+  ],
+};
