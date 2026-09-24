@@ -45,8 +45,8 @@ export const saveLiveLessonProgress = createServerFn({ method: "POST" })
       .extend({
         stagesDone: z.array(z.string().max(30)).max(20),
         speakingAttempts: z.number().int().min(0).max(500),
-        vocabulary: z.array(z.string().max(80)).max(60),
-        grammar: z.array(z.string().max(120)).max(20),
+        vocabulary: z.array(z.string().transform((s) => s.slice(0, 200))).max(60),
+        grammar: z.array(z.string().transform((s) => s.slice(0, 300))).max(20),
         pronunciationScore: z.number().int().min(0).max(100).nullable(),
         fluencyNote: z.string().max(600).nullable(),
         challengeResult: z.record(z.string(), z.unknown()).nullable(),
