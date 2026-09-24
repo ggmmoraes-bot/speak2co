@@ -7,6 +7,7 @@ import { INTERMEDIATE_U02_DRILLS } from "./speak2drill-intermediate-02";
 import { INTERMEDIATE_U11_DRILLS } from "./speak2drill-intermediate-11";
 import { INTERMEDIATE_U22_DRILLS } from "./speak2drill-intermediate-22";
 import { INTERMEDIATE_DRILLS } from "./intermediate-drills";
+import { UPPER_U01_DRILLS } from "./speak2drill-upper-01";
 import * as D0205 from "./speak2drill-beginner-02-05";
 import * as D0610 from "./speak2drill-beginner-06-10";
 import * as D1115 from "./speak2drill-beginner-11-15";
@@ -60,6 +61,7 @@ const AUTHORED: Record<string, DrillSet> = (() => {
     "INTERMEDIATE-U02": INTERMEDIATE_U02_DRILLS,
     "INTERMEDIATE-U11": INTERMEDIATE_U11_DRILLS,
     "INTERMEDIATE-U22": INTERMEDIATE_U22_DRILLS,
+    "UPPER-INTERMEDIATE-U01": UPPER_U01_DRILLS,
   };
   for (const mod of BATCHES) {
     for (const [name, set] of Object.entries(mod)) {
