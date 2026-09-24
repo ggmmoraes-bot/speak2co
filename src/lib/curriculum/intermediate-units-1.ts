@@ -1,5 +1,6 @@
 import type { CourseUnit } from "./types";
 import { INTERMEDIATE_U01 } from "./intermediate-unit-01";
+import { INTERMEDIATE_U04 } from "./intermediate-unit-04";
 import { INTERMEDIATE_U02 } from "./intermediate-unit-02";
 
 /** Speak2Co — Intermediate English Course (B1). Units 1–10 do currículo oficial. */
@@ -127,127 +128,7 @@ INTERMEDIATE_U02,
       lessonReview: { summary: { en: "In this unit, we've been exploring the world of news media and how to express our opinions. We've also been practicing the Present Perfect Continuous to talk about ongoing actions.", pt: "Nesta unidade, exploramos o mundo da mídia de notícias e como expressar nossas opiniões. Também praticamos o Present Perfect Continuous para falar sobre ações contínuas." }, canDo: [{ en: "I can identify and use vocabulary related to news media (e.g., headline, journalist, coverage).", pt: "Consigo identificar e usar vocabulário relacionado à mídia de notícias (por exemplo, manchete, jornalista, cobertura)." }, { en: "I can express my opinion using phrases like 'In my opinion...' or 'From my point of view...'.", pt: "Consigo expressar minha opinião usando frases como 'Na minha opinião...' ou 'Do meu ponto de vista...'." }, { en: "I can form and use the Present Perfect Continuous to describe actions that started in the past and continue now.", pt: "Consigo formar e usar o Present Perfect Continuous para descrever ações que começaram no passado e continuam agora." }], next: { en: "In the next unit, we will discuss 'Travel and Tourism' and learn about 'Future Simple and 'be going to'.", pt: "Na próxima unidade, discutiremos 'Viagens e Turismo' e aprenderemos sobre 'Future Simple e 'be going to'." } },
     },
   },
-  {
-    code: "INTERMEDIATE-U04",
-    number: 4,
-    title: "Unit 4 — Relationships — Phrasal verbs related to daily life and work",
-    titlePt: "Unidade 4 — Relacionamentos — Phrasal verbs relacionados ao dia a dia e ao trabalho",
-    cefr: "B1",
-    objective: { en: "Teach relationships and phrasal verbs related to daily life and work (get up, look for, find out, deal with) in a contextualized way.", pt: "Ensinar relacionamentos e phrasal verbs relacionados ao dia a dia e ao trabalho (get up, look for, find out, deal with) de forma contextualizada." },
-    communicationGoal: { en: "The student will be able to use 'agree disagree' and relationships vocabulary to communicate in real situations.", pt: "O aluno será capaz de usar 'agree disagree' e o vocabulário de relacionamentos para se comunicar em situações reais." },
-    prerequisites: { en: "Grammar: Present Perfect Continuous for actions that started in the past and continue now. Vocabulary: News Media.", pt: "Estrutura: Present Perfect Continuous para ações que começaram no passado e continuam agora. Vocabulário: News Media." },
-    newContent: { en: "Grammar: Phrasal verbs related to daily life and work (get up, look for, find out, deal with). | Vocabulary: Relationships (10 lexical items) | Expressions: Agree Disagree", pt: "Gramática: Phrasal verbs relacionados ao dia a dia e ao trabalho (get up, look for, find out, deal with). | Vocabulário: Relacionamentos (10 itens lexicais) | Expressões: Agree Disagree" },
-    reviewContent: { en: "Not applicable — initial unit of the course.", pt: "Não aplicável — unidade inicial do curso." },
-    discover: {
-      id: "INTERMEDIATE-U04-DISCOVER",
-      warmUp: { prompt: { en: "Look at the images. What do you see? What do these images represent?", pt: "Observe as imagens. O que você vê? O que essas imagens representam?" }, phrases: [{ en: "Two people shaking hands.", pt: "Duas pessoas apertando as mãos." }, { en: "A group of friends laughing together.", pt: "Um grupo de amigos rindo juntos." }] },
-      context: {
-        situation: { en: "Anna and Ben are colleagues discussing a new project. They have different ideas about how to approach it.", pt: "Anna e Ben são colegas discutindo um novo projeto. Eles têm ideias diferentes sobre como abordá-lo." },
-        dialogue: [
-          { who: "Anna", en: "I think we should prioritize the marketing strategy first. It will help us get more clients quickly.", pt: "Acho que deveríamos priorizar a estratégia de marketing primeiro. Isso nos ajudará a conseguir mais clientes rapidamente." },
-          { who: "Ben", en: "I see your point, but I'm not so sure about that. We need to focus on product development to build a strong foundation.", pt: "Entendo seu ponto, mas não tenho tanta certeza disso. Precisamos focar no desenvolvimento do produto para construir uma base sólida." },
-          { who: "Anna", en: "But if we don't market it well, how will people even know about our great product?", pt: "Mas se não fizermos um bom marketing, como as pessoas sequer saberão sobre nosso ótimo produto?" },
-          { who: "Ben", en: "I completely agree that marketing is important, but without a polished product, it might be harder to keep customers long-term.", pt: "Concordo plenamente que o marketing é importante, mas sem um produto bem-acabado, pode ser mais difícil manter os clientes a longo prazo." },
-          { who: "Anna", en: "Perhaps we can do both simultaneously? A smaller marketing launch and continuous product improvement?", pt: "Talvez possamos fazer os dois simultaneamente? Um lançamento de marketing menor e melhoria contínua do produto?" },
-          { who: "Ben", en: "That sounds like a good compromise. I think that could work.", pt: "Isso parece um bom acordo. Acho que isso pode funcionar." },
-        ],
-      },
-      vocabulary: [
-        { term: "trust", pt: "confiança", ipa: "/trʌst/", definition: "The belief that someone or something is reliable, good, honest, or effective.", example: "It takes time to build trust in a new relationship.", examplePt: "Leva tempo para construir confiança em um novo relacionamento." },
-        { term: "communication", pt: "comunicação", ipa: "/kəˌmjuːnɪˈkeɪʃn/", definition: "The act of sharing information, ideas, or feelings.", example: "Good communication is key to solving problems.", examplePt: "Uma boa comunicação é a chave para resolver problemas." },
-        { term: "conflict", pt: "conflito", ipa: "/ˈkɒnflɪkt/", definition: "A serious disagreement or argument.", example: "They had a conflict about their work schedule.", examplePt: "Eles tiveram um conflito sobre o horário de trabalho deles." },
-        { term: "support", pt: "apoio", ipa: "/səˈpɔːrt/", definition: "To give help, encouragement, or approval to someone.", example: "My friends always support my decisions.", examplePt: "Meus amigos sempre apoiam minhas decisões." },
-        { term: "commitment", pt: "compromisso", ipa: "/kəˈmɪtmənt/", definition: "A promise or firm decision to do something.", example: "Being a parent requires a lot of commitment.", examplePt: "Ser pai ou mãe exige muito compromisso." },
-        { term: "boundaries", pt: "limites", ipa: "/ˈbaʊndəriz/", definition: "Limits that define appropriate behavior in relationships.", example: "It's important to set clear boundaries at work.", examplePt: "É importante estabelecer limites claros no trabalho." },
-        { term: "empathy", pt: "empatia", ipa: "/ˈɛmpəθi/", definition: "The ability to understand and share the feelings of another.", example: "Showing empathy helps build stronger connections.", examplePt: "Mostrar empatia ajuda a construir conexões mais fortes." },
-        { term: "connection", pt: "conexão", ipa: "/kəˈnɛkʃn/", definition: "A relationship in which a person, thing, or idea is linked or associated with something else.", example: "They feel a strong connection despite living far apart.", examplePt: "Eles sentem uma forte conexão apesar de morarem longe." },
-        { term: "compromise", pt: "acordo / conciliação", ipa: "/ˈkɒmprəmaɪz/", definition: "An agreement reached by adjusting demands or modifying opinions.", example: "Finding a compromise often helps to resolve disagreements.", examplePt: "Encontrar um acordo frequentemente ajuda a resolver desentendimentos." },
-        { term: "respect", pt: "respeito", ipa: "/rɪˈspɛkt/", definition: "A feeling of deep admiration for someone or something, or treating someone well.", example: "Mutual respect is vital in any partnership.", examplePt: "Respeito mútuo é vital em qualquer parceria." },
-      ],
-      expressions: [{ en: "I completely agree.", pt: "Concordo plenamente." }, { en: "I see your point, but...", pt: "Entendo seu ponto, mas..." }, { en: "I'm not so sure about that.", pt: "Não tenho tanta certeza disso." }],
-      grammar: [
-        {
-          title: { en: "Phrasal verbs related to daily life and work", pt: "Phrasal verbs relacionados ao dia a dia e ao trabalho" },
-          examples: [{ en: "I usually get up at 7 AM on weekdays.", pt: "Eu geralmente me levanto às 7 da manhã nos dias de semana." }, { en: "She is looking for a new job opportunity.", pt: "Ela está procurando por uma nova oportunidade de emprego." }, { en: "We need to find out more information about the client.", pt: "Precisamos descobrir mais informações sobre o cliente." }],
-          rule: { en: "Phrasal verbs are combinations of a verb and a preposition or adverb, creating a new meaning. They are very common in spoken English. 'Get up' means to rise from bed. 'Look for' means to search. 'Find out' means to discover information. 'Deal with' means to manage or handle a situation.", pt: "Phrasal verbs são combinações de um verbo e uma preposição ou advérbio, criando um novo significado. Eles são muito comuns no inglês falado. 'Get up' significa levantar-se da cama. 'Look for' significa procurar. 'Find out' significa descobrir informações. 'Deal with' significa gerenciar ou lidar com uma situação." },
-          mistakes: [{ en: "Incorrect: I find information out. (Correct: I find out information.)", pt: "Incorreto: I find information out. (Correto: I find out information.)" }, { en: "Incorrect: He deals a problem with. (Correct: He deals with a problem.)", pt: "Incorreto: He deals a problem with. (Correto: He deals with a problem.)" }],
-        },
-      ],
-      controlledPractice: [
-        { id: "i4d-cp1", prompt: { en: "Which phrasal verb means 'to rise from bed'?", pt: "Qual phrasal verb significa 'levantar-se da cama'?" }, options: ["look for", "get up", "find out"], answer: "get up", explanation: { en: "'Get up' means to wake up and leave your bed.", pt: "'Get up' significa acordar e sair da cama." } },
-        { id: "i4d-cp2", prompt: { en: "I need to _______ how to use this new software.", pt: "Preciso _______ como usar este novo software." }, options: ["deal with", "get up", "find out"], answer: "find out", explanation: { en: "'Find out' means to discover information.", pt: "'Find out' significa descobrir informações." } },
-        { id: "i4d-cp3", prompt: { en: "How do you _______ stress at work?", pt: "Como você _______ o estresse no trabalho?" }, options: ["get up", "look for", "deal with"], answer: "deal with", explanation: { en: "'Deal with' means to manage or handle a situation.", pt: "'Deal with' significa gerenciar ou lidar com uma situação." } },
-        { id: "i4d-cp4", prompt: { en: "She's _______ her keys. Can you help her?", pt: "Ela está _______ as chaves dela. Você pode ajudá-la?" }, options: ["getting up", "looking for", "finding out"], answer: "looking for", explanation: { en: "'Looking for' means searching for something.", pt: "'Looking for' significa procurar por algo." } },
-      ],
-      input: {
-        kind: "listening",
-        title: { en: "Workplace Challenges", pt: "Desafios no Ambiente de Trabalho" },
-        lines: [
-          { en: "Speaker 1: I'm really struggling to deal with all these new deadlines. It's tough.", pt: "Locutor 1: Estou realmente lutando para lidar com todos esses novos prazos. É difícil." },
-          { en: "Speaker 2: I know what you mean. Sometimes I find it hard to get up in the morning knowing what's ahead.", pt: "Locutor 2: Sei o que você quer dizer. Às vezes acho difícil me levantar de manhã sabendo o que está por vir." },
-          { en: "Speaker 1: I'm also trying to find out more about that new client, but information is scarce.", pt: "Locutor 1: Também estou tentando descobrir mais sobre aquele novo cliente, mas a informação é escassa." },
-          { en: "Speaker 2: Maybe we should look for ways to organize our tasks better. A good system could help.", pt: "Locutor 2: Talvez devêssemos procurar maneiras de organizar nossas tarefas melhor. Um bom sistema poderia ajudar." },
-        ],
-        questions: [
-          { id: "i4d-ilq1", prompt: { en: "What is Speaker 1 struggling with?", pt: "Com o que o Locutor 1 está lutando?" }, options: ["Finding new clients.", "Dealing with new deadlines.", "Organizing tasks."], answer: "Dealing with new deadlines.", explanation: { en: "Speaker 1 says, 'I'm really struggling to deal with all these new deadlines.'", pt: "O Locutor 1 diz: 'Estou realmente lutando para lidar com todos esses novos prazos.'" } },
-          { id: "i4d-ilq2", prompt: { en: "What does Speaker 2 suggest?", pt: "O que o Locutor 2 sugere?" }, options: ["To find out more about the client.", "To get up earlier.", "To look for better ways to organize tasks."], answer: "To look for better ways to organize tasks.", explanation: { en: "Speaker 2 says, 'Maybe we should look for ways to organize our tasks better.'", pt: "O Locutor 2 diz: 'Talvez devêssemos procurar maneiras de organizar nossas tarefas melhor.'" } },
-        ],
-      },
-      quickCheck: [
-        { id: "i4d-qc1", prompt: { en: "Which word describes the belief that someone is reliable?", pt: "Qual palavra descreve a crença de que alguém é confiável?" }, options: ["conflict", "trust", "empathy"], answer: "trust", explanation: { en: "Trust is the belief that someone is reliable and honest.", pt: "Confiança é a crença de que alguém é confiável e honesto." } },
-        { id: "i4d-qc2", prompt: { en: "When you want to discover new information, you usually...", pt: "Quando você quer descobrir novas informações, você geralmente..." }, options: ["get up", "look for", "find out"], answer: "find out", explanation: { en: "'Find out' means to discover information.", pt: "'Find out' significa descobrir informações." } },
-        { id: "i4d-qc3", prompt: { en: "Which expression shows complete agreement?", pt: "Qual expressão demonstra total concordância?" }, options: ["I'm not so sure about that.", "I see your point, but...", "I completely agree."], answer: "I completely agree.", explanation: { en: "'I completely agree' is used to express full agreement.", pt: "'I completely agree' é usado para expressar concordância total." } },
-        { id: "i4d-qc4", prompt: { en: "Setting clear _______ is important for healthy relationships.", pt: "Estabelecer _______ claros é importante para relacionamentos saudáveis." }, options: ["conflicts", "boundaries", "commitments"], answer: "boundaries", explanation: { en: "Boundaries define appropriate behavior in relationships.", pt: "Limites definem o comportamento apropriado nos relacionamentos." } },
-      ],
-    },
-    communicate: {
-      id: "INTERMEDIATE-U04-COMMUNICATE",
-      review: [{ en: "We reviewed phrasal verbs like 'get up', 'look for', 'find out', and 'deal with'.", pt: "Revisamos phrasal verbs como 'get up', 'look for', 'find out' e 'deal with'." }, { en: "We practiced vocabulary related to relationships, such as 'trust', 'communication', and 'respect'.", pt: "Praticamos vocabulário relacionado a relacionamentos, como 'confiança', 'comunicação' e 'respeito'." }, { en: "We learned expressions to agree and disagree, like 'I completely agree' and 'I'm not so sure about that'.", pt: "Aprendemos expressões para concordar e discordar, como 'I completely agree' e 'I'm not so sure about that'." }],
-      activities: [
-        {
-          id: "i4c-a1",
-          title: { en: "Solve a Problem", pt: "Resolver um Problema" },
-          instruction: { en: "Imagine you and your colleague have different ideas for a team project. Discuss and try to find a compromise using the vocabulary and expressions learned.", pt: "Imagine que você e seu colega têm ideias diferentes para um projeto em equipe. Discutam e tentem encontrar um acordo usando o vocabulário e as expressões aprendidas." },
-          phrases: [{ en: "I think we should...", pt: "Acho que deveríamos..." }, { en: "How about we try...?", pt: "Que tal tentarmos...?" }, { en: "That sounds like a good compromise.", pt: "Isso parece um bom acordo." }],
-          check: [
-            { id: "i4c-a1q1", prompt: { en: "Did you use any of the 'agree/disagree' expressions?", pt: "Você usou alguma das expressões de 'concordar/discordar'?" }, options: ["Yes, at least one.", "No, I forgot.", "Only partly."], answer: "Yes, at least one.", explanation: { en: "Using these expressions helps in managing different opinions.", pt: "Usar essas expressões ajuda a gerenciar diferentes opiniões." } },
-            { id: "i4c-a1q2", prompt: { en: "Were you able to reach a compromise?", pt: "Vocês conseguiram chegar a um acordo?" }, options: ["Yes, we found a solution.", "No, we disagreed completely.", "We almost did."], answer: "Yes, we found a solution.", explanation: { en: "A compromise is an important part of solving problems in relationships.", pt: "Um acordo é uma parte importante da resolução de problemas em relacionamentos." } },
-          ],
-        },
-        {
-          id: "i4c-a2",
-          title: { en: "Write a Short Text", pt: "Escrever um Texto Curto" },
-          instruction: { en: "Write a short paragraph (3-4 sentences) about the importance of 'communication' and 'respect' in a friendship. Include one phrasal verb from this unit.", pt: "Escreva um parágrafo curto (3-4 frases) sobre a importância da 'comunicação' e do 'respeito' em uma amizade. Inclua um phrasal verb desta unidade." },
-          phrases: [{ en: "Good communication is essential...", pt: "Boa comunicação é essencial..." }, { en: "We must show respect...", pt: "Devemos demonstrar respeito..." }, { en: "It helps us deal with...", pt: "Isso nos ajuda a lidar com..." }],
-          check: [
-            { id: "i4c-a2q1", prompt: { en: "Did you include both 'communication' and 'respect'?", pt: "Você incluiu 'comunicação' e 'respeito'?" }, options: ["Yes, both.", "Only one.", "Neither."], answer: "Yes, both.", explanation: { en: "These are key vocabulary words for relationships.", pt: "Essas são palavras-chave de vocabulário para relacionamentos." } },
-            { id: "i4c-a2q2", prompt: { en: "Did you use at least one phrasal verb correctly?", pt: "Você usou pelo menos um phrasal verb corretamente?" }, options: ["Yes, I did.", "No, I forgot.", "I tried, but I'm not sure."], answer: "Yes, I did.", explanation: { en: "Practicing phrasal verbs in context is important.", pt: "Praticar phrasal verbs em contexto é importante." } },
-          ],
-        },
-        {
-          id: "i4c-a3",
-          title: { en: "Interpret a Listening", pt: "Interpretar um Áudio" },
-          instruction: { en: "Listen to two friends discussing a weekend plan. Identify where they agree or disagree and what phrasal verbs they use.", pt: "Ouça dois amigos discutindo um plano de fim de semana. Identifique onde eles concordam ou discordam e quais phrasal verbs eles usam." },
-          phrases: [{ en: "Friend 1: I want to get up early to go hiking.", pt: "Amigo 1: Quero me levantar cedo para fazer trilha." }, { en: "Friend 2: I'm not so sure about that. I prefer sleeping in.", pt: "Amigo 2: Não tenho tanta certeza disso. Prefiro dormir até mais tarde." }, { en: "Friend 1: Okay, I see your point, but can we at least find out if the weather will be good?", pt: "Amigo 1: Ok, entendo seu ponto, mas podemos pelo menos descobrir se o tempo estará bom?" }],
-          check: [
-            { id: "i4c-a3q1", prompt: { en: "What did Friend 2 disagree with?", pt: "Com o que o Amigo 2 discordou?" }, options: ["Going hiking.", "Getting up early.", "Checking the weather."], answer: "Getting up early.", explanation: { en: "Friend 2 says, 'I'm not so sure about that. I prefer sleeping in.'", pt: "O Amigo 2 diz: 'Não tenho tanta certeza disso. Prefiro dormir até mais tarde.'" } },
-            { id: "i4c-a3q2", prompt: { en: "Which phrasal verb did Friend 1 use to mean 'discover'?", pt: "Qual phrasal verb o Amigo 1 usou para significar 'descobrir'?" }, options: ["get up", "look for", "find out"], answer: "find out", explanation: { en: "Friend 1 says, 'can we at least find out if the weather will be good?'", pt: "O Amigo 1 diz: 'podemos pelo menos descobrir se o tempo estará bom?'" } },
-          ],
-        },
-      ],
-      challenge: {
-        id: "i4c-challenge1",
-        title: { en: "A Team Dilemma", pt: "Um Dilema de Equipe" },
-        instruction: { en: "Work with a partner. You are both team leaders with different approaches to motivate your team. One believes in strict deadlines and individual competition, the other believes in flexible schedules and team collaboration. Discuss your approaches, using at least three vocabulary words and two phrasal verbs from the unit, and try to reach a common strategy.", pt: "Trabalhe com um parceiro. Vocês são ambos líderes de equipe com abordagens diferentes para motivar sua equipe. Um acredita em prazos rígidos e competição individual, o outro acredita em horários flexíveis e colaboração em equipe. Discutam suas abordagens, usando pelo menos três palavras do vocabulário e dois phrasal verbs da unidade, e tentem chegar a uma estratégia comum." },
-        phrases: [{ en: "I completely agree that motivation is key.", pt: "Concordo plenamente que a motivação é fundamental." }, { en: "We need to deal with this issue carefully.", pt: "Precisamos lidar com essa questão com cuidado." }, { en: "How can we find out what truly works?", pt: "Como podemos descobrir o que realmente funciona?" }],
-        check: [
-          { id: "i4c-chalq1", prompt: { en: "Did you use at least three vocabulary words from the 'Relationships' list?", pt: "Você usou pelo menos três palavras do vocabulário da lista 'Relacionamentos'?" }, options: ["Yes, three or more.", "Only one or two.", "No, I forgot."], answer: "Yes, three or more.", explanation: { en: "Using the specific vocabulary helps in discussing the topic more effectively.", pt: "Usar o vocabulário específico ajuda a discutir o tópico de forma mais eficaz." } },
-          { id: "i4c-chalq2", prompt: { en: "Did you use at least two phrasal verbs from this unit?", pt: "Você usou pelo menos dois phrasal verbs desta unidade?" }, options: ["Yes, two or more.", "Only one.", "No, I forgot."], answer: "Yes, two or more.", explanation: { en: "Integrating phrasal verbs into your discussion shows good command of the new grammar.", pt: "Integrar phrasal verbs na sua discussão demonstra bom domínio da nova gramática." } },
-        ],
-      },
-      lessonReview: { summary: { en: "In this unit, we explored key vocabulary for discussing relationships, learned how to express agreement and disagreement, and practiced common phrasal verbs related to daily life and work.", pt: "Nesta unidade, exploramos vocabulário-chave para discutir relacionamentos, aprendemos a expressar concordância e discordância, e praticamos phrasal verbs comuns relacionados ao dia a dia e ao trabalho." }, canDo: [{ en: "I can talk about different types of relationships and their important aspects.", pt: "Consigo falar sobre diferentes tipos de relacionamentos e seus aspectos importantes." }, { en: "I can use phrasal verbs like 'get up', 'look for', 'find out', and 'deal with' in daily conversations.", pt: "Consigo usar phrasal verbs como 'get up', 'look for', 'find out' e 'deal with' em conversas diárias." }, { en: "I can express agreement and disagreement politely in discussions.", pt: "Consigo expressar concordância e discordância de forma educada em discussões." }], next: { en: "In the next unit, we will continue expanding our vocabulary and grammar skills, focusing on 'Future Plans' and more complex sentence structures.", pt: "Na próxima unidade, continuaremos expandindo nosso vocabulário e habilidades gramaticais, focando em 'Planos Futuros' e estruturas de frases mais complexas." } },
-    },
-  },
+  INTERMEDIATE_U04,
   {
     code: "INTERMEDIATE-U05",
     number: 5,
