@@ -1,0 +1,85 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Intermediate Unit 30 (Workplace).
+ * Conteúdo autoral Speak2Co: vocabulário de ambiente de trabalho, frases
+ * complexas (conjunções e pronomes relativos) e expressões de resolução de problemas.
+ */
+const d = (id: string, base: string, basePt: string, instruction: string, answer: string) => ({
+  id,
+  base,
+  basePt,
+  instruction,
+  answer,
+});
+
+export const INTERMEDIATE_U30_DRILLS: DrillSet = {
+  verbs: [
+    d("i30dr-v01", "We have a big problem with the budget.", "Temos um grande problema com o orçamento.", "Change \"We\" to \"She\".", "She has a big problem with the budget."),
+    d("i30dr-v02", "I finished the report because the deadline was close.", "Terminei o relatório porque o prazo estava próximo.", "Change \"I\" to \"They\".", "They finished the report because the deadline was close."),
+    d("i30dr-v03", "Although she was tired, she kept working.", "Embora estivesse cansada, ela continuou trabalhando.", "Change \"she\" to \"he\" (both).", "Although he was tired, he kept working."),
+    d("i30dr-v04", "We can negotiate with the suppliers.", "Podemos negociar com os fornecedores.", "Make the sentence negative.", "We can't negotiate with the suppliers."),
+    d("i30dr-v05", "Does he need help with the negotiation?", "Ele precisa de ajuda com a negociação?", "Answer with \"Yes, he does.\".", "Yes, he needs help with the negotiation."),
+    d("i30dr-v06", "If we work together, we can solve this quickly.", "Se trabalharmos juntos, podemos resolver isso rapidamente.", "Change \"we\" to \"you\" (both).", "If you work together, you can solve this quickly."),
+    d("i30dr-v07", "The team decided to revise the strategy.", "A equipe decidiu revisar a estratégia.", "Make it a question.", "Did the team decide to revise the strategy?"),
+    d("i30dr-v08", "She gave me positive feedback.", "Ela me deu um feedback positivo.", "Change \"She\" to \"They\".", "They gave me positive feedback."),
+    d("i30dr-v09", "We are overspending on the campaign.", "Estamos gastando demais na campanha.", "Change \"We\" to \"The company\".", "The company is overspending on the campaign."),
+    d("i30dr-v10", "I haven't finished the report yet.", "Ainda não terminei o relatório.", "Change \"I\" to \"She\".", "She hasn't finished the report yet."),
+    d("i30dr-v11", "They received a promotion last month.", "Eles receberam uma promoção no mês passado.", "Make it negative.", "They didn't receive a promotion last month."),
+    d("i30dr-v12", "We need to reallocate the tasks.", "Precisamos realocar as tarefas.", "Change \"We\" to \"He\".", "He needs to reallocate the tasks."),
+    d("i30dr-v13", "Did you submit the weekly report?", "Você enviou o relatório semanal?", "Answer with \"Yes, I did.\".", "Yes, I submitted the weekly report."),
+    d("i30dr-v14", "The client is asking for a new strategy.", "O cliente está pedindo uma nova estratégia.", "Change \"is asking\" to future with \"will\".", "The client will ask for a new strategy."),
+    d("i30dr-v15", "We must inform the client today.", "Precisamos informar o cliente hoje.", "Change \"must\" to \"have to\".", "We have to inform the client today."),
+  ],
+  vocabulary: [
+    d("i30dr-n01", "The deadline for the report is tomorrow.", "O prazo final do relatório é amanhã.", "Change \"tomorrow\" to \"next week\".", "The deadline for the report is next week."),
+    d("i30dr-n02", "She prepared a detailed presentation.", "Ela preparou uma apresentação detalhada.", "Change \"detailed\" to \"short\".", "She prepared a short presentation."),
+    d("i30dr-n03", "The negotiation took several weeks.", "A negociação levou várias semanas.", "Change \"several weeks\" to \"two months\".", "The negotiation took two months."),
+    d("i30dr-n04", "After years of hard work, she got a promotion.", "Após anos de trabalho duro, ela conseguiu uma promoção.", "Change \"she\" to \"he\" (both).", "After years of hard work, he got a promotion."),
+    d("i30dr-n05", "The manager gave me positive feedback.", "O gerente me deu um feedback positivo.", "Change \"positive\" to \"honest\".", "The manager gave me honest feedback."),
+    d("i30dr-n06", "Successful projects depend on good teamwork.", "Projetos bem-sucedidos dependem de um bom trabalho em equipe.", "Change \"Successful\" to \"Difficult\".", "Difficult projects depend on good teamwork."),
+    d("i30dr-n07", "Our new client is important for the company.", "Nosso novo cliente é importante para a empresa.", "Change \"new\" to \"biggest\".", "Our biggest client is important for the company."),
+    d("i30dr-n08", "I need to submit a progress report.", "Preciso enviar um relatório de progresso.", "Change \"progress\" to \"final\".", "I need to submit a final report."),
+    d("i30dr-n09", "The company developed a new marketing strategy.", "A empresa desenvolveu uma nova estratégia de marketing.", "Change \"marketing\" to \"sales\".", "The company developed a new sales strategy."),
+    d("i30dr-n10", "We need to stay within the budget.", "Precisamos nos manter dentro do orçamento.", "Change \"the budget\" to \"our limits\".", "We need to stay within our limits."),
+    d("i30dr-n11", "The deadline is very close now.", "O prazo está muito próximo agora.", "Change \"close\" to \"far away\".", "The deadline is very far away now."),
+    d("i30dr-n12", "He asked for feedback on his presentation.", "Ele pediu feedback sobre a apresentação dele.", "Change \"his presentation\" to \"her report\".", "He asked for feedback on her report."),
+    d("i30dr-n13", "The client wants a new report.", "O cliente quer um novo relatório.", "Change \"new report\" to \"quick answer\".", "The client wants a quick answer."),
+    d("i30dr-n14", "Teamwork made the project successful.", "O trabalho em equipe tornou o projeto bem-sucedido.", "Change \"successful\" to \"possible\".", "Teamwork made the project possible."),
+    d("i30dr-n15", "The budget for this project is too small.", "O orçamento para este projeto é muito pequeno.", "Change \"too small\" to \"big enough\".", "The budget for this project is big enough."),
+  ],
+  expressions: [
+    d("i30dr-e01", "What do you suggest we do?", "O que você sugere que façamos?", "Change \"we\" to \"I\".", "What do you suggest I do?"),
+    d("i30dr-e02", "Let's find a solution together.", "Vamos encontrar uma solução juntos.", "Change \"together\" to \"right now\".", "Let's find a solution right now."),
+    d("i30dr-e03", "That's one option, but we also have a presentation.", "Essa é uma opção, mas também temos uma apresentação.", "Change \"a presentation\" to \"a meeting\".", "That's one option, but we also have a meeting."),
+    d("i30dr-e04", "Teamwork makes the dream work, doesn't it?", "Trabalho em equipe faz o sonho acontecer, não é?", "Change \"doesn't it\" to \"right\".", "Teamwork makes the dream work, right?"),
+    d("i30dr-e05", "I can imagine the pressure you're under.", "Posso imaginar a pressão que você está sob.", "Change \"you're\" to \"they're\".", "I can imagine the pressure they're under."),
+    d("i30dr-e06", "If you need help, just ask.", "Se você precisar de ajuda, é só pedir.", "Change \"you\" to \"she\".", "If she needs help, just ask."),
+    d("i30dr-e07", "We're overspending, aren't we?", "Estamos gastando demais, não é?", "Change \"we're\" to \"they're\".", "They're overspending, aren't they?"),
+    d("i30dr-e08", "Perhaps we can negotiate with the suppliers.", "Talvez possamos negociar com os fornecedores.", "Change \"Perhaps\" to \"Maybe\".", "Maybe we can negotiate with the suppliers."),
+    d("i30dr-e09", "The main problem is that we're behind schedule.", "O principal problema é que estamos atrasados.", "Change \"behind schedule\" to \"over budget\".", "The main problem is that we're over budget."),
+    d("i30dr-e10", "To solve this, they decided to revise the plan.", "Para resolver isso, eles decidiram revisar o plano.", "Change \"they\" to \"we\".", "To solve this, we decided to revise the plan."),
+    d("i30dr-e11", "That's a good idea! We can do this.", "Essa é uma boa ideia! Conseguimos fazer isso.", "Change \"We\" to \"You\".", "That's a good idea! You can do this."),
+    d("i30dr-e12", "You're right, let's revise the strategy.", "Você está certo, vamos revisar a estratégia.", "Change \"let's\" to \"we should\".", "You're right, we should revise the strategy."),
+    d("i30dr-e13", "It's an ongoing discussion, isn't it?", "É uma discussão contínua, não é?", "Change \"isn't it\" to \"right\".", "It's an ongoing discussion, right?"),
+    d("i30dr-e14", "We have to revise the strategy because the deadline is close.", "Precisamos revisar a estratégia porque o prazo está próximo.", "Change \"revise\" to \"change\".", "We have to change the strategy because the deadline is close."),
+    d("i30dr-e15", "What do you suggest we do about the budget?", "O que você sugere que façamos sobre o orçamento?", "Change \"the budget\" to \"the deadline\".", "What do you suggest we do about the deadline?"),
+  ],
+  grammar: [
+    d("i30dr-g01", "Although I was tired, I finished the report.", "Embora eu estivesse cansado, terminei o relatório.", "Change \"tired\" to \"busy\".", "Although I was busy, I finished the report."),
+    d("i30dr-g02", "The plan, which we discussed last week, is ready.", "O plano, que discutimos na semana passada, está pronto.", "Change \"last week\" to \"yesterday\".", "The plan, which we discussed yesterday, is ready."),
+    d("i30dr-g03", "If we work together, we can solve this quickly.", "Se trabalharmos juntos, podemos resolver isso rapidamente.", "Change \"quickly\" to \"today\".", "If we work together, we can solve this today."),
+    d("i30dr-g04", "We improved the product because we received feedback.", "Melhoramos o produto porque recebemos feedback.", "Change \"we received\" to \"we got\".", "We improved the product because we got feedback."),
+    d("i30dr-g05", "The client, who asked for the report, is very important.", "O cliente, que pediu o relatório, é muito importante.", "Change \"the report\" to \"a meeting\".", "The client, who asked for a meeting, is very important."),
+    d("i30dr-g06", "She continued working, although she was tired.", "Ela continuou trabalhando, embora estivesse cansada.", "Change \"working\" to \"studying\".", "She continued studying, although she was tired."),
+    d("i30dr-g07", "The report, which was late, upset the client.", "O relatório, que estava atrasado, chateou o cliente.", "Change \"late\" to \"incomplete\".", "The report, which was incomplete, upset the client."),
+    d("i30dr-g08", "I worked late because I had a lot to do.", "Trabalhei até tarde porque tinha muito a fazer.", "Change \"a lot to do\" to \"a deadline\".", "I worked late because I had a deadline."),
+    d("i30dr-g09", "We need help, so we asked the manager.", "Precisamos de ajuda, então pedimos ao gerente.", "Change \"the manager\" to \"our colleagues\".", "We need help, so we asked our colleagues."),
+    d("i30dr-g10", "The new project, which is challenging, started last month.", "O novo projeto, que é desafiador, começou no mês passado.", "Change \"challenging\" to \"exciting\".", "The new project, which is exciting, started last month."),
+    d("i30dr-g11", "If you need help with the negotiation, just ask.", "Se você precisar de ajuda com a negociação, é só pedir.", "Change \"the negotiation\" to \"the report\".", "If you need help with the report, just ask."),
+    d("i30dr-g12", "I heard you got a promotion, which is fantastic news.", "Ouvi dizer que você foi promovido, o que é uma notícia fantástica.", "Change \"fantastic\" to \"great\".", "I heard you got a promotion, which is great news."),
+    d("i30dr-g13", "It was a lot of teamwork, because we had tight deadlines.", "Foi muito trabalho em equipe, porque tínhamos prazos apertados.", "Change \"tight\" to \"many\".", "It was a lot of teamwork, because we had many deadlines."),
+    d("i30dr-g14", "My client is asking for a new strategy, although I haven't finished the report.", "Meu cliente está pedindo uma nova estratégia, embora eu não tenha terminado o relatório.", "Change \"a new strategy\" to \"more time\".", "My client is asking for more time, although I haven't finished the report."),
+    d("i30dr-g15", "Because a team member is sick, the project is delayed.", "Porque um membro da equipe está doente, o projeto está atrasado.", "Change \"is sick\" to \"is on vacation\".", "Because a team member is on vacation, the project is delayed."),
+  ],
+};

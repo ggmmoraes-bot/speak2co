@@ -1,0 +1,85 @@
+import type { DrillSet } from "./speak2drill-sets";
+
+/**
+ * Speak2Drill — Intermediate Unit 10 (Culture Society — Functional language).
+ * Conteúdo autoral Speak2Co: linguagem funcional para reuniões, vocabulário
+ * de cultura e sociedade, e expressões de negociação.
+ */
+const d = (id: string, base: string, basePt: string, instruction: string, answer: string) => ({
+  id,
+  base,
+  basePt,
+  instruction,
+  answer,
+});
+
+export const INTERMEDIATE_U10_DRILLS: DrillSet = {
+  verbs: [
+    d("i10dr-v01", "Could you clarify that point?", "Você poderia esclarecer esse ponto?", "Change \"that point\" to \"this idea\".", "Could you clarify this idea?"),
+    d("i10dr-v02", "Let's move on to the next topic.", "Vamos passar para o próximo tópico.", "Change \"the next topic\" to \"the budget\".", "Let's move on to the budget."),
+    d("i10dr-v03", "I agree with that proposal.", "Concordo com essa proposta.", "Make the sentence negative.", "I don't agree with that proposal."),
+    d("i10dr-v04", "Would you consider a different approach?", "Você consideraria uma abordagem diferente?", "Change \"a different approach\" to \"a new deadline\".", "Would you consider a new deadline?"),
+    d("i10dr-v05", "That could work.", "Isso poderia funcionar.", "Add \"but I have concerns\" at the end.", "That could work, but I have concerns."),
+    d("i10dr-v06", "Let's reach a compromise.", "Vamos chegar a um acordo.", "Make it a question with \"Shall we\".", "Shall we reach a compromise?"),
+    d("i10dr-v07", "We're agreed on the following steps.", "Estamos de acordo com os próximos passos.", "Make it a question.", "Are we agreed on the following steps?"),
+    d("i10dr-v08", "David understands Clara's point.", "David entende o ponto da Clara.", "Make the sentence negative.", "David doesn't understand Clara's point."),
+    d("i10dr-v09", "They drafted a plan for a pilot group.", "Eles elaboraram um plano para um grupo piloto.", "Change \"They\" to \"She\".", "She drafted a plan for a pilot group."),
+    d("i10dr-v10", "We could explore that option.", "Poderíamos explorar essa opção.", "Change \"that option\" to \"another strategy\".", "We could explore another strategy."),
+    d("i10dr-v11", "I see your point, but I have a different perspective.", "Entendo seu ponto, mas tenho uma perspectiva diferente.", "Change \"I\" to \"We\".", "We see your point, but we have a different perspective."),
+    d("i10dr-v12", "She proposed a different approach.", "Ela propôs uma abordagem diferente.", "Make a question.", "Did she propose a different approach?"),
+    d("i10dr-v13", "Let's explore that.", "Vamos explorar isso.", "Change \"that\" to \"this option\".", "Let's explore this option."),
+    d("i10dr-v14", "We should focus on direct communication.", "Deveríamos focar na comunicação direta.", "Make the sentence negative.", "We shouldn't focus on direct communication."),
+    d("i10dr-v15", "How about we agree on a deadline?", "Que tal concordarmos em um prazo?", "Change \"a deadline\" to \"a budget\".", "How about we agree on a budget?"),
+  ],
+  vocabulary: [
+    d("i10dr-n01", "Wearing specific clothes is a common tradition.", "Usar roupas específicas é uma tradição comum.", "Change \"tradition\" to \"custom\".", "Wearing specific clothes is a common custom."),
+    d("i10dr-n02", "Our team benefits from diversity.", "Nossa equipe se beneficia da diversidade.", "Change \"diversity\" to \"heritage\".", "Our team benefits from heritage."),
+    d("i10dr-n03", "Cultural identity is shaped by language.", "A identidade cultural é moldada pela língua.", "Change \"identity\" to \"perspective\".", "Cultural perspective is shaped by language."),
+    d("i10dr-n04", "The local community organized a festival.", "A comunidade local organizou um festival.", "Change \"organized\" to \"is organizing\".", "The local community is organizing a festival."),
+    d("i10dr-n05", "Honesty is a core value in their family.", "Honestidade é um valor essencial em sua família.", "Change \"family\" to \"company\".", "Honesty is a core value in their company."),
+    d("i10dr-n06", "Many sites are preserved as part of our heritage.", "Muitos locais são preservados como parte de nossa herança.", "Change \"sites\" to \"traditions\".", "Many traditions are preserved as part of our heritage."),
+    d("i10dr-n07", "Each new generation faces different challenges.", "Cada nova geração enfrenta desafios diferentes.", "Change \"challenges\" to \"opportunities\".", "Each new generation faces different opportunities."),
+    d("i10dr-n08", "It's important to consider different perspectives.", "É importante considerar diferentes perspectivas.", "Change \"perspectives\" to \"cultural norms\".", "It's important to consider different cultural norms."),
+    d("i10dr-n09", "It's a social norm to greet with a handshake.", "É uma norma social cumprimentar com um aperto de mão.", "Change \"a handshake\" to \"a bow\".", "It's a social norm to greet with a bow."),
+    d("i10dr-n10", "The team lacked diversity.", "A equipe carecia de diversidade.", "Make the sentence affirmative and positive.", "The team has a lot of diversity."),
+    d("i10dr-n11", "Our marketing materials weren't effective.", "Nossos materiais de marketing não foram eficazes.", "Make the sentence affirmative.", "Our marketing materials were effective."),
+    d("i10dr-n12", "We overlooked some local customs.", "Negligenciamos alguns costumes locais.", "Make the sentence negative.", "We didn't overlook some local customs."),
+    d("i10dr-n13", "The use of colors might be perceived differently.", "O uso das cores pode ser percebido de forma diferente.", "Change \"colors\" to \"symbols\".", "The use of symbols might be perceived differently."),
+    d("i10dr-n14", "We can integrate deeper cultural insights.", "Podemos integrar insights culturais mais profundos.", "Change \"We\" to \"They\".", "They can integrate deeper cultural insights."),
+    d("i10dr-n15", "Their cultural values matter.", "Os valores culturais deles importam.", "Make a question.", "Do their cultural values matter?"),
+  ],
+  expressions: [
+    d("i10dr-e01", "Would you consider...?", "Você consideraria...?", "Complete with \"a smaller team\".", "Would you consider a smaller team?"),
+    d("i10dr-e02", "That could work, but...", "Isso poderia funcionar, mas...", "Complete with \"I have concerns\".", "That could work, but I have concerns."),
+    d("i10dr-e03", "Let's reach a compromise.", "Vamos chegar a um acordo.", "Change \"a compromise\" to \"an agreement\".", "Let's reach an agreement."),
+    d("i10dr-e04", "The main challenge is...", "O principal desafio é...", "Complete with \"the timeline\".", "The main challenge is the timeline."),
+    d("i10dr-e05", "Considering their cultural values...", "Considerando seus valores culturais...", "Complete with \"we should be patient\".", "Considering their cultural values, we should be patient."),
+    d("i10dr-e06", "A possible solution could be...", "Uma possível solução poderia ser...", "Complete with \"a pilot group\".", "A possible solution could be a pilot group."),
+    d("i10dr-e07", "I think the core issue was...", "Acho que o problema central foi...", "Complete with \"poor communication\".", "I think the core issue was poor communication."),
+    d("i10dr-e08", "They could have said...", "Eles poderiam ter dito...", "Complete with \"something more direct\".", "They could have said something more direct."),
+    d("i10dr-e09", "To avoid misunderstanding, it's crucial to...", "Para evitar mal-entendidos, é crucial...", "Complete with \"listen carefully\".", "To avoid misunderstanding, it's crucial to listen carefully."),
+    d("i10dr-e10", "My first question is...", "Minha primeira pergunta é...", "Complete with \"about your expectations\".", "My first question is about your expectations."),
+    d("i10dr-e11", "This is important because of their...", "Isso é importante por causa de seus...", "Complete with \"cultural norms\".", "This is important because of their cultural norms."),
+    d("i10dr-e12", "It helps us understand their perspective.", "Isso nos ajuda a entender a perspectiva deles.", "Change \"their\" to \"our client's\".", "It helps us understand our client's perspective."),
+    d("i10dr-e13", "I understand your need for...", "Entendo sua necessidade de...", "Complete with \"a faster deadline\".", "I understand your need for a faster deadline."),
+    d("i10dr-e14", "Perhaps we could explore...", "Talvez pudéssemos explorar...", "Complete with \"another option\".", "Perhaps we could explore another option."),
+    d("i10dr-e15", "How about we agree on...?", "Que tal concordarmos em...?", "Complete with \"a shared plan\".", "How about we agree on a shared plan?"),
+  ],
+  grammar: [
+    d("i10dr-g01", "Could you clarify that point?", "Você poderia esclarecer esse ponto?", "Change to \"Could you explain\".", "Could you explain that point?"),
+    d("i10dr-g02", "Let's move on to the next topic.", "Vamos passar para o próximo tópico.", "Make it a suggestion with \"Shall we\".", "Shall we move on to the next topic?"),
+    d("i10dr-g03", "I agree with that proposal.", "Concordo com essa proposta.", "Change \"agree\" to \"disagree\".", "I disagree with that proposal."),
+    d("i10dr-g04", "We're agreed on the following steps, correct?", "Estamos de acordo com os próximos passos, certo?", "Remove \"correct?\" and make it a statement.", "We're agreed on the following steps."),
+    d("i10dr-g05", "Would you consider starting with a small group?", "Você consideraria começar com um grupo pequeno?", "Change \"a small group\" to \"a new team\".", "Would you consider starting with a new team?"),
+    d("i10dr-g06", "I see your point, but I propose a different approach.", "Entendo seu ponto, mas proponho uma abordagem diferente.", "Change \"I\" to \"She\".", "She sees your point, but she proposes a different approach."),
+    d("i10dr-g07", "That could work, but I'm concerned about the timeline.", "Isso poderia funcionar, mas estou preocupada com o cronograma.", "Change \"the timeline\" to \"the budget\".", "That could work, but I'm concerned about the budget."),
+    d("i10dr-g08", "We'll draft a plan for a pilot group.", "Vamos elaborar um plano para um grupo piloto.", "Make it a question.", "Will we draft a plan for a pilot group?"),
+    d("i10dr-g09", "Let's reach a compromise here.", "Vamos chegar a um acordo aqui.", "Change \"here\" to \"before Friday\".", "Let's reach a compromise before Friday."),
+    d("i10dr-g10", "Direct communication is more straightforward.", "A comunicação direta é mais direta.", "Change to comparative with \"than indirect communication\".", "Direct communication is more straightforward than indirect communication."),
+    d("i10dr-g11", "Building trust is key in many cultures.", "Construir confiança é fundamental em muitas culturas.", "Change \"is key\" to \"isn't easy\".", "Building trust isn't easy in many cultures."),
+    d("i10dr-g12", "A longer phase might delay our project.", "Uma fase mais longa pode atrasar nosso projeto.", "Change \"might\" to \"is going to\".", "A longer phase is going to delay our project."),
+    d("i10dr-g13", "We could then scale up.", "Poderíamos então expandir.", "Make it a question.", "Could we then scale up?"),
+    d("i10dr-g14", "I like the idea of minimizing risk.", "Gosto da ideia de minimizar riscos.", "Make the sentence negative.", "I don't like the idea of minimizing risk."),
+    d("i10dr-g15", "Would you consider a localized campaign first?", "Você consideraria uma campanha localizada primeiro?", "Change \"first\" to \"this month\".", "Would you consider a localized campaign this month?"),
+  ],
+};
