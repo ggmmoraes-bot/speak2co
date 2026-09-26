@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { pt } from "./dictionaries/pt";
 import { en } from "./dictionaries/en";
 import { es } from "./dictionaries/es";
+import { stage2 } from "./dictionaries/stage2";
 import {
   DEFAULT_LOCALE,
   isLocale,
@@ -23,7 +24,11 @@ import {
 
 export { LOCALES, LOCALE_LABELS, DEFAULT_LOCALE, isLocale, type Locale };
 
-const DICTIONARIES: Record<Locale, Dictionary> = { pt, en, es };
+const DICTIONARIES: Record<Locale, Dictionary> = {
+  pt: { ...pt, ...stage2.pt },
+  en: { ...en, ...stage2.en },
+  es: { ...es, ...stage2.es },
+};
 
 const STORAGE_KEY = "speak2co.locale";
 
