@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { supabase } from "@/integrations/supabase/client";
 import { siteUrl } from "@/lib/site";
+import { useT } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,6 +32,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const navigate = useNavigate();
+  const t = useT();
   const [introDone, setIntroDone] = useState(false);
 
   // Garante a entrada da página mesmo se o autoplay for bloqueado ou o vídeo demorar.
@@ -89,12 +91,12 @@ function Index() {
           className={`flex w-full flex-col items-center transition-opacity duration-700 ${introDone ? "opacity-100" : "pointer-events-none opacity-0"}`}
         >
         <p className="mt-8 text-xs font-medium tracking-[0.32em] text-muted-foreground uppercase sm:text-sm">
-          English for Every Opportunity.
+          {t("landing.tagline")}
         </p>
 
         <div className="mt-10 flex w-full max-w-sm flex-col gap-3 sm:max-w-md sm:flex-row">
           <Button asChild size="lg" className="btn-gold h-12 flex-1 rounded-full px-6 text-sm font-semibold">
-            <Link to="/auth">Entrar na plataforma</Link>
+            <Link to="/auth">{t("landing.enter")}</Link>
           </Button>
           <Button
             asChild
@@ -102,22 +104,22 @@ function Index() {
             variant="outline"
             className="btn-gold-outline h-12 flex-1 rounded-full px-6 text-sm font-semibold text-foreground"
           >
-            <Link to="/planos">Ver planos e preços</Link>
+            <Link to="/planos">{t("landing.plans")}</Link>
           </Button>
         </div>
 
 
         <nav className="mt-12 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
           <Link to="/termos" className="hover:text-accent">
-            Termos de Uso
+            {t("landing.terms")}
           </Link>
           <span aria-hidden="true">•</span>
           <Link to="/reembolso" className="hover:text-accent">
-            Política de Reembolso
+            {t("landing.refund")}
           </Link>
           <span aria-hidden="true">•</span>
           <Link to="/privacidade" className="hover:text-accent">
-            Aviso de Privacidade
+            {t("landing.privacy")}
           </Link>
         </nav>
         </div>

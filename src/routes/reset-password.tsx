@@ -6,6 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useT } from "@/lib/i18n";
+import { LanguageSelector } from "@/components/LanguageSelector";
 import logo from "@/assets/speak2co-logo.asset.json";
 
 export const Route = createFileRoute("/reset-password")({
@@ -25,10 +27,11 @@ export const Route = createFileRoute("/reset-password")({
   component: ResetPasswordPage,
 });
 
-const passwordSchema = z.string().min(6, "A senha precisa ter ao menos 6 caracteres").max(72);
 
 function ResetPasswordPage() {
   const navigate = useNavigate();
+  const t = useT();
+  const passwordSchema = z.string().min(6, t("auth.err.password")).max(72);
   const [ready, setReady] = useState(false);
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
@@ -52,7 +55,7 @@ function ResetPasswordPage() {
       return;
     }
     if (password !== confirm) {
-      toast.error("As senhas não coincidem.");
+      toast.error(t("reset.mismatch"));
       return;
     }
     setLoading(true);
@@ -61,44 +64,45 @@ function ResetPasswordPage() {
     if (error) {
       const msg = error.message.toLowerCase();
       if (msg.includes("different from the old password") || msg.includes("same_password")) {
-        toast.error("A nova senha precisa ser diferente da senha atual. Escolha outra senha.");
+        toast.error(t("reset.same"));
       } else if (msg.includes("should be at least") || msg.includes("weak")) {
-        toast.error("Senha muito fraca. Use ao menos 6 caracteres, com letras e números.");
+        toast.error(t("reset.weak"));
       } else if (
         msg.includes("session") ||
         msg.includes("expired") ||
         msg.includes("token") ||
         msg.includes("not found")
       ) {
-        toast.error(
-          "Este link de redefinição expirou ou já foi usado. Peça um novo link em 'Esqueci minha senha'.",
-        );
+        toast.error(t("reset.expired"));
       } else {
         toast.error(error.message);
       }
       return;
     }
-    toast.success("Senha atualizada com sucesso!");
+    toast.success(t("reset.success"));
     navigate({ to: "/painel", replace: true });
   }
 
   return (
-    <main className="surface-navy flex min-h-screen flex-col items-center justify-center px-6 py-16">
+    <main className="surface-navy relative flex min-h-screen flex-col items-center justify-center px-6 py-16">
+      <div className="absolute top-4 right-4 z-20 sm:top-6 sm:right-6">
+        <LanguageSelector />
+      </div>
       <Link to="/" className="mb-8">
         <img src={logo.url} alt="Logo Speak2Co" className="glow-gold h-24 w-24 rounded-full object-cover" />
       </Link>
 
       <div className="w-full max-w-md rounded-3xl border border-border bg-card/70 p-8 backdrop-blur">
-        <h1 className="text-center text-2xl font-semibold">Redefinir senha</h1>
+        <h1 className="text-center text-2xl font-semibold">{t("reset.title")}</h1>
         <p className="mt-2 text-center text-sm text-muted-foreground">
           {ready
-            ? "Escolha uma nova senha para acessar sua conta."
-            : "Abra esta página pelo link enviado ao seu e-mail para redefinir a senha."}
+            ? t("reset.ready")
+            : t("reset.notReady")}
         </p>
 
         <form onSubmit={handleSubmit} className="mt-6 grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="new-password">Nova senha</Label>
+            <Label htmlFor="new-password">{t("reset.new")}</Label>
             <Input
               id="new-password"
               type="password"
@@ -108,7 +112,7 @@ function ResetPasswordPage() {
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="confirm-password">Confirmar nova senha</Label>
+            <Label htmlFor="confirm-password">{t("reset.confirm")}</Label>
             <Input
               id="confirm-password"
               type="password"
@@ -122,13 +126,13 @@ function ResetPasswordPage() {
             disabled={loading || !ready}
             className="bg-gold text-primary-foreground glow-gold mt-2 rounded-full font-semibold hover:opacity-90"
           >
-            Salvar nova senha
+            {t("reset.save")}
           </Button>
         </form>
 
         <div className="mt-6 text-center text-sm">
           <Link to="/auth" className="text-gold underline-offset-4 hover:underline">
-            Voltar para o login
+            {t("reset.back")}
           </Link>
         </div>
       </div>
