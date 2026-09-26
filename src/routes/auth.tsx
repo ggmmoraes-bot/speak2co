@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useT } from "@/lib/i18n";
+import { LanguageSelector } from "@/components/LanguageSelector";
 import logo from "@/assets/speak2co-logo.asset.json";
 
 export const Route = createFileRoute("/auth")({
@@ -32,12 +34,13 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
 });
 
-const emailSchema = z.string().trim().email("Informe um e-mail válido").max(255);
-const passwordSchema = z.string().min(6, "A senha precisa ter ao menos 6 caracteres").max(72);
-const nameSchema = z.string().trim().min(2, "Informe seu nome completo").max(100);
 
 function AuthPage() {
   const navigate = useNavigate();
+  const t = useT();
+  const emailSchema = z.string().trim().email(t("auth.err.email")).max(255);
+  const passwordSchema = z.string().min(6, t("auth.err.password")).max(72);
+  const nameSchema = z.string().trim().min(2, t("auth.err.name")).max(100);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -63,7 +66,7 @@ function AuthPage() {
     if (error) {
       const msg = error.message.toLowerCase();
       if (msg.includes("not confirmed")) {
-        toast.error("Sua conta ainda não foi confirmada. Enviamos um novo link para o seu e-mail.");
+        toast.error(t("auth.err.notConfirmed"));
         void supabase.auth.resend({
           type: "signup",
           email: parsed.data.email,
@@ -71,9 +74,7 @@ function AuthPage() {
         });
         return;
       }
-      toast.error(
-        "E-mail ou senha incorretos. Se você já tem conta, use 'Esqueci minha senha' para criar uma nova senha.",
-      );
+      toast.error(t("auth.err.invalid"));
       return;
     }
     navigate({ to: "/painel", replace: true });
@@ -100,7 +101,7 @@ function AuthPage() {
     if (error) {
       setLoading(false);
       if (error.message.toLowerCase().includes("already registered")) {
-        toast.error("Você já tem uma conta com esse e-mail. Use a aba 'Entrar'.");
+        toast.error(t("auth.err.exists"));
         return;
       }
       toast.error(error.message);
@@ -109,7 +110,7 @@ function AuthPage() {
     // E-mail já cadastrado: o Supabase devolve um usuário sem identidades.
     if (data.user && (data.user.identities?.length ?? 0) === 0) {
       setLoading(false);
-      toast.error("Você já tem uma conta com esse e-mail. Use a aba 'Entrar'.");
+      toast.error(t("auth.err.exists"));
       return;
     }
     if (data.session) {
@@ -134,7 +135,7 @@ function AuthPage() {
   async function handleForgotPassword() {
     const parsed = emailSchema.safeParse(email);
     if (!parsed.success) {
-      toast.error("Informe seu e-mail no campo acima para redefinir a senha.");
+      toast.error(t("auth.err.resetEmail"));
       return;
     }
     setLoading(true);
@@ -143,10 +144,10 @@ function AuthPage() {
     });
     setLoading(false);
     if (error) {
-      toast.error("Não foi possível enviar o e-mail de redefinição. Tente novamente.");
+      toast.error(t("auth.err.resetFail"));
       return;
     }
-    toast.success("Enviamos um link de redefinição para o seu e-mail.");
+    toast.success(t("auth.resetSent"));
   }
 
   async function handleOAuth(provider: "google" | "apple") {
@@ -156,7 +157,7 @@ function AuthPage() {
     });
     if (result.error) {
       setLoading(false);
-      toast.error("Não foi possível conectar com esse provedor.");
+      toast.error(t("auth.err.oauth"));
       return;
     }
     if (result.redirected) return;
@@ -164,14 +165,17 @@ function AuthPage() {
   }
 
   return (
-    <main className="surface-navy flex min-h-screen flex-col items-center justify-center px-6 py-16">
+    <main className="surface-navy relative flex min-h-screen flex-col items-center justify-center px-6 py-16">
+      <div className="absolute top-4 right-4 z-20 sm:top-6 sm:right-6">
+        <LanguageSelector />
+      </div>
       <Link to="/" className="mb-8">
         <img src={logo.url} alt="Logo Speak2Co" className="glow-gold h-28 w-28 rounded-full object-cover" />
       </Link>
 
       <div className="w-full max-w-md rounded-3xl border border-border bg-card/70 p-8 backdrop-blur">
         <h1 className="text-center text-2xl font-semibold">
-          Welcome to <span className="text-foreground">Speak</span><span className="text-gold">2Co</span>
+          {t("auth.welcome")} <span className="text-foreground">Speak</span><span className="text-gold">2Co</span>
 
         </h1>
 
@@ -181,8 +185,7 @@ function AuthPage() {
 
         {sent ? (
           <p className="mt-8 text-center text-sm text-muted-foreground">
-            Enviamos um e-mail de confirmação para <strong className="text-foreground">{email}</strong>.
-            Confirme o cadastro para acessar sua conta.
+            {t("auth.confirmSent", { email })}
           </p>
         ) : (
           <>
@@ -194,7 +197,7 @@ function AuthPage() {
                 onClick={() => handleOAuth("google")}
                 className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
               >
-                Continuar com Google
+                {t("auth.google")}
               </Button>
               <Button
                 type="button"
@@ -203,24 +206,24 @@ function AuthPage() {
                 onClick={() => handleOAuth("apple")}
                 className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
               >
-                Continuar com Apple
+                {t("auth.apple")}
               </Button>
             </div>
 
             <div className="my-6 flex items-center gap-3 text-xs tracking-widest text-muted-foreground uppercase">
-              <span className="h-px flex-1 bg-border" /> ou <span className="h-px flex-1 bg-border" />
+              <span className="h-px flex-1 bg-border" /> {t("auth.or")} <span className="h-px flex-1 bg-border" />
             </div>
 
             <Tabs defaultValue="signin">
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="signin">Entrar</TabsTrigger>
-                <TabsTrigger value="signup">Criar conta</TabsTrigger>
+                <TabsTrigger value="signin">{t("auth.tabSignIn")}</TabsTrigger>
+                <TabsTrigger value="signup">{t("auth.tabSignUp")}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="signin">
                 <form onSubmit={handleSignIn} className="mt-6 grid gap-4">
                   <div className="grid gap-2">
-                    <Label htmlFor="signin-email">E-mail</Label>
+                    <Label htmlFor="signin-email">{t("auth.email")}</Label>
                     <Input
                       id="signin-email"
                       type="email"
@@ -230,7 +233,7 @@ function AuthPage() {
                     />
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="signin-password">Senha</Label>
+                    <Label htmlFor="signin-password">{t("auth.password")}</Label>
                     <Input
                       id="signin-password"
                       type="password"
@@ -244,7 +247,7 @@ function AuthPage() {
                     disabled={loading}
                     className="bg-gold text-primary-foreground glow-gold mt-2 rounded-full font-semibold hover:opacity-90"
                   >
-                    Entrar
+                    {t("buttons.signIn")}
                   </Button>
                   <button
                     type="button"
@@ -252,7 +255,7 @@ function AuthPage() {
                     disabled={loading}
                     className="text-gold mt-1 text-center text-sm underline-offset-4 hover:underline"
                   >
-                    Esqueci minha senha
+                    {t("auth.forgotPassword")}
                   </button>
                 </form>
               </TabsContent>
@@ -260,7 +263,7 @@ function AuthPage() {
               <TabsContent value="signup">
                 <form onSubmit={handleSignUp} className="mt-6 grid gap-4">
                   <div className="grid gap-2">
-                    <Label htmlFor="signup-name">Nome completo</Label>
+                    <Label htmlFor="signup-name">{t("auth.fullName")}</Label>
                     <Input
                       id="signup-name"
                       autoComplete="name"
@@ -269,7 +272,7 @@ function AuthPage() {
                     />
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="signup-email">E-mail</Label>
+                    <Label htmlFor="signup-email">{t("auth.email")}</Label>
                     <Input
                       id="signup-email"
                       type="email"
@@ -279,7 +282,7 @@ function AuthPage() {
                     />
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="signup-password">Senha</Label>
+                    <Label htmlFor="signup-password">{t("auth.password")}</Label>
                     <Input
                       id="signup-password"
                       type="password"
@@ -293,7 +296,7 @@ function AuthPage() {
                     disabled={loading}
                     className="bg-gold text-primary-foreground glow-gold mt-2 rounded-full font-semibold hover:opacity-90"
                   >
-                    Criar minha conta
+                    {t("auth.createAccount")}
                   </Button>
                 </form>
               </TabsContent>
