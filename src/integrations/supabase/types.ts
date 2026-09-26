@@ -1208,6 +1208,7 @@ export type Database = {
           goal: string | null
           id: string
           plan: Database["public"]["Enums"]["plan_tier"]
+          preferred_language: string | null
           target_level: string | null
           updated_at: string
         }
@@ -1219,6 +1220,7 @@ export type Database = {
           goal?: string | null
           id: string
           plan?: Database["public"]["Enums"]["plan_tier"]
+          preferred_language?: string | null
           target_level?: string | null
           updated_at?: string
         }
@@ -1230,6 +1232,7 @@ export type Database = {
           goal?: string | null
           id?: string
           plan?: Database["public"]["Enums"]["plan_tier"]
+          preferred_language?: string | null
           target_level?: string | null
           updated_at?: string
         }
