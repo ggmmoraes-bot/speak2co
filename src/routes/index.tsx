@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import logoIntro from "@/assets/speak2co-logo-intro.mp4.asset.json";
 import logoIntroWebm from "@/assets/speak2co-logo-intro.webm.asset.json";
 import { Button } from "@/components/ui/button";
+import { LanguageSelector } from "@/components/LanguageSelector";
 import { supabase } from "@/integrations/supabase/client";
 import { siteUrl } from "@/lib/site";
 
@@ -62,6 +63,10 @@ function Index() {
       />
       <div aria-hidden="true" className="pointer-events-none absolute h-[min(90vw,760px)] w-[min(90vw,760px)] rounded-full border border-gold/10" />
       <div aria-hidden="true" className="pointer-events-none absolute h-[min(72vw,590px)] w-[min(72vw,590px)] rounded-full border border-gold/10" />
+
+      <div className="absolute top-4 right-4 z-20 sm:top-6 sm:right-6">
+        <LanguageSelector />
+      </div>
 
       <section className="relative z-10 flex w-full max-w-xl flex-col items-center text-center">
         <div className="logo-entrance aspect-square w-[min(76vw,42vh,420px)] overflow-hidden rounded-full drop-shadow-[0_24px_48px_color-mix(in_oklab,var(--gold)_30%,transparent)] sm:w-[min(58vw,48vh,460px)]">
