@@ -10,6 +10,7 @@ import { PlanUnlockedDialog } from "@/components/PlanUnlockedDialog";
 import { buildHomeSections } from "@/lib/home-hub";
 import { useAccess, aiMinutesLeft, useAdminPreviewPlan, useIsAdmin } from "@/lib/entitlements";
 import { AdminPlanPreview } from "@/components/AdminPlanPreview";
+import { LanguageSelector } from "@/components/LanguageSelector";
 import { getCefrStage } from "@/lib/placement-content";
 import logo from "@/assets/speak2co-logo.asset.json";
 
@@ -93,6 +94,7 @@ function Painel() {
             </span>
           </Link>
           <div className="flex shrink-0 items-center gap-2">
+            <LanguageSelector />
             {isAdminAccount && <AdminPlanPreview />}
             {isAdminAccount && !previewPlan && (
               <>
