@@ -1,5 +1,6 @@
 import { Globe } from "lucide-react";
 import { useI18n, LOCALES, LOCALE_LABELS, type Locale } from "@/lib/i18n";
+import { FlagIcon } from "@/components/FlagIcon";
 
 /**
  * Seletor de idioma sempre visível: as três bandeiras lado a lado,
@@ -33,9 +34,7 @@ export function LanguageSelector({ className }: { className?: string }) {
                 : "text-muted-foreground hover:bg-secondary hover:text-foreground"
             }`}
           >
-            <span className="text-2xl leading-none" aria-hidden>
-              {item.flag}
-            </span>
+            <FlagIcon locale={code} className="h-5 w-7" />
             <span className="hidden sm:inline">{item.short}</span>
           </button>
         );
