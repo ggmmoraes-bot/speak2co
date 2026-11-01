@@ -84,11 +84,12 @@ export function LifetimeCatalog({
           Categoria 2 — Produtos individuais
         </p>
         <h2 id="individual-heading" className="text-center text-2xl font-bold sm:text-3xl">
-          <AltHeading text="Escolha só o que você precisa" />
+          <AltHeading text="Vá além do inglês. Desenvolva habilidades para cada oportunidade." />
         </h2>
         <p className="mx-auto max-w-2xl text-center text-sm text-muted-foreground">
-          Cada produto é independente: pagamento único de {BRL(19.9)} e acesso vitalício ao produto
-          comprado. Você pode comprar quantos quiser, com ou sem o All Access.
+          Conheça nossa Product Line: soluções especializadas em inglês para diferentes objetivos pessoais e
+          profissionais. Cada produto oferece conteúdos e recursos específicos, com pagamento único de {BRL(19.9)} e
+          acesso vitalício ao produto adquirido.
         </p>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {INDIVIDUAL_PRODUCTS.map((p) => {
