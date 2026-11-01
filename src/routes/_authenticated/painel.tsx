@@ -171,7 +171,7 @@ function Painel() {
                 </Button>
                 <Button asChild variant="outline" className="rounded-full font-semibold">
                   <Link to="/assinatura" search={{ simulacao: undefined }}>
-                    <ShieldCheck className="mr-2 h-4 w-4 text-gold" /> Minha assinatura
+                    <ShieldCheck className="mr-2 h-4 w-4 text-gold" /> Meu acesso
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full font-semibold">

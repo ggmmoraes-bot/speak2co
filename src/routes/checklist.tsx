@@ -92,13 +92,13 @@ const ROUTES: RouteItem[] = [
   },
   {
     path: "/premium",
-    title: "Assinar Premium",
-    description: "Planos anuais com checkout do Mercado Pago e parcelamento em até 12x.",
+    title: "Comprar acesso vitalício",
+    description: "Speak2Co Complete e produtos individuais com pagamento único pelo Mercado Pago.",
     status: "protected",
   },
   {
     path: "/assinatura",
-    title: "Minha assinatura",
+    title: "Meu acesso",
     description:
       "Situação, valor, próxima renovação, recursos liberados e histórico de eventos do webhook.",
     status: "protected",

@@ -72,7 +72,7 @@ function MeuPlano() {
               <p className="text-xs tracking-widest uppercase">Histórico de versões bloqueado</p>
             </div>
             <p className="mt-3 text-sm text-muted-foreground">
-              No plano Essential você consulta todas as versões anteriores do seu plano e volta para
+              Com o Speak2Co Complete você consulta todas as versões anteriores do seu plano e volta para
               qualquer uma delas.
             </p>
             <Button
@@ -80,7 +80,7 @@ function MeuPlano() {
               className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
             >
               <Link to="/upgrade/essential" search={{ feature: "historico" as const }}>
-                Fazer upgrade para o Essential
+                Conhecer o Speak2Co Complete
               </Link>
             </Button>
           </div>

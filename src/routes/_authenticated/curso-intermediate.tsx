@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_authenticated/curso-intermediate")({
       feature="courses_intermediate"
       title="Curso Intermediate — 40 unidades do Método Speak2Co"
       benefit="Desbloqueie as 40 unidades B1→B2 com gramática avançada, phrasal verbs, collocations, diálogos longos, exercícios, quiz e checagem de pronúncia com IA."
-      requiredPlan="Essential"
+      requiredPlan="Speak2Co Complete"
     >
       <Outlet />
     </FeatureGate>

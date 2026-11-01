@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_authenticated/speak2travel")({
       feature="product_line_travel"
       title="Speak2Travel é uma Product Line Premium"
       benefit="Desbloqueie os 10 módulos de inglês para viagens, o Trip Planner com IA, os role plays de aeroporto, hotel e restaurante e todo o material complementar com checagem de pronúncia."
-      requiredPlan="Premium"
+      requiredPlan="Speak2Travel"
     >
       <Outlet />
     </FeatureGate>

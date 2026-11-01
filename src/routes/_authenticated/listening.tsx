@@ -348,7 +348,7 @@ function ListeningPracticePage() {
       feature={FEATURE_KEYS.learningTools}
       title="Listening Practice"
       benefit="Ouça diálogos com duas vozes, transcrição, vocabulário e perguntas de compreensão."
-      requiredPlan="Essential"
+      requiredPlan="Speak2Co Complete"
     >
       <ListeningPracticePageInner />
     </FeatureGate>

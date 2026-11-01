@@ -48,7 +48,7 @@ function GatedMaterialPage() {
       feature="premium_materials"
       title="Materiais de preparação do Speak2Hire"
       benefit="Desbloqueie os frameworks de entrevista: elevator pitch, método STAR, power words e o guia S.O.S."
-      requiredPlan="Essential"
+      requiredPlan="Speak2Co Complete"
     >
       <MaterialPage />
     </FeatureGate>
