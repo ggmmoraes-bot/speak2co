@@ -23,7 +23,7 @@ export const PLAN_META: Record<
   signature: { name: "Signature", level: 3, yearlyPrice: 579.0, checkoutKey: "signature_yearly" },
 };
 
-export const INSTALLMENTS = 12;
+export const INSTALLMENTS = 10;
 
 export const BRL = (value: number) =>
   value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });

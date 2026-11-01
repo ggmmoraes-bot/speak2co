@@ -47,10 +47,10 @@ export function PlanPrice({
         <span className="text-[0.6em] font-semibold">{INSTALLMENTS}x de </span>
         {BRL(installmentOf(charged))}
       </p>
-      <p className="text-sm font-medium text-foreground">Plano anual — acesso por 12 meses</p>
+      <p className="text-sm font-medium text-foreground">Pagamento único — acesso vitalício</p>
       <p className="mt-1 text-xs text-muted-foreground">
         Valor total: {BRL(charged)} · em até {INSTALLMENTS}x sem juros no cartão ou à vista (Pix ou
-        boleto)
+        boleto) · sem mensalidade
       </p>
 
     </div>
