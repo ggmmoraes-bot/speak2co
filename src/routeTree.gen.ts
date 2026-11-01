@@ -100,6 +100,7 @@ import { Route as AuthenticatedSpeak2travelModuloModuleIdRouteImport } from './r
 import { Route as AuthenticatedSpeak2travelRevisaoModuleIdRouteImport } from './routes/_authenticated/speak2travel.revisao.$moduleId'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as ApiPublicWebhooksMercadopagoRouteImport } from './routes/api/public/webhooks/mercadopago'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as AuthenticatedCursoBeginnerUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-beginner.unidade.$unitCode.$part'
 import { Route as AuthenticatedCursoIntermediateUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-intermediate.unidade.$unitCode.$part'
 import { Route as AuthenticatedCursoUpperUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-upper.unidade.$unitCode.$part'
@@ -617,6 +618,12 @@ const ApiPublicWebhooksMercadopagoRoute =
     path: '/api/public/webhooks/mercadopago',
     getParentRoute: () => rootRouteImport,
   } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute =
   AuthenticatedCursoBeginnerUnidadeUnitCodePartRouteImport.update({
     id: '/unidade/$unitCode/$part',
@@ -733,6 +740,7 @@ export interface FileRoutesByFullPath {
   '/speak2travel/revisao/$moduleId': typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
   '/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
   '/curso-upper/unidade/$unitCode/$part': typeof AuthenticatedCursoUpperUnidadeUnitCodePartRoute
@@ -821,6 +829,7 @@ export interface FileRoutesByTo {
   '/speak2travel/revisao/$moduleId': typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
   '/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
   '/curso-upper/unidade/$unitCode/$part': typeof AuthenticatedCursoUpperUnidadeUnitCodePartRoute
@@ -919,6 +928,7 @@ export interface FileRoutesById {
   '/_authenticated/speak2travel/revisao/$moduleId': typeof AuthenticatedSpeak2travelRevisaoModuleIdRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/api/public/webhooks/mercadopago': typeof ApiPublicWebhooksMercadopagoRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/_authenticated/curso-beginner/unidade/$unitCode/$part': typeof AuthenticatedCursoBeginnerUnidadeUnitCodePartRoute
   '/_authenticated/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
   '/_authenticated/curso-upper/unidade/$unitCode/$part': typeof AuthenticatedCursoUpperUnidadeUnitCodePartRoute
@@ -1017,6 +1027,7 @@ export interface FileRouteTypes {
     | '/speak2travel/revisao/$moduleId'
     | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
+    | '/lovable/email/transactional/preview'
     | '/curso-beginner/unidade/$unitCode/$part'
     | '/curso-intermediate/unidade/$unitCode/$part'
     | '/curso-upper/unidade/$unitCode/$part'
@@ -1105,6 +1116,7 @@ export interface FileRouteTypes {
     | '/speak2travel/revisao/$moduleId'
     | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
+    | '/lovable/email/transactional/preview'
     | '/curso-beginner/unidade/$unitCode/$part'
     | '/curso-intermediate/unidade/$unitCode/$part'
     | '/curso-upper/unidade/$unitCode/$part'
@@ -1202,6 +1214,7 @@ export interface FileRouteTypes {
     | '/_authenticated/speak2travel/revisao/$moduleId'
     | '/api/public/payments/webhook'
     | '/api/public/webhooks/mercadopago'
+    | '/lovable/email/transactional/preview'
     | '/_authenticated/curso-beginner/unidade/$unitCode/$part'
     | '/_authenticated/curso-intermediate/unidade/$unitCode/$part'
     | '/_authenticated/curso-upper/unidade/$unitCode/$part'
@@ -1225,6 +1238,7 @@ export interface RootRouteChildren {
   ApiVoiceTranscribeRoute: typeof ApiVoiceTranscribeRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   ApiPublicWebhooksMercadopagoRoute: typeof ApiPublicWebhooksMercadopagoRoute
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1866,6 +1880,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWebhooksMercadopagoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/curso-beginner/unidade/$unitCode/$part': {
       id: '/_authenticated/curso-beginner/unidade/$unitCode/$part'
       path: '/unidade/$unitCode/$part'
@@ -2218,6 +2239,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiVoiceTranscribeRoute: ApiVoiceTranscribeRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   ApiPublicWebhooksMercadopagoRoute: ApiPublicWebhooksMercadopagoRoute,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

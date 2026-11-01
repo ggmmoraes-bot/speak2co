@@ -171,6 +171,33 @@ async function syncPreferencePayment(payment: {
     raw: { plan },
   });
 
+  if (approved && existing.status !== "authorized") {
+    try {
+      const PRODUCT_NAMES: Record<string, string> = {
+        complete_lifetime: "Speak2Co All Access",
+        speak2hire_lifetime: "Speak2Hire",
+        speak2fluency_lifetime: "Speak2Fluency",
+        speak2travel_lifetime: "Speak2Travel",
+      };
+      const { data: u } = await supabaseAdmin.auth.admin.getUserById(existing.user_id);
+      const email = u?.user?.email;
+      if (email) {
+        const amt = payment.transaction_amount ?? existing.amount;
+        const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
+        await sendTemplateEmail("purchase-confirmed", email, {
+          templateData: {
+            name: (u?.user?.user_metadata?.['full_name'] as string | undefined)?.split(" ")[0],
+            productName: PRODUCT_NAMES[existing.plan_key ?? ""] ?? "Speak2Co",
+            amount: amt != null ? `R$ ${Number(amt).toFixed(2).replace(".", ",")}` : undefined,
+          },
+          idempotencyKey: `purchase-confirmed-${existing.id}`,
+        });
+      }
+    } catch (e) {
+      console.error("[purchase-confirmed email]", e);
+    }
+  }
+
   return true;
 }
 
