@@ -117,7 +117,7 @@ async function syncPreferencePayment(payment: {
 
   const { data: existing } = await supabaseAdmin
     .from("subscriptions")
-    .select("id, user_id, status, amount, currency, current_period_end")
+    .select("id, user_id, status, amount, currency, current_period_end, plan_key")
     .eq("external_reference", reference)
     .maybeSingle();
   if (!existing) return false;
@@ -129,7 +129,8 @@ async function syncPreferencePayment(payment: {
       ? "cancelled"
       : "pending";
 
-  // O período de 12 meses passa a contar da aprovação do pagamento.
+  // Produtos de pagamento único (`*_lifetime`) não expiram: sem data final.
+  const lifetime = (existing.plan_key ?? "").endsWith("_lifetime");
   const periodEnd = new Date();
   periodEnd.setFullYear(periodEnd.getFullYear() + 1);
 
@@ -137,7 +138,7 @@ async function syncPreferencePayment(payment: {
     .from("subscriptions")
     .update({
       status,
-      ...(approved ? { current_period_end: periodEnd.toISOString() } : {}),
+      ...(approved ? { current_period_end: lifetime ? null : periodEnd.toISOString() } : {}),
       raw: JSON.parse(JSON.stringify(payment)),
       updated_at: new Date().toISOString(),
     })
@@ -151,7 +152,7 @@ async function syncPreferencePayment(payment: {
     amount: payment.transaction_amount ?? existing.amount ?? null,
     currency: payment.currency_id ?? "BRL",
     message: approved
-      ? "Pagamento anual aprovado — acesso liberado por 12 meses."
+      ? lifetime ? "Pagamento único aprovado — acesso vitalício liberado." : "Pagamento anual aprovado — acesso liberado por 12 meses."
       : `Pagamento ${payment.status ?? "desconhecido"} (${payment.status_detail ?? "sem detalhe"}).`,
     raw: JSON.parse(JSON.stringify(payment)),
   });
