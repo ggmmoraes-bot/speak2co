@@ -35,7 +35,6 @@ export function LifetimeCatalog({
   /** Produtos que a aluna já possui (por checkoutKey). */
   owned?: Partial<Record<LifetimeCheckoutKey, boolean>>;
 }) {
-  const installment = COMPLETE_PRODUCT.price / COMPLETE_PRODUCT.installments;
   const ownedBadge = (
     <span className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-gold/50 bg-gold/10 text-sm font-semibold text-gold">
       <Check className="h-4 w-4" /> Você já possui — acesso vitalício
@@ -61,7 +60,7 @@ export function LifetimeCatalog({
           <p className="mt-6 text-4xl font-bold text-gold">{BRL(COMPLETE_PRODUCT.price)}</p>
           <p className="text-sm font-medium text-foreground">Pagamento único</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            ou até {COMPLETE_PRODUCT.installments}x de {BRL(installment)} sem juros no cartão
+            ou até {COMPLETE_PRODUCT.installments}x no cartão de crédito
           </p>
           <ul className="mt-6 grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
             {COMPLETE_PRODUCT.benefits.map((b) => (
