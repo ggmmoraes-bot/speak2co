@@ -1531,11 +1531,12 @@ export type Database = {
         }
         Returns: boolean
       }
+      owned_product_features: { Args: { _user_id: string }; Returns: string[] }
       sync_expired_plans: { Args: never; Returns: undefined }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
-      plan_tier: "free" | "premium" | "essential" | "signature"
+      plan_tier: "free" | "premium" | "essential" | "signature" | "complete"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1664,7 +1665,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
-      plan_tier: ["free", "premium", "essential", "signature"],
+      plan_tier: ["free", "premium", "essential", "signature", "complete"],
     },
   },
 } as const
