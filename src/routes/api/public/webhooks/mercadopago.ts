@@ -186,7 +186,7 @@ async function syncPreferencePayment(payment: {
         const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
         await sendTemplateEmail("purchase-confirmed", email, {
           templateData: {
-            name: (u.user.user_metadata?.full_name as string | undefined)?.split(" ")[0],
+            name: (u?.user?.user_metadata?.['full_name'] as string | undefined)?.split(" ")[0],
             productName: PRODUCT_NAMES[existing.plan_key ?? ""] ?? "Speak2Co",
             amount: amt != null ? `R$ ${Number(amt).toFixed(2).replace(".", ",")}` : undefined,
           },

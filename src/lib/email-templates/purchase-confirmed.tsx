@@ -38,7 +38,7 @@ const Email = ({ name, productName, amount }: Props) => (
 export const template = {
   component: Email,
   subject: (d: Record<string, any>) =>
-    `Compra confirmada: ${d?.productName || 'Speak2Co'} — acesso vitalício liberado`,
+    `Compra confirmada: ${d?.['productName'] || 'Speak2Co'} — acesso vitalício liberado`,
   displayName: 'Compra confirmada',
   previewData: { name: 'Ana', productName: 'Speak2Co All Access', amount: 'R$ 97,90' },
 } satisfies TemplateEntry
