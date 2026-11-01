@@ -39,17 +39,17 @@ export const Route = createFileRoute("/_authenticated/upgrade/essential")({
   },
   head: () => ({
     meta: [
-      { title: "Upgrade para o Essential — Speak2Co" },
+      { title: "Speak2Co Complete — acesso vitalício" },
       {
         name: "description",
         content:
-          "Libere marcos de evolução, ajustes do plano com IA e histórico de versões assinando o plano Essential do Speak2Co.",
+          "Libere marcos de evolução, ajustes do plano com IA e histórico com o Speak2Co Complete: pagamento único e acesso vitalício.",
       },
-      { property: "og:title", content: "Upgrade para o Essential — Speak2Co" },
+      { property: "og:title", content: "Speak2Co Complete — acesso vitalício" },
       {
         property: "og:description",
         content:
-          "Assine o Essential e desbloqueie o plano de estudos completo com marcos, ajustes por IA e histórico.",
+          "Desbloqueie o plano de estudos completo com o Speak2Co Complete, pagamento único.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -66,13 +66,13 @@ function UpgradeEssentialPage() {
     queryKey: ["my-checkout-pricing"],
     queryFn: () => fetchPricing(),
   });
-  const pricing = pricingData?.pricing?.["essential_yearly"];
+  const pricing = pricingData?.pricing?.["complete_lifetime" as never];
 
   const mutation = useMutation({
     mutationFn: () =>
       checkout({
         data: {
-          planKey: "essential_yearly" as never,
+          planKey: "complete_lifetime" as const,
           origin: window.location.origin,
         },
       }),
@@ -86,14 +86,14 @@ function UpgradeEssentialPage() {
 
   return (
     <main className="mx-auto w-full max-w-4xl px-6 py-14">
-      <p className="text-sm uppercase tracking-[0.3em] text-gold">Plano Essential</p>
+      <p className="text-sm uppercase tracking-[0.3em] text-gold">Speak2Co Complete</p>
       <h1 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
         {focus ? `Libere ${focus.title.toLowerCase()}` : "Libere seu plano de estudos completo"}
       </h1>
       <p className="mt-3 max-w-2xl text-muted-foreground">
         {focus
           ? focus.description
-          : "O plano Gratuito é uma degustação. Com o Essential você recebe o plano inteiro, com marcos, ajustes por IA e histórico."}
+          : "O plano Gratuito é uma degustação. Com o Speak2Co Complete você recebe o plano inteiro, com marcos, ajustes por IA e histórico."}
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
@@ -118,17 +118,17 @@ function UpgradeEssentialPage() {
       <section className="mt-10 rounded-2xl border border-gold/40 bg-card/60 p-8 backdrop-blur">
         <div className="flex flex-col items-center text-center">
           <span className="rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold text-gold">
-            Ideal para iniciantes
+            Acesso vitalício
           </span>
           <div className="mt-4">
             <PlanPrice
-              total={PLAN_META.essential.yearlyPrice}
+              total={PLAN_META.complete.yearlyPrice}
               discountedTotal={pricing?.finalAmount ?? null}
               align="center"
             />
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Acesso por 12 meses · renovação por nova contratação avisada antes do vencimento
+            Pagamento único · sem mensalidade · sem renovação
           </p>
         </div>
 
@@ -155,10 +155,10 @@ function UpgradeEssentialPage() {
             onClick={() => mutation.mutate()}
             className="rounded-full bg-gold px-8 font-semibold text-primary-foreground hover:opacity-90"
           >
-            {mutation.isPending ? "Abrindo checkout…" : "Assinar o Essential"}
+            {mutation.isPending ? "Abrindo checkout…" : "Adquirir acesso vitalício"}
           </Button>
           <Button asChild variant="outline" className="rounded-full">
-            <Link to="/premium">Comparar todos os planos</Link>
+            <Link to="/premium">Ver todas as opções</Link>
           </Button>
         </div>
         <p className="mt-4 text-center text-xs text-muted-foreground">
