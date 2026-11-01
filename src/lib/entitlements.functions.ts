@@ -126,6 +126,7 @@ export const getMyAccess = createServerFn({ method: "GET" })
       features,
       aiDailyMinutes: isAdmin ? null : (plan?.ai_daily_minutes ?? null),
       aiUsedSeconds: usageRes.data?.seconds_used ?? 0,
+      ownedProducts,
     };
   });
 
