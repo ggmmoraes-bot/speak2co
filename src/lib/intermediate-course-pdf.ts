@@ -9,7 +9,7 @@ export async function exportIntermediateCourseToPdf() {
   await renderCoursePdf(doc, {
     lessons: INTERMEDIATE_UNITS.map(unitToPdfLesson),
     courseTitle: "Intermediate English Course",
-    subtitle: "Método Speak2Co · Plano Essential",
+    subtitle: "Método Speak2Co · All Access",
     intro:
       `${INTERMEDIATE_UNITS.length} unidades B1 com Part 1 — Discover e Part 2 — Communicate: ` +
       "warm-up, contexto real, vocabulário com IPA, gramática por exemplos, expressões, " +

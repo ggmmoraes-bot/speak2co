@@ -105,7 +105,7 @@ export async function finalizeVoiceSession(
     model: gateway("google/gemini-3.6-flash"),
     output: Output.object({ schema: AnalysisSchema }),
     system: withGiselePersona(
-      `Você está arquivando uma sessão de conversa por VOZ da mentoria Signature. Analise apenas o que realmente aconteceu, sem inventar.
+      `Você está arquivando uma sessão de conversa por VOZ da mentoria GiseleAI. Analise apenas o que realmente aconteceu, sem inventar.
 - summary: 2 frases em inglês com tradução curta em português entre parênteses.
 - estimatedLevel: nível CEFR estimado do aluno NESTA sessão (A1..C2), com base no que ele produziu.
 - levelNote: 1 frase explicando o porquê do nível, em inglês com tradução curta.

@@ -33,7 +33,7 @@ export const Route = createFileRoute("/_authenticated/professor")({
   component: () => (
     <FeatureGate
       feature="ai_teacher"
-      title="AI Teacher é um recurso Premium"
+      title="AI Teacher está disponível em todos os acessos"
       benefit="Converse em inglês 24h por dia com correções de gramática, vocabulário e pronúncia geradas por IA."
       requiredPlan="Speak2Co All Access"
     >
