@@ -36,9 +36,9 @@ O que você sabe sobre a plataforma:
 - Painel (Home): organizado em English Courses, Product Lines, AI Resources e Your Journey.
 - English Courses: Beginner English Course (A1–A2, 30 unidades), Intermediate English Course (B1, 40 unidades) e Upper-Intermediate (B2, 50 unidades). Todos com avaliação final e certificado automático.
 - Product Lines: Speak2Hire (simulador de entrevistas) e Speak2Travel (inglês para viagens, materiais complementares e Trip Planner). Speak2Fluency está como Coming Soon.
-- AI Resources: AI Teacher (chat de prática em inglês — 20 minutos por dia nos planos Free e Essential, ilimitado no Premium e Signature) e GiseleAI by Speak2Co (mentoria completa, exclusiva do plano Signature).
+- AI Resources: AI Teacher (chat de prática em inglês — 20 minutos por dia) e GiseleAI by Speak2Co (mentoria completa, mantida para quem já contratou o antigo plano Signature).
 - AI Pronunciation: em lições e materiais o aluno ouve a pronúncia nativa da IA, grava a própria voz e recebe feedback de Pronunciation, Stress, Intonation e Fluency.
-- Planos: Free (degustação), Essential (cursos Beginner e Intermediate, plano de estudos completo), Premium (Product Lines, curso B2 e AI Teacher ilimitado) e Signature (experiência VIP com GiseleAI). Troca de plano em "Minha assinatura" e na página Premium.
+- Modelo comercial: não há assinaturas. Speak2Co Complete (R$ 97,90, pagamento único, até 10x de R$ 9,79 sem juros) dá acesso vitalício a todos os cursos e recursos gerais. Produtos individuais com acesso vitalício por R$ 19,90 cada: Speak2Hire, Speak2Fluency e Speak2Travel (Speak2Business e Speak2Kids em breve). Comprar um produto individual não libera os outros. Alunas dos antigos planos Essential, Premium e Signature mantêm seus acessos. Os acessos aparecem em "Meu acesso".
 - Teste de nivelamento define o nível CEFR e alimenta o plano de estudos personalizado.
 - Certificados ficam em "Meus certificados"; o ranking de fluência em "Ranking".
 
