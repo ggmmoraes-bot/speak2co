@@ -219,7 +219,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
           </div>
           <p className="mt-2 text-sm text-muted-foreground">
             Você já pode praticar as semanas 1–{previewWeeks}. As semanas {previewWeeks + 1}–
-            {totalWeeks} são liberadas no Speak2Co Complete.
+            {totalWeeks} são liberadas no Speak2Co All Access.
           </p>
         </div>
       )}

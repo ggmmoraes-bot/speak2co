@@ -48,7 +48,7 @@ function GatedMaterialPage() {
       feature="premium_materials"
       title="Materiais complementares do Speak2Travel"
       benefit="Desbloqueie o Travel Vocabulary, Grammar, Pronunciation Lab, Survival English, Culture Tips e Pocket Dictionary com pronúncia da IA."
-      requiredPlan="Speak2Co Complete"
+      requiredPlan="Speak2Co All Access"
     >
       <MaterialPage />
     </FeatureGate>

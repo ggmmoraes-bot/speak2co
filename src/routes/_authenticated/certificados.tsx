@@ -38,7 +38,7 @@ export const Route = createFileRoute("/_authenticated/certificados")({
       feature="cefr_certificate"
       title="Certificados Speak2Co"
       benefit="Emita certificados oficiais em PDF por nível CEFR, cursos concluídos e marcos de prática."
-      requiredPlan="Speak2Co Complete"
+      requiredPlan="Speak2Co All Access"
     >
       <CertificadosPage />
     </FeatureGate>

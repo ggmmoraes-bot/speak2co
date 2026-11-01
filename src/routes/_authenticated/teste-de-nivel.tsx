@@ -54,7 +54,7 @@ export const Route = createFileRoute("/_authenticated/teste-de-nivel")({
       feature="placement_test"
       title="Teste de nivelamento CEFR"
       benefit="Descubra seu nível de inglês (A1 a C1) com 20 questões e uma redação avaliada pela IA."
-      requiredPlan="Speak2Co Complete"
+      requiredPlan="Speak2Co All Access"
     >
       <PlacementPage />
     </FeatureGate>

@@ -98,7 +98,7 @@ function FlashcardsPage() {
       feature={FEATURE_KEYS.learningTools}
       title="Flashcards"
       benefit="Revisão espaçada do seu vocabulário com o sistema Again, Hard, Good e Easy."
-      requiredPlan="Speak2Co Complete"
+      requiredPlan="Speak2Co All Access"
     >
       <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-10">
         <header>

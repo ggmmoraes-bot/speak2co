@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_authenticated/curso-beginner")({
       feature="courses_beginner"
       title="Curso Beginner — 30 unidades do Método Speak2Co"
       benefit="Desbloqueie as 30 unidades completas com vocabulário, verbos, gramática, conversação, exercícios, quiz e checagem de pronúncia com IA."
-      requiredPlan="Speak2Co Complete"
+      requiredPlan="Speak2Co All Access"
     >
       <Outlet />
     </FeatureGate>

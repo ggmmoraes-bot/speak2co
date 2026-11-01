@@ -39,17 +39,17 @@ export const Route = createFileRoute("/_authenticated/upgrade/essential")({
   },
   head: () => ({
     meta: [
-      { title: "Speak2Co Complete — acesso vitalício" },
+      { title: "Speak2Co All Access — acesso vitalício" },
       {
         name: "description",
         content:
-          "Libere marcos de evolução, ajustes do plano com IA e histórico com o Speak2Co Complete: pagamento único e acesso vitalício.",
+          "Libere marcos de evolução, ajustes do plano com IA e histórico com o Speak2Co All Access: pagamento único e acesso vitalício.",
       },
-      { property: "og:title", content: "Speak2Co Complete — acesso vitalício" },
+      { property: "og:title", content: "Speak2Co All Access — acesso vitalício" },
       {
         property: "og:description",
         content:
-          "Desbloqueie o plano de estudos completo com o Speak2Co Complete, pagamento único.",
+          "Desbloqueie o plano de estudos completo com o Speak2Co All Access, pagamento único.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -86,14 +86,14 @@ function UpgradeEssentialPage() {
 
   return (
     <main className="mx-auto w-full max-w-4xl px-6 py-14">
-      <p className="text-sm uppercase tracking-[0.3em] text-gold">Speak2Co Complete</p>
+      <p className="text-sm uppercase tracking-[0.3em] text-gold">Speak2Co All Access</p>
       <h1 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
         {focus ? `Libere ${focus.title.toLowerCase()}` : "Libere seu plano de estudos completo"}
       </h1>
       <p className="mt-3 max-w-2xl text-muted-foreground">
         {focus
           ? focus.description
-          : "O plano Gratuito é uma degustação. Com o Speak2Co Complete você recebe o plano inteiro, com marcos, ajustes por IA e histórico."}
+          : "O plano Gratuito é uma degustação. Com o Speak2Co All Access você recebe o plano inteiro, com marcos, ajustes por IA e histórico."}
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">

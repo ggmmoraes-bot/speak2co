@@ -93,7 +93,7 @@ const ROUTES: RouteItem[] = [
   {
     path: "/premium",
     title: "Comprar acesso vitalício",
-    description: "Speak2Co Complete e produtos individuais com pagamento único pelo Mercado Pago.",
+    description: "Speak2Co All Access e produtos individuais com pagamento único pelo Mercado Pago.",
     status: "protected",
   },
   {

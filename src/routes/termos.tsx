@@ -69,7 +69,7 @@ const SECTIONS: Section[] = [
   {
     title: "4. Planos e funcionalidades",
     paragraphs: [
-      "A Speak2Co oferece produtos de pagamento único com acesso vitalício: o Speak2Co Complete e produtos individuais, cada um com funcionalidades específicas. Os recursos disponíveis em cada plano são apresentados na plataforma no momento da contratação.",
+      "A Speak2Co oferece produtos de pagamento único com acesso vitalício: o Speak2Co All Access e produtos individuais, cada um com funcionalidades específicas. Os recursos disponíveis em cada plano são apresentados na plataforma no momento da contratação.",
       "A Speak2Co poderá:",
     ],
     items: [

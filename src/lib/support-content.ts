@@ -39,7 +39,7 @@ export const HELP_GUIDE: HelpArticle[] = [
     steps: [
       "AI Teacher: conversa livre em inglês com correção. Free e Essential têm 20 minutos por dia.",
       "AI Pronunciation: grave sua voz e receba nota de Pronunciation, Stress, Intonation e Fluency.",
-      "GiseleAI (Speak2Co Complete): mentoria contínua, missões diárias, Voice Room e plano personalizado.",
+      "GiseleAI (Speak2Co All Access): mentoria contínua, missões diárias, Voice Room e plano personalizado.",
       "Permita o uso do microfone no navegador na primeira vez que gravar.",
     ],
   },
@@ -62,7 +62,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     group: "Plans",
     q: "Quais planos existem e como funciona a cobrança?",
-    a: "Não há assinaturas. Você pode comprar o Speak2Co Complete (R$ 97,90, até 10x sem juros) com acesso vitalício a todos os cursos e recursos gerais, e produtos individuais (Speak2Hire, Speak2Fluency e Speak2Travel) por R$ 19,90 cada, também vitalícios. Pagamento único, sem mensalidade.",
+    a: "Não há assinaturas. Você pode comprar o Speak2Co All Access (R$ 97,90, até 10x sem juros) com acesso vitalício a todos os cursos e recursos gerais, e produtos individuais (Speak2Hire, Speak2Fluency e Speak2Travel) por R$ 19,90 cada, também vitalícios. Pagamento único, sem mensalidade.",
   },
   {
     group: "Plans",
@@ -102,7 +102,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     group: "AI",
     q: "A GiseleAI está em qual plano?",
-    a: "GiseleAI by Speak2Co está incluída no Speak2Co Complete (e no antigo Signature), com voz, memória de longo prazo e mentoria personalizada.",
+    a: "GiseleAI by Speak2Co está incluída no Speak2Co All Access (e no antigo Signature), com voz, memória de longo prazo e mentoria personalizada.",
   },
   {
     group: "Product Lines",

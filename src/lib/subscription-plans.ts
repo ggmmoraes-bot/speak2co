@@ -17,7 +17,7 @@ export const PLAN_META: Record<
   { name: string; level: number; yearlyPrice: number | null; checkoutKey: string | null }
 > = {
   free: { name: "Free", level: 0, yearlyPrice: null, checkoutKey: null },
-  complete: { name: "Speak2Co Complete", level: 15, yearlyPrice: 97.9, checkoutKey: "complete_lifetime" },
+  complete: { name: "Speak2Co All Access", level: 15, yearlyPrice: 97.9, checkoutKey: "complete_lifetime" },
   essential: { name: "Essential", level: 1, yearlyPrice: 430.8, checkoutKey: "essential_yearly" },
   premium: { name: "Premium", level: 2, yearlyPrice: 479.0, checkoutKey: "premium_yearly" },
   signature: { name: "Signature", level: 3, yearlyPrice: 579.0, checkoutKey: "signature_yearly" },
@@ -177,7 +177,7 @@ export type LifetimeCheckoutKey =
 
 export const COMPLETE_PRODUCT = {
   checkoutKey: "complete_lifetime" as const,
-  name: "Speak2Co Complete",
+  name: "Speak2Co All Access",
   price: 97.9,
   installments: 10,
   benefits: PLAN_BENEFITS.complete,

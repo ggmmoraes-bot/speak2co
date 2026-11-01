@@ -23,7 +23,7 @@ const ART: Record<IndividualProduct["id"], string> = {
 };
 
 /**
- * Vitrine comercial única (página pública e área da aluna): Speak2Co Complete
+ * Vitrine comercial única (página pública e área da aluna): Speak2Co All Access
  * + produtos individuais. Quem chama decide o que cada botão faz.
  */
 export function LifetimeCatalog({
@@ -88,7 +88,7 @@ export function LifetimeCatalog({
         </h2>
         <p className="mx-auto max-w-2xl text-center text-sm text-muted-foreground">
           Cada produto é independente: pagamento único de {BRL(19.9)} e acesso vitalício ao produto
-          comprado. Você pode comprar quantos quiser, com ou sem o Complete.
+          comprado. Você pode comprar quantos quiser, com ou sem o All Access.
         </p>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {INDIVIDUAL_PRODUCTS.map((p) => {
