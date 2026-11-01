@@ -160,7 +160,7 @@ export async function createPreference(params: {
         {
           id: params.planKey,
           title,
-          description: sanitizeText("Acesso por 12 meses", 120),
+          description: sanitizeText("Pagamento unico - acesso vitalicio", 120),
           category_id: "learnings",
           quantity: 1,
           unit_price: amount,
@@ -177,8 +177,7 @@ export async function createPreference(params: {
       auto_return: "approved",
       statement_descriptor: "SPEAK2CO",
       payment_methods: {
-        installments: 12,
-        default_installments: 12,
+        installments: plan.installments,
       },
       notification_url: notifyUrl,
     },
