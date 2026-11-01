@@ -115,9 +115,9 @@ function PosterCard(item: ProductLineItem) {
               </DialogTitle>
               <DialogDescription className="pt-1">
                 {comingSoon
-                  ? `Em breve na plataforma${requiredPlan ? ` — disponível no plano ${requiredPlan}.` : "."}`
+                  ? `Em breve na plataforma.`
                   : requiredPlan
-                    ? `Este recurso é liberado a partir do plano ${requiredPlan}.`
+                    ? `Este recurso é liberado com ${requiredPlan}.`
                     : "Este recurso não está incluído no seu plano atual."}
               </DialogDescription>
             </DialogHeader>

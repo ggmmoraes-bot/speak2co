@@ -157,7 +157,7 @@ export function EcosystemCard({ item }: { item: EcosystemItem }) {
               {item.status === "soon"
                 ? "This feature will be available soon."
                 : label
-                  ? `This feature is available on the ${label} Plan.`
+                  ? `This feature is available with ${label}.`
                   : "This feature is not included in your current plan."}
             </DialogDescription>
           </DialogHeader>
