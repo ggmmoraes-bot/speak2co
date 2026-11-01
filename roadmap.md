@@ -13,4 +13,4 @@
 - [x] Escolher direção — Apresentação do teste.
 - [x] Aprovar frases para as imagens — as duas frases confirmadas pela usuária.
 - [x] Produzir e inspecionar conjunto final com e sem frases — seis imagens para feed e Stories.
-- [ ] Aprovar o conjunto final de imagens — aguarda escolha da usuária.
+- [x] Aprovar o conjunto final de imagens — seis imagens aprovadas pela usuária.
