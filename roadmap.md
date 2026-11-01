@@ -11,5 +11,6 @@
 - [x] Aprovar os textos propostos — versão 1 escolhida pela usuária.
 - [x] Criar e revisar prévias visuais com telas reais; apresentar duas opções.
 - [x] Escolher direção — Apresentação do teste.
-- [ ] Aprovar frases para as imagens — aguarda resposta da usuária.
-- [ ] Produzir conjunto final com e sem frases — depende da escolha e aprovação acima.
+- [x] Aprovar frases para as imagens — as duas frases confirmadas pela usuária.
+- [x] Produzir e inspecionar conjunto final com e sem frases — seis imagens para feed e Stories.
+- [ ] Aprovar o conjunto final de imagens — aguarda escolha da usuária.
