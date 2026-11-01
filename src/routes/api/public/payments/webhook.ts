@@ -79,7 +79,7 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
           }
         }
 
-        // Rótulo legível do plano (ex.: "Premium Anual") para o aluno ver em
+        // Rótulo legível do produto (ex.: "All Access") para o aluno ver em
         // Minha assinatura, em vez da chave técnica do preço.
         const { data: planRow } = await supabaseAdmin
           .from("plans")
