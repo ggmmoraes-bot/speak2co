@@ -9,4 +9,6 @@
 ## Speak2Co Cadastros (Facebook e Instagram)
 - [x] Preparar e apresentar textos sobre o teste de nivelamento gratuito para adultos focados em carreira no Brasil.
 - [x] Aprovar os textos propostos — versão 1 escolhida pela usuária.
-- [ ] Produzir criação visual com a plataforma em destaque e mistura de imagens com e sem frases — aguarda escolha de direção e aprovação das frases.
+- [x] Criar e revisar prévias visuais com telas reais; apresentar duas opções.
+- [ ] Escolher direção e aprovar frases para as imagens — aguarda resposta da usuária.
+- [ ] Produzir conjunto final com e sem frases — depende da escolha e aprovação acima.
