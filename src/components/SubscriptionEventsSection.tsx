@@ -48,7 +48,7 @@ export function SubscriptionEventsSection({
       <h2 className="text-xl font-semibold text-foreground">Histórico dos meus pagamentos</h2>
       <p className="mt-1 text-sm text-muted-foreground">
         Registro de tudo o que o Mercado Pago notificou: criação, aprovação, renovação e cancelamento —
-        incluindo o momento exato em que o Premium foi liberado.
+        incluindo o momento exato em que cada acesso foi liberado.
       </p>
 
       {isPending ? (

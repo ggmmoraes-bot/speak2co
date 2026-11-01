@@ -39,7 +39,7 @@ export async function checkBrandVoiceAccess(
     return {
       allowed: false,
       planAllowed: false,
-      reason: "A GiseleAI faz parte do plano Signature.",
+      reason: "A GiseleAI faz parte do Speak2Co All Access.",
     };
   }
   return { allowed: true, planAllowed: true };
