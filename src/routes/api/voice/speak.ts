@@ -78,7 +78,7 @@ export const Route = createFileRoute("/api/voice/speak")({
               ? "openai"
               : "elevenlabs";
 
-        // Escopo completo da Gisele AI (Signature) — checagem real de plano.
+        // Escopo completo da Gisele AI (All Access) — checagem real de plano.
         if (isGiseleScope) {
           const { assertGiseleScope } = await import("@/lib/brand-voice.server");
           try {

@@ -383,7 +383,7 @@ export async function exportBeginnerCourseToPdf(
   await renderCoursePdf(doc, {
     lessons,
     courseTitle: "Beginner English Course",
-    subtitle: "Método Speak2Co · Plano Essential",
+    subtitle: "Método Speak2Co · All Access",
     intro:
       `${lessons.length} unidades progressivas com warm-up, vocabulário com IPA, verbos, gramática por ` +
       "exemplos, expressões, diálogos, laboratório de pronúncia, exercícios escritos e falados, quiz e revisão.",

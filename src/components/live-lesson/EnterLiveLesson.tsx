@@ -22,7 +22,7 @@ export const COURSE_LEVEL_BY_BASE: Record<string, CourseLevel> = {
 };
 
 /**
- * Entrada para a Guided Lesson with Gisele (exclusiva do Signature).
+ * Entrada para a Guided Lesson with Gisele (incluída no All Access).
  * O botão fica sempre visível; nos demais planos o clique abre o convite
  * de upgrade em vez de iniciar a aula.
  */
