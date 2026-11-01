@@ -371,7 +371,7 @@ function AdminPage() {
                 id="plan-key"
                 value={planForm.key}
                 onChange={(e) => setPlanForm({ ...planForm, key: e.target.value })}
-                placeholder="signature"
+                placeholder="complete"
               />
             </div>
             <div>
@@ -380,7 +380,7 @@ function AdminPage() {
                 id="plan-name"
                 value={planForm.name}
                 onChange={(e) => setPlanForm({ ...planForm, name: e.target.value })}
-                placeholder="Signature"
+                placeholder="Speak2Co All Access"
               />
             </div>
             <div>

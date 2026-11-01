@@ -34,7 +34,7 @@ export const Route = createFileRoute("/_authenticated/live-lesson/$course/$unitC
         feature="gisele_ai"
         title="Guided Lesson with Gisele"
         benefit="Aula guiada pessoalmente pela Gisele, com apoio de IA: prática de fala, feedback estruturado e desafio final — sobre o mesmo conteúdo do seu curso."
-        requiredPlan="Signature"
+        requiredPlan="Speak2Co All Access"
       >
         <LiveLesson key={`${course}-${unit.code}-${part}`} course={course} unit={unit} part={part} />
       </FeatureGate>

@@ -9,7 +9,7 @@ import { createGiseleThread, type GiseleFocus } from "@/lib/gisele.functions";
 
 /**
  * Atalho "Ask GiseleAI" dentro dos sub-produtos.
- * Só aparece para quem tem o plano Signature (feature gisele_ai).
+ * Só aparece para quem tem a GiseleAI liberada (feature gisele_ai, incluída no All Access).
  */
 export function AskGiseleButton({
   focus,
