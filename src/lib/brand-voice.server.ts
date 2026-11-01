@@ -14,7 +14,7 @@ export function isBrandVoiceId(voiceId: string | undefined | null) {
 
 /**
  * Escopo completo da GiseleAI (chat, Voice Room, memória, relatórios).
- * Exclusivo do plano Signature — checagem real no servidor.
+ * Exclusivo do Speak2Co All Access — checagem real no servidor.
  */
 export async function assertGiseleScope(supabase: Client, userId: string) {
   return assertFeatureAccess(supabase, userId, "gisele_ai");
@@ -27,7 +27,7 @@ export type BrandVoiceCheck = {
 };
 
 /**
- * A voz da GiseleAI depende SOMENTE do plano Signature ativo.
+ * A voz da GiseleAI depende SOMENTE do acesso à GiseleAI (All Access).
  * Não existe etapa de ativação/autorização de voz para o aluno.
  */
 export async function checkBrandVoiceAccess(
@@ -39,7 +39,7 @@ export async function checkBrandVoiceAccess(
     return {
       allowed: false,
       planAllowed: false,
-      reason: "A GiseleAI faz parte do plano Signature.",
+      reason: "A GiseleAI faz parte do Speak2Co All Access.",
     };
   }
   return { allowed: true, planAllowed: true };

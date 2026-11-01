@@ -22,7 +22,7 @@ export const COURSE_LEVEL_BY_BASE: Record<string, CourseLevel> = {
 };
 
 /**
- * Entrada para a Guided Lesson with Gisele (exclusiva do Signature).
+ * Entrada para a Guided Lesson with Gisele (incluída no All Access).
  * O botão fica sempre visível; nos demais planos o clique abre o convite
  * de upgrade em vez de iniciar a aula.
  */
@@ -64,17 +64,17 @@ export function EnterLiveLesson({
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Lock className="h-4 w-4 text-gold" />
-              Guided Lesson — Signature only
+              Guided Lesson — All Access
             </DialogTitle>
             <DialogDescription>
-              Guided Lesson with Gisele is exclusive to the Signature Plan. Upgrade to study with
+              Guided Lesson with Gisele is included in Speak2Co All Access. Get it to study with
               Gisele's guided experience, enhanced by AI.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button asChild className="btn-gold rounded-full font-semibold">
               <Link to="/premium">
-                <Sparkles className="mr-2 h-4 w-4" /> Upgrade to Signature
+                <Sparkles className="mr-2 h-4 w-4" /> Get All Access
               </Link>
             </Button>
           </DialogFooter>

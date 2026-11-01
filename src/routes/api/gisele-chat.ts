@@ -58,11 +58,11 @@ export const Route = createFileRoute("/api/gisele-chat")({
         if (!auth.ok) return new Response(auth.message, { status: auth.status });
         const { supabase, userId } = auth;
 
-        // Gisele AI é exclusiva do Signature — validado no servidor.
+        // Gisele AI é exclusiva do All Access — validado no servidor.
         const { checkFeatureAccess } = await import("@/lib/entitlements-access.server");
         const access = await checkFeatureAccess(supabase, userId, "gisele_ai");
         if (!access.allowed) {
-          return new Response("A Gisele AI é exclusiva do plano Signature.", { status: 403 });
+          return new Response("A GiseleAI está incluída no Speak2Co All Access.", { status: 403 });
         }
         if (access.aiDailyMinutes != null && access.aiUsedSeconds >= access.aiDailyMinutes * 60) {
           return new Response(
@@ -102,7 +102,7 @@ export const Route = createFileRoute("/api/gisele-chat")({
             : "bilingual";
 
         const system = withGiselePersona(
-          `Esta é a experiência Signature "Gisele AI by Speak2Co" — a mentoria completa e exclusiva desse plano.
+          `Esta é a experiência "Gisele AI by Speak2Co" — a mentoria completa incluída no Speak2Co All Access.
 
 FOCO DESTA SESSÃO: ${focusLabel.en} — ${focusLabel.prompt}
 ${session?.summary ? `Contexto trazido pelo aluno: ${session.summary}` : ""}

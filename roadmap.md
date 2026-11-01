@@ -1,4 +1,12 @@
 
+## Correção global do sistema de acesso
+- [x] Renomear planos no banco: complete → "Speak2Co All Access", free → "Cadastro Gratuito"
+- [x] Etiquetas dos cards da Home (All Access / produto / Cadastro Gratuito); Support & Community preservada
+- [x] Termos comerciais reescritos para pagamento único vitalício
+- [x] Telas e prompts da GiseleAI alinhados (All Access, sem Signature/Essential/Premium)
+- [x] Cortesia do admin passa a conceder All Access
+- [x] 94 testes passando + build OK
+
 ## Ajustes finais All Access (antes de publicar)
 - [x] Renomear "Speak2Co Complete" → "Speak2Co All Access" (Speak2Co branco, All Access dourado)
 - [x] Remover "sem juros" e valor fixo de parcela; exibir "R$ 97,90 pagamento único ou até 10x no cartão"

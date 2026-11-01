@@ -1,5 +1,5 @@
 /**
- * Speak2Co Method — Beginner English Course (Essential plan).
+ * Speak2Co Method — Beginner English Course (All Access).
  * 20 lições progressivas: contexto antes da gramática, prática intensiva,
  * repetição espaçada e checagem de pronúncia com IA em cada frase.
  */

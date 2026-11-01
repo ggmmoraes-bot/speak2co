@@ -123,7 +123,7 @@ export function buildCertificates(input: Input): Certificate[] {
       return {
         id: "beginner",
         title: "Certificado Beginner English Course",
-        subtitle: "Método Speak2Co · Plano Essential",
+        subtitle: "Método Speak2Co · All Access",
         description: `Conclua as ${input.beginnerLessonsTotal} lições do curso Beginner e seja aprovado no assessment final (mínimo ${input.beginnerPassScore}%).`,
         unlocked: lessonsOk && passed,
         progress,
@@ -149,7 +149,7 @@ export function buildCertificates(input: Input): Certificate[] {
       return {
         id: "intermediate",
         title: "Certificado Intermediate English Course",
-        subtitle: "Método Speak2Co · Plano Essential",
+        subtitle: "Método Speak2Co · All Access",
         description: `Conclua as ${input.intermediateLessonsTotal} lições do curso Intermediate e seja aprovado no assessment final (mínimo ${input.intermediatePassScore}%).`,
         unlocked: lessonsOk && passed,
         progress,

@@ -22,7 +22,7 @@ export const Route = createFileRoute("/api/voice/transcribe")({
           return new Response("Áudio muito longo", { status: 413 });
         }
 
-        // Voice Room da Gisele AI é exclusivo do Signature — checagem no servidor.
+        // Voice Room da Gisele AI é exclusivo do All Access — checagem no servidor.
         if (String(form.get("scope") ?? "") === "gisele") {
           const { assertGiseleScope } = await import("@/lib/brand-voice.server");
           try {

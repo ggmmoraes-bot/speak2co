@@ -19,7 +19,7 @@ export type SubscriptionEventView = {
 export type SimulationMode = "anual" | "pendente" | "cancelada";
 
 export const SIMULATION_MODES: { value: SimulationMode; label: string }[] = [
-  { value: "anual", label: "Premium anual" },
+  { value: "anual", label: "All Access vitalício" },
   { value: "pendente", label: "Pagamento pendente" },
   { value: "cancelada", label: "Assinatura cancelada" },
 ];
@@ -62,9 +62,9 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
       mode,
       isPremium: false,
       subscription: {
-        plan_label: "Premium anual",
+        plan_label: "All Access vitalício",
         status: "pending",
-        amount: 479.0,
+        amount: 97.9,
         currency: "BRL",
         next_payment_date: null,
         init_point: null,
@@ -74,7 +74,7 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
           id: "sim-1",
           event_type: "checkout_created",
           status: "pending",
-          amount: 479.0,
+          amount: 97.9,
           currency: "BRL",
           message: "Checkout de simulação criado — nenhuma cobrança real foi feita.",
           preapproval_id: preapprovalId,
@@ -97,9 +97,9 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
       mode,
       isPremium: false,
       subscription: {
-        plan_label: "Premium anual",
+        plan_label: "All Access vitalício",
         status: "cancelled",
-        amount: 479.0,
+        amount: 97.9,
         currency: "BRL",
         next_payment_date: null,
         init_point: null,
@@ -109,10 +109,10 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
           id: "sim-1",
           event_type: "subscription_authorized",
           status: "authorized",
-          amount: 479.0,
+          amount: 97.9,
           currency: "BRL",
           next_payment_date: daysFromNow(-35),
-          message: "Premium liberado (simulação).",
+          message: "All Access liberado (simulação).",
           preapproval_id: preapprovalId,
           created_at: daysFromNow(-65),
         },
@@ -120,7 +120,7 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
           id: "sim-2",
           event_type: "subscription_renewed",
           status: "authorized",
-          amount: 479.0,
+          amount: 97.9,
           currency: "BRL",
           next_payment_date: daysFromNow(-5),
           message: "Renovação confirmada (simulação).",
@@ -139,14 +139,14 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
     };
   }
 
-  const amount = 479.0;
+  const amount = 97.9;
   const cycleDays = 365;
 
   return {
     mode,
     isPremium: true,
     subscription: {
-      plan_label: "Premium anual",
+      plan_label: "All Access vitalício",
       status: "authorized",
       amount,
       currency: "BRL",
@@ -171,7 +171,7 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
         amount,
         currency: "BRL",
         next_payment_date: daysFromNow(-3),
-        message: "Pagamento aprovado — Premium liberado (simulação).",
+        message: "Pagamento aprovado — All Access liberado (simulação).",
         preapproval_id: preapprovalId,
         created_at: daysFromNow(-cycleDays - 3),
       },

@@ -15,7 +15,7 @@ export type HubCardProps = {
   params?: Record<string, string>;
   locked?: boolean;
   comingSoon?: boolean;
-  requiredPlan?: "Essential" | "Premium" | "Signature";
+  requiredPlan?: "All Access" | "Speak2Hire" | "Speak2Fluency" | "Speak2Travel";
 };
 
 const cardBase =

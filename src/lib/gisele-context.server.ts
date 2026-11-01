@@ -251,7 +251,7 @@ export function describeSnapshot(s: StudentSnapshot): string {
 
   return `PERFIL DO ALUNO (fonte de verdade — não invente nada além disto):
 - Nome: ${s.name}
-- Plano: ${s.planKey} (Signature: acesso completo à mentoria Gisele AI)
+- Plano: ${s.planKey} (complete/All Access: acesso completo à mentoria Gisele AI)
 - Nível atual: ${s.level ?? "não definido"}${s.placement?.level ? ` (teste de nivelamento: ${s.placement.level}, ${s.placement.score ?? "?"} pontos)` : ""}
 - Objetivo declarado: ${s.preferences.objective ?? s.goal ?? "não informado"} | Nível desejado: ${s.targetLevel ?? "não informado"}
 - Tempo disponível por dia: ${s.preferences.minutesPerDay} minutos — dimensione a prática para caber neste tempo.

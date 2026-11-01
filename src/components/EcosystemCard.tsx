@@ -14,7 +14,14 @@ import {
 import { BrandText } from "@/components/BrandText";
 
 export type EcosystemStatus = "available" | "locked" | "soon";
-export type PlanName = "Free" | "Essential" | "Premium" | "Signature";
+export type PlanName =
+  | "Cadastro Gratuito"
+  | "All Access"
+  | "Speak2Hire"
+  | "Speak2Fluency"
+  | "Speak2Travel"
+  | "Speak2Business"
+  | "Speak2Kids";
 
 export type EcosystemItem = {
   id: string;
@@ -150,7 +157,7 @@ export function EcosystemCard({ item }: { item: EcosystemItem }) {
               {item.status === "soon"
                 ? "This feature will be available soon."
                 : label
-                  ? `This feature is available on the ${label} Plan.`
+                  ? `This feature is available with ${label}.`
                   : "This feature is not included in your current plan."}
             </DialogDescription>
           </DialogHeader>

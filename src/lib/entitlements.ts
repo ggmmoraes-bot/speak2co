@@ -76,7 +76,7 @@ export function usePreviewPlan() {
 
 /**
  * Verdadeira role administrativa, confirmada pelo servidor (`has_role`).
- * Plano de assinatura (inclusive Signature) NUNCA concede privilégio de admin.
+ * Nenhum plano ou produto (inclusive o All Access) concede privilégio de admin.
  * Também limpa o modo "Ver como" de quem não é administrador.
  */
 export function useIsAdmin(): boolean {

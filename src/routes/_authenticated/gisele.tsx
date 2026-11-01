@@ -11,7 +11,7 @@ export const Route = createFileRoute("/_authenticated/gisele")({
       {
         name: "description",
         content:
-          "Powered by AI. Guided by Gisele. Practice, speak, learn and improve with a personal English mentor — exclusive to the Signature plan.",
+          "Powered by AI. Guided by Gisele. Practice, speak, learn and improve with a personal English mentor — included in Speak2Co All Access.",
       },
       { property: "og:title", content: "GiseleAI — Your Personal English Mentor" },
       {
@@ -25,9 +25,9 @@ export const Route = createFileRoute("/_authenticated/gisele")({
   component: () => (
     <FeatureGate
       feature="gisele_ai"
-      title="GiseleAI é exclusiva do Signature"
+      title="GiseleAI está incluída no All Access"
       benefit="Mentoria contínua com IA que conhece seu nível, seu progresso e seus objetivos: prática diária, correções priorizadas e revisão espaçada — tudo dentro da GiseleAI."
-      requiredPlan="Signature"
+      requiredPlan="Speak2Co All Access"
     >
       <GiseleLayout />
     </FeatureGate>

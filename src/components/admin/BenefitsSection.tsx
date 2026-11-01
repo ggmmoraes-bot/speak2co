@@ -94,7 +94,7 @@ export function BenefitsSection() {
       };
       if (mode === "courtesy") {
         await courtesy({ data: base });
-        toast.success("Cortesia concedida — o plano Signature já está liberado para o aluno.");
+        toast.success("Cortesia concedida — o All Access já está liberado para o aluno.");
       } else {
         await discount({
           data: {
@@ -135,7 +135,7 @@ export function BenefitsSection() {
     >
       <h2 className="text-xl font-semibold text-foreground">Benefícios e Assinaturas Especiais</h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        Conceda o Signature como cortesia ou um desconto individual. O aluno continua sendo aluno —
+        Conceda o All Access como cortesia ou um desconto individual. O aluno continua sendo aluno —
         nada disso aparece para ele e os preços públicos não mudam.
       </p>
 
@@ -208,7 +208,7 @@ export function BenefitsSection() {
           <div className="mt-5 grid gap-4 md:grid-cols-3">
             <div>
               <Label>Plano</Label>
-              <Input value="Signature" readOnly />
+              <Input value="All Access" readOnly />
             </div>
 
             {mode === "courtesy" ? (
@@ -289,7 +289,7 @@ export function BenefitsSection() {
             onClick={handleGrant}
             className="mt-5 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
           >
-            {mode === "courtesy" ? "Conceder cortesia Signature" : "Conceder desconto"}
+            {mode === "courtesy" ? "Conceder cortesia All Access" : "Conceder desconto"}
           </Button>
         </div>
       )}

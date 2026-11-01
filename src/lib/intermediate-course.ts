@@ -1,5 +1,5 @@
 /**
- * Speak2Co Method™ — Intermediate English Course (Essential plan).
+ * Speak2Co Method™ — Intermediate English Course (All Access).
  * Currículo oficial: 40 unidades B1, cada uma com Part 1 — Discover e
  * Part 2 — Communicate (80 partes pedagógicas, identificadores estáveis).
  */

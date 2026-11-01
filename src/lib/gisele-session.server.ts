@@ -54,7 +54,7 @@ export async function summarizeSession(supabase: Client, userId: string, threadI
     model: gateway("google/gemini-3.6-flash"),
     output: Output.object({ schema: SummarySchema }),
     system: withGiselePersona(
-      `Você está encerrando uma sessão de mentoria Signature. Resuma o que REALMENTE aconteceu na conversa abaixo, sem inventar progresso.
+      `Você está encerrando uma sessão de mentoria GiseleAI. Resuma o que REALMENTE aconteceu na conversa abaixo, sem inventar progresso.
 - summary: 2 frases em inglês, com tradução curta em português entre parênteses.
 - strengths / weaknesses: observações objetivas de linguagem (gramática, vocabulário, pronúncia, fluência).
 - reviewItems: itens curtos para revisão espaçada (estruturas ou palavras a retomar em alguns dias).`,

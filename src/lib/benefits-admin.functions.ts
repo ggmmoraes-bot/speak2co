@@ -95,7 +95,7 @@ export const listBenefits = createServerFn({ method: "GET" })
 const baseGrant = {
   userId: z.string().uuid(),
   email: z.string().email().max(200).nullable().optional(),
-  planKey: z.enum(["signature", "premium", "essential"]).default("signature"),
+  planKey: z.enum(["complete", "signature", "premium", "essential"]).default("complete"),
   startsAt: z.string().min(4).max(40).nullable().optional(),
   endsAt: z.string().min(4).max(40).nullable().optional(),
   note: z.string().max(400).nullable().optional(),
@@ -139,7 +139,7 @@ export const grantCourtesy = createServerFn({ method: "POST" })
     return { ok: true, id: created!.id };
   });
 
-/** Desconto individual (ex.: 10% no Signature), com validade e limite de uso. */
+/** Desconto individual (ex.: 10% no All Access), com validade e limite de uso. */
 export const grantDiscount = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
