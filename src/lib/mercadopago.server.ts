@@ -1,12 +1,17 @@
 const MP_API = "https://api.mercadopago.com";
 
-/** A Speak2Co opera exclusivamente com assinaturas anuais. */
-export type PlanKey = "essential_yearly" | "premium_yearly" | "signature_yearly";
+/** A Speak2Co vende apenas produtos de pagamento único com acesso vitalício. */
+export type PlanKey =
+  | "complete_lifetime"
+  | "speak2hire_lifetime"
+  | "speak2fluency_lifetime"
+  | "speak2travel_lifetime";
 
-export const MP_PLANS: Record<PlanKey, { label: string; amount: number; frequency: number; frequency_type: "months" }> = {
-  essential_yearly: { label: "Essential Anual", amount: 430.8, frequency: 12, frequency_type: "months" },
-  premium_yearly: { label: "Premium Anual", amount: 479.0, frequency: 12, frequency_type: "months" },
-  signature_yearly: { label: "Signature Anual", amount: 579.0, frequency: 12, frequency_type: "months" },
+export const MP_PLANS: Record<PlanKey, { label: string; amount: number; installments: number }> = {
+  complete_lifetime: { label: "Complete - Acesso Vitalicio", amount: 97.9, installments: 10 },
+  speak2hire_lifetime: { label: "Speak2Hire - Acesso Vitalicio", amount: 19.9, installments: 1 },
+  speak2fluency_lifetime: { label: "Speak2Fluency - Acesso Vitalicio", amount: 19.9, installments: 1 },
+  speak2travel_lifetime: { label: "Speak2Travel - Acesso Vitalicio", amount: 19.9, installments: 1 },
 };
 
 function getToken() {

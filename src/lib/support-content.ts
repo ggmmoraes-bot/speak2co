@@ -51,7 +51,7 @@ export const HELP_GUIDE: HelpArticle[] = [
       "Áudio não toca: verifique o volume do sistema e desative o modo silencioso no celular.",
       "Microfone não grava: confirme a permissão do navegador em Configurações → Site → Microfone.",
       "Página em branco ou desatualizada: atualize a página (Ctrl+F5) para carregar a versão mais recente.",
-      "Problemas de pagamento ou acesso: abra Minha assinatura e use Falar com a fundadora.",
+      "Problemas de pagamento ou acesso: abra Meu acesso e use Falar com a fundadora.",
     ],
   },
 ];
@@ -62,12 +62,12 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     group: "Plans",
     q: "Quais planos existem e como funciona a cobrança?",
-    a: "São quatro planos: Free, Essential, Premium e Signature. Todas as assinaturas são anuais, com opção de parcelamento no cartão.",
+    a: "Não há assinaturas. Você pode comprar o Speak2Co Complete (R$ 97,90, até 10x sem juros) com acesso vitalício a todos os cursos e recursos gerais, e produtos individuais (Speak2Hire, Speak2Fluency e Speak2Travel) por R$ 19,90 cada, também vitalícios. Pagamento único, sem mensalidade.",
   },
   {
     group: "Plans",
-    q: "Posso fazer upgrade a qualquer momento?",
-    a: "Sim. Em Minha assinatura você faz upgrade na hora; os recursos do novo plano são liberados imediatamente após a confirmação do pagamento.",
+    q: "Posso comprar outros produtos depois?",
+    a: "Sim. Cada produto é independente e liberado assim que o pagamento é confirmado. Comprar um produto individual não libera os outros.",
   },
   {
     group: "Plans",
@@ -112,7 +112,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     group: "Product Lines",
     q: "O que é Speak2Hire, Speak2Travel e Speak2Fluency?",
-    a: "São Product Lines temáticas: entrevistas de emprego, inglês de viagem e fluência no dia a dia, disponíveis a partir do plano Premium. Elas fazem parte de uma linha de produtos em expansão, então outros Product Lines continuarão sendo adicionados à plataforma ao longo do tempo.",
+    a: "São Product Lines temáticas: entrevistas de emprego, inglês de viagem e fluência no dia a dia, disponíveis como produtos individuais de R$ 19,90 com acesso vitalício. Elas fazem parte de uma linha de produtos em expansão, então outros Product Lines continuarão sendo adicionados à plataforma ao longo do tempo.",
   },
   {
     group: "Product Lines",

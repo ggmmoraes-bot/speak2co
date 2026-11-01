@@ -78,9 +78,9 @@ export function AiUsageGuard({ children }: { children: ReactNode }) {
   if (!allowed) {
     return (
       <UpgradeScreen
-        title="AI Teacher disponível nos planos pagos"
+        title="AI Teacher disponível no Speak2Co Complete"
         benefit="Converse em inglês com um AI Teacher que corrige gramática, pronúncia e adapta tudo ao seu nível."
-        requiredPlan="Essential"
+        requiredPlan="Speak2Co Complete"
       />
     );
   }
@@ -95,8 +95,7 @@ export function AiUsageGuard({ children }: { children: ReactNode }) {
           Você usou seus {access?.aiDailyMinutes} minutos de hoje
         </h1>
         <p className="mt-3 max-w-md text-muted-foreground">
-          Seu limite diário do AI Teacher foi atingido. Ele é renovado amanhã — ou libere
-          conversas ilimitadas agora mesmo com o plano Premium.
+          Seu limite diário do AI Teacher foi atingido. Ele é renovado amanhã.
         </p>
         <Button
           asChild

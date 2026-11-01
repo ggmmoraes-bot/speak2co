@@ -69,7 +69,7 @@ const SECTIONS: Section[] = [
   {
     title: "4. Planos e funcionalidades",
     paragraphs: [
-      "A Speak2Co oferece diferentes planos de assinatura, com funcionalidades e níveis de acesso específicos. Os recursos disponíveis em cada plano são apresentados na plataforma no momento da contratação.",
+      "A Speak2Co oferece produtos de pagamento único com acesso vitalício: o Speak2Co Complete e produtos individuais, cada um com funcionalidades específicas. Os recursos disponíveis em cada plano são apresentados na plataforma no momento da contratação.",
       "A Speak2Co poderá:",
     ],
     items: [
@@ -182,10 +182,10 @@ const SECTIONS: Section[] = [
     ],
   },
   {
-    title: "10. Pagamentos, assinaturas e renovação",
+    title: "10. Pagamentos e acesso vitalício",
     paragraphs: [
-      "Os planos da Speak2Co são contratados conforme as condições apresentadas no momento da compra.",
-      "Quando o plano contratado possuir período anual, o acesso corresponderá ao período de 12 meses, contado a partir da confirmação do pagamento, observadas as condições de parcelamento escolhidas.",
+      "Os produtos da Speak2Co são adquiridos por pagamento único, sem mensalidade, cobrança recorrente ou renovação automática.",
+      "O acesso ao produto adquirido é vitalício, vinculado à conta da aluna, e passa a valer a partir da confirmação do pagamento, observadas as condições de parcelamento escolhidas.",
       "As condições específicas de:",
     ],
     items: [
@@ -195,7 +195,6 @@ const SECTIONS: Section[] = [
       "emissão de comprovantes;",
       "cancelamento;",
       "reembolso;",
-      "renovação;",
     ],
     after: [
       "serão apresentadas durante o processo de contratação e/ou estabelecidas na Política de Reembolso aplicável.",
@@ -205,17 +204,15 @@ const SECTIONS: Section[] = [
   {
     title: "11. Cancelamento e reembolso",
     paragraphs: [
-      "O cancelamento da assinatura deverá seguir as condições apresentadas na plataforma e na Política de Reembolso da Speak2Co.",
-      "Quando aplicável, o cancelamento da renovação automática não implica necessariamente encerramento imediato do período já contratado.",
-      "O acesso poderá permanecer disponível até o final do período já pago, conforme as condições da contratação e da política de reembolso.",
+      "Pedidos de reembolso seguem as condições apresentadas na plataforma e na Política de Reembolso da Speak2Co.",
+      "Como não há cobrança recorrente, não existe renovação a cancelar.",
     ],
   },
   {
-    title: "12. Upgrades e downgrades",
+    title: "12. Aquisição de outros produtos",
     paragraphs: [
-      "Quando disponíveis, os upgrades e downgrades seguirão as condições apresentadas na plataforma.",
-      "Um upgrade poderá proporcionar acesso imediato às funcionalidades do novo plano, conforme as regras de cobrança aplicáveis.",
-      "Um downgrade poderá entrar em vigor no próximo ciclo de assinatura, conforme as condições apresentadas no momento da alteração.",
+      "A aluna poderá adquirir outros produtos a qualquer momento, cada um com seu próprio pagamento único.",
+      "A compra de um produto individual não libera automaticamente os demais produtos.",
     ],
   },
   {
@@ -302,7 +299,7 @@ const SECTIONS: Section[] = [
   {
     title: "20. Contato",
     paragraphs: [
-      "Dúvidas sobre a plataforma, conta, assinatura, cursos ou funcionalidades poderão ser encaminhadas pelos canais oficiais de atendimento da Speak2Co ou pela área Help Center da plataforma.",
+      "Dúvidas sobre a plataforma, conta, compras, cursos ou funcionalidades poderão ser encaminhadas pelos canais oficiais de atendimento da Speak2Co ou pela área Help Center da plataforma.",
     ],
   },
 ];

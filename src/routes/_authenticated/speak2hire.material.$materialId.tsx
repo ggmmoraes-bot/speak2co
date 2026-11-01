@@ -34,7 +34,7 @@ export const Route = createFileRoute("/_authenticated/speak2hire/material/$mater
   component: GatedMaterialPage,
   errorComponent: ({ error }) => (
     <div role="alert" className="p-8 text-sm text-destructive">
-      {error.message}
+      {error instanceof Error ? error.message : String(error)}
     </div>
   ),
   notFoundComponent: () => (
@@ -48,7 +48,7 @@ function GatedMaterialPage() {
       feature="premium_materials"
       title="Materiais de preparação do Speak2Hire"
       benefit="Desbloqueie os frameworks de entrevista: elevator pitch, método STAR, power words e o guia S.O.S."
-      requiredPlan="Essential"
+      requiredPlan="Speak2Co Complete"
     >
       <MaterialPage />
     </FeatureGate>

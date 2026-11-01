@@ -139,7 +139,7 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           titleEn: "Speak2Business",
           titlePt: "Inglês corporativo",
           description:
-            "Reuniões, negociação, apresentações e liderança em inglês. Em breve na plataforma, a partir do plano Premium.",
+            "Reuniões, negociação, apresentações e liderança em inglês. Em breve na plataforma, como produto individual.",
           icon: Briefcase,
           imageUrl: speak2businessLogo.url,
           status: "soon" as const,
@@ -150,7 +150,7 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           titleEn: "Speak2Kids",
           titlePt: "Inglês para crianças",
           description:
-            "Aprendizado lúdico e interativo para crianças. Em breve na plataforma, a partir do plano Premium.",
+            "Aprendizado lúdico e interativo para crianças. Em breve na plataforma, como produto individual.",
           icon: Sparkles,
           imageUrl: speak2kidsLogo.url,
           status: "soon" as const,
@@ -362,9 +362,9 @@ export function buildHomeSections(access: Access): HubSectionData[] {
         {
           id: "my-subscription",
           titleEn: "My Subscription",
-          titlePt: "Minha assinatura",
+          titlePt: "Meu acesso",
           description:
-            "Veja seu plano, condições da contratação anual, termos, renovação, upgrade e histórico.",
+            "Veja seus produtos com acesso vitalício e o histórico dos seus pagamentos.",
           icon: CreditCard,
           to: "/assinatura",
           status: "available",

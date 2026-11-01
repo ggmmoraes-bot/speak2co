@@ -302,7 +302,7 @@ function GrammarPage() {
       feature={FEATURE_KEYS.learningTools}
       title="Grammar"
       benefit="Estude gramática do Beginner ao Advanced com explicações bilíngues e exercícios."
-      requiredPlan="Essential"
+      requiredPlan="Speak2Co Complete"
     >
       <GrammarPageInner />
     </FeatureGate>

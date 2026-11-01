@@ -36,7 +36,7 @@ const SECTIONS: Array<{ title: string; items: string[] }> = [
       "Aprendizagem: nível CEFR, respostas de exercícios, progresso nos cursos, gravações de voz enviadas para correção de pronúncia, conversas com a IA e preferências de estudo.",
       "Suporte: mensagens enviadas nos canais de atendimento e à fundadora.",
       "Técnicos: endereço IP, identificadores de dispositivo, registros de acesso e uso de recursos.",
-      "Assinatura: plano contratado, situação do pagamento e datas de vigência. Dados de cartão nunca passam pelos nossos servidores — são tratados diretamente pelo provedor de pagamento.",
+      "Compras: produtos adquiridos, situação do pagamento e datas de vigência. Dados de cartão nunca passam pelos nossos servidores — são tratados diretamente pelo provedor de pagamento.",
     ],
   },
   {
@@ -55,7 +55,7 @@ const SECTIONS: Array<{ title: string; items: string[] }> = [
     items: [
       "Provedores de infraestrutura, banco de dados e hospedagem.",
       "Provedores de inteligência artificial e de voz, para gerar correções, respostas e áudios.",
-      "Paddle.com, como Merchant of Record, para venda, gestão da assinatura, cobrança, impostos e emissão de faturas; e Mercado Pago para pagamentos em reais.",
+      "Paddle.com, como Merchant of Record, para venda, gestão de compras, cobrança, impostos e emissão de faturas; e Mercado Pago para pagamentos em reais.",
       "Assessores profissionais (contábeis e jurídicos) e autoridades, quando exigido por lei.",
       "Não vendemos dados pessoais.",
     ],

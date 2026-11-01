@@ -242,7 +242,7 @@ function WritingPage() {
       feature={FEATURE_KEYS.learningTools}
       title="Writing"
       benefit="Escreva textos em inglês e receba correção detalhada da IA, com versão corrigida."
-      requiredPlan="Essential"
+      requiredPlan="Speak2Co Complete"
     >
       <main className="mx-auto w-full max-w-4xl flex-1 px-6 py-10">
         <header>

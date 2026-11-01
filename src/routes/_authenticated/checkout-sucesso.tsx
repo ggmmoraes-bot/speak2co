@@ -14,12 +14,12 @@ export const Route = createFileRoute("/_authenticated/checkout-sucesso")({
       {
         name: "description",
         content:
-          "Confirmação do pagamento da sua assinatura anual Speak2Co e liberação imediata dos recursos do plano.",
+          "Confirmação do seu pagamento único Speak2Co e liberação do acesso vitalício.",
       },
       { property: "og:title", content: "Pagamento confirmado | Speak2Co" },
       {
         property: "og:description",
-        content: "Sua assinatura anual Speak2Co foi confirmada e seus recursos já estão liberados.",
+        content: "Seu acesso vitalício Speak2Co foi confirmado.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -45,7 +45,9 @@ function CheckoutSuccessPage() {
   });
 
   const plan = isPlanKey(data?.plan) ? (data.plan as PlanKey) : "free";
-  const confirmed = plan !== "free";
+  const latest = data?.subscription;
+  const confirmed = latest?.status === "authorized" || latest?.status === "active";
+  const isComplete = latest?.plan_key === "complete_lifetime";
 
   useEffect(() => {
     if (confirmed) {
@@ -68,19 +70,22 @@ function CheckoutSuccessPage() {
       {confirmed ? (
         <>
           <p className="mt-4 text-muted-foreground">
-            Sua assinatura anual está ativa. Estes recursos acabaram de ser liberados:
+            Seu acesso vitalício a {latest?.plan_label?.split(" - ")[0] ?? "Speak2Co"} está liberado.
+            Pagamento único — nada mais será cobrado.
           </p>
-          <ul className="mx-auto mt-6 max-w-md space-y-2 text-left text-sm text-muted-foreground">
-            {PLAN_BENEFITS[plan].map((benefit) => (
-              <li key={benefit}>• {benefit}</li>
-            ))}
-          </ul>
+          {isComplete || plan !== "free" ? (
+            <ul className="mx-auto mt-6 max-w-md space-y-2 text-left text-sm text-muted-foreground">
+              {PLAN_BENEFITS[isComplete ? "complete" : plan].map((benefit) => (
+                <li key={benefit}>• {benefit}</li>
+              ))}
+            </ul>
+          ) : null}
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Button asChild>
               <Link to="/painel">Ir para o painel</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/assinatura" search={{ simulacao: undefined }}>Ver minha assinatura</Link>
+              <Link to="/assinatura" search={{ simulacao: undefined }}>Ver meu acesso</Link>
             </Button>
           </div>
         </>
@@ -93,13 +98,12 @@ function CheckoutSuccessPage() {
           {tookTooLong ? (
             <p className="mt-4 text-sm text-muted-foreground">
               A confirmação está demorando mais que o normal. Nenhuma cobrança se perde: assim que o
-              provedor confirmar, o plano é liberado automaticamente. Você pode acompanhar em Minha
-              assinatura.
+              provedor confirmar, o acesso é liberado automaticamente. Você pode acompanhar em Meu acesso.
             </p>
           ) : null}
           <div className="mt-8 flex justify-center">
             <Button asChild variant="outline">
-              <Link to="/assinatura" search={{ simulacao: undefined }}>Ver minha assinatura</Link>
+              <Link to="/assinatura" search={{ simulacao: undefined }}>Ver meu acesso</Link>
             </Button>
           </div>
         </>

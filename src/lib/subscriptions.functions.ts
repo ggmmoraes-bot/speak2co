@@ -3,7 +3,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 const planKeySchema = z.object({
-  planKey: z.enum(["essential_yearly", "premium_yearly", "signature_yearly"]),
+  planKey: z.enum(["complete_lifetime", "speak2hire_lifetime", "speak2fluency_lifetime", "speak2travel_lifetime"]),
   origin: z.string().url().max(300),
 });
 
@@ -52,6 +52,17 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
       throw new Error("Seu plano já está liberado nesta conta — não é necessário pagamento.");
     }
 
+    // Impede comprar de novo um produto vitalício que a aluna já possui.
+    const { data: owned } = await supabaseAdmin
+      .from("subscriptions")
+      .select("id")
+      .eq("user_id", context.userId)
+      .eq("plan_key", data.planKey)
+      .in("status", ["active", "authorized"])
+      .limit(1)
+      .maybeSingle();
+    if (owned) throw new Error("Você já possui este produto com acesso vitalício.");
+
     const externalReference = `${context.userId}:${crypto.randomUUID()}`;
     // Cobrança anual avulsa: permite parcelar em até 12x no cartão. O desconto
     // individual já está aplicado no valor enviado ao Mercado Pago.
@@ -64,9 +75,6 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
       backUrl: "https://speak2co.lovable.app/checkout-sucesso",
       amount: pricing.finalAmount,
     });
-
-    const periodEnd = new Date();
-    periodEnd.setFullYear(periodEnd.getFullYear() + 1);
 
     const { data: created, error } = await supabaseAdmin
       .from("subscriptions")
@@ -81,8 +89,8 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
         amount: pricing.finalAmount,
         currency: "BRL",
         init_point: preference.init_point ?? null,
-        current_period_end: periodEnd.toISOString(),
-        // Sem débito automático: a renovação é feita por nova contratação.
+        current_period_end: null,
+        // Pagamento único: nada é renovado nem cobrado de novo.
         cancel_at_period_end: true,
         raw: JSON.parse(JSON.stringify({ preference, pricing })),
       })
@@ -99,8 +107,8 @@ export const startMercadoPagoCheckout = createServerFn({ method: "POST" })
       amount: pricing.finalAmount,
       currency: "BRL",
       message: pricing.discountPercent
-        ? `Checkout criado para o plano ${plan.label} com ${pricing.discountPercent}% de desconto (R$ ${pricing.finalAmount.toFixed(2)}), parcelável em até 12x.`
-        : `Checkout criado para o plano ${plan.label}, parcelável em até 12x.`,
+        ? `Checkout criado para o plano ${plan.label} com ${pricing.discountPercent}% de desconto (R$ ${pricing.finalAmount.toFixed(2)}) (pagamento único, acesso vitalício).`
+        : `Checkout criado para o plano ${plan.label} (pagamento único, acesso vitalício).`,
       raw: JSON.parse(JSON.stringify({ preference, pricing })),
     });
 

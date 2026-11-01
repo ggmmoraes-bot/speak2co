@@ -36,7 +36,7 @@ export async function checkFeatureAccess(
 
   const isAdmin = adminRes.data === true;
 
-  const [featRes, planRes, usageRes] = await Promise.all([
+  const [featRes, planRes, usageRes, ownedRes] = await Promise.all([
     supabase
       .from("plan_features")
       .select("enabled")
@@ -51,12 +51,17 @@ export async function checkFeatureAccess(
       .eq("feature_key", "ai_teacher")
       .eq("usage_date", new Date().toISOString().slice(0, 10))
       .maybeSingle(),
+    supabase.rpc("owned_product_features", { _user_id: userId }),
   ]);
+
+  // Produtos individuais vitalícios (Speak2Hire, Speak2Fluency, Speak2Travel)
+  // liberam só o próprio recurso, somando-se ao plano da aluna.
+  const owned = ((ownedRes.data as string[] | null) ?? []).includes(featureKey);
 
   return {
     planKey,
     isAdmin,
-    allowed: isAdmin || featRes.data?.enabled === true,
+    allowed: isAdmin || featRes.data?.enabled === true || owned,
     aiDailyMinutes: isAdmin ? null : (planRes.data?.ai_daily_minutes ?? null),
     aiUsedSeconds: usageRes.data?.seconds_used ?? 0,
   };

@@ -8,12 +8,12 @@ export const Route = createFileRoute("/reembolso")({
       {
         name: "description",
         content:
-          "Garantia de 30 dias nas assinaturas anuais Speak2Co: como pedir reembolso, prazos e como o pagamento é devolvido.",
+          "Garantia de 30 dias nas compras Speak2Co: como pedir reembolso, prazos e como o pagamento é devolvido.",
       },
       { property: "og:title", content: "Política de Reembolso | Speak2Co" },
       {
         property: "og:description",
-        content: "Garantia de satisfação de 30 dias nas assinaturas anuais da Speak2Co.",
+        content: "Garantia de satisfação de 30 dias nas compras da Speak2Co.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -27,7 +27,7 @@ const ITEMS = [
   "Compras com cartão internacional são processadas pela Paddle.com, nossa revendedora e Merchant of Record. O pedido de reembolso pode ser feito diretamente em paddle.net, informando o e-mail usado na compra, ou pelo nosso atendimento — nós encaminhamos.",
   "Compras feitas em reais pelo Mercado Pago são reembolsadas pelo mesmo meio de pagamento utilizado na contratação.",
   "O valor é devolvido pelo mesmo meio de pagamento. O prazo de crédito depende do banco ou da operadora do cartão, normalmente entre 5 e 10 dias úteis após a aprovação.",
-  "Após o prazo de 30 dias, o cancelamento continua disponível a qualquer momento: a renovação automática é desligada e o acesso permanece até o fim dos 12 meses já pagos, sem cobrança adicional.",
+  "Todas as compras são de pagamento único com acesso vitalício: não há mensalidade nem renovação automática a cancelar.",
   "Certificados e PDFs já emitidos continuam sendo seus, mesmo após o reembolso; o acesso à plataforma é encerrado quando o reembolso é processado.",
 ];
 

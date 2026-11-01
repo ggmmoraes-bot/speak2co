@@ -30,13 +30,13 @@ export function UpgradeScreen({
       <p className="mt-3 max-w-lg text-muted-foreground">{benefit}</p>
       {requiredPlan && (
         <p className="mt-4 rounded-full border border-gold/40 bg-gold/10 px-4 py-1 text-sm font-semibold text-gold">
-          Disponível no plano {requiredPlan}
+          Disponível com {requiredPlan} — acesso vitalício
         </p>
       )}
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Button asChild className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90">
           <Link to="/premium">
-            <Sparkles className="mr-2 h-4 w-4" /> Fazer upgrade agora
+            <Sparkles className="mr-2 h-4 w-4" /> Ver opções de acesso
           </Link>
         </Button>
         <Button asChild variant="outline" className="rounded-full font-semibold">

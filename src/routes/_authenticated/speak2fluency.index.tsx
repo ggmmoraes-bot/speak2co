@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_authenticated/speak2fluency/")({
       {
         name: "description",
         content:
-          "8 módulos de fluência, rotina diária de 25 minutos e feedback da IA em pronunciation, stress, intonation e fluency. Disponível a partir do plano Premium.",
+          "8 módulos de fluência, rotina diária de 25 minutos e feedback da IA em pronunciation, stress, intonation e fluency. Disponível como produto individual, com acesso vitalício.",
       },
       { property: "og:title", content: "Speak2Fluency — Speak without translating" },
       {

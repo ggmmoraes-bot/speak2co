@@ -17,6 +17,8 @@ export type FakeState = {
   usedSeconds?: number;
   /** consentimento da voz autorizada da marca (ai_voice_settings) */
   consentStatus?: string | null;
+  /** recursos liberados por produtos individuais vitalícios */
+  ownedProducts?: string[];
 };
 
 type Filters = Record<string, unknown>;
@@ -67,6 +69,7 @@ export function createFakeSupabase(state: FakeState) {
   const client = {
     from: (table: string) => builder(table),
     rpc: async (fn: string) => {
+      if (fn === "owned_product_features") return { data: state.ownedProducts ?? [], error: null };
       if (fn !== "has_role") throw new Error(`rpc inesperado: ${fn}`);
       return { data: state.isAdmin === true, error: null };
     },
@@ -124,7 +127,14 @@ export const PLAN_MATRIX: Record<string, Record<string, boolean>> = {
   },
 };
 
+PLAN_MATRIX["complete"] = {
+  ...PLAN_MATRIX["essential"],
+  premium_materials: true,
+  courses_upper_intermediate: true,
+};
+
 export const AI_MINUTES: Record<string, number | null> = {
+  complete: 20,
   free: 20,
   essential: 20,
   premium: null,

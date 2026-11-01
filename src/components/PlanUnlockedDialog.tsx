@@ -94,7 +94,7 @@ export function PlanUnlockedDialog() {
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/assinatura" search={{ simulacao: undefined }} onClick={() => setOpen(false)}>
-              Ver minha assinatura
+              Ver meu acesso
             </Link>
           </Button>
         </div>

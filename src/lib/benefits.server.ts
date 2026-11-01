@@ -37,7 +37,7 @@ export type CheckoutPricing = {
 
 /** `signature_yearly` → `signature` */
 export function planTierOfCheckoutKey(planKey: string): string {
-  return planKey.replace(/_(yearly|monthly)$/, "");
+  return planKey.replace(/_(yearly|monthly|lifetime)$/, "");
 }
 
 async function adminClient() {
