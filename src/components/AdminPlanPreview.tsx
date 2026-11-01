@@ -3,17 +3,19 @@ import { setPreviewPlan, useAdminPreviewPlan, useIsAdmin } from "@/lib/entitleme
 
 const OPTIONS = [
   { key: "", label: "Admin (acesso total)" },
-  { key: "free", label: "Free" },
-  { key: "essential", label: "Essential" },
-  { key: "premium", label: "Premium" },
-  { key: "signature", label: "Signature" },
+  { key: "free", label: "Cadastro Gratuito" },
+  { key: "complete", label: "All Access" },
+  { key: "essential", label: "Essential (legado)" },
+  { key: "premium", label: "Premium (legado)" },
+  { key: "signature", label: "Signature (legado)" },
 ];
 
 const LABELS: Record<string, string> = {
-  free: "Free",
-  essential: "Essential",
-  premium: "Premium",
-  signature: "Signature",
+  free: "Cadastro Gratuito",
+  complete: "All Access",
+  essential: "Essential (legado)",
+  premium: "Premium (legado)",
+  signature: "Signature (legado)",
 };
 
 /**

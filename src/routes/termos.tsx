@@ -60,7 +60,7 @@ const SECTIONS: Section[] = [
   {
     title: "3. GiseleAI by Speak2Co",
     paragraphs: [
-      "A GiseleAI by Speak2Co é uma experiência exclusiva do Signature Plan.",
+      "A GiseleAI by Speak2Co é uma experiência incluída no Speak2Co All Access.",
       "A GiseleAI foi concebida como uma experiência de Personal English Mentoring, utilizando inteligência artificial para oferecer ao aluno prática personalizada, orientação, feedback, acompanhamento e atividades adaptadas à sua jornada de aprendizagem.",
       "A GiseleAI poderá utilizar recursos de inteligência artificial e tecnologia de voz para proporcionar experiências de conversação e orientação em inglês. A disponibilidade, funcionalidades e tecnologias utilizadas poderão ser aprimoradas ao longo do tempo.",
       "A voz utilizada na GiseleAI é um recurso autorizado e integrado à experiência da Speak2Co e não poderá ser copiada, extraída, gravada, reproduzida, distribuída ou utilizada fora da plataforma sem autorização expressa da titular.",

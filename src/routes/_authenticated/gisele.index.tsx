@@ -209,7 +209,7 @@ function GiseleHub() {
                 {snapshot.level ?? "Level to be defined"}
               </span>
               <span className="rounded-full border border-border px-3 py-1 text-muted-foreground">
-                Signature experience
+                All Access experience
               </span>
             </div>
           </div>

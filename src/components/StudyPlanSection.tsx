@@ -187,7 +187,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
           >
             <Link to="/upgrade/essential" search={{ feature: "ajustes" as const }}>
               <Lock className="mr-2 h-4 w-4" />
-              Ajustar com IA · Essential
+              Ajustar com IA · All Access
             </Link>
           </Button>
         )}
@@ -373,7 +373,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                   Você está vendo uma degustação do seu plano de estudos.
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  O plano Gratuito libera as {previewWeeks} primeiras semanas. Com o plano Essential
+                  O cadastro gratuito libera as {previewWeeks} primeiras semanas. Com o Speak2Co All Access
                   você desbloqueia as {Math.max(totalWeeks - previewWeeks, 0)} semanas restantes, os
                   marcos de evolução, os ajustes do plano com IA, o travamento de semanas e o
                   histórico de versões.
@@ -383,7 +383,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                   className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                 >
                   <Link to="/upgrade/essential" search={{}}>
-                    Liberar com o Essential
+                    Liberar com o All Access
                   </Link>
                 </Button>
               </div>
@@ -410,15 +410,15 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                 <p className="text-xs tracking-widest uppercase">Marcos de evolução bloqueados</p>
               </div>
               <p className="mt-3 text-sm text-muted-foreground">
-                Os marcos mostram cada conquista prevista no seu plano. Eles fazem parte do plano
-                Essential.
+                Os marcos mostram cada conquista prevista no seu plano. Eles fazem parte do
+                Speak2Co All Access.
               </p>
               <Button
                 asChild
                 className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
               >
                 <Link to="/upgrade/essential" search={{ feature: "marcos" as const }}>
-                  Fazer upgrade para o Essential
+                  Conhecer o All Access
                 </Link>
               </Button>
             </div>

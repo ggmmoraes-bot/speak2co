@@ -37,7 +37,7 @@ export const HELP_GUIDE: HelpArticle[] = [
     title: "Practicing with AI",
     titlePt: "Praticando com IA",
     steps: [
-      "AI Teacher: conversa livre em inglês com correção. Free e Essential têm 20 minutos por dia.",
+      "AI Teacher: conversa livre em inglês com correção. Disponível em todos os acessos, com 20 minutos por dia.",
       "AI Pronunciation: grave sua voz e receba nota de Pronunciation, Stress, Intonation e Fluency.",
       "GiseleAI (Speak2Co All Access): mentoria contínua, missões diárias, Voice Room e plano personalizado.",
       "Permita o uso do microfone no navegador na primeira vez que gravar.",
@@ -71,7 +71,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     group: "Plans",
-    q: "O que está incluso no plano Free?",
+    q: "O que está incluso no cadastro gratuito?",
     a: "Progress Tracking, Certificates, Study Path, Study Goals, Milestones e o AI Teacher com 20 minutos por dia.",
   },
   {
@@ -97,7 +97,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     group: "AI",
     q: "O limite de 20 minutos por dia vale para quais planos?",
-    a: "Free e Essential. Premium e Signature têm uso ilimitado do AI Teacher.",
+    a: "Vale para todos os acessos: o AI Teacher tem 20 minutos por dia, do cadastro gratuito ao All Access.",
   },
   {
     group: "AI",
@@ -107,7 +107,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     group: "Product Lines",
     q: "O que são os Product Lines da Speak2Co?",
-    a: "Os Product Lines são produtos e experiências especializadas da Speak2Co, desenvolvidos para diferentes objetivos de aprendizagem e situações reais de uso do inglês. Atualmente a plataforma conta com produtos como Speak2Hire, Speak2Travel, Speak2Fluency — além do Speak2Business e do Speak2Kids, que estão em Coming Soon e serão liberados a partir do plano Premium. Novos Product Lines serão acrescentados futuramente, ampliando continuamente as possibilidades de aprendizagem e prática.",
+    a: "Os Product Lines são produtos e experiências especializadas da Speak2Co, desenvolvidos para diferentes objetivos de aprendizagem e situações reais de uso do inglês. Atualmente a plataforma conta com produtos como Speak2Hire, Speak2Travel, Speak2Fluency — além do Speak2Business e do Speak2Kids, que estão em Coming Soon e serão vendidos como produtos individuais. Novos Product Lines serão acrescentados futuramente, ampliando continuamente as possibilidades de aprendizagem e prática.",
   },
   {
     group: "Product Lines",
