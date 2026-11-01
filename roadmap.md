@@ -5,3 +5,8 @@
 - [x] Atualizar memória do modelo comercial
 - [x] Testes + tsgo
 - [ ] Publicar (pedido anterior do usuário) — em andamento
+
+## Speak2Co Cadastros (Facebook e Instagram)
+- [x] Preparar e apresentar textos sobre o teste de nivelamento gratuito para adultos focados em carreira no Brasil.
+- [ ] Aprovar os textos propostos — aguarda resposta da usuária.
+- [ ] Produzir criação visual com a plataforma em destaque e mistura de imagens com e sem frases — aguarda escolha de direção e aprovação das frases.
