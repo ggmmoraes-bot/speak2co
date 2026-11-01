@@ -16,7 +16,7 @@ export const Route = createFileRoute("/_authenticated/premium")({
       {
         name: "description",
         content:
-          "Speak2Co All Access por R$ 97,90 em até 10x sem juros e produtos individuais por R$ 19,90. Pagamento único e acesso vitalício.",
+          "Speak2Co All Access por R$ 97,90 em até 10x no cartão de crédito e produtos individuais por R$ 19,90. Pagamento único e acesso vitalício.",
       },
       { property: "og:title", content: "Acesso vitalício — Speak2Co" },
       {

@@ -62,7 +62,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     group: "Plans",
     q: "Quais planos existem e como funciona a cobrança?",
-    a: "Não há assinaturas. Você pode comprar o Speak2Co All Access (R$ 97,90, até 10x sem juros) com acesso vitalício a todos os cursos e recursos gerais, e produtos individuais (Speak2Hire, Speak2Fluency e Speak2Travel) por R$ 19,90 cada, também vitalícios. Pagamento único, sem mensalidade.",
+    a: "Não há assinaturas. Você pode comprar o Speak2Co All Access (R$ 97,90, até 10x no cartão de crédito) com acesso vitalício a todos os cursos e recursos gerais, e produtos individuais (Speak2Hire, Speak2Fluency e Speak2Travel) por R$ 19,90 cada, também vitalícios. Pagamento único, sem mensalidade.",
   },
   {
     group: "Plans",

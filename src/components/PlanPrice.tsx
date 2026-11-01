@@ -1,4 +1,4 @@
-import { BRL, INSTALLMENTS, installmentOf } from "@/lib/subscription-plans";
+import { BRL, INSTALLMENTS } from "@/lib/subscription-plans";
 
 /**
  * Hierarquia comercial do preço: a parcela mensal em destaque, deixando claro

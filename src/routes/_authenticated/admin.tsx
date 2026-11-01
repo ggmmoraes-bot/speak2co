@@ -418,7 +418,7 @@ function AdminPage() {
               />
             </div>
             <div>
-              <Label htmlFor="plan-installment">Parcelamento (12x sem juros)</Label>
+              <Label htmlFor="plan-installment">Parcelamento (em até 12x no cartão)</Label>
               <Input
                 id="plan-installment"
                 readOnly
