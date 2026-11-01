@@ -82,83 +82,50 @@ export const PLAN_BENEFITS: Record<PlanKey, string[]> = {
 export type TermsContext = {
   planName: string;
   startLabel: string;
-  endLabel: string;
   totalLabel: string;
   installmentLabel: string;
   paymentMethod: string;
-  autoRenew: boolean;
-  nextChargeLabel: string;
 };
 
 export type TermsSection = { title: string; items: string[] };
 
 /**
- * Termos comerciais da assinatura. Textos genéricos e neutros: nenhuma multa,
- * taxa ou regra jurídica é inventada aqui — a Speak2Co substitui estes textos
- * pelos termos definitivos quando forem publicados.
+ * Termos comerciais do acesso vitalício. Textos genéricos e neutros: nenhuma
+ * multa, taxa ou regra jurídica é inventada aqui — a Speak2Co substitui estes
+ * textos pelos termos definitivos quando forem publicados.
  */
 export function buildSubscriptionTerms(ctx: TermsContext): TermsSection[] {
   return [
     {
-      title: "Período de validade do acesso",
+      title: "Validade do acesso",
       items: [
-        `Plano contratado: ${ctx.planName} — contratação anual com acesso por 12 meses.`,
-        `Início do acesso: ${ctx.startLabel}.`,
-        `Término do período contratado: ${ctx.endLabel}.`,
-        "O acesso aos conteúdos liberados pelo plano permanece disponível durante todo o período contratado.",
+        `Produto adquirido: ${ctx.planName} — pagamento único com acesso vitalício.`,
+        `Início do acesso: ${ctx.startLabel}, logo após a confirmação do pagamento.`,
+        "O acesso não expira: não há mensalidade, renovação automática ou cobrança recorrente.",
       ],
     },
     {
-      title: "Forma e periodicidade de cobrança",
+      title: "Forma de pagamento",
       items: [
         `Forma de pagamento registrada: ${ctx.paymentMethod}.`,
-        `Valor total da contratação: ${ctx.totalLabel}.`,
+        `Valor total da compra: ${ctx.totalLabel}.`,
         `Parcelamento em até ${INSTALLMENTS}x no cartão de crédito, ou pagamento à vista por Pix ou boleto.`,
         "Quando há desconto individual concedido pela Speak2Co, ele é aplicado sobre o valor total antes do parcelamento.",
-        "A contratação é anual. O parcelamento é apenas a forma de pagamento do período de 12 meses e não caracteriza assinatura mensal.",
       ],
     },
     {
-      title: "Renovação",
+      title: "Novos produtos",
       items: [
-        ctx.autoRenew
-          ? "A renovação automática está ativa para o próximo período anual."
-          : "Não há débito automático: a Speak2Co avisa antes do vencimento e a renovação é feita por uma nova contratação.",
-        `Fim do período contratado: ${ctx.nextChargeLabel}.`,
-        "A renovação é feita pelo mesmo plano vigente, salvo alteração solicitada pelo aluno antes da data de renovação.",
-      ],
-    },
-
-    {
-      title: "Alteração de plano — upgrade",
-      items: [
-        "O upgrade para um plano superior pode ser solicitado a qualquer momento dentro de Minha Assinatura.",
-        "Ao confirmar, os recursos do novo plano são liberados imediatamente.",
-        "Quando aplicável, a cobrança é ajustada de forma proporcional ao tempo restante do período contratado.",
-      ],
-    },
-    {
-      title: "Alteração de plano — downgrade",
-      items: [
-        "O downgrade para um plano inferior passa a valer no próximo ciclo de renovação.",
-        "Os benefícios do plano já contratado continuam disponíveis até o fim do período pago.",
-        "Após a mudança, os recursos exclusivos do plano anterior deixam de ficar disponíveis.",
-      ],
-    },
-    {
-      title: "Cancelamento e expiração",
-      items: [
-        "O cancelamento pode ser solicitado a qualquer momento e sempre exige confirmação explícita do aluno.",
-        "Ao cancelar, a renovação automática é desligada e o acesso continua até o fim do período já contratado.",
-        "Quando a assinatura expira, a conta volta ao plano Free e os recursos pagos deixam de ficar disponíveis. O histórico de estudos é preservado.",
+        "Novos produtos podem ser adquiridos a qualquer momento em Meu Acesso.",
+        "Após a confirmação do pagamento, o acesso ao produto é liberado automaticamente.",
+        "Cada produto individual libera somente os conteúdos e funcionalidades do produto adquirido.",
       ],
     },
     {
       title: "Pagamento não aprovado",
       items: [
-        "Se um pagamento não for aprovado, a assinatura fica com status de pagamento pendente e novas tentativas podem ser feitas pelo provedor de pagamento.",
-        "O acesso é mantido enquanto a regularização estiver em andamento, conforme as condições do provedor.",
-        "Não havendo regularização, a assinatura é encerrada e a conta volta ao plano Free.",
+        "Se um pagamento não for aprovado, nenhuma cobrança é concluída e uma nova tentativa pode ser feita pelo provedor de pagamento.",
+        "O acesso ao produto é liberado somente após a confirmação do pagamento.",
       ],
     },
   ];
