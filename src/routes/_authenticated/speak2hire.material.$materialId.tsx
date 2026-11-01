@@ -34,7 +34,7 @@ export const Route = createFileRoute("/_authenticated/speak2hire/material/$mater
   component: GatedMaterialPage,
   errorComponent: ({ error }) => (
     <div role="alert" className="p-8 text-sm text-destructive">
-      {error.message}
+      {error instanceof Error ? error.message : String(error)}
     </div>
   ),
   notFoundComponent: () => (
