@@ -4,15 +4,20 @@
  * preços de fallback, benefícios exibidos e textos dos termos da assinatura.
  */
 
-export type PlanKey = "free" | "essential" | "premium" | "signature";
+export type PlanKey = "free" | "complete" | "essential" | "premium" | "signature";
 
-export const PLAN_ORDER: PlanKey[] = ["free", "essential", "premium", "signature"];
+/**
+ * Essential, Premium e Signature não são mais vendidos. Continuam aqui só para
+ * reconhecer alunas que já os contrataram (acesso preservado).
+ */
+export const PLAN_ORDER: PlanKey[] = ["free", "complete", "essential", "premium", "signature"];
 
 export const PLAN_META: Record<
   PlanKey,
   { name: string; level: number; yearlyPrice: number | null; checkoutKey: string | null }
 > = {
   free: { name: "Free", level: 0, yearlyPrice: null, checkoutKey: null },
+  complete: { name: "Speak2Co Complete", level: 15, yearlyPrice: 97.9, checkoutKey: "complete_lifetime" },
   essential: { name: "Essential", level: 1, yearlyPrice: 430.8, checkoutKey: "essential_yearly" },
   premium: { name: "Premium", level: 2, yearlyPrice: 479.0, checkoutKey: "premium_yearly" },
   signature: { name: "Signature", level: 3, yearlyPrice: 579.0, checkoutKey: "signature_yearly" },
@@ -35,6 +40,14 @@ export const PLAN_BENEFITS: Record<PlanKey, string[]> = {
     "Amostra do plano de estudos",
     "Exercícios diários limitados",
     "AI Teacher — 20 minutos por dia",
+  ],
+  complete: [
+    "Curso Beginner, Intermediate e Upper-Intermediate (Advanced quando disponível)",
+    "Vocabulário com IPA, Listening, Grammar, Reading, Writing e Flashcards",
+    "Study Path, Study Goals, Progress Tracking e Milestones",
+    "AI Teacher — 20 minutos por dia",
+    "Certificados dos cursos concluídos",
+    "Pagamento único — acesso vitalício",
   ],
   essential: [
     "Curso Beginner (A1–A2) e Curso Intermediate (B1) completos",
@@ -149,3 +162,75 @@ export function buildSubscriptionTerms(ctx: TermsContext): TermsSection[] {
     },
   ];
 }
+
+
+/* ------------------------------------------------------------------ */
+/* Modelo comercial vigente: pagamento único com acesso vitalício       */
+/* ------------------------------------------------------------------ */
+
+export type LifetimeCheckoutKey =
+  | "complete_lifetime"
+  | "speak2hire_lifetime"
+  | "speak2fluency_lifetime"
+  | "speak2travel_lifetime";
+
+export const COMPLETE_PRODUCT = {
+  checkoutKey: "complete_lifetime" as const,
+  name: "Speak2Co Complete",
+  price: 97.9,
+  installments: 10,
+  benefits: PLAN_BENEFITS.complete,
+};
+
+export type IndividualProduct = {
+  id: "hire" | "fluency" | "travel" | "business" | "kids";
+  name: string;
+  description: string;
+  price: number;
+  /** null = em construção, não pode ser comprado. */
+  checkoutKey: LifetimeCheckoutKey | null;
+  featureKey: string | null;
+};
+
+export const INDIVIDUAL_PRODUCTS: IndividualProduct[] = [
+  {
+    id: "hire",
+    name: "Speak2Hire",
+    description: "Inglês para entrevistas de emprego, processos seletivos e oportunidades profissionais.",
+    price: 19.9,
+    checkoutKey: "speak2hire_lifetime",
+    featureKey: "product_line_hire",
+  },
+  {
+    id: "fluency",
+    name: "Speak2Fluency",
+    description: "Inglês para desenvolver fluência, comunicação e confiança no idioma.",
+    price: 19.9,
+    checkoutKey: "speak2fluency_lifetime",
+    featureKey: "product_line_fluency",
+  },
+  {
+    id: "travel",
+    name: "Speak2Travel",
+    description: "Inglês para viagens, situações práticas e comunicação internacional.",
+    price: 19.9,
+    checkoutKey: "speak2travel_lifetime",
+    featureKey: "product_line_travel",
+  },
+  {
+    id: "business",
+    name: "Speak2Business",
+    description: "Inglês para negócios, comunicação corporativa e ambiente profissional.",
+    price: 19.9,
+    checkoutKey: null,
+    featureKey: null,
+  },
+  {
+    id: "kids",
+    name: "Speak2Kids",
+    description: "Inglês para crianças.",
+    price: 19.9,
+    checkoutKey: null,
+    featureKey: null,
+  },
+];
