@@ -10,5 +10,6 @@
 - [x] Preparar e apresentar textos sobre o teste de nivelamento gratuito para adultos focados em carreira no Brasil.
 - [x] Aprovar os textos propostos — versão 1 escolhida pela usuária.
 - [x] Criar e revisar prévias visuais com telas reais; apresentar duas opções.
-- [ ] Escolher direção e aprovar frases para as imagens — aguarda resposta da usuária.
+- [x] Escolher direção — Apresentação do teste.
+- [ ] Aprovar frases para as imagens — aguarda resposta da usuária.
 - [ ] Produzir conjunto final com e sem frases — depende da escolha e aprovação acima.
