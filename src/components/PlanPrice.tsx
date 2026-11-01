@@ -38,19 +38,17 @@ export function PlanPrice({
       {hasDiscount && (
         <p className="flex flex-wrap items-center gap-2 text-sm">
           <span className="rounded-full bg-accent/15 px-2 py-0.5 text-xs font-semibold text-accent">
-            {percentOff}% OFF + até {INSTALLMENTS}x sem juros
+            {percentOff}% OFF
           </span>
           <span className="text-muted-foreground line-through">{BRL(total)}</span>
         </p>
       )}
       <p className={`font-bold text-accent ${compact ? "text-2xl" : "text-4xl"}`}>
-        <span className="text-[0.6em] font-semibold">{INSTALLMENTS}x de </span>
-        {BRL(installmentOf(charged))}
+        {BRL(charged)}
       </p>
       <p className="text-sm font-medium text-foreground">Pagamento único — acesso vitalício</p>
       <p className="mt-1 text-xs text-muted-foreground">
-        Valor total: {BRL(charged)} · em até {INSTALLMENTS}x sem juros no cartão ou à vista (Pix ou
-        boleto) · sem mensalidade
+        Em até {INSTALLMENTS}x no cartão de crédito ou à vista (Pix ou boleto) · sem mensalidade
       </p>
 
     </div>
