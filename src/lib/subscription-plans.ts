@@ -46,6 +46,7 @@ export const PLAN_BENEFITS: Record<PlanKey, string[]> = {
     "Vocabulário com IPA, Listening, Grammar, Reading, Writing e Flashcards",
     "Study Path, Study Goals, Progress Tracking e Milestones",
     "AI Teacher — 20 minutos por dia",
+    "GiseleAI by Speak2Co — mentoria, Voice Room e missões diárias",
     "Certificados dos cursos concluídos",
     "Pagamento único — acesso vitalício",
   ],

@@ -131,6 +131,7 @@ PLAN_MATRIX["complete"] = {
   ...PLAN_MATRIX["essential"],
   premium_materials: true,
   courses_upper_intermediate: true,
+  gisele_ai: true,
 };
 
 export const AI_MINUTES: Record<string, number | null> = {
