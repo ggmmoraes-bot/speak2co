@@ -38,6 +38,7 @@ export type MyAccess = {
   features: Record<string, boolean>;
   aiDailyMinutes: number | null;
   aiUsedSeconds: number;
+  ownedProducts?: string[];
 };
 
 const PLAN_COLUMNS =
@@ -98,7 +99,7 @@ export const getMyAccess = createServerFn({ method: "GET" })
 
     const isAdmin = adminRes.data === true;
 
-    const [planRes, featRes, usageRes] = await Promise.all([
+    const [planRes, featRes, usageRes, ownedRes] = await Promise.all([
       supabase.from("plans").select(PLAN_COLUMNS).eq("key", planKey).maybeSingle(),
       supabase.from("plan_features").select("feature_key, enabled").eq("plan_key", planKey),
       supabase
@@ -108,10 +109,13 @@ export const getMyAccess = createServerFn({ method: "GET" })
         .eq("feature_key", "ai_teacher")
         .eq("usage_date", new Date().toISOString().slice(0, 10))
         .maybeSingle(),
+      supabase.rpc("owned_product_features", { _user_id: userId }),
     ]);
 
     const features: Record<string, boolean> = {};
     for (const row of featRes.data ?? []) features[row.feature_key] = row.enabled;
+    const ownedProducts = (ownedRes.data as string[] | null) ?? [];
+    for (const key of ownedProducts) features[key] = true;
 
     const plan = (planRes.data as PlanRow | null) ?? null;
 
