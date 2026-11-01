@@ -14,7 +14,14 @@ import {
 import { BrandText } from "@/components/BrandText";
 
 export type EcosystemStatus = "available" | "locked" | "soon";
-export type PlanName = "Free" | "Essential" | "Premium" | "Signature";
+export type PlanName =
+  | "Cadastro Gratuito"
+  | "All Access"
+  | "Speak2Hire"
+  | "Speak2Fluency"
+  | "Speak2Travel"
+  | "Speak2Business"
+  | "Speak2Kids";
 
 export type EcosystemItem = {
   id: string;

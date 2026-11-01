@@ -23,7 +23,7 @@ export type ProductLineItem = {
   params?: Record<string, string>;
   locked?: boolean;
   comingSoon?: boolean;
-  requiredPlan?: "Free" | "Essential" | "Premium" | "Signature";
+  requiredPlan?: "All Access" | "Speak2Hire" | "Speak2Fluency" | "Speak2Travel" | "Speak2Business" | "Speak2Kids";
 };
 
 const posterBase =
