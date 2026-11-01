@@ -8,7 +8,7 @@ export type PlanKey =
   | "speak2travel_lifetime";
 
 export const MP_PLANS: Record<PlanKey, { label: string; amount: number; installments: number }> = {
-  complete_lifetime: { label: "Complete - Acesso Vitalicio", amount: 97.9, installments: 10 },
+  complete_lifetime: { label: "All Access - Acesso Vitalicio", amount: 97.9, installments: 10 },
   speak2hire_lifetime: { label: "Speak2Hire - Acesso Vitalicio", amount: 19.9, installments: 1 },
   speak2fluency_lifetime: { label: "Speak2Fluency - Acesso Vitalicio", amount: 19.9, installments: 1 },
   speak2travel_lifetime: { label: "Speak2Travel - Acesso Vitalicio", amount: 19.9, installments: 1 },

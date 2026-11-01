@@ -23,7 +23,7 @@ const ART: Record<IndividualProduct["id"], string> = {
 };
 
 /**
- * Vitrine comercial única (página pública e área da aluna): Speak2Co Complete
+ * Vitrine comercial única (página pública e área da aluna): Speak2Co All Access
  * + produtos individuais. Quem chama decide o que cada botão faz.
  */
 export function LifetimeCatalog({
@@ -35,7 +35,6 @@ export function LifetimeCatalog({
   /** Produtos que a aluna já possui (por checkoutKey). */
   owned?: Partial<Record<LifetimeCheckoutKey, boolean>>;
 }) {
-  const installment = COMPLETE_PRODUCT.price / COMPLETE_PRODUCT.installments;
   const ownedBadge = (
     <span className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-gold/50 bg-gold/10 text-sm font-semibold text-gold">
       <Check className="h-4 w-4" /> Você já possui — acesso vitalício
@@ -50,8 +49,9 @@ export function LifetimeCatalog({
         </p>
         <div className="mx-auto w-full max-w-3xl rounded-3xl border border-gold/60 bg-card p-6 shadow-[0_0_40px_-18px_var(--gold)] sm:p-10">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 id="complete-heading" className="text-2xl font-bold text-foreground sm:text-3xl">
-              {COMPLETE_PRODUCT.name}
+            <h2 id="complete-heading" className="text-2xl font-bold sm:text-3xl">
+              <span className="text-foreground">Speak2Co</span>{" "}
+              <span className="text-gold">All Access</span>
             </h2>
             <span className="inline-flex items-center gap-1 rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold tracking-wide text-gold uppercase">
               <InfinityIcon className="h-4 w-4" /> Acesso vitalício
@@ -60,7 +60,7 @@ export function LifetimeCatalog({
           <p className="mt-6 text-4xl font-bold text-gold">{BRL(COMPLETE_PRODUCT.price)}</p>
           <p className="text-sm font-medium text-foreground">Pagamento único</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            ou até {COMPLETE_PRODUCT.installments}x de {BRL(installment)} sem juros no cartão
+            ou até {COMPLETE_PRODUCT.installments}x no cartão de crédito
           </p>
           <ul className="mt-6 grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
             {COMPLETE_PRODUCT.benefits.map((b) => (
@@ -88,7 +88,7 @@ export function LifetimeCatalog({
         </h2>
         <p className="mx-auto max-w-2xl text-center text-sm text-muted-foreground">
           Cada produto é independente: pagamento único de {BRL(19.9)} e acesso vitalício ao produto
-          comprado. Você pode comprar quantos quiser, com ou sem o Complete.
+          comprado. Você pode comprar quantos quiser, com ou sem o All Access.
         </p>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {INDIVIDUAL_PRODUCTS.map((p) => {

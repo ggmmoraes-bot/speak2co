@@ -35,7 +35,7 @@ export const Route = createFileRoute("/_authenticated/professor")({
       feature="ai_teacher"
       title="AI Teacher é um recurso Premium"
       benefit="Converse em inglês 24h por dia com correções de gramática, vocabulário e pronúncia geradas por IA."
-      requiredPlan="Speak2Co Complete"
+      requiredPlan="Speak2Co All Access"
     >
       <ProfessorLayout />
     </FeatureGate>

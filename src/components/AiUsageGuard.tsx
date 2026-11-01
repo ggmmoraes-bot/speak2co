@@ -78,9 +78,9 @@ export function AiUsageGuard({ children }: { children: ReactNode }) {
   if (!allowed) {
     return (
       <UpgradeScreen
-        title="AI Teacher disponível no Speak2Co Complete"
+        title="AI Teacher disponível no Speak2Co All Access"
         benefit="Converse em inglês com um AI Teacher que corrige gramática, pronúncia e adapta tudo ao seu nível."
-        requiredPlan="Speak2Co Complete"
+        requiredPlan="Speak2Co All Access"
       />
     );
   }

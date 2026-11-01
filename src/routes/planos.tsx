@@ -7,7 +7,7 @@ import { siteUrl } from "@/lib/site";
 
 const TITLE = "Planos e preços — Speak2Co";
 const DESCRIPTION =
-  "Speak2Co Complete por R$ 97,90 com acesso vitalício e produtos individuais por R$ 19,90: pagamento único, sem mensalidade. Comece grátis hoje.";
+  "Speak2Co All Access por R$ 97,90 com acesso vitalício e produtos individuais por R$ 19,90: pagamento único, sem mensalidade. Comece grátis hoje.";
 
 export const Route = createFileRoute("/planos")({
   head: () => ({
