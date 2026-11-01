@@ -15,6 +15,13 @@
       "when": 1793565156906,
       "tag": "0001_restrict_owned_products",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793566065851,
+      "tag": "0002_complete_includes_gisele_ai",
+      "breakpoints": true
     }
   ]
 }

@@ -39,7 +39,7 @@ export const HELP_GUIDE: HelpArticle[] = [
     steps: [
       "AI Teacher: conversa livre em inglês com correção. Free e Essential têm 20 minutos por dia.",
       "AI Pronunciation: grave sua voz e receba nota de Pronunciation, Stress, Intonation e Fluency.",
-      "GiseleAI (Signature): mentoria contínua, missões diárias, Voice Room e plano personalizado.",
+      "GiseleAI (Speak2Co Complete): mentoria contínua, missões diárias, Voice Room e plano personalizado.",
       "Permita o uso do microfone no navegador na primeira vez que gravar.",
     ],
   },
@@ -102,7 +102,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     group: "AI",
     q: "A GiseleAI está em qual plano?",
-    a: "GiseleAI by Speak2Co é exclusiva do plano Signature, com voz, memória de longo prazo e mentoria personalizada.",
+    a: "GiseleAI by Speak2Co está incluída no Speak2Co Complete (e no antigo Signature), com voz, memória de longo prazo e mentoria personalizada.",
   },
   {
     group: "Product Lines",
