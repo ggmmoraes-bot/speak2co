@@ -19,7 +19,7 @@ export type SubscriptionEventView = {
 export type SimulationMode = "anual" | "pendente" | "cancelada";
 
 export const SIMULATION_MODES: { value: SimulationMode; label: string }[] = [
-  { value: "anual", label: "Premium anual" },
+  { value: "anual", label: "All Access vitalício" },
   { value: "pendente", label: "Pagamento pendente" },
   { value: "cancelada", label: "Assinatura cancelada" },
 ];
@@ -62,7 +62,7 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
       mode,
       isPremium: false,
       subscription: {
-        plan_label: "Premium anual",
+        plan_label: "All Access vitalício",
         status: "pending",
         amount: 479.0,
         currency: "BRL",
@@ -97,7 +97,7 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
       mode,
       isPremium: false,
       subscription: {
-        plan_label: "Premium anual",
+        plan_label: "All Access vitalício",
         status: "cancelled",
         amount: 479.0,
         currency: "BRL",
@@ -146,7 +146,7 @@ export function buildSimulation(mode: SimulationMode): SimulationData {
     mode,
     isPremium: true,
     subscription: {
-      plan_label: "Premium anual",
+      plan_label: "All Access vitalício",
       status: "authorized",
       amount,
       currency: "BRL",
