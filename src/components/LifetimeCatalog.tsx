@@ -50,8 +50,9 @@ export function LifetimeCatalog({
         </p>
         <div className="mx-auto w-full max-w-3xl rounded-3xl border border-gold/60 bg-card p-6 shadow-[0_0_40px_-18px_var(--gold)] sm:p-10">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 id="complete-heading" className="text-2xl font-bold text-foreground sm:text-3xl">
-              {COMPLETE_PRODUCT.name}
+            <h2 id="complete-heading" className="text-2xl font-bold sm:text-3xl">
+              <span className="text-foreground">Speak2Co</span>{" "}
+              <span className="text-gold">All Access</span>
             </h2>
             <span className="inline-flex items-center gap-1 rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold tracking-wide text-gold uppercase">
               <InfinityIcon className="h-4 w-4" /> Acesso vitalício

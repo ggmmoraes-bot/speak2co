@@ -113,7 +113,7 @@ export function buildSubscriptionTerms(ctx: TermsContext): TermsSection[] {
       items: [
         `Forma de pagamento registrada: ${ctx.paymentMethod}.`,
         `Valor total da contratação: ${ctx.totalLabel}.`,
-        `Parcelamento em até ${INSTALLMENTS}x de ${ctx.installmentLabel} sem juros no cartão, ou pagamento à vista por Pix ou boleto.`,
+        `Parcelamento em até ${INSTALLMENTS}x no cartão de crédito, ou pagamento à vista por Pix ou boleto.`,
         "Quando há desconto individual concedido pela Speak2Co, ele é aplicado sobre o valor total antes do parcelamento.",
         "A contratação é anual. O parcelamento é apenas a forma de pagamento do período de 12 meses e não caracteriza assinatura mensal.",
       ],
