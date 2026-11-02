@@ -151,7 +151,7 @@ export function BenefitsSection() {
             placeholder="maria ou maria@email.com"
           />
           <Button disabled={busy} onClick={handleSearch} className="rounded-full font-semibold">
-            Buscar
+            Search
           </Button>
         </div>
 
@@ -194,14 +194,14 @@ export function BenefitsSection() {
               className="rounded-full"
               onClick={() => setMode("courtesy")}
             >
-              Conceder assinatura gratuita
+              Grant complimentary access
             </Button>
             <Button
               variant={mode === "discount" ? "default" : "outline"}
               className="rounded-full"
               onClick={() => setMode("discount")}
             >
-              Conceder desconto especial
+              Grant special discount
             </Button>
           </div>
 
@@ -218,14 +218,14 @@ export function BenefitsSection() {
                   className="rounded-full"
                   onClick={() => setPermanent(true)}
                 >
-                  Permanente
+                  Permanent
                 </Button>
                 <Button
                   variant={!permanent ? "default" : "outline"}
                   className="rounded-full"
                   onClick={() => setPermanent(false)}
                 >
-                  Temporária
+                  Temporary
                 </Button>
               </div>
             ) : (
@@ -289,7 +289,7 @@ export function BenefitsSection() {
             onClick={handleGrant}
             className="mt-5 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
           >
-            {mode === "courtesy" ? "Conceder cortesia All Access" : "Conceder desconto"}
+            {mode === "courtesy" ? "Grant All Access courtesy" : "Grant discount"}
           </Button>
         </div>
       )}
@@ -332,7 +332,7 @@ export function BenefitsSection() {
                         className="rounded-full"
                         onClick={() => handleStatus(b.id, "inactive")}
                       >
-                        Desativar
+                        Deactivate
                       </Button>
                     )}
                     {b.status === "inactive" && (
@@ -342,7 +342,7 @@ export function BenefitsSection() {
                         className="rounded-full"
                         onClick={() => handleStatus(b.id, "active")}
                       >
-                        Reativar
+                        Reactivate
                       </Button>
                     )}
                     {b.status !== "revoked" && (
@@ -352,7 +352,7 @@ export function BenefitsSection() {
                         className="rounded-full"
                         onClick={() => handleStatus(b.id, "revoked")}
                       >
-                        Revogar
+                        Revoke
                       </Button>
                     )}
                     <Button
@@ -361,7 +361,7 @@ export function BenefitsSection() {
                       className="rounded-full"
                       onClick={() => setHistoryOf(historyOf === b.id ? null : b.id)}
                     >
-                      Histórico
+                      History
                     </Button>
                   </div>
                 </td>

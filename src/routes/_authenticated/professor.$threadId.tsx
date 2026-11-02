@@ -31,6 +31,16 @@ import { supabase } from "@/integrations/supabase/client";
 
 
 export const Route = createFileRoute("/_authenticated/professor/$threadId")({
+  head: () => ({
+    meta: [
+      {"title": "AI Teacher Conversation | Speak2Co"},
+      {"name": "description", "content": "AI Teacher Conversation on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "AI Teacher Conversation | Speak2Co"},
+      {"property": "og:description", "content": "AI Teacher Conversation on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   validateSearch: (search: Record<string, unknown>) => ({
     prompt: typeof search["prompt"] === "string" ? (search["prompt"] as string) : undefined,
   }),

@@ -22,6 +22,16 @@ import { AltHeading } from "@/components/AltHeading";
 
 
 export const Route = createFileRoute("/_authenticated/gisele/voice-session/$threadId")({
+  head: () => ({
+    meta: [
+      {"title": "Voice Session | GiseleAI | Speak2Co"},
+      {"name": "description", "content": "Voice Session on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "Voice Session | GiseleAI | Speak2Co"},
+      {"property": "og:description", "content": "Voice Session on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: VoiceSessionPage,
 });
 

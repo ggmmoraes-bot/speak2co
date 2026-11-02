@@ -4,6 +4,16 @@ import { Card } from "@/components/ui/card";
 import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/privacidade")({
+  head: () => ({
+    meta: [
+      {"title": "Privacy | GiseleAI | Speak2Co"},
+      {"name": "description", "content": "Privacy on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "Privacy | GiseleAI | Speak2Co"},
+      {"property": "og:description", "content": "Privacy on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: PrivacyPage,
 });
 

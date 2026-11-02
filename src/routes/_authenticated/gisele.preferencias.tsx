@@ -12,6 +12,16 @@ import { SUPPORT_LANGUAGES, useVoiceSettings } from "@/lib/use-voice-settings";
 import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/preferencias")({
+  head: () => ({
+    meta: [
+      {"title": "Preferences | GiseleAI | Speak2Co"},
+      {"name": "description", "content": "Preferences on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "Preferences | GiseleAI | Speak2Co"},
+      {"property": "og:description", "content": "Preferences on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: PreferencesPage,
 });
 

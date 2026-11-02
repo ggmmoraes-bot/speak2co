@@ -12,6 +12,16 @@ import type { GiseleFocus } from "@/lib/gisele.functions";
 import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/meu-progresso")({
+  head: () => ({
+    meta: [
+      {"title": "My Progress | GiseleAI | Speak2Co"},
+      {"name": "description", "content": "My Progress on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "My Progress | GiseleAI | Speak2Co"},
+      {"property": "og:description", "content": "My Progress on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: ProgressPage,
 });
 

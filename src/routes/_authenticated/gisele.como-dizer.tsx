@@ -14,6 +14,16 @@ import {
 } from "@/lib/gisele-activities.functions";
 
 export const Route = createFileRoute("/_authenticated/gisele/como-dizer")({
+  head: () => ({
+    meta: [
+      {"title": "How Would Gisele Say It | GiseleAI | Speak2Co"},
+      {"name": "description", "content": "How Would Gisele Say It on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "How Would Gisele Say It | GiseleAI | Speak2Co"},
+      {"property": "og:description", "content": "How Would Gisele Say It on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: HowWouldGiseleSayIt,
 });
 

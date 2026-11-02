@@ -8,6 +8,16 @@ import { getStudyPlan, type StudyPlan } from "@/lib/study-plan.functions";
 import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/meu-plano")({
+  head: () => ({
+    meta: [
+      {"title": "My Plan | GiseleAI | Speak2Co"},
+      {"name": "description", "content": "My Plan on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "My Plan | GiseleAI | Speak2Co"},
+      {"property": "og:description", "content": "My Plan on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: GiselePlanPage,
 });
 
