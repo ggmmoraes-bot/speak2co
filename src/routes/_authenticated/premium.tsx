@@ -79,20 +79,20 @@ function PremiumPage() {
         owned={owned}
         renderAction={(key, primary) => (
           <Button
-            variant={primary ? "default" : "outline"}
+            variant="default"
             disabled={disabled || mutation.isPending}
             onClick={() => mutation.mutate(key)}
             className={
               primary
                 ? "btn-gold h-12 w-full rounded-full text-sm font-bold text-gold-ink uppercase"
-                : "btn-gold-outline h-11 w-full rounded-full text-sm font-semibold text-foreground"
+                : "btn-gold h-11 w-full rounded-full text-sm font-semibold text-gold-ink"
             }
           >
-            {mutation.isPending && mutation.variables === key
-              ? "Opening payment..."
-              : primary
-                ? "Get lifetime access"
-                : "Buy"}
+            {mutation.isPending && mutation.variables === key ? (
+              "Opening payment..."
+            ) : (
+              <LifetimeCta primary={primary} />
+            )}
           </Button>
         )}
       />
