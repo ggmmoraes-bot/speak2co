@@ -4,7 +4,7 @@ import type { Dictionary } from "../types";
 export const pt: Dictionary = {
   // Idioma
   "language.label": "Idioma",
-  "language.change": "Alterar idioma",
+  "language.change": "Change language",
 
   // Navegação
   "nav.home": "Início",
@@ -24,25 +24,25 @@ export const pt: Dictionary = {
   "nav.benefits": "Benefícios",
 
   // Botões
-  "buttons.startLesson": "Começar aula",
-  "buttons.continue": "Continuar",
-  "buttons.save": "Salvar",
-  "buttons.cancel": "Cancelar",
-  "buttons.back": "Voltar",
-  "buttons.next": "Avançar",
-  "buttons.previous": "Anterior",
-  "buttons.finish": "Concluir",
-  "buttons.close": "Fechar",
-  "buttons.retry": "Tentar novamente",
-  "buttons.signIn": "Entrar",
-  "buttons.signUp": "Criar conta",
-  "buttons.signOut": "Sair",
-  "buttons.send": "Enviar",
-  "buttons.confirm": "Confirmar",
-  "buttons.edit": "Editar",
-  "buttons.delete": "Excluir",
-  "buttons.seeMore": "Ver mais",
-  "buttons.goHome": "Ir para o início",
+  "buttons.startLesson": "Start Lesson",
+  "buttons.continue": "Continue",
+  "buttons.save": "Save",
+  "buttons.cancel": "Cancel",
+  "buttons.back": "Back",
+  "buttons.next": "Next",
+  "buttons.previous": "Previous",
+  "buttons.finish": "Finish",
+  "buttons.close": "Close",
+  "buttons.retry": "Try again",
+  "buttons.signIn": "Sign in",
+  "buttons.signUp": "Create account",
+  "buttons.signOut": "Sign out",
+  "buttons.send": "Send",
+  "buttons.confirm": "Confirm",
+  "buttons.edit": "Edit",
+  "buttons.delete": "Delete",
+  "buttons.seeMore": "See more",
+  "buttons.goHome": "Go home",
 
   // Estados
   "state.loading": "Carregando...",
@@ -56,7 +56,7 @@ export const pt: Dictionary = {
   "home.title": "Bem-vinda à Speak2Co",
   "home.subtitle": "Tudo o que você precisa para alcançar seus objetivos em inglês, em um só lugar.",
   "home.myPlan": "Meu plano de estudos",
-  "home.placementTest": "Fazer teste de nivelamento",
+  "home.placementTest": "Take the placement test",
   "home.level": "Nível",
   "home.plan": "Plano",
 
@@ -64,7 +64,7 @@ export const pt: Dictionary = {
   "auth.email": "E-mail",
   "auth.password": "Senha",
   "auth.fullName": "Nome completo",
-  "auth.forgotPassword": "Esqueci minha senha",
-  "auth.createAccount": "Criar minha conta",
-  "auth.alreadyHaveAccount": "Já tenho uma conta",
+  "auth.forgotPassword": "Forgot my password",
+  "auth.createAccount": "Create my account",
+  "auth.alreadyHaveAccount": "I already have an account",
 };
