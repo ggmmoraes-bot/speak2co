@@ -124,7 +124,7 @@ export function PronunciationDialog({
           <div className="flex flex-wrap items-center gap-2">
             <Button variant="secondary" onClick={playModel} disabled={playing || busy}>
               {playing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Volume2 className="h-4 w-4" />}
-              Ouvir modelo
+              Listen to model
             </Button>
             <Button
               onClick={toggleRecording}
@@ -138,7 +138,7 @@ export function PronunciationDialog({
               ) : (
                 <Mic className="h-4 w-4" />
               )}
-              {recording ? "Parar e avaliar" : busy ? "Avaliando…" : "Gravar minha voz"}
+              {recording ? "Stop & check" : busy ? "Checking…" : "Record my voice"}
             </Button>
             {result && (
               <Button variant="ghost" onClick={() => setResult(null)}>

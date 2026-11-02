@@ -222,7 +222,7 @@ function Speak2HireHub() {
                       to="/speak2hire/sessao/$sessionId"
                       params={{ sessionId: session.id }}
                     >
-                      {session.completed ? "Ver feedback" : "Continuar"}
+                      {session.completed ? "View feedback" : "Continue"}
                     </Link>
                   </Button>
                   <Button

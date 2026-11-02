@@ -287,7 +287,7 @@ function DialogueSection({
           className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
         >
           <Link to="/speak2travel/modulo/$moduleId" params={{ moduleId: track.id }}>
-            <Sparkles className="mr-1 h-4 w-4" /> Começar o role play
+            <Sparkles className="mr-1 h-4 w-4" /> Start role play
           </Link>
         </Button>
       </div>

@@ -101,19 +101,19 @@ function Painel() {
                 <Button asChild variant="outline" className="rounded-full">
                   <Link to="/admin">
                     <ShieldCheck className="h-4 w-4 text-gold" />
-                    <span className="ml-2 hidden sm:inline">Administração</span>
+                    <span className="ml-2 hidden sm:inline">Admin</span>
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full">
                   <Link to="/admin" hash="beneficios">
                     <Gift className="h-4 w-4 text-gold" />
-                    <span className="ml-2 hidden sm:inline">Benefícios</span>
+                    <span className="ml-2 hidden sm:inline">Benefits</span>
                   </Link>
                 </Button>
               </>
             )}
             <Button variant="outline" onClick={handleSignOut} className="rounded-full">
-              Sair
+              Sign out
             </Button>
           </div>
         </div>
@@ -140,12 +140,12 @@ function Painel() {
 
               <div className="mt-6 flex flex-wrap gap-2 text-xs">
                 <span className="badge-gold rounded-full px-3 py-1 font-semibold text-gold">
-                  Level: {profile?.english_level ?? "A definir"}
+                  Level: {profile?.english_level ?? "Not set"}
                   {stage ? ` · ${stage.name}` : ""}
                 </span>
                 {access?.aiDailyMinutes != null && (
                   <span className="badge-gold rounded-full px-3 py-1 font-semibold text-gold">
-                    AI Teacher: {aiMinutesLeft(access)}/{access.aiDailyMinutes} min hoje
+                    AI Teacher: {aiMinutesLeft(access)}/{access.aiDailyMinutes} min today
                   </span>
                 )}
               </div>
@@ -156,27 +156,27 @@ function Painel() {
                   className="glow-gold rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                 >
                   <Link to="/teste-de-nivel">
-                    <Target className="mr-2 h-4 w-4" /> Fazer teste de nivelamento
+                    <Target className="mr-2 h-4 w-4" /> Take Placement Test
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full font-semibold">
                   <Link to="/meu-plano">
-                    <Compass className="mr-2 h-4 w-4 text-gold" /> Meu plano de estudos
+                    <Compass className="mr-2 h-4 w-4 text-gold" /> My Study Plan
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full font-semibold">
                   <Link to="/perfil">
-                    <UserRound className="mr-2 h-4 w-4 text-gold" /> Meu perfil
+                    <UserRound className="mr-2 h-4 w-4 text-gold" /> My Profile
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full font-semibold">
                   <Link to="/assinatura" search={{ simulacao: undefined }}>
-                    <ShieldCheck className="mr-2 h-4 w-4 text-gold" /> Meu acesso
+                    <ShieldCheck className="mr-2 h-4 w-4 text-gold" /> My Access
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full font-semibold">
                   <Link to="/premium">
-                    <Sparkles className="mr-2 h-4 w-4 text-gold" /> Planos
+                    <Sparkles className="mr-2 h-4 w-4 text-gold" /> Plans
                   </Link>
                 </Button>
               </div>

@@ -231,7 +231,7 @@ function SessionPage() {
                   </>
                 ) : (
                   <>
-                    <Play className="mr-1 h-4 w-4" /> {elapsed > 0 ? "Retomar" : "Começar"}
+                    <Play className="mr-1 h-4 w-4" /> {elapsed > 0 ? "Resume" : "Start"}
                   </>
                 )}
               </Button>

@@ -39,7 +39,7 @@ function ProfessorIndex() {
         onClick={handleNewThread}
         className="rounded-full bg-gold text-primary-foreground font-semibold hover:opacity-90"
       >
-        Começar a conversar
+        Start conversation
       </Button>
     </div>
   );
