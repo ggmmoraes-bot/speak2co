@@ -104,11 +104,11 @@ export function LiveLessonPreviewPicker() {
             params={{ course, unitCode: currentUnit, part }}
           >
             <PlayCircle className="mr-2 h-4 w-4" />
-            Abrir Guided Lesson
+            Open Guided Lesson
           </Link>
         </Button>
         <Button asChild variant="outline" className="rounded-full font-semibold">
-          <Link to="/admin-live-lesson">Gerenciar vídeos</Link>
+          <Link to="/admin-live-lesson">Manage videos</Link>
         </Button>
       </div>
     </section>

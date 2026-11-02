@@ -10,6 +10,16 @@ import { getRecommendations, updateRecommendationStatus } from "@/lib/gisele-dat
 import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/recomendacoes")({
+  head: () => ({
+    meta: [
+      {"title": "Recommendations | GiseleAI | Speak2Co"},
+      {"name": "description", "content": "Recommendations on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "Recommendations | GiseleAI | Speak2Co"},
+      {"property": "og:description", "content": "Recommendations on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: RecommendationsPage,
 });
 

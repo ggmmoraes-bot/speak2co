@@ -91,7 +91,7 @@ export function PlanVersionsSection() {
                       onClick={() => setOpenId(isOpen ? null : version.id)}
                       className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
                     >
-                      {isOpen ? "Ocultar" : "Ver detalhes"}
+                      {isOpen ? "Hide" : "View details"}
                     </Button>
                     <Button
                       variant="outline"

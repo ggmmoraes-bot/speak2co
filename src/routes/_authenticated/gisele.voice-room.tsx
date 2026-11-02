@@ -13,6 +13,16 @@ import { isBrandVoice, useVoiceSettings } from "@/lib/use-voice-settings";
 import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/voice-room")({
+  head: () => ({
+    meta: [
+      {"title": "Voice Room | GiseleAI | Speak2Co"},
+      {"name": "description", "content": "Voice Room on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "Voice Room | GiseleAI | Speak2Co"},
+      {"property": "og:description", "content": "Voice Room on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: VoiceRoomPage,
 });
 

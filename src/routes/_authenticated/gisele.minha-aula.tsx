@@ -8,6 +8,16 @@ import { Input } from "@/components/ui/input";
 import { createGiseleLesson, type GiseleLesson } from "@/lib/gisele-activities.functions";
 
 export const Route = createFileRoute("/_authenticated/gisele/minha-aula")({
+  head: () => ({
+    meta: [
+      {"title": "Create My Lesson | GiseleAI | Speak2Co"},
+      {"name": "description", "content": "Create My Lesson on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "Create My Lesson | GiseleAI | Speak2Co"},
+      {"property": "og:description", "content": "Create My Lesson on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: CreateMyLesson,
 });
 

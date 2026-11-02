@@ -258,7 +258,7 @@ export function UnitPartLesson({
         to={courseBase as "/"}
         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
       >
-        <ArrowLeft className="h-4 w-4" /> Back to course · Voltar ao curso
+        <ArrowLeft className="h-4 w-4" /> Back to course
       </Link>
 
       <header className="mt-4 rounded-3xl border border-gold/30 bg-gold/5 p-5">

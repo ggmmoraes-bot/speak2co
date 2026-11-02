@@ -37,6 +37,16 @@ import {
 } from "@/lib/gisele.functions";
 
 export const Route = createFileRoute("/_authenticated/gisele/$threadId")({
+  head: () => ({
+    meta: [
+      {"title": "Conversation | GiseleAI | Speak2Co"},
+      {"name": "description", "content": "Conversation on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "Conversation | GiseleAI | Speak2Co"},
+      {"property": "og:description", "content": "Conversation on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: GiseleThreadPage,
 });
 
@@ -322,7 +332,7 @@ function GiseleChat({
                   <button
                     type="button"
                     onClick={() => playMessage(m)}
-                    aria-label="Ouvir a resposta"
+                    aria-label="Listen to the response"
                     className="flex w-fit items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-gold"
                   >
                     {speakingId === m.id ? (

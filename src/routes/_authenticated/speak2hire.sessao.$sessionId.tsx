@@ -274,7 +274,7 @@ function SessionPage() {
             disabled={index === 0 || saving}
             onClick={() => goTo(index - 1)}
           >
-            <ArrowLeft className="mr-1 h-4 w-4" /> Anterior
+            <ArrowLeft className="mr-1 h-4 w-4" /> Previous
           </Button>
           {index < questions.length - 1 ? (
             <Button
@@ -282,7 +282,7 @@ function SessionPage() {
               disabled={saving}
               onClick={() => goTo(index + 1)}
             >
-              {saving ? "Salvando..." : "Próxima pergunta"} <ArrowRight className="ml-1 h-4 w-4" />
+              {saving ? "Saving..." : "Next question"} <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
           ) : (
             <Button
@@ -291,7 +291,7 @@ function SessionPage() {
               onClick={handleFinish}
             >
               <Sparkles className="mr-1 h-4 w-4" />
-              {finishing ? "Avaliando..." : "Finalizar e receber feedback"}
+              {finishing ? "Evaluating..." : "Finish and get feedback"}
             </Button>
           )}
           <Button
@@ -303,7 +303,7 @@ function SessionPage() {
               navigate({ to: "/speak2hire" });
             }}
           >
-            Salvar e sair
+            Save and exit
           </Button>
         </div>
       </div>
@@ -396,7 +396,7 @@ function FeedbackView({ session }: { session: InterviewSession }) {
           asChild
           className="mt-10 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
         >
-          <Link to="/speak2hire">Praticar outra trilha</Link>
+          <Link to="/speak2hire">Practice another track</Link>
         </Button>
       </div>
     </main>

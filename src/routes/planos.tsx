@@ -45,7 +45,7 @@ function PublicPlans() {
           </p>
           <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="btn-gold h-12 flex-1 rounded-full text-sm font-semibold">
-              <Link to="/auth">Criar conta grátis</Link>
+              <Link to="/auth">Create free account</Link>
             </Button>
             <Button
               asChild
@@ -53,7 +53,7 @@ function PublicPlans() {
               variant="outline"
               className="btn-gold-outline h-12 flex-1 rounded-full text-sm font-semibold text-foreground"
             >
-              <Link to="/auth">Já sou aluno</Link>
+              <Link to="/auth">I already have an account</Link>
             </Button>
           </div>
         </header>
@@ -69,7 +69,7 @@ function PublicPlans() {
                   : "btn-gold-outline h-11 w-full rounded-full text-sm font-semibold text-foreground"
               }
             >
-              <Link to="/auth">{primary ? "Adquirir acesso vitalício" : "Comprar"}</Link>
+              <Link to="/auth">{primary ? "Get lifetime access" : "Buy"}</Link>
             </Button>
           )}
         />
@@ -86,7 +86,7 @@ function PublicPlans() {
             em minutos. Você pode comprar seu acesso vitalício quando quiser.
           </p>
           <Button asChild size="lg" className="btn-gold h-12 rounded-full px-10 text-sm font-semibold">
-            <Link to="/auth">Criar minha conta</Link>
+            <Link to="/auth">Create my account</Link>
           </Button>
         </section>
 

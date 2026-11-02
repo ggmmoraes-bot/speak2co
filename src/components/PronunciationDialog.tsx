@@ -142,7 +142,7 @@ export function PronunciationDialog({
             </Button>
             {result && (
               <Button variant="ghost" onClick={() => setResult(null)}>
-                <RefreshCw className="h-4 w-4" /> Tentar de novo
+                <RefreshCw className="h-4 w-4" /> Try again
               </Button>
             )}
           </div>

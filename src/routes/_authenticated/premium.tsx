@@ -89,10 +89,10 @@ function PremiumPage() {
             }
           >
             {mutation.isPending && mutation.variables === key
-              ? "Abrindo pagamento..."
+              ? "Opening payment..."
               : primary
-                ? "Adquirir acesso vitalício"
-                : "Comprar"}
+                ? "Get lifetime access"
+                : "Buy"}
           </Button>
         )}
       />

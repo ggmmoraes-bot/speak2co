@@ -76,7 +76,7 @@ function Speak2TravelHub() {
       <div className="mx-auto max-w-5xl px-6 py-12">
         <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2 rounded-full">
           <Link to="/painel">
-            <ArrowLeft className="mr-1 h-4 w-4" /> Voltar ao painel
+            <ArrowLeft className="mr-1 h-4 w-4" /> Back to dashboard
           </Link>
         </Button>
 
@@ -118,7 +118,7 @@ function Speak2TravelHub() {
             className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
           >
             <Link to="/speak2travel/trip-planner">
-              <Sparkles className="mr-1 h-4 w-4" /> Abrir Trip Planner
+              <Sparkles className="mr-1 h-4 w-4" /> Open Trip Planner
             </Link>
           </Button>
           <p className="text-xs tracking-widest text-muted-foreground uppercase">
@@ -172,14 +172,14 @@ function Speak2TravelHub() {
                       params={{ moduleId: track.id }}
                       className="rounded-full bg-gold px-4 py-1.5 text-xs font-semibold text-primary-foreground hover:opacity-90"
                     >
-                      Praticar
+                      Practice
                     </Link>
                     <Link
                       to="/speak2travel/revisao/$moduleId"
                       params={{ moduleId: track.id }}
                       className="rounded-full border border-primary/40 px-4 py-1.5 text-xs text-foreground/80 hover:border-gold/60"
                     >
-                      Revisar ({track.vocabulary.length} cartões)
+                      Review ({track.vocabulary.length} cards)
                     </Link>
                   </div>
                 </div>
@@ -216,7 +216,7 @@ function Speak2TravelHub() {
                   ))}
                 </ul>
                 <p className="mt-4 inline-flex rounded-full bg-gold px-4 py-1.5 text-xs font-semibold text-primary-foreground">
-                  Praticar com áudio da IA
+                  Practice with AI audio
                 </p>
               </Link>
             ))}

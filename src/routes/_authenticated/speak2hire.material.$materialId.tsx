@@ -152,7 +152,7 @@ function MaterialPage() {
             asChild
             className="mt-6 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
           >
-            <Link to="/speak2hire">Ir para o simulador</Link>
+            <Link to="/speak2hire">Go to simulator</Link>
           </Button>
         </div>
       </div>

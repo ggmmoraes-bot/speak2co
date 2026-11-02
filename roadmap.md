@@ -1,4 +1,8 @@
 
+## Comandos restantes em inglês
+- [x] Revisar e traduzir ações em português, preservando títulos, chaves e layout
+- [x] Verificar com conta administradora: Painel, perfil, gramática, avaliação Beginner, teste de nível, preços e Flashcards; 13 testes passando
+
 ## Voz oficial da GiseleAI
 - [x] Confirmar restrição da ElevenLabs: plano atual não permite clonagem instantânea
 - [x] Corrigir classificação dos erros: 13 testes passando, build OK e aviso confirmado no botão Listen to Gisele com sessão autenticada

@@ -238,7 +238,7 @@ function AdminPage() {
           </p>
         </div>
         <Button asChild variant="outline" className="rounded-full font-semibold">
-          <Link to="/painel">Voltar ao painel</Link>
+          <Link to="/painel">Back to dashboard</Link>
         </Button>
       </header>
 
@@ -247,10 +247,10 @@ function AdminPage() {
           onClick={() => scrollToBenefits()}
           className="glow-gold rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
         >
-          Benefícios e Assinaturas Especiais
+          Benefits and Special Access
         </Button>
         <Button asChild variant="outline" className="rounded-full font-semibold">
-          <Link to="/admin-live-lesson">Vídeos da Guided Lesson</Link>
+          <Link to="/admin-live-lesson">Guided Lesson videos</Link>
         </Button>
         <Button
           variant="outline"
@@ -261,7 +261,7 @@ function AdminPage() {
               ?.scrollIntoView({ behavior: "smooth", block: "start" })
           }
         >
-          Preview da Guided Lesson
+          Guided Lesson preview
         </Button>
       </nav>
       <p className="mt-2 text-xs text-muted-foreground">
@@ -332,7 +332,7 @@ function AdminPage() {
                           })
                         }
                       >
-                        Editar
+                        Edit
                       </Button>
                       {plan.key !== "free" && (
                         <Button
@@ -349,7 +349,7 @@ function AdminPage() {
                             }
                           }}
                         >
-                          Remover
+                          Remove
                         </Button>
                       )}
                     </div>
@@ -453,7 +453,7 @@ function AdminPage() {
                 checked={planForm.highlight}
                 onCheckedChange={(v) => setPlanForm({ ...planForm, highlight: v })}
               />
-              <Label htmlFor="plan-highlight">Destacar na vitrine</Label>
+              <Label htmlFor="plan-highlight">Highlight in catalog</Label>
             </div>
             <div className="flex items-center gap-3">
               <Switch
@@ -470,10 +470,10 @@ function AdminPage() {
               onClick={handleSavePlan}
               className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
             >
-              Salvar plano
+              Save plan
             </Button>
             <Button variant="ghost" className="rounded-full" onClick={() => setPlanForm(EMPTY_PLAN)}>
-              Limpar
+              Clear
             </Button>
           </div>
         </div>
@@ -563,7 +563,7 @@ function AdminPage() {
             onClick={handleSaveFeature}
             className="mt-5 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
           >
-            Salvar recurso
+            Save feature
           </Button>
         </div>
       </section>

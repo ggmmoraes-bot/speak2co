@@ -90,7 +90,7 @@ function MyAccessPage() {
               recursos gerais por {BRL(COMPLETE_PRODUCT.price)}, em pagamento único.
             </p>
             <Button asChild className="btn-gold mt-5 rounded-full font-bold text-gold-ink uppercase">
-              <Link to="/premium">Adquirir acesso vitalício</Link>
+              <Link to="/premium">Get lifetime access</Link>
             </Button>
           </div>
         )}
@@ -128,7 +128,7 @@ function MyAccessPage() {
           })}
         </ul>
         <Button asChild variant="outline" className="btn-gold-outline mt-6 rounded-full">
-          <Link to="/premium">{hasAnything ? "Ver outros produtos" : "Ver produtos"}</Link>
+          <Link to="/premium">{hasAnything ? "View other products" : "View products"}</Link>
         </Button>
       </section>
 

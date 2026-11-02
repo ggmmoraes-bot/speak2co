@@ -108,7 +108,7 @@ function GeneralVocabularyPage() {
           <button
             onClick={() => setQuery("")}
             className="absolute top-1/2 right-3 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-            aria-label="Limpar busca"
+            aria-label="Clear search"
           >
             <X className="h-4 w-4" />
           </button>
@@ -148,7 +148,7 @@ function GeneralVocabularyPage() {
                     <button
                       onClick={() => speak(w.term)}
                       className="ml-auto inline-flex items-center gap-1 rounded-full border border-gold/40 px-3 py-1 text-xs font-semibold text-gold transition hover:bg-gold/10"
-                      aria-label={`Ouvir ${w.term}`}
+                      aria-label={`Listen to ${w.term}`}
                     >
                       <Volume2 className="h-3.5 w-3.5" /> Listen
                     </button>

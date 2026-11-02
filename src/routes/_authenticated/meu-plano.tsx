@@ -57,7 +57,7 @@ function MeuPlano() {
       <div className="mx-auto max-w-3xl">
         <Button asChild variant="outline" className="rounded-full">
           <Link to="/painel">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Voltar para a Home
+            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
           </Link>
         </Button>
 
@@ -80,7 +80,7 @@ function MeuPlano() {
               className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
             >
               <Link to="/upgrade/essential" search={{ feature: "historico" as const }}>
-                Conhecer o Speak2Co All Access
+                Explore Speak2Co All Access
               </Link>
             </Button>
           </div>

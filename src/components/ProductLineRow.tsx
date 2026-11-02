@@ -128,11 +128,11 @@ function PosterCard(item: ProductLineItem) {
                 className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
               >
                 <Link to="/premium">
-                  <Sparkles className="mr-2 h-4 w-4" /> Ver planos
+                  <Sparkles className="mr-2 h-4 w-4" /> View plans
                 </Link>
               </Button>
               <Button variant="outline" className="rounded-full" onClick={() => setOpen(false)}>
-                Fechar
+                Close
               </Button>
             </DialogFooter>
           </DialogContent>
@@ -180,7 +180,7 @@ export function ProductLineRow({
         <div className="hidden gap-2 sm:flex">
           <button
             type="button"
-            aria-label="Anterior"
+            aria-label="Previous"
             onClick={() => scrollBy(-1)}
             className="btn-gold-outline flex h-9 w-9 items-center justify-center rounded-full text-foreground/80 transition-colors hover:text-gold"
           >
@@ -188,7 +188,7 @@ export function ProductLineRow({
           </button>
           <button
             type="button"
-            aria-label="Próximo"
+            aria-label="Next"
             onClick={() => scrollBy(1)}
             className="btn-gold-outline flex h-9 w-9 items-center justify-center rounded-full text-foreground/80 transition-colors hover:text-gold"
           >

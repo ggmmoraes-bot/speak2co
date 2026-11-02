@@ -127,7 +127,7 @@ function AdminLiveLessonMedia() {
   return (
     <main className="mx-auto w-full max-w-4xl flex-1 space-y-6 px-6 py-8">
       <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-        <ArrowLeft className="h-4 w-4" /> Voltar ao painel administrativo
+        <ArrowLeft className="h-4 w-4" /> Back to admin dashboard
       </Link>
 
       <header>
@@ -255,7 +255,7 @@ function AdminLiveLessonMedia() {
             className="btn-gold rounded-full font-semibold"
           >
             {saveMutation.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-            Salvar
+            Save
           </Button>
           <StatusBadge status={form.videoUrl.trim() ? "video" : "portrait"} />
         </div>
@@ -290,7 +290,7 @@ function AdminLiveLessonMedia() {
                   onClick={() => deleteMutation.mutate(m.id)}
                   className="gap-1 text-xs"
                 >
-                  <Trash2 className="h-3.5 w-3.5" /> Remover
+                  <Trash2 className="h-3.5 w-3.5" /> Remove
                 </Button>
               </li>
             ))}

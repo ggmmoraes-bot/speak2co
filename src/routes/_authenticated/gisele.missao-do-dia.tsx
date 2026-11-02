@@ -12,6 +12,16 @@ import { createGiseleThread, type GiseleFocus } from "@/lib/gisele.functions";
 import { AltHeading } from "@/components/AltHeading";
 
 export const Route = createFileRoute("/_authenticated/gisele/missao-do-dia")({
+  head: () => ({
+    meta: [
+      {"title": "Daily Mission | GiseleAI | Speak2Co"},
+      {"name": "description", "content": "Daily Mission on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "Daily Mission | GiseleAI | Speak2Co"},
+      {"property": "og:description", "content": "Daily Mission on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: MissionPage,
 });
 

@@ -195,7 +195,7 @@ function ChecklistPage() {
                     to={route.path}
                     className="text-xs font-semibold text-accent underline underline-offset-4"
                   >
-                    Abrir
+                    Open
                   </Link>
                 )}
                 <StatusBadge status={route.status} />

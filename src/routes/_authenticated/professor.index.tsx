@@ -7,6 +7,16 @@ import { createThread } from "@/lib/chat.functions";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/professor/")({
+  head: () => ({
+    meta: [
+      {"title": "AI Teacher | Speak2Co"},
+      {"name": "description", "content": "AI Teacher on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "AI Teacher | Speak2Co"},
+      {"property": "og:description", "content": "AI Teacher on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: ProfessorIndex,
 });
 

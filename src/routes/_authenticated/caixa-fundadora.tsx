@@ -94,7 +94,7 @@ function FounderAdminInbox() {
           Esta área é exclusiva da administração da Speak2Co.
         </p>
         <Button asChild className="mt-6">
-          <Link to="/painel">Voltar ao painel</Link>
+          <Link to="/painel">Back to dashboard</Link>
         </Button>
       </main>
     );
@@ -107,7 +107,7 @@ function FounderAdminInbox() {
         to="/painel"
         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
       >
-        <ArrowLeft className="h-4 w-4" /> Painel
+        <ArrowLeft className="h-4 w-4" /> Dashboard
       </Link>
 
       <header className="space-y-1">
@@ -203,7 +203,7 @@ function FounderAdminInbox() {
                   })
                 }
               >
-                <Send className="mr-2 h-4 w-4" /> Enviar resposta
+                <Send className="mr-2 h-4 w-4" /> Send reply
               </Button>
               {!item.answered && (
                 <Button
@@ -212,7 +212,7 @@ function FounderAdminInbox() {
                   disabled={resolveMutation.isPending}
                   onClick={() => resolveMutation.mutate(item.id)}
                 >
-                  <CheckCircle2 className="mr-2 h-4 w-4" /> Marcar como resolvida
+                  <CheckCircle2 className="mr-2 h-4 w-4" /> Mark as resolved
                 </Button>
               )}
             </div>

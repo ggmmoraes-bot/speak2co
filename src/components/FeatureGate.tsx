@@ -36,11 +36,11 @@ export function UpgradeScreen({
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Button asChild className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90">
           <Link to="/premium">
-            <Sparkles className="mr-2 h-4 w-4" /> Ver opções de acesso
+            <Sparkles className="mr-2 h-4 w-4" /> View access options
           </Link>
         </Button>
         <Button asChild variant="outline" className="rounded-full font-semibold">
-          <Link to="/painel">Voltar ao painel</Link>
+          <Link to="/painel">Back to dashboard</Link>
         </Button>
       </div>
     </main>

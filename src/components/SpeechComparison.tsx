@@ -39,7 +39,7 @@ export function SpeechComparison({
               type="button"
               onClick={onPlayModel}
               className="text-gold hover:opacity-80"
-              aria-label="Ouvir a pronúncia sugerida"
+              aria-label="Listen to the suggested pronunciation"
             >
               <Volume2 className="h-3.5 w-3.5" />
             </button>

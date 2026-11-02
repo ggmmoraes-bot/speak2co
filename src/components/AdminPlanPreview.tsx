@@ -39,7 +39,7 @@ export function AdminPlanPreviewBar() {
           onClick={() => setPreviewPlan(null)}
           className="flex items-center gap-1 rounded-full border border-border px-2 py-1 font-semibold text-foreground hover:bg-secondary"
         >
-          <X className="h-3 w-3" /> Sair
+          <X className="h-3 w-3" /> Exit
         </button>
       </div>
   );
@@ -58,7 +58,7 @@ export function AdminPlanPreview() {
   return (
     <label className="flex items-center gap-2 rounded-full border border-gold/40 bg-gold/5 px-3 py-1.5 text-xs text-muted-foreground">
       <Eye className="h-3.5 w-3.5 text-gold" />
-      <span className="hidden sm:inline">Ver como</span>
+      <span className="hidden sm:inline">View as</span>
       <select
         value=""
         onChange={(e) => setPreviewPlan(e.target.value || null)}

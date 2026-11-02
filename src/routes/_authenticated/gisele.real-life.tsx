@@ -4,6 +4,16 @@ import { GiseleActivityScreen } from "@/components/gisele/GiseleActivityScreen";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_authenticated/gisele/real-life")({
+  head: () => ({
+    meta: [
+      {"title": "Real-Life Practice | GiseleAI | Speak2Co"},
+      {"name": "description", "content": "Real-Life Practice on Speak2Co: personalized English learning and practice."},
+      {"property": "og:title", "content": "Real-Life Practice | GiseleAI | Speak2Co"},
+      {"property": "og:description", "content": "Real-Life Practice on Speak2Co: personalized English learning and practice."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
+    ],
+  }),
   component: RealLifePage,
 });
 

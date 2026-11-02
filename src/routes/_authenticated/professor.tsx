@@ -100,7 +100,7 @@ function ProfessorLayout() {
           <Link
             to="/painel"
             className="text-muted-foreground transition-colors hover:text-foreground"
-            aria-label="Voltar ao painel"
+            aria-label="Back to dashboard"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
@@ -112,7 +112,7 @@ function ProfessorLayout() {
             disabled={creating}
             className="w-full justify-start gap-2 rounded-full bg-gold text-primary-foreground font-semibold hover:opacity-90"
           >
-            <Plus className="h-4 w-4" /> Nova conversa
+            <Plus className="h-4 w-4" /> New conversation
           </Button>
         </div>
 
@@ -144,7 +144,7 @@ function ProfessorLayout() {
               <button
                 type="button"
                 onClick={() => handleDelete(t.id)}
-                aria-label="Excluir conversa"
+                aria-label="Delete conversation"
                 className="opacity-0 transition-opacity hover:text-destructive group-hover:opacity-100"
               >
                 <Trash2 className="h-4 w-4" />
