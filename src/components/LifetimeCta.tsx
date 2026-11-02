@@ -1,16 +1,16 @@
-import { ShoppingBag } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 
 /**
  * Label for the lifetime catalog CTA buttons.
  * - Primary (Speak2Co All Access): infinity symbol to emphasize lifetime,
  *   with the Portuguese translation underneath in a smaller font.
- * - Individual products: gold shopping-bag icon + "Buy".
+ * - Individual products: gold shopping-cart icon + "Buy".
  */
 export function LifetimeCta({ primary }: { primary: boolean }) {
   if (!primary) {
     return (
       <span className="flex items-center justify-center gap-2">
-        <ShoppingBag aria-hidden="true" className="h-4 w-4" />
+        <ShoppingCart aria-hidden="true" className="h-4 w-4" />
         <span>Buy</span>
       </span>
     );
