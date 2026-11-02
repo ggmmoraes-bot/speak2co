@@ -276,7 +276,7 @@ function PlacementPage() {
                 disabled={starting}
                 className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
               >
-                {starting ? "Preparando..." : shown ? "Refazer o teste" : "Começar o teste"}
+                {starting ? "Preparing..." : shown ? "Retake test" : "Start test"}
               </Button>
               {shown && (
                 <Button

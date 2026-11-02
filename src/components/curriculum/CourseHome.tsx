@@ -88,7 +88,7 @@ export function CourseHome({
         <div className="mt-5 space-y-2">
           <div className="flex items-center justify-between text-sm">
             <span className="font-semibold text-foreground">
-              {done} de {partsTotal} partes concluídas
+              {done} of {partsTotal} parts completed
             </span>
             <span className="font-bold text-gold">{percent}%</span>
           </div>
@@ -102,7 +102,7 @@ export function CourseHome({
             ) : (
               <Download className="h-4 w-4" />
             )}
-            Baixar curso completo em PDF
+            Download full course (PDF)
           </Button>
         </div>
       </header>
@@ -129,7 +129,7 @@ export function CourseHome({
         </p>
         <Button asChild variant="outline" className="mt-4 gap-2 rounded-full">
           <Link to="/vocabulario">
-            <BookMarked className="h-4 w-4" /> Abrir Vocabulary Book
+            <BookMarked className="h-4 w-4" /> Open Vocabulary Book
           </Link>
         </Button>
       </section>
@@ -140,7 +140,7 @@ export function CourseHome({
           {eligible ? <Award className="h-4 w-4" /> : <Lock className="h-4 w-4" />} Final Assessment
         </span>
         <h2 className="mt-2 text-xl font-semibold text-foreground">
-          {certified ? "Curso concluído — certificado emitido" : "Assessment final"}
+          {certified ? "Course completed — certificate issued" : "Final Assessment"}
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
           {certified
@@ -152,12 +152,12 @@ export function CourseHome({
         <div className="mt-4 flex flex-wrap gap-3">
           <Button asChild className="rounded-full" disabled={!eligible}>
             <Link to={assessmentHref as "/"}>
-              {certified ? "Refazer assessment" : "Ir para o assessment"}
+              {certified ? "Retake assessment" : "Go to assessment"}
             </Link>
           </Button>
           {certified && (
             <Button asChild variant="outline" className="rounded-full">
-              <Link to="/certificados">Ver certificado</Link>
+              <Link to="/certificados">View certificate</Link>
             </Button>
           )}
         </div>

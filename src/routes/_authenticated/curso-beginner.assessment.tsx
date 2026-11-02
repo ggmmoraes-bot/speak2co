@@ -135,7 +135,7 @@ function BeginnerAssessmentPage() {
             Conclua as {BEGINNER_PARTS_TOTAL} partes do curso para liberar o assessment final.
           </p>
           <Button asChild className="mt-4 rounded-full">
-            <Link to="/curso-beginner">Continuar o curso</Link>
+            <Link to="/curso-beginner">Continue course</Link>
           </Button>
         </section>
       ) : (

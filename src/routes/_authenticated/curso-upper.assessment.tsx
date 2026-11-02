@@ -138,7 +138,7 @@ function UpperAssessmentPage() {
             final.
           </p>
           <Button asChild className="mt-4 rounded-full">
-            <Link to="/curso-upper">Continuar o curso</Link>
+            <Link to="/curso-upper">Continue course</Link>
           </Button>
         </section>
       ) : (

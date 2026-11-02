@@ -90,7 +90,7 @@ export function PlanUnlockedDialog() {
             onClick={() => setOpen(false)}
             className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
           >
-            Começar a usar
+            Get started
           </Button>
           <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/assinatura" search={{ simulacao: undefined }} onClick={() => setOpen(false)}>
