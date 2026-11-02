@@ -128,7 +128,7 @@ function MyAccessPage() {
           })}
         </ul>
         <Button asChild variant="outline" className="btn-gold-outline mt-6 rounded-full">
-          <Link to="/premium">{hasAnything ? "Ver outros produtos" : "Ver produtos"}</Link>
+          <Link to="/premium">{hasAnything ? "View other products" : "View products"}</Link>
         </Button>
       </section>
 

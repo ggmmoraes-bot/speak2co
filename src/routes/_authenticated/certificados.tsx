@@ -155,7 +155,7 @@ function CertificadosPage() {
               });
             }}
           >
-            Restaurar padrão
+            Restore defaults
           </Button>
         </section>
 

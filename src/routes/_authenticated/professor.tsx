@@ -112,7 +112,7 @@ function ProfessorLayout() {
             disabled={creating}
             className="w-full justify-start gap-2 rounded-full bg-gold text-primary-foreground font-semibold hover:opacity-90"
           >
-            <Plus className="h-4 w-4" /> Nova conversa
+            <Plus className="h-4 w-4" /> New conversation
           </Button>
         </div>
 

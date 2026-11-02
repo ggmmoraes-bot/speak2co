@@ -284,7 +284,7 @@ function PlacementPage() {
                   className="rounded-full"
                   onClick={() => navigate({ to: "/meu-plano" })}
                 >
-                  Ver meu plano de estudos
+                  View my study plan
                 </Button>
               )}
             </div>
@@ -406,7 +406,7 @@ function PlacementPage() {
                   </div>
                   <div className="flex gap-2">
                     <Button variant="outline" size="sm" className="rounded-full" onClick={() => setResult(test)}>
-                      Ver resultado
+                      View result
                     </Button>
                     <Button
                       variant="ghost"

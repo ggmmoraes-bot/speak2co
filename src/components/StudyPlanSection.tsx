@@ -177,7 +177,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
             onClick={() => previewMutation.mutate()}
             className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
           >
-            {previewMutation.isPending ? "Preparando prévia…" : "Ver prévia do ajuste"}
+            {previewMutation.isPending ? "Preparing preview…" : "Preview adjustment"}
           </Button>
         )}
         {profileReady && plan && !fullPlan && (
@@ -272,7 +272,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
               onClick={() => applyMutation.mutate(preview.weeks)}
               className="rounded-full"
             >
-              {applyMutation.isPending ? "Aplicando…" : "Aplicar ajuste"}
+              {applyMutation.isPending ? "Applying…" : "Apply adjustment"}
             </Button>
             <Button
               variant="outline"
@@ -280,7 +280,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
               onClick={() => setPreview(null)}
               className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
             >
-              Manter como está
+              Keep as is
             </Button>
             <Button
               variant="outline"

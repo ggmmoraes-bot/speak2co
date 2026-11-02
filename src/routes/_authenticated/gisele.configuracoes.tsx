@@ -282,7 +282,7 @@ function GiseleSettingsPage() {
           toast.success("Preferências restauradas.");
         }}
       >
-        <RotateCcw className="mr-2 h-4 w-4" /> Restaurar padrão
+        <RotateCcw className="mr-2 h-4 w-4" /> Restore defaults
       </Button>
     </div>
   );

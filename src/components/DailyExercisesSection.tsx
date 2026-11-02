@@ -152,7 +152,7 @@ export function DailyExercisesSection({ hasPlan }: { hasPlan: boolean }) {
               onClick={() => submission.mutate({ id: current.id, answers })}
               className="bg-gold text-primary-foreground glow-gold w-fit rounded-full font-semibold hover:opacity-90"
             >
-              {submission.isPending ? "Corrigindo…" : "Corrigir exercícios"}
+              {submission.isPending ? "Grading…" : "Check exercises"}
             </Button>
           )}
         </div>
