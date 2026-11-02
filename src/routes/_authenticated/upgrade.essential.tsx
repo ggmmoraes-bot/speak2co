@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Check, Flag, History, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LifetimeCta } from "@/components/LifetimeCta";
 import { startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
 import { getMyCheckoutPricing } from "@/lib/benefits.functions";
 import { PlanPrice } from "@/components/PlanPrice";
