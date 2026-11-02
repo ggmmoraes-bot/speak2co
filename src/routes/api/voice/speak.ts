@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { verifyChatRequest } from "@/lib/chat-auth.server";
+import { classifyElevenLabsVoiceError } from "@/lib/elevenlabs-voice-error";
 
 const MAX_CHARS = 3000;
 
@@ -121,13 +122,8 @@ export const Route = createFileRoute("/api/voice/speak")({
           if (!elevenRes.ok) {
             const detail = await elevenRes.text().catch(() => "");
             console.error("[voice/speak:elevenlabs]", elevenRes.status, detail);
-            if (elevenRes.status === 401 || elevenRes.status === 402) {
-              return new Response(
-                "Créditos de voz esgotados — o áudio volta assim que os créditos forem adicionados.",
-                { status: 402 },
-              );
-            }
-            return new Response("Não foi possível gerar o áudio.", { status: elevenRes.status });
+            const failure = classifyElevenLabsVoiceError(elevenRes.status, detail);
+            return new Response(failure.message, { status: failure.status });
           }
           return new Response(elevenRes.body, {
             headers: { "Content-Type": "audio/mpeg", "Cache-Control": "no-store" },
