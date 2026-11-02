@@ -1,4 +1,9 @@
 
+## Voz oficial da GiseleAI
+- [x] Confirmar restrição da ElevenLabs: plano atual não permite clonagem instantânea
+- [ ] Corrigir classificação dos erros e validar com testes e sessão autenticada
+- [ ] Restaurar reprodução da voz oficial — depende de plano ElevenLabs que permita a voz clonada; não substituir a identidade vocal
+
 ## Correção global do sistema de acesso
 - [x] Renomear planos no banco: complete → "Speak2Co All Access", free → "Cadastro Gratuito"
 - [x] Etiquetas dos cards da Home (All Access / produto / Cadastro Gratuito); Support & Community preservada

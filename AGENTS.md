@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Classify ElevenLabs failures through `src/lib/elevenlabs-voice-error.ts` using provider error codes before HTTP status, because clone-plan restrictions and exhausted quota can both arrive as HTTP 401.
