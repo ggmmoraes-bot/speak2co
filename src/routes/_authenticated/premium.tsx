@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { LifetimeCatalog } from "@/components/LifetimeCatalog";
+import { LifetimeCta } from "@/components/LifetimeCta";
 import { startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
 import { getPaymentOptions } from "@/lib/payments.functions";
 import { useAccess } from "@/lib/entitlements";

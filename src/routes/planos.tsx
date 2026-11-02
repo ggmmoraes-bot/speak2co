@@ -62,14 +62,16 @@ function PublicPlans() {
           renderAction={(_key, primary) => (
             <Button
               asChild
-              variant={primary ? "default" : "outline"}
+              variant="default"
               className={
                 primary
                   ? "btn-gold h-12 w-full rounded-full text-sm font-bold text-gold-ink uppercase"
-                  : "btn-gold-outline h-11 w-full rounded-full text-sm font-semibold text-foreground"
+                  : "btn-gold h-11 w-full rounded-full text-sm font-semibold text-gold-ink"
               }
             >
-              <Link to="/auth">{primary ? "Get lifetime access" : "Buy"}</Link>
+              <Link to="/auth">
+                <LifetimeCta primary={primary} />
+              </Link>
             </Button>
           )}
         />
