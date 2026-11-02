@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { LifetimeCatalog } from "@/components/LifetimeCatalog";
+import { LifetimeCta } from "@/components/LifetimeCta";
 import { startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
 import { getPaymentOptions } from "@/lib/payments.functions";
 import { useAccess } from "@/lib/entitlements";
@@ -79,20 +80,20 @@ function PremiumPage() {
         owned={owned}
         renderAction={(key, primary) => (
           <Button
-            variant={primary ? "default" : "outline"}
+            variant="default"
             disabled={disabled || mutation.isPending}
             onClick={() => mutation.mutate(key)}
             className={
               primary
                 ? "btn-gold h-12 w-full rounded-full text-sm font-bold text-gold-ink uppercase"
-                : "btn-gold-outline h-11 w-full rounded-full text-sm font-semibold text-foreground"
+                : "btn-gold h-11 w-full rounded-full text-sm font-semibold text-gold-ink"
             }
           >
-            {mutation.isPending && mutation.variables === key
-              ? "Opening payment..."
-              : primary
-                ? "Get lifetime access"
-                : "Buy"}
+            {mutation.isPending && mutation.variables === key ? (
+              "Opening payment..."
+            ) : (
+              <LifetimeCta primary={primary} />
+            )}
           </Button>
         )}
       />

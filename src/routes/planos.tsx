@@ -3,6 +3,7 @@ import logo from "@/assets/speak2co-logo.asset.json";
 import { AltHeading } from "@/components/AltHeading";
 import { Button } from "@/components/ui/button";
 import { LifetimeCatalog } from "@/components/LifetimeCatalog";
+import { LifetimeCta } from "@/components/LifetimeCta";
 import { siteUrl } from "@/lib/site";
 
 const TITLE = "Planos e preços — Speak2Co";
@@ -62,14 +63,16 @@ function PublicPlans() {
           renderAction={(_key, primary) => (
             <Button
               asChild
-              variant={primary ? "default" : "outline"}
+              variant="default"
               className={
                 primary
                   ? "btn-gold h-12 w-full rounded-full text-sm font-bold text-gold-ink uppercase"
-                  : "btn-gold-outline h-11 w-full rounded-full text-sm font-semibold text-foreground"
+                  : "btn-gold h-11 w-full rounded-full text-sm font-semibold text-gold-ink"
               }
             >
-              <Link to="/auth">{primary ? "Get lifetime access" : "Buy"}</Link>
+              <Link to="/auth">
+                <LifetimeCta primary={primary} />
+              </Link>
             </Button>
           )}
         />

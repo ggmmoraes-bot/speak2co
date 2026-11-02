@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Check, Flag, History, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LifetimeCta } from "@/components/LifetimeCta";
 import { startMercadoPagoCheckout } from "@/lib/subscriptions.functions";
 import { getMyCheckoutPricing } from "@/lib/benefits.functions";
 import { PlanPrice } from "@/components/PlanPrice";
@@ -155,7 +156,11 @@ function UpgradeEssentialPage() {
             onClick={() => mutation.mutate()}
             className="rounded-full bg-gold px-8 font-semibold text-primary-foreground hover:opacity-90"
           >
-            {mutation.isPending ? "Opening checkout…" : "Get lifetime access"}
+            {mutation.isPending ? (
+              "Opening checkout…"
+            ) : (
+              <LifetimeCta primary />
+            )}
           </Button>
           <Button asChild variant="outline" className="rounded-full">
             <Link to="/premium">View all options</Link>
