@@ -194,7 +194,7 @@ function PerfilPage() {
             disabled={loading}
             className="bg-gold text-primary-foreground glow-gold mt-2 rounded-full font-semibold hover:opacity-90"
           >
-            Salvar perfil
+            Save profile
           </Button>
         </form>
       </div>

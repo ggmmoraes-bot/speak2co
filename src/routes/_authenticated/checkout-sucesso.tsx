@@ -82,10 +82,10 @@ function CheckoutSuccessPage() {
           ) : null}
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Button asChild>
-              <Link to="/painel">Ir para o painel</Link>
+              <Link to="/painel">Go to dashboard</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/assinatura" search={{ simulacao: undefined }}>Ver meu acesso</Link>
+              <Link to="/assinatura" search={{ simulacao: undefined }}>View my access</Link>
             </Button>
           </div>
         </>
@@ -103,7 +103,7 @@ function CheckoutSuccessPage() {
           ) : null}
           <div className="mt-8 flex justify-center">
             <Button asChild variant="outline">
-              <Link to="/assinatura" search={{ simulacao: undefined }}>Ver meu acesso</Link>
+              <Link to="/assinatura" search={{ simulacao: undefined }}>View my access</Link>
             </Button>
           </div>
         </>

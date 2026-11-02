@@ -155,10 +155,10 @@ function UpgradeEssentialPage() {
             onClick={() => mutation.mutate()}
             className="rounded-full bg-gold px-8 font-semibold text-primary-foreground hover:opacity-90"
           >
-            {mutation.isPending ? "Abrindo checkout…" : "Adquirir acesso vitalício"}
+            {mutation.isPending ? "Opening checkout…" : "Get lifetime access"}
           </Button>
           <Button asChild variant="outline" className="rounded-full">
-            <Link to="/premium">Ver todas as opções</Link>
+            <Link to="/premium">View all options</Link>
           </Button>
         </div>
         <p className="mt-4 text-center text-xs text-muted-foreground">

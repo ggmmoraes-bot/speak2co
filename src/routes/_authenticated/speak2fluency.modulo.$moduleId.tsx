@@ -161,7 +161,7 @@ function FluencyModulePage() {
       <div className="mx-auto max-w-3xl px-6 py-12">
         <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2 rounded-full">
           <Link to="/speak2fluency">
-            <ArrowLeft className="mr-1 h-4 w-4" /> Voltar ao Speak2Fluency
+            <ArrowLeft className="mr-1 h-4 w-4" /> Back to Speak2Fluency
           </Link>
         </Button>
 

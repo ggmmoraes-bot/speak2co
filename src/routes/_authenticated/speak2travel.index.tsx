@@ -76,7 +76,7 @@ function Speak2TravelHub() {
       <div className="mx-auto max-w-5xl px-6 py-12">
         <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2 rounded-full">
           <Link to="/painel">
-            <ArrowLeft className="mr-1 h-4 w-4" /> Voltar ao painel
+            <ArrowLeft className="mr-1 h-4 w-4" /> Back to dashboard
           </Link>
         </Button>
 
@@ -118,7 +118,7 @@ function Speak2TravelHub() {
             className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
           >
             <Link to="/speak2travel/trip-planner">
-              <Sparkles className="mr-1 h-4 w-4" /> Abrir Trip Planner
+              <Sparkles className="mr-1 h-4 w-4" /> Open Trip Planner
             </Link>
           </Button>
           <p className="text-xs tracking-widest text-muted-foreground uppercase">

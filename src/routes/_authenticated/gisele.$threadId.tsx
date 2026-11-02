@@ -322,7 +322,7 @@ function GiseleChat({
                   <button
                     type="button"
                     onClick={() => playMessage(m)}
-                    aria-label="Ouvir a resposta"
+                    aria-label="Listen to the response"
                     className="flex w-fit items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-gold"
                   >
                     {speakingId === m.id ? (

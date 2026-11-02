@@ -168,7 +168,7 @@ export function PracticeMeetingsSection() {
                       disabled={leaveMutation.isPending}
                       onClick={() => leaveMutation.mutate(m.id)}
                     >
-                      Cancelar inscrição
+                      Cancel registration
                     </Button>
                   </>
                 )}

@@ -109,7 +109,7 @@ export function DialoguePlayer({ lines }: { lines: DialoguePlayerLine[] }) {
                     setTimeout(() => void playFrom(i), 60);
                   }}
                   className="ml-auto text-muted-foreground transition hover:text-gold"
-                  aria-label={`Ouvir ${line.who}`}
+                  aria-label={`Listen to ${line.who}`}
                 >
                   <Volume2 className="h-3.5 w-3.5" />
                 </button>

@@ -35,7 +35,7 @@ function GiselePlanPage() {
             to="/meu-plano"
             className="inline-flex items-center gap-1 font-semibold text-gold hover:underline"
           >
-            Gerar meu plano <ArrowRight className="h-3.5 w-3.5" />
+            Generate my plan <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </Card>
       )}

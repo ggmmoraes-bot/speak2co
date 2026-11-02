@@ -167,7 +167,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
             onClick={() => mutation.mutate()}
             className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
           >
-            {mutation.isPending ? "Gerando…" : plan ? "Gerar novamente" : "Gerar plano"}
+            {mutation.isPending ? "Generating…" : plan ? "Generate again" : "Generate plan"}
           </Button>
         )}
         {profileReady && plan && fullPlan && (
@@ -288,7 +288,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
               onClick={() => previewMutation.mutate()}
               className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
             >
-              {previewMutation.isPending ? "Gerando…" : "Gerar outra prévia"}
+              {previewMutation.isPending ? "Generating…" : "Generate another preview"}
             </Button>
           </div>
         </div>
@@ -418,7 +418,7 @@ Conduza esta prática comigo passo a passo, em inglês adequado ao meu nível, c
                 className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
               >
                 <Link to="/upgrade/essential" search={{ feature: "marcos" as const }}>
-                  Conhecer o All Access
+                  Explore All Access
                 </Link>
               </Button>
             </div>

@@ -106,7 +106,7 @@ function Speak2HireHub() {
       <div className="mx-auto max-w-5xl px-6 py-12">
         <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2 rounded-full">
           <Link to="/painel">
-            <ArrowLeft className="mr-1 h-4 w-4" /> Voltar ao painel
+            <ArrowLeft className="mr-1 h-4 w-4" /> Back to dashboard
           </Link>
         </Button>
 
@@ -183,7 +183,7 @@ function Speak2HireHub() {
                   className="mt-4 rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                 >
                   <Play className="mr-1 h-4 w-4" />
-                  {startingTrack === track.id ? "Preparando..." : "Iniciar simulação"}
+                  {startingTrack === track.id ? "Preparing..." : "Start simulation"}
                 </Button>
               </div>
             ))}
@@ -229,7 +229,7 @@ function Speak2HireHub() {
                     variant="ghost"
                     size="icon"
                     className="rounded-full"
-                    aria-label="Excluir sessão"
+                    aria-label="Delete session"
                     onClick={() => handleDelete(session.id)}
                   >
                     <Trash2 className="h-4 w-4" />

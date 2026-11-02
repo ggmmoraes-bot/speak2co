@@ -72,7 +72,7 @@ export function PronunciationTraining({ attempts }: { attempts: PronunciationAtt
           ) : (
             <Dumbbell className="h-3.5 w-3.5" />
           )}
-          {loading ? "Gerando…" : plan ? "Gerar novo treino" : "Gerar treino dos meus erros"}
+          {loading ? "Generating…" : plan ? "Generate new practice" : "Practice my mistakes"}
         </button>
       </div>
 
@@ -148,7 +148,7 @@ export function PronunciationTraining({ attempts }: { attempts: PronunciationAtt
               disabled={index === 0}
               className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-xs text-foreground/80 disabled:opacity-40"
             >
-              <ChevronLeft className="h-3.5 w-3.5" /> Anterior
+              <ChevronLeft className="h-3.5 w-3.5" /> Previous
             </button>
             <button
               type="button"
@@ -156,7 +156,7 @@ export function PronunciationTraining({ attempts }: { attempts: PronunciationAtt
               disabled={index === plan.drills.length - 1}
               className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-xs text-foreground/80 disabled:opacity-40"
             >
-              Próximo <ChevronRight className="h-3.5 w-3.5" />
+              Next <ChevronRight className="h-3.5 w-3.5" />
             </button>
           </div>
         </div>

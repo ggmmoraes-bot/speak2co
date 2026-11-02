@@ -86,7 +86,7 @@ function CertificadosPage() {
     <main className="surface-navy min-h-screen px-6 py-12">
       <div className="mx-auto max-w-3xl">
         <Button asChild variant="outline" className="rounded-full">
-          <Link to="/painel">Voltar ao painel</Link>
+          <Link to="/painel">Back to dashboard</Link>
         </Button>
 
         <h1 className="mt-8 text-3xl font-semibold sm:text-4xl">
@@ -236,7 +236,7 @@ function CertificateCard({
           }
           className="bg-gold text-primary-foreground glow-gold rounded-full font-semibold hover:opacity-90"
         >
-          Baixar certificado em PDF
+          Download certificate PDF
         </Button>
         {certificate.unlocked ? (
           <span className="text-xs text-muted-foreground">Código: {certificate.code}</span>

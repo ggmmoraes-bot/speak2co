@@ -97,7 +97,7 @@ function BeginnerAssessmentPage() {
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-10">
       <Button asChild variant="outline" size="sm" className="rounded-full">
-        <Link to="/curso-beginner">Voltar ao curso</Link>
+        <Link to="/curso-beginner">Back to course</Link>
       </Button>
 
       <header className="mt-4 rounded-3xl border border-border bg-card/60 p-6 backdrop-blur">
@@ -188,7 +188,7 @@ function BeginnerAssessmentPage() {
                   onClick={handleSubmit}
                   disabled={saving}
                 >
-                  {saving ? "Corrigindo..." : "Finalizar assessment"}
+                  {saving ? "Grading..." : "Submit assessment"}
                 </Button>
               </>
             ) : (
@@ -202,7 +202,7 @@ function BeginnerAssessmentPage() {
                       automaticamente.
                     </p>
                     <Button asChild className="w-full rounded-full">
-                      <Link to="/certificados">Ver e baixar meu certificado</Link>
+                      <Link to="/certificados">View and download my certificate</Link>
                     </Button>
                   </>
                 ) : (
@@ -219,7 +219,7 @@ function BeginnerAssessmentPage() {
                         setSubmitted(false);
                       }}
                     >
-                      Refazer assessment
+                      Retake assessment
                     </Button>
                   </>
                 )}

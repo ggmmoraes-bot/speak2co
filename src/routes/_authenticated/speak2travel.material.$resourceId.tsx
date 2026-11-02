@@ -79,7 +79,7 @@ function MaterialPage() {
       <div className="mx-auto max-w-4xl px-6 py-12">
         <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2 rounded-full">
           <Link to="/speak2travel">
-            <ArrowLeft className="mr-1 h-4 w-4" /> Voltar ao Speak2Travel
+            <ArrowLeft className="mr-1 h-4 w-4" /> Back to Speak2Travel
           </Link>
         </Button>
 
@@ -101,7 +101,7 @@ function MaterialPage() {
             ) : (
               <Download className="mr-2 h-4 w-4" />
             )}
-            Baixar PDF para estudo
+            Download study PDF
           </Button>
         </header>
 

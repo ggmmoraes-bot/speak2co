@@ -69,7 +69,7 @@ function PublicPlans() {
                   : "btn-gold-outline h-11 w-full rounded-full text-sm font-semibold text-foreground"
               }
             >
-              <Link to="/auth">{primary ? "Adquirir acesso vitalício" : "Comprar"}</Link>
+              <Link to="/auth">{primary ? "Get lifetime access" : "Buy"}</Link>
             </Button>
           )}
         />

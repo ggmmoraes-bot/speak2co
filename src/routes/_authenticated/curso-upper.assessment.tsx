@@ -99,7 +99,7 @@ function UpperAssessmentPage() {
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-10">
       <Button asChild variant="outline" size="sm" className="rounded-full">
-        <Link to="/curso-upper">Voltar ao curso</Link>
+        <Link to="/curso-upper">Back to course</Link>
       </Button>
 
       <header className="mt-4 rounded-3xl border border-border bg-card/60 p-6 backdrop-blur">
@@ -194,7 +194,7 @@ function UpperAssessmentPage() {
                   onClick={handleSubmit}
                   disabled={saving}
                 >
-                  {saving ? "Corrigindo..." : "Finalizar assessment"}
+                  {saving ? "Grading..." : "Submit assessment"}
                 </Button>
               </>
             ) : (
@@ -208,7 +208,7 @@ function UpperAssessmentPage() {
                       automaticamente.
                     </p>
                     <Button asChild className="w-full rounded-full">
-                      <Link to="/certificados">Ver e baixar meu certificado</Link>
+                      <Link to="/certificados">View and download my certificate</Link>
                     </Button>
                   </>
                 ) : (
@@ -225,7 +225,7 @@ function UpperAssessmentPage() {
                         setSubmitted(false);
                       }}
                     >
-                      Refazer assessment
+                      Retake assessment
                     </Button>
                   </>
                 )}

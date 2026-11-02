@@ -83,10 +83,10 @@ function GiseleLayout() {
             </div>
             <Link
               to="/painel"
-              aria-label="Voltar ao painel"
+              aria-label="Back to dashboard"
               className="ml-auto inline-flex items-center gap-2 rounded-full border border-border/70 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-gold/50 hover:text-foreground"
             >
-              <ArrowLeft className="h-3.5 w-3.5" /> Painel
+              <ArrowLeft className="h-3.5 w-3.5" /> Dashboard
             </Link>
           </div>
 

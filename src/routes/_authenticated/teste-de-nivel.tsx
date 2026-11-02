@@ -233,7 +233,7 @@ function PlacementPage() {
       <div className="mx-auto max-w-4xl px-6 py-12">
         <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2 rounded-full">
           <Link to="/painel">
-            <ArrowLeft className="mr-1 h-4 w-4" /> Voltar ao painel
+            <ArrowLeft className="mr-1 h-4 w-4" /> Back to dashboard
           </Link>
         </Button>
 
@@ -355,7 +355,7 @@ function PlacementPage() {
                 disabled={step === 0}
                 onClick={() => setStep((s) => Math.max(0, s - 1))}
               >
-                <ArrowLeft className="mr-1 h-4 w-4" /> Anterior
+                <ArrowLeft className="mr-1 h-4 w-4" /> Previous
               </Button>
               {isWritingStep ? (
                 <Button
@@ -363,7 +363,7 @@ function PlacementPage() {
                   disabled={submitting}
                   className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                 >
-                  {submitting ? "Avaliando com a IA..." : "Finalizar e ver meu nível"}
+                  {submitting ? "Evaluating with AI..." : "Finish and see my level"}
                 </Button>
               ) : (
                 <Button
@@ -371,7 +371,7 @@ function PlacementPage() {
                   disabled={question ? answers[question.id] === undefined : false}
                   className="rounded-full bg-gold font-semibold text-primary-foreground hover:opacity-90"
                 >
-                  Próxima <ArrowRight className="ml-1 h-4 w-4" />
+                  Next <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
               )}
             </div>
@@ -413,7 +413,7 @@ function PlacementPage() {
                       size="icon"
                       className="rounded-full"
                       onClick={() => handleDelete(test.id)}
-                      aria-label="Excluir resultado"
+                      aria-label="Delete result"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>

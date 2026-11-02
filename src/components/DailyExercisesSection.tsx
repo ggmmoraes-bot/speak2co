@@ -70,7 +70,7 @@ export function DailyExercisesSection({ hasPlan }: { hasPlan: boolean }) {
             onClick={() => generation.mutate()}
             className="rounded-full border-primary/40 bg-transparent text-foreground hover:bg-secondary"
           >
-            {generation.isPending ? "Gerando…" : current ? "Novos exercícios" : "Gerar exercícios"}
+            {generation.isPending ? "Generating…" : current ? "New exercises" : "Generate exercises"}
           </Button>
         )}
       </div>
