@@ -3,6 +3,7 @@ import logo from "@/assets/speak2co-logo.asset.json";
 import { AltHeading } from "@/components/AltHeading";
 import { Button } from "@/components/ui/button";
 import { LifetimeCatalog } from "@/components/LifetimeCatalog";
+import { LifetimeCta } from "@/components/LifetimeCta";
 import { siteUrl } from "@/lib/site";
 
 const TITLE = "Planos e preços — Speak2Co";
