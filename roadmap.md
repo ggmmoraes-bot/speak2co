@@ -1,4 +1,8 @@
 
+## Comandos restantes em inglês
+- [ ] Revisar e traduzir ações em português, preservando títulos, chaves e layout
+- [ ] Verificar os comandos atualizados nas telas
+
 ## Voz oficial da GiseleAI
 - [x] Confirmar restrição da ElevenLabs: plano atual não permite clonagem instantânea
 - [x] Corrigir classificação dos erros: 13 testes passando, build OK e aviso confirmado no botão Listen to Gisele com sessão autenticada
