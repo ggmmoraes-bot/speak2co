@@ -1,7 +1,7 @@
 
 ## Voz oficial da GiseleAI
 - [x] Confirmar restrição da ElevenLabs: plano atual não permite clonagem instantânea
-- [ ] Corrigir classificação dos erros e validar com testes e sessão autenticada
+- [x] Corrigir classificação dos erros: 13 testes passando, build OK e aviso confirmado no botão Listen to Gisele com sessão autenticada
 - [ ] Restaurar reprodução da voz oficial — depende de plano ElevenLabs que permita a voz clonada; não substituir a identidade vocal
 
 ## Correção global do sistema de acesso
