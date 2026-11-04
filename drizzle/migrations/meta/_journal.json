@@ -29,6 +29,13 @@
       "when": 1793574765892,
       "tag": "0003_rename_plan_display_names",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793830253721,
+      "tag": "0004_speak2kids_progress",
+      "breakpoints": true
     }
   ]
 }
