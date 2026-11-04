@@ -149,10 +149,12 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           titleEn: "Speak2Kids",
           titlePt: "Inglês para crianças",
           description:
-            "Aprendizado lúdico e interativo para crianças. Em breve na plataforma, como produto individual.",
+            "Beginner Kids English (7–10 anos): 20 unidades lúdicas com jogos, músicas e stickers. Em breve como produto individual.",
           icon: Sparkles,
           imageUrl: speak2kidsLogo.url,
-          status: "soon" as const,
+          // Não vendável ainda: só quem tem o recurso (admin) abre a prévia.
+          to: hasFeature(access, "product_line_kids") ? "/speak2kids" : undefined,
+          status: hasFeature(access, "product_line_kids") ? ("available" as const) : ("soon" as const),
         },
       ],
     },
