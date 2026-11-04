@@ -816,6 +816,69 @@ export type Database = {
         }
         Relationships: []
       }
+      kids_profiles: {
+        Row: {
+          avatar: string
+          created_at: string
+          nickname: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar?: string
+          created_at?: string
+          nickname?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar?: string
+          created_at?: string
+          nickname?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      kids_progress: {
+        Row: {
+          activities_done: string[]
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          id: string
+          part: number
+          quick_check_score: number | null
+          unit_number: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          activities_done?: string[]
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          part: number
+          quick_check_score?: number | null
+          unit_number: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          activities_done?: string[]
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          part?: number
+          quick_check_score?: number | null
+          unit_number?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       live_lesson_media: {
         Row: {
           caption: string | null

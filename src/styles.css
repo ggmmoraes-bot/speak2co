@@ -62,10 +62,18 @@
   --color-gold: var(--gold);
   --color-gold-deep: var(--gold-deep);
   --color-gold-ink: var(--gold-ink);
+  --color-kids-pink: var(--kids-pink);
+  --color-kids-sky: var(--kids-sky);
+  --color-kids-mint: var(--kids-mint);
+  --color-kids-sun: var(--kids-sun);
 }
 
 :root {
   --radius: 0.75rem;
+  --kids-pink: oklch(0.72 0.17 0);
+  --kids-sky: oklch(0.72 0.13 230);
+  --kids-mint: oklch(0.78 0.14 160);
+  --kids-sun: oklch(0.86 0.16 85);
   --gold: oklch(0.82 0.15 87);
   --gold-deep: oklch(0.72 0.12 78);
   /* Texto sobre botões dourados: preto, para contraste forte. */
