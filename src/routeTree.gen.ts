@@ -43,6 +43,7 @@ import { Route as AuthenticatedProfessorRouteImport } from './routes/_authentica
 import { Route as AuthenticatedReadingRouteImport } from './routes/_authenticated/reading'
 import { Route as AuthenticatedSpeak2fluencyRouteImport } from './routes/_authenticated/speak2fluency'
 import { Route as AuthenticatedSpeak2hireRouteImport } from './routes/_authenticated/speak2hire'
+import { Route as AuthenticatedSpeak2kidsRouteImport } from './routes/_authenticated/speak2kids'
 import { Route as AuthenticatedSpeak2travelRouteImport } from './routes/_authenticated/speak2travel'
 import { Route as AuthenticatedSpeakingRouteImport } from './routes/_authenticated/speaking'
 import { Route as AuthenticatedTesteDeNivelRouteImport } from './routes/_authenticated/teste-de-nivel'
@@ -82,6 +83,8 @@ import { Route as AuthenticatedProfessorIndexRouteImport } from './routes/_authe
 import { Route as AuthenticatedProfessorThreadIdRouteImport } from './routes/_authenticated/professor.$threadId'
 import { Route as AuthenticatedSpeak2fluencyIndexRouteImport } from './routes/_authenticated/speak2fluency.index'
 import { Route as AuthenticatedSpeak2hireIndexRouteImport } from './routes/_authenticated/speak2hire.index'
+import { Route as AuthenticatedSpeak2kidsIndexRouteImport } from './routes/_authenticated/speak2kids.index'
+import { Route as AuthenticatedSpeak2kidsCertificadoRouteImport } from './routes/_authenticated/speak2kids.certificado'
 import { Route as AuthenticatedSpeak2travelIndexRouteImport } from './routes/_authenticated/speak2travel.index'
 import { Route as AuthenticatedSpeak2travelTripPlannerRouteImport } from './routes/_authenticated/speak2travel.trip-planner'
 import { Route as AuthenticatedUpgradeEssentialRouteImport } from './routes/_authenticated/upgrade.essential'
@@ -105,6 +108,7 @@ import { Route as AuthenticatedCursoBeginnerUnidadeUnitCodePartRouteImport } fro
 import { Route as AuthenticatedCursoIntermediateUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-intermediate.unidade.$unitCode.$part'
 import { Route as AuthenticatedCursoUpperUnidadeUnitCodePartRouteImport } from './routes/_authenticated/curso-upper.unidade.$unitCode.$part'
 import { Route as AuthenticatedLiveLessonCourseUnitCodePartRouteImport } from './routes/_authenticated/live-lesson.$course.$unitCode.$part'
+import { Route as AuthenticatedSpeak2kidsUnidadeUnitPartRouteImport } from './routes/_authenticated/speak2kids.unidade.$unit.$part'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -281,6 +285,11 @@ const AuthenticatedSpeak2fluencyRoute =
 const AuthenticatedSpeak2hireRoute = AuthenticatedSpeak2hireRouteImport.update({
   id: '/speak2hire',
   path: '/speak2hire',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSpeak2kidsRoute = AuthenticatedSpeak2kidsRouteImport.update({
+  id: '/speak2kids',
+  path: '/speak2kids',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSpeak2travelRoute =
@@ -513,6 +522,18 @@ const AuthenticatedSpeak2hireIndexRoute =
     path: '/',
     getParentRoute: () => AuthenticatedSpeak2hireRoute,
   } as any)
+const AuthenticatedSpeak2kidsIndexRoute =
+  AuthenticatedSpeak2kidsIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedSpeak2kidsRoute,
+  } as any)
+const AuthenticatedSpeak2kidsCertificadoRoute =
+  AuthenticatedSpeak2kidsCertificadoRouteImport.update({
+    id: '/certificado',
+    path: '/certificado',
+    getParentRoute: () => AuthenticatedSpeak2kidsRoute,
+  } as any)
 const AuthenticatedSpeak2travelIndexRoute =
   AuthenticatedSpeak2travelIndexRouteImport.update({
     id: '/',
@@ -648,6 +669,12 @@ const AuthenticatedLiveLessonCourseUnitCodePartRoute =
     path: '/live-lesson/$course/$unitCode/$part',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSpeak2kidsUnidadeUnitPartRoute =
+  AuthenticatedSpeak2kidsUnidadeUnitPartRouteImport.update({
+    id: '/unidade/$unit/$part',
+    path: '/unidade/$unit/$part',
+    getParentRoute: () => AuthenticatedSpeak2kidsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -683,6 +710,7 @@ export interface FileRoutesByFullPath {
   '/reading': typeof AuthenticatedReadingRoute
   '/speak2fluency': typeof AuthenticatedSpeak2fluencyRouteWithChildren
   '/speak2hire': typeof AuthenticatedSpeak2hireRouteWithChildren
+  '/speak2kids': typeof AuthenticatedSpeak2kidsRouteWithChildren
   '/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/speaking': typeof AuthenticatedSpeakingRoute
   '/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
@@ -715,6 +743,7 @@ export interface FileRoutesByFullPath {
   '/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
   '/gisele/writing': typeof AuthenticatedGiseleWritingRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
+  '/speak2kids/certificado': typeof AuthenticatedSpeak2kidsCertificadoRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
@@ -727,6 +756,7 @@ export interface FileRoutesByFullPath {
   '/professor/': typeof AuthenticatedProfessorIndexRoute
   '/speak2fluency/': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
+  '/speak2kids/': typeof AuthenticatedSpeak2kidsIndexRoute
   '/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
   '/vocabulario/': typeof AuthenticatedVocabularioIndexRoute
   '/comunidade/encontro/$meetingId': typeof AuthenticatedComunidadeEncontroMeetingIdRoute
@@ -745,6 +775,7 @@ export interface FileRoutesByFullPath {
   '/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
   '/curso-upper/unidade/$unitCode/$part': typeof AuthenticatedCursoUpperUnidadeUnitCodePartRoute
   '/live-lesson/$course/$unitCode/$part': typeof AuthenticatedLiveLessonCourseUnitCodePartRoute
+  '/speak2kids/unidade/$unit/$part': typeof AuthenticatedSpeak2kidsUnidadeUnitPartRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -804,6 +835,7 @@ export interface FileRoutesByTo {
   '/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
   '/gisele/writing': typeof AuthenticatedGiseleWritingRoute
   '/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
+  '/speak2kids/certificado': typeof AuthenticatedSpeak2kidsCertificadoRoute
   '/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
@@ -816,6 +848,7 @@ export interface FileRoutesByTo {
   '/professor': typeof AuthenticatedProfessorIndexRoute
   '/speak2fluency': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/speak2hire': typeof AuthenticatedSpeak2hireIndexRoute
+  '/speak2kids': typeof AuthenticatedSpeak2kidsIndexRoute
   '/speak2travel': typeof AuthenticatedSpeak2travelIndexRoute
   '/vocabulario': typeof AuthenticatedVocabularioIndexRoute
   '/comunidade/encontro/$meetingId': typeof AuthenticatedComunidadeEncontroMeetingIdRoute
@@ -834,6 +867,7 @@ export interface FileRoutesByTo {
   '/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
   '/curso-upper/unidade/$unitCode/$part': typeof AuthenticatedCursoUpperUnidadeUnitCodePartRoute
   '/live-lesson/$course/$unitCode/$part': typeof AuthenticatedLiveLessonCourseUnitCodePartRoute
+  '/speak2kids/unidade/$unit/$part': typeof AuthenticatedSpeak2kidsUnidadeUnitPartRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -871,6 +905,7 @@ export interface FileRoutesById {
   '/_authenticated/reading': typeof AuthenticatedReadingRoute
   '/_authenticated/speak2fluency': typeof AuthenticatedSpeak2fluencyRouteWithChildren
   '/_authenticated/speak2hire': typeof AuthenticatedSpeak2hireRouteWithChildren
+  '/_authenticated/speak2kids': typeof AuthenticatedSpeak2kidsRouteWithChildren
   '/_authenticated/speak2travel': typeof AuthenticatedSpeak2travelRouteWithChildren
   '/_authenticated/speaking': typeof AuthenticatedSpeakingRoute
   '/_authenticated/teste-de-nivel': typeof AuthenticatedTesteDeNivelRoute
@@ -903,6 +938,7 @@ export interface FileRoutesById {
   '/_authenticated/gisele/voice-room': typeof AuthenticatedGiseleVoiceRoomRoute
   '/_authenticated/gisele/writing': typeof AuthenticatedGiseleWritingRoute
   '/_authenticated/professor/$threadId': typeof AuthenticatedProfessorThreadIdRoute
+  '/_authenticated/speak2kids/certificado': typeof AuthenticatedSpeak2kidsCertificadoRoute
   '/_authenticated/speak2travel/trip-planner': typeof AuthenticatedSpeak2travelTripPlannerRoute
   '/_authenticated/upgrade/essential': typeof AuthenticatedUpgradeEssentialRoute
   '/api/voice/pronunciation': typeof ApiVoicePronunciationRoute
@@ -915,6 +951,7 @@ export interface FileRoutesById {
   '/_authenticated/professor/': typeof AuthenticatedProfessorIndexRoute
   '/_authenticated/speak2fluency/': typeof AuthenticatedSpeak2fluencyIndexRoute
   '/_authenticated/speak2hire/': typeof AuthenticatedSpeak2hireIndexRoute
+  '/_authenticated/speak2kids/': typeof AuthenticatedSpeak2kidsIndexRoute
   '/_authenticated/speak2travel/': typeof AuthenticatedSpeak2travelIndexRoute
   '/_authenticated/vocabulario/': typeof AuthenticatedVocabularioIndexRoute
   '/_authenticated/comunidade/encontro/$meetingId': typeof AuthenticatedComunidadeEncontroMeetingIdRoute
@@ -933,6 +970,7 @@ export interface FileRoutesById {
   '/_authenticated/curso-intermediate/unidade/$unitCode/$part': typeof AuthenticatedCursoIntermediateUnidadeUnitCodePartRoute
   '/_authenticated/curso-upper/unidade/$unitCode/$part': typeof AuthenticatedCursoUpperUnidadeUnitCodePartRoute
   '/_authenticated/live-lesson/$course/$unitCode/$part': typeof AuthenticatedLiveLessonCourseUnitCodePartRoute
+  '/_authenticated/speak2kids/unidade/$unit/$part': typeof AuthenticatedSpeak2kidsUnidadeUnitPartRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -970,6 +1008,7 @@ export interface FileRouteTypes {
     | '/reading'
     | '/speak2fluency'
     | '/speak2hire'
+    | '/speak2kids'
     | '/speak2travel'
     | '/speaking'
     | '/teste-de-nivel'
@@ -1002,6 +1041,7 @@ export interface FileRouteTypes {
     | '/gisele/voice-room'
     | '/gisele/writing'
     | '/professor/$threadId'
+    | '/speak2kids/certificado'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
     | '/api/voice/pronunciation'
@@ -1014,6 +1054,7 @@ export interface FileRouteTypes {
     | '/professor/'
     | '/speak2fluency/'
     | '/speak2hire/'
+    | '/speak2kids/'
     | '/speak2travel/'
     | '/vocabulario/'
     | '/comunidade/encontro/$meetingId'
@@ -1032,6 +1073,7 @@ export interface FileRouteTypes {
     | '/curso-intermediate/unidade/$unitCode/$part'
     | '/curso-upper/unidade/$unitCode/$part'
     | '/live-lesson/$course/$unitCode/$part'
+    | '/speak2kids/unidade/$unit/$part'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1091,6 +1133,7 @@ export interface FileRouteTypes {
     | '/gisele/voice-room'
     | '/gisele/writing'
     | '/professor/$threadId'
+    | '/speak2kids/certificado'
     | '/speak2travel/trip-planner'
     | '/upgrade/essential'
     | '/api/voice/pronunciation'
@@ -1103,6 +1146,7 @@ export interface FileRouteTypes {
     | '/professor'
     | '/speak2fluency'
     | '/speak2hire'
+    | '/speak2kids'
     | '/speak2travel'
     | '/vocabulario'
     | '/comunidade/encontro/$meetingId'
@@ -1121,6 +1165,7 @@ export interface FileRouteTypes {
     | '/curso-intermediate/unidade/$unitCode/$part'
     | '/curso-upper/unidade/$unitCode/$part'
     | '/live-lesson/$course/$unitCode/$part'
+    | '/speak2kids/unidade/$unit/$part'
   id:
     | '__root__'
     | '/'
@@ -1157,6 +1202,7 @@ export interface FileRouteTypes {
     | '/_authenticated/reading'
     | '/_authenticated/speak2fluency'
     | '/_authenticated/speak2hire'
+    | '/_authenticated/speak2kids'
     | '/_authenticated/speak2travel'
     | '/_authenticated/speaking'
     | '/_authenticated/teste-de-nivel'
@@ -1189,6 +1235,7 @@ export interface FileRouteTypes {
     | '/_authenticated/gisele/voice-room'
     | '/_authenticated/gisele/writing'
     | '/_authenticated/professor/$threadId'
+    | '/_authenticated/speak2kids/certificado'
     | '/_authenticated/speak2travel/trip-planner'
     | '/_authenticated/upgrade/essential'
     | '/api/voice/pronunciation'
@@ -1201,6 +1248,7 @@ export interface FileRouteTypes {
     | '/_authenticated/professor/'
     | '/_authenticated/speak2fluency/'
     | '/_authenticated/speak2hire/'
+    | '/_authenticated/speak2kids/'
     | '/_authenticated/speak2travel/'
     | '/_authenticated/vocabulario/'
     | '/_authenticated/comunidade/encontro/$meetingId'
@@ -1219,6 +1267,7 @@ export interface FileRouteTypes {
     | '/_authenticated/curso-intermediate/unidade/$unitCode/$part'
     | '/_authenticated/curso-upper/unidade/$unitCode/$part'
     | '/_authenticated/live-lesson/$course/$unitCode/$part'
+    | '/_authenticated/speak2kids/unidade/$unit/$part'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1479,6 +1528,13 @@ declare module '@tanstack/react-router' {
       path: '/speak2hire'
       fullPath: '/speak2hire'
       preLoaderRoute: typeof AuthenticatedSpeak2hireRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/speak2kids': {
+      id: '/_authenticated/speak2kids'
+      path: '/speak2kids'
+      fullPath: '/speak2kids'
+      preLoaderRoute: typeof AuthenticatedSpeak2kidsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/speak2travel': {
@@ -1754,6 +1810,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSpeak2hireIndexRouteImport
       parentRoute: typeof AuthenticatedSpeak2hireRoute
     }
+    '/_authenticated/speak2kids/': {
+      id: '/_authenticated/speak2kids/'
+      path: '/'
+      fullPath: '/speak2kids/'
+      preLoaderRoute: typeof AuthenticatedSpeak2kidsIndexRouteImport
+      parentRoute: typeof AuthenticatedSpeak2kidsRoute
+    }
+    '/_authenticated/speak2kids/certificado': {
+      id: '/_authenticated/speak2kids/certificado'
+      path: '/certificado'
+      fullPath: '/speak2kids/certificado'
+      preLoaderRoute: typeof AuthenticatedSpeak2kidsCertificadoRouteImport
+      parentRoute: typeof AuthenticatedSpeak2kidsRoute
+    }
     '/_authenticated/speak2travel/': {
       id: '/_authenticated/speak2travel/'
       path: '/'
@@ -1914,6 +1984,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/live-lesson/$course/$unitCode/$part'
       preLoaderRoute: typeof AuthenticatedLiveLessonCourseUnitCodePartRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/speak2kids/unidade/$unit/$part': {
+      id: '/_authenticated/speak2kids/unidade/$unit/$part'
+      path: '/unidade/$unit/$part'
+      fullPath: '/speak2kids/unidade/$unit/$part'
+      preLoaderRoute: typeof AuthenticatedSpeak2kidsUnidadeUnitPartRouteImport
+      parentRoute: typeof AuthenticatedSpeak2kidsRoute
     }
   }
 }
@@ -2119,6 +2196,26 @@ const AuthenticatedSpeak2hireRouteWithChildren =
     AuthenticatedSpeak2hireRouteChildren,
   )
 
+interface AuthenticatedSpeak2kidsRouteChildren {
+  AuthenticatedSpeak2kidsCertificadoRoute: typeof AuthenticatedSpeak2kidsCertificadoRoute
+  AuthenticatedSpeak2kidsIndexRoute: typeof AuthenticatedSpeak2kidsIndexRoute
+  AuthenticatedSpeak2kidsUnidadeUnitPartRoute: typeof AuthenticatedSpeak2kidsUnidadeUnitPartRoute
+}
+
+const AuthenticatedSpeak2kidsRouteChildren: AuthenticatedSpeak2kidsRouteChildren =
+  {
+    AuthenticatedSpeak2kidsCertificadoRoute:
+      AuthenticatedSpeak2kidsCertificadoRoute,
+    AuthenticatedSpeak2kidsIndexRoute: AuthenticatedSpeak2kidsIndexRoute,
+    AuthenticatedSpeak2kidsUnidadeUnitPartRoute:
+      AuthenticatedSpeak2kidsUnidadeUnitPartRoute,
+  }
+
+const AuthenticatedSpeak2kidsRouteWithChildren =
+  AuthenticatedSpeak2kidsRoute._addFileChildren(
+    AuthenticatedSpeak2kidsRouteChildren,
+  )
+
 interface AuthenticatedSpeak2travelRouteChildren {
   AuthenticatedSpeak2travelTripPlannerRoute: typeof AuthenticatedSpeak2travelTripPlannerRoute
   AuthenticatedSpeak2travelIndexRoute: typeof AuthenticatedSpeak2travelIndexRoute
@@ -2171,6 +2268,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedReadingRoute: typeof AuthenticatedReadingRoute
   AuthenticatedSpeak2fluencyRoute: typeof AuthenticatedSpeak2fluencyRouteWithChildren
   AuthenticatedSpeak2hireRoute: typeof AuthenticatedSpeak2hireRouteWithChildren
+  AuthenticatedSpeak2kidsRoute: typeof AuthenticatedSpeak2kidsRouteWithChildren
   AuthenticatedSpeak2travelRoute: typeof AuthenticatedSpeak2travelRouteWithChildren
   AuthenticatedSpeakingRoute: typeof AuthenticatedSpeakingRoute
   AuthenticatedTesteDeNivelRoute: typeof AuthenticatedTesteDeNivelRoute
@@ -2208,6 +2306,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedReadingRoute: AuthenticatedReadingRoute,
   AuthenticatedSpeak2fluencyRoute: AuthenticatedSpeak2fluencyRouteWithChildren,
   AuthenticatedSpeak2hireRoute: AuthenticatedSpeak2hireRouteWithChildren,
+  AuthenticatedSpeak2kidsRoute: AuthenticatedSpeak2kidsRouteWithChildren,
   AuthenticatedSpeak2travelRoute: AuthenticatedSpeak2travelRouteWithChildren,
   AuthenticatedSpeakingRoute: AuthenticatedSpeakingRoute,
   AuthenticatedTesteDeNivelRoute: AuthenticatedTesteDeNivelRoute,
