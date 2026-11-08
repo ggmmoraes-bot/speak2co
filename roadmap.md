@@ -21,7 +21,7 @@
 - [x] Remover "sem juros" e valor fixo de parcela; exibir "R$ 97,90 pagamento único ou até 10x no cartão"
 - [x] Atualizar memória do modelo comercial
 - [x] Testes + tsgo
-- [ ] Publicar (pedido anterior do usuário) — em andamento
+- [x] Publicar alterações anteriores — publicação solicitada anteriormente; Speak2Kids não será publicado
 
 ## Speak2Co Cadastros (Facebook e Instagram)
 - [x] Preparar e apresentar textos sobre o teste de nivelamento gratuito para adultos focados em carreira no Brasil.
@@ -31,3 +31,9 @@
 - [x] Aprovar frases para as imagens — as duas frases confirmadas pela usuária.
 - [x] Produzir e inspecionar conjunto final com e sem frases — seis imagens para feed e Stories.
 - [x] Aprovar o conjunto final de imagens — seis imagens aprovadas pela usuária.
+
+## Speak2Kids — somente preview
+- [ ] Corrigir e completar currículo de 20 unidades / 40 partes sem alterar Beginner adulto
+- [ ] Integrar hub, painel, aulas, atividades, imagens e certificado com conta/progresso existentes
+- [ ] Validar checagem, desbloqueio, persistência, privacidade e telas desktop/mobile
+- [ ] Conferir testes e preview sem publicar/deploy

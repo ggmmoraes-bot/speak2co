@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Award, CheckCircle2, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { buildQuickCheck, getKidsUnit, KIDS_UNITS_TOTAL, type KidsUnit } from "@/lib/speak2kids/curriculum";
@@ -9,6 +9,8 @@ import {
   AudioNotice, CountGame, DrawDescribe, Flashcards, ListenButton, MatchGame, PointQuiz,
   QuickCheck, RolePlay, SequenceGame, SingAlong, SortGame, TprGame,
 } from "@/components/speak2kids/KidsActivities";
+import { KidsArtwork } from "@/components/speak2kids/KidsArtwork";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/speak2kids/unidade/$unit/$part")({
@@ -38,7 +40,7 @@ export const Route = createFileRoute("/_authenticated/speak2kids/unidade/$unit/$
 function Block({ n, title, children, tone = "sky" }: { n?: number | string; title: string; children: React.ReactNode; tone?: "sky" | "pink" | "mint" | "sun" }) {
   const border = { sky: "border-kids-sky/50", pink: "border-kids-pink/50", mint: "border-kids-mint/60", sun: "border-kids-sun/60" }[tone];
   return (
-    <section className={cn("rounded-[2rem] border-2 bg-card p-5 sm:p-6", border)}>
+    <section className={cn("border-t-2 py-5 sm:py-6", border)}>
       <h2 className="mb-3 text-lg font-extrabold text-foreground">{n !== undefined && <span className="mr-2 text-gold">{n}.</span>}{title}</h2>
       {children}
     </section>
@@ -47,8 +49,9 @@ function Block({ n, title, children, tone = "sky" }: { n?: number | string; titl
 
 function KidsLesson() {
   const { unit, part } = Route.useLoaderData();
-  const { data: rows, isLoading } = useKidsProgress();
+  const { data: rows, isLoading, error } = useKidsProgress();
   const p = part === "discover" ? 1 : 2;
+  if (error) return <main className="p-8 text-center">Não foi possível carregar a aula. Atualize e tente novamente.</main>;
   if (isLoading || !rows) return <main className="p-10 text-center text-muted-foreground">Loading…</main>;
   const status = partStatus(rows, unit.n, p);
   if (status === "locked") {
@@ -65,13 +68,13 @@ function KidsLesson() {
   return (
     <main className="mx-auto w-full max-w-4xl space-y-5 px-4 py-8 sm:px-6">
       <Link to="/speak2kids" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Back to Speak2Kids</Link>
-      <header className="rounded-[2rem] bg-gradient-to-br from-kids-sky/25 via-kids-pink/15 to-kids-sun/25 p-6">
+      <header className="py-4">
         <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">Unit {unit.n} · Part {p} — {p === 1 ? "Discover" : "Communicate"} {status === "completed" && "· ✅ Done"}</p>
-        <h1 className="mt-1 flex items-center gap-3 text-3xl font-extrabold text-foreground"><span aria-hidden>{unit.emoji}</span>{unit.title}</h1>
+        <h1 className="mt-1 flex items-start gap-3 text-3xl font-extrabold text-foreground"><span aria-hidden>{unit.emoji}</span>{unit.title}</h1>
         <p className="mt-1 text-sm text-muted-foreground">{unit.topic}</p>
-        <div className="mt-3 rounded-2xl bg-card/70 p-3 text-sm" role="img" aria-label={unit.imageTheme}>🖼️ {unit.imageTheme}</div>
+        <div className="mt-5 max-w-sm"><KidsArtwork unit={unit.n} theme={unit.imageTheme} /></div>
       </header>
-      {p === 1 ? <Discover unit={unit} done={status === "completed"} /> : <Communicate unit={unit} done={status === "completed"} doneList={row?.activities_done ?? []} />}
+      {p === 1 ? <Discover key={`discover-${unit.n}`} unit={unit} done={status === "completed"} /> : <Communicate key={`communicate-${unit.n}`} unit={unit} done={status === "completed"} doneList={row?.activities_done ?? []} />}
     </main>
   );
 }
@@ -81,7 +84,8 @@ function KidsLesson() {
 function Discover({ unit, done }: { unit: KidsUnit; done: boolean }) {
   const save = useSavePart();
   const questions = useMemo(() => buildQuickCheck(unit), [unit]);
-  const startOnce = () => !done && save.mutate({ unit: unit.n, part: 1 });
+  const [started, setStarted] = useState(false);
+  const startOnce = () => { if (!done && !started) { setStarted(true); save.mutate({ unit: unit.n, part: 1 }); } };
   return (
     <>
       <Block title="🎯 Objetivo da aula" tone="sun">
@@ -108,13 +112,15 @@ function Discover({ unit, done }: { unit: KidsUnit; done: boolean }) {
       <Block n={7} title={`Reading / Listening · ${unit.readingListening.kind === "song" ? "🎵 Song" : "📖 Story"}: ${unit.readingListening.title}`}>
         <ul className="space-y-1">{unit.readingListening.lines.map((l) => <li key={l} className="flex items-center gap-2 font-semibold">{l} <ListenButton text={l} /></li>)}</ul>
       </Block>
+      <Block title="Writing" tone="mint"><WritingPractice unit={unit} /></Block>
+      <Block title="Move & Say"><TprGame prompts={unit.tpr ?? unit.vocab.slice(0, 3).map((w) => `Point to: ${w.en}!`)} /></Block>
       <Block n={8} title={`Quick Check (${questions.length} perguntas)`} tone="pink">
         {done ? (
           <p className="font-bold">✅ Quick Check concluído. Você pode refazer quando quiser:</p>
         ) : <p className="mb-3 text-sm text-muted-foreground">Acerte pelo menos 75% para liberar a Part 2.</p>}
         <div className="mt-3"><QuickCheck key={unit.n} questions={questions} onPass={(c) => save.mutate({ unit: unit.n, part: 1, quick_check_score: c, completed: true })} /></div>
       </Block>
-      {(done || save.isSuccess) && (
+      {done && (
         <Button asChild size="lg" className="w-full rounded-full bg-gold font-extrabold text-primary-foreground">
           <Link to="/speak2kids/unidade/$unit/$part" params={{ unit: String(unit.n), part: "communicate" }}>Go to Part 2 · Communicate <ArrowRight className="ml-2 h-5 w-5" /></Link>
         </Button>
@@ -128,7 +134,7 @@ function Practice({ unit }: { unit: KidsUnit }) {
   if (t === "count") return <CountGame unit={unit} />;
   if (t === "sequence") return <SequenceGame words={unit.vocab} />;
   if (t === "tpr") return <TprGame prompts={unit.tpr ?? unit.expressions} />;
-  if (t === "sort") return <SortGame bins={unit.practice.bins!} pool={unit.vocab.slice(0, 6).map((w) => w.en)} />;
+  if (t === "sort") return <SortGame bins={unit.practice.bins ?? []} pool={unit.vocab.slice(0, 6).map((w) => w.en)} />;
   return <MatchGame words={unit.vocab} seed={unit.n} />;
 }
 
@@ -165,7 +171,7 @@ function Communicate({ unit, done, doneList }: { unit: KidsUnit; done: boolean; 
     <>
       <Block title="🔁 Review" tone="sun">
         <p className="mb-3 text-sm text-muted-foreground">Retomada rápida da Part 1:</p>
-        <div className="flex flex-wrap gap-2">{unit.vocab.map((w) => <span key={w.en} className="rounded-2xl bg-muted/50 px-3 py-1 font-bold">{w.emoji} {w.en}</span>)}</div>
+        <div className="flex flex-wrap gap-2">{unit.vocab.map((w) => <span key={w.en} className="rounded-lg bg-muted/50 px-3 py-1 font-bold">{w.emoji} {w.en}</span>)}</div>
         <p className="mt-3 font-semibold">⭐ {unit.examples.join(" · ")}</p>
         <div className="mt-3"><AudioNotice /></div>
       </Block>
@@ -173,7 +179,7 @@ function Communicate({ unit, done, doneList }: { unit: KidsUnit; done: boolean; 
         const kind = activityKind(a);
         const ok = doneList.includes(a);
         return (
-          <Block key={a} n={k + 1} title={`${a} ${ok ? "✅" : ""}`} tone={(["sky", "pink", "mint", "sun"] as const)[k % 4]}>
+          <Block key={a} n={k + 1} title={`${a} ${ok ? "✅" : ""}`} tone={(["sky", "pink", "mint", "sun"] as const)[k % 4] ?? "sky"}>
             {kind === "sing" && <SingAlong lines={unit.readingListening.lines} onDone={() => mark(a)} />}
             {kind === "point" && <PointQuiz words={unit.vocab} mode="point" seed={unit.n + k} onDone={() => mark(a)} />}
             {kind === "bingo" && <PointQuiz words={unit.vocab} mode="bingo" seed={unit.n + k} onDone={() => mark(a)} />}
@@ -233,4 +239,12 @@ function ChallengeChecklist({ unit, done, onDone }: { unit: KidsUnit; done: bool
       <Button disabled={done} onClick={onDone} className="rounded-full bg-kids-sun font-bold text-foreground">{done ? "Challenge done! ✅" : "I did the challenge! ✅"}</Button>
     </div>
   );
+}
+
+function WritingPractice({ unit }: { unit: KidsUnit }) {
+  const target = unit.n === 20 ? "I can swim." : unit.examples[0] ?? unit.expressions[0] ?? "Hello!";
+  const [answer, setAnswer] = useState("");
+  const [checked, setChecked] = useState(false);
+  const correct = answer.trim().toLowerCase().replace(/[.!?]/g, "") === target.toLowerCase().replace(/[.!?]/g, "");
+  return <div className="space-y-3"><p className="text-sm text-muted-foreground">Leia e escreva a frase. Um adulto pode ajudar.</p><p className="font-bold">{target}</p><Input aria-label="Write the sentence" value={answer} maxLength={160} onChange={(e) => { setAnswer(e.target.value); setChecked(false); }} /><Button variant="outline" disabled={!answer.trim()} onClick={() => setChecked(true)}>Check writing</Button>{checked && <p role="status">{correct ? "Great writing! 🌟" : "Confira as palavras e tente novamente 🙂"}</p>}</div>;
 }

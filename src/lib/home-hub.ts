@@ -153,8 +153,8 @@ export function buildHomeSections(access: Access): HubSectionData[] {
           icon: Sparkles,
           imageUrl: speak2kidsLogo.url,
           // Não vendável ainda: só quem tem o recurso (admin) abre a prévia.
-          to: hasFeature(access, "product_line_kids") ? "/speak2kids" : undefined,
-          status: hasFeature(access, "product_line_kids") ? ("available" as const) : ("soon" as const),
+          to: "/speak2kids",
+          status: hasFeature(access, FEATURE_KEYS.productLineKids) ? ("available" as const) : ("soon" as const),
         },
       ],
     },

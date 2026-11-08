@@ -23,8 +23,9 @@ function KidsCertificate() {
   const { data: rows, isLoading } = useKidsProgress();
   const { data: profile } = useKidsProfile();
   if (isLoading || !rows) return <main className="p-10 text-center text-muted-foreground">Loading…</main>;
-  const finished = unitStatus(rows, KIDS_UNITS_TOTAL) === "completed";
-  const date = rows.length ? new Date().toLocaleDateString("pt-BR") : "";
+  const finished = Array.from({ length: KIDS_UNITS_TOTAL }, (_, i) => i + 1).every((n) => unitStatus(rows, n) === "completed");
+  const completedAt = rows.find((r) => r.unit_number === 20 && r.part === 2)?.completed_at;
+  const date = completedAt ? new Date(completedAt).toLocaleDateString("pt-BR") : "";
   return (
     <main className="mx-auto w-full max-w-3xl px-4 py-8">
       <Link to="/speak2kids" className="inline-flex items-center gap-1 text-sm text-muted-foreground print:hidden"><ArrowLeft className="h-4 w-4" /> Back to Speak2Kids</Link>
@@ -37,10 +38,10 @@ function KidsCertificate() {
       ) : (
         <>
           <section className="mt-6 rounded-[2rem] border-4 border-gold bg-gradient-to-br from-kids-sky/20 via-card to-kids-sun/25 p-8 text-center sm:p-12">
-            <p className="text-xs font-bold tracking-[0.3em] text-muted-foreground uppercase">Speak2Kids · Speak2Co</p>
+            <p className="text-xs font-bold  text-muted-foreground uppercase">Speak2Kids · Speak2Co</p>
             <h1 className="mt-3 text-3xl font-extrabold text-foreground sm:text-4xl">Super Speaker Certificate 🌟</h1>
             <p className="mt-6 text-muted-foreground">This certificate is proudly given to</p>
-            <p className="mt-2 text-4xl font-extrabold text-gold">{profile?.avatar} {profile?.nickname ?? "Super Kid"}</p>
+            <p className="mt-2 break-words text-3xl font-extrabold text-gold">{profile?.avatar} {profile?.nickname ?? "Super Kid"}</p>
             <p className="mt-6 text-lg">for completing all {KIDS_UNITS_TOTAL} units of <strong>Beginner Kids English</strong> (Pre-A1 → A1).</p>
             <p className="mt-2 text-2xl">I am a Super Speaker! 🎤🏆</p>
             <p className="mt-6 text-sm text-muted-foreground">{date}</p>

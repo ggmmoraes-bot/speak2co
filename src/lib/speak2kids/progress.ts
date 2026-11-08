@@ -4,6 +4,7 @@ export type KidsProgressRow = {
   completed: boolean;
   quick_check_score: number | null;
   activities_done: string[];
+  completed_at?: string | null;
 };
 
 export type PartStatus = "locked" | "available" | "in_progress" | "completed";
@@ -14,9 +15,9 @@ const find = (rows: KidsProgressRow[], unit: number, part: number) =>
 /** Part 1 abre quando a Part 2 da unidade anterior termina; Part 2 abre só após Part 1 (Quick Check aprovado). */
 export function partStatus(rows: KidsProgressRow[], unit: number, part: 1 | 2): PartStatus {
   const row = find(rows, unit, part);
-  if (row?.completed) return "completed";
+  if (row?.completed && (part === 2 || passedQuickCheck(row.quick_check_score ?? 0, unit === 20 ? 5 : 4))) return "completed";
   const unlocked =
-    part === 1 ? unit === 1 || !!find(rows, unit - 1, 2)?.completed : !!find(rows, unit, 1)?.completed;
+    part === 1 ? unit === 1 || !!find(rows, unit - 1, 2)?.completed : !!find(rows, unit, 1)?.completed && passedQuickCheck(find(rows, unit, 1)?.quick_check_score ?? 0, unit === 20 ? 5 : 4);
   if (!unlocked) return "locked";
   return row ? "in_progress" : "available";
 }
