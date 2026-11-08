@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { KIDS_AVATARS, KIDS_UNITS, KIDS_UNITS_TOTAL } from "@/lib/speak2kids/curriculum";
 import { nextPart, partStatus, unitStatus, type PartStatus } from "@/lib/speak2kids/progress";
 import { useKidsProfile, useKidsProgress, useSaveKidsProfile } from "@/lib/speak2kids/use-kids";
+import { KidsLogo, KidsArtwork } from "@/components/speak2kids/KidsArtwork";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/speak2kids/")({
@@ -30,11 +31,11 @@ const STATUS_LABEL: Record<PartStatus, string> = {
 };
 
 function KidsDashboard() {
-  const { data: rows = [] } = useKidsProgress();
+  const { data: rows = [], isPending, error } = useKidsProgress();
   const { data: profile, isFetched } = useKidsProfile();
   const save = useSaveKidsProfile();
   const [nick, setNick] = useState("");
-  const [avatar, setAvatar] = useState(KIDS_AVATARS[0]);
+  const [avatar, setAvatar] = useState(KIDS_AVATARS[0] ?? "🦁");
   const [editing, setEditing] = useState(false);
   useEffect(() => {
     if (profile) { setNick(profile.nickname); setAvatar(profile.avatar); }
@@ -45,24 +46,27 @@ function KidsDashboard() {
   const next = nextPart(rows, KIDS_UNITS_TOTAL);
   const showProfileForm = isFetched && (!profile || editing);
 
+  if (isPending) return <main className="p-8 text-center">Loading Speak2Kids…</main>;
+  if (error) return <main className="p-8 text-center">Não foi possível carregar o progresso. Atualize para tentar novamente.</main>;
   return (
     <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6">
       <Link to="/painel" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="h-4 w-4" /> Back to dashboard
       </Link>
 
-      <section className="mt-4 overflow-hidden rounded-[2rem] border-2 border-kids-sun/50 bg-gradient-to-br from-kids-sky/25 via-kids-pink/15 to-kids-sun/25 p-6 sm:p-8">
+      <section className="mt-4 overflow-hidden border-b border-kids-sun/50 pb-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
+            <KidsLogo />
             <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">Speak2Kids · 7–10 anos · Pre-A1 → A1</p>
             <h1 className="mt-1 text-3xl font-extrabold text-foreground sm:text-4xl">Beginner Kids English 🎈</h1>
-            <p className="mt-2 max-w-xl text-sm text-muted-foreground">20 unidades, 40 partes: descubra (Discover) e depois converse (Communicate) com jogos, músicas e muita ação!</p>
+            <p className="mt-2 max-w-xl text-sm text-muted-foreground">Hello, little Super Speaker! 🌟</p>
           </div>
           {profile && !editing && (
-            <button type="button" onClick={() => setEditing(true)} className="flex items-center gap-3 rounded-3xl bg-card/80 px-4 py-3">
+            <Button variant="ghost" type="button" onClick={() => setEditing(true)} className="flex h-auto items-center gap-3 rounded-lg bg-card/80 px-4 py-3">
               <span className="text-4xl">{profile.avatar}</span>
               <span className="text-left"><span className="block font-extrabold">{profile.nickname}</span><span className="text-xs text-muted-foreground">Edit</span></span>
-            </button>
+            </Button>
           )}
         </div>
 
@@ -91,17 +95,17 @@ function KidsDashboard() {
       </section>
 
       {showProfileForm && (
-        <section className="mt-6 rounded-3xl border-2 border-kids-sky/40 bg-card p-5">
+        <section className="mt-6 border-b border-kids-sky/40 py-5">
           <h2 className="text-lg font-extrabold">Crie o perfil da criança</h2>
           <p className="text-sm text-muted-foreground">Só um apelido e um avatar — não pedimos nome completo, idade, escola ou contatos.</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {KIDS_AVATARS.map((a) => (
-              <button key={a} type="button" onClick={() => setAvatar(a)} aria-label={`avatar ${a}`}
-                className={cn("h-12 w-12 rounded-2xl border-2 text-3xl", avatar === a ? "border-gold bg-gold/20" : "border-border")}>{a}</button>
+              <Button variant="ghost" key={a} type="button" onClick={() => setAvatar(a)} aria-label={`avatar ${a}`}
+                className={cn("h-12 w-12 rounded-lg border-2 text-3xl", avatar === a ? "border-gold bg-gold/20" : "border-border")}>{a}</Button>
             ))}
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Input value={nick} maxLength={20} onChange={(e) => setNick(e.target.value)} placeholder="Nickname (ex.: Super Lu)" className="max-w-xs" />
+            <Input aria-label="Nickname" value={nick} maxLength={20} onChange={(e) => setNick(e.target.value)} placeholder="Nickname (ex.: Super Lu)" className="max-w-xs" />
             <Button disabled={!nick.trim() || save.isPending} className="rounded-full bg-gold font-bold text-primary-foreground"
               onClick={() => save.mutate({ nickname: nick.trim(), avatar }, { onSuccess: () => setEditing(false) })}>Save</Button>
           </div>
@@ -114,25 +118,25 @@ function KidsDashboard() {
           {KIDS_UNITS.map((u) => {
             const st = unitStatus(rows, u.n);
             return (
-              <li key={u.n} className={cn("rounded-3xl border-2 bg-card p-4", st === "completed" ? "border-kids-mint" : st === "locked" ? "border-border opacity-70" : "border-kids-sun/60")}>
+              <li key={u.n} className={cn("rounded-lg border-2 bg-card p-4", st === "completed" ? "border-kids-mint" : st === "locked" ? "border-border opacity-70" : "border-kids-sun/60")}>
                 <div className="flex items-start gap-3">
-                  <span className="text-4xl" aria-hidden>{u.emoji}</span>
+                  <div className="w-20 shrink-0"><KidsArtwork unit={u.n} theme={u.imageTheme} /></div>
                   <div className="min-w-0 flex-1">
                     <p className="text-xs font-bold text-muted-foreground">UNIT {u.n} {st === "completed" && "· 🌟 Sticker"}</p>
                     <h3 className="font-extrabold text-foreground">{u.title}</h3>
                     <p className="text-xs text-muted-foreground">{u.topic}</p>
                   </div>
                 </div>
-                <div className="mt-3 grid grid-cols-2 gap-2">
+                <div className="mt-3 grid gap-2 min-[460px]:grid-cols-2">
                   {([1, 2] as const).map((p) => {
                     const ps = partStatus(rows, u.n, p);
                     const label = p === 1 ? "Part 1 · Discover" : "Part 2 · Communicate";
                     if (ps === "locked") return (
-                      <span key={p} className="flex items-center gap-1 rounded-2xl bg-muted/50 px-3 py-2 text-xs font-semibold text-muted-foreground"><Lock className="h-3 w-3" /> {label}</span>
+                      <span key={p} className="flex items-center gap-1 rounded-lg bg-muted/50 px-3 py-2 text-xs font-semibold text-muted-foreground"><Lock className="h-3 w-3" /> {label}</span>
                     );
                     return (
                       <Link key={p} to="/speak2kids/unidade/$unit/$part" params={{ unit: String(u.n), part: p === 1 ? "discover" : "communicate" }}
-                        className={cn("flex items-center gap-1 rounded-2xl px-3 py-2 text-xs font-bold", ps === "completed" ? "bg-kids-mint/20" : "bg-kids-sun/25")}>
+                        className={cn("flex items-center gap-1 rounded-lg px-3 py-2 text-xs font-bold", ps === "completed" ? "bg-kids-mint/20" : "bg-kids-sun/25")}>
                         {ps === "completed" ? <CheckCircle2 className="h-3 w-3" /> : <PlayCircle className="h-3 w-3" />} {label} · {STATUS_LABEL[ps]}
                       </Link>
                     );
@@ -144,7 +148,7 @@ function KidsDashboard() {
         </ol>
       </section>
 
-      <section className="mt-8 flex gap-3 rounded-3xl border border-border bg-card/60 p-5 text-sm text-muted-foreground">
+      <section className="mt-8 flex gap-3 border-t border-border py-5 text-sm text-muted-foreground">
         <ShieldCheck className="h-5 w-5 shrink-0 text-gold" />
         <p><strong className="text-foreground">Para pais e responsáveis:</strong> o Speak2Kids não tem chat entre crianças, perfis públicos, ranking, anúncios nem links externos. Guardamos apenas apelido, avatar e progresso. A voz e os desenhos da criança não são gravados nem enviados.</p>
       </section>
@@ -154,7 +158,7 @@ function KidsDashboard() {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-3xl bg-card/80 px-4 py-3">
+    <div className="rounded-lg bg-card/80 px-4 py-3">
       <p className="text-xs font-semibold text-muted-foreground">{label}</p>
       <p className="text-2xl font-extrabold text-foreground">{value}</p>
     </div>

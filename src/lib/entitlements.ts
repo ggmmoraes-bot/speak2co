@@ -17,6 +17,7 @@ export const FEATURE_KEYS = {
   premiumMaterials: "premium_materials",
   productLineTravel: "product_line_travel",
   productLineHire: "product_line_hire",
+  productLineKids: "product_line_kids",
   productLineFluency: "product_line_fluency",
   giseleAi: "gisele_ai",
   learningTools: "learning_tools",
