@@ -35,7 +35,7 @@ export type KidsUnit = {
 
 const v = (list: string): KidsWord[] =>
   list.split(";").map((s) => {
-    const [en, emoji, pt] = s.split("|").map((x) => x.trim());
+    const [en = "", emoji = "", pt = ""] = s.split("|").map((x) => x.trim());
     return { en, emoji, pt };
   });
 
@@ -67,10 +67,10 @@ export const KIDS_UNITS: KidsUnit[] = [
     expressions: ["This is my mom.", "This is my dog.", "I have one brother."],
     grammarFocus: "This is my... + possessive 's", examples: ["This is my sister.", "This is Tom's dog."],
     practice: { type: "match", label: "Ligue cada nome à pessoa certa da família." },
-    readingListening: { kind: "story", title: "My Happy Family", lines: ["Hello! I am Lucas.", "This is my mom. This is my dad.", "This is my sister, Bia. She is a baby!", "This is Grandma's cat. I love my family!"] },
+    readingListening: { kind: "story", title: "My Happy Family", lines: ["Hello! I am Lucas.", "This is my mom. This is my dad.", "This is my sister, Bia. She is a baby!", "This is Grandma's cat. This is my pet."] },
     activities: ["Draw & Describe", "Point & Say", "Family Tree Talk", "Puppet Interview", "Pair Talk"],
     challenge: "Desenhe sua família e apresente cada pessoa usando “This is my...”.",
-    challengeFrames: ["This is my ___.", "This is my ___ and this is my ___.", "I love my family!"],
+    challengeFrames: ["This is my ___.", "This is my ___ and this is my ___.", "This is my pet."],
   },
   {
     n: 3, title: "Colors & Shapes", topic: "Articles a/an and “It is a...”", emoji: "🔺",
@@ -167,7 +167,7 @@ export const KIDS_UNITS: KidsUnit[] = [
     readingListening: { kind: "story", title: "A Trip to the Zoo", lines: ["Today we are at the zoo!", "Look at the elephant. It is big!", "Look at the monkey. It is fast!", "The turtle is slow... but it is happy!"] },
     activities: ["Zoo Charades", "Point & Say", "Animal Description Game", "Draw & Describe", "Pair Talk"],
     challenge: "Descreva seu animal selvagem favorito com 2 adjetivos.",
-    challengeFrames: ["My favorite animal is the ___.", "It is ___ and ___.", "It can ___."],
+    challengeFrames: ["It is a ___.", "It is ___ and ___.", "It can ___."],
   },
   {
     n: 9, title: "My House", topic: "“There is / There are”", emoji: "🏠",
@@ -183,7 +183,7 @@ export const KIDS_UNITS: KidsUnit[] = [
     readingListening: { kind: "song", title: "My House Song", lines: ["This is my house, my happy house!", "There is a kitchen, there is a bed!", "There are two chairs and a big red sofa!", "This is my house, my happy house!"] },
     activities: ["House Tour Talk", "Point & Say", "Furniture Match", "Draw My House", "Pair Talk"],
     challenge: "Descreva seu quarto usando “There is / There are”.",
-    challengeFrames: ["There is a ___ in my room.", "There are two ___s.", "My room is ___."],
+    challengeFrames: ["There is a ___ in my room.", "There are two ___s.", "There is a ___ in my room."],
   },
   {
     n: 10, title: "Yummy Food", topic: "“I like / I don't like”", emoji: "🍕",
@@ -280,7 +280,7 @@ export const KIDS_UNITS: KidsUnit[] = [
     readingListening: { kind: "song", title: "How Do You Feel Today?", lines: ["How do you feel today?", "I feel happy, hip hooray!", "I feel sleepy, yawn, yawn, yawn!", "I feel hungry, let's eat on the lawn!"] },
     activities: ["Feelings Charades", "Point & Say", "Emotion Cards", "Draw Your Feeling", "Pair Talk"],
     challenge: "Conte como você está se sentindo hoje e por quê.",
-    challengeFrames: ["Today I feel ___.", "I am ___ because ___.", "How do you feel?"],
+    challengeFrames: ["I feel ___.", "How do you feel?"],
   },
   {
     n: 16, title: "Let's Play!", topic: "“I can” and “I like + verb-ing”", emoji: "⚽",
@@ -296,7 +296,7 @@ export const KIDS_UNITS: KidsUnit[] = [
     readingListening: { kind: "song", title: "What Can You Do?", lines: ["What can you do? What can you do?", "I can swim and I can run too!", "I like dancing, I like singing!", "What can you do? Let's play, it's spring!"] },
     activities: ["Sports Charades", "Point & Say", "Hobby Interview", "Talent Show Talk", "Pair Talk"],
     challenge: "Apresente 2 coisas que você sabe fazer e 2 de que gosta.",
-    challengeFrames: ["I can ___.", "I can ___ and ___.", "I like ___ing."],
+    challengeFrames: ["I can ___.", "I can ___ and ___.", "I like ___."],
   },
   {
     n: 17, title: "Around My Town", topic: "Prepositions of place (in, on, under, next to)", emoji: "🏙️",
@@ -360,7 +360,7 @@ export const KIDS_UNITS: KidsUnit[] = [
     readingListening: { kind: "song", title: "I Am a Super Speaker!", lines: ["Hello, my name is... I am a star!", "This is my family, near and far!", "I like pizza, I can swim and dance!", "I am a Super Speaker — give me a chance!"] },
     activities: ["Show and Tell", "Point & Say", "Super Speaker Interview", "Talent Show Presentation", "Certificate Celebration"],
     challenge: "Faça seu Show and Tell completo: nome, idade, família, comida favorita e o que sabe fazer.",
-    challengeFrames: ["My name is ___ and I am ___ years old.", "This is my ___.", "My favorite food is ___.", "I can ___. I am a Super Speaker!"],
+    challengeFrames: ["My name is ___ and I am ___ years old.", "This is my ___.", "I like ___.", "I can ___. I am a Super Speaker!"],
   },
 ];
 
@@ -371,19 +371,38 @@ export type QuickCheckQuestion = { id: string; prompt: string; emoji: string; op
 
 /** Quick Check: 4 perguntas por unidade; Unit 20 tem exatamente 5, misturando unidades. */
 export function buildQuickCheck(unit: KidsUnit): QuickCheckQuestion[] {
-  const pick = (u: KidsUnit, i: number): QuickCheckQuestion => {
+  const picture = (u: KidsUnit, i: number): QuickCheckQuestion => {
     const w = u.vocab[i % u.vocab.length];
-    const others = u.vocab.filter((x) => x.en !== w.en);
-    const d1 = others[(i * 3 + 1) % others.length];
-    const d2 = others[(i * 3 + 5) % others.length];
-    const opts = [w.en, d1.en, d2.en === d1.en ? others[(i + 2) % others.length].en : d2.en];
+    if (!w) throw new Error("Vocabulary missing");
+    const options = [w.en, ...u.vocab.filter((x) => x.en !== w.en).slice(i % 3, i % 3 + 2).map((x) => x.en)];
     const rot = i % 3;
-    return { id: `u${u.n}-q${i}`, prompt: "Which one is this?", emoji: w.emoji, options: [...opts.slice(rot), ...opts.slice(0, rot)], answer: w.en };
+    return { id: `u${u.n}-q${i}`, prompt: `Which word means “${w.pt}”?`, emoji: w.emoji, options: [...options.slice(rot), ...options.slice(0, rot)], answer: w.en };
   };
-  if (unit.n === 20) {
-    return [1, 2, 10, 16, 20].map((n, i) => ({ ...pick(getKidsUnit(n)!, i * 2 + 1), id: `u20-q${i}` }));
-  }
-  return [0, 3, 6, 8].map((i) => pick(unit, i));
+  const grammar = (n: number, i: number, prompt: string, answer: string, other: string[]): QuickCheckQuestion => ({ id: `u${n}-grammar${i}`, prompt, emoji: "", answer, options: i % 2 ? [...other, answer] : [other[0] ?? "", answer, other[1] ?? ""] });
+  const checks: Record<number, [string, string, string[]][]> = {
+    1: [["Ana says hello. What does she say next?", "My name is Ana.", ["My Ana name.", "Name Ana my."]], ["Say your name: ___ Pedro.", "I am", ["My", "Hello my"]]],
+    2: [["Introduce your mom.", "This is my mom.", ["This my is mom.", "My mom this."]], ["The dog belongs to Tom.", "This is Tom's dog.", ["This is dog Tom.", "This is Tom dog."]]],
+    3: [["Choose a/an: It is ___ orange star.", "an", ["a", "two"]], ["Describe 🔵: It is a blue ___.", "circle", ["triangle", "square"]]],
+    4: [["How many stars? ⭐⭐⭐⭐⭐", "five", ["three", "ten"]], ["Choose the plural.", "ten apples", ["ten apple", "apple ten"]]],
+    5: [["I ___ two eyes.", "have", ["has", "am"]], ["She ___ curly hair.", "has", ["have", "is"]]],
+    6: [["Two 🪆🪆: choose the plural.", "two dolls", ["two doll", "a dolls"]], ["One 🚲: choose the singular.", "a bike", ["a bikes", "two bikes"]]],
+    7: [["The duck ___ swim.", "can", ["can't", "has"]], ["The pig ___ fly.", "can't", ["can", "is"]]],
+    8: [["Describe 🐘.", "The elephant is big.", ["The elephant is small.", "The elephant is fast."]], ["Describe 🐢.", "It is slow.", ["It is fast.", "It is tall."]]],
+    9: [["One sofa: ___ a sofa.", "There is", ["There are", "I have two"]], ["Two beds: ___ two beds.", "There are", ["There is", "It is a"]]],
+    10: [["You enjoy pizza. Say it!", "I like pizza.", ["I don't like pizza.", "I pizza like not."]], ["You do not enjoy milk.", "I don't like milk.", ["I like milk.", "I milk not."]]],
+    11: [["Which command opens a book?", "Open your book.", ["Close your book.", "Sit down."]], ["Which command asks you to sit?", "Sit down, please.", ["Stand up, please.", "Open your book."]]],
+    12: [["Describe your shirt: I ___ a red shirt.", "am wearing", ["wearing is", "is wearing"]], ["Describe her dress: She ___ a dress.", "is wearing", ["am wearing", "wearing am"]]],
+    13: [["Describe ☀️.", "It's sunny.", ["It's rainy.", "It's snowy."]], ["Describe ❄️.", "It's snowy.", ["It's hot.", "It's sunny."]]],
+    14: [["Morning routine: I ___ my teeth.", "brush", ["sleep", "play"]], ["She ___ to school by bus.", "goes", ["go", "going"]]],
+    15: [["Describe 😄: I feel ___.", "happy", ["sad", "scared"]], ["Describe 😴: I am ___.", "sleepy", ["surprised", "excited"]]],
+    16: [["I like ___.", "dancing", ["dance", "can dance"]], ["I can ___.", "swim", ["swimming", "likes swimming"]]],
+    17: [["The cat is below the table.", "The cat is under the table.", ["The cat is on the table.", "The cat is in the table."]], ["The park is beside the school.", "The park is next to the school.", ["The park is under the school.", "The park is in the school."]]],
+    18: [["Count the candles: 🕯️🕯️🕯️🕯️🕯️🕯️🕯️🕯️", "I am eight years old.", ["I am seven years old.", "I am nine years old."]], ["Ask a friend's age.", "How old are you?", ["What color is it?", "How many balloons?"]]],
+    19: [["The monkey can ___.", "climb", ["fly", "swim like a fish"]], ["Fish ___ walk.", "can't", ["can", "has"]]],
+    20: [["Introduce yourself.", "My name is Ana.", ["My Ana name.", "Name my Ana."]], ["Introduce your family.", "This is my mom.", ["My this mom.", "Mom is this my."]], ["Tell your age.", "I am nine years old.", ["I nine old.", "My old nine."]], ["Say your favorite food.", "I like pizza.", ["I pizza liking.", "Pizza my I."]], ["Describe an ability.", "I can swim.", ["I can swimming.", "I swim can."]]],
+  };
+  const grammarQuestions = (checks[unit.n] ?? []).map(([prompt, answer, other], i) => grammar(unit.n, i, prompt, answer, other));
+  return unit.n === 20 ? grammarQuestions : [picture(unit, 0), picture(unit, 3), ...grammarQuestions];
 }
 
 export const KIDS_AVATARS = ["🦁", "🐼", "🦊", "🐸", "🐯", "🐨", "🦄", "🐙", "🐧", "🐵"];
